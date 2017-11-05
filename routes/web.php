@@ -48,152 +48,152 @@ Route::get('account/getEnprInfo', ['uses' => 'InfoController@getEnprInfo']);
 //Route::post('account/editPersonInfo', ['uses' => 'InfoController@editPersonInfo']);
 //Route::post('account/editEnprInfo', ['uses' => 'InfoController@editEnprInfo']);
 //企业号验证页面
-Route::any('account/enterpriseVerify', ['uses' => 'AccountController@enterpriseVerifyView']);
-Route::any('account/enterpriseVerify/upload', ['uses' => 'AccountController@uploadVerinfo']);
-//个人信息资料修改新增页面
-Route::any('account/personinfo/edit', ['uses' => 'AccountController@personinfoEdit']);
-//企业信息修改页
-Route::any('account/enprinfo/edit', ['uses' => 'AccountController@enprinfoEdit']);
-
-Route::any('account/', ['uses' => 'PersonCenterController@index']);
-Route::any('account/index', ['uses' => 'PersonCenterController@index']);
-//简历模块
-Route::get('resume/add', ['uses' => 'ResumeController@getIndex']);
-Route::get('resume/addResume', ['uses' => 'ResumeController@addResume']);
-Route::any('resume/getRegion', ['uses' => 'ResumeController@getRegion']);
-Route::any('resume/getIndustry', ['uses' => 'ResumeController@getIndustry']);
-Route::get('resume/getResumeList', ['uses' => 'ResumeController@getResumeList']);
-Route::get('resume/preview', ['uses' => 'ResumeController@previewResume']);
-
-Route::post('resume/rename', ['uses' => 'ResumeController@rename']);
-Route::post('resume/addIntention', ['uses' => 'ResumeController@addIntention']);
-Route::post('resume/addEducation', ['uses' => 'ResumeController@addEducation']);
-Route::post('resume/addGame', ['uses' => 'ResumeController@addEgamexpr']);
-Route::post('resume/addWorkexp', ['uses' => 'ResumeController@addWorkexp']);
-Route::post('resume/addSkill', ['uses' => 'ResumeController@addTag']);
-Route::post('resume/addExtra', ['uses' => 'ResumeController@addExtra']);
-Route::post('resume/deleteSkill', ['uses' => 'ResumeController@deleteTag']);
-Route::get('resume/deleteEducation', ['uses' => 'ResumeController@deleteEducation']);
-Route::get('resume/deleteGame', ['uses' => 'ResumeController@deleteGame']);
-Route::get('resume/deleteWorkexp', ['uses' => 'ResumeController@deleteWorkexp']);
-
-//职位发布、查看
-Route::get('position/checkVerification', ['uses' => 'PositionController@checkVerification']);
-Route::any('position/publish', ['uses' => 'PositionController@publishIndex']);
-Route::any('position/publish/add', ['uses' => 'PositionController@publish']);
-Route::any('position/publishList', ['uses' => 'PositionController@publishList']);
-Route::any('position/publishList/delete', ['uses' => 'PositionController@delPosition']);
-Route::any('position/publishList/search', ['uses' => 'PositionController@searchPosition']);//发布列表页搜索已发布职位
-Route::any('position/detail', ['uses' => 'PositionController@detail']);
-Route::any('position/advanceSearch', ['uses' => 'PositionController@advanceIndex']);
-//Route::any('position/advanceSearch/search', ['uses' => 'PositionController@advanceSearch']);
-//Route::any('position/advanceSearch/testRaw', ['uses' => 'PositionController@testRaw']);
-
-Route::any('delivered/add', ['uses' => 'DeliveredController@delivered']);//投递简历
-Route::get('position/applyList', ['uses' => 'PositionController@applyList']);//个人职位申请记录
-Route::get('position/deliverList', ['uses' => 'PositionController@deliverListView']);
-Route::get('position/deliverDetail', ['uses' => 'PositionController@deliverDetailView']);
-Route::any('position/deliverDetail/reply', ['uses' => 'PositionController@reply']);//回复投递简历
-Route::any('position/deldeliverRecord', ['uses' => 'PositionController@deldeliverRecord']);//删除简历投递记录
-
-//新闻模块
-Route::any('news/{pagnum?}', ['uses' => 'NewsController@SearchNews'])->where('pagnum', '[0-9]+');//完成
-//Route::any('news/index',['uses' => 'NewsController@SearchNews']);
-Route::any('news/detail', ['uses' => 'NewsController@detail']);
-Route::any('news/content', ['uses' => 'NewsController@requestNewsContent']);
-Route::any('news/addReview', ['uses' => 'NewsController@addReview']);//添加评论
-
-//Route::get('news/detail', function () {
-//    return view('news.detail');
+//Route::any('account/enterpriseVerify', ['uses' => 'AccountController@enterpriseVerifyView']);
+//Route::any('account/enterpriseVerify/upload', ['uses' => 'AccountController@uploadVerinfo']);
+////个人信息资料修改新增页面
+//Route::any('account/personinfo/edit', ['uses' => 'AccountController@personinfoEdit']);
+////企业信息修改页
+//Route::any('account/enprinfo/edit', ['uses' => 'AccountController@enprinfoEdit']);
+//
+//Route::any('account/', ['uses' => 'PersonCenterController@index']);
+//Route::any('account/index', ['uses' => 'PersonCenterController@index']);
+////简历模块
+//Route::get('resume/add', ['uses' => 'ResumeController@getIndex']);
+//Route::get('resume/addResume', ['uses' => 'ResumeController@addResume']);
+//Route::any('resume/getRegion', ['uses' => 'ResumeController@getRegion']);
+//Route::any('resume/getIndustry', ['uses' => 'ResumeController@getIndustry']);
+//Route::get('resume/getResumeList', ['uses' => 'ResumeController@getResumeList']);
+//Route::get('resume/preview', ['uses' => 'ResumeController@previewResume']);
+//
+//Route::post('resume/rename', ['uses' => 'ResumeController@rename']);
+//Route::post('resume/addIntention', ['uses' => 'ResumeController@addIntention']);
+//Route::post('resume/addEducation', ['uses' => 'ResumeController@addEducation']);
+//Route::post('resume/addGame', ['uses' => 'ResumeController@addEgamexpr']);
+//Route::post('resume/addWorkexp', ['uses' => 'ResumeController@addWorkexp']);
+//Route::post('resume/addSkill', ['uses' => 'ResumeController@addTag']);
+//Route::post('resume/addExtra', ['uses' => 'ResumeController@addExtra']);
+//Route::post('resume/deleteSkill', ['uses' => 'ResumeController@deleteTag']);
+//Route::get('resume/deleteEducation', ['uses' => 'ResumeController@deleteEducation']);
+//Route::get('resume/deleteGame', ['uses' => 'ResumeController@deleteGame']);
+//Route::get('resume/deleteWorkexp', ['uses' => 'ResumeController@deleteWorkexp']);
+//
+////职位发布、查看
+//Route::get('position/checkVerification', ['uses' => 'PositionController@checkVerification']);
+//Route::any('position/publish', ['uses' => 'PositionController@publishIndex']);
+//Route::any('position/publish/add', ['uses' => 'PositionController@publish']);
+//Route::any('position/publishList', ['uses' => 'PositionController@publishList']);
+//Route::any('position/publishList/delete', ['uses' => 'PositionController@delPosition']);
+//Route::any('position/publishList/search', ['uses' => 'PositionController@searchPosition']);//发布列表页搜索已发布职位
+//Route::any('position/detail', ['uses' => 'PositionController@detail']);
+//Route::any('position/advanceSearch', ['uses' => 'PositionController@advanceIndex']);
+////Route::any('position/advanceSearch/search', ['uses' => 'PositionController@advanceSearch']);
+////Route::any('position/advanceSearch/testRaw', ['uses' => 'PositionController@testRaw']);
+//
+//Route::any('delivered/add', ['uses' => 'DeliveredController@delivered']);//投递简历
+//Route::get('position/applyList', ['uses' => 'PositionController@applyList']);//个人职位申请记录
+//Route::get('position/deliverList', ['uses' => 'PositionController@deliverListView']);
+//Route::get('position/deliverDetail', ['uses' => 'PositionController@deliverDetailView']);
+//Route::any('position/deliverDetail/reply', ['uses' => 'PositionController@reply']);//回复投递简历
+//Route::any('position/deldeliverRecord', ['uses' => 'PositionController@deldeliverRecord']);//删除简历投递记录
+//
+////新闻模块
+//Route::any('news/{pagnum?}', ['uses' => 'NewsController@SearchNews'])->where('pagnum', '[0-9]+');//完成
+////Route::any('news/index',['uses' => 'NewsController@SearchNews']);
+//Route::any('news/detail', ['uses' => 'NewsController@detail']);
+//Route::any('news/content', ['uses' => 'NewsController@requestNewsContent']);
+//Route::any('news/addReview', ['uses' => 'NewsController@addReview']);//添加评论
+//
+////Route::get('news/detail', function () {
+////    return view('news.detail');
+////});
+////站内信模块
+//Route::any('message/', ['uses' => 'MessageController@index']);//站内信主页
+//Route::any('message/index', ['uses' => 'MessageController@index']);//站内信主页
+//Route::any('message/detail', ['uses' => 'MessageController@detail']);//站内信详情
+//Route::any('message/read', ['uses' => 'MessageController@isRead']);//设置已读
+//Route::any('message/delete', ['uses' => 'MessageController@delMessage']);
+//Route::any('message/sendMessage', ['uses' => 'MessageController@sendMessage']);//发送站内信
+//Route::any('message/delDialog', ['uses' => 'MessageController@delDialog']);//发送站内信
+//
+////网站信息模块
+//Route::any('about/', ['uses' => 'AboutController@index']);//网站信息模块
+//Route::any('about/index', ['uses' => 'AboutController@index']);//网站信息模块
+//
+//Route::any('company', ['uses' => 'HomeController@companySearch']);//完成
+////Route::any('company', function () {
+////    return view('company');
+////});
+//
+//
+//
+////网站后台
+//Route::get('admin/login', function () {
+//    return view('admin/login');
 //});
-//站内信模块
-Route::any('message/', ['uses' => 'MessageController@index']);//站内信主页
-Route::any('message/index', ['uses' => 'MessageController@index']);//站内信主页
-Route::any('message/detail', ['uses' => 'MessageController@detail']);//站内信详情
-Route::any('message/read', ['uses' => 'MessageController@isRead']);//设置已读
-Route::any('message/delete', ['uses' => 'MessageController@delMessage']);
-Route::any('message/sendMessage', ['uses' => 'MessageController@sendMessage']);//发送站内信
-Route::any('message/delDialog', ['uses' => 'MessageController@delDialog']);//发送站内信
-
-//网站信息模块
-Route::any('about/', ['uses' => 'AboutController@index']);//网站信息模块
-Route::any('about/index', ['uses' => 'AboutController@index']);//网站信息模块
-
-Route::any('company', ['uses' => 'HomeController@companySearch']);//完成
-//Route::any('company', function () {
-//    return view('company');
-//});
-
-
-
-//网站后台
-Route::get('admin/login', function () {
-    return view('admin/login');
-});
-Route::post('admin/login', ['uses' => 'Admin\LoginController@postLogin']);
-
-Route::get('admin/', ['uses' => 'Admin\DashboardController@view']);
-Route::get('admin/dashboard', ['uses' => 'Admin\DashboardController@view']);
-
-Route::get('admin/admin', ['uses' => 'Admin\AdminController@view']);
-
-
-Route::any('admin/industry', ['uses' => 'Admin\IndustryController@index']);//显示行业
-Route::any('admin/industry/{option}', ['uses' => 'Admin\IndustryController@edit'])->where('option', '[A-Za-z]+');//显示行业
-
-Route::any('admin/occupation', ['uses' => 'Admin\OccupationController@index']);//显示职业
-Route::any('admin/occupation/{option}', ['uses' => 'Admin\OccupationController@edit'])->where('option', '[A-Za-z]+');//显示职业
-
-Route::any('admin/region', ['uses' => 'Admin\RegionController@index']);//显示地区
-Route::any('admin/region/{option}', ['uses' => 'Admin\RegionController@edit'])->where('option', '[A-Za-z]+');//显示地区
-
-//审批企业信息
-Route::any('admin/enterprise/{option?}', ['uses' => 'Admin\VerificationController@index'])->where('option', '[0-2]{1}');//显示待审核或已审核的企业信息
-Route::any('admin/enterprise/detail', ['uses' => 'Admin\VerificationController@showDetail']);//显示待审核或已审核的企业信息
-Route::any('admin/enterprise/examine', ['uses' => 'Admin\VerificationController@passVerfi']);//显示待审核或已审核的企业信息
-
-//登陆注册
-Route::post('admin/register', ['uses' => 'Admin\AdminController@addAdmin']);
-Route::any('admin/delete', ['uses' => 'Admin\AdminController@deleteAdmin']);
-
-
-Route::get('admin/index', ['uses' => 'Admin\LoginController@index']);
-Route::get('admin/logout', ['uses' => 'Admin\LoginController@logout']);
-Route::get('admin/getUid', ['uses' => 'Admin\AdminAuthController@getUid']);
-Route::get('admin/getType', ['uses' => 'Admin\AdminAuthController@getType']);
-
-//发布广告
-Route::get('admin/addAds', ['uses' => 'Admin\AdvertsController@addAdView']);//显示已发布广告信息
-
-Route::any('admin/ads', ['uses' => 'Admin\AdvertsController@index']);//显示已发布广告信息
-Route::any('admin/ads/detail', ['uses' => 'Admin\AdvertsController@detail']);//显示已发布广告信息
-Route::any('admin/ads/add', ['uses' => 'Admin\AdvertsController@addAds']);//新增或修改广告信息
-Route::any('admin/ads/find', ['uses' => 'Admin\AdvertsController@findAd']);//查找location位置是否有广告
-Route::any('admin/ads/del', ['uses' => 'Admin\AdvertsController@delAd']);//删除广告
-
-//发布新闻
-Route::any('admin/news', ['uses' => 'Admin\EditnewsController@index']);//显示已发布新闻信息
-Route::any('admin/news/detail', ['uses' => 'Admin\EditnewsController@detail']);//显示已发布新闻信息
-Route::get('admin/addNews', ['uses' => 'Admin\EditnewsController@addNewsView']);//新增或修改新闻信息
-Route::any('admin/news/add', ['uses' => 'Admin\EditnewsController@addNews']);//新增或修改新闻信息
-Route::any('admin/news/del', ['uses' => 'Admin\EditnewsController@delNews']);
-
-//管理企业发布职位
-Route::any('admin/position', ['uses' => 'Admin\PositionController@index']);//显示已发布的职位信息
-Route::any('admin/position/search', ['uses' => 'Admin\PositionController@findPosition']);//根据公司名字搜索对应发布的职位信息
-Route::any('admin/position/urgency', ['uses' => 'Admin\PositionController@isUrgency']);//设置职位是否紧急状态
-Route::any('admin/position/offposition', ['uses' => 'Admin\PositionController@OffPosition']);//下架职位信息
-//管理网站信息
-Route::any('admin/about', ['uses' => 'Admin\WebinfoController@index']);//显示已发布广告信息
-Route::any('admin/about/setPhone', ['uses' => 'Admin\WebinfoController@setPhone']);
-Route::any('admin/about/setEmail', ['uses' => 'Admin\WebinfoController@setEmail']);
-Route::any('admin/about/setAddress', ['uses' => 'Admin\WebinfoController@setAddress']);
-Route::any('admin/about/setContent', ['uses' => 'Admin\WebinfoController@setContent']);
-
-//end
-Route::any('smstest', ['uses' => 'ValidationController@verifySmsCode']);//显示已发布的职位信息
-Route::any('sendsms', ['uses' => 'ValidationController@sendSMS']);//显示已发布的职位信息
-Route::any('getAllApplyList', ['uses' => 'PersonCenterController@getAllApplyList']);//显示已发布的职位信息
+//Route::post('admin/login', ['uses' => 'Admin\LoginController@postLogin']);
+//
+//Route::get('admin/', ['uses' => 'Admin\DashboardController@view']);
+//Route::get('admin/dashboard', ['uses' => 'Admin\DashboardController@view']);
+//
+//Route::get('admin/admin', ['uses' => 'Admin\AdminController@view']);
+//
+//
+//Route::any('admin/industry', ['uses' => 'Admin\IndustryController@index']);//显示行业
+//Route::any('admin/industry/{option}', ['uses' => 'Admin\IndustryController@edit'])->where('option', '[A-Za-z]+');//显示行业
+//
+//Route::any('admin/occupation', ['uses' => 'Admin\OccupationController@index']);//显示职业
+//Route::any('admin/occupation/{option}', ['uses' => 'Admin\OccupationController@edit'])->where('option', '[A-Za-z]+');//显示职业
+//
+//Route::any('admin/region', ['uses' => 'Admin\RegionController@index']);//显示地区
+//Route::any('admin/region/{option}', ['uses' => 'Admin\RegionController@edit'])->where('option', '[A-Za-z]+');//显示地区
+//
+////审批企业信息
+//Route::any('admin/enterprise/{option?}', ['uses' => 'Admin\VerificationController@index'])->where('option', '[0-2]{1}');//显示待审核或已审核的企业信息
+//Route::any('admin/enterprise/detail', ['uses' => 'Admin\VerificationController@showDetail']);//显示待审核或已审核的企业信息
+//Route::any('admin/enterprise/examine', ['uses' => 'Admin\VerificationController@passVerfi']);//显示待审核或已审核的企业信息
+//
+////登陆注册
+//Route::post('admin/register', ['uses' => 'Admin\AdminController@addAdmin']);
+//Route::any('admin/delete', ['uses' => 'Admin\AdminController@deleteAdmin']);
+//
+//
+//Route::get('admin/index', ['uses' => 'Admin\LoginController@index']);
+//Route::get('admin/logout', ['uses' => 'Admin\LoginController@logout']);
+//Route::get('admin/getUid', ['uses' => 'Admin\AdminAuthController@getUid']);
+//Route::get('admin/getType', ['uses' => 'Admin\AdminAuthController@getType']);
+//
+////发布广告
+//Route::get('admin/addAds', ['uses' => 'Admin\AdvertsController@addAdView']);//显示已发布广告信息
+//
+//Route::any('admin/ads', ['uses' => 'Admin\AdvertsController@index']);//显示已发布广告信息
+//Route::any('admin/ads/detail', ['uses' => 'Admin\AdvertsController@detail']);//显示已发布广告信息
+//Route::any('admin/ads/add', ['uses' => 'Admin\AdvertsController@addAds']);//新增或修改广告信息
+//Route::any('admin/ads/find', ['uses' => 'Admin\AdvertsController@findAd']);//查找location位置是否有广告
+//Route::any('admin/ads/del', ['uses' => 'Admin\AdvertsController@delAd']);//删除广告
+//
+////发布新闻
+//Route::any('admin/news', ['uses' => 'Admin\EditnewsController@index']);//显示已发布新闻信息
+//Route::any('admin/news/detail', ['uses' => 'Admin\EditnewsController@detail']);//显示已发布新闻信息
+//Route::get('admin/addNews', ['uses' => 'Admin\EditnewsController@addNewsView']);//新增或修改新闻信息
+//Route::any('admin/news/add', ['uses' => 'Admin\EditnewsController@addNews']);//新增或修改新闻信息
+//Route::any('admin/news/del', ['uses' => 'Admin\EditnewsController@delNews']);
+//
+////管理企业发布职位
+//Route::any('admin/position', ['uses' => 'Admin\PositionController@index']);//显示已发布的职位信息
+//Route::any('admin/position/search', ['uses' => 'Admin\PositionController@findPosition']);//根据公司名字搜索对应发布的职位信息
+//Route::any('admin/position/urgency', ['uses' => 'Admin\PositionController@isUrgency']);//设置职位是否紧急状态
+//Route::any('admin/position/offposition', ['uses' => 'Admin\PositionController@OffPosition']);//下架职位信息
+////管理网站信息
+//Route::any('admin/about', ['uses' => 'Admin\WebinfoController@index']);//显示已发布广告信息
+//Route::any('admin/about/setPhone', ['uses' => 'Admin\WebinfoController@setPhone']);
+//Route::any('admin/about/setEmail', ['uses' => 'Admin\WebinfoController@setEmail']);
+//Route::any('admin/about/setAddress', ['uses' => 'Admin\WebinfoController@setAddress']);
+//Route::any('admin/about/setContent', ['uses' => 'Admin\WebinfoController@setContent']);
+//
+////end
+//Route::any('smstest', ['uses' => 'ValidationController@verifySmsCode']);//显示已发布的职位信息
+//Route::any('sendsms', ['uses' => 'ValidationController@sendSMS']);//显示已发布的职位信息
+//Route::any('getAllApplyList', ['uses' => 'PersonCenterController@getAllApplyList']);//显示已发布的职位信息
 
 /*
 |--------------------------------------------------------------------------

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class About extends Model
 {
     //指定表明
-    protected $table = 'jobs_webinfo';
+    protected $table = 'bylh_webinfo';
 
     //指定主键id
     protected $primaryKey = 'wid';
