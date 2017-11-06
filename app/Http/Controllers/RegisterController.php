@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Userinfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -53,19 +54,11 @@ class RegisterController extends Controller
                 $user->tel_vertify = 1;
 
                 if ($user->save()) {
-                    if ($input['type'] == 1) {//个人用户
-                        $perinfo = new Personinfo();
-                        $perinfo->uid = $user->uid;
-                        $perinfo->register_way = 0;
-                        $perinfo->save();
-                        $data['type'] = $input['type'];
-
-                    } else if ($input['type'] == 2) {//企业用户
-                        $enprinfo = new Enprinfo();
-                        $enprinfo->uid = $user->uid;
-                        $enprinfo->save();
-                        $data['type'] = $input['type'];
-                    }
+                    //注册成功用户需一并建立userinfo表
+                    $userinfo = new Userinfo();
+                    $userinfo->uid = $user->uid;
+                    $userinfo->register_way = 0;
+                    $userinfo->save();
                     $data['status'] = 200;
                     $data['msg'] = "注册成功！";
                     return $data;
@@ -114,25 +107,16 @@ class RegisterController extends Controller
                 $user = new User();
                 $user->mail = $input['email'];
                 $user->password = bcrypt($input['password']);
-                $user->type = $input['type'];
                 $user->username = $username[0];
 
-                $type = $input['type'];
                 if ($user->save()) {
-                    if ($input['type'] == 1) {//个人用户
-                        $perinfo = new Personinfo();
-                        $perinfo->uid = $user->uid;
-                        $perinfo->register_way = 1;
-                        $perinfo->save();
+                    $perinfo = new Userinfo();
+                    $perinfo->uid = $user->uid;
+                    $perinfo->save();
 
-                    } else if ($input['type'] == 2) {//企业用户
-                        $enprinfo = new Enprinfo();
-                        $enprinfo->uid = $user->uid;
-                        $enprinfo->save();
-                    }
                     //发送验证邮件
                     $mailstatus = ValidationController::sendemail($input['email'],$user->uid);
-                    if($mailstatus ==-1){
+                    if($mailstatus ==-1 || $mailstatus ==0){
                         $data['status'] = 400;
                         $data['msg'] ="验证邮件发送失败！";
                         return $data;

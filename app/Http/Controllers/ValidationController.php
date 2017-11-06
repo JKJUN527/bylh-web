@@ -89,7 +89,7 @@ class ValidationController extends Controller
     {
         if($mail != "" && $uid != "") {
             $res = Tempemail::where('uid', '=', $uid)
-                ->where('type','=',0)
+                ->where('type','=',0)//注册验证
                 ->get();
             if ($res->count()) {
                 //return $res[0]->deadline;
@@ -118,15 +118,15 @@ class ValidationController extends Controller
                 $e3_email = new E3Email();
                 $e3_email->from = "404138362@qq.com";
                 $e3_email->to = $mail;
-                $e3_email->subject = "电竞招聘邮箱验证";
-                $e3_email->content = "请于一周内点击该链接，完成验证。http://www.eshunter.com/validate_email"
+                $e3_email->subject = "不亦乐乎邮箱验证";
+                $e3_email->content = "请于一周内点击该链接，完成验证。http://localhost/validate_email"
                     . "?uid=" . $uid
                     . '&code=' . $ecode
                     . '&type=0'
                     . '如非本人操作请忽略此邮件。';
                 //发送纯文本邮件
                 Mail::raw($e3_email->content, function ($message) use ($e3_email) {
-                    $message->from($e3_email->from, '电竞招聘官网');
+                    $message->from($e3_email->from, '不亦乐乎官网');
                     $message->subject($e3_email->subject);
                     $message->to($e3_email->to);
                 });
@@ -160,7 +160,7 @@ class ValidationController extends Controller
                     $data["status"] = 200;
                     $data["user"] = $user;
 
-                    //return $data;
+                    return $data;
                     return view("account.emailVerify", ["data" => $data]);
 //                    echo "<script> alert('邮箱验证成功！')</script>>";
 //                    return redirect('index');
