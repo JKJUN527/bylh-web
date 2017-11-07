@@ -1,23 +1,17 @@
 <?php
-//z正式网站路由开始
-//Route::get('index', function () {//主页返回四类广告（大图、小图、文字、急聘广告、最新新闻（5个）），
-//    return view('index');
-//});
-//测试生成session uid
-Route::any('session', ['uses' => 'PositionController@test1']);
-//
-Route::any('/', ['uses' => 'HomeController@index']);//完成
-Route::any('/index', ['uses' => 'HomeController@index']);//完成
-Route::any('/index/search', ['uses' => 'HomeController@indexSearch']);//完成
+
+Route::any('/', ['uses' => 'HomeController@index']);
+Route::any('/index', ['uses' => 'HomeController@index']);
+Route::any('/index/search', ['uses' => 'HomeController@indexSearch']);
 
 //登录注册
 Route::get('account/login', ['uses' => 'LoginController@index']);
 Route::get('account/register', ['uses' => 'RegisterController@index']);
 
-Route::post('account/register', ['uses' => 'RegisterController@postRegister']);  //完成
-Route::post('account/login', ['uses' => 'LoginController@postLogin']);   //完成
+Route::post('account/register', ['uses' => 'RegisterController@postRegister']);
+Route::post('account/login', ['uses' => 'LoginController@postLogin']);
 
-Route::get('account/logout', ['uses' => 'LoginoutController@logout']);   //完成
+Route::get('account/logout', ['uses' => 'LoginoutController@logout']);
 Route::any('account/sms', ['uses' => 'ValidationController@regSMS']);//发送短信验证码
 //发送邮箱
 Route::any('account/sendemail', ['uses' => 'ValidationController@sendemail']);

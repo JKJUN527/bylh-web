@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Seviceclass1;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,6 +21,8 @@ class AccountController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
+
+
 
 
         return view('account.index',['data'=>$data]);
