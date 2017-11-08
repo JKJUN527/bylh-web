@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Adverts;
+use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
 use App\News;
@@ -50,7 +51,10 @@ class HomeController extends Controller {
             ->take(4)
             ->get();
         //返回热门需求
-
+        $data['demands'] = Demands::where('state',0)
+            ->orderBy('view_count','desc')
+            ->take(4)
+            ->get();
         //返回广告
         $data['ad'] = HomeController::searchAd();
         //返回热门服务商
@@ -125,63 +129,56 @@ class HomeController extends Controller {
 
         $news = array();
         $position = array();
-        //主页搜索功能，传入keywords返回关键字匹配的新闻及position相关数据。
+        //主页搜索功能，传入keywords返回关键字匹配的三类服务，需求及新闻相关数据。
 
         $keywords = "";
-        //不能搜索公司
         if ($request->has('keyword')) {
-            //if ($request->isMethod('POST')) {
+
             if ($request->isMethod('GET')) {
                 $keywords = $request->input('keyword');
-                //$keywords = 'lol';
-                //$num = $request->input('num');
-                $news = News::where('content', 'like', '%' . $keywords . '%')
+
+                $data['news'] = News::where('content', 'like', '%' . $keywords . '%')
                     ->orWhere('title', 'like', '%' . $keywords . '%')
-                    ->orWhere('subtitle', 'like', '%' . $keywords . '%')
-                    //->paginate($num);
                     ->get();
 
-                $position = Position::where('vaildity', '>=', date('Y-m-d H-i-s'))
-                    ->where('position_status', 1)
+                $data['genlservices'] = Genlservices::where('state', '=', 0)
+                    ->where('type', 0)
                     ->where(function ($query) use ($keywords) {
                         $query->orwhere('title', 'like', '%' . $keywords . '%')
-                            ->orwhere('pdescribe', 'like', '%' . $keywords . '%')
+                            ->orwhere('describe', 'like', '%' . $keywords . '%')
                             ->orwhere('experience', 'like', '%' . $keywords . '%');
+                    })
+                    ->get();
+                $data['finlservices'] = Finlservices::where('state', '=', 0)
+                    ->where('type', 1)
+                    ->where(function ($query) use ($keywords) {
+                        $query->orwhere('title', 'like', '%' . $keywords . '%')
+                            ->orwhere('describe', 'like', '%' . $keywords . '%');
+                    })
+                    ->get();
+                $data['qaservices'] = Qaservices::where('state', '=', 0)
+                    ->where('type', 2)
+                    ->where(function ($query) use ($keywords) {
+                        $query->orwhere('title', 'like', '%' . $keywords . '%')
+                            ->orwhere('describe', 'like', '%' . $keywords . '%')
+                            ->orwhere('experience', 'like', '%' . $keywords . '%');
+                    })
+                    ->get();
+                $data['demands'] = Demands::where('state',0)
+                    ->where(function ($query) use ($keywords) {
+                        $query->orwhere('title', 'like', '%' . $keywords . '%')
+                            ->orwhere('describe', 'like', '%' . $keywords . '%');
                     })
                     ->get();
             }
         }
         // ly:添加返回搜索的关键字
-        $searchResult['keyword'] = $keywords;
-        $searchResult['news'] = $news;
-        $searchResult['position'] = $position;
+        $data['keyword'] = $keywords;
 
-        // ly:返回首页搜索结果页面
         //return $data;
         return view('search', [
             "data" => $data,
-            "searchResult" => $searchResult
         ]);
     }
 
-    public function companySearch(Request $request) {
-        $data = array();
-
-        $data['uid'] = AuthController::getUid();
-        $data['username'] = InfoController::getUsername();
-        $data['type'] = AuthController::getType();
-        $data['position'] = null;
-
-        if ($request->has('eid')) {
-            $eid = $request->input('eid');
-            $data['position'] = Position::where('eid', $eid)
-                ->where('vaildity', '>=', date('Y-m-d H-i-s'))
-                ->where('position_status', 1)
-                ->paginate(9);
-            $data['enprinfo'] = Enprinfo::find($eid);
-            $data['industry'] = Industry::all();
-        }
-        //return $data;
-        return view('company', ['data' => $data]);
-    }
 }

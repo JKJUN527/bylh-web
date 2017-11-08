@@ -18,25 +18,16 @@ Route::any('account/sendemail', ['uses' => 'ValidationController@sendemail']);
 //验证邮箱
 Route::any('validate_email', ['uses' => 'ValidationController@verifyEmailCode']);
 
-
-Route::get('account/findPassword', ['uses' => 'ForgetPwController@view']);
-Route::post('account/findPassword/{option}', ['uses' => 'ForgetPwController@index'])->where('option', '[0-2]{1}');
-
-//Route::get('account/findPassword', function () {
-//    return view('account.findPassword');
-//});
-//Route::any('account/resetPassword', ['uses' => 'FixPasswordController@resetPassword']);
-//Route::any('account/forgotPasswordReset', ['uses' => 'FixPasswordController@forgotPasswordReset']);
-Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
+//忘记密码
+Route::get('account/findPassword', ['uses' => 'ForgetPwController@index']);
+Route::post('account/findPassword/{option}', ['uses' => 'ForgetPwController@resetpw'])->where('option', '[0-2]{1}');
 
 //权限获取
 Route::get('account/getType', ['uses' => 'AuthController@getType']);  //完成
 Route::get('account/getUid', ['uses' => 'AuthController@getUid']);  //完成
-//个人信息获取、新增、更新
-//Route::get('account/edit', function () {//进入方法，返回修改界面，带上个人信息。
-//    return view('account.edit');
-//});
-Route::get('account/edit', ['uses' => 'InfoController@index']);//个人、企业基本信息修改界面
-Route::get('account/getPersonInfo', ['uses' => 'InfoController@getPersonInfo']);
-Route::get('account/getEnprInfo', ['uses' => 'InfoController@getEnprInfo']);
+//修改个人资料
+Route::get('account/edit', ['uses' => 'AccountController@index']);//个人、企业基本信息修改界面
+Route::post('account/edit', ['uses' => 'AccountController@editbaseinfo']);//提交修改
+
+Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
 

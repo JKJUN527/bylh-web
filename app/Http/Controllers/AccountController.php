@@ -9,6 +9,8 @@
 namespace App\Http\Controllers;
 
 use App\Seviceclass1;
+use App\User;
+use App\Userinfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,23 +24,71 @@ class AccountController extends Controller {
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-
-
+        //暂定初始页面需要返回内容
 
         return view('account.index',['data'=>$data]);
     }
-    //忘记密码主页
-    public function findPassword() {
-
-        return view('account/findPassword');
-    }
-
 
     //修改个人基本资料主页
-    public function editbaseinfo() {
+    public function editbaseinfo(Request $request)
+    {
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
 
-        return view('account/edit');
+        if ($data['uid'] != 0 && ($data['type'] == 0 || $data['type'] == 1))   //确认为合法个人用户
+        {
+            if ($data['uid'] == 0) {//用户未登陆
+                return view('account.login', ['data' => $data]);
+            }
+            //上传头像;
+            $infoid = Userinfo::where('uid', $data['uid'])->first();
+            $userinfo = Userinfo::find($infoid->id);
+
+            if ($request->hasFile('photo')) {
+                //验证输入的图片格式,验证图片尺寸比例为一比一
+//            $this->validate($request, [
+//                'photo' => 'dimensions:ratio=1/1'
+//            ]);
+                $photo = $request->file('photo');
+                if ($photo->isValid()) {//判断文件是否上传成功
+                    $ext = $photo->getClientOriginalExtension();
+                    //临时觉得路径
+                    $realPath = $photo->getRealPath();
+
+                    $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'photo' . '.' . $ext;
+
+                    $bool = Storage::disk('profile')->put($filename, file_get_contents($realPath));
+                    if ($bool) {
+                        $userinfo->photo = asset('storage/profiles/' . $filename);//个人头像上传位置
+                    }
+                }
+            }
+            $userinfo->real_name = $request->input('real_name');
+            $userinfo->note = $request->input('note');
+            $userinfo->birthday = $request->input('birthday');
+            $userinfo->sex = $request->input('sex');
+            $userinfo->city = $request->input('city');
+            $userinfo->residence = $request->input('residence');
+            $userinfo->tel = $request->input('tel');
+            $userinfo->mail = $request->input('mail');
+
+            if ($userinfo->save()) {
+                $user = User::find($data['uid']);
+                $user->username = $request->input('username');
+                $user->save();
+                $data['status'] = 200;
+                $data['msg'] = "操作成功";
+            } else {
+                $data['status'] = 400;
+                $data['msg'] = "操作失败";
+            }
+
+            return $data;
+        }
     }
+
     //修改服务用户服务相关资料主页
     public function editserviceinfo() {
 
