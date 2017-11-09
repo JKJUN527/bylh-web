@@ -73,6 +73,11 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public/newspic'),
         ],
+        /*支付码图片*/
+        'paycode' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/paycode'),
+        ],
         /*广告图片*/
         'adpic' => [
             'driver' => 'local',

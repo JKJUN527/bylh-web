@@ -8,11 +8,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Account;
-use App\Enprinfo;
-use App\Industry;
-use App\Personinfo;
-use App\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

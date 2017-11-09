@@ -8,7 +8,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Seviceclass1;
+use App\Serviceinfo;
 use App\User;
 use App\Userinfo;
 use Illuminate\Http\Request;
@@ -70,7 +70,6 @@ class AccountController extends Controller {
             $userinfo->birthday = $request->input('birthday');
             $userinfo->sex = $request->input('sex');
             $userinfo->city = $request->input('city');
-            $userinfo->residence = $request->input('residence');
             $userinfo->tel = $request->input('tel');
             $userinfo->mail = $request->input('mail');
 
@@ -90,131 +89,74 @@ class AccountController extends Controller {
     }
 
     //修改服务用户服务相关资料主页
-    public function editserviceinfo() {
-
-        return view('account/edit');
-    }
-
-    //个人资料修改（新增）
-    public function personinfoEdit(Request $request) {
+    public function serviceinfo() {
         $data = array();
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
-        $data['type'] = AuthController::getType();
-        if ($data['uid'] == 0) {//用户未登陆
-            return view('account.login', ['data' => $data]);
-        }
-        //上传头像;
-        $pid = Personinfo::where('uid', $data['uid'])->first();
-        $personinfo = Personinfo::find($pid['pid']);
-
-        if ($request->hasFile('photo')) {
-            //验证输入的图片格式,验证图片尺寸比例为一比一
-//            $this->validate($request, [
-//                'photo' => 'dimensions:ratio=1/1'
-//            ]);
-            $photo = $request->file('photo');
-            if ($photo->isValid()) {//判断文件是否上传成功
-                $originalName = $photo->getClientOriginalName();
-                //扩展名
-                $ext = $photo->getClientOriginalExtension();
-                //mimetype
-                $type = $photo->getClientMimeType();
-                //临时觉得路径
-                $realPath = $photo->getRealPath();
-
-                $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'photo' . '.' . $ext;
-
-                $bool = Storage::disk('profile')->put($filename, file_get_contents($realPath));
-                if ($bool) {
-                    $personinfo->photo = asset('storage/profiles/' . $filename);
-                }
-            }
-        }
-        $personinfo->pname = $request->input('pname');
-        $personinfo->birthday = $request->input('birthday');
-        $personinfo->sex = $request->input('sex');
-        $personinfo->work_year = $request->input('work_year');
-        $personinfo->register_place = $request->input('register_place');
-        $personinfo->residence = $request->input('residence');
-        $personinfo->tel = $request->input('tel');
-        $personinfo->mail = $request->input('mail');
-        $personinfo->is_marry = $request->input('is_marry');
-        $personinfo->political = $request->input('political');
-        $personinfo->self_evalu = $request->input('self_evalu');
-        $personinfo->education = $request->input('education');
-
-        if ($personinfo->save()) {
-            $user = Users::find($data['uid']);
-            $user->username = $request->input('username');
-            $user->save();
-            $data['status'] = 200;
-            $data['msg'] = "操作成功";
-        } else {
-            $data['status'] = 400;
-            $data['msg'] = "操作失败";
-        }
-
-        return $data;
-    }
-
-    //企业资料修改，新增
-    public function enprinfoEdit(Request $request) {
-        $data = array();
-        $data['uid'] = AuthController::getUid();
-        $data['username'] = InfoController::getUsername();
-        $data['type'] = AuthController::getType();
         $data['type'] = AuthController::getType();
         if ($data['uid'] == 0) {//用户未登陆
             $data['status'] = 400;
             $data['msg'] = "请先登陆再进行操作";
             return $data;
         }
-        if ($data['type'] != 2) {
+        if ($data['type'] != 1) {
             $data['status'] = 400;
             $data['msg'] = "用户非法，请登录企业号";
             return $data;
         }
-        //上传头像;
-        $eid = Enprinfo::where('uid', $data['uid'])->first();
-        $enprinfo = Enprinfo::find($eid['eid']);
 
-        if ($request->hasFile('elogo')) {
+        return view('account/edit',['data'=>$data]);
+    }
+    public function editserviceinfo(Request $request) {
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+        if ($data['uid'] == 0) {//用户未登陆
+            $data['status'] = 400;
+            $data['msg'] = "请先登陆再进行操作";
+            return $data;
+        }
+        if ($data['type'] != 1) {
+            $data['status'] = 400;
+            $data['msg'] = "用户非法，请登录企业号";
+            return $data;
+        }
+        $is_exist = Serviceinfo::where('uid',$data['uid'])->first();
+        if(empty($is_exist)){
+            $data['status'] = 400;
+            $data['msg'] = "未存在该用户的服务信息表";
+            return $data;
+        }
+        $serviceinfo = Serviceinfo::find($is_exist->id);
+        //接收数据
+        if ($request->hasFile('paycode')) {
             //验证输入的图片格式,验证图片尺寸比例为一比一
 //            $this->validate($request, [
 //                'elogo' => 'dimensions:ratio=1/1'
 //            ]);
-            $elogo = $request->file('elogo');
-            if ($elogo->isValid()) {//判断文件是否上传成功
-                $originalName = $elogo->getClientOriginalName();
-                //扩展名
-                $ext = $elogo->getClientOriginalExtension();
-                //mimetype
-                $type = $elogo->getClientMimeType();
+            $pay = $request->file('paycode');
+            if ($pay->isValid()) {//判断文件是否上传成功
+                $ext = $pay->getClientOriginalExtension();
                 //临时觉得路径
-                $realPath = $elogo->getRealPath();
+                $realPath = $pay->getRealPath();
 
-                $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'elogo' . '.' . $ext;
+                $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'paycode' . '.' . $ext;
 
-                $bool = Storage::disk('profile')->put($filename, file_get_contents($realPath));
+                $bool = Storage::disk('paycode')->put($filename, file_get_contents($realPath));
                 if ($bool) {
-//                    $enprinfo->elogo = $filename;
-                    $enprinfo->elogo = asset('storage/profiles/' . $filename);
+                    $serviceinfo->paycode = asset('storage/paycode/' . $filename);
                 }
             }
         }
-        $enprinfo->byname = $request->input('byname');
-        $enprinfo->email = $request->input('email');
-        $enprinfo->etel = $request->input('etel');
-        $enprinfo->ebrief = $request->input('ebrief');
-        $enprinfo->escale = $request->input('escale');
-//        $enprinfo->enature = $request->input('enature');
-//        $enprinfo->industry = $request->input('industry');
-        $enprinfo->home_page = $request->input('home_page');
-        $enprinfo->address = $request->input('address');
+        $serviceinfo->city = $request->input('city');
+        $serviceinfo->current_edu = $request->input('current_edu');
+        $serviceinfo->graduate_edu = $request->input('graduate_edu');
+        $serviceinfo->is_offline = $request->input('is_offline');
+        $serviceinfo->has_video = $request->input('has_video');
+        $serviceinfo->pay_way = $request->input('pay_way');
 
-
-        if ($enprinfo->save()) {
+        if ($serviceinfo->save()) {
             $data['status'] = 200;
             $data['msg'] = "操作成功";
         } else {
@@ -224,58 +166,39 @@ class AccountController extends Controller {
 
         return $data;
     }
-    //企业用户验证页面\返回对应企业信息
-    //如果options 为upload，则上传证件照片到数据库
+
+    //实名认证页面\返回对应企业信息
+    //如果option  012 分别代表不同的认证上传页面
     //返回值为$data数组
-    public function enterpriseVerifyView(Request $request) {
+    public function authindex(Request $request,$option) {
         $data = array();
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-        $uid = $data['uid'];
-
-        if ($uid == 0)
-            return view("/account/login", ['data' => $data]);
-
-        $type = AuthController::getType();
-
-        if ($type != 2)
-            return redirect()->back();
-
-        $eid = Enprinfo::select('eid')
-            ->where('uid', '=', $uid)
-            ->first();
-
-//        if (sizeof($eid) == 0)
-        if (!$eid->count())
-            return redirect()->back();
-
-        $eid = $eid['eid'];
-        $data['eid'] = $eid;
-//        if ($eid[0]['is_verification'] == 1) {
-//            //已验证
-//            $data['is_verification'] = 1;
-//        } else {
-//            //未验证
-//            $data['is_verification'] = 0;
-//        }
-        $data['is_verification'] = $eid[0]['is_verification'];
-        $data['enterprise'] = Enprinfo::find($eid);
-        $data['industry'] = Industry::select('id', 'name')->get();
+        switch ($option){
+            case 0://实名认证
+                $state = User::where('uid',$data['uid'])
+                    ->where('status',0)
+                    ->first();
+                if(!$state->realname_verify && $data['type']==0){
+                    //查看用户审核情况
+                }
+                return 0;
+            case 1:
+                return 1;
+            case 2:
+                return 2;
+            default:
+                return "error";
+        }
 
         //return $data;
         return view("account.enterpriseVerify", ['data' => $data]);
     }
 
     //上传企业验证证件照片
-
-    /**
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function uploadVerinfo(Request $request) {
+    public function uploadauth(Request $request) {
         $data = array();
         $uid = AuthController::getUid();
         $username = InfoController::getUsername();

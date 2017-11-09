@@ -21,13 +21,24 @@ Route::any('validate_email', ['uses' => 'ValidationController@verifyEmailCode'])
 //忘记密码
 Route::get('account/findPassword', ['uses' => 'ForgetPwController@index']);
 Route::post('account/findPassword/{option}', ['uses' => 'ForgetPwController@resetpw'])->where('option', '[0-2]{1}');
+//修改密码
+Route::get('account/resetPassword', ['uses' => 'FixPasswordController@index']);
+Route::post('account/resetPassword', ['uses' => 'FixPasswordController@index']);
 
 //权限获取
 Route::get('account/getType', ['uses' => 'AuthController@getType']);  //完成
 Route::get('account/getUid', ['uses' => 'AuthController@getUid']);  //完成
 //修改个人资料
-Route::get('account/edit', ['uses' => 'AccountController@index']);//个人、企业基本信息修改界面
-Route::post('account/edit', ['uses' => 'AccountController@editbaseinfo']);//提交修改
+Route::get('account/baseedit', ['uses' => 'AccountController@index']);//个人、企业基本信息修改界面
+Route::post('account/baseedit', ['uses' => 'AccountController@editbaseinfo']);//提交修改
+//修改服务用户服务相关信息
+Route::get('account/serviceedit', ['uses' => 'AccountController@serviceinfo']);//服务相关信息修改页面
+Route::post('account/serviceedit', ['uses' => 'AccountController@editserviceinfo']);//提交修改
+//实名认证页面、实习中介认证、专业问答认证
+Route::get('account/authentication/{option}', ['uses' => 'AccountController@authindex'])->where('option', '[0-2]{1}');//服务相关信息修改页面
+Route::post('account/authentication/{option}', ['uses' => 'AccountController@uploadauth'])->where('option', '[0-2]{1}');//服务相关信息修改页面
+
+
 
 Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
 
