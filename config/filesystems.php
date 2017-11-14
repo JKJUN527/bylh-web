@@ -63,7 +63,7 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public/profiles'),
         ],
-        /*法人照片、企业营业执照*/
+        /*实名认证、资质审核照片*/
         'authentication' => [
             'driver' => 'local',
             'root' => storage_path('app/public/authentication'),

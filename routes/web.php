@@ -36,9 +36,16 @@ Route::get('account/serviceedit', ['uses' => 'AccountController@serviceinfo']);/
 Route::post('account/serviceedit', ['uses' => 'AccountController@editserviceinfo']);//提交修改
 //实名认证页面、实习中介认证、专业问答认证
 Route::get('account/authentication/{option}', ['uses' => 'AccountController@authindex'])->where('option', '[0-2]{1}');//服务相关信息修改页面
-Route::post('account/authentication/{option}', ['uses' => 'AccountController@uploadauth'])->where('option', '[0-2]{1}');//服务相关信息修改页面
+Route::post('account/authentication/{option}', ['uses' => 'AccountController@uploadauth'])->where('option', '[0-2]{1}');//服务相关信息提交页面
 
+//一般服务发布主页、实习中介服务发布主页、专业问答服务发布主页
+Route::get('service/genlpublish', ['uses' => 'ServiceController@genlserviceindex']);//一般服务发布主页
+Route::get('service/finlpublish', ['uses' => 'ServiceController@finlserviceindex']);//实习中介发布主页
+Route::get('service/qapublish', ['uses' => 'ServiceController@qaserviceindex']);//专业问答发布主页
 
 
 Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
+
+//测试方法
+Route::get('sensitive', ['uses' => 'SensitiveController@test']);
 

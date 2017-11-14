@@ -176,95 +176,197 @@ class AccountController extends Controller {
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-        switch ($option){
-            case 0://实名认证
-                $state = User::where('uid',$data['uid'])
-                    ->where('status',0)
-                    ->first();
-                if(!$state->realname_verify && $data['type']==0){
-                    //查看用户审核情况
-                }
-                return 0;
-            case 1:
-                return 1;
-            case 2:
-                return 2;
-            default:
-                return "error";
+        if($data['uid']==0){
+            return view('account.login',['data'=>$data]);
         }
+        $state = User::where('uid',$data['uid'])
+            ->where('status',0)
+            ->first();
+        if(count($state)>0){//用户合法、存在
+            $data['userinfo'] = Userinfo::where('uid',$data['uid'])->first();//取得用户基本信息（电话邮箱之类）
+            switch ($option){
+                case 0://实名认证
+                    //查看用户审核情况(普通用户未验证)
+                    //返回用户实名认证情况
+                    $situation = Userinfo::where('uid',$data['uid'])->select('realname_statue')->first();
+                    $data['is_vertify']=$situation['realname_statue'];
+                    break;
+                case 1://实习中介认证
+                    $situation = Userinfo::where('uid',$data['uid'])->select('finance_statue')->first();
+                    $data['is_vertify']=$situation['finance_statue'];
+                    break;
+                case 2:
+                    $situation = Userinfo::where('uid',$data['uid'])->select('majors_statue')->first();
+                    $data['is_vertify']=$situation['majors_statue'];
+                    break;
+                default:
+                    return "error";
+            }
+        }else
+            return view('account.login',['data'=>$data]);
 
-        //return $data;
-        return view("account.enterpriseVerify", ['data' => $data]);
+        return $data;
+        return view("account.vertifyindex", ['data' => $data]);
     }
 
-    //上传企业验证证件照片
-    public function uploadauth(Request $request) {
+    //上传实名验证证件照片
+    public function uploadauth(Request $request,$option)
+    {
         $data = array();
-        $uid = AuthController::getUid();
-        $username = InfoController::getUsername();
-        $eid = Enprinfo::where('uid', $uid)->first();
-        if($eid['is_verification']==0||$eid['is_verification']==1){
-            $data['status']=400;
-            $data['msg']="用户已提交审核，无需重复提交";
-            return $data;
-        }
-        if ($request->has('ename') && $request->has('enature') && $request->has('industry')) {
-            $enprinfo = Enprinfo::find($eid['eid']);
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
 
-            if ($request->isMethod('POST')) {
-                $ecertifi = $request->file('ecertifi');//取得上传文件信息
-                $lcertifi = $request->file('lcertifi');//取得上传文件信息
-
-                if ($ecertifi->isValid() && $lcertifi->isValid()) {//判断文件是否上传成功
-                    //原文件名
-                    //echo '文件上传成功';
-                    $originalName1 = $ecertifi->getClientOriginalName();
-                    $originalName2 = $lcertifi->getClientOriginalName();
-                    //扩展名
-                    $ext1 = $ecertifi->getClientOriginalExtension();
-                    $ext2 = $lcertifi->getClientOriginalExtension();
-                    //mimetype
-                    $type1 = $ecertifi->getClientMimeType();
-                    $type2 = $lcertifi->getClientMimeType();
-                    //临时觉得路径
-                    $realPath1 = $ecertifi->getRealPath();
-                    $realPath2 = $lcertifi->getRealPath();
-
-                    $filename1 = date('Y-m-d-H-i-s') . '-' . uniqid() . 'ecertifi' . '.' . $ext1;
-                    $filename2 = date('Y-m-d-H-i-s') . '-' . uniqid() . 'lcertifi' . '.' . $ext2;
-
-                    $bool1 = Storage::disk('authentication')->put($filename1, file_get_contents($realPath1));
-                    $bool2 = Storage::disk('authentication')->put($filename2, file_get_contents($realPath2));
-                    //var_dump($bool);
-                    if($bool1 && $bool2){
-                        //文件名保存到数据库中
-                        $enprinfo->ecertifi = asset('storage/authentication/' . $filename1);
-                        $enprinfo->lcertifi = asset('storage/authentication/' . $filename2);
-                    }
-                    $enprinfo->ename = $request->input('ename');
-                    $enprinfo->enature = $request->input('enature');
-                    $enprinfo->industry = $request->input('industry');
-                    $enprinfo->email = $request->input('email');
-                    $enprinfo->etel = $request->input('etel');
-                    $enprinfo->address = $request->input('address');
-                    $enprinfo->is_verification = 0;
-
-
-                    if ($enprinfo->save()) {
-                        $data['status'] = 200;
-                        $data['msg'] = "上传成功";
-                        return $data;
-                        //return redirect('account/enterpriseVerify?eid='.$eid)->with('success', '上传证件成功');
-                    } else {
-                        $data['status'] = 400;
-                        $data['msg'] = "上传失败";
-                        return $data;
-                        //return redirect('account/enterpriseVerify?eid='.$eid)->with('error', '上传证件失败');
-                    }
-
-
+        $infoid = Userinfo::where('uid', $data['uid'])->first();
+        switch ($option) {
+            case 0:
+                if ($infoid['realname_statue'] == 0 || $infoid['realname_statue'] == 1) {
+                    $data['status'] = 400;
+                    $data['msg'] = "用户已提交审核，无需重复提交";
+                    return $data;
                 }
-            }
+                if ($request->has('real_name') && $request->has('id_card') && $request->hasFile('idcard_photo')) {
+                    $userinfo = Userinfo::find($infoid['id']);
+                    if ($request->isMethod('POST')) {
+                        $idcard_photo = $request->file('idcard_photo');//取得上传文件信息
+
+                        if ($idcard_photo->isValid()) {//判断文件是否上传成功
+                            //原文件名
+//                            $originalName1 = $idcard_photo->getClientOriginalName();
+                            //扩展名
+                            $ext = $idcard_photo->getClientOriginalExtension();
+                            //mimetype
+                            $type1 = $idcard_photo->getClientMimeType();
+                            //临时觉得路径
+                            $realPath = $idcard_photo->getRealPath();
+
+                            $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'idcard_photo' . '.' . $ext;
+
+                            $bool = Storage::disk('authentication')->put($filename, file_get_contents($realPath));
+                            if ($bool) {
+                                //文件名保存到数据库中
+                                $userinfo->idcard_photo = asset('storage/authentication/' . $filename);
+                            }
+                            $userinfo->tel = $request->input('tel');
+                            $userinfo->mail = $request->input('mail');
+                            $userinfo->real_name = $request->input('real_name');
+                            $userinfo->id_card = $request->input('id_card');
+                            $userinfo->realname_statue = 0;
+
+                            if ($userinfo->save()) {
+                                $data['status'] = 200;
+                                $data['msg'] = "上传成功";
+                                return $data;
+                                //return redirect('account/enterpriseVerify?eid='.$eid)->with('success', '上传证件成功');
+                            } else {
+                                $data['status'] = 400;
+                                $data['msg'] = "上传失败";
+                                return $data;
+                                //return redirect('account/enterpriseVerify?eid='.$eid)->with('error', '上传证件失败');
+                            }
+                        }
+                    }
+                }
+                break;
+            case 1://实习中介认证
+                if ($infoid['realname_statue'] != 1) {
+                    $data['status'] = 400;
+                    $data['msg'] = "必须先通过实名认证";
+                    return $data;
+                }
+                if ($request->hasFile('finance_photo')) {
+                    $userinfo = Userinfo::find($infoid['id']);
+                    if ($request->isMethod('POST')) {
+                        $finance_photo = $request->file('finance_photo');//取得上传文件信息
+
+                        if ($finance_photo->isValid()) {//判断文件是否上传成功
+                            //原文件名
+//                            $originalName1 = $idcard_photo->getClientOriginalName();
+                            //扩展名
+                            $ext = $finance_photo->getClientOriginalExtension();
+                            //mimetype
+                            $type1 = $finance_photo->getClientMimeType();
+                            //临时觉得路径
+                            $realPath = $finance_photo->getRealPath();
+
+                            $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'finance_photo' . '.' . $ext;
+
+                            $bool = Storage::disk('authentication')->put($filename, file_get_contents($realPath));
+                            if ($bool) {
+                                //文件名保存到数据库中
+                                $userinfo->finance_photo = asset('storage/authentication/' . $filename);
+                            }
+                            $userinfo->tel = $request->input('tel');
+                            $userinfo->mail = $request->input('mail');
+                            $userinfo->finance_statue = 0;
+
+                            if ($userinfo->save()) {
+                                $data['status'] = 200;
+                                $data['msg'] = "上传成功";
+                                return $data;
+                                //return redirect('account/enterpriseVerify?eid='.$eid)->with('success', '上传证件成功');
+                            } else {
+                                $data['status'] = 400;
+                                $data['msg'] = "上传失败";
+                                return $data;
+                                //return redirect('account/enterpriseVerify?eid='.$eid)->with('error', '上传证件失败');
+                            }
+                        }
+                    }
+                }
+                break;
+            case 2://专业认证
+                if ($infoid['realname_statue'] != 1) {
+                    $data['status'] = 400;
+                    $data['msg'] = "必须先通过实名认证";
+                    return $data;
+                }
+                if ($request->hasFile('majors_photo')) {
+                    $userinfo = Userinfo::find($infoid['id']);
+                    if ($request->isMethod('POST')) {
+                        $majors_photo = $request->file('majors_photo');//取得上传文件信息
+
+                        if ($majors_photo->isValid()) {//判断文件是否上传成功
+                            //原文件名
+//                            $originalName1 = $idcard_photo->getClientOriginalName();
+                            //扩展名
+                            $ext = $majors_photo->getClientOriginalExtension();
+                            //mimetype
+                            $type1 = $majors_photo->getClientMimeType();
+                            //临时觉得路径
+                            $realPath = $majors_photo->getRealPath();
+
+                            $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'majors_photo' . '.' . $ext;
+
+                            $bool = Storage::disk('authentication')->put($filename, file_get_contents($realPath));
+                            if ($bool) {
+                                //文件名保存到数据库中
+                                $userinfo->majors_photo = asset('storage/authentication/' . $filename);
+                            }
+                            $userinfo->tel = $request->input('tel');
+                            $userinfo->mail = $request->input('mail');
+                            $userinfo->majors_statue = 0;
+
+                            if ($userinfo->save()) {
+                                $data['status'] = 200;
+                                $data['msg'] = "上传成功";
+                                return $data;
+                                //return redirect('account/enterpriseVerify?eid='.$eid)->with('success', '上传证件成功');
+                            } else {
+                                $data['status'] = 400;
+                                $data['msg'] = "上传失败";
+                                return $data;
+                                //return redirect('account/enterpriseVerify?eid='.$eid)->with('error', '上传证件失败');
+                            }
+                        }
+                    }
+                }
+                break;
+            default:
+                $data['status'] = 400;
+                $data['msg'] = "操作错误";
+                return $data;
         }
+
     }
 }
