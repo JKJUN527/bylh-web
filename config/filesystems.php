@@ -73,6 +73,21 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public/newspic'),
         ],
+        /*一般服务描述图片*/
+        'genlservicespic' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/genlservicespic'),
+        ],
+        /*一般服务描述图片*/
+        'finlservicespic' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/finlservicespic'),
+        ],
+        /*一般服务描述图片*/
+        'qaservicespic' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/qaservicespic'),
+        ],
         /*支付码图片*/
         'paycode' => [
             'driver' => 'local',

@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 class SensitiveController extends Controller {
 
     //敏感词检测
-    public function checkSensitive($str) {
+    public static function checkSensitive($str) {
         $data = array();
         $sensitive = array();
         //从数据库获取敏感词列表
