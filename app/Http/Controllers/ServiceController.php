@@ -365,6 +365,54 @@ class ServiceController extends Controller {
         return view('service/editservice',['data'=>$data]);
     }
 
+    //下架服务
+    //传入服务id，及服务type
+    public function deleteservice(Request $request){
+        $data = array();
+        $data['status']=400;
+        $data['msg']="参数错误";
+        if($request->has('sid') && $request->has('type')){
+            $type = $request->input('type');
+            $sid = $request->input('sid');
+            switch ($type){
+                case 0://一般服务
+                    $service = Genlservices::find($sid);
+                    $service->state=1;
+                    if($service->save()){
+                        $data['status']=200;
+                        $data['msg']="一般服务下架成功";
+                    }
+                    break;
+                case 1://金融服务
+                    $service = Finlservices::find($sid);
+                    $service->state=1;
+                    if($service->save()){
+                        $data['status']=200;
+                        $data['msg']="金融服务下架成功";
+                    }
+                    break;
+                case 2://问答服务
+                    $service = Qaservices::find($sid);
+                    $service->state=1;
+                    if($service->save()){
+                        $data['status']=200;
+                        $data['msg']="问答服务下架成功";
+                    }
+                    break;
+            }
+
+        }
+        return $data;
+    }
+
+    //保存编辑服务内容
+    //option 123 表示保存一般服务、实习中介、专业问答服务。
+    public function editservicePost(Request $request,$option){
+        $data = array();
+        $data['uid']=AuthController::getUid();
+
+    }
+
 
 
 }
