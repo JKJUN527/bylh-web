@@ -55,6 +55,8 @@ Route::post('service/qapublish', ['uses' => 'ServiceController@qaservicePublic']
 //服务下架
 Route::post('service/delete',['uses' => 'ServiceController@deleteservice']);
 
+//服务高级搜索
+Route::any('service/advanceSearch',['uses' => 'ServiceController@advanceIndex']);
 
 Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
 
