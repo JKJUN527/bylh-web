@@ -8,12 +8,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Adverts;
-use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
-use App\News;
 use App\Qaservices;
+use App\Region;
 use App\Serviceclass1;
 use App\Serviceclass2;
 use App\Serviceclass3;
@@ -406,13 +404,13 @@ class ServiceController extends Controller {
     }
     //服务高级搜索|根据关键字、服务三个类别、服务类型信息、地区查找对应的职位信息
     //排序按发布时间、价钱、浏览次数
-    //其中，salary 1:<3k 2:3k>= & <5k 3:5k>= & <10k 4:10k>= & <15k 5:15k>= & <20k 6:20k>= & <25k 7:25k>= & <50k 8:>=50k
+    //
     public function advanceSearch(Request $request) {
         $data = array();
         //$data['position'] = Position::select('pid','eid','title','tag','pdescribe','salary','region','work_nature','occupation',)
         $orderBy = "view_count";
         $desc = "desc";
-        if ($request->has('orderBy')) {//0:热度排序2:时间排序1:薪水
+        if ($request->has('orderBy')) {//0:热度排序1:时间排序2:价钱
             $data["orderBy"] = $request->input('orderBy');
 
             switch ($request->input('orderBy')) {
@@ -420,14 +418,14 @@ class ServiceController extends Controller {
                     $orderBy = "view_count";
                     break;
                 case 1:
-                    $orderBy = "salary";
+                    $orderBy = "created_at";
                     break;
                 case 2:
-                    $orderBy = "jobs_position.created_at";
+                    $orderBy = "price";
                     break;
             }
         }
-
+        //desc =1 倒序  2 正序
         if ($request->has('desc')) {
             if ($request->input('desc') == 1) {
                 $data["desc"] = 1;
@@ -438,77 +436,83 @@ class ServiceController extends Controller {
             }
         }
 
-        if ($request->has('industry')) $data['industry'] = $request->input('industry');
-        if ($request->has('region')) $data['region'] = $request->input('region');
-        if ($request->has('salary')) $data['salary'] = $request->input('salary');
-        if ($request->has('work_nature')) $data['work_nature'] = $request->input('work_nature');
-        if ($request->has('keyword')) $data['keyword'] = $request->input('keyword');
+//        if ($request->has('class1')) $data['class1'] = $request->input('class1');
+//        if ($request->has('class2')) $data['class2'] = $request->input('class2');
+//        if ($request->has('class3')) $data['class3'] = $request->input('class3');
+//        if ($request->has('price')) $data['price'] = $request->input('price');
+//        if ($request->has('city')) $data['city'] = $request->input('city ');
+//        if ($request->has('service_type')) $data['service_type'] = $request->input('service_type');//服务类型（012一般服务，实习课堂，专业问答）
+//        if ($request->has('keyword')) $data['keyword'] = $request->input('keyword');
 
-        //return $data;
+        switch ($data['service_type']){
+            case 0:
+                $table = "bylh_genlservices";
+                break;
+            case 1:
+                $table = "bylh_finlservices";
+                break;
+            case 2:
+                $table = "bylh_qaservices";
+                break;
+            default:
+                $table = "bylh_genlservices";
+        }
 
-        $data['position'] = DB::table('jobs_position')
-            ->select('pid', 'title', 'ename','byname' ,'salary','jobs_region.name','position_status')
-            ->leftjoin('jobs_enprinfo', 'jobs_enprinfo.eid', '=', 'jobs_position.eid')
-            ->leftjoin('jobs_region', 'jobs_region.id', '=', 'jobs_position.region')
-            ->where('vaildity', '>=', date('Y-m-d H-i-s'))
+        $data['services'] = DB::table($table)
+//            ->select('pid', 'title', 'ename','byname' ,'salary','jobs_region.name','position_status')
+//            ->leftjoin('jobs_enprinfo', 'jobs_enprinfo.eid', '=', 'jobs_position.eid')
+//            ->leftjoin('jobs_region', 'jobs_region.id', '=', 'jobs_position.region')
+            ->where('state', '=', 0)
 //        $data['position'] = Position::where('vaildity', '>=', date('Y-m-d H-i-s'))
 //            ->where('position_status', '=', 1)
-            ->where(function ($query){
-                $query->where('position_status',1)
-                    ->orwhere('position_status',4);
-            })
             ->where(function ($query) use ($request) {
-                if ($request->has('industry')) {//行业
-                    $query->where('jobs_position.industry', '=', $request->input('industry'));
+                if ($request->has('class1')) {//行业
+                    $query->where('class1', '=', $request->input('class1'));
                 }
-                if ($request->has('region')) {
-                    $query->where('jobs_position.region', '=', $request->input('region'));
+                if ($request->has('class2')) {
+                    $query->where('class2', '=', $request->input('class2'));
                 }
-                if ($request->has('salary')) {
-                    switch ($request->input('salary')) {
+                if ($request->has('price')) {
+                    switch ($request->input('price')) {
                         case 1:
-                            $query->where('jobs_position.salary', '<', 3000);
+                            $query->where('price', '<', 50);
                             break;
                         case 2:
-                            $query->where('jobs_position.salary', '>=', 3000);
-                            $query->where('jobs_position.salary', '<', 5000);
+                            $query->where('price', '>=', 50);
+                            $query->where('price', '<', 100);
                             break;
                         case 3:
-                            $query->where('jobs_position.salary', '>=', 5000);
-                            $query->where('jobs_position.salary', '<', 10000);
+                            $query->where('price', '>=', 100);
+                            $query->where('price', '<', 500);
                             break;
                         case 4:
-                            $query->where('jobs_position.salary', '>=', 10000);
-                            $query->where('jobs_position.salary', '<', 15000);
+                            $query->where('price', '>=', 500);
+                            $query->where('price', '<', 2000);
                             break;
                         case 5:
-                            $query->where('jobs_position.salary', '>=', 15000);
-                            $query->where('jobs_position.salary', '<', 20000);
+                            $query->where('price', '>=', 2000);
+                            $query->where('price', '<', 5000);
                             break;
                         case 6:
-                            $query->where('jobs_position.salary', '>=', 20000);
-                            $query->where('jobs_position.salary', '<', 25000);
+                            $query->where('price', '>=', 5000);
+                            $query->where('price', '<', 10000);
                             break;
                         case 7:
-                            $query->where('jobs_position.salary', '>=', 25000);
-                            $query->where('jobs_position.salary', '<', 50000);
-                            break;
-                        case 8:
-                            $query->where('jobs_position.salary', '>', 50000);
+                            $query->where('price', '>', 10000);
                             break;
                         default:
                             break;
                     }
                 }
-                if ($request->has('work_nature')) {
-                    $query->where('jobs_position.work_nature', '=', $request->input('work_nature'));
+                if ($request->has('region')) {
+                    $query->where('city', '=', $request->input('region'));
                 }
-                //未加入对公司名称以及公司别名的搜索
+                //对关键字进行搜索
                 if ($request->has('keyword')) {
                     $keyword = $request->input('keyword');
-                    $query->where('jobs_position.title', 'like', '%' . $keyword . '%')
+                    $query->where('title', 'like', '%' . $keyword . '%')
                         ->orWhere(function ($query) use ($keyword) {
-                            $query->where('jobs_position.pdescribe', 'like', '%' . $keyword . '%');
+                            $query->where('describe', 'like', '%' . $keyword . '%');
                         });
                 }
             })
@@ -522,13 +526,23 @@ class ServiceController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
-        $data['industry'] = Industry::all();
+
+        $data['class1'] = Serviceclass1::all();
+        $data['class2'] = Serviceclass2::all();
+        $data['class3'] = Serviceclass3::all();
         $data['region'] = Region::all();
+        //返回查询结果
         $data['result'] = $this->advanceSearch($request);
 
-        $data['condition'] = $request->all();
+        //返回上次查询条件
+        $data['condition']['class1'] = $request->input('class1');
+        $data['condition']['class2'] = $request->input('class2');
+        $data['condition']['class3'] = $request->input('class3');
+        $data['condition']['region'] = $request->input('region');
+        $data['condition']['servicetype'] = $request->input('servicetype');
+        $data['condition']['keyword'] = $request->input('keyword');
 //        return $data;
-        return view('position/advanceSearch', ['data' => $data]);
+        return view('service/advanceSearch', ['data' => $data]);
     }
 
     //保存编辑服务内容
