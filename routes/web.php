@@ -58,6 +58,9 @@ Route::post('service/delete',['uses' => 'ServiceController@deleteservice']);
 //服务高级搜索
 Route::any('service/advanceSearch',['uses' => 'ServiceController@advanceIndex']);
 
+//服务详情页
+Route::any('service/detail',['uses' => 'ServiceController@detail']);
+
 Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
 
 //测试方法

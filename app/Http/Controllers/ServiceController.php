@@ -15,7 +15,10 @@ use App\Region;
 use App\Serviceclass1;
 use App\Serviceclass2;
 use App\Serviceclass3;
+use App\Serviceinfo;
+use App\Servicereviews;
 use App\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -544,7 +547,57 @@ class ServiceController extends Controller {
 //        return $data;
         return view('service/advanceSearch', ['data' => $data]);
     }
+    //传入服务id,及对应的服务类型，返回具体的服务详情
+    //需返回服务详情、服务历史评价、发布者其他服务、以及发布者服务相关信息
+    public function detail(Request $request){
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
 
+        if($request->has('sid') && $request->has('type')){
+            $sid = $request->input('sid');
+            switch ($request->input('type')){
+                case 0:
+                    $data['detail'] = Genlservices::where('id',$sid)
+                        ->where('state',0)
+                        ->first();
+                    //对应服务浏览次数加1
+                    $addview = Genlservices::find($sid);
+                    $addview->view_count +=1;
+                    $addview->save();
+                    break;
+                case 1:
+                    $data['detail'] = Finlservices::where('id',$sid)
+                        ->where('state',0)
+                        ->first();
+                    //对应服务浏览次数加1
+                    $addview = Finlservices::find($sid);
+                    $addview->view_count +=1;
+                    $addview->save();
+                    break;
+                case 2:
+                    $data['detail'] = Qaservices::where('id',$sid)
+                        ->where('state',0)
+                        ->first();
+                    //对应服务浏览次数加1
+                    $addview = Qaservices::find($sid);
+                    $addview->view_count +=1;
+                    $addview->save();
+                    break;
+            }
+            //服务对应评价
+            $data['review'] = Servicereviews::where('sid',$sid)
+                ->where('type',0)
+                ->where('state',0)
+                ->orderby('created_at','desc')
+                ->paginate(10);//默认一页显示10条评价
+            //服务商服务相关信息
+            $data['serviceinfo'] = Serviceinfo::where('uid',$data['detail']->uid)->first();
+        }
+//        return $data;
+        return view('service/detail',['data'=>$data]);
+    }
     //保存编辑服务内容
     //option 123 表示保存一般服务、实习中介、专业问答服务。
     public function editservicePost(Request $request,$option){
