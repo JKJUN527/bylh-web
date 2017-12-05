@@ -61,8 +61,8 @@ Route::any('service/advanceSearch',['uses' => 'ServiceController@advanceIndex'])
 //服务详情页
 Route::any('service/detail',['uses' => 'ServiceController@detail']);
 
-Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
 
+Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
 //测试方法
 Route::get('sensitive', ['uses' => 'SensitiveController@test']);
 
