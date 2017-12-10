@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Datetemp;
+use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
 use App\Orders;
@@ -23,7 +25,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ServiceController extends Controller {
+class OrderController extends Controller {
    //购买服务
     //传入服务id及服务类型
     //当用户点击购买服务后调用，成功则打开用户收款二维码。
@@ -105,18 +107,136 @@ class ServiceController extends Controller {
 
     }
     //服务用户点击确认收款后，修改订单状态
+    //传入收款金额
     public function ConfirmGetPayment(Request $request){
         $data = array();
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
+        $data["status"] = 400;
+
+        if ($data['uid'] == 0) {//用户未登陆
+            return view('account.login', ['data' => $data]);
+        }
+        if($data['type']==0 ||$data['type']==1){ //只能服务用户点击确认收款
+            $data['msg'] = "非法用户";
+            return $data;
+        }
+
+        if($request->has('order_id') && $request->has('money')){
+            $order = Orders::find($request->input('order_id'));
+            if($order){
+                $order->state =2;
+                $order->price = $request->input('money');//默认相信服务方提供的收款价格
+                if($order->save()){
+                    $data['status']=200;
+                    $data['msg'] = "确认收款成功";
+                    $content = "我已收到你的付款，请尽快与我联系！";
+                    //发送站内信到服务用户，通知确认收款
+                    MessageController::sendMessage($request,$order->d_uid,$content);
+                }
+            }else{
+                $data['status'] = 400;
+                $data['msg'] = "未查询到相关订单";
+                return $data;
+            }
+
+        }else{
+            $data['msg'] = "传入参数错误";
+        }
+        return $data;
+
+    }
+    //评价服务
+    //传入订单id,及评价内容
+    public function reviewService(Request $request){
+        $data = array();
+        $uid = AuthController::getUid();
+        $data['status']=400;
+        $data['msg']="参数错误";
+
+        if($request->has('order_id') && $request->has('review')){
+            $order_id = $request->input('order_id');
+            $review = $request->input('review');
+            $order = Orders::find($order_id);
+            if($order){//找到订单
+                $servicereview  = new Servicereviews();
+                $servicereview->uid = $uid;
+                $servicereview->sid = $order->service_id;
+                $servicereview->type = $order->type;
+                $servicereview->comments = $review;
+                if($servicereview->save()){
+                    $data['status'] = 200;
+                    $data['msg'] = "评论成功";
+                    return $data;
+                }else{
+                    $data['msg'] = "评论失败";
+                }
+            }else{
+                $data['msg']="未找到对应订单信息";
+            }
+
+        }
+        return $data;
+    }
+    //预约需求
+    public function reservationDemand(Request $request){
+        $data = array();
+        $uid = AuthController::getUid();
+//        $data['username'] = InfoController::getUsername();
+        $type = AuthController::getType();
+        $data['status'] = 400;
+
+        if ($uid == 0) {//用户未登陆
+            return view('account.login', ['data' => $data]);
+        }
+        if($type==0 ||$type==1){ //只能服务用户点击预约服务
+            $data['msg'] = "非法用户";
+            return $data;
+        }
+        //每一个服务用户预约一个需求，创建临时预约表。
+        //传入预约留言及报价、预约需求id、返回预约状态
+        if($request->has('msg') && $request->has('did') && $request->has('price')){
+            //查询当前需求的状态，
+            $demand = Demands::find($request->input('did'));
+            if($demand){
+                if($demand->state == 1)//需求下架
+                {
+                    $data['msg'] = "该需求已下架，请查看后处理";
+                    return $data;
+                }else{
+                    $datetemp = new Datetemp();
+                    $datetemp->sid = $uid;
+                    $datetemp->did = $demand->uid;
+                    $datetemp->demand_id = $demand->id;
+                    $datetemp->price = $request->input('price');
+                    if($datetemp->save()){
+                        $data['status'] = 200;
+                        $data['msg'] = "预约成功！";
+                        return $data;
+                    }
+                }
+            }else{
+                $data['msg'] = "查无此需求，请检查后重试！";
+                return $data;
+            }
+        }
+
 
     }
 
-    //预约需求
-    public function reservationDemand(){
+    //获取订单详情页面
+    //传入订单id
+    public function getdetail(Request $request){
         $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
 
+        if($request->has('order_id')){
+            $data['order']->find($request->input('order_id'));
+        }
+        return view('order/detail',['data'=>$data]);
     }
 
 

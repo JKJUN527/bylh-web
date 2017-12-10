@@ -60,6 +60,21 @@ Route::any('service/advanceSearch',['uses' => 'ServiceController@advanceIndex'])
 
 //服务详情页
 Route::any('service/detail',['uses' => 'ServiceController@detail']);
+//评论服务
+Route::any('service/reviewService',['uses' => 'serviceController@reviewService']);
+
+//修改订单状态
+//点击购买服务
+Route::any('order/createOrder',['uses' => 'OrderController@createOrder']);
+//点击确认付款
+Route::any('order/ConfirmPayment',['uses' => 'OrderController@ConfirmPayment']);
+//点击确认收款
+Route::post('order/ConfirmGetPayment',['uses' => 'OrderController@ConfirmGetPayment']);
+//获取订单详情
+Route::get('order/getdetail',['uses' => 'OrderController@getdetail']);
+//服务用户预约需求
+Route::post('order/reservationDemand',['uses' => 'OrderController@reservationDemand']);
+
 
 
 Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
