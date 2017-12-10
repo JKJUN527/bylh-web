@@ -239,6 +239,28 @@ class OrderController extends Controller {
         return view('order/detail',['data'=>$data]);
     }
 
+    //需求用户选择服务商主页
+    //传入需求id
+    public function selectServiceIndex(Request $request){
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+
+        if($request->has('did')){
+            $demand = Demands::find($request->input('did'));
+            if($demand->uid != $data['uid']){//用户不能查看非自己发布需求
+                return redirect()->back();
+            }
+            $data['selectlist'] = Datetemp::where('did',$data['uid'])
+                ->where('demand_id',$request->input('did'))
+                ->where('state',0)
+                ->paginate(20);//默认每页显示20条报价记录
+        }
+        return view('demands/selectindex',['data'=>$data]);
+    }
+    //需求发布用户，选择相应的服务商后，删除对应的其他服务提供temp信息。
+
 
 
 }
