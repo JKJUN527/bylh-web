@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller {
+
     //一般服务发布主页
     public function genlserviceindex() {
         $data = array();
@@ -562,7 +563,10 @@ class ServiceController extends Controller {
                     $data['detail'] = Genlservices::where('id',$sid)
                         ->where('state',0)
                         ->first();
-                    //对应服务浏览次数加1
+                    //对应服务浏览次数加1--发布者浏览，不加浏览量
+                    if($data['detail']->uid == $data['uid']){
+                        break;
+                    }
                     $addview = Genlservices::find($sid);
                     $addview->view_count +=1;
                     $addview->save();
@@ -572,6 +576,9 @@ class ServiceController extends Controller {
                         ->where('state',0)
                         ->first();
                     //对应服务浏览次数加1
+                    if($data['detail']->uid == $data['uid']){
+                        break;
+                    }
                     $addview = Finlservices::find($sid);
                     $addview->view_count +=1;
                     $addview->save();
@@ -581,6 +588,9 @@ class ServiceController extends Controller {
                         ->where('state',0)
                         ->first();
                     //对应服务浏览次数加1
+                    if($data['detail']->uid == $data['uid']){
+                        break;
+                    }
                     $addview = Qaservices::find($sid);
                     $addview->view_count +=1;
                     $addview->save();

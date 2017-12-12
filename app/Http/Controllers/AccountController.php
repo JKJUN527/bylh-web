@@ -23,12 +23,62 @@ class AccountController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
-
+        if($data['uid']==0){//先登录
+            return view('account.login',['data'=>$data]);
+        }
         //暂定初始页面需要返回内容
+        //返回已发布的服务列表及需求列表
+        //返回个人已发布服务列表
+        switch ($data['type']) {
+            case 1://需求用户
+                $data['demandsList'] = DemandsController::getDemandsList();
+                $info = new InfoController();
+                $data['personInfo'] = $info->getPersonInfo();
+                $data['messageNum'] = $this->getMessageNum();
+                $data['orderNum'] = $this->getOrderNum();
+                break;
+            case 2://服务用户
+                $data['type'] = 2;
+                $info = new InfoController();
+                $data['uid'] = AuthController::getUid();
+                $data['enterpriseInfo'] = $info->getEnprInfo();
+                $data['positionList'] = $this->getPostionList();
+                $data['messageNum'] = $this->getMessageNum();
+                $data['applyList'] = $this->getApplyList();
+                $data['industry'] = Industry::all();
+                break;
+        }
 
         return view('account.index',['data'=>$data]);
     }
-
+    //获取未完成订单个数
+    public function getOrderNum(){
+        $uid = AuthController::getUid();
+        $num = Orders::where(function ($query) use($uid){
+            $query->where('s_uid',$uid)
+                ->orWhere(function ($query) use ($uid) {
+                    $query->where('d_uid',$uid);
+                });
+        })
+            ->where('state','!=',3)
+            ->count();
+        if ($num > 99)
+            return 99;
+        else
+            return $num;
+    }
+    //获取未读消息个数
+    public function getMessageNum() {
+        $uid = AuthController::getUid();
+        $num = Message::where('to_id', '=', $uid)
+            ->where('is_read', '=', '0')
+            ->where("is_delete", "=", "0")
+            ->count();
+        if ($num > 99)
+            return 99;
+        else
+            return $num;
+    }
     //修改个人基本资料主页
     public function editbaseinfo(Request $request)
     {

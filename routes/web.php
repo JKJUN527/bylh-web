@@ -63,7 +63,11 @@ Route::any('service/detail',['uses' => 'ServiceController@detail']);
 //评论服务
 Route::any('service/reviewService',['uses' => 'serviceController@reviewService']);
 
-//修改订单状态
+//订单模块
+
+//获取订单列表
+Route::get('order/index',['uses' => 'OrderController@orderlist']);
+Route::get('order/',['uses' => 'OrderController@orderlist']);
 //点击购买服务
 Route::any('order/createOrder',['uses' => 'OrderController@createOrder']);
 //点击确认付款
@@ -74,6 +78,46 @@ Route::post('order/ConfirmGetPayment',['uses' => 'OrderController@ConfirmGetPaym
 Route::get('order/getdetail',['uses' => 'OrderController@getdetail']);
 //服务用户预约需求
 Route::post('order/reservationDemand',['uses' => 'OrderController@reservationDemand']);
+
+//需求用户查看报价列表\并选择服务商
+Route::get('order/selectServiceIndex',['uses' => 'OrderController@selectServiceIndex']);
+Route::post('order/selectServicer',['uses' => 'OrderController@selectServicer']);
+
+//需求模块
+//发布需求页面及post方法
+Route::get('demands/demandPublishIndex',['uses' => 'DemandsController@demandPublishIndex']);
+Route::post('demands/PublishPost',['uses' => 'DemandsController@PublishPost']);
+//编辑需求页面
+Route::get('demands/editdemandIndex',['uses' => 'DemandsController@editdemandIndex']);
+//删除需求
+Route::post('demands/deletedemand',['uses' => 'DemandsController@deletedemand']);
+//获取需求详情页
+Route::get('demands/detail',['uses' => 'DemandsController@detail']);
+
+
+
+
+
+//站内信模块
+//发送站内信
+Route::post('message/sendMessage',['uses' => 'MessageController@sendMessage']);
+//获取站内信列表
+Route::get('message/index',['uses' => 'MessageController@index']);
+Route::get('message/',['uses' => 'MessageController@index']);
+//获取站内信详情
+Route::get('message/detail',['uses' => 'MessageController@detail']);
+//删除站内信--整个对话
+Route::post('message/delDialog',['uses' => 'MessageController@delDialog']);
+//标记站内信为已读
+Route::post('message/isread',['uses' => 'MessageController@isRead']);
+//删除站内信单条消息
+Route::post('message/delmessage',['uses' => 'MessageController@delMessage']);
+
+
+
+
+//获取订单列表
+Route::get('order/orderlist',['uses' => 'OrderController@orderlist']);
 
 
 

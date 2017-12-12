@@ -12,6 +12,7 @@ use App\Enprinfo;
 use App\Message;
 use App\Personinfo;
 use App\User;
+use App\Userinfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -62,17 +63,12 @@ class MessageController extends Controller {
         }
         foreach ($temp as $item) {
             $type = User::find($item);
-            if($type['type']!=2) {
+            if($type['type']!=0) {
                 $data['user'][$item] = User::select('username')
                     ->where('uid', '=', $item)
                     ->get();
-                if($type['type']==3){
-                    $data['user'][$item][0]['username']="系统消息";
-                }
-            }elseif ($type['type']==2){
-                $data['user'][$item] = Enprinfo::select('ename')
-                    ->where('uid', '=', $item)
-                    ->get();
+            }elseif ($type['type']==0){
+                $data['user'][$item][0]['username']="系统消息";
             }
         }
 
@@ -92,14 +88,12 @@ class MessageController extends Controller {
             //var_dump($type[0]['attributes']['type']);
             //var_dump($type['attributes']['type']);
             $data = null;
-            if ($type[0]['attributes']['type'] == 1) {//普通用户
-                $data = Personinfo::where('uid', '=', $uid)
-                    ->first();
-            } else if ($type[0]['attributes']['type'] == 2) {//企业用户
-                $data = Enprinfo::where('uid', '=', $uid)
-                    ->first();
-            } else if ($type[0]['attributes']['type'] == 3) {//管理员
+            if ($type[0]['attributes']['type'] == 0) {//管理员
                 $data = 'admin';//管理员头像可以用一个固定图片替代
+
+            } else{//普通用户
+                $data = Userinfo::where('uid', '=', $uid)
+                    ->first();
             }
         }
         return $data;

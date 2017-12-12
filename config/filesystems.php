@@ -78,15 +78,20 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public/genlservicespic'),
         ],
-        /*一般服务描述图片*/
+        /*实习中介描述图片*/
         'finlservicespic' => [
             'driver' => 'local',
             'root' => storage_path('app/public/finlservicespic'),
         ],
-        /*一般服务描述图片*/
+        /*专业问答服务描述图片*/
         'qaservicespic' => [
             'driver' => 'local',
             'root' => storage_path('app/public/qaservicespic'),
+        ],
+        /*需求描述图片*/
+        'demandspic' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/demandspic'),
         ],
         /*支付码图片*/
         'paycode' => [

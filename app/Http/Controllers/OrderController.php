@@ -260,6 +260,63 @@ class OrderController extends Controller {
         return view('demands/selectindex',['data'=>$data]);
     }
     //需求发布用户，选择相应的服务商后，删除对应的其他服务提供temp信息。
+    //选择对应服务商后，生成订单。
+    public function selectServicer(Request $request){
+        $data = array();
+        $data['status'] = 400;
+        $uid = AuthController::getUid();
+
+        if($request->has('s_id') && $request->has('demand_id')){
+            $sid = $request->input('s_id');
+            $demand_id = $request->input('demand_id');
+            $servicer = Datetemp::where('sid',$sid)
+                ->where('demand_id',$demand_id)
+                ->where('did',$uid)->where('state',0)
+                ->get();
+            if($servicer->count()>=1){
+                $neworder = new Orders();
+                $neworder->s_uid = $sid;
+                $neworder->d_uid = $uid;
+                $neworder->create_uid = $sid;
+                $neworder->type = 0;
+                $neworder->demand_id = $demand_id;
+                $neworder->price = $servicer->price;
+                $neworder->vaildity = date('Y-m-d H:i:s', strtotime('+7 day'));
+
+                if($neworder->save()){
+                    $deltemp = Datetemp::where('demand_id',$demand_id)->update(['state' => 1]);
+                    $data['status'] = 200;
+                    $data['msg'] = "已成功选择服务用户！创建订单成功";
+                    return $data;
+                }
+            }else{
+                $data['msg'] = "此服务用户未预约该需求";
+            }
+        }
+    }
+
+    //查看与自己相关订单列表
+    public function orderlist(){
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+        $uid = $data['uid'];
+
+        if ($uid == 0) {//用户未登陆
+            return view('account.login', ['data' => $data]);
+        }
+        $data['orderlist'] = Orders::where(function ($query) use($uid){
+            $query->where('s_uid',$uid)
+                ->orWhere(function ($query) use ($uid) {
+                    $query->where('d_uid',$uid);
+                });
+        })
+        ->paginate(20);
+
+        return view('account/orderlist',['data'=>$data]);
+
+    }
 
 
 
