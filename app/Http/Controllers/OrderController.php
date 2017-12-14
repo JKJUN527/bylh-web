@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Datetemp;
+use App\Demandreviews;
 use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
@@ -174,6 +175,37 @@ class OrderController extends Controller {
                 }
             }else{
                 $data['msg']="未找到对应订单信息";
+            }
+
+        }
+        return $data;
+    }
+    //回答需求
+    //传入需求id,及评价内容
+    public function reviewDemand(Request $request){
+        $data = array();
+        $uid = AuthController::getUid();
+        $data['status']=400;
+        $data['msg']="参数错误";
+
+        if($request->has('did') && $request->has('review')){
+            $did = $request->input('did');
+            $review = $request->input('review');
+            $demandreview = new Demandreviews();
+            $demandreview->uid = $uid;
+            $demandreview->did = $did;
+            $demandreview->comments = $review;
+            if($demandreview->save()){
+                //发送站内信给需求发布者
+                $toid = Demands::find($did);
+                $content = "我回答了你的需求，请尽快查看！";
+                MessageController::sendMessage($request,$toid->uid,$content);
+
+                $data['status'] = 200;
+                $data['msg'] = "评论成功";
+                return $data;
+            }else{
+                $data['msg'] = "评论失败";
             }
 
         }

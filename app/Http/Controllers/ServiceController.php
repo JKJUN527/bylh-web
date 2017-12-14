@@ -159,6 +159,7 @@ class ServiceController extends Controller {
                     if ($genlser->save()) {
                         $data['status'] = 200;
                         $data['msg'] = "操作成功";
+                        $data['demands'] = $this->recommendDemands($request);
                         return $data;
                     } else {
                         $data['status'] = 400;
@@ -234,6 +235,7 @@ class ServiceController extends Controller {
                 if ($genlser->save()) {
                     $data['status'] = 200;
                     $data['msg'] = "操作成功";
+                    $data['demands'] = $this->recommendDemands($request);
                     return $data;
                 } else {
                     $data['status'] = 400;
@@ -309,6 +311,7 @@ class ServiceController extends Controller {
                 if ($genlser->save()) {
                     $data['status'] = 200;
                     $data['msg'] = "操作成功";
+                    $data['demands'] = $this->recommendDemands($request);
                     return $data;
                 } else {
                     $data['status'] = 400;
@@ -319,6 +322,24 @@ class ServiceController extends Controller {
             return $data;
         }
         return $data;
+    }
+    //推荐需求--根据三个class分类
+    public function recommendDemands(Request $request){
+        $class1_id = $request->input('class1_id');
+        $class2_id = $request->input('class2_id');
+        $class3_id = $request->input('class3_id');
+        $city = $request->input('city');
+
+        $demands = Demands::select('id','title','city','picture','class1_id')
+            ->where('state',0)
+            ->where(function($query) use($class1_id,$city){
+                $query->where('city','=',$city)
+                    ->orWhere(function($query) use($class1_id){
+                        $query->where('class1_id', $class1_id);
+                    });
+            })
+            ->get();
+        return $demands;
     }
     //编辑服务主页
     //传入sid值及对应的type值
@@ -440,13 +461,13 @@ class ServiceController extends Controller {
             }
         }
 
-//        if ($request->has('class1')) $data['class1'] = $request->input('class1');
-//        if ($request->has('class2')) $data['class2'] = $request->input('class2');
-//        if ($request->has('class3')) $data['class3'] = $request->input('class3');
-//        if ($request->has('price')) $data['price'] = $request->input('price');
-//        if ($request->has('city')) $data['city'] = $request->input('city ');
-//        if ($request->has('service_type')) $data['service_type'] = $request->input('service_type');//服务类型（012一般服务，实习课堂，专业问答）
-//        if ($request->has('keyword')) $data['keyword'] = $request->input('keyword');
+        if ($request->has('class1')) $data['class1'] = $request->input('class1');
+        if ($request->has('class2')) $data['class2'] = $request->input('class2');
+        if ($request->has('class3')) $data['class3'] = $request->input('class3');
+        if ($request->has('price')) $data['price'] = $request->input('price');
+        if ($request->has('city')) $data['city'] = $request->input('city ');
+        if ($request->has('service_type')) $data['service_type'] = $request->input('service_type');//服务类型（012一般服务，实习课堂，专业问答）
+        if ($request->has('keyword')) $data['keyword'] = $request->input('keyword');
 
         switch ($data['service_type']){
             case 0:

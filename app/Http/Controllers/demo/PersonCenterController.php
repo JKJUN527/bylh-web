@@ -10,11 +10,15 @@ namespace App\Http\Controllers;
 
 use App\Backup;
 use App\Delivered;
+use App\Demands;
 use App\Enprinfo;
+use App\Finlservices;
+use App\Genlservices;
 use App\Industry;
 use App\Message;
 use App\Personinfo;
 use App\Position;
+use App\Qaservices;
 use Faker\Provider\lv_LV\Person;
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +31,7 @@ class PersonCenterController extends Controller {
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-        if (AuthController::getUid() == 0) {
+        if ($data['uid'] == 0) {
             return view("/account/login",['data'=>$data]);
         }
 
@@ -59,7 +63,37 @@ class PersonCenterController extends Controller {
 //        return $data;
         return view('account.index', ['data' => $data]);
     }
+    //获取已发布一般服务列表
+    public function getGenlservices($uid){
+        $genlservices = Genlservices::where('uid',$uid)
+            ->where('state',0)
+            ->get();
+        return $genlservices;
+    }
+    //获取已发布实习中介服务列表
+    public function getFinlservices($uid){
+        $finlservices = Finlservices::where('uid',$uid)
+            ->where('state',0)
+            ->get();
+        return $finlservices;
+    }
+    //获取已发布专业问答服务列表
+    public function getQaservices($uid){
+        $qaservices = Qaservices::where('uid',$uid)
+            ->where('state',0)
+            ->get();
+        return $qaservices;
+    }
+    //获取需求列表
+    public function getDemands($uid){
+        $demands = Demands::where('uid',$uid)
+            ->where('state',0)
+            ->get();
+        return $demands;
+    }
 
+
+//原方法
     public function recommendPosition() {
 
         $uid = AuthController::getUid();

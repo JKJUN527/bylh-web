@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Demandreviews;
 use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
@@ -19,6 +20,7 @@ use App\Serviceclass3;
 use App\Serviceinfo;
 use App\Servicereviews;
 use App\User;
+use App\Userinfo;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -101,6 +103,7 @@ class DemandsController extends Controller {
                     if ($demands->save()) {
                         $data['status'] = 200;
                         $data['msg'] = "操作成功";
+                        $data['services'] = $this->recommendServices($request);
                         return $data;
                     } else {
                         $data['status'] = 400;
@@ -108,8 +111,44 @@ class DemandsController extends Controller {
                         return $data;
                     }
                 }
-                return $data;
         }
+        return $data;
+    }
+    //推荐服务--根据三个class分类
+    public function recommendServices(Request $request){
+        $class1_id = $request->input('class1_id');
+        $class2_id = $request->input('class2_id');
+        $title = $request->input('title');
+        $city = $request->input('city');
+        $data = array();
+        $data['finlservices'] = Finlservices::select('id','type','title','city','picture','class1_id')
+            ->where('state',0)
+            ->where(function($query) use($class1_id,$city,$title){
+                $query->orWhere('city','=',$city)
+                    ->orWhere('is_urgency',1)
+                    ->orWhere('class1_id', $class1_id)
+                    ->orWhere('describe', 'like', '%' . $title . '%');
+            })
+            ->get();
+        $data['genlservices'] = Genlservices::select('id','type','title','city','picture','class1_id')
+            ->where('state',0)
+            ->where(function($query) use($class1_id,$city,$title){
+                $query->orWhere('city','=',$city)
+                    ->orWhere('is_urgency',1)
+                    ->orWhere('class1_id', $class1_id)
+                    ->orWhere('describe', 'like', '%' . $title . '%');
+            })
+            ->get();
+        $data['qaservices'] = Qaservices::select('id','type','title','city','picture','class1_id')
+            ->where('state',0)
+            ->where(function($query) use($class1_id,$city,$title){
+                $query->orWhere('city','=',$city)
+                    ->orWhere('is_urgency',1)
+                    ->orWhere('class1_id', $class1_id)
+                    ->orWhere('describe', 'like', '%' . $title . '%');
+            })
+            ->get();
+
         return $data;
     }
 
@@ -163,12 +202,10 @@ class DemandsController extends Controller {
         }
         return $data;
     }
-    //需求高级搜索|根据关键字、服务三个类别、地区查找对应的职位信息
+    //需求高级搜索|根据关键字、服务三个类别、地区查找对应的需求信息
     //排序按发布时间、价钱、浏览次数
-    //
     public function advanceSearch(Request $request) {
         $data = array();
-        //$data['position'] = Position::select('pid','eid','title','tag','pdescribe','salary','region','work_nature','occupation',)
         $orderBy = "view_count";
         $desc = "desc";
         if ($request->has('orderBy')) {//0:热度排序1:时间排序2:价钱
@@ -197,29 +234,15 @@ class DemandsController extends Controller {
             }
         }
 
-//        if ($request->has('class1')) $data['class1'] = $request->input('class1');
-//        if ($request->has('class2')) $data['class2'] = $request->input('class2');
-//        if ($request->has('class3')) $data['class3'] = $request->input('class3');
-//        if ($request->has('price')) $data['price'] = $request->input('price');
-//        if ($request->has('city')) $data['city'] = $request->input('city ');
-//        if ($request->has('service_type')) $data['service_type'] = $request->input('service_type');//服务类型（012一般服务，实习课堂，专业问答）
-//        if ($request->has('keyword')) $data['keyword'] = $request->input('keyword');
+        if ($request->has('class1')) $data['class1'] = $request->input('class1');
+        if ($request->has('class2')) $data['class2'] = $request->input('class2');
+        if ($request->has('class3')) $data['class3'] = $request->input('class3');
+        if ($request->has('price')) $data['price'] = $request->input('price');
+        if ($request->has('city')) $data['city'] = $request->input('city ');
+        if ($request->has('keyword')) $data['keyword'] = $request->input('keyword');
 
-        switch ($data['service_type']){
-            case 0:
-                $table = "bylh_genlservices";
-                break;
-            case 1:
-                $table = "bylh_finlservices";
-                break;
-            case 2:
-                $table = "bylh_qaservices";
-                break;
-            default:
-                $table = "bylh_genlservices";
-        }
-
-        $data['services'] = DB::table($table)
+        $table = "bylh_demands";
+        $data['demands'] = DB::table($table)
 //            ->select('pid', 'title', 'ename','byname' ,'salary','jobs_region.name','position_status')
 //            ->leftjoin('jobs_enprinfo', 'jobs_enprinfo.eid', '=', 'jobs_position.eid')
 //            ->leftjoin('jobs_region', 'jobs_region.id', '=', 'jobs_position.region')
@@ -303,7 +326,7 @@ class DemandsController extends Controller {
         $data['condition']['servicetype'] = $request->input('servicetype');
         $data['condition']['keyword'] = $request->input('keyword');
 //        return $data;
-        return view('service/advanceSearch', ['data' => $data]);
+        return view('demands/advanceSearch', ['data' => $data]);
     }
     //传入需求id返回具体的需求详情
     //需返回需求详情、需求评论、发布者其他需求、以及发布者基本信息
@@ -313,45 +336,33 @@ class DemandsController extends Controller {
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-        if($request->has('sid') && $request->has('type')){
-            $sid = $request->input('sid');
-            switch ($request->input('type')){
-                case 0:
-                    $data['detail'] = Genlservices::where('id',$sid)
-                        ->where('state',0)
-                        ->first();
-                    //对应服务浏览次数加1
-                    $addview = Genlservices::find($sid);
-                    $addview->view_count +=1;
-                    $addview->save();
-                    break;
-                case 1:
-                    $data['detail'] = Finlservices::where('id',$sid)
-                        ->where('state',0)
-                        ->first();
-                    //对应服务浏览次数加1
-                    $addview = Finlservices::find($sid);
-                    $addview->view_count +=1;
-                    $addview->save();
-                    break;
-                case 2:
-                    $data['detail'] = Qaservices::where('id',$sid)
-                        ->where('state',0)
-                        ->first();
-                    //对应服务浏览次数加1
-                    $addview = Qaservices::find($sid);
-                    $addview->view_count +=1;
-                    $addview->save();
-                    break;
+        if($request->has('did')){
+            $data['detail'] = Demands::find($request->input('did'));
+            if($data['detail']){
+                $uid = $data['detail']->uid;
+                //查找对应用户的基本信息
+                $data['userinfo'] = Userinfo::where('uid',$uid)->first();
+                //用户其他需求信息
+                $data['otherDemands'] = Demands::where('uid',$uid)
+                    ->where('state',0)
+                    ->where('state',0)
+                    ->paginate(20);//默认显示20条
+                //需求对应回答、评论
+                $data['review'] = DB::table('bylh_demandreviews')
+                    ->select('bylh_demandreviews.uid', 'username','photo','comments', 'bylh_demandreviews.created_at')
+                    ->leftjoin('bylh_users', 'bylh_users.uid', '=', 'bylh_demandreviews.uid')
+                    ->leftjoin('bylh_userinfo', 'bylh_userinfo.uid', '=', 'bylh_demandreviews.uid')
+                    ->where('did', '=', $request->input('did'))
+                    ->where('state',0)
+                    ->orderby('bylh_demandreviews.created_at','desc')
+                    ->paginate(10);//默认一页显示10条评价
+                //需求浏览次数加一
+                $data['detail']->view_count +=1;
+                $data['detail']->save();
+            }else{
+                $data['detail'] = "";
             }
-            //服务对应评价
-            $data['review'] = Servicereviews::where('sid',$sid)
-                ->where('type',0)
-                ->where('state',0)
-                ->orderby('created_at','desc')
-                ->paginate(10);//默认一页显示10条评价
-            //服务商服务相关信息
-            $data['serviceinfo'] = Serviceinfo::where('uid',$data['detail']->uid)->first();
+
         }
 //        return $data;
         return view('service/detail',['data'=>$data]);

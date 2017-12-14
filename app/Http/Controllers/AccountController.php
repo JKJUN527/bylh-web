@@ -51,6 +51,34 @@ class AccountController extends Controller {
 
         return view('account.index',['data'=>$data]);
     }
+    //获取已发布一般服务列表
+    public function getGenlservices($uid){
+        $genlservices = Genlservices::where('uid',$uid)
+            ->where('state',0)
+            ->get();
+        return $genlservices;
+    }
+    //获取已发布实习中介服务列表
+    public function getFinlservices($uid){
+        $finlservices = Finlservices::where('uid',$uid)
+            ->where('state',0)
+            ->get();
+        return $finlservices;
+    }
+    //获取已发布专业问答服务列表
+    public function getQaservices($uid){
+        $qaservices = Qaservices::where('uid',$uid)
+            ->where('state',0)
+            ->get();
+        return $qaservices;
+    }
+    //获取需求列表
+    public function getDemands($uid){
+        $demands = Demands::where('uid',$uid)
+            ->where('state',0)
+            ->get();
+        return $demands;
+    }
     //获取未完成订单个数
     public function getOrderNum(){
         $uid = AuthController::getUid();
