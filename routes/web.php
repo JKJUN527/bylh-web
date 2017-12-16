@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', function () {
+Route::get('/index', function () {
     return view('home2');
 });
 Route::any('/home2',function(){
