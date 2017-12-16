@@ -108,8 +108,8 @@ class WebinfoController extends Controller {
         if ($uid == 0) {
             return redirect('admin/login');
         }
-//        if($request->has('webinfo')){
-//            $data = $request->input('webinfo');
+//        if($requests->has('webinfo')){
+//            $data = $requests->input('webinfo');
         $webinfo = about::findfirst();
         $webinfo->uid = 1;//登陆获取
         $webinfo->tel = $request->input('tel');

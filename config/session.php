@@ -105,7 +105,7 @@ return [
     |
     | Some session drivers must manually sweep their storage location to get
     | rid of old sessions from storage. Here are the chances that it will
-    | happen on a given request. By default, the odds are 2 out of 100.
+    | happen on a given requests. By default, the odds are 2 out of 100.
     |
     */
 

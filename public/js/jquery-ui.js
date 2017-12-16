@@ -11253,7 +11253,7 @@ $.widget( "ui.tabs", {
 				try {
 					// Passing index avoid a race condition when this method is
 					// called after the user has selected another tab.
-					// Pass the anchor that initiated this request allows
+					// Pass the anchor that initiated this requests allows
 					// loadError to manipulate the tab content panel via $(a.hash)
 					o.ajaxOptions.error( xhr, s, index, a );
 				}

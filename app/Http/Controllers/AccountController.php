@@ -126,7 +126,7 @@ class AccountController extends Controller {
 
             if ($request->hasFile('photo')) {
                 //验证输入的图片格式,验证图片尺寸比例为一比一
-//            $this->validate($request, [
+//            $this->validate($requests, [
 //                'photo' => 'dimensions:ratio=1/1'
 //            ]);
                 $photo = $request->file('photo');
@@ -210,7 +210,7 @@ class AccountController extends Controller {
         //接收数据
         if ($request->hasFile('paycode')) {
             //验证输入的图片格式,验证图片尺寸比例为一比一
-//            $this->validate($request, [
+//            $this->validate($requests, [
 //                'elogo' => 'dimensions:ratio=1/1'
 //            ]);
             $pay = $request->file('paycode');

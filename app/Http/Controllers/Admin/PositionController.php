@@ -36,8 +36,8 @@ class PositionController extends Controller {
         if ($uid == 0) {
             return redirect('admin/login');
         }
-//        if($request->has('pagesize')){
-//            $pagesize = $request->input('pagesize');
+//        if($requests->has('pagesize')){
+//            $pagesize = $requests->input('pagesize');
 //        }else
 //            $pagesize = 5;//默认每页显示20页
         if ($request->has('ename')) {

@@ -228,9 +228,9 @@ class StudentController extends Controller
     }
     public function session1(Request $request)
     {
-       //1.HTTP request session
-//        $request->session()->put('name','jiajun');
-//        echo $request->session()->get('name');
+       //1.HTTP requests session
+//        $requests->session()->put('name','jiajun');
+//        echo $requests->session()->get('name');
         //2.session()
 //        session()->put('name','jiajun');
 //        echo session()->get('name');

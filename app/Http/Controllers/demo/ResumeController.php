@@ -389,8 +389,8 @@ class ResumeController extends Controller {
         return $data;
     }
 
-//    public function updateEducation(Request $request) {
-//        $input = $request->all();
+//    public function updateEducation(Request $requests) {
+//        $input = $requests->all();
 //        $uid = AuthController::getUid();
 //        $eduid = $input['eduid'];
 //        $education = Education::find($eduid);

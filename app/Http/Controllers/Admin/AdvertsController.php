@@ -84,7 +84,7 @@ class AdvertsController extends Controller {
             return $data;
         }
         //接收参数
-//        $data = $request->input('adsinfo');//接收广告除图片之外的信息。
+//        $data = $requests->input('adsinfo');//接收广告除图片之外的信息。
 
         if ($request->input('type') == 0 || $request->input('type') == 1) {//大图和小图广告\图片上传
             if ($request->hasFile('adpic')) {
@@ -170,15 +170,15 @@ class AdvertsController extends Controller {
             return redirect('admin/login');
         }
         // 什么意思？没看懂
-//        if ($request->has('type')) {
-//            $type = $request->input('type');
-//            if ($request->has('location')) {
-//                $location = $request->input('location');
+//        if ($requests->has('type')) {
+//            $type = $requests->input('type');
+//            if ($requests->has('location')) {
+//                $location = $requests->input('location');
 //                $ad = Adverts::where('location', '=', $location)
 //                    ->where('type', '=', $type)
 //                    ->delete();
-//            } else if ($request->has('adid')) {
-//                $adid = $request->input('adid');
+//            } else if ($requests->has('adid')) {
+//                $adid = $requests->input('adid');
 //                $ad = Adverts::where('adid', '=', $adid)
 //                    ->where('type', '=', $type)
 //                    ->delete();

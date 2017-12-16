@@ -1247,7 +1247,7 @@
         // Drawings
 
         /**
-         * Main function called in request animation frame
+         * Main function called in requests animation frame
          * to update everything
          */
         updateScene: function () {

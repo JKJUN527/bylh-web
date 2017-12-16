@@ -50,7 +50,7 @@ class AccountController extends Controller {
 
         if ($request->hasFile('photo')) {
             //验证输入的图片格式,验证图片尺寸比例为一比一
-//            $this->validate($request, [
+//            $this->validate($requests, [
 //                'photo' => 'dimensions:ratio=1/1'
 //            ]);
             $photo = $request->file('photo');
@@ -121,7 +121,7 @@ class AccountController extends Controller {
 
         if ($request->hasFile('elogo')) {
             //验证输入的图片格式,验证图片尺寸比例为一比一
-//            $this->validate($request, [
+//            $this->validate($requests, [
 //                'elogo' => 'dimensions:ratio=1/1'
 //            ]);
             $elogo = $request->file('elogo');
@@ -148,8 +148,8 @@ class AccountController extends Controller {
         $enprinfo->etel = $request->input('etel');
         $enprinfo->ebrief = $request->input('ebrief');
         $enprinfo->escale = $request->input('escale');
-//        $enprinfo->enature = $request->input('enature');
-//        $enprinfo->industry = $request->input('industry');
+//        $enprinfo->enature = $requests->input('enature');
+//        $enprinfo->industry = $requests->input('industry');
         $enprinfo->home_page = $request->input('home_page');
         $enprinfo->address = $request->input('address');
 

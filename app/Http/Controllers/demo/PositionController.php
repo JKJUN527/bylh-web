@@ -288,7 +288,7 @@ class PositionController extends Controller {
         $eid = Enprinfo::where('uid',$data['uid'])->first();
         if ($request->isMethod('POST')) {
             //还未验证字段合法性
-//            $data = $request->input(position);
+//            $data = $requests->input(position);
             $position = new position();
             $position->eid = $eid->eid;
             $position->title = $request->input('title');
@@ -637,7 +637,7 @@ class PositionController extends Controller {
     }
 
     public function test1(Request $request) {
-//        $request->session()->put('uid', 1);
+//        $requests->session()->put('uid', 1);
         $request->session()->flush();
         var_dump($request->session()->all());
     }

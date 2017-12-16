@@ -2190,7 +2190,7 @@ if (parseInt(ws + '08') !== 8 || parseInt(ws + '0x16') !== 22) {
 
     xhr = function ( url, callback ) { // create new XMLHttpRequest object and run it
       try {
-        //try to create a request object
+        //try to create a requests object
         //arranging the two conditions this way is for IE7/8's benefit
         //so that it works with any combination of ActiveX or Native XHR settings,
         //as long as one or the other is enabled; but if both are enabled

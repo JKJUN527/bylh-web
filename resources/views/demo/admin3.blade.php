@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html>
+<title>实名认证</title>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+<link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+<link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
 
-    <title>实名认证</title>
+<link href="css/personal.css" rel="stylesheet" type="text/css">
+<link href="css/stepstyle.css" rel="stylesheet" type="text/css">
+<link href="css/vipstyle.css" rel="stylesheet" type="text/css">
+<link href="css/infstyle.css" rel="stylesheet" type="text/css">
+<link href="css/orstyle.css" rel="stylesheet" type="text/css">
 
-    <link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
-    <link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
-
-    <link href="css/personal.css" rel="stylesheet" type="text/css">
-    <link href="css/stepstyle.css" rel="stylesheet" type="text/css">
-  <!--<link href="css/vipstyle.css" rel="stylesheet" type="text/css">-->
-    <link href="css/infstyle.css" rel="stylesheet" type="text/css">
-    <link href="css/orstyle.css" rel="stylesheet" type="text/css">
-
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script src="AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script src="AmazeUI-2.4.2/assets/js/amazeui.js"></script>
 </head>
 
 <body>
@@ -84,9 +77,9 @@
 </div>
 <b class="line"></b>
 @section('content')
-    @show
+@show
 @section('footer')
-    @show
+@show
 </div>
 <aside class="menu">
     <ul>
@@ -104,14 +97,14 @@
             <p><i class="am-icon-balance-scale"></i>我的交易</p>
             <ul>
                 <li><a href="/order">订单管理</a></li>
-                <li> <a href="/comment">评价服务</a></li>
+                <li> <a href="change.html">退款售后</a></li>
+                <li> <a href="comment.html">评价服务</a></li>
             </ul>
         </li>
         <li class="person">
             <p><i class="am-icon-dollar"></i>我的服务</p>
             <ul>
                 <li> <a href="/sendrequest">发布服务</a></li>
-                <li> <a href="/myrequest">服务列表</a></li>
             </ul>
         </li>
 
@@ -119,19 +112,19 @@
             <p><i class="am-icon-tags"></i>我的需求</p>
             <ul>
                 <li> <a href="/sendneed">发布需求</a></li>
-                <li> <a href="/myneed">需求列表</a></li>
+                <li> <a href="foot.html">足迹</a></li>
             </ul>
         </li>
 
         <li class="person">
-            <p><i class="am-icon-qq"></i>信息中心</p>
+            <p><i class="am-icon-qq"></i>站内信</p>
             <ul>
-                <li> <a href="/message">站内信</a></li>
-                <li> <a href="/news">我的消息</a></li>
+                <li> <a href="consultation.html">商品咨询</a></li>
+                <li> <a href="suggest.html">意见反馈</a></li>
+                <li> <a href="news.html">我的消息</a></li>
             </ul>
         </li>
     </ul>
 </aside>
 </div>
 </body>
-</html>

@@ -118,11 +118,11 @@ class HomeController extends Controller {
         $keywords = "";
         //不能搜索公司
         if ($request->has('keyword')) {
-            //if ($request->isMethod('POST')) {
+            //if ($requests->isMethod('POST')) {
             if ($request->isMethod('GET')) {
                 $keywords = $request->input('keyword');
                 //$keywords = 'lol';
-                //$num = $request->input('num');
+                //$num = $requests->input('num');
                 $news = News::where('content', 'like', '%' . $keywords . '%')
                     ->orWhere('title', 'like', '%' . $keywords . '%')
                     ->orWhere('subtitle', 'like', '%' . $keywords . '%')

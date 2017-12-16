@@ -548,7 +548,7 @@ textarea {
 
 /* ==========================================================================
    Print styles.
-   Inlined to avoid the additional HTTP request:
+   Inlined to avoid the additional HTTP requests:
    http://www.phpied.com/delay-loading-your-print-css/
    ========================================================================== */
 @media print {

@@ -70,7 +70,7 @@
         </div>
 </div>
 -->
-<div class="get" style="background: url(../images/00.jpg) top center no-repeat; color: #fff;text-align: center;height: 278px;">
+<div class="get" style="background: url(images/00.jpg) top center no-repeat; color: #fff;text-align: center;height: 278px;">
     <div class="am-g" style="max-width: 1500px;margin: 0 auto;width: 100%;">
         <div class="am-u-lg-12">
             <div class="leftpanel am-u-lg-3" style="display: inline-block;">
@@ -850,7 +850,7 @@
     <li class="active"><a href="/home2"><i class="am-icon-home "></i>首页</a></li>
     <li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
     <li><a href="/orderinfo"><i class="am-icon-shopping-basket"></i>订单详情</a></li>
-    <li><a href="/index.html"><i class="am-icon-user"></i>我的</a></li>
+    <li><a href="/index"><i class="am-icon-user"></i>我的</a></li>
 </div>
 <!--菜单 -->
 <div class=tip>

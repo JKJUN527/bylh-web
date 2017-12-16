@@ -1,79 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
-
-    <title>个人中心</title>
-
-    <link href="../AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
-    <link href="../AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
-    <link href="../css/personal.css" rel="stylesheet" type="text/css">
-    <link href="../css/vipstyle.css" rel="stylesheet" type="text/css">
-    <script src="../AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
-    <script src="../AmazeUI-2.4.2/assets/js/amazeui.js"></script>
-</head>
-
-<body>
-<!--头 -->
-<header>
-    <article>
-        <div class="mt-logo">
-            <!--顶部导航条 -->
-            <div class="am-container header">
-                <ul class="message-l">
-                    <div class="topMessage">
-                        <div class="menu-hd">
-                            <a href="#" target="_top" class="h">亲，请登录</a>
-                            <a href="#" target="_top">免费注册</a>
-                        </div>
-                    </div>
-                </ul>
-                <ul class="message-r">
-                    <div class="topMessage home">
-                        <div class="menu-hd"><a href="home2.html" target="_top" class="h"><i class="am-icon-home am-icon-fw"></i>首页</a></div>
-                    </div>
-                    <div class="topMessage my-shangcheng">
-                        <div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
-                    </div>
-                </ul>
-            </div>
-
-            <!--悬浮搜索框-->
-
-            <div class="nav white">
-                <div class="logoBig">
-                    <li><img src="../images/bylh.png" style="width: 60%;" /></li>
-                </div>
-
-                <div class="search-bar pr">
-                    <a name="index_none_header_sysc" href="#"></a>
-                    <form>
-                        <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-                        <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-                    </form>
-                </div>
-            </div>
-
-            <div class="clear"></div>
-        </div>
-        </div>
-    </article>
-</header>
-<div class="nav-table">
-    <div class="long-title"><span class="all-goods">全部分类</span></div>
-    <div class="nav-cont">
-        <ul>
-            <li class="index"><a href="#">首页</a></li>
-            <li class="qc"><a href="#">需求大厅</a></li>
-            <li class="qc"><a href="#">大学生服务</a></li>
-            <li class="qc"><a href="#">实习课堂</a></li>
-            <li class="qc last"><a href="#">专业问答</a></li>
-        </ul>
-    </div>
-</div>
-<b class="line"></b>
+@extends('demo.admin3')
+@section('content')
 <div class="center">
     <div class="col-main">
         <div class="main-wrap">
@@ -92,11 +18,12 @@
                                 </a>
                                 <div class="m-info">
                                     <em class="s-name" style="padding-top: 20px;">小叮当</em>
+                                    <div class="vip1"><a href="#"><span>13942123@qq.com</span><em></em></a></div>
                                 </div>
                             </div>
                             <div class="m-right">
                                 <div class="m-new">
-                                    <a href="news.html"><i class="am-icon-dropbox  am-icon-md" style="padding-right:5px ;"></i>消息盒子</a>
+                                    <a href="/message"><i class="am-icon-dropbox  am-icon-md" style="padding-right:5px ;"></i>消息盒子</a>
                                 </div>
 
                             </div>
@@ -107,25 +34,26 @@
                             <div class="s-bar">
                                 <i class="s-icon"></i>基本资料
                             </div>
-                            <p class="m-coupon">
+                            <p class="m-age">
                                 <em class="m-num">24</em>
                                 <span class="m-title">年龄</span>
                             </p>
-                            <p class="m-wallet">
+                            <p class="m-sex">
                                 <em class="m-num">男</em>
                                 <span class="m-title">性别</span>
                             </p>
-                            <p class="m-bill">
-                                <em class="m-num">1992年7月16日</em>
-                                <span class="m-title">生日</span>
+                            <p class="tel">
+                                <em class="m-num">18281878123</em>
+                                <span class="m-title">电话</span>
                             </p>
                         </div>
 
                         <!--我的钱包-->
                         <div class="wallet">
                             <div class="s-bar">
-                                <i class="s-icon"></i>热门需求
-                                <label style="float: right;">更多>>></label>
+                                <a href="/myneed">
+                                <i class="s-icon"></i>我的需求
+                                <label style="float: right;">更多>>></label></a>
                             </div>
                             <p class="m-big squareS">
                                 <a href="#">
@@ -157,7 +85,7 @@
                                 <div class="m-order">
                                     <div class="s-bar">
                                         <i class="s-icon"></i>我的订单
-                                        <a class="i-load-more-item-shadow" href="order.html">全部订单</a>
+                                        <a class="i-load-more-item-shadow" href="/order">全部订单</a>
                                     </div>
                                     <ul>
                                         <li><a href="order.html"><i><img src="../images/pay.png"/></i><span>待付款</span></a></li>
@@ -250,7 +178,7 @@
                                     <p>我的分享</p>
                                 </li>
                             </a>
-                            <a href="../home/home2.html">
+                            <a href="home/home2.html">
                                 <li class="am-u-sm-4"><i class="am-icon-clock-o am-icon-md"></i>
                                     <p>限时活动</p>
                                 </li>
@@ -277,8 +205,8 @@
 				  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
                                     <li>
                                         <div class="am-gallery-item">
-                                            <a href="../images/f1.jpg" class="">
-                                                <img src="../images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                                            <a href="images/f1.jpg" class="">
+                                                <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
                                                 <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
                                                 <div class="am-gallery-desc">2375-09-26</div>
                                             </a>
@@ -286,8 +214,8 @@
                                     </li>
                                     <li>
                                         <div class="am-gallery-item">
-                                            <a href="../images/f1.jpg" class="">
-                                                <img src="../images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
+                                            <a href="images/f1.jpg" class="">
+                                                <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
                                                 <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
                                                 <div class="am-gallery-desc">2375-09-26</div>
                                             </a>
@@ -295,8 +223,8 @@
                                     </li>
                                     <li>
                                         <div class="am-gallery-item">
-                                            <a href="../images/f1.jpg" class="">
-                                                <img src="../images/f1.jpg"  alt="不要太担心 只因为我相信"/>
+                                            <a href="images/f1.jpg" class="">
+                                                <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
                                                 <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
                                                 <div class="am-gallery-desc">2375-09-26</div>
                                             </a>
@@ -304,8 +232,8 @@
                                     </li>
                                     <li>
                                         <div class="am-gallery-item">
-                                            <a href="../images/f1.jpg" class="">
-                                                <img src="../images/f1.jpg"  alt="终会走过这条遥远的道路"/>
+                                            <a href="images/f1.jpg" class="">
+                                                <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
                                                 <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
                                                 <div class="am-gallery-desc">2375-09-26</div>
                                             </a>
@@ -313,8 +241,8 @@
                                     </li>
                                     <li>
                                         <div class="am-gallery-item">
-                                            <a href="../images/f1.jpg" class="">
-                                                <img src="../images/f1.jpg"  alt="终会走过这条遥远的道路"/>
+                                            <a href="images/f1.jpg" class="">
+                                                <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
                                                 <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
                                                 <div class="am-gallery-desc">2375-09-26</div>
                                             </a>
@@ -322,8 +250,8 @@
                                     </li>
                                     <li>
                                         <div class="am-gallery-item">
-                                            <a href="../images/f1.jpg" class="">
-                                                <img src="../images/f1.jpg"  alt="终会走过这条遥远的道路"/>
+                                            <a href="images/f1.jpg" class="">
+                                                <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
                                                 <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
                                                 <div class="am-gallery-desc">2375-09-26</div>
                                             </a>
@@ -365,6 +293,7 @@
         </div>
 
         <!--底部-->
+        @section('footer')
         <div class="footer ">
             <div class="footer-hd ">
             </div>
@@ -377,64 +306,5 @@
                 </p>
             </div>
         </div>
-
-    </div>
-
-    <aside class="menu">
-        <ul>
-            <li class="person active">
-                <a href="index.html"><i class="am-icon-user"></i>个人中心</a>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-newspaper-o"></i>个人资料</p>
-                <ul>
-                    <li> <a href="user.html">个人信息</a></li>
-                    <li> <a href="safety.html">安全设置</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-balance-scale"></i>我的交易</p>
-                <ul>
-                    <li><a href="order.html">订单管理</a></li>
-                    <li> <a href="change.html">退款售后</a></li>
-                    <li> <a href="comment.html">评价服务</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-dollar"></i>我的服务</p>
-                <ul>
-                    <li> <a href="points.html">发布服务</a></li>
-                </ul>
-            </li>
-
-            <li class="person">
-                <p><i class="am-icon-tags"></i>我的需求</p>
-                <ul>
-                    <li> <a href="collection.html">发布需求</a></li>
-                    <li> <a href="foot.html">足迹</a></li>
-                </ul>
-            </li>
-
-            <li class="person">
-                <p><i class="am-icon-qq"></i>站内信</p>
-                <ul>
-                    <li> <a href="consultation.html">商品咨询</a></li>
-                    <li> <a href="suggest.html">意见反馈</a></li>
-
-                    <li> <a href="news.html">我的消息</a></li>
-                </ul>
-            </li>
-        </ul>
-
-    </aside>
-</div>
-<!--引导 -->
-<div class="navCir">
-    <li><a href="../home/home2.html"><i class="am-icon-home "></i>首页</a></li>
-    <li><a href="../home/sort.html"><i class="am-icon-list"></i>分类</a></li>
-    <li><a href="../home/shopcart.html"><i class="am-icon-shopping-basket"></i>订单</a></li>
-    <li class="active"><a href="index.html"><i class="am-icon-user"></i>我的</a></li>
-</div>
-</body>
-
-</html>
+    @endsection
+@endsection

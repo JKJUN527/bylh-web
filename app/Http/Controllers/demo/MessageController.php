@@ -252,8 +252,8 @@ class MessageController extends Controller {
     public function test(Request $request) {
         echo "test";
         $request->session()->put('uid', 1);
-        //echo $request->session()->get('uid');
-        //dd($request->session()->all());
+        //echo $requests->session()->get('uid');
+        //dd($requests->session()->all());
         $data = ['name' => 'jkjun', 'sex' => 'm'];
         return response()->json($data);
     }

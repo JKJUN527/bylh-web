@@ -1,28 +1,37 @@
 <?php
 
-Route::get('/index', function () {
+Route::get('/', function () {
     return view('home2');
 });
 Route::any('/home2',function(){
     return view('home2');
 });
 Route::any('/needinfo',function(){
-    return view('needinfo');
+    return view('need.needinfo');
 });
 Route::any('/sendneed',function(){
-    return view('sendneed');
+    return view('need.sendneed');
 });
 Route::any('/sendneed2',function(){
-    return view('sendneed2');
+    return view('need.sendneed2');
 });
 Route::any('/sendrequest',function(){
-    return view('sendrequest');
+    return view('requests.sendrequest');
 });
 Route::any('/sendrequest2',function(){
-    return view('sendrequest2');
+    return view('requests.sendrequest2');
+});
+Route::any('/myneed',function(){
+    return view('need.myneeds');
+});
+Route::any('/myrequest',function(){
+    return view('requests.myrequest');
+});
+Route::any('/needappointment',function(){
+    return view('need.needappointment');
 });
 Route::any('/search',function(){
-    return view('search');
+    return view('search.search');
 });
 Route::any('/register',function(){
     return view('account.register');
@@ -31,61 +40,62 @@ Route::any('/login',function(){
     return view('account.login');
 });
 Route::any('/message',function(){
-    return view('message');
+    return view('messages.message');
 });
 Route::any('/need',function(){
-    return view('need');
+    return view('need.need');
 });
 Route::any('/request',function(){
-    return view('request');
+    return view('requests.request');
 });
 Route::any('/requestinfo',function(){
-    return view('requestinfo');
+    return view('requests.requestinfo');
 });
 Route::any('/order',function(){
-        return view('order');
+        return view('order.order');
 });
 Route::any('/orderinfo',function(){
-    return view('orderinfo');
+    return view('order.orderinfo');
 });
 Route::any('/email',function(){
-    return view('email');
+    return view('person.email');
 });
 Route::any('/index',function(){
-    return view('index');
+    return view('person.index');
 });
 Route::any('/idcard',function(){
-    return view('idcard');
+    return view('person.idcard');
 });
 Route::any('/question',function(){
-    return view('question');
+    return view('person.question');
 });
 Route::any('/password',function(){
-    return view('password');
+    return view('person.password');
 });
 Route::any('/user',function(){
-    return view('user');
+    return view('person.user');
 });
 Route::any('/safety',function(){
-    return view('safety');
+    return view('person.safety');
 });
 Route::any('/phone',function(){
-    return view('phone');
+    return view('person.phone');
 });
 
 
 //控制器方法
-//Route::any('/', ['uses' => 'HomeController@index']);
+/*
+Route::any('/', ['uses' => 'HomeController@index']);
 Route::any('/index', ['uses' => 'HomeController@index']);
 Route::any('/index/search', ['uses' => 'HomeController@indexSearch']);
-
+*/
 //登录注册
 Route::get('account/login', ['uses' => 'LoginController@index']);
 Route::get('account/register', ['uses' => 'RegisterController@index']);
 
 Route::post('account/register', ['uses' => 'RegisterController@postRegister']);
 Route::post('account/login', ['uses' => 'LoginController@postLogin']);
-
+/*
 Route::get('account/logout', ['uses' => 'LoginoutController@logout']);
 Route::any('account/sms', ['uses' => 'ValidationController@regSMS']);//发送短信验证码
 //发送邮箱
@@ -201,7 +211,7 @@ Route::get('order/orderlist',['uses' => 'OrderController@orderlist']);
 Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
 //测试方法
 Route::get('sensitive', ['uses' => 'SensitiveController@test']);
-
+*/
 
 
 
