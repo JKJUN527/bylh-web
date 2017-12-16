@@ -81,6 +81,9 @@ Route::any('/safety',function(){
 Route::any('/phone',function(){
     return view('person.phone');
 });
+Route::any('/comment',function(){
+    return view('person.comment');
+});
 
 
 //控制器方法

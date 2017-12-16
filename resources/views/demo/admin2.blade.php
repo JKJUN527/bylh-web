@@ -77,8 +77,8 @@
             <li class="qc last"><a href="/request">专业问答</a></li>
         </ul>
         <div class="nav-extra">
-            <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-            <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+            <a href="/message" style="color: #f5e79e;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息
+            <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
         </div>
     </div>
 </div>

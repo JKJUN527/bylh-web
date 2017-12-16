@@ -205,8 +205,8 @@
 				  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
                                     <li>
                                         <div class="am-gallery-item">
-                                            <a href="images/f1.jpg" class="">
-                                                <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                                            <a href="../images/f1.jpg" class="">
+                                                <img src="../images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
                                                 <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
                                                 <div class="am-gallery-desc">2375-09-26</div>
                                             </a>

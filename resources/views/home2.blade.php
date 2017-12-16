@@ -5,15 +5,6 @@
     <div class="slideall" style="height: auto;">
 
         <!--<div class="long-title"><span class="all-goods">全部分类</span></div>-->
-        <div class="nav-cont" >
-            <ul>
-                <li class="index"><a href="/">首页</a></li>
-                <li class="qc"><a href="/">需求大厅</a></li>
-                <li class="qc"><a href="/">大学生服务</a></li>
-                <li class="qc"><a href="/">实习中介</a></li>
-                <li class="qc last"><a href="/">专业问答</a></li>
-            </ul>
-        </div>
 
         <div class="bannerTwo">
             <!--轮播 -->
