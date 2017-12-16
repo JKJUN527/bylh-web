@@ -1,6 +1,81 @@
 <?php
 
-Route::any('/', ['uses' => 'HomeController@index']);
+Route::get('/', function () {
+    return view('home2');
+});
+Route::any('/home2',function(){
+    return view('home2');
+});
+Route::any('/needinfo',function(){
+    return view('needinfo');
+});
+Route::any('/sendneed',function(){
+    return view('sendneed');
+});
+Route::any('/sendneed2',function(){
+    return view('sendneed2');
+});
+Route::any('/sendrequest',function(){
+    return view('sendrequest');
+});
+Route::any('/sendrequest2',function(){
+    return view('sendrequest2');
+});
+Route::any('/search',function(){
+    return view('search');
+});
+Route::any('/register',function(){
+    return view('account.register');
+});
+Route::any('/login',function(){
+    return view('account.login');
+});
+Route::any('/message',function(){
+    return view('message');
+});
+Route::any('/need',function(){
+    return view('need');
+});
+Route::any('/request',function(){
+    return view('request');
+});
+Route::any('/requestinfo',function(){
+    return view('requestinfo');
+});
+Route::any('/order',function(){
+        return view('order');
+});
+Route::any('/orderinfo',function(){
+    return view('orderinfo');
+});
+Route::any('/email',function(){
+    return view('email');
+});
+Route::any('/index',function(){
+    return view('index');
+});
+Route::any('/idcard',function(){
+    return view('idcard');
+});
+Route::any('/question',function(){
+    return view('question');
+});
+Route::any('/password',function(){
+    return view('password');
+});
+Route::any('/user',function(){
+    return view('user');
+});
+Route::any('/safety',function(){
+    return view('safety');
+});
+Route::any('/phone',function(){
+    return view('phone');
+});
+
+
+//控制器方法
+//Route::any('/', ['uses' => 'HomeController@index']);
 Route::any('/index', ['uses' => 'HomeController@index']);
 Route::any('/index/search', ['uses' => 'HomeController@indexSearch']);
 
@@ -126,4 +201,8 @@ Route::get('order/orderlist',['uses' => 'OrderController@orderlist']);
 Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
 //测试方法
 Route::get('sensitive', ['uses' => 'SensitiveController@test']);
+
+
+
+
 

@@ -7,17 +7,13 @@
  */
 namespace App\Http\Controllers\Admin;
 
+use App\Admin;
 use App\Http\Controllers\Controller;
 use App\About;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Helper\Table;
-use Auth;
-use App\Admininfo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\User;
-use App\Http\Controllers\InfoController;
 use Illuminate\Support\Facades\Session;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -36,23 +32,18 @@ class LoginController extends Controller
         $input = $request->all();
         $username = $input['username'];
         $password = $input['password'];
-        $isexist = User::where('username', '=', $username)->where('type',3)
-            ->get();
+        $isexist = Admin::where('username', '=', $username)->get();
         if($isexist->count())
         {
-            $res = User::where('username','=',$username)->first();
+            $res = Admin::where('username','=',$username)->first();
             if(Hash::check($password, $res->password))
             {
-//                $uid = User::where('username','=',$username)->select('uid')->first()->uid;
-                $uid = $res->uid;
-                session()->put('backUid',$uid);
-                $type =User::where('uid','=',$uid)
-                    ->select('type')
-                    ->get();
-                $type = $type[0]['type'];
-                session()->put('adminType',$type);
+                $aid = $res->aid;
+                session()->put('backUid',$aid);
+
+                session()->put('adminType',$res->role);
                 $last_login = date('Y-m-d H-i-s',time());
-                $affectedRows = Admininfo::where('uid',$uid)
+                $affectedRows = Admin::where('aid',$aid)
                     ->update(['last_login'=>$last_login]);
                 if($affectedRows)
                 {
@@ -83,7 +74,7 @@ class LoginController extends Controller
         $uid = AdminAuthController::getUid();
         if ($uid == 0)
             return null;
-        $user = User::where("uid", $uid)->get();
-        return $user[0]->username;
+        $user = Admin::find($uid);
+        return $user->username;
     }
 }

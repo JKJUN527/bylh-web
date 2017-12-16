@@ -1,313 +1,730 @@
-@extends('layout.master')
-@section('title', 'ehunter首页')
-
-@section('custom-style')
-    <style>
-        body {
-            background-color: #ffffff;
-        }
-
-        .header-post {
-            width: 100%;
-            height: 120px;
-            background-color: #333333;
-        }
-
-        .search-box {
-            padding-top: 25px;
-        }
-
-        .search-box input {
-            width: 500px;
-            height: 43px;
-            padding: 10px 10px;
-            border: none;
-            font-size: 16px;
-            margin-right: 8px;
-        }
-
-        .search-box button {
-            font-weight: 300;
-            position: relative;
-            top: -3px;
-        }
-
-        .search-box-appendix {
-            padding-top: 4px;
-        }
-
-        .search-box-appendix span,
-        .search-box-appendix a {
-            margin-left: 6px;
-            font-size: 10pt;
-            font-weight: 300;
-            color: #f5f5f5;
-            text-decoration: none;
-        }
-
-        .search-box-appendix a:hover {
-            color: #F44336;
-        }
-
-        .search-box-appendix a:last-child {
-            margin-left: 20px;
-            text-decoration-line: underline;
-        }
-
-        .search-box button {
-            width: 100px;
-            height: 45px;
-        }
-
-        .main {
-            padding-top: 24px;
-            /*background-color: #d1c4e9;*/
-        }
-
-        .title h4 {
-            font-weight: 300;
-            margin-top: 0;
-        }
-
-        .title h4 > small {
-            margin-left: 16px;
-            color: #4c4c4c;
-            font-weight: 300;
-        }
-
-        .button-accent,
-        .button-accent:hover,
-        .button-accent.mdl-button--raised,
-        .button-accent.mdl-button--fab {
-            color: rgb(255, 255, 255);
-            background-color: #D32F2F;
-        }
-
-        .button-accent .mdl-ripple {
-            background: rgb(255, 255, 255);
-        }
-
-        .content {
-            min-height: 800px;
-        }
-
-        .publish-item {
-            border-top: 1px solid #f5f5f5;
-            -webkit-transition: all 0.4s ease;
-            -moz-transition: all 0.4s ease;
-            -o-transition: all 0.4s ease;
-            transition: all 0.4s ease;
-        }
-
-        .position-info {
-            padding: 16px 0 16px 16px;
-            display: inline-block;
-            width: 500px;
-        }
-
-        .position-info > h5 {
-            margin: 0 0 8px 0;
-            display: inline-block;
-        }
-
-        .position-info > h5 > a,
-        .news-content > h6 > a {
-            color: #232323;
-        }
-
-        .position-info > h5 > a:hover,
-        .news-content > h6 > a:hover {
-            text-decoration: underline;
-        }
-
-        .position-info > p {
-            margin: 0;
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 300;
-        }
-
-        .position-info > span {
-            font-size: 12px;
-            color: #aaaaaa;
-            margin-right: 6px;
-        }
-
-        .news-body {
-            width: 100%;
-            min-height: 120px;
-            padding: 24px 0;
-            margin: 0 !important;
-            border-top: 1px solid #f5f5f5;
-            -webkit-transition: all 0.4s ease;
-            -moz-transition: all 0.4s ease;
-            -o-transition: all 0.4s ease;
-            transition: all 0.4s ease;
-        }
-
-        .news-aside {
-            display: inline-block;
-            width: 180px;
-            margin-left: 24px;
-            float: right;
-        }
-
-        .news-aside img {
-            width: 100%;
-        }
-
-        .news-content {
-            /*display: inline-block;*/
-            width: 420px;
-            padding: 16px 0 16px 16px;
-        }
-
-        .news-content h6 {
-            font-size: 18px;
-            font-weight: 500;
-            margin: 0 0 8px 0;
-        }
-
-        .news-content .content-body {
-            font-size: 14px;
-            font-weight: 300;
-            color: #737373;
-        }
-
-        .news-content .content-appendix {
-            font-size: 12px;
-            font-weight: 300;
-            color: #aaaaaa;
-        }
-
-        .news-content .content-appendix span {
-            margin-right: 8px;
-        }
-
-        .divider-light--line {
-            width: 100%;
-            height: 1px;
-            background-color: #f5f5f5;
-        }
-    </style>
-@endsection
-
-@section('custom-script')
-    <script type="text/javascript">
-
-    </script>
-@endsection
-
-@section('header-nav')
-    @if($data['uid'] === 0)
-        @include('components.headerNav', ['isLogged' => false])
-    @else
-        @include('components.headerNav', ['isLogged' => true, 'username' => $data['username']])
-    @endif
-@endsection
-
+@extends('demo.admin')
+@extends('demo.nav')
 @section('content')
-    <div class="header-post">
-        <div class="container">
+<!--搜索界面-->
+<div class="am-g am-g-fixed" style="padding-top: 45px;">
+    <div class="am-u-lg-8 am-u-md-8 am-u-sm-8">
+        <div class="am-container" style="border-bottom: 2px solid #eee;padding: 20px;background: #fff;margin-top: 20px;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
+            <div class="am-tabs" data-am-tabs>
+                <ul class="am-tabs-nav am-nav am-nav-tabs" style="border-bottom: 4px solid #ee6363;">
+                    <li class="am-active" style="background: #cfcfcf;"><a href="#tab1" style="font-size: 16px;padding-right: : 10px;color: #fff;padding:6px;">全部需求</a></li>
+                    <li style="background: #cfcfcf;"><a href="#tab2" style="font-size: 16px;padding-right:10px;color: #fff;padding: 6px;">全部服务</a></li>
+                </ul>
+                <div class="rankit">
+                    <select data-am-selected>
+                        <option value="综合排序" selected>综合排序</option>
+                        <option value="销量优先">销量优先</option>
+                        <option value="价格升序">价格升序</option>
+                        <option value="价格降序">价格降序</option>
+                        <option value="发布时间">发布时间</option>
+                    </select>
+                </div>
+                <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
 
-            <div class="search-box">
-                <form action="/index/search">
+                <div class="am-tabs-bd">
+                    <!--需求-->
+                    <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                        <table class="xm_list" cellpadding="0" cellspacing="0">
 
-                    <input type="text" name="keyword" value="{{$searchResult['keyword'] or ''}}" placeholder="输入搜索内容"/>
-                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised
-                        mdl-js-ripple-effect button-accent">立即搜索
-                    </button>
-                </form>
-                <div class="search-box-appendix">
-                    <span>热门分类: </span>
-                    <a href="#">电竞培训</a>
-                    <a href="#">电竞传媒</a>
-                    <a href="#">电竞俱乐部</a>
-                    <a href="#">使用高级搜索</a>
+                            <tbody>
+
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="公司LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥500</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">公司LOGO设计</span>
+                                        </a>
+                                        <a href="javascript:;" class="task_ji" title="加急项目" style="background-color: #F84C4C;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">急</a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">LOGO名称：正安检测科技有限公司要求以“正安”汉字或首打字母为主要设计元素，简单，大气，易识别。颜色参考：工业蓝 或 深红...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="公司LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥600</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">Villae Bo  瓦帕碧奥</span>
+                                        </a>
+                                        <a href="javascript:;" class="task_ji" title="加急项目" style="background-color: #F84C4C;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">急</a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">LOGO名称：正安检测科技有限公司要求以“正安”汉字或首打字母为主要设计元素，简单，大气，易识别。颜色参考：工业蓝 或 深红...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="饮品品牌起名"><font class="money" style="font-size: 18px;color: #ff6600;">￥700</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">饮品品牌起名</span>
+                                        </a>
+                                        <a href="javascript:;" class="task_ji" title="置顶项目" style="background-color: #99E400;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">顶</a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="饮品品牌起名"><font class="money" style="font-size: 18px;color: #ff6600;">￥1188</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">设计圆床</span>
+                                        </a>
+                                        <a href="javascript:;" class="task_ji" title="置顶项目" style="background-color: #99E400;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">顶</a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="饮品品牌起名"><font class="money" style="font-size: 18px;color: #ff6600;">￥700</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">饮品品牌起名</span>
+                                        </a>
+                                        <a href="javascript:;" class="task_ji" title="加急项目" style="background-color: #FF3300;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">加</a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
+                                        </a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
+                                        </a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
+                                        </a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
+                                        </a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
+                                        </a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr class="line_h   adserveritembg">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                    <div class="aa task_item_i" style="padding: 20px 5px;">
+                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
+                                        </a>
+                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="fujia"></div>
+                                </td>
+                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
+                                    <div class="hh">
+                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+
+                                        <br>
+                                        <font style="color:#ff6600">1</font> 天后截止
+
+                                    </div></td>
+                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
+                                    <div class="hhb">
+                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <!--分页实现-->
+
+                            <tr>
+                                <td colspan="4" style="border-bottom:0;padding:15px 0 40px 0">
+
+                                    <div class="pager_container">
+
+                                        <ul data-am-widget="pagination"
+                                            class="am-pagination am-pagination-default"
+                                        >
+
+                                            <li class="am-pagination-first ">
+                                                <a href="#" class="">第一页</a>
+                                            </li>
+
+                                            <li class="am-pagination-prev ">
+                                                <a href="#" class="">上一页</a>
+                                            </li>
+
+
+                                            <li class="">
+                                                <a href="#" class="">1</a>
+                                            </li>
+                                            <li class="am-active">
+                                                <a href="#" class="am-active">2</a>
+                                            </li>
+                                            <li class="">
+                                                <a href="#" class="">3</a>
+                                            </li>
+                                            <li class="">
+                                                <a href="#" class="">4</a>
+                                            </li>
+                                            <li class="">
+                                                <a href="#" class="">5</a>
+                                            </li>
+
+
+                                            <li class="am-pagination-next ">
+                                                <a href="#" class="">下一页</a>
+                                            </li>
+
+                                            <li class="am-pagination-last ">
+                                                <a href="#" class="">最末页</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+
+                                    <div class="clear"></div>
+                                </td>
+                            </tr>
+                            </tbody></table>
+                    </div>
+                    <!--服务搜索-->
+                    <div class="am-tab-panel am-fade" id="tab2">
+                        <div class="findrequest">
+                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                                            <img src="images/f4.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
+                                            <img src="images/f3.png"  alt="某天 也许会相遇 相遇在这个好地方"/>
+                                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-3.jpg" class="">
+                                            <img src="images/f2.jpg"  alt="米旭品牌设计"/>
+                                            <h3 class="am-gallery-title">米旭品牌设计</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-4.jpg" class="">
+                                            <img src="images/f1.jpg"  alt="龙博品牌设计"/>
+                                            <h3 class="am-gallery-title">龙博品牌设计</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!--2-->
+                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                                            <img src="images/f4.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
+                                            <img src="images/f3.png"  alt="某天 也许会相遇 相遇在这个好地方"/>
+                                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-3.jpg" class="">
+                                            <img src="images/f2.jpg"  alt="米旭品牌设计"/>
+                                            <h3 class="am-gallery-title">米旭品牌设计</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-4.jpg" class="">
+                                            <img src="images/f1.jpg"  alt="龙博品牌设计"/>
+                                            <h3 class="am-gallery-title">龙博品牌设计</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!--3-->
+                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                                            <img src="images/f4.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
+                                            <img src="images/f3.png"  alt="某天 也许会相遇 相遇在这个好地方"/>
+                                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-3.jpg" class="">
+                                            <img src="images/f2.jpg"  alt="米旭品牌设计"/>
+                                            <h3 class="am-gallery-title">米旭品牌设计</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-4.jpg" class="">
+                                            <img src="images/f1.jpg"  alt="龙博品牌设计"/>
+                                            <h3 class="am-gallery-title">龙博品牌设计</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!--4-->
+                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                                            <img src="images/f4.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
+                                            <img src="images/f3.png"  alt="某天 也许会相遇 相遇在这个好地方"/>
+                                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-3.jpg" class="">
+                                            <img src="images/f2.jpg"  alt="米旭品牌设计"/>
+                                            <h3 class="am-gallery-title">米旭品牌设计</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="http://s.amazeui.org/media/i/demos/bing-4.jpg" class="">
+                                            <img src="images/f1.jpg"  alt="龙博品牌设计"/>
+                                            <h3 class="am-gallery-title">龙博品牌设计</h3>
+                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!--分页-->
+                            <div class="pager_container">
+
+                                <ul data-am-widget="pagination"
+                                    class="am-pagination am-pagination-default"
+                                >
+
+                                    <li class="am-pagination-first ">
+                                        <a href="#" class="">第一页</a>
+                                    </li>
+
+                                    <li class="am-pagination-prev ">
+                                        <a href="#" class="">上一页</a>
+                                    </li>
+
+
+                                    <li class="">
+                                        <a href="#" class="">1</a>
+                                    </li>
+                                    <li class="am-active">
+                                        <a href="#" class="am-active">2</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="">3</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="">4</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="">5</a>
+                                    </li>
+
+
+                                    <li class="am-pagination-next ">
+                                        <a href="#" class="">下一页</a>
+                                    </li>
+
+                                    <li class="am-pagination-last ">
+                                        <a href="#" class="">最末页</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="am-u-lg-3 am-u-md-3 am-u-sm-3">
+        <div class="am-container" style="border: 2px solid #eee;padding: 20px;background: #fff;margin-left: 20px;margin-top: 20px;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
+            <div class="guessyouwant">
+                <div class="guess-title" style="font-size: 20px;font-weight: bold;padding: 5px;border-bottom: 3px solid #b84554;margin-bottom: 20px;">
+                    推荐服务商
+                </div>
+                <div class=" fr main-c">
+                    <a class="fws-hd" href="http://shop.680.com/10442660/" title="米旭品牌设计 " target="_blank"><img src="../images/f2.jpg" width="210" height="210" alt="米旭品牌设计 "></a>
+                    <a class="fws-name" href="http://shop.680.com/10442660/" title="米旭品牌设计 " target="_blank" style="padding:20px;font-size: 18px;">米旭品牌设计 </a>
+                    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+                    <div style="clear:both; height:5px"></div>
+                    <div class="main-cb">
+							<span class="fl"><img src="http://js.680.com/images/zuan2.gif" alt="钻石二级
+							积分：1430分" title="钻石二级
+							积分：1430" class="tip" align="absmiddle" style="width: 34px;height: 16px;position: inherit;background: #fff;margin-left: 20px;"></span>
+                        <div class="clear"></div>
+                    </div>
 
+                    <div style="color: #666;height: 40px;width: 230px;line-height: 30px;padding-left: 20px;font-size: 14px;padding-top: 0;">
+                        <div class="fl" style="float: left;">所在地：</div>
+
+                        <div class="locus" style="background: url(images/shop_680.png) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
+                        <div style="float:left; padding-left:3px;width:110px; overflow:hidden;height:30px;">
+                            广东-佛山
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="shop_zpjmsg" style="float: left;padding-left: 20px;">好评率：<span>100%</span>&nbsp;&nbsp;|&nbsp;&nbsp;总评：<span>5</span>分
+                    </div><div class="clear"></div>
+                </div>
+                <br>
+                <hr data-am-widget="divider" style="height: 4px;" class="am-divider am-divider-default" />
+                <br>
+                <!--推荐2-->
+                <div class=" fr main-c">
+                    <a class="fws-hd" href="http://shop.680.com/10442660/" title="龙博品牌设计 " target="_blank"><img src="../images/f1.jpg" width="210" height="210" alt="龙博品牌设计 "></a>
+                    <a class="fws-name" href="http://shop.680.com/10442660/" title="龙博品牌设计 " target="_blank" style="padding:20px;font-size: 18px;">龙博品牌设计 </a>
+                    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+                    <div style="clear:both; height:5px"></div>
+                    <div class="main-cb">
+							<span class="fl"><img src="http://js.680.com/images/zuan2.gif" alt="钻石二级
+							积分：1430分" title="钻石二级
+							积分：1430" class="tip" align="absmiddle" style="width: 34px;height: 16px;position: inherit;background: #fff;margin-left: 20px;"></span>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div style="color: #666;height: 40px;width: 230px;line-height: 30px;padding-left: 20px;font-size: 14px;padding-top: 0;">
+                        <div class="fl" style="float: left;">所在地：</div>
+
+                        <div class="locus" style="background: url(images/shop_680.png) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
+                        <div style="float:left; padding-left:3px;width:110px; overflow:hidden;height:30px;">
+                            广东-佛山
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="shop_zpjmsg" style="float: left;padding-left: 20px;">好评率：<span>100%</span>&nbsp;&nbsp;|&nbsp;&nbsp;总评：<span>5</span>分
+                    </div><div class="clear"></div>
+                </div>
+                <br>
+                <hr data-am-widget="divider" style="height: 4px;" class="am-divider am-divider-default" />
+                <br>
+                <!--推荐3-->
+                <div class=" fr main-c">
+                    <a class="fws-hd" href="http://shop.680.com/10442660/" title="米旭品牌设计 " target="_blank"><img src="images/f2.jpg" width="210" height="210" alt="米旭品牌设计 "></a>
+                    <a class="fws-name" href="http://shop.680.com/10442660/" title="米旭品牌设计 " target="_blank" style="padding:20px;font-size: 18px;">米旭品牌设计 </a>
+                    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+                    <div style="clear:both; height:5px"></div>
+                    <div class="main-cb">
+							<span class="fl"><img src="http://js.680.com/images/zuan2.gif" alt="钻石二级
+							积分：1430分" title="钻石二级
+							积分：1430" class="tip" align="absmiddle" style="width: 34px;height: 16px;position: inherit;background: #fff;margin-left: 20px;"></span>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div style="color: #666;height: 40px;width: 230px;line-height: 30px;padding-left: 20px;font-size: 14px;padding-top: 0;">
+                        <div class="fl" style="float: left;">所在地：</div>
+
+                        <div class="locus" style="background: url(images/shop_680.png) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
+                        <div style="float:left; padding-left:3px;width:110px; overflow:hidden;height:30px;">
+                            广东-佛山
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="shop_zpjmsg" style="float: left;padding-left: 20px;">好评率：<span>100%</span>&nbsp;&nbsp;|&nbsp;&nbsp;总评：<span>5</span>分
+                    </div><div class="clear"></div>
+                </div>
+
+            </div>
         </div>
     </div>
 
+</div>
+<!--广告-->
+<div class="advertisement" style="padding: 10px;width: 50%;float: left;">
+    <img src="images/ad1.png">
+</div>
+<div class="advertisement" style="padding: 10px;width: 50%;float: right;">
+    <img src="images/ad1.png">
+</div>
+@section('footer')
+<div class="footer " style="border: none;">
+    <div class="footer-hd ">
+    </div>
+    <div class="footer-bd ">
+        <br>
+        <p style="text-align: center;">
 
+            Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
+            客服电话：88888888<br>
+            联系邮箱：不亦乐乎＠bylehu.com
 
-    <section class="main">
-
-        <div class="container">
-            <div class="title">
-                <h4>搜索结果
-                    <small>共计 {{count($searchResult['position']) + count($searchResult['news'])}} 个</small>
-                </h4>
-            </div>
-
-            <div class="content">
-
-                <div class="info-panel--left info-panel">
-
-                    @forelse($searchResult['position'] as $position)
-                        <div class="publish-item">
-                            <div class="position-info">
-                                <h5><a href="/position/detail?pid={{$position->pid}}">{{$position->title}}</a></h5><br>
-                                <p>
-                                    {{str_replace("</br>","",mb_substr($position->pdescribe, 0, 30, 'utf-8'))}}
-                                </p><br>
-                                <span>{{$position->created_at}} 发布</span>
-                                <span>{{$position->vaildity}} 过期</span>
-                            </div>
-                        </div>
-                    @empty
-                        <p>未搜索到与"{{$searchResult['keyword']}}"相关的职位</p>
-                    @endforelse
-
-
-                    @forelse($searchResult['news'] as $news)
-
-                        <div class="news-body">
-
-                                @if($news->picture != null)
-                                    <?php
-                                    $pics = explode(';', $news->picture);
-                                    $baseurl = explode('@', $pics[0])[0];
-                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
-                                    $imagepath = explode('@', $pics[0])[1];
-                                    ?>
-                                    <div class="news-aside">
-                                        {{--<img src="{{$news->picture or asset('images/lamian.jpg')}}"/>--}}
-                                        <img src="{{$baseurl}}{{$imagepath}}"/>
-                                    </div>
-                                @endif
-
-                            <div class="news-content">
-                                <h6>
-                                    <a href="/news/detail?nid={{$news->nid}}">
-                                        [{{$news->quote}}] {{$news->title}}
-                                        <small>&nbsp;&nbsp;{{$news->subtitle}}</small>
-                                    </a>
-                                </h6>
-                                <div class="content-body">
-                                    {{str_replace("</br>","",mb_substr($news->content, 0, 40, 'utf-8'))}}
-                                </div>
-                                <small class="content-appendix">
-                                    <span>作者: author_ly</span><span>发布时间: {{$news->created_at}}</span>
-                                </small>
-                            </div>
-                        </div>
-                    @empty
-                        <p>未搜索到与"{{$searchResult['keyword']}}"相关的新闻资讯</p>
-                    @endforelse
-
-                    <div class="divider-light--line" style="clear: both;"></div>
-                </div>
-
-                <div class="gap"></div>
-
-                <div class="info-panel--right  info-panel">
-                    {{--ad--}}
-                </div>
-
-            </div>
-        </div>
-
-    </section>
+        </p>
+    </div>
+</div>
+    @endsection
 @endsection

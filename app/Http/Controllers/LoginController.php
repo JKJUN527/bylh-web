@@ -42,8 +42,8 @@ class LoginController extends Controller {
         $input = $request->all();
 
         //手机登陆
-        if ($request->has('phone')) {
-            $phone = $input['phone'];
+        if ($request->has('username')) {
+            $phone = $input['username'];
             $password = $input['password'];
 
             //判断是否存在该用户
@@ -51,7 +51,7 @@ class LoginController extends Controller {
                 ->get();
             if ($isexist->count()) {
                 $validatorTel = Validator::make($input, [
-                    'phone' => 'required|regex:/^1[34578][0-9]{9}$/',
+                    'username' => 'required|regex:/^1[34578][0-9]{9}$/',
                     'password' => 'required|min:6|max:60'
                 ]);
                 if (!($validatorTel->fails())) {

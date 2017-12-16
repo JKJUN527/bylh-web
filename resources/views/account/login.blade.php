@@ -1,262 +1,133 @@
-@extends('layout.master')
-@section('title', '登录')
+<!DOCTYPE html>
+<html>
 
-@section('custom-style')
-    <link rel="stylesheet" type="text/css" href="{{asset('plugins/bootstrap-select/css/bootstrap-select.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('plugins/animate-css/animate.min.css')}}">
-    <style>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-        .login-card-holder {
-            width: 100%;
-            min-height: 450px;
-            background: url({{asset('images/akali_vs_baron_3.jpg')}}) no-repeat center;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            padding: 80px 0
-        }
+    <link rel="stylesheet" href="AmazeUI-2.4.2/assets/css/amazeui.css" />
+    <link href="css/dlstyle.css" rel="stylesheet" type="text/css">
+    <script src="{{asset('js/jquery.js')}}"></script>
+</head>
 
-        .login-card-holder > h3,
-        .login-card-holder > p {
-            min-width: 800px;
-            font-weight: 300;
-            text-align: center;
-            /*color: #333333;*/
-            color: white;
-        }
+<body>
 
-        .login-card-holder > p {
-            padding-bottom: 32px;
-        }
+<div class="login-boxtitle">
+    <a href="/"><img alt="logo" src="images/bylh.png" /></a>
+</div>
 
-        .login-card {
-            width: 800px;
-            height: 300px;
-            margin: 0 auto;
-            padding: 0 30px;
-            background-color: rgba(255, 255, 255, .95);
-            border: 1px solid lightgray;
-        }
+<div class="login-banner">
+    <div class="login-main">
+        <div class="login-banner-bg"><span></span><img src="images/big2.png" /></div>
+        <div class="login-box">
 
-        .login-card > h5 {
-            font-weight: 300;
-            text-align: center;
-            color: rgb(0, 0, 0);
-        }
+            <h3 class="title">登录</h3>
 
-        .login-form {
-            width: 370px;
-            border-right: 1px solid #4d4d4d;
-        }
+            <div class="clear"></div>
 
-        #right-panel {
-            width: 365px;
-            padding-left: 30px;
-        }
+            <div class="login-form">
+                <form>
+                    <div class="user-name">
+                        <label for="user"><i class="am-icon-user"></i></label>
+                        <input type="text" name="" id="user" placeholder="邮箱/手机/用户名">
+                    </div>
+                    <div class="user-pass">
+                        <label for="password"><i class="am-icon-lock"></i></label>
+                        <input type="password" name="" id="password" placeholder="请输入密码">
+                    </div>
+                </form>
+            </div>
 
-        #right-panel a {
-            color: #03A9F4;
-            text-decoration: underline;
-        }
+            <div class="login-links">
+                <label for="remember-me"><input id="remember-me" type="checkbox">记住密码</label>
+                <a href="#" class="am-fr">忘记密码</a>
+                <a href="/" class="zcnext am-fr am-btn-default">注册</a>
+                <br />
+            </div>
+            <div class="am-cf">
+                <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm" style="margin-top: 30px;">
+            </div>
 
-        .form-group {
-            width: 340px;
-        }
-
-        .form-group .form-line input {
-            background-color: transparent;
-        }
-
-        a {
-            cursor: pointer;
-        }
-
-        a.forget-pwd {
-            color: #03A9F4;
-            font-size: 12px;
-            margin-left: 24px;
-            text-decoration: underline;
-        }
-
-
-    </style>
-@endsection
-
-@section('header-nav')
-    @if($data['uid'] === 0)
-        @include('components.headerNav', ['isLogged' => false])
-    @else
-        @include('components.headerNav', ['isLogged' => true, 'username' => $data['username']])
-    @endif
-@endsection
-
-@section('content')
-
-    <div class="login-card-holder">
-        <h3><?=$site_desc ?></h3>
-        {{--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.--}}
-        {{--Aenan convallis.</p>--}}
-
-        <div class="login-card mdl-card mdl-shadow--2dp">
-
-            <h5>立即登录</h5>
-
-            <table border="0">
-                <tr>
-                    <td>
-                        <form method="post" class="login-form" id="login-form">
-
-                            <div class="form-group" id="phone-form">
-                                <div class="form-line">
-                                    <input type="text" name="phone" style="position: fixed; bottom: -9999px;"
-                                           autocomplete="off">
-                                    <input type="text" id="phone" name="phone" class="phone form-control"
-                                           placeholder="手机号..." autocomplete="off">
-                                </div>
-                                <label class="error" for="phone"></label>
-                            </div>
-
-                            <div class="form-group" id="email-form">
-                                <div class="form-line">
-                                    <input type="text" name="email" style="position: fixed; bottom: -9999px;">
-                                    <input type="text" id="email" name="email" class="email form-control"
-                                           placeholder="邮箱..." autocomplete="off">
-                                </div>
-                                <label class="error" for="email"></label>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="password" id="password" name="password" class="password form-control"
-                                           placeholder="密码..." autocomplete="off">
-                                </div>
-                                <label class="error" for="password"></label>
-                            </div>
-
-                            <button type="submit" id="login-btn"
-                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button-blue-sky">
-                                立即登录
-                            </button>
-
-                                <a class="forget-pwd" href="/account/findPassword">忘记密码？</a>
-                        </form>
-                    </td>
-                    <td>
-                        <div id="right-panel">
-                            <p>
-                                切换登录方式
-                                <a for="phone-form" onclick="switchLoginType(0)">使用手机号登录</a>
-                                <a for="email-form" onclick="switchLoginType(1)">使用邮箱登录</a>
-                            </p>
-                            <p>还没有账号？
-                                <button to="/account/register"
-                                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button-blue-sky">
-                                    立即注册
-                                </button>
-                            </p>
-                        </div>
-                    </td>
-                </tr>
-            </table>
         </div>
     </div>
+</div>
+<script>
+    $("input[type='submit']").click(function (event) {
+        alert(1111);
+        var username = $('#user');
+        var password = $('#password');
+        {{--if (phone.is(':visible') && phone.val() === '') {--}}
+            {{--setError(phone, 'phone', '不能为空');--}}
+            {{--return;--}}
+        {{--} else if (phone.is(":visible") && !/^1[34578]\d{9}$/.test(phone.val())) {--}}
+            {{--setError(phone, 'phone', '手机号格式不正确');--}}
+            {{--return;--}}
+        {{--} else {--}}
+            {{--removeError(phone, 'phone');--}}
+        {{--}--}}
 
+        {{--if (email.is(':visible') && email.val() === '') {--}}
+            {{--setError(email, 'email', '不能为空');--}}
+            {{--return;--}}
+        {{--} else if (email.is(':visible') &&--}}
+                {{--!/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(email.val())) {--}}
+            {{--setError(email, 'email', '邮箱格式不正确');--}}
+            {{--return;--}}
+        {{--} else {--}}
+            {{--removeError(email, 'email')--}}
+        {{--}--}}
 
-@endsection
+        {{--if (password.val() === '') {--}}
+            {{--setError(password, 'password', '不能为空');--}}
+            {{--return;--}}
+        {{--} else {--}}
+            {{--removeError(password, 'password')--}}
+        {{--}--}}
 
+        var formData = new FormData();
+        formData.append("username", username.val());
+        formData.append("password", password.val());
 
-@section('custom-script')
-    <script src="{{asset('plugins/bootstrap-select/js/bootstrap-select.min.js')}}"></script>
-    <script src="{{asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js')}}"></script>
-    <script src="{{asset('plugins/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
-    <script type="text/javascript">
-
-        var loginType = 0;//0:phone; 1:email
-
-        $loginForm = $("#login-form");
-
-        $("#email-form").hide();
-        $("a[for='phone-form']").hide();
-
-        $(".form-control").focus(function () {
-            $(this.parentNode).addClass("focused");
-        }).blur(function () {
-            $(this.parentNode).removeClass("focused");
-        });
-
-        function switchLoginType(type) {
-            if (type === 0) {
-                $("a[for='phone-form']").hide();
-                $("a[for='email-form']").fadeIn(500);
-                $("#email-form").hide();
-                $("#phone-form").fadeIn(500);
-                $("#phone").val("");
-                loginType = 0;
-            } else if (type === 1) {
-                $("a[for='phone-form']").fadeIn(500);
-                $("a[for='email-form']").hide();
-                $("#phone-form").hide();
-                $("#email-form").fadeIn(500);
-                $("#email").val("");
-                loginType = 1;
-            }
-        }
-
-        $loginForm.find(".email").inputmask({alias: "email"});
-        $loginForm.find(".phone").inputmask('99999999999', {placeholder: '___________'});
-
-
-        $("button[type='submit']").click(function (event) {
-            event.preventDefault();
-
-            var phone = $('#phone');
-            var email = $('#email');
-            var password = $('#password');
-
-            if (phone.is(':visible') && phone.val() === '') {
-                setError(phone, 'phone', '不能为空');
-                return;
-            } else {
-                removeError(phone, 'phone');
-            }
-
-            if (email.is(':visible') && email.val() === '') {
-                setError(email, 'email', '不能为空');
-                return;
-            } else {
-                removeError(email, 'email')
-            }
-
-            if (password.val() === '') {
-                setError(password, 'password', '不能为空');
-                return;
-            } else {
-                removeError(password, 'password')
-            }
-
-            var formData = new FormData();
-            if (loginType === 0)
-                formData.append("phone", phone.val());
-            if (loginType === 1)
-                formData.append("email", email.val());
-            formData.append("password", password.val());
-
-            $.ajax({
-                url: "/account/login",
-                type: "post",
-                dataType: 'text',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: formData,
-                success: function (data) {
-                    //console.log(data);
-                    var result = JSON.parse(data);
-                    checkResultWithLocation(result.status, "登录成功，正在跳转", result.msg, "/index");
-
+        $.ajax({
+            url: "/account/login",
+            type: "post",
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (data) {
+                //console.log(data);
+                var result = JSON.parse(data);
+                if(result.status == 200){
+                    alert('登陆成功');
                 }
-            });
+//                checkResultWithLocation(result.status, "登录成功，正在跳转", result.msg, "/index");
+
+            }
         });
-    </script>
-@endsection
+    });
+</script>
+
+<div class="footer ">
+    <div class="footer-hd ">
+    </div>
+    <div class="footer-bd ">
+        <br>
+        <p style="text-align: center;">
+
+            Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
+            客服电话：88888888<br>
+            联系邮箱：不亦乐乎＠bylehu.com
+
+        </p>
+    </div>
+</div>
+</body>
+
+</html>
