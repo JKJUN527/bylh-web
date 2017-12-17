@@ -204,5 +204,32 @@ Route::get('sensitive', ['uses' => 'SensitiveController@test']);
 
 
 
+//后台系统
+
+Route::get('admin/login', function () {
+    return view('admin/login');
+});
+Route::post('admin/login', ['uses' => 'Admin\LoginController@postLogin']);
+
+Route::get('admin/', ['uses' => 'Admin\DashboardController@view']);
+Route::get('admin/dashboard', ['uses' => 'Admin\DashboardController@view']);
+//管理网站信息
+Route::any('admin/about', ['uses' => 'Admin\WebinfoController@index']);//显示已发布广告信息
+Route::any('admin/about/setPhone', ['uses' => 'Admin\WebinfoController@setPhone']);
+Route::any('admin/about/setEmail', ['uses' => 'Admin\WebinfoController@setEmail']);
+Route::any('admin/about/setAddress', ['uses' => 'Admin\WebinfoController@setAddress']);
+Route::any('admin/about/setContent', ['uses' => 'Admin\WebinfoController@setContent']);
+
+//设置管理员界面
+Route::get('admin/admin', ['uses' => 'Admin\AdminController@view']);
+Route::post('admin/register', ['uses' => 'Admin\AdminController@addAdmin']);
+Route::any('admin/delete', ['uses' => 'Admin\AdminController@deleteAdmin']);
+
+//审批企业信息
+Route::any('admin/verify/{option?}', ['uses' => 'Admin\VerificationController@index'])->where('option', '[A-Za-z]+');//显示待审核或已审核的信息
+Route::any('admin/showverify/detail', ['uses' => 'Admin\VerificationController@showDetail']);//显示待审核或已审核的企业信息
+Route::any('admin/examine_verify', ['uses' => 'Admin\VerificationController@passVerfi']);//显示待审核或已审核的企业信息
+
+
 
 

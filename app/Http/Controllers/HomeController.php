@@ -16,6 +16,7 @@ use App\News;
 use App\Qaservices;
 use App\Serviceclass1;
 use App\Serviceclass2;
+use App\Serviceinfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -28,32 +29,40 @@ class HomeController extends Controller {
 
         $data['serviceclass1']= Serviceclass1::all();//服务范围分类
         $data['serviceclass2']= Serviceclass2::all();//服务专业细分
+        $data['serviceclass3']= Serviceclass3::all();//服务项目细分
 
         //返回最热门一般服务4个
         $data['hotest1']= Genlservices::where('state',0)
             ->where('type',0)
             ->where('is_urgency',1)
             ->orderBy('view_count','desc')
-            ->take(4)
+            ->take(8)
             ->get();
         //返回最热门实习中介服务4个
         $data['hotest2']= Finlservices::where('state',0)
             ->where('type',1)
             ->where('is_urgency',1)
             ->orderBy('view_count','desc')
-            ->take(4)
+            ->take(8)
             ->get();
         //返回最热门专业问答服务4个
         $data['hotest3']= Qaservices::where('state',0)
             ->where('type',2)
             ->where('is_urgency',1)
             ->orderBy('view_count','desc')
-            ->take(4)
+            ->take(8)
             ->get();
         //返回热门需求
         $data['demands'] = Demands::where('state',0)
             ->orderBy('view_count','desc')
-            ->take(4)
+            ->take(24)
+            ->get();
+        //返回热门服务商
+        //默认设置为急聘服务商显示
+        $data['hotservers'] = Serviceinfo::select('uid','elogo','city','graduate_edu','is_offline')
+            ->where('is_urgency',1)
+            ->orderBy('created_at','ase')
+            ->take(8)
             ->get();
         //返回广告
         $data['ad'] = HomeController::searchAd();

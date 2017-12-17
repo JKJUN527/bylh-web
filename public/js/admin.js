@@ -578,10 +578,6 @@ function locationTimeout(url, second) {
  */
 function checkResult(status, succeedInfo, failedInfo, element) {
     if (status === 200) {
-        setTimeout(function () {
-            location.reload()
-        }, 1000);
-
         showNotification(
             "alert-success",
             succeedInfo,

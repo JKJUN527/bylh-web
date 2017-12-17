@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\about;
+use App\About;
+use App\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 
 class DashboardController extends Controller {
+    //后台首页显示网站关于信息
     public function view() {
         $uid = AdminAuthController::getUid();
         if ($uid == 0)
             return view('admin.login');
 
         $data = self::getLoginInfo();
-        $data['webinfo'] = about::orderBy('updated_at', 'desc')
+        $data['webinfo'] = About::orderBy('updated_at', 'desc')
             ->take(1)
             ->get()[0];
 
@@ -25,7 +27,7 @@ class DashboardController extends Controller {
         $uid = AdminAuthController::getUid();
         $data = array();
         $data['uid'] = $uid;
-        $user = User::where("uid", $uid)->first();
+        $user = Admin::where("aid", $uid)->first();
 
         if ($user == null)
             return view('admin.login');
