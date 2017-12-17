@@ -70,8 +70,8 @@
             <li class="qc last"><a href="/request">专业问答</a></li>
         </ul>
         <div class="nav-extra">
-            <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-            <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+            <a href="/message" style="color: #f5e79e;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息
+                <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
         </div>
     </div>
 </div>
@@ -97,14 +97,14 @@
             <p><i class="am-icon-balance-scale"></i>我的交易</p>
             <ul>
                 <li><a href="/order">订单管理</a></li>
-                <li> <a href="change.html">退款售后</a></li>
-                <li> <a href="comment.html">评价服务</a></li>
+                <li> <a href="/comment">评价服务</a></li>
             </ul>
         </li>
         <li class="person">
             <p><i class="am-icon-dollar"></i>我的服务</p>
             <ul>
                 <li> <a href="/sendrequest">发布服务</a></li>
+                <li> <a href="/myrequest">服务列表</a></li>
             </ul>
         </li>
 
@@ -112,16 +112,15 @@
             <p><i class="am-icon-tags"></i>我的需求</p>
             <ul>
                 <li> <a href="/sendneed">发布需求</a></li>
-                <li> <a href="foot.html">足迹</a></li>
+                <li> <a href="/myneed">需求列表</a></li>
             </ul>
         </li>
 
         <li class="person">
-            <p><i class="am-icon-qq"></i>站内信</p>
+            <p><i class="am-icon-qq"></i>信息中心</p>
             <ul>
-                <li> <a href="consultation.html">商品咨询</a></li>
-                <li> <a href="suggest.html">意见反馈</a></li>
-                <li> <a href="news.html">我的消息</a></li>
+                <li> <a href="/message">站内信</a></li>
+                <li> <a href="/news">我的消息</a></li>
             </ul>
         </li>
     </ul>
