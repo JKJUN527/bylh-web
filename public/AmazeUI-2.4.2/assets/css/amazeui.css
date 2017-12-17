@@ -2343,7 +2343,6 @@ output {
   display: block;
   width: 100%;
   padding: 0.5em;
-  font-size: 1.6rem;
   line-height: 1.2;
   color: #555555;
   vertical-align: middle;
@@ -8356,7 +8355,6 @@ img.am-thumbnail,
 .am-form-group .am-alert {
   margin: 5px 0 0;
   padding: 0.25em 0.625em;
-  font-size: 1.3rem;
 }
 /* Close in alert */
 .am-alert > .am-close:first-child {

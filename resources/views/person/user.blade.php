@@ -31,114 +31,78 @@
 
                 <!--个人信息 -->
                 <div class="info-main">
-                    <form class="am-form am-form-horizontal">
-
-                        <div class="am-form-group">
-                            <label for="user-name2" class="am-form-label">昵称</label>
-                            <div class="am-form-content">
-                                <input type="text" id="user-name2" placeholder="nickname">
-                                <small>昵称长度不能超过40个汉字</small>
+                    <form action="" class="am-form" id="doc-vld-msg">
+                        <fieldset>
+                            <div class="am-form-group">
+                                <label for="doc-vld-name-2-1">用户名：</label>
+                                <input type="text" id="doc-vld-name-2-1" minlength="3" placeholder="输入用户名（至少 3 个字符）" required/>
                             </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label for="user-name" class="am-form-label">姓名</label>
-                            <div class="am-form-content">
-                                <input type="text" id="user-name2" placeholder="name">
-
-                            </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label class="am-form-label">性别</label>
-                            <div class="am-form-content sex">
+                            <div class="am-form-group">
+                                <label>性别： </label>
                                 <label class="am-radio-inline">
-                                    <input type="radio" name="radio10" value="male" data-am-ucheck> 男
+                                    <input type="radio"  value="" name="docVlGender" required> 男
                                 </label>
                                 <label class="am-radio-inline">
-                                    <input type="radio" name="radio10" value="female" data-am-ucheck> 女
+                                    <input type="radio" name="docVlGender"> 女
                                 </label>
                                 <label class="am-radio-inline">
-                                    <input type="radio" name="radio10" value="secret" data-am-ucheck> 保密
+                                    <input type="radio" name="docVlGender"> 其他
                                 </label>
                             </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label for="user-birth" class="am-form-label">生日</label>
-                            <div class="am-form-content birth">
-                                <div class="birth-select">
-                                    <select data-am-selected>
-                                        <option value="a">2015</option>
-                                        <option value="b">1987</option>
-                                    </select>
-                                    <em>年</em>
-                                </div>
-                                <div class="birth-select2">
-                                    <select data-am-selected>
-                                        <option value="a">12</option>
-                                        <option value="b">8</option>
-                                    </select>
-                                    <em>月</em></div>
-                                <div class="birth-select2">
-                                    <select data-am-selected>
-                                        <option value="a">21</option>
-                                        <option value="b">23</option>
-                                    </select>
-                                    <em>日</em></div>
+                            <div class="am-form-group">
+                                <label for="doc-vld-email-2-1">邮箱：</label>
+                                <input type="email" id="doc-vld-email-2-1" data-validation-message="请输入合法的邮箱" placeholder="输入邮箱" required/>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="doc-vld-age-2-1">年龄：</label>
+                                <input type="number" class=""  id="doc-vld-age-2-1" placeholder="输入年龄  3-120" min="3" max="120" required />
                             </div>
 
-                        </div>
-                        <div class="am-form-group">
-                            <label for="user-phone" class="am-form-label">电话</label>
-                            <div class="am-form-content">
-                                <input id="user-phone" placeholder="telephonenumber" type="tel">
-
+                            <div class="am-form-group">
+                                <label for="doc-vld-tel-2-1">电话：</label>
+                                <input id="user-phone" placeholder="输入电话" type="tel"  data-validation-message="请输入合法的电话" required/>
                             </div>
-                        </div>
-                        <div class="am-form-group">
-                            <label for="user-email" class="am-form-label">电子邮件</label>
-                            <div class="am-form-content">
-                                <input id="user-email" placeholder="Email" type="email">
 
+                            <div class="am-form-group">
+                                <label for="doc-vld-ta-2-1">签名：</label>
+                                <textarea id="doc-vld-ta-2-1" minlength="10" maxlength="100"></textarea>
                             </div>
-                        </div>
-                        <div class="am-form-group address">
-                            <label for="user-address" class="am-form-label">收货地址</label>
-                            <div class="am-form-content address">
-                                <a href="/address">
-                                    <p class="new-mu_l2cw">
-                                        <span class="province">湖北</span>省
-                                        <span class="city">武汉</span>市
-                                        <span class="dist">洪山</span>区
-                                        <span class="street">雄楚大道666号(中南财经政法大学)</span>
-                                        <span class="am-icon-angle-right"></span>
-                                    </p>
-                                </a>
 
+                            <div class="info-btn">
+                                <button class="am-btn am-btn-danger" type="submit">提交</button>
                             </div>
-                        </div>
-                        <div class="am-form-group safety">
-                            <label for="user-safety" class="am-form-label">账号安全</label>
-                            <div class="am-form-content safety">
-                                <a href="/safety">
-
-                                    <span class="am-icon-angle-right"></span>
-
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="info-btn">
-                            <div class="am-btn am-btn-danger">保存修改</div>
-                        </div>
-
+                        </fieldset>
                     </form>
+
                 </div>
 
             </div>
 
         </div>
+        <script type="text/javascript">
+            $(function() {
+                $('#doc-vld-msg').validator({
+                    onValid: function(validity) {
+                        $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+                    },
+
+                    onInValid: function(validity) {
+                        var $field = $(validity.field);
+                        var $group = $field.closest('.am-form-group');
+                        var $alert = $group.find('.am-alert');
+                        // 使用自定义的提示信息 或 插件内置的提示信息
+                        var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+                        if (!$alert.length) {
+                            $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+                            appendTo($group);
+                        }
+
+                        $alert.html(msg).show();
+                    }
+                });
+            });
+        </script>
         <!--底部-->
         @section('footer')
         <div class="footer ">
