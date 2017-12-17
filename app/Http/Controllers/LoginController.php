@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
@@ -20,8 +21,8 @@ class LoginController extends Controller {
     use AuthenticatesUsers;
 
     public function __construct() {
-        $this->middleware('guest');
-    }
+    $this->middleware('guest');
+}
 
     //打开登陆页面，传递当前用户信息到前端显示
     public function index() {
@@ -38,7 +39,6 @@ class LoginController extends Controller {
     /*登录验证逻辑*/
     public function postLogin(Request $request) {
         $data = array();
-
         $input = $request->all();
 
         //手机登陆
@@ -55,21 +55,23 @@ class LoginController extends Controller {
                     'password' => 'required|min:6|max:60'
                 ]);
                 if (!($validatorTel->fails())) {
+//                    if (Auth::attempt(array('tel' => $phone, 'password' => $password))) {
                     if (Auth::attempt(array('tel' => $phone, 'password' => $password))) {
-                        $uid = Auth::user()->uid;
-                        session()->put('frontUid',$uid);
-                        $type = User::where('uid', '=', $uid)
-                            ->select('type')
-                            ->get();
-                        $type = $type[0]['type'];
-                        session()->put('type', $type);
-                        $data['status'] = 200;
-                        $data['msg'] = "登陆成功！";
-                        return $data;
-                    }
+                            $uid = Auth::user()->uid;
+                            session()->put('frontUid',$uid);
+                            $type = User::where('uid', '=', $uid)
+                                ->select('type')
+                                ->get();
+                            $type = $type[0]['type'];
+                            session()->put('type', $type);
+                            $data['status'] = 200;
+                            $data['msg'] = "登陆成功！";
+                            return $data;
+                        }
                     $data['status'] = 400;
                     $data['msg'] = "用户名或密码错误！";
                     return $data;
+
                 } else {
                     $data['status'] = 400;
                     $data['msg'] = "电话或密码格式不符合要求！";
@@ -127,6 +129,14 @@ class LoginController extends Controller {
             $data['msg'] = "登录失败";
             return $data;
         }
+    }
+
+    //登出函数
+    public function logout() {
+        Auth::logout();
+        Session::flush();   //清除所有缓存
+        // return 123;
+        return redirect('index');
     }
 
 }

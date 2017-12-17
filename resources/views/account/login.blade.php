@@ -58,7 +58,6 @@
 </div>
 <script>
     $("input[type='submit']").click(function (event) {
-        alert(1111);
         var username = $('#user');
         var password = $('#password');
         {{--if (phone.is(':visible') && phone.val() === '') {--}}

@@ -1,9 +1,9 @@
 <?php
 
-Route::get('/index', function () {
+Route::get('/', function () {
     return view('home2');
 });
-Route::any('/home2',function(){
+Route::get('/index',function(){
     return view('home2');
 });
 Route::any('/needinfo',function(){
@@ -86,7 +86,7 @@ Route::get('account/register', ['uses' => 'RegisterController@index']);
 Route::post('account/register', ['uses' => 'RegisterController@postRegister']);
 Route::post('account/login', ['uses' => 'LoginController@postLogin']);
 
-Route::get('account/logout', ['uses' => 'LoginoutController@logout']);
+Route::get('account/logout', ['uses' => 'LoginController@logout']);
 Route::any('account/sms', ['uses' => 'ValidationController@regSMS']);//发送短信验证码
 //发送邮箱
 Route::any('account/sendemail', ['uses' => 'ValidationController@sendemail']);
