@@ -62,7 +62,7 @@
                                 <div class="fore2"><small>您验证的邮箱：5831XXX@qq.com 可用于快速找回登录密码</small></div>
                             </div>
                             <div class="fore3">
-                                <a href=/email">
+                                <a href="/email">
                                     <div class="am-btn am-btn-secondary">换绑</div>
                                 </a>
                             </div>
