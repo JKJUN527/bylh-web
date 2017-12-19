@@ -9,8 +9,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Industry;
-use App\Occupation;
+use App\Serviceclass1;
+use App\Serviceclass2;
+use App\Serviceclass3;
 use Illuminate\Http\Request;
 
 class IndustryController extends Controller {
@@ -21,8 +22,9 @@ class IndustryController extends Controller {
             return view('admin.login');
 
         $data = DashboardController::getLoginInfo();
-        $data['industry'] = Industry::all();
-        $data['occupation'] = Occupation::all();
+        $data['industry'] = Serviceclass1::all();
+        $data['occupation'] = Serviceclass2::all();
+        $data['class3'] = Serviceclass3::all();
         return view('admin.industry', ['data' => $data]);
     }
 
@@ -39,7 +41,7 @@ class IndustryController extends Controller {
                 //return 'add';
                 if ($request->has('name')) {
                     $name = $request->input('name');
-                    $industry = new Industry();
+                    $industry = new Serviceclass1();
                     $industry->name = $name;
 
                     if ($industry->save()) {
@@ -55,7 +57,7 @@ class IndustryController extends Controller {
                 if ($request->has('id')) {
                     $id = $request->input('id');
 
-                    $del = Industry::find($id);
+                    $del = Serviceclass1::find($id);
                     $bool = $del->delete();
 
                     if ($bool) {

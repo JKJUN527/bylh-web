@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('title', '行业及职业')
+@section('title', '行业及专业')
 
 @section('custom-style')
     <style>
@@ -21,12 +21,12 @@
 @endsection
 
 @section('sidebar')
-    @include('components.adminAside', ['title' => 'industry', 'subtitle'=>'', 'username' => $data['username']])
+    @include('layout.adminAside', ['title' => 'industry', 'subtitle'=>'', 'username' => $data['username']])
 @endsection
 
 @section('content')
     <div class="row clearfix">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
@@ -67,7 +67,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3">暂无地区</td>
+                                <td colspan="3">暂无行业</td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -76,22 +76,22 @@
             </div>
         </div>
 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        职业列表
+                        专业列表
                     </h2>
                     <div class="mdl-card__menu">
 
-                        <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+                        <button id="demo-menu-lower-middle" class="mdl-button mdl-js-button mdl-button--icon">
                             <i class="material-icons">more_vert</i>
                         </button>
 
-                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                            for="demo-menu-lower-right">
+                        <ul class="mdl-menu mdl-menu--bottom-middle mdl-js-menu mdl-js-ripple-effect"
+                            for="demo-menu-lower-middle">
                             <li class="mdl-menu__item">
-                                <a data-toggle="modal" data-target="#addOccupationModal">添加职业</a>
+                                <a data-toggle="modal" data-target="#addOccupationModal">添加专业</a>
                             </li>
                         </ul>
                     </div>
@@ -101,7 +101,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>职业名称</th>
+                            <th>专业名称</th>
                             <th>所属行业</th>
                             <th>操作</th>
                         </tr>
@@ -114,7 +114,7 @@
 
                                 <td>
                                     @foreach($data['industry'] as $industry)
-                                        @if($occupation->industry_id == $industry->id)
+                                        @if($occupation->class1_id == $industry->id)
                                             {{$industry->name}}
                                         @endif
                                     @endforeach
@@ -126,7 +126,66 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3">暂无地区</td>
+                                <td colspan="3">暂无专业</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        服务细分
+                    </h2>
+                    <div class="mdl-card__menu">
+
+                        <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                            for="demo-menu-lower-right">
+                            <li class="mdl-menu__item">
+                                <a data-toggle="modal" data-target="#addClass3Modal">添加小类</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table table-striped" id="cu-admin-table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>细分名称</th>
+                            <th>所属专业</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($data['class3'] as $class3)
+                            <tr>
+                                <td>{{$class3->id}}</td>
+                                <td>{{$class3->name}}</td>
+
+                                <td>
+                                    @foreach($data['occupation'] as $occupation)
+                                        @if($class3->class2_id == $occupation->id)
+                                            {{$occupation->name}}
+                                        @endif
+                                    @endforeach
+                                </td>
+
+                                <td>
+                                    <i class="material-icons delete-class3" data-content="{{$class3->id}}">delete</i>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3">暂无细分项</td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -169,7 +228,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel">添加一个职业</h4>
+                    <h4 class="modal-title" id="defaultModalLabel">添加一个专业</h4>
                 </div>
                 <form role="form" method="post" id="add_occupation_form">
                     <div class="modal-body">
@@ -194,6 +253,46 @@
                                 @endforeach
                             </select>
                             <label class="error" for="parent-industry"></label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary waves-effect">添加</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addClass3Modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">添加一个细分项</h4>
+                </div>
+                <form role="form" method="post" id="add_class3_form">
+                    <div class="modal-body">
+
+                        <label for="name">细分名称</label>
+                        <div class="input-group">
+                            <div class="form-line">
+                                <input type="text" id="name-class3" name="name-class3" class="form-control"
+                                       placeholder="细分名称">
+                            </div>
+                            <label id="name-error" class="error" for="name-class3"></label>
+                        </div>
+
+                        <label for="parent-industry">所属专业</label>
+                        <div class="form-group">
+                            {{--如果想要添加动态查找，向select中添加属性：data-live-search="true"--}}
+                            <select class="form-control show-tick selectpicker" data-live-search="true"
+                                    id="parent-occupation" name="industry">
+                                <option value="">请选择所属行业</option>
+                                @foreach($data['occupation'] as $occupation)
+                                    <option value="{{$occupation->id}}">{{$occupation->name}}</option>
+                                @endforeach
+                            </select>
+                            <label class="error" for="parent-occupation"></label>
                         </div>
 
                     </div>
@@ -294,6 +393,51 @@
                 }
             })
         });
+        $("#add_class3_form").submit(function (event) {
+            event.preventDefault();
+
+            var name = $("#name-class3");
+            var occupation = $("#parent-occupation");
+
+            if (name.val() === '') {
+                setError(name, 'name-class3', '不能为空');
+                return;
+            } else {
+                removeError(name, 'name-class3');
+            }
+
+            if (occupation.val() === '') {
+                setError(occupation, 'parent-occupation', '请选择所属专业');
+                return;
+            } else {
+                removeError(occupation, 'parent-occupation');
+            }
+
+            var formData = new FormData();
+            formData.append("name", name.val());
+            formData.append("occupation_id", occupation.val());
+
+
+            $.ajax({
+                url: "/admin/occupation/addclass",
+                type: "post",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    $("#addClass3Modal").modal('toggle');
+                    var result = JSON.parse(data);
+
+                    checkResult(result.status, "操作成功", result.msg, null);
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1200);
+                }
+            })
+        });
 
         $(".delete-industry").click(function () {
             var element = $(this);
@@ -334,6 +478,30 @@
             }, function () {
                 $.ajax({
                     url: "/admin/occupation/delete?id=" + element.attr("data-content"),
+                    type: "get",
+                    success: function (data) {
+                        checkResult(data['status'], '操作成功', data['msg'], null);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1200);
+                    }
+                })
+            });
+        })
+        $(".delete-class3").click(function () {
+            var element = $(this);
+
+            swal({
+                type: "warning",
+                title: "确认",
+                text: "确定删除该服务细分吗？",
+                confirmButtonText: "删除",
+                cancelButtonText: "取消",
+                showCancelButton: true,
+                closeOnConfirm: true
+            }, function () {
+                $.ajax({
+                    url: "/admin/occupation/deleteclass?id=" + element.attr("data-content"),
                     type: "get",
                     success: function (data) {
                         checkResult(data['status'], '操作成功', data['msg'], null);

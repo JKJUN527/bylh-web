@@ -79,7 +79,7 @@
                 >
                     <a href="/admin/industry">
                         <i class="material-icons">business</i>
-                        <span>行业-职业</span>
+                        <span>行业-专业</span>
                     </a>
                 </li>
                 <li
