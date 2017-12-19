@@ -230,6 +230,10 @@ Route::any('admin/verify/{option?}', ['uses' => 'Admin\VerificationController@in
 Route::any('admin/showverify/detail', ['uses' => 'Admin\VerificationController@showDetail']);//显示待审核或已审核的企业信息
 Route::any('admin/examine_verify', ['uses' => 'Admin\VerificationController@passVerfi']);//显示待审核或已审核的企业信息
 
+//设置地区
+Route::any('admin/region', ['uses' => 'Admin\RegionController@index']);//显示地区
+Route::any('admin/region/{option}', ['uses' => 'Admin\RegionController@edit'])->where('option', '[A-Za-z]+');//显示地区
+
 
 
 

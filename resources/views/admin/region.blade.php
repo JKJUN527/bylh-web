@@ -21,7 +21,7 @@
 @endsection
 
 @section('sidebar')
-    @include('components.adminAside', ['title' => 'region', 'subtitle'=>'', 'username' => $data['username']])
+    @include('layout.adminAside', ['title' => 'region', 'subtitle'=>'', 'username' => $data['username']])
 @endsection
 
 @section('content')
