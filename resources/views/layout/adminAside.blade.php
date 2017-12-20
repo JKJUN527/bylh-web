@@ -83,13 +83,13 @@
                     </a>
                 </li>
                 <li
-                        @if($title === 'egame')
+                        @if($title === 'sensitive')
                         class="active"
                         @endif
                 >
-                    <a href="/admin/egame">
+                    <a href="/admin/sensitive">
                         <i class="material-icons">face</i>
-                        <span>游戏-段位</span>
+                        <span>敏感词系统</span>
                     </a>
                 </li>
 

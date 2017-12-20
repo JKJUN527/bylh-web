@@ -237,6 +237,9 @@ Route::any('admin/region/{option}', ['uses' => 'Admin\RegionController@edit'])->
 Route::any('admin/industry', ['uses' => 'Admin\IndustryController@index']);//显示行业-专业-服务细分
 Route::any('admin/industry/{option}', ['uses' => 'Admin\IndustryController@edit'])->where('option', '[A-Za-z]+');//显示行业
 Route::any('admin/occupation/{option}', ['uses' => 'Admin\OccupationController@edit'])->where('option', '[A-Za-z]+');//显示职业
+//设置敏感词
+Route::any('admin/sensitive', ['uses' => 'Admin\SensitiveController@index']);//显示敏感词
+Route::any('admin/sensitive/{option}', ['uses' => 'Admin\SensitiveController@edit'])->where('option', '[A-Za-z]+');//操作敏感词
 
 
 

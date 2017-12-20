@@ -16,6 +16,7 @@ use App\News;
 use App\Qaservices;
 use App\Serviceclass1;
 use App\Serviceclass2;
+use App\Serviceclass3;
 use App\Serviceinfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
