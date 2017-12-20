@@ -7,6 +7,11 @@
         .btn:focus {
             color: #ffffff;
         }
+        #indicatorContainer{
+            position: absolute;
+            right: 2rem;
+            top: 1rem;
+        }
     </style>
 @endsection
 
@@ -51,6 +56,8 @@
                 </dl>
             </div>
         </div>
+        {{--<input style="display: none" id="completionvalue" value="230" />--}}
+        {{--<div class="prg-cont rad-prg" id="indicatorContainer"></div>--}}
 
         <button class="btn bg-teal waves-effect"
                 data-toggle="modal" data-target="#setTelModal">修改公司电话
@@ -175,6 +182,7 @@
 @endsection
 
 @section('custom-script')
+    <script src="{{asset('js/radialindicator.min.js')}}"></script>
     <script type="text/javascript">
         $("#set-phone-form").submit(function (event) {
             event.preventDefault();
@@ -311,6 +319,17 @@
                     }, 1200);
                 }
             })
+        });
+        //设置百分比
+        $('#indicatorContainer').radialIndicator({
+            barColor: {
+                0: '#FF0000',
+                33: '#FFFF00',
+                66: '#0066FF',
+                100: '#33CC33'
+            },
+            percentage: false,
+            initValue: $('#completionvalue').val()
         });
     </script>
 @show

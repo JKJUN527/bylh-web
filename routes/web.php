@@ -210,7 +210,7 @@ Route::get('admin/login', function () {
     return view('admin/login');
 });
 Route::post('admin/login', ['uses' => 'Admin\LoginController@postLogin']);
-
+Route::get('admin/logout', ['uses' => 'Admin\LoginController@logout']);
 Route::get('admin/', ['uses' => 'Admin\DashboardController@view']);
 Route::get('admin/dashboard', ['uses' => 'Admin\DashboardController@view']);
 //管理网站信息
@@ -240,7 +240,19 @@ Route::any('admin/occupation/{option}', ['uses' => 'Admin\OccupationController@e
 //设置敏感词
 Route::any('admin/sensitive', ['uses' => 'Admin\SensitiveController@index']);//显示敏感词
 Route::any('admin/sensitive/{option}', ['uses' => 'Admin\SensitiveController@edit'])->where('option', '[A-Za-z]+');//操作敏感词
-
+//发布广告
+Route::get('admin/addAds', ['uses' => 'Admin\AdvertsController@addAdView']);//显示已发布广告信息
+Route::any('admin/ads', ['uses' => 'Admin\AdvertsController@index']);//显示已发布广告信息
+Route::any('admin/ads/detail', ['uses' => 'Admin\AdvertsController@detail']);//显示已发布广告信息
+Route::any('admin/ads/add', ['uses' => 'Admin\AdvertsController@addAds']);//新增或修改广告信息
+Route::any('admin/ads/find', ['uses' => 'Admin\AdvertsController@findAd']);//查找location位置是否有广告
+Route::any('admin/ads/del', ['uses' => 'Admin\AdvertsController@delAd']);//删除广告
+//发布新闻
+Route::any('admin/news', ['uses' => 'Admin\EditnewsController@index']);//显示已发布新闻信息
+Route::any('admin/news/detail', ['uses' => 'Admin\EditnewsController@detail']);//显示已发布新闻信息
+Route::get('admin/addNews', ['uses' => 'Admin\EditnewsController@addNewsView']);//新增或修改新闻信息
+Route::any('admin/news/add', ['uses' => 'Admin\EditnewsController@addNews']);//新增或修改新闻信息
+Route::any('admin/news/del', ['uses' => 'Admin\EditnewsController@delNews']);
 
 
 
