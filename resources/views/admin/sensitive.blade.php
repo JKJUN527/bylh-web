@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('title', '游戏及段位')
+@section('title', '敏感词系统')
 
 @section('custom-style')
     <style>

@@ -152,7 +152,7 @@
                                 <input type="file" id="picture-big" name="picture-big" class="form-control"
                                        onchange='showBigPreview(this)'/>
                             </div>
-                            <div class="help-info" for="picture-big">.jpg 或 .png格式，200×100 像素</div>
+                            <div class="help-info" for="picture-big">.jpg 或 .png格式，700×70 像素</div>
                             <label id="picture-big-error" class="error" for="picture-big"></label>
                         </div>
 
@@ -184,14 +184,14 @@
                             <label id="url-big-error" class="error" for="url-big"></label>
                         </div>
 
-                        <div class="input-group">
-                            <div class="form-line">
-                                <input type="number" id="eid-big" name="eid-big" min="1" step="1" class="form-control"
-                                       placeholder="公司ID">
-                            </div>
-                            <div class="help-info" for="eid-big"></div>
-                            <label id="eid-big-error" class="error" for="eid-big"></label>
-                        </div>
+                        {{--<div class="input-group">--}}
+                            {{--<div class="form-line">--}}
+                                {{--<input type="number" id="eid-big" name="eid-big" min="1" step="1" class="form-control"--}}
+                                       {{--placeholder="公司ID">--}}
+                            {{--</div>--}}
+                            {{--<div class="help-info" for="eid-big"></div>--}}
+                            {{--<label id="eid-big-error" class="error" for="eid-big"></label>--}}
+                        {{--</div>--}}
 
                         <label for="date-big">有效截至日期</label>
                         <div class="input-group">
@@ -233,7 +233,7 @@
                                 <input type="file" id="picture-small" name="picture-small" class="form-control"
                                        onchange="showSmallPreview(this)"/>
                             </div>
-                            <div class="help-info" for="picture">.jpg 或 .png格式，100×50 像素</div>
+                            <div class="help-info" for="picture">.jpg 或 .png格式，300×30 像素</div>
                             <label id="picture-error" class="error" for="picture"></label>
                         </div>
 
@@ -258,15 +258,15 @@
                             <label id="url-small-error" class="error" for="url-small"></label>
                         </div>
 
-                        <div class="input-group">
-                            <div class="form-line">
-                                <input type="number" id="eid-small" min="1" step="1" name="eid-small"
-                                       class="form-control"
-                                       placeholder="公司ID">
-                            </div>
-                            <div class="help-info" for="eid-small"></div>
-                            <label id="eid-small-error" class="error" for="eid-small"></label>
-                        </div>
+                        {{--<div class="input-group">--}}
+                            {{--<div class="form-line">--}}
+                                {{--<input type="number" id="eid-small" min="1" step="1" name="eid-small"--}}
+                                       {{--class="form-control"--}}
+                                       {{--placeholder="公司ID">--}}
+                            {{--</div>--}}
+                            {{--<div class="help-info" for="eid-small"></div>--}}
+                            {{--<label id="eid-small-error" class="error" for="eid-small"></label>--}}
+                        {{--</div>--}}
 
                         <label for="date-small">有效截至日期</label>
                         <div class="input-group">
@@ -319,14 +319,14 @@
                             <label id="url-word-error" class="error" for="url-word"></label>
                         </div>
 
-                        <div class="input-group">
-                            <div class="form-line">
-                                <input type="number" id="eid-word" name="eid-word" min="1" step="1" class="form-control"
-                                       placeholder="公司ID">
-                            </div>
-                            <div class="help-info" for="eid-word"></div>
-                            <label id="eid-word-error" class="error" for="eid-word"></label>
-                        </div>
+                        {{--<div class="input-group">--}}
+                            {{--<div class="form-line">--}}
+                                {{--<input type="number" id="eid-word" name="eid-word" min="1" step="1" class="form-control"--}}
+                                       {{--placeholder="公司ID">--}}
+                            {{--</div>--}}
+                            {{--<div class="help-info" for="eid-word"></div>--}}
+                            {{--<label id="eid-word-error" class="error" for="eid-word"></label>--}}
+                        {{--</div>--}}
 
                         <label for="date-word">有效截至日期</label>
                         <div class="input-group">
@@ -453,20 +453,20 @@
                         var height = image.height;
                         console.log(width + "//" + height);
 
-                        if (width !== 200 || height !== 100) {
+                        if (width !== 700 || height !== 70) {
                             isCorrect = false;
                             $("#picture-big").val("");
                             swal({
                                 title: "错误",
                                 type: "error",
-                                text: "当前选择图片分辨率为: " + width + "px * " + height + "px \n大图片广告分辨率应为 200像素 * 100像素",
+                                text: "当前选择图片分辨率为: " + width + "px * " + height + "px \n大图片广告分辨率应为 700像素 * 70像素",
                                 cancelButtonText: "关闭",
                                 showCancelButton: true,
                                 showConfirmButton: false
                             });
                         } else if (isCorrect) {
                             $("#preview-holder-big").html("<div class='image-preview'>" +
-                                "<img src='" + objectUrl + "' width='200' height='100'>" +
+                                "<img src='" + objectUrl + "' width='700' height='70'>" +
                                 "<i class='material-icons delete-image' onclick='deleteBigImage(this)'>close</i></div>");
                         }
                     };
@@ -518,20 +518,20 @@
                         var height = image.height;
                         console.log(width + "//" + height);
 
-                        if (width !== 100 || height !== 50) {
+                        if (width !== 300 || height !== 30) {
                             isCorrect = false;
                             $("#picture-small").val("");
                             swal({
                                 title: "错误",
                                 type: "error",
-                                text: "当前选择图片分辨率为: " + width + "px * " + height + "px \n小图片广告分辨率应为 100像素 * 50像素",
+                                text: "当前选择图片分辨率为: " + width + "px * " + height + "px \n小图片广告分辨率应为 300像素 * 30像素",
                                 cancelButtonText: "关闭",
                                 showCancelButton: true,
                                 showConfirmButton: false
                             });
                         } else if (isCorrect) {
                             $("#preview-holder-small").html("<div class='image-preview'>" +
-                                "<img src='" + objectUrl + "' width='100' height='50'>" +
+                                "<img src='" + objectUrl + "' width='300' height='30'>" +
                                 "<i class='material-icons delete-image' onclick='deleteSmallImage(this)'>close</i></div>");
                         }
                     };
@@ -585,7 +585,7 @@
             var file = $("#picture-big");
             var title = $("input[name='title-big']");
             var subtitle = $("input[name='subtitle-big']");
-            var eid = $("input[name='eid-big']");
+//            var eid = $("input[name='eid-big']");
             var date = $("input[name='date-big']");
             var url = $("input[name='url-big']");
             var location = $("select[name='big-image--location']");
@@ -611,12 +611,12 @@
                 removeError(url, 'url-big');
             }
 
-            if (eid.val() === '') {
-                setError(eid, 'eid-big', "不能为空");
-                return;
-            } else {
-                removeError(eid, 'eid-big');
-            }
+//            if (eid.val() === '') {
+//                setError(eid, 'eid-big', "不能为空");
+//                return;
+//            } else {
+//                removeError(eid, 'eid-big');
+//            }
 
             if (date.val() === '') {
                 setError(date, 'date-big', "不能为空");
@@ -649,7 +649,7 @@
             formData.append('homepage', url.val());
             formData.append('validity', date.val());
             formData.append('location', location.val());
-            formData.append('eid', eid.val());
+//            formData.append('eid', eid.val());
 
             $.ajax({
                 url: "/admin/ads/find?type=0&location=" + location.val(),
@@ -727,7 +727,7 @@
             var file = $("#picture-small");
             var title = $("input[name='title-small']");
             var date = $("input[name='date-small']");
-            var eid = $("input[name='eid-small']");
+//            var eid = $("input[name='eid-small']");
             var url = $("input[name='url-small']");
             var location = $("select[name='small-image--location']");
 
@@ -745,12 +745,12 @@
                 removeError(url, 'url-small');
             }
 
-            if (eid.val() === '') {
-                setError(eid, 'eid-small', "不能为空");
-                return;
-            } else {
-                removeError(eid, 'eid-small');
-            }
+//            if (eid.val() === '') {
+//                setError(eid, 'eid-small', "不能为空");
+//                return;
+//            } else {
+//                removeError(eid, 'eid-small');
+//            }
 
             if (date.val() === '') {
                 setError(date, 'date-small', "不能为空");
@@ -783,7 +783,7 @@
             formData.append('homepage', url.val());
             formData.append('validity', date.val());
             formData.append('location', location.val());
-            formData.append('eid', eid.val());
+//            formData.append('eid', eid.val());
 
             $.ajax({
                 url: "/admin/ads/find?type=1&location=" + location.val(),
@@ -862,7 +862,7 @@
             var date = $("input[name='date-word']");
             var url = $("input[name='url-word']");
             var location = $("select[name='word--location']");
-            var eid = $("input[name='eid-word']");
+//            var eid = $("input[name='eid-word']");
 
             if (title.val() === '') {
                 setError(title, 'title-word', "不能为空");
@@ -877,13 +877,13 @@
             } else {
                 removeError(url, 'url-word');
             }
-
-            if (eid.val() === '') {
-                setError(eid, 'eid-word', "不能为空");
-                return;
-            } else {
-                removeError(eid, 'eid-word');
-            }
+//
+//            if (eid.val() === '') {
+//                setError(eid, 'eid-word', "不能为空");
+//                return;
+//            } else {
+//                removeError(eid, 'eid-word');
+//            }
 
             if (date.val() === '') {
                 setError(date, 'date-word', "不能为空");
@@ -907,7 +907,7 @@
             formData.append('homepage', url.val());
             formData.append('validity', date.val());
             formData.append('location', location.val());
-            formData.append('eid', eid.val());
+//            formData.append('eid', eid.val());
 
             $.ajax({
                 url: "/admin/ads/find?type=2&location=" + location.val(),

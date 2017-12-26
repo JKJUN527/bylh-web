@@ -88,7 +88,7 @@
 @endsection
 
 @section('sidebar')
-    @include('components.adminAside', ['title' => 'news', 'subtitle'=>'addNews', 'username' => $data['username']])
+    @include('layout.adminAside', ['title' => 'news', 'subtitle'=>'addNews', 'username' => $data['username']])
 @endsection
 
 @section('content')
@@ -341,7 +341,7 @@
             var formData = new FormData();
             formData.append("ename", '');
             formData.append("title", title.val());
-            formData.append("subtitle", '');
+//            formData.append("subtitle", '');
             formData.append("quote", quote.val());
             formData.append("tag", '');
             formData.append("content", newsContent);

@@ -82,15 +82,14 @@ class EditnewsController extends Controller {
 
                 $picfilepath = $picfilepath . $Item . '@' . $picname . ';';
                 $bool = Storage::disk('newspic')->put($picname, file_get_contents($realPath));
+                $new->picture = asset('storage/newspic/' . $picfilepath);
             }
         }
         //保存都数据库
         $new->title = $request->input('title');
-        $new->subtitle = $request->input('subtitle');
         $new->uid = $uid;//uid 后期通过登录注册方法获取
         $new->quote = $request->input('quote');
         $new->content = $request->input('content');
-        $new->picture = asset('storage/newspic/' . $picfilepath);
         $new->tag = $request->input('tag');
         if ($new->save()) {
             $data['status'] = 200;

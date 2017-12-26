@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('title', 'News')
+@section('title', '新闻系统')
 
 @section('custom-style')
     <style>
@@ -21,7 +21,7 @@
 @endsection
 
 @section('sidebar')
-    @include('components.adminAside', ['title' => 'news', 'subtitle'=>'newsList', 'username' => $data['username']])
+    @include('layout.adminAside', ['title' => 'news', 'subtitle'=>'newsList', 'username' => $data['username']])
 @endsection
 
 @section('content')
@@ -121,24 +121,26 @@
 
                     var content = news['content'];
                     var images = news['picture'];
-                    var imageTemp = images.split(";");
-                    var imagesArray = [];
+                    if(images != null && images != ""){
+                        var imageTemp = images.split(";");
+                        var imagesArray = [];
+                        if(imageTemp.length >0){
+                            for (var i in imageTemp) {
+                                imagesArray[i + ''] = imageTemp[i + ''].split("@");
+                            }
 
-                    for (var i in imageTemp) {
-                        imagesArray[i + ''] = imageTemp[i + ''].split("@");
+                            var baseUrl = imagesArray[0][0].substring(0, imagesArray[0][0].length - 1);
+                            imagesArray[0][0] = imagesArray[0][0].replace(baseUrl, '');
+
+//                    console.log(imagesArray);
+//                    console.log(baseUrl);
+//                    console.log();
+
+                            for (var j = 0; j < imagesArray.length; j++) {
+                                content = content.replace("[图片" + imagesArray[j][0] + "]", "<img src='" + baseUrl + imagesArray[j][1] + "' width='100%'/>");
+                            }
+                        }
                     }
-
-                    var baseUrl = imagesArray[0][0].substring(0, imagesArray[0][0].length - 1);
-                    imagesArray[0][0] = imagesArray[0][0].replace(baseUrl, '');
-
-                    console.log(imagesArray);
-                    console.log(baseUrl);
-                    console.log();
-
-                    for (var j = 0; j < imagesArray.length; j++) {
-                        content = content.replace("[图片" + imagesArray[j][0] + "]", "<img src='" + baseUrl + imagesArray[j][1] + "' width='100%'/>");
-                    }
-
                     $(".news-content").html(content);
                 }
             });
