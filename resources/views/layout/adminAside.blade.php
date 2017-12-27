@@ -94,14 +94,37 @@
                 </li>
 
                 <li
-                        @if($title === 'position')
+                        @if($title === 'service')
                         class="active"
                         @endif
                 >
-                    <a href="/admin/position">
+                    <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">work</i>
-                        <span>已发布职位</span>
+                        <span>已发布服务</span>
                     </a>
+                    <ul class="ml-menu">
+                        <li
+                                @if($subtitle === 'genlservice')
+                                class="active"
+                                @endif
+                        >
+                            <a href="/admin/genlservices">大学生服务列表</a>
+                        </li>
+                        <li
+                                @if($subtitle === 'finlservice')
+                                class="active"
+                                @endif
+                        >
+                            <a href="/admin/finlservices">实习中介服务列表</a>
+                        </li>
+                        <li
+                                @if($subtitle === 'majorservice')
+                                class="active"
+                                @endif
+                        >
+                            <a href="/admin/majorservices">专业问答服务列表</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li

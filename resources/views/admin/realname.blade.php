@@ -10,7 +10,7 @@
 @endsection
 
 @section('sidebar')
-    @include('layout.adminAside', ['title' => 'enterprise', 'subtitle'=>'realname', 'username' => $data['username']])
+    @include('layout.adminAside', ['title' => 'verify', 'subtitle'=>'realname', 'username' => $data['username']])
 @endsection
 
 @section('content')

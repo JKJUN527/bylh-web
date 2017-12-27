@@ -54,6 +54,33 @@
                         <span>{{$data['webinfo']->content or '无介绍'}}</span>
                     </dd>
                 </dl>
+
+                <dl>
+                    <dt><span>订单量</span></dt>
+                    <dd>
+                        <span>订单总量:{{$data['order_total']}}</span>
+                    </dd>
+                    <dd>
+                        <span>交易成功量:{{$data['order_success']}}</span>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt><span>服务需求发布量</span></dt>
+                    <dd>
+                        <span>服务发布量:{{$data['service_count']}}</span>
+                    </dd>
+                    <dd>
+                        <span>需求发布量:{{$data['demand_count']}}</span>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt><span>用户注册量</span></dt>
+                    <dd>
+                        <span>注册用户数:{{$data['user_count']}}</span>
+                    </dd>
+                </dl>
             </div>
         </div>
         {{--<input style="display: none" id="completionvalue" value="230" />--}}
@@ -184,6 +211,10 @@
 @section('custom-script')
     <script src="{{asset('js/radialindicator.min.js')}}"></script>
     <script type="text/javascript">
+        window.onload = function(){
+            setTimeout("location.reload()",2000);//两秒自动刷新
+        }
+
         $("#set-phone-form").submit(function (event) {
             event.preventDefault();
             var phone = $("#tel");

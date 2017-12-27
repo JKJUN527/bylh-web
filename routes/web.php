@@ -253,6 +253,7 @@ Route::any('admin/news/detail', ['uses' => 'Admin\EditnewsController@detail']);/
 Route::get('admin/addNews', ['uses' => 'Admin\EditnewsController@addNewsView']);//新增或修改新闻信息
 Route::any('admin/news/add', ['uses' => 'Admin\EditnewsController@addNews']);//新增或修改新闻信息
 Route::any('admin/news/del', ['uses' => 'Admin\EditnewsController@delNews']);
-
+//下架服务或设置服务加急
+Route::any('admin/genlservices', ['uses' => 'Admin\ServicesController@genlservicesIndex']);
 
 
