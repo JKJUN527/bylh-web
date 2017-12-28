@@ -82,6 +82,9 @@
                         @endforelse
                         </tbody>
                     </table>
+                    <nav>
+                        {!! $data['region']->render() !!}
+                    </nav>
                 </div>
             </div>
         </div>

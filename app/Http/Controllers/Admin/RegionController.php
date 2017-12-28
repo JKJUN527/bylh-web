@@ -21,7 +21,7 @@ class RegionController extends Controller {
             return view('admin.login');
 
         $data = DashboardController::getLoginInfo();
-        $data['region'] = Region::all();
+        $data['region'] = Region::paginate(10);
         //return $data;
         return view('admin/region', ['data' => $data]);
     }
