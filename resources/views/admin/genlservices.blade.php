@@ -22,6 +22,9 @@
         .hot {
             color: #F44336;
         }
+        .online {
+            color: green;
+        }
     </style>
 @endsection
 
@@ -35,16 +38,18 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        职位列表
+                        大学生服务列表
                     </h2>
                 </div>
                 <div class="body table-responsive">
                     <table class="table table-striped" id="cu-admin-table">
                         <thead>
-                        <tr>
+                        <tr>·
                             <th>#</th>
-                            <th>职位名称</th>
-                            <th>职位描述</th>
+                            <th>服务名称</th>
+                            <th>服务城市</th>
+                            <th>服务行业</th>
+                            <th>服务描述</th>
                             <th>状态</th>
                             <th>操作</th>
                         </tr>
@@ -54,6 +59,8 @@
                             <tr>
                                 <td>{{$genlservices->id}}</td>
                                 <td>{{$genlservices->title or '无'}}</td>
+                                <td>{{$genlservices->city}}</td>
+                                <td>{{$genlservices->name}}</td>
                                 <td>{{mb_substr($genlservices->describe, 0, 20)}}</td>
 
                                 <td>
@@ -67,7 +74,7 @@
                                 </td>
 
                                 <td>
-                                    <i class="material-icons off-the-shelf" data-content="{{$genlservices->id}}">remove_circle</i>
+                                    <i class="material-icons off-the-shelf @if($genlservices->state !=0) online @endif" data-content="{{$genlservices->id}}">remove_circle</i>
                                     <i class="material-icons set-hot @if($genlservices->is_urgency == 1) hot @endif"
                                        data-content="{{$genlservices->id}}">whatshot</i>
                                     {{--<i class="material-icons on-the-shelf" data-content="{{$position->pid}}">file_upload</i>--}}
@@ -94,31 +101,52 @@
     <script type="text/javascript">
         $(".off-the-shelf").click(function () {
             var element = $(this);
-
-            swal({
-                type: "warning",
-                title: "确认",
-                text: "确定下架该服务吗？",
-                confirmButtonText: "下架",
-                cancelButtonText: "取消",
-                showCancelButton: true,
-                closeOnConfirm: true
-            }, function () {
-                $.ajax({
-                    url: "/admin/position/offposition?id=" + element.attr("data-content"),
-                    type: "get",
-                    success: function (data) {
-                        checkResult(data['status'], "操作成功", data['msg'], null);
-                    }
+            var setOnline = element.hasClass("online") ? 0 : 1;
+            if(setOnline){
+                swal({
+                    type: "warning",
+                    title: "确认",
+                    text: "确定下架该服务吗？",
+                    confirmButtonText: "下架",
+                    cancelButtonText: "取消",
+                    showCancelButton: true,
+                    closeOnConfirm: true
+                }, function () {
+                    $.ajax({
+                        url: "/admin/services/offposition?type=0&id=" + element.attr("data-content"),
+                        type: "get",
+                        success: function (data) {
+                            checkResult(data['status'], "操作成功", data['msg'], null);
+                        }
+                    })
                 })
-            })
+            }else{
+                swal({
+                    type: "warning",
+                    title: "确认",
+                    text: "确定重新上架该服务吗？",
+                    confirmButtonText: "上架",
+                    cancelButtonText: "取消",
+                    showCancelButton: true,
+                    closeOnConfirm: true
+                }, function () {
+                    $.ajax({
+                        url: "/admin/services/onposition?type=0&id=" + element.attr("data-content"),
+                        type: "get",
+                        success: function (data) {
+                            checkResult(data['status'], "操作成功", data['msg'], null);
+                        }
+                    })
+                })
+            }
+
         });
 
         $(".set-hot").click(function () {
             var element = $(this);
             var setUrgency = element.hasClass("hot") ? 0 : 1;
 
-            var url = "/admin/position/urgency?pid=" + element.attr("data-content") + "&urgency=" + setUrgency;
+            var url = "/admin/services/urgency?type=0&id=" + element.attr("data-content") + "&urgency=" + setUrgency;
 
             $.ajax({
                 url: url,

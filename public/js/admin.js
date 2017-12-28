@@ -577,6 +577,9 @@ function locationTimeout(url, second) {
  * @param element
  */
 function checkResult(status, succeedInfo, failedInfo, element) {
+    setTimeout(function () {
+        location.reload()
+    }, 1000);
     if (status === 200) {
         showNotification(
             "alert-success",
@@ -586,7 +589,6 @@ function checkResult(status, succeedInfo, failedInfo, element) {
             "animated fadeInRight",
             "animated fadeOutRight"
         );
-
         if (element !== null) element.hide();
     } else if (status === 400) {
         showNotification(

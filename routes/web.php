@@ -220,7 +220,8 @@ Route::any('admin/about/setEmail', ['uses' => 'Admin\WebinfoController@setEmail'
 Route::any('admin/about/setAddress', ['uses' => 'Admin\WebinfoController@setAddress']);
 Route::any('admin/about/setContent', ['uses' => 'Admin\WebinfoController@setContent']);
 
-//设置管理员界面
+//设置管理员界面OffPosition
+//设置管理员界面OffPosition
 Route::get('admin/admin', ['uses' => 'Admin\AdminController@view']);
 Route::post('admin/register', ['uses' => 'Admin\AdminController@addAdmin']);
 Route::any('admin/delete', ['uses' => 'Admin\AdminController@deleteAdmin']);
@@ -255,5 +256,10 @@ Route::any('admin/news/add', ['uses' => 'Admin\EditnewsController@addNews']);//�
 Route::any('admin/news/del', ['uses' => 'Admin\EditnewsController@delNews']);
 //下架服务或设置服务加急
 Route::any('admin/genlservices', ['uses' => 'Admin\ServicesController@genlservicesIndex']);
+Route::any('admin/finlservices', ['uses' => 'Admin\ServicesController@finlservicesIndex']);
+Route::any('admin/majorservices', ['uses' => 'Admin\ServicesController@qaservicesIndex']);
+Route::any('admin/services/offposition', ['uses' => 'Admin\ServicesController@OffPosition']);
+Route::any('admin/services/onposition', ['uses' => 'Admin\ServicesController@onPosition']);
+Route::any('admin/services/urgency', ['uses' => 'Admin\ServicesController@isUrgency']);
 
 
