@@ -76,6 +76,9 @@
                         @endforelse
                         </tbody>
                     </table>
+                    <nav>
+                        {!! $data['news']->render() !!}
+                    </nav>
                 </div>
             </div>
         </div>
