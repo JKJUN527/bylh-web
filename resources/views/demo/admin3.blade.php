@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<html>
+<title>实名认证</title>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+<link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+<link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
 
-    <title>实名认证</title>
+<link href="css/personal.css" rel="stylesheet" type="text/css">
+<link href="css/stepstyle.css" rel="stylesheet" type="text/css">
+<link href="css/vipstyle.css" rel="stylesheet" type="text/css">
+<link href="css/infstyle.css" rel="stylesheet" type="text/css">
+<link href="css/orstyle.css" rel="stylesheet" type="text/css">
 
-    <link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
-    <link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
-
-    <link href="css/personal.css" rel="stylesheet" type="text/css">
-    <link href="css/stepstyle.css" rel="stylesheet" type="text/css">
-  <!--<linkhref="css/vipstyle.css" rel="stylesheet" type="text/css">-->
-    <link href="css/infstyle.css" rel="stylesheet" type="text/css">
-    <link href="css/orstyle.css" rel="stylesheet" type="text/css">
-
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script src="AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script src="AmazeUI-2.4.2/assets/js/amazeui.js"></script>
 </head>
-<style>
-
-</style>
 
 <body>
 <!--头 -->
@@ -81,15 +71,15 @@
         </ul>
         <div class="nav-extra">
             <a href="/message" style="color: #f5e79e;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息
-            <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
+                <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
         </div>
     </div>
 </div>
 <b class="line"></b>
 @section('content')
-    @show
+@show
 @section('footer')
-    @show
+@show
 </div>
 <aside class="menu">
     <ul>
@@ -137,4 +127,3 @@
 </aside>
 </div>
 </body>
-</html>

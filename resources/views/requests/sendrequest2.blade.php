@@ -22,11 +22,14 @@
 <div class="am-container" style="padding: 60px;">
     <div class="fabu_step1 am-g am-g-fixed">
         <div class="am-u-lg-12 am-g-u-md-12 am-u-sm-12">
-            <div class="fabu1" style="background:#eee;margin-bottom: 10px;">
+            <div class="fabu1" style="background:#eee;margin-bottom: 10px;height:300px;">
                 <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">联系方式</div>
-                <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
-						0px;">
-                    <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">18581872812</label>
+                <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 20px;">
+                    <label for="doc-ipt-3-a" class="am-form-label" style="font-size: 16px;width:200px;text-align: left;">电话:&nbsp;&nbsp;<span>18581872812</span></label>
+                    <br><br><br>
+                    <label for="doc-ipt-3-a" class="am-form-label" style="font-size: 16px;width:200px;text-align: left;">邮箱:&nbsp;&nbsp;<span>18581872812@qq.com</span></label><br><br><br>
+                    <label for="doc-ipt-3-a" class="am-form-label" style="font-size: 16px;width:200px;text-align: left;">服务类型:&nbsp;&nbsp;<span>一般服务</span></label><br><br><br>
+                    <label for="doc-ipt-3-a" class="am-form-label" style="font-size: 16px;width:200px;text-align: left;">服务类别:&nbsp;&nbsp;<span>家教艺体</span></label>
                 </div>
             </div>
             <div class="fabu1" style="background:#eee;margin-bottom:10px;">
@@ -56,76 +59,55 @@
                     </div>
                 </div>
             </div>
-            <div class="fabu1" style="background:#eee;height: 500px;">
-                <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">您可能还需要</div>
-                <div class="am-g am-g-fixed" style="padding-top: 20px;">
-                    <div class="am-u-lg-2 am-u-md-2 am-u-sm-2" style="padding-left: 60px;">
-                        <label class="am-radio am-danger" style="font-size: 16px;">
-                            <input type="radio" name="radio3" value="" data-am-ucheck><h2>加急卡</h2>
-                        </label>
-                    </div>
-                    <div class="am-u-lg-5 am-u-md-5 am-u-sm-5">
-                        在首页项目加急处显示，同时也在悬赏大厅显示，持续24小时(使用时间不可叠加)。
-                    </div>
-                    <div class="am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;padding: 5px;">
-                        <span style="font-size: 24px;color: #b84554;">￥50/</span>张
-                    </div>
-                    <div class="am-u-lg-2 am-u-md-2 am-u-sm-2" style="float: left;">
-                        <select data-am-selected>
-                            <option value="a" selected>1</option>
-                            <option value="b">2</option>
-                            <option value="o">3</option>
-                            <option value="m">4</option>
-                            <option value="d" disabled>5</option>
-                        </select>
+            <div class="fabu1" style="background:#eee;height: 600px;">
+                <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">信息填写</div>
+                <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
+						0px;">
+                    <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
+                        <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">需求标题</label>
+                        <div class="am-u-sm-8" style="float: left;margin-left: 30px;">
+                            <input type="title" id="doc-ipt-3-a" class="am-form-field">
+                        </div>
                     </div>
                 </div>
-                <div class="am-g am-g-fixed" style="padding-top: 20px;">
-                    <div class="am-u-lg-2 am-u-md-2 am-u-sm-2" style="padding-left: 60px;">
-                        <label class="am-radio am-danger" style="font-size: 16px;">
-                            <input type="radio" name="radio3" value="" data-am-ucheck><h2>置顶卡</h2>
-                        </label>
-                    </div>
-                    <div class="am-u-lg-5 am-u-md-5 am-u-sm-5">
-                        您已经成功发布的项目在悬赏大厅列表页面置顶保持24小时（使用时间不可叠加)。
-                    </div>
-                    <div class="am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;padding: 5px;">
-                        <span style="font-size: 24px;color: #b84554;">￥20/</span>张
-                    </div>
-                    <div class="am-u-lg-2 am-u-md-2 am-u-sm-2" style="float: left;">
-                        <select data-am-selected>
-                            <option value="a" selected>1</option>
-                            <option value="b">2</option>
-                            <option value="o">3</option>
-                            <option value="m">4</option>
-                            <option value="d" disabled>5</option>
-                        </select>
+                <!--城市联动-->
+                <div class="fb_container" style="padding: 0px 3px;margin-left: 10px;margin-bottom: 2
+						0px;">
+
+                    <form class="am-form-group am-form-danger am-form-icon am-padding-sm">
+                        <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;padding-left: 20px;
+">你所在城市</label>
+                        <div class="am-form-group am-input-group" id="address3" style="padding-left: 20px;
+">
+							<span class="am-input-group-label">
+							<i class="am-icon am-icon-home" style="padding-left: 20px;
+"></i>
+							<span class="am-padding-horizontal-xs">省市</span>
+							</span>
+                            <input readonly type="text" name="nickname" class="am-form-field am-radius" placeholder="请选择地址" required="" value="" style="width: 50%;">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
+						0px;">
+                    <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
+                        <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">描述需求</label>
+                        <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
+                            <textarea class="" rows="8" id="doc-ta-1" style="width: 100%;"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="am-g am-g-fixed" style="padding-top: 20px;">
-                    <div class="am-u-lg-2 am-u-md-2 am-u-sm-2" style="padding-left: 60px;">
-                        <label class="am-radio am-danger" style="font-size: 16px;">
-                            <input type="radio" name="radio3" value="" data-am-ucheck><h2>排名提升卡</h2>
-                        </label>
+
+                <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
+						0px;margin-top: 100px;">
+                    <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
+                        <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">添加附件</label>
+                        <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
+                            <button type="button" class="am-btn am-btn-default am-btn-sm">
+                                <i class="am-icon-cloud-upload"></i> 选择要上传的文件</button>
+                        </div>
                     </div>
-                    <div class="am-u-lg-5 am-u-md-5 am-u-sm-5">
-                        使用该卡可以更新项目操作时间，让你的项目排名一次性提升到最前面。
-                    </div>
-                    <div class="am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;padding: 5px;">
-                        <span style="font-size: 24px;color: #b84554;">￥10/</span>张
-                    </div>
-                    <div class="am-u-lg-2 am-u-md-2 am-u-sm-2" style="float: left;">
-                        <select data-am-selected>
-                            <option value="a" selected>1</option>
-                            <option value="b">2</option>
-                            <option value="o">3</option>
-                            <option value="m">4</option>
-                            <option value="d" disabled>5</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="account" style="float: right;padding: 10px;">
-                    总计：<span style="font-size: 24px;color: #b84554">50</span>元
                 </div>
                 <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
                 <label class="am-checkbox am-default" style="font-size: 16px;margin-left:20px;">
@@ -138,6 +120,24 @@
         </div>
     </div>
 </div>
+<script src="dist/iscroll.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="dist/address.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function() {
+        document.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        }, false);
+
+        //	配置级联层数
+        $("#address3").address({
+            prov: "广东省",
+            city: "中山市",
+            scrollToCenter: true,
+            selectNumber: 2,
+        });
+
+    });
+</script>
 @section('footer')
 <div class="footer " style="border: none;">
     <div class="footer-hd ">

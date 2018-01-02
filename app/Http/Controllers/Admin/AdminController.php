@@ -35,26 +35,22 @@ class AdminController extends Controller {
             ]);
             if (!($validator->fails())) {
                 $username = $input['username'];
-                $isexist = User::where('username', '=', $username)
+                $isexist = Admin::where('username', '=', $username)
                     ->get();
                 if (!($isexist->count())) {
-                    $user = new User();
-                    $user->username = $input['username'];
-                    $user->password = bcrypt($input['password']);
-                    $user->type = 3;
-                    if ($user->save()) {
-                        $adminInfo = new Admininfo();
-                        $adminInfo->uid = $user->uid;
-                        $adminInfo->save();
+                    $admin = new Admin();
+                    $admin->username = $input['username'];
+                    $admin->password = bcrypt($input['password']);
+                    if ($admin->save()) {
                         $data['status'] = 200;
                         $data['msg'] = '管理员添加成功';
                     } else {
                         $data['status'] = 400;
                         $data['msg'] = '管理员添加失败';
                     }
-                } else {
+                }else{
                     $data['status'] = 400;
-                    $data['msg'] = '用户名已存在，添加失败';
+                    $data['msg'] = '管理员已存在';
                 }
             } else {
                 $data['status'] = 400;
@@ -79,23 +75,14 @@ class AdminController extends Controller {
         $aid = $request->input('id');
 
         if (AdminAuthController::isAdmin()) {
-            $admin = Admininfo::find($aid);
+            $admin = Admin::find($aid);
             if (!$admin) {
-                $data['status'] = 400;
-                $data['msg'] = '删除的管理员ID不存在';
                 return $data;
             }
-            $uid = $admin->uid;
             $flag = $admin->delete();
             if ($flag) {
-                $user = User::find($uid);
-                if ($user->delete()) {
-                    $data['status'] = 200;
-                    $data['msg'] = '删除成功';
-                } else {
-                    $data['status'] = 400;
-                    $data['msg'] = '删除失败';
-                }
+                $data['status'] = 200;
+                $data['msg'] = '删除成功';
             } else {
                 $data['status'] = 400;
                 $data['msg'] = '删除失败';
@@ -114,10 +101,7 @@ class AdminController extends Controller {
             return redirect('admin/login');
         }
 
-        $admins = DB::table('jobs_users')
-            ->join('jobs_admininfo', 'jobs_admininfo.uid', '=', 'jobs_users.uid')
-            ->select('aid', 'username', 'permission', 'role', 'status')
-            ->get();
+        $admins = Admin::all();
 
         return $admins;
     }

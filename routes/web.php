@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 
 Route::get('/index', function () {
     return view('home2');
@@ -74,9 +75,11 @@ Route::any('/phone',function(){
 });
 
 
+=======
+>>>>>>> 0ef335df9ea4e016434e26a590cbebedb45b08e0
 //控制器方法
-//Route::any('/', ['uses' => 'HomeController@index']);
-Route::any('/index', ['uses' => 'HomeController@index']);
+Route::get('/', ['uses' => 'HomeController@index']);
+Route::get('/index', ['uses' => 'HomeController@index']);
 Route::any('/index/search', ['uses' => 'HomeController@indexSearch']);
 
 //登录注册
@@ -86,7 +89,7 @@ Route::get('account/register', ['uses' => 'RegisterController@index']);
 Route::post('account/register', ['uses' => 'RegisterController@postRegister']);
 Route::post('account/login', ['uses' => 'LoginController@postLogin']);
 
-Route::get('account/logout', ['uses' => 'LoginoutController@logout']);
+Route::get('account/logout', ['uses' => 'LoginController@logout']);
 Route::any('account/sms', ['uses' => 'ValidationController@regSMS']);//发送短信验证码
 //发送邮箱
 Route::any('account/sendemail', ['uses' => 'ValidationController@sendemail']);
@@ -204,5 +207,62 @@ Route::get('sensitive', ['uses' => 'SensitiveController@test']);
 
 
 
+//后台系统
+
+Route::get('admin/login', function () {
+    return view('admin/login');
+});
+Route::post('admin/login', ['uses' => 'Admin\LoginController@postLogin']);
+Route::get('admin/logout', ['uses' => 'Admin\LoginController@logout']);
+Route::get('admin/', ['uses' => 'Admin\DashboardController@view']);
+Route::get('admin/dashboard', ['uses' => 'Admin\DashboardController@view']);
+//管理网站信息
+Route::any('admin/about', ['uses' => 'Admin\WebinfoController@index']);//显示已发布广告信息
+Route::any('admin/about/setPhone', ['uses' => 'Admin\WebinfoController@setPhone']);
+Route::any('admin/about/setEmail', ['uses' => 'Admin\WebinfoController@setEmail']);
+Route::any('admin/about/setAddress', ['uses' => 'Admin\WebinfoController@setAddress']);
+Route::any('admin/about/setContent', ['uses' => 'Admin\WebinfoController@setContent']);
+
+//设置管理员界面OffPosition
+//设置管理员界面OffPosition
+Route::get('admin/admin', ['uses' => 'Admin\AdminController@view']);
+Route::post('admin/register', ['uses' => 'Admin\AdminController@addAdmin']);
+Route::any('admin/delete', ['uses' => 'Admin\AdminController@deleteAdmin']);
+
+//审批企业信息
+Route::any('admin/verify/{option?}', ['uses' => 'Admin\VerificationController@index'])->where('option', '[A-Za-z]+');//显示待审核或已审核的信息
+Route::any('admin/showverify/detail', ['uses' => 'Admin\VerificationController@showDetail']);//显示待审核或已审核的企业信息
+Route::any('admin/examine_verify', ['uses' => 'Admin\VerificationController@passVerfi']);//显示待审核或已审核的企业信息
+
+//设置地区
+Route::any('admin/region', ['uses' => 'Admin\RegionController@index']);//显示地区
+Route::any('admin/region/{option}', ['uses' => 'Admin\RegionController@edit'])->where('option', '[A-Za-z]+');//显示地区
+//设置行业-专业
+Route::any('admin/industry', ['uses' => 'Admin\IndustryController@index']);//显示行业-专业-服务细分
+Route::any('admin/industry/{option}', ['uses' => 'Admin\IndustryController@edit'])->where('option', '[A-Za-z]+');//显示行业
+Route::any('admin/occupation/{option}', ['uses' => 'Admin\OccupationController@edit'])->where('option', '[A-Za-z]+');//显示职业
+//设置敏感词
+Route::any('admin/sensitive', ['uses' => 'Admin\SensitiveController@index']);//显示敏感词
+Route::any('admin/sensitive/{option}', ['uses' => 'Admin\SensitiveController@edit'])->where('option', '[A-Za-z]+');//操作敏感词
+//发布广告
+Route::get('admin/addAds', ['uses' => 'Admin\AdvertsController@addAdView']);//显示已发布广告信息
+Route::any('admin/ads', ['uses' => 'Admin\AdvertsController@index']);//显示已发布广告信息
+Route::any('admin/ads/detail', ['uses' => 'Admin\AdvertsController@detail']);//显示已发布广告信息
+Route::any('admin/ads/add', ['uses' => 'Admin\AdvertsController@addAds']);//新增或修改广告信息
+Route::any('admin/ads/find', ['uses' => 'Admin\AdvertsController@findAd']);//查找location位置是否有广告
+Route::any('admin/ads/del', ['uses' => 'Admin\AdvertsController@delAd']);//删除广告
+//发布新闻
+Route::any('admin/news', ['uses' => 'Admin\EditnewsController@index']);//显示已发布新闻信息
+Route::any('admin/news/detail', ['uses' => 'Admin\EditnewsController@detail']);//显示已发布新闻信息
+Route::get('admin/addNews', ['uses' => 'Admin\EditnewsController@addNewsView']);//新增或修改新闻信息
+Route::any('admin/news/add', ['uses' => 'Admin\EditnewsController@addNews']);//新增或修改新闻信息
+Route::any('admin/news/del', ['uses' => 'Admin\EditnewsController@delNews']);
+//下架服务或设置服务加急
+Route::any('admin/genlservices', ['uses' => 'Admin\ServicesController@genlservicesIndex']);
+Route::any('admin/finlservices', ['uses' => 'Admin\ServicesController@finlservicesIndex']);
+Route::any('admin/majorservices', ['uses' => 'Admin\ServicesController@qaservicesIndex']);
+Route::any('admin/services/offposition', ['uses' => 'Admin\ServicesController@OffPosition']);
+Route::any('admin/services/onposition', ['uses' => 'Admin\ServicesController@onPosition']);
+Route::any('admin/services/urgency', ['uses' => 'Admin\ServicesController@isUrgency']);
 
 

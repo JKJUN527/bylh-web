@@ -9,27 +9,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Serviceclass1;
-use App\Serviceclass2;
-use App\Serviceclass3;
+use App\Sensitive;
 use Illuminate\Http\Request;
 
-class IndustryController extends Controller {
-    //显示已添加行业
+class SensitiveController extends Controller {
+    //显示已添加敏感词
     public function index() {
         $uid = AdminAuthController::getUid();
         if ($uid == 0)
             return view('admin.login');
 
         $data = DashboardController::getLoginInfo();
-        $data['industry'] = Serviceclass1::all();
-        $data['occupation'] = Serviceclass2::all();
-        $data['class3'] = Serviceclass3::all();
-        return view('admin.industry', ['data' => $data]);
+        $data['sensitive'] = Sensitive::orderBy('id', 'desc')
+            ->paginate(4);
+        return view('admin.sensitive', ['data' => $data]);
     }
 
-    //删除、添加行业
-    //添加传入industry[name],删除传入inid
+    //删除、添加敏感词
+    //添加传入name,删除传入id
     public function edit(Request $request, $option) {
         $data = array();
         $uid = AdminAuthController::getUid();
@@ -41,10 +38,10 @@ class IndustryController extends Controller {
                 //return 'add';
                 if ($request->has('name')) {
                     $name = $request->input('name');
-                    $industry = new Serviceclass1();
-                    $industry->name = $name;
+                    $sensitive = new Sensitive();
+                    $sensitive->keyword = $name;
 
-                    if ($industry->save()) {
+                    if ($sensitive->save()) {
                         $data['status'] = 200;
                     } else {
                         $resultData['status'] = 400;
@@ -57,8 +54,8 @@ class IndustryController extends Controller {
                 if ($request->has('id')) {
                     $id = $request->input('id');
 
-                    $del = Serviceclass1::find($id);
-                    $bool = $del->delete();
+                    $delsensitive = Sensitive::find($id);
+                    $bool = $delsensitive->delete();
 
                     if ($bool) {
                         $data['status'] = 200;

@@ -14,8 +14,7 @@ class Account
 {
     public function handel($request,Closure $next)
     {
-        if(!Session::get('loginuid')){
-            echo "123";
+        if(!Session->get('frontUid')){
             return view("account.login");
         }
         return $next($request);

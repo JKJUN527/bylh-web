@@ -1,5 +1,43 @@
 @extends('demo.admin2')
 @section('content')
+    <style type="text/css">
+        .msgmanage{
+            font-size: 16px;
+            font-weight:bold;
+        }
+        .am-container{
+            border:2px solid #eee;
+        }
+        .am-message{
+            border-bottom: 2px dotted #eee;
+            margin-bottom: 20px;
+        }
+        .am-img{
+            width: 120px;
+            height: 120px;
+        }
+        .p-title{
+            margin-top: 20px;
+        }
+        .p-title>h2{
+            font-size: 18px;
+        }
+        .p-content{
+            margin-top: 20px;
+        }
+        .p-content>p{
+            font-size: 16px;
+            color: #999;
+        }
+        .message-time{
+              margin-top: 40px;
+        }
+        .message-time>p{
+            font-size: 16px;
+            color: #999;
+        }
+    </style>
+
 <div class="center">
     <div class="col-main">
         <div class="main-wrap">
@@ -14,60 +52,60 @@
                     <div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
                         <div class="am-tabs" data-am-tabs>
                             <ul class="am-tabs-nav am-nav am-nav-tabs">
-                                <li class="am-active am-u-lg-6"><a href="#tab1" style="font-size: 16px;font-weight:bold;">消息管理</a></li>
-                                <li class="am-u-lg-6"><a href="#tab2" style="font-size: 16px;font-weight:bold;">发送消息</a></li>
+                                <li class="am-active am-u-lg-6"><a href="#tab1" class="msgmanage">消息管理</a></li>
+                                <li class="am-u-lg-6"><a href="#tab2" class="msgmanage" >发送消息</a></li>
                             </ul>
 
                             <div class="am-tabs-bd">
                                 <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                                     <div class="am-g am-g-fixed">
-                                        <div class="am-container" style="border:2px solid #eee;">
-                                            <div class="am-message am-u-lg-12 am-u-md-12 am-u-sm-12" style="border-bottom: 2px dotted #eee;margin-bottom: 20px;">
+                                        <div class="am-container">
+                                            <div class="am-message am-u-lg-12 am-u-md-12 am-u-sm-12">
                                                 <div class="message-title am-u-lg-3 am-u-md-3 am-u-sm-3">
-                                                    <img src="images/f1.jpg" style="width: 120px;height: 120px;">
+                                                    <img src="images/f1.jpg" class="am-img">
                                                 </div>
                                                 <div class="message-id am-u-lg-5 am-u-md-5 am-u-sm-5" >
-                                                    <div class="p-title" style="margin-top: 20px;">
-                                                        <h2 style="font-size: 18px;">不亦乐乎网</h2>
+                                                    <div class="p-title">
+                                                        <h2>不亦乐乎网</h2>
                                                     </div>
-                                                    <div class="p-content" style="margin-top: 20px;">
-                                                        <p style="font-size: 16px;color: #999;">欢迎来到不亦乐乎!</p>
+                                                    <div class="p-content">
+                                                        <p>欢迎来到不亦乐乎!</p>
                                                     </div>
                                                 </div>
-                                                <div class="message-time am-u-lg-4 am-u-md-4 am-u-sm-4" style="margin-top: 40px;">
-                                                    <p style="font-size: 16px;color: #999;">2017-12-11</p><span style="padding-left:20px;font-size: 16px;color: #999;">10:58</span>
+                                                <div class="message-time am-u-lg-4 am-u-md-4 am-u-sm-4">
+                                                    <p>2017-12-11</p><span style="padding-left:20px;font-size: 16px;color: #999;">10:58</span>
                                                 </div>
                                             </div>
-                                            <div class="am-message am-u-lg-12 am-u-md-12 am-u-sm-12" style="border-bottom: 2px dotted #eee;margin-bottom: 20px;">
+                                            <div class="am-message am-u-lg-12 am-u-md-12 am-u-sm-12">
                                                 <div class="message-title am-u-lg-3 am-u-md-3 am-u-sm-3">
-                                                    <img src="images/f1.jpg" style="width: 120px;height: 120px;">
+                                                    <img src="images/f1.jpg" class="am-img">
                                                 </div>
                                                 <div class="message-id am-u-lg-5 am-u-md-5 am-u-sm-5" >
-                                                    <div class="p-title" style="margin-top: 20px;">
-                                                        <h2 style="font-size: 18px;">不亦乐乎网</h2>
+                                                    <div class="p-title">
+                                                        <h2>不亦乐乎网</h2>
                                                     </div>
-                                                    <div class="p-content" style="margin-top: 20px;">
-                                                        <p style="font-size: 16px;color: #999;">欢迎来到不亦乐乎!</p>
+                                                    <div class="p-content">
+                                                        <p >欢迎来到不亦乐乎!</p>
                                                     </div>
                                                 </div>
-                                                <div class="message-time am-u-lg-4 am-u-md-4 am-u-sm-4" style="margin-top: 40px;">
-                                                    <p style="font-size: 16px;color: #999;">2017-12-11</p><span style="padding-left:20px;font-size: 16px;color: #999;">10:58</span>
+                                                <div class="message-time am-u-lg-4 am-u-md-4 am-u-sm-4" >
+                                                    <p>2017-12-11</p><span style="padding-left:20px;font-size: 16px;color: #999;">10:58</span>
                                                 </div>
                                             </div>
-                                            <div class="am-message am-u-lg-12 am-u-md-12 am-u-sm-12" style="border-bottom: 2px dotted #eee;margin-bottom: 20px;">
+                                            <div class="am-message am-u-lg-12 am-u-md-12 am-u-sm-12" >
                                                 <div class="message-title am-u-lg-3 am-u-md-3 am-u-sm-3">
-                                                    <img src="images/f1.jpg" style="width: 120px;height: 120px;">
+                                                    <img src="images/f1.jpg" class="am-img">
                                                 </div>
                                                 <div class="message-id am-u-lg-5 am-u-md-5 am-u-sm-5" >
-                                                    <div class="p-title" style="margin-top: 20px;">
-                                                        <h2 style="font-size: 18px;">不亦乐乎网</h2>
+                                                    <div class="p-title">
+                                                        <h2 >不亦乐乎网</h2>
                                                     </div>
-                                                    <div class="p-content" style="margin-top: 20px;">
-                                                        <p style="font-size: 16px;color: #999;">欢迎来到不亦乐乎!</p>
+                                                    <div class="p-content">
+                                                        <p>欢迎来到不亦乐乎!</p>
                                                     </div>
                                                 </div>
-                                                <div class="message-time am-u-lg-4 am-u-md-4 am-u-sm-4" style="margin-top: 40px;">
-                                                    <p style="font-size: 16px;color: #999;">2017-12-11</p><span style="padding-left:20px;font-size: 16px;color: #999;">10:58</span>
+                                                <div class="message-time am-u-lg-4 am-u-md-4 am-u-sm-4" >
+                                                    <p >2017-12-11</p><span style="padding-left:20px;font-size: 16px;color: #999;">10:58</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,8 +113,8 @@
                                 </div>
                                 <div class="am-tab-panel am-fade" id="tab2">
                                     <div class="am-g am-g-fixed">
-                                        <div class="am-container" style="border:2px solid #eee;">
-                                            <div class="am-message am-u-lg-12 am-u-md-12 am-u-sm-12" style="border-bottom: 2px dotted #eee;margin-bottom: 20px;">
+                                        <div class="am-container">
+                                            <div class="am-message am-u-lg-12 am-u-md-12 am-u-sm-12" >
                                                 <!--站内信息-->
                                                 <ul class="am-comments-list am-comments-list-flip">
                                                     <li class="am-comment">

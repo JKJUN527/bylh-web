@@ -79,7 +79,7 @@ class AdvertsController extends Controller {
             ->where('validity', '>=', date('Y-m-d H-i-s'))
             ->get();
         if ($isexist->count()) {
-            $data['status'] = 400;
+            $data['status'] = 401;
             $data['msg'] = "该广告位已存在广告，删除后才能进行添加";
             return $data;
         }
@@ -115,7 +115,7 @@ class AdvertsController extends Controller {
         //ad信息保存到数据库
         $ad->uid = $uid;//从登陆验证接口获取
         $ad->title = $request->input('title');
-        $ad->eid = $request->input('eid');
+//        $ad->eid = $request->input('eid');
         $ad->content = $request->input('content');
         $ad->type = $request->input('type');
         $ad->location = $request->input('location');

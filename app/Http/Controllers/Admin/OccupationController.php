@@ -9,8 +9,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Industry;
-use App\Occupation;
+use App\Serviceclass2;
+use App\Serviceclass3;
 use Illuminate\Http\Request;
 
 class OccupationController extends Controller {
@@ -50,11 +50,29 @@ class OccupationController extends Controller {
                     $name = $request->input('name');
                     $industry_id = $request->input('industry_id');
 
-                    $occupation = new Occupation();
+                    $occupation = new Serviceclass2();
                     $occupation->name = $name;
-                    $occupation->industry_id = $industry_id;
+                    $occupation->class1_id = $industry_id;
 
                     if ($occupation->save()) {
+                        $data['status'] = 200;
+                    } else {
+                        $data['status'] = 400;
+                        $data['msg'] = "添加失败";
+                    }
+                }
+                break;
+            case 'addclass':
+                //return 'add';
+                if ($request->has('name')) {
+                    $name = $request->input('name');
+                    $occupation_id = $request->input('occupation_id');
+
+                    $class3 = new Serviceclass3();
+                    $class3->name = $name;
+                    $class3->class2_id = $occupation_id;
+
+                    if ($class3->save()) {
                         $data['status'] = 200;
                     } else {
                         $data['status'] = 400;
@@ -67,7 +85,22 @@ class OccupationController extends Controller {
                 if ($request->has('id')) {
                     $oid = $request->input('id');
 
-                    $del = Occupation::find($oid);
+                    $del = Serviceclass2::find($oid);
+
+                    if ($del->delete()) {
+                        $data['status'] = 200;
+                    } else {
+                        $data['status'] = 400;
+                        $data['msg'] = "删除失败";
+                    }
+                }
+                break;
+            case 'deleteclass':
+                //return 'delete';
+                if ($request->has('id')) {
+                    $class3_id = $request->input('id');
+
+                    $del = Serviceclass3::find($class3_id);
 
                     if ($del->delete()) {
                         $data['status'] = 200;

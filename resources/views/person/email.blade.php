@@ -27,11 +27,11 @@
                     <div class="u-progress-bar-inner"></div>
                 </div>
             </div>
-            <form class="am-form am-form-horizontal">
+            <form class="am-form am-form-horizontal" id="doc-vld-msg">
                 <div class="am-form-group">
-                    <label for="user-email" class="am-form-label">验证邮箱</label>
+                    <label for="doc-vld-email-2-1" class="am-form-label">验证邮箱</label>
                     <div class="am-form-content">
-                        <input type="email" id="user-email" placeholder="请输入邮箱地址">
+                        <input type="email" id="doc-vld-email-2-1" data-validation-message="请输入合法的邮箱" placeholder="输入邮箱" required/>
                     </div>
                 </div>
                 <div class="am-form-group code">
@@ -50,6 +50,30 @@
             </form>
 
         </div>
+        <script type="text/javascript">
+            $(function() {
+                $('#doc-vld-msg').validator({
+                    onValid: function(validity) {
+                        $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+                    },
+
+                    onInValid: function(validity) {
+                        var $field = $(validity.field);
+                        var $group = $field.closest('.am-form-group');
+                        var $alert = $group.find('.am-alert');
+                        // 使用自定义的提示信息 或 插件内置的提示信息
+                        var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+                        if (!$alert.length) {
+                            $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+                            appendTo($group);
+                        }
+
+                        $alert.html(msg).show();
+                    }
+                });
+            });
+        </script>
         <!--底部-->
         @section('footer')
         <div class="footer ">
