@@ -72,7 +72,7 @@ class HomeController extends Controller {
         //返回企业资讯
         $data['news'] = HomeController::searchNews();
 
-        return $data;
+//        return $data;
         return view('index', ["data" => $data]);
     }
 

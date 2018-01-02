@@ -30,6 +30,7 @@
 
             <div class="clear"></div>
 
+
             <div class="login-form">
                 <form>
                     <div class="user-name">
@@ -58,6 +59,7 @@
 </div>
 <script>
     $("input[type='submit']").click(function (event) {
+        alert(1111);
         var username = $('#user');
         var password = $('#password');
         {{--if (phone.is(':visible') && phone.val() === '') {--}}

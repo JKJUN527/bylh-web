@@ -57,8 +57,8 @@
             height: 30px;
             line-height: 30px;
         }
-        .am-dropdown{
-            width: 20%;
+       .am-dropdown-toggle{
+            width: 80%;
         }
         .am-nav-tabs > li.am-active > a, .am-nav-tabs > li.am-active > a:hover, .am-nav-tabs > li.am-active > a:focus, .am-nav-tabs > li > a:hover{
             background:#ee6363;
