@@ -323,7 +323,7 @@ class ServiceController extends Controller {
         }
         return $data;
     }
-    //推荐需求--根据三个class分类
+    //推荐服务--根据三个class分类
     public function recommendDemands(Request $request){
         $class1_id = $request->input('class1_id');
         $class2_id = $request->input('class2_id');
@@ -385,7 +385,7 @@ class ServiceController extends Controller {
         $data['serviceclass3']= Serviceclass3::all();
 
         return $data;
-        return view('service/editservice',['data'=>$data]);
+        return view('service/request',['data'=>$data]);
     }
 
     //下架服务
@@ -567,7 +567,7 @@ class ServiceController extends Controller {
         $data['condition']['servicetype'] = $request->input('servicetype');
         $data['condition']['keyword'] = $request->input('keyword');
 //        return $data;
-        return view('service/advanceSearch', ['data' => $data]);
+        return view('service/edit', ['data' => $data]);
     }
     //传入服务id,及对应的服务类型，返回具体的服务详情
     //需返回服务详情、服务历史评价、发布者其他服务、以及发布者服务相关信息
@@ -627,7 +627,7 @@ class ServiceController extends Controller {
             $data['serviceinfo'] = Serviceinfo::where('uid',$data['detail']->uid)->first();
         }
 //        return $data;
-        return view('service/detail',['data'=>$data]);
+        return view('service/advanceSearch',['data'=>$data]);
     }
     //保存编辑服务内容
     //option 123 表示保存一般服务、实习中介、专业问答服务。

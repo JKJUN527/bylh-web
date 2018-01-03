@@ -11276,7 +11276,7 @@ $.widget( "ui.tabs", {
 		// which are the callbacks for the latest clicked tab...
 		this.element.queue( "tabs", this.element.queue( "tabs" ).splice( -2, 2 ) );
 
-		// terminate pending requests from other tabs
+		// terminate pending service from other tabs
 		if ( this.xhr ) {
 			this.xhr.abort();
 			delete this.xhr;

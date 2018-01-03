@@ -250,7 +250,7 @@
     });
 </script>
 <!--需求展示-->
-<div class="shopMain" id="shopmain">
+<div class="shopMain" id="shopmain" style="background:white;">
     <div class="am-container " >
         <div class="shopTitle ">
             <h4 class="floor-title"><span class="am-badge am-badge-warning am-round">1</span>&nbsp;&nbsp;设计需求</h4>

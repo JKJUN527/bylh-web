@@ -45,7 +45,7 @@
         <!--<div class="long-title"><span class="all-goods">全部分类</span></div>-->
         <div class="nav-cont" style="padding-left: 350px;" >
             <ul>
-                <li class="index"><a href="/home2">首页</a></li>
+                <li class="index"><a href="/index">首页</a></li>
                 <li class="qc"><a href="/need">需求大厅</a></li>
                 <li class="qc"><a href="/request">大学生服务</a></li>
                 <li class="qc"><a href="/request">实习中介</a></li>

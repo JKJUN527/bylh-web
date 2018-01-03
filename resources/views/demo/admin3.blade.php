@@ -30,10 +30,10 @@
                 </ul>
                 <ul class="message-r">
                     <div class="topMessage home">
-                        <div class="menu-hd"><a href="/home2" target="_top" class="h"><i class="am-icon-home am-icon-fw"></i>首页</a></div>
+                        <div class="menu-hd"><a href="/index" target="_top" class="h"><i class="am-icon-home am-icon-fw"></i>首页</a></div>
                     </div>
                     <div class="topMessage my-shangcheng">
-                        <div class="menu-hd MyShangcheng"><a href="/index" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+                        <div class="menu-hd MyShangcheng"><a href="/home" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
                     </div>
                 </ul>
             </div>

@@ -33,7 +33,7 @@
                                 <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
                                     <div class="aa task_item_i" style="padding: 20px 5px;">
                                         <a href="/" target="_blank" title="公司LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥500</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">公司LOGO设计</span>
-                                        </a>
+                                       </a>
                                         <a href="javascript:;" class="task_ji" title="加急项目" style="background-color: #F84C4C;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">急</a>
                                         <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">LOGO名称：正安检测科技有限公司要求以“正安”汉字或首打字母为主要设计元素，简单，大气，易识别。颜色参考：工业蓝 或 深红...</div>
 

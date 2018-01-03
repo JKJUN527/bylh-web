@@ -1,29 +1,36 @@
 <?php
-<<<<<<< HEAD
-
-Route::get('/index', function () {
-    return view('home2');
+Route::get('/', function () {
+    return view('index');
 });
-Route::any('/home2',function(){
-    return view('home2');
+Route::any('/index',function(){
+    return view('index');
 });
 Route::any('/needinfo',function(){
-    return view('needinfo');
+    return view('need.needinfo');
 });
 Route::any('/sendneed',function(){
-    return view('sendneed');
+    return view('need.sendneed');
 });
 Route::any('/sendneed2',function(){
-    return view('sendneed2');
+    return view('need.sendneed2');
 });
 Route::any('/sendrequest',function(){
-    return view('sendrequest');
+    return view('service.sendrequest');
 });
 Route::any('/sendrequest2',function(){
-    return view('sendrequest2');
+    return view('service.sendrequest2');
+});
+Route::any('/myneed',function(){
+    return view('need.myneeds');
+});
+Route::any('/myrequest',function(){
+    return view('service.myrequest');
+});
+Route::any('/needappointment',function(){
+    return view('need.needappointment');
 });
 Route::any('/search',function(){
-    return view('search');
+    return view('search.search');
 });
 Route::any('/register',function(){
     return view('account.register');
@@ -32,51 +39,54 @@ Route::any('/login',function(){
     return view('account.login');
 });
 Route::any('/message',function(){
-    return view('message');
+    return view('messages.message');
 });
 Route::any('/need',function(){
-    return view('need');
+    return view('need.need');
 });
 Route::any('/request',function(){
-    return view('request');
+    return view('service.advanceSearch');
+});
+Route::any('/service',function(){
+    return view('service.advanceSearch');
 });
 Route::any('/requestinfo',function(){
-    return view('requestinfo');
+    return view('service.requestinfo');
 });
 Route::any('/order',function(){
-        return view('order');
+    return view('order.order');
 });
 Route::any('/orderinfo',function(){
-    return view('orderinfo');
+    return view('order.orderinfo');
 });
 Route::any('/email',function(){
-    return view('email');
+    return view('person.email');
 });
-Route::any('/index',function(){
-    return view('index');
+Route::any('/home',function(){
+    return view('person.home');
 });
 Route::any('/idcard',function(){
-    return view('idcard');
+    return view('person.idcard');
 });
 Route::any('/question',function(){
-    return view('question');
+    return view('person.question');
 });
 Route::any('/password',function(){
-    return view('password');
+    return view('person.password');
 });
 Route::any('/user',function(){
-    return view('user');
+    return view('person.user');
 });
 Route::any('/safety',function(){
-    return view('safety');
+    return view('person.safety');
 });
 Route::any('/phone',function(){
-    return view('phone');
+    return view('person.phone');
+});
+Route::any('/comment',function(){
+    return view('person.comment');
 });
 
-
-=======
->>>>>>> 0ef335df9ea4e016434e26a590cbebedb45b08e0
 //控制器方法
 Route::get('/', ['uses' => 'HomeController@index']);
 Route::get('/index', ['uses' => 'HomeController@index']);
@@ -173,6 +183,8 @@ Route::post('demands/deletedemand',['uses' => 'DemandsController@deletedemand'])
 Route::get('demands/detail',['uses' => 'DemandsController@detail']);
 //回答需求
 Route::get('demands/reviewDemand',['uses' => 'OrderController@reviewDemand']);
+//需求高级搜索
+Route::any('demands/advanceSearch',['uses' => 'DemandsController@advanceIndex']);
 
 
 

@@ -43,7 +43,7 @@
                                                             </span></dt>
                                                         @foreach($data['serviceclass3'] as $serviceclass3)
                                                             @if($serviceclass3->class2_id ==$serviceclass2->id )
-                                                                <dd><a title="蒸蛋糕" href="#"><span>{{$serviceclass3->name}}</span></a></dd>
+                                                                <dd><a title="{{$serviceclass3->name}}" href="#"><span>{{$serviceclass3->name}}</span></a></dd>
                                                             @endif
                                                         @endforeach
                                                     </dl>
@@ -196,15 +196,9 @@
                             </h1>
                             <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
                             <ul class="comcategory">
-                                <li><a href="/"><span>需求信息1</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息2</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息3</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息4</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息5</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息6</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息4</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息5</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息6</span><i>2016-06-16</i></a></li>
+                                @foreach($data['hotest1'] as $hotest1)
+                                <li><a href="/"><span>{{$hotest1->title}}</span><i>{{$hotest1->created_at}}</i></a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -218,15 +212,9 @@
                             </h1>
                             <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
                             <ul class="comcategory">
-                                <li><a href="/"><span>需求信息1</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息2</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息3</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息4</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息5</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息6</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息4</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息5</span><i>2016-06-16</i></a></li>
-                                <li><a href="/"><span>需求信息6</span><i>2016-06-16</i></a></li>
+                                @foreach($data['hotest1'] as $hotest1)
+                                    <li><a href="/"><span>{{$hotest1->title}}</span><i>{{$hotest1->created_at}}</i></a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -249,7 +237,7 @@
             <div class="shopMain" id="shopmain">
                 <div class="am-container " >
                     <div class="shopTitle ">
-                        <h4 class="floor-title">设计需求</h4>
+                        <h4 class="floor-title">一般服务</h4>
                         <div class="today-brands " style="right:0px ;top:13px;">
                             <a href="# ">商标/VI设计</a>|
                             <a href="# ">包装设计</a>|
@@ -265,17 +253,19 @@
                 <div class="am-g am-g-fixed">
                     <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
                         <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
+  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{pureview: true}" >
+                            @foreach($data['hotest2'] as $hotest2)
                             <li>
                                 <div class="am-gallery-item">
-                                    <a href="images/f1.jpg" class="">
-                                        <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                                        <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                        <div class="am-gallery-desc">2375-09-26</div>
+                                    <a href="{{$hotest2->picture}}" class="">
+                                        <img src="{{$hotest2->picture}}"  alt="{{$hotest2->title}}"/>
+                                        <h3 class="am-gallery-title">{{$hotest2->title}}</h3>
+                                        <div class="am-gallery-desc">{{$hotest2->created_at}}</div>
                                     </a>
                                 </div>
                             </li>
-                            <li>
+                           @endforeach
+                           <!-- <li>
                                 <div class="am-gallery-item">
                                     <a href="images/f1.jpg" class="">
                                         <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
@@ -283,64 +273,21 @@
                                         <div class="am-gallery-desc">2375-09-26</div>
                                     </a>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="am-gallery-item">
-                                    <a href="images/f1.jpg" class="">
-                                        <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                                        <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                                        <div class="am-gallery-desc">2375-09-26</div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="am-gallery-item">
-                                    <a href="images/f1.jpg" class="">
-                                        <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                                        <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                        <div class="am-gallery-desc">2375-09-26</div>
-                                    </a>
-                                </div>
-                            </li>
+                            </li>-->
                         </ul>
                         <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                            <li>
-                                <div class="am-gallery-item">
-                                    <a href="images/f1.jpg" class="">
-                                        <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                                        <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                        <div class="am-gallery-desc">2375-09-26</div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="am-gallery-item">
-                                    <a href="images/f1.jpg" class="">
-                                        <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                                        <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                        <div class="am-gallery-desc">2375-09-26</div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="am-gallery-item">
-                                    <a href="images/f1.jpg" class="">
-                                        <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                                        <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                                        <div class="am-gallery-desc">2375-09-26</div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="am-gallery-item">
-                                    <a href="images/f1.jpg" class="">
-                                        <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                                        <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                        <div class="am-gallery-desc">2375-09-26</div>
-                                    </a>
-                                </div>
-                            </li>
+  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{pureview: true}" >
+                            @foreach($data['hotest2'] as $hotest2)
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="{{$hotest2->picture}}" class="">
+                                            <img src="{{$hotest2->picture}}"  alt="{{$hotest2->title}}"/>
+                                            <h3 class="am-gallery-title">{{$hotest2->title}}</h3>
+                                            <div class="am-gallery-desc">{{$hotest2->created_at}}</div>
+                                        </a>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -349,7 +296,7 @@
             <div class="shopMain" id="shopmain">
                 <div class="am-container " >
                     <div class="shopTitle ">
-                        <h4 class="floor-title">开发需求</h4>
+                        <h4 class="floor-title">实习中介</h4>
                         <div class="today-brands " style="right:0px ;top:13px;">
                             <a href="/">整站建设</a>|
                             <a href="/ ">网站优化</a>|
@@ -363,7 +310,7 @@
                     </div>
                 </div>
                 <div class="am-g am-g-fixed">
-                    <div class="am-u-lg-3 am-u-md-4" style="padding:10px;height: 80%;">
+                    <div class="am-u-lg-3 am-u-md-4" style="padding:10px;">
                         <a href="/">
                             <img src="images/img_06.jpg">
                         </a>
@@ -393,20 +340,9 @@
                     </div>
                     <div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">
                         <ul>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;宝贝起名</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥1500</font>&nbsp;&nbsp;&nbsp;&nbsp;昆利达logo及名片设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥2000</font>&nbsp;&nbsp;&nbsp;&nbsp;业态装修布局图</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥300</font>&nbsp;&nbsp;&nbsp;&nbsp;java程序bug调试</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥70</font>&nbsp;&nbsp;&nbsp;&nbsp;帮助排队取号</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥30</font>&nbsp;&nbsp;&nbsp;&nbsp;测星座，测运势，塔罗牌占卜</a><span style="color: gray;float: right;">查看详情</span></li>
-                        </ul>
-                        <ul>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥1000</font>&nbsp;&nbsp;&nbsp;&nbsp;室内装修设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥10000</font>&nbsp;&nbsp;&nbsp;&nbsp;web网页设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥4000</font>&nbsp;&nbsp;&nbsp;&nbsp;本科毕业论文编写</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;电脑装系统</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥90</font>&nbsp;&nbsp;&nbsp;&nbsp;照片转漫画</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥150</font>&nbsp;&nbsp;&nbsp;&nbsp;专业心理咨询</a><span style="color: gray;float: right;">查看详情</span></li>
+                            @foreach($data['hotest3'] as $hotest3)
+                            <li><a href="/"><font color="#b84554" style="font-size: 18px;">￥{{$hotest3->price}}</font>&nbsp;&nbsp;&nbsp;&nbsp;{{$hotest3->title}}</a><span style="color: gray;float: right;">查看详情</span></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -419,15 +355,13 @@
                 </div>
                 <div class="rank_content" style="margin: 0 60px;border-bottom: 2px solid #df3536;border-left: 2px solid #df3536;border-right: 2px solid #df3536;">
                     <ul>
+                        @foreach($data['hotest2'] as $hotest2)
                         <li style="text-align: center;">
                             <div class="box1"></div>
                             <div class="outer-con" style="padding: 10px;position: inherit;">
-                                <a href="/"><img src="images/f2.jpg" style="width: 50%;" />
+                                <a href="/"><img src="{{$hotest2->picture}}" style="width: 50%;" />
                                     <div class="title ">
-                                        专业1
-                                    </div>
-                                    <div class="sub-title ">
-                                        好评率 100%
+                                        {{$hotest2->title}}
                                     </div>
                                     <div class="right-panel">
                                         <button type="button" class="am-btn am-btn-danger">查看详情</button>
@@ -435,54 +369,7 @@
                                 </a>
                             </div>
                         </li>
-                        <li style="text-align: center;">
-                            <div class="box1"></div>
-                            <div class="outer-con" style="padding: 10px;position: inherit;">
-                                <a href="/"><img src="images/f2.jpg" style="width: 50%;" />
-                                    <div class="title ">
-                                        专业1
-                                    </div>
-                                    <div class="sub-title ">
-                                        好评率 100%
-                                    </div>
-                                    <div class="right-panel">
-                                        <button type="button" class="am-btn am-btn-danger">查看详情</button>
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-                        <li style="text-align: center;">
-                            <div class="box1"></div>
-                            <div class="outer-con" style="padding: 10px;position: inherit;">
-                                <a href="/"><img src="images/f2.jpg" style="width: 50%;" />
-                                    <div class="title ">
-                                        专业1
-                                    </div>
-                                    <div class="sub-title ">
-                                        好评率 100%
-                                    </div>
-                                    <div class="right-panel">
-                                        <button type="button" class="am-btn am-btn-danger">查看详情</button>
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-                        <li style="text-align: center;">
-                            <div class="box1"></div>
-                            <div class="outer-con" style="padding: 10px;position: inherit;">
-                                <a href="/"><img src="images/f2.jpg" style="width: 50%;" />
-                                    <div class="title ">
-                                        专业1
-                                    </div>
-                                    <div class="sub-title ">
-                                        好评率 100%
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="right-panel">
-                                <button type="button" class="am-btn am-btn-danger">查看详情</button>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -626,10 +513,10 @@
 
     <!--广告-->
     <div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-        <img src="images/ad1.png">
+        <img src="images/ad4.jpg">
     </div>
     <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-        <img src="images/ad1.png">
+        <img src="images/ad5.jpg">
     </div>
 @section('footer')
     <div class="footer " style="border: none;">
