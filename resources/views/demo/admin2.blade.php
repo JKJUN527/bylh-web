@@ -40,10 +40,10 @@
                 </ul>
                 <ul class="message-r">
                     <div class="topMessage home">
-                        <div class="menu-hd"><a href="/home2" target="_top" class="h"><i class="am-icon-home am-icon-fw"></i>首页</a></div>
+                        <div class="menu-hd"><a href="/index" target="_top" class="h"><i class="am-icon-home am-icon-fw"></i>首页</a></div>
                     </div>
                     <div class="topMessage my-shangcheng">
-                        <div class="menu-hd MyShangcheng"><a href="/index" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+                        <div class="menu-hd MyShangcheng"><a href="/home" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
                     </div>
                 </ul>
             </div>
@@ -58,7 +58,7 @@
                 <div class="search-bar pr">
                     <a name="index_none_header_sysc" href="/search"></a>
                     <form>
-                        <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+                        <input id="searchInput" name="index_none_header_sysc" value="{{$data['keyword'] or ''}}" type="text" placeholder="搜索" autocomplete="off">
                         <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
                     </form>
                 </div>
@@ -73,7 +73,7 @@
     <div class="long-title"><span class="all-goods">全部分类</span></div>
     <div class="nav-cont">
         <ul>
-            <li class="index"><a href="/home2">首页</a></li>
+            <li class="index"><a href="/index">首页</a></li>
             <li class="qc"><a href="/need">需求大厅</a></li>
             <li class="qc"><a href="/request">大学生服务</a></li>
             <li class="qc"><a href="/request">实习课堂</a></li>

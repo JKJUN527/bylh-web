@@ -9607,7 +9607,7 @@
             // Don't fire events if jQuery.event is undefined in an AMD-usage scenario (#15118)
             fireGlobals = jQuery.event && s.global;
 
-            // Watch for a new set of requests
+            // Watch for a new set of service
             if (fireGlobals && jQuery.active++ === 0) {
                 jQuery.event.trigger("ajaxStart");
             }
@@ -9622,7 +9622,7 @@
             // and/or If-None-Match header later on
             cacheURL = s.url;
 
-            // More options handling for requests with no content
+            // More options handling for service with no content
             if (!s.hasContent) {
 
                 // If data is available, append data to url
@@ -10127,7 +10127,7 @@
             }
 
             // Support: IE 9-11
-            // IE seems to error on cross-domain PATCH requests when ActiveX XHR
+            // IE seems to error on cross-domain PATCH service when ActiveX XHR
             // is used. In IE 9+ always use the native XHR.
             // Note: this condition won't catch Edge as it doesn't define
             // document.documentMode but it also doesn't support ActiveX so it won't
@@ -10154,7 +10154,7 @@
         xhrSupported = jQuery.ajaxSettings.xhr();
 
 // Support: IE<10
-// Open requests must be manually aborted on unload (#5280)
+// Open service must be manually aborted on unload (#5280)
 // See https://support.microsoft.com/kb/2856746 for more info
     if (window.attachEvent) {
         window.attachEvent("onunload", function () {
@@ -10206,10 +10206,10 @@
                         }
 
                         // X-Requested-With header
-                        // For cross-domain requests, seeing as conditions for a preflight are
+                        // For cross-domain service, seeing as conditions for a preflight are
                         // akin to a jigsaw puzzle, we simply never set it to be sure.
                         // (it can always be set on a per-request basis or even using ajaxSetup)
-                        // For same-domain requests, won't change header if already provided.
+                        // For same-domain service, won't change header if already provided.
                         if (!options.crossDomain && !headers["X-Requested-With"]) {
                             headers["X-Requested-With"] = "XMLHttpRequest";
                         }
@@ -10262,7 +10262,7 @@
                                     }
 
                                     // Firefox throws an exception when accessing
-                                    // statusText for faulty cross-domain requests
+                                    // statusText for faulty cross-domain service
                                     try {
                                         statusText = xhr.statusText;
                                     } catch (e) {
@@ -10369,7 +10369,7 @@
 // Bind script tag hack transport
     jQuery.ajaxTransport("script", function (s) {
 
-        // This transport only deals with cross domain requests
+        // This transport only deals with cross domain service
         if (s.crossDomain) {
 
             var script,
@@ -10440,7 +10440,7 @@
         }
     });
 
-// Detect, normalize options and install callbacks for jsonp requests
+// Detect, normalize options and install callbacks for jsonp service
     jQuery.ajaxPrefilter("json jsonp", function (s, originalSettings, jqXHR) {
 
         var callbackName, overwritten, responseContainer,

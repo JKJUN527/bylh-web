@@ -41,7 +41,7 @@
         </a>
     </div>
     <div class="am-u-sm-3">
-        <a href="/index"><img src="images/mansmall.jpg" />
+        <a href="/home"><img src="images/mansmall.jpg" />
             <div class="title">个人中心</div>
         </a>
     </div>
@@ -243,19 +243,13 @@
     });
 </script>
 <!--需求展示-->
-<div class="am-g am-g-fixed">
+<div class="am-g am-g-fixed" style="background:white;">
     <div class="am-u-lg-8 am-u-md-8">
         <div class="shopMain" id="shopmain">
             <div class="am-container " >
                 <div class="shopTitle ">
-                    <h4 class="floor-title"><span class="am-badge am-badge-warning am-round">1</span>&nbsp;&nbsp;设计需求</h4>
+                    <h4 class="floor-title"><span class="am-badge am-badge-warning am-round">1</span>&nbsp;&nbsp;一般服务</h4>
                     <div class="today-brands " style="right:0px ;top:13px;">
-                        <a href="# ">商标/VI设计</a>|
-                        <a href="# ">包装设计</a>|
-                        <a href="# ">封面设计</a>|
-                        <a href="# ">海报设计</a>|
-                        <a href="# ">宣传品设计</a>|
-                        <a href="# ">服装设计</a>
                         <span class="am-badge am-badge-warning am-round">More</span>
                     </div>
 
@@ -348,21 +342,15 @@
         <div class="shopMain" id="shopmain">
             <div class="am-container " >
                 <div class="shopTitle ">
-                    <h4 class="floor-title"><span class="am-badge am-badge-primary am-round">2</span>&nbsp;&nbsp;开发需求</h4>
+                    <h4 class="floor-title"><span class="am-badge am-badge-primary am-round">2</span>&nbsp;&nbsp;实习中介</h4>
                     <div class="today-brands " style="right:0px ;top:13px;">
-                        <a href="#">整站建设</a>|
-                        <a href="#">网站优化</a>|
-                        <a href="#">网站编程</a>|
-                        <a href="#">网站开发</a>|
-                        <a href="#">工具开发</a>|
-                        <a href="#">软件开发</a>
                         <span class="am-badge am-badge-primary am-round">More</span>
                     </div>
 
                 </div>
             </div>
             <div class="am-g am-g-fixed">
-                <div class="am-u-lg-3 am-u-md-4" style="padding:10px;height: 80%;">
+                <div class="am-u-lg-3 am-u-md-4" style="padding:10px;">
                     <a href="#">
                         <img src="images/img_06.jpg">
                     </a>
@@ -501,14 +489,8 @@
 <div class="shopMain" id="shopmain">
     <div class="am-container " >
         <div class="shopTitle ">
-            <h4 class="floor-title"><span class="am-badge am-badge-success am-round">3</span>&nbsp;&nbsp;装修需求</h4>
+            <h4 class="floor-title"><span class="am-badge am-badge-success am-round">3</span>&nbsp;&nbsp;专业问答</h4>
             <div class="today-brands " style="right:0px ;top:13px;">
-                <a href="# ">整站建设</a>|
-                <a href="# ">网站优化</a>|
-                <a href="# ">网站编程</a>|
-                <a href="# ">网站开发</a>|
-                <a href="# ">工具开发</a>|
-                <a href="# ">软件开发</a>
                 <span class="am-badge am-badge-success am-round">More</span>
             </div>
 
@@ -680,142 +662,6 @@
         </div>
     </div>
 </div>
-<!--需求4-->
-<div class="shopMain" id="shopmain">
-    <div class="am-container " >
-        <div class="shopTitle ">
-            <h4 class="floor-title"><span class="am-badge am-badge-danger am-round">4</span>&nbsp;&nbsp;文案需求</h4>
-            <div class="today-brands " style="right:0px ;top:13px;">
-                <a href="# ">整站建设</a>|
-                <a href="# ">网站优化</a>|
-                <a href="# ">网站编程</a>|
-                <a href="# ">网站开发</a>|
-                <a href="# ">工具开发</a>|
-                <a href="# ">软件开发</a>
-                <span class="am-badge am-badge-danger am-round">More</span>
-            </div>
-
-        </div>
-    </div>
-    <div class="am-g am-g-fixed">
-        <div class="am-u-lg-12  am-u-md-12" style="padding:10px;height: 80%;">
-            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
-  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                            <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
-  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                            <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
 <!--猜你喜欢-->
 <div class="guesslike">
     <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted">
@@ -847,10 +693,10 @@
 
 <!--引导 -->
 <div class="navCir">
-    <li class="active"><a href="/home2"><i class="am-icon-home "></i>首页</a></li>
+    <li class="active"><a href="/index"><i class="am-icon-home "></i>首页</a></li>
     <li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
     <li><a href="/orderinfo"><i class="am-icon-shopping-basket"></i>订单详情</a></li>
-    <li><a href="/index"><i class="am-icon-user"></i>我的</a></li>
+    <li><a href="/home"><i class="am-icon-user"></i>我的</a></li>
 </div>
 <!--菜单 -->
 <div class=tip>
