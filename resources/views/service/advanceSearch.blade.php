@@ -133,6 +133,7 @@
         <dl class="listIndex" attr="terminal_brand_s">
             <dt>分类：</dt>
             <dd>
+                {{--@foreach($data['class1'] as $class1)--}}
                 <a href="javascript:void(0)" values2="" values1="" attrval="全部">全部</a>
                 <a href="javascript:void(0)" values2="" values1="" attrval="体育">体育</a>
                 <a href="javascript:void(0)" values2="" values1="" attrval="艺术">艺术</a>
@@ -145,6 +146,7 @@
                 <a href="javascript:void(0)" values2="" values1="" attrval="事务">事务</a>
                 <a href="javascript:void(0)" values2="" values1="" attrval="金融">金融</a>
                 <a href="javascript:void(0)" values2="" values1="" attrval="问答">问答</a>
+                {{--@endforeach--}}
             </dd>
         </dl>
 

@@ -32,8 +32,8 @@ class LoginController extends Controller {
         $data['type'] = AuthController::getType();
 
 
-        return $data;
-//        return view('account/login', ["data" => $data]);
+       # return $data;
+        return view('account/login', ["data" => $data]);
     }
 
     /*登录验证逻辑*/
