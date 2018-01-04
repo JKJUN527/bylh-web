@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
 use App\Qaservices;
@@ -628,6 +629,38 @@ class ServiceController extends Controller {
         }
 //        return $data;
         return view('service/advanceSearch',['data'=>$data]);
+    }
+    //获取服务用户发布所有需求及服务列表
+    //传入用户id
+    public function getAllservices(Request $request){
+        $data = array();
+        if($request->has('uid')){
+            $uid = $request->input('uid');
+            $is_exist = User::find($uid);
+            if($is_exist){
+                $data['demands'] = Demands::where('uid',$uid)
+                    ->where('state',0)
+                    ->take(12)
+                    ->get();
+                $data['genlservices'] = Genlservices::where('uid',$uid)
+                    ->where('state',0)
+                    ->take(12)
+                    ->get();
+                $data['finlservices'] = Finlservices::where('uid',$uid)
+                    ->where('state',0)
+                    ->take(12)
+                    ->get();
+                $data['qaservices'] = Qaservices::where('uid',$uid)
+                    ->where('state',0)
+                    ->take(12)
+                    ->get();
+                $data['userinfo'] =where('uid',$uid)->first();
+                return view('service/getallservices',['data'=>$data]);
+            }else{
+                return redirect()->back();
+            }
+        }else
+            return redirect()->back();
     }
     //保存编辑服务内容
     //option 123 表示保存一般服务、实习中介、专业问答服务。

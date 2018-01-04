@@ -116,6 +116,11 @@ Route::post('account/resetPassword', ['uses' => 'FixPasswordController@index']);
 //权限获取
 Route::get('account/getType', ['uses' => 'AuthController@getType']);  //完成
 Route::get('account/getUid', ['uses' => 'AuthController@getUid']);  //完成
+
+//用户主页
+Route::get('account/index', ['uses' => 'AccountController@index']);  //完成
+Route::get('account/', ['uses' => 'AccountController@index']);  //完成
+
 //修改个人资料
 Route::get('account/baseedit', ['uses' => 'AccountController@index']);//个人、企业基本信息修改界面
 Route::post('account/baseedit', ['uses' => 'AccountController@editbaseinfo']);//提交修改
@@ -150,6 +155,8 @@ Route::any('service/advanceSearch',['uses' => 'ServiceController@advanceIndex'])
 Route::any('service/detail',['uses' => 'ServiceController@detail']);
 //评论服务
 Route::any('service/reviewService',['uses' => 'serviceController@reviewService']);
+//获取用户发布所有需求、服务列表
+Route::get('service/reviewService',['uses' => 'serviceController@reviewService']);
 
 //订单模块
 
@@ -211,9 +218,6 @@ Route::post('message/delmessage',['uses' => 'MessageController@delMessage']);
 //获取订单列表
 Route::get('order/orderlist',['uses' => 'OrderController@orderlist']);
 
-
-
-Route::get('account/recommendPosition', ['uses' => 'PersonCenterController@recommendPosition']);
 //测试方法
 Route::get('sensitive', ['uses' => 'SensitiveController@test']);
 
