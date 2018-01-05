@@ -20,11 +20,17 @@ class MessageController extends Controller {
     //站内信主页，需返回数据站内信详情、及发送人信息（id、pic）
 
     public function index(Request $request) {
-        $data = array();
-        $data['uid'] = AuthController::getUid();
-        $data['username'] = InfoController::getUsername();
-        $data['type'] = AuthController::getType();
-        $uid = $data['uid'];
+//        $data = array();
+//        $data['uid'] = AuthController::getUid();
+//        $data['username'] = InfoController::getUsername();
+//        $data['type'] = AuthController::getType();
+//        $uid = $data['uid'];
+
+        // 伪造登录验证信息
+        $data["uid"] = 1;
+        $data["username"] = "jkjun";
+        $data["type"] = 1;
+        $uid = $data["uid"];
 
         if ($uid == 0) {
             return view('account.login',['data'=>$data]);
@@ -72,11 +78,8 @@ class MessageController extends Controller {
             }
         }
 
-//        return $data;
-        return view('message.index', ['data' => $data]);
-        //dd(response()->json($list));//转换为json数据格式报错
-//        }
-
+        //return $data;
+        return view('messages.index', ['data' => $data]);
     }
 
     //根据用户id，判断用户类型，并返回用户基本信息
@@ -205,6 +208,7 @@ class MessageController extends Controller {
 
     //站内信详情，与某人的对话内容，传入from_id,to_id,
     public function detail(Request $request) {
+        /*
         $data = array();
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
@@ -240,7 +244,10 @@ class MessageController extends Controller {
             $data['userinfo'] = MessageController::getUserInfo($id);
         }
 //        return $data;
-        return view('message.detail', ['data' => $data]);
+
+        return view('messages.detail', ['data' => $data]);
+        */
+        return view("messages.detail");
     }
 
     public function test(Request $request) {
