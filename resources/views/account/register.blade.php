@@ -10,22 +10,22 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <link rel="stylesheet" href="AmazeUI-2.4.2/assets/css/amazeui.min.css" />
-    <link href="css/dlstyle.css" rel="stylesheet" type="text/css">
-    <script src="AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
-    <script src="AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+    <link rel="stylesheet" href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.min.css')}}" />
+    <link href="{{asset('css/dlstyle.css')}}" rel="stylesheet" type="text/css">
+    <script src="{{asset('AmazeUI-2.4.2/assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.min.js')}}"></script>
 
 </head>
 
 <body>
 
 <div class="login-boxtitle">
-    <a href="/"><img alt="" src="images/bylh.png" /></a>
+    <a href="/"><img alt="" src="{{asset('images/bylh.png')}}" /></a>
 </div>
 
 <div class="res-banner">
     <div class="res-main">
-        <div class="login-banner-bg"><span></span><img src="images/big2.png" /></div>
+        <div class="login-banner-bg"><span></span><img src="{{asset('images/big2.png')}}" /></div>
         <div class="login-box">
 
             <div class="am-tabs" id="doc-my-tabs">
@@ -93,7 +93,6 @@
                         <div class="am-cf">
                             <input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
                         </div>
-
                         <hr>
                     </div>
 

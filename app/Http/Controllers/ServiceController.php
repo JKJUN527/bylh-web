@@ -557,7 +557,7 @@ class ServiceController extends Controller {
         $data['class2'] = Serviceclass2::all();
         $data['class3'] = Serviceclass3::all();
         $data['region'] = Region::all();
-        //返回查询结果
+/*        //返回查询结果
         $data['result'] = $this->advanceSearch($request);
 
         //返回上次查询条件
@@ -566,9 +566,9 @@ class ServiceController extends Controller {
         $data['condition']['class3'] = $request->input('class3');
         $data['condition']['region'] = $request->input('region');
         $data['condition']['servicetype'] = $request->input('servicetype');
-        $data['condition']['keyword'] = $request->input('keyword');
-//        return $data;
-        return view('service/edit', ['data' => $data]);
+        $data['condition']['keyword'] = $request->input('keyword');*/
+       // return $data;
+        return view('service/advanceSearch', ['data' => $data]);
     }
     //传入服务id,及对应的服务类型，返回具体的服务详情
     //需返回服务详情、服务历史评价、发布者其他服务、以及发布者服务相关信息
