@@ -38,6 +38,11 @@
         .p-content > p {
             font-size: 16px;
             color: #999;
+            cursor: pointer;
+        }
+
+        .p-content > p:hover {
+            color: #000;
         }
 
         .message-time {
@@ -79,7 +84,7 @@
                                         @foreach($data["listMessages"] as $m)
                                             <div class="am-message am-u-lg-12 am-u-md-12 am-u-sm-12">
                                                 <div class="message-title am-u-lg-3 am-u-md-3 am-u-sm-3">
-                                                    <img src="images/f1.jpg" class="am-img">
+                                                    <img src="{{asset("images/f1.jpg")}}" class="am-img">
                                                 </div>
                                                 <div class="message-id am-u-lg-5 am-u-md-5 am-u-sm-5">
                                                     <div class="p-title">
@@ -87,7 +92,13 @@
                                                             {{$data["user"][$m["from_id"]][0]["username"]}}
                                                         </h2>
                                                     </div>
-                                                    <div class="p-content">
+                                                    <div class="p-content"
+                                                         @if($m->from_id == $data["uid"])
+                                                         data-content="{{$m->to_id}}"
+                                                         @else
+                                                         data-content="{{$m->from_id}}"
+                                                            @endif
+                                                    >
                                                         <p>{{$m->content}}</p>
                                                     </div>
                                                 </div>
@@ -107,4 +118,13 @@
         </div>
 
     </div>
+@endsection
+
+
+@section('custom-script')
+    <script type="text/javascript">
+        $(".p-content").click(function () {
+            self.location = "/message/detail?id=" + $(this).attr("data-content");
+        })
+    </script>
 @endsection
