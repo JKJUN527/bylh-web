@@ -149,5 +149,8 @@
 
 <script type="text/javascript" src="{{asset("js/jquery-1.7.2.min.js")}}"></script>
 <script src="{{asset("AmazeUI-2.4.2/assets/js/amazeui.js")}}"></script>
+
+@section('custom-script')
+@show
 </body>
 </html>

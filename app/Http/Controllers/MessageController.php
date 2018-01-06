@@ -26,7 +26,7 @@ class MessageController extends Controller {
 //        $data['type'] = AuthController::getType();
 //        $uid = $data['uid'];
 
-        // 伪造登录验证信息
+        //todo 伪造登录验证信息
         $data["uid"] = 1;
         $data["username"] = "jkjun";
         $data["type"] = 1;
@@ -105,6 +105,10 @@ class MessageController extends Controller {
     //发送站内信，传入to_id(原对话from_id)|message,数组形式
     public static function sendMessage(Request $request,$toid='',$content='') {
         $from_id = AuthController::getUid();
+
+        //todo 伪造登录验证信息
+        $from_id = 1;
+
         if ($from_id == 0) {
             return view('account.login');
         }
@@ -208,12 +212,19 @@ class MessageController extends Controller {
 
     //站内信详情，与某人的对话内容，传入from_id,to_id,
     public function detail(Request $request) {
-        /*
+
         $data = array();
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
         $to_id = AuthController::getUid();
+
+        //todo 伪造登录验证信息
+        $data["uid"] = 1;
+        $data["username"] = "jkjun";
+        $data["type"] = 1;
+        $to_id = $data["uid"];
+
         if ($to_id == 0) {
             $data['status'] = 400;
             $data['msg'] = "用户未登陆";
@@ -234,7 +245,7 @@ class MessageController extends Controller {
                     $query->where('from_id', $to_id)->where('to_id', $id)
                         ->orWhere('from_id', $id)->where('to_id', $to_id);
                 })
-                ->orderBy('created_at', 'desc')
+                ->orderBy('created_at', 'asc')
                 ->get();
             //标记对话为已读
             foreach ($data['message'] as $item){
@@ -243,11 +254,10 @@ class MessageController extends Controller {
             }
             $data['userinfo'] = MessageController::getUserInfo($id);
         }
-//        return $data;
+
+        //return $data;
 
         return view('messages.detail', ['data' => $data]);
-        */
-        return view("messages.detail");
     }
 
     public function test(Request $request) {
