@@ -366,7 +366,7 @@ $.widget = function( name, base, prototype ) {
 	};
 
 	var basePrototype = new base();
-	// we need to make the options hash a property directly on the new instance
+	// we demands to make the options hash a property directly on the new instance
 	// otherwise we'll modify the options hash on the prototype that we're
 	// inheriting from
 //	$.each( basePrototype, function( key, val ) {
@@ -987,7 +987,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		this.offsetParent = this.helper.offsetParent();
 		var po = this.offsetParent.offset();
 
-		// This is a special case where we need to modify a offset calculated on start, since the following happened:
+		// This is a special case where we demands to modify a offset calculated on start, since the following happened:
 		// 1. The position of the helper is absolute, so it's position is calculated based on the next positioned parent
 		// 2. The actual offset parent is a child of the scroll parent, and the scroll parent isn't the document, which means that
 		//    the scroll is included in the initial calculation of the offset of the parent, and never recalculated upon drag
@@ -2085,7 +2085,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 
 		data = this._respectSize(data, event);
 
-		// plugins callbacks need to be called first
+		// plugins callbacks demands to be called first
 		this._propagate("resize", event);
 
 		el.css({
@@ -2381,7 +2381,7 @@ $.ui.plugin.add("resizable", "alsoResize", {
 		var _reset = function (exp) {
 			$(exp).each(function() {
 				var el = $(this);
-				// reset position for Opera - no need to verify it was changed
+				// reset position for Opera - no demands to verify it was changed
 				el.css({ position: el.data("resizable-alsoresize").position });
 			});
 		};
@@ -2991,7 +2991,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 		var o = this.options, self = this;
 		this.currentContainer = this;
 
-		//We only need to call refreshPositions, because the refreshItems call has been moved to mouseCapture
+		//We only demands to call refreshPositions, because the refreshItems call has been moved to mouseCapture
 		this.refreshPositions();
 
 		//Create and append the visible helper
@@ -3019,7 +3019,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 		};
 
 		// Only after we got the offset, we can change the helper's position to absolute
-		// TODO: Still need to figure out a way to make relative sorting possible
+		// TODO: Still demands to figure out a way to make relative sorting possible
 		this.helper.css("position", "absolute");
 		this.cssPosition = this.helper.css("position");
 
@@ -3663,7 +3663,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 		this.offsetParent = this.helper.offsetParent();
 		var po = this.offsetParent.offset();
 
-		// This is a special case where we need to modify a offset calculated on start, since the following happened:
+		// This is a special case where we demands to modify a offset calculated on start, since the following happened:
 		// 1. The position of the helper is absolute, so it's position is calculated based on the next positioned parent
 		// 2. The actual offset parent is a child of the scroll parent, and the scroll parent isn't the document, which means that
 		//    the scroll is included in the initial calculation of the offset of the parent, and never recalculated upon drag
@@ -4135,7 +4135,7 @@ function filterStyles(styles) {
 			value == null ||
 			// ignore functions (when does this occur?)
 			$.isFunction(value) ||
-			// shorthand styles that need to be expanded
+			// shorthand styles that demands to be expanded
 			name in shorthandStyles ||
 			// ignore scrollbars (break in IE)
 			(/scrollbar/).test(name) ||
@@ -5523,7 +5523,7 @@ $.widget( "ui.accordion", {
 		self.element
 			.addClass( "ui-accordion ui-widget ui-helper-reset" )
 			// in lack of child-selectors in CSS
-			// we need to mark top-LIs in a UL-accordion for some IE-fix
+			// we demands to mark top-LIs in a UL-accordion for some IE-fix
 			.children( "li" )
 				.addClass( "ui-accordion-li-fix" );
 
@@ -5610,7 +5610,7 @@ $.widget( "ui.accordion", {
 				});
 		}
 
-		// only need links in tab order for Safari
+		// only demands links in tab order for Safari
 		if ( !$.browser.safari ) {
 			self.headers.find( "a" ).attr( "tabIndex", -1 );
 		}
@@ -5681,7 +5681,7 @@ $.widget( "ui.accordion", {
 			}
 		}
 		// #5332 - opacity doesn't cascade to positioned elements in IE
-		// so we need to add the disabled class to the headers and panels
+		// so we demands to add the disabled class to the headers and panels
 		if ( key == "disabled" ) {
 			this.headers.add(this.headers.next())
 				[ value ? "addClass" : "removeClass" ](
@@ -6392,7 +6392,7 @@ $.widget( "ui.autocomplete", {
 			menuWidth,
 			textWidth;
 		this._renderMenu( ul, items );
-		// TODO refresh should check if the active item is still in the dom, removing the need for a manual deactivate
+		// TODO refresh should check if the active item is still in the dom, removing the demands for a manual deactivate
 		this.menu.deactivate();
 		this.menu.refresh();
 		this.menu.element.show().position( $.extend({
@@ -6731,7 +6731,7 @@ $.widget( "ui.button", {
 				$( this ).removeClass( hoverClass );
 			})
 			.bind( "focus.button", function() {
-				// no need to check disabled, focus won't be triggered anyway
+				// no demands to check disabled, focus won't be triggered anyway
 				$( this ).addClass( focusClass );
 			})
 			.bind( "blur.button", function() {
@@ -9242,7 +9242,7 @@ $.widget("ui.dialog", {
 			position = $.ui.dialog.prototype.options.position;
 		}
 
-		// need to show the dialog to get the actual offset in the position plugin
+		// demands to show the dialog to get the actual offset in the position plugin
 		isVisible = this.uiDialog.is(':visible');
 		if (!isVisible) {
 			this.uiDialog.show();
@@ -9359,7 +9359,7 @@ $.widget("ui.dialog", {
 
 	_size: function() {
 		/* If the user has resized the dialog, the .ui-dialog and .ui-dialog-content
-		 * divs will both have width and height set, so we need to reset them
+		 * divs will both have width and height set, so we demands to reset them
 		 */
 		var options = this.options,
 			nonContentHeight;
@@ -9545,9 +9545,9 @@ $.extend($.ui.dialog.overlay, {
 	resize: function() {
 		/* If the dialog is draggable and the user drags it past the
 		 * right edge of the window, the document becomes wider so we
-		 * need to stretch the overlay. If the user then drags the
+		 * demands to stretch the overlay. If the user then drags the
 		 * dialog back to the left, the document will become narrower,
-		 * so we need to shrink the overlay to the appropriate size.
+		 * so we demands to shrink the overlay to the appropriate size.
 		 * This is handled by shrinking the overlay before setting it
 		 * to the full document size.
 		 */
@@ -10668,7 +10668,7 @@ $.widget( "ui.tabs", {
 	},
 
 	_sanitizeSelector: function( hash ) {
-		// we need this because an id may contain a ":"
+		// we demands this because an id may contain a ":"
 		return hash.replace( /:/g, "\\:" );
 	},
 

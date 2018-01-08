@@ -1,69 +1,52 @@
 @extends('demo.admin')
+@section('title', '不亦乐乎')
+@section('custom-style')
+<style type="text/css">
+    .comcategory li{
+        font-size:14px;
+        padding: 3px;
+    }
+    .comcategory li a:hover{
+        color: #b84554;
+    }
+    .comcategory li i{
+        color: gray;
+        margin-left: 10px;
+    }
+    .title-first a{
+        text-align: center;
+        padding: 60px;
+        font-size: 18px;
+        color: #000;
+        font-weight: bold;
+    }
+    .title-first a:hover{
+        color: #b84554;
+        font-weight: bold;
+    }
+    .demo li{
+        float: none;
+        width: 100%;
+        padding: 0px 5px;
+        border: none;
+        height: 30px;
+        line-height: 30px;
+    }
+    .title-first{
+        float: none;
+        width: 100%;
+        padding: 0px 5px;
+        border: none;
+        height: 30px;
+        line-height: 30px;
+    }
+    .am-nav-tabs > li.am-active > a, .am-nav-tabs > li.am-active > a:hover, .am-nav-tabs > li.am-active > a:focus, .am-nav-tabs > li > a:hover{
+        background:#ee6363;
+        color: #fff;
+    }
+</style>
+@endsection
 @section('content')
-<div class="hmtop">
-    <!--顶部导航条 -->
-    <div class="am-container header">
-        <ul class="message-l">
-            <div class="topMessage">
-                <div class="menu-hd">
-                    <a href="{{asset('login')}}" target="_top" class="h">亲，请登录</a>
-                    <a href="{{asset('register')}}" target="_top">免费注册</a>
-                </div>
-            </div>
-        </ul>
-        <ul class="message-r">
-            <div class="topMessage my-shangcheng">
-                <div class="menu-hd MyShangcheng"><a href="{{asset('login')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>登录</a></div>
-            </div>
-            <div class="topMessage my-shangcheng">
-                <div class="menu-hd MyShangcheng"><a  href="{{asset('register')}}" target="_top"><i class="am-icon-user-plus am-icon-fw"></i>注册</a></div>
-            </div>
-        </ul>
-    </div>
-
-    <!--悬浮搜索框-->
-
-    <div class="nav white">
-        <div class="logo"><img src="{{asset('images/bylh2.png')}}" /></div>
-        <div class="logoBig">
-            <li><img src="{{asset('images/bylh.png')}}" /></li>
-        </div>
-
-        <div class="search-bar pr">
-            <a name="index_none_header_sysc" href="#"></a>
-            <form>
-                <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-                <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-            </form>
-        </div>
-    </div>
-
-    <div class="clear"></div>
-</div>
-<b class="line"></b>
-<div class="shopNav">
-    <div class="slideall" style="height: auto;">
-
-        <!--<div class="long-title"><span class="all-goods">全部分类</span></div>-->
-        <div class="nav-cont" >
-            <ul>
-                <li class="index"><a href="{{asset('index')}}">首页</a></li>
-                <li class="qc"><a href="{{asset('need')}}">需求大厅</a></li>
-                <li class="qc"><a href="{{asset('advanceSearch')}}">大学生服务</a></li>
-                <li class="qc"><a href="{{asset('advanceSearch')}}">实习中介</a></li>
-                <li class="qc last"><a href="{{asset('advanceSearch')}}">专业问答</a></li>
-            </ul>
-        </div>
-
-        <div class="bannerTwo">
-            <!--轮播 -->
-            <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
-                <ul class="am-slides">
-                    <li class="banner1"><a href="introduction.html"><img src="{{asset('images/3.jpg')}}" /></a></li>
-                </ul>
-            </div>
-        </div>
-
         <!--侧边导航 -->
         <div id="nav" class="navfull" style="position: static;">
             <div class="area clearfix">
@@ -149,11 +132,6 @@
                 </a>
             </div>
         </div>
-
-
-        <!--各类活动-->
-        <!--走马灯 -->
-
         <div class="marqueenTwo" style="background-color: #000;">
             <div class="demo">
                 <ul style="padding-top:70px;">
@@ -543,54 +521,6 @@
         <img src="{{asset('images/ad5.jpg')}}">
     </div>
 @endsection
-    @section('footer')
-    <div class="footer " style="border: none;">
-        <div class="footer-hd ">
-        </div>
-        <div class="footer-bd ">
-            <br>
-            <p style="text-align: center;">
-
-                Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
-                客服电话：88888888<br>
-                联系邮箱：不亦乐乎＠bylehu.com
-
-            </p>
-        </div>
-        @endsection
-    </div>
-</div>
-</div>
-</div>
-</div>
-
-<!--引导 -->
-<div class="navCir">
-    <li class="active"><a href="{{asset('index')}}"><i class="am-icon-home "></i>首页</a></li>
-    <li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
-    <li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>订单详情</a></li>
-    <li><a href="{{asset('home')}}"><i class="am-icon-user"></i>我的</a></li>
-</div>
-<!--菜单 -->
-<div class=tip>
-    <div id="sidebar">
-        <div id="wrap">
-            <div id="prof" class="item ">
 
 
-            </div>
 
-
-            <!--回到顶部 -->
-            <div id="quick_links_pop " class="quick_links_pop hide "></div>
-
-        </div>
-
-    </div>
-</div>
-<script>
-    window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
-</script>
-<script type="text/javascript " src="../basic/js/quick_links.js "></script>
-</body>
-</html>

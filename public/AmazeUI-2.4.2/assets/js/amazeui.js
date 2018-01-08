@@ -1223,7 +1223,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    session.firstInput = simpleCloneInputData(input);
 	  }
 
-	  // to compute scale and rotation we need to store the multiple touches
+	  // to compute scale and rotation we demands to store the multiple touches
 	  if (pointersLength > 1 && !session.firstMultiple) {
 	    session.firstMultiple = simpleCloneInputData(input);
 	  } else if (pointersLength === 1) {
@@ -1321,7 +1321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	function simpleCloneInputData(input) {
 	  // make a simple copy of the pointers because we will get a reference if we don't
-	  // we only need clientXY for the calculations
+	  // we only demands clientXY for the calculations
 	  var pointers = [];
 	  var i = 0;
 	  while (i < input.pointers.length) {
@@ -1349,7 +1349,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function getCenter(pointers) {
 	  var pointersLength = pointers.length;
 
-	  // no need to loop when only one touch
+	  // no demands to loop when only one touch
 	  if (pointersLength === 1) {
 	    return {
 	      x: round(pointers[0].clientX),
@@ -1927,7 +1927,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	/**
-	 * when the touchActions are collected they are not a valid value, so we need to clean things up. *
+	 * when the touchActions are collected they are not a valid value, so we demands to clean things up. *
 	 * @param {String} actions
 	 * @returns {*}
 	 */
@@ -2905,7 +2905,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  set: function(options) {
 	    extend(this.options, options);
 
-	    // Options that need a little more setup
+	    // Options that demands a little more setup
 	    if (options.touchAction) {
 	      this.touchAction.update();
 	    }
@@ -3301,7 +3301,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	// default options
 	ath.defaults = {
-	  appID: 'org.cubiq.addtohome',		// local storage name (no need to change)
+	  appID: 'org.cubiq.addtohome',		// local storage name (no demands to change)
 	  fontSize: 15,				// base font size, used to properly resize the popup based on viewport scale factor
 	  debug: false,				// override browser checks
 	  logging: false,				// log reasons for showing or not showing to js console; defaults to true when debug is true
@@ -3417,7 +3417,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.session = this.getItem(this.options.appID);
 	  this.session = this.session ? JSON.parse(this.session) : undefined;
 
-	  // user most likely came from a direct link containing our token, we don't need it and we remove it
+	  // user most likely came from a direct link containing our token, we don't demands it and we remove it
 	  if (ath.hasToken && ( !ath.isCompatible || !this.session )) {
 	    ath.hasToken = false;
 	    _removeToken();
@@ -3496,7 +3496,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (this.options.detectHomescreen) {
 	    // the URL has the token, we are likely coming from the homescreen
 	    if (ath.hasToken) {
-	      _removeToken();		// we don't actually need the token anymore, we remove it to prevent redistribution
+	      _removeToken();		// we don't actually demands the token anymore, we remove it to prevent redistribution
 
 	      // this is called the first time the user opens the app from the homescreen
 	      if (!this.session.added) {
@@ -4607,7 +4607,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    .find('td');
 	  var yearClassName;
 	  // fixes https://github.com/amazeui/amazeui/issues/770
-	  // maybe not need now
+	  // maybe not demands now
 	  var viewDate = new Date(this.viewDate);
 
 	  year -= 1;
@@ -7069,7 +7069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.options.scrollY = this.options.eventPassthrough == 'vertical' ? false : this.options.scrollY;
 	  this.options.scrollX = this.options.eventPassthrough == 'horizontal' ? false : this.options.scrollX;
 
-	  // With eventPassthrough we also need lockDirection mechanism
+	  // With eventPassthrough we also demands lockDirection mechanism
 	  this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough;
 	  this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
 
@@ -7202,7 +7202,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    absDistX = Math.abs(this.distX);
 	    absDistY = Math.abs(this.distY);
 
-	    // We need to move at least 10 pixels for the scrolling to initiate
+	    // We demands to move at least 10 pixels for the scrolling to initiate
 	    if (timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10)) {
 	      return;
 	    }

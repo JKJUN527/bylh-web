@@ -1,4 +1,5 @@
 @extends('demo.admin2')
+@section('title', '消息管理')
 @section('content')
     <style type="text/css">
         .msgmanage{
@@ -252,5 +253,5 @@
                 </p>
             </div>
         </div>
-            @endsection
+@endsection
 @endsection

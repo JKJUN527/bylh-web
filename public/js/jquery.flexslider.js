@@ -1315,7 +1315,7 @@ window.Modernizr = (function( window, document, undefined ) {
       }
 
       // <style> elements in IE6-9 are considered 'NoScope' elements and therefore will be removed
-      // when injected with innerHTML. To get around this you need to prepend the 'NoScope' element
+      // when injected with innerHTML. To get around this you demands to prepend the 'NoScope' element
       // with a 'scoped' element, in our case the soft-hyphen entity as it won't mess with our measurements.
       // msdn.microsoft.com/en-us/library/ms533897%28VS.85%29.aspx
       // Documents served as xml will throw if using &shy; so use xml friendly encoded version. See issue #277
@@ -1971,7 +1971,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
     // In FF4, if disabled, window.localStorage should === null.
 
-    // Normally, we could not test that directly and need to do a
+    // Normally, we could not test that directly and demands to do a
     //   `('localStorage' in window) && ` test first because otherwise Firefox will
     //   throw bugzil.la/365772 if cookies are disabled
 
@@ -2154,7 +2154,7 @@ window.Modernizr = (function( window, document, undefined ) {
     }
 
     /*>>webforms*/
-    // input tests need to run.
+    // input tests demands to run.
     Modernizr.input || webforms();
     /*>>webforms*/
 
@@ -2568,7 +2568,7 @@ window.Modernizr = (function( window, document, undefined ) {
     // Modernizr.prefixed('boxSizing') // 'MozBoxSizing'
 
     // Properties must be passed as dom-style camelcase, rather than `box-sizing` hypentated style.
-    // Return values will also be the camelCase variant, if you need to translate that to hypenated style use:
+    // Return values will also be the camelCase variant, if you demands to translate that to hypenated style use:
     //
     //     str.replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');
 

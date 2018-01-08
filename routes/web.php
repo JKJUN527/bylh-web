@@ -132,7 +132,6 @@ Route::get('sensitive', ['uses' => 'SensitiveController@test']);
 
 
 //后台系统
-
 Route::get('admin/login', function () {
     return view('admin/login');
 });

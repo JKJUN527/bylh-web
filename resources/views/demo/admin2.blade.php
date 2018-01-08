@@ -5,23 +5,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
 
-    <title>实名认证</title>
+    <title>@yield('title')</title>
 
-    <link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
-    <link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+    <link href="{{asset('AmazeUI-2.4.2/assets/css/admin.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css">
 
-    <link href="css/personal.css" rel="stylesheet" type="text/css">
-    <link href="css/stepstyle.css" rel="stylesheet" type="text/css">
-  <!--<linkhref="css/vipstyle.css" rel="stylesheet" type="text/css">-->
-    <link href="css/infstyle.css" rel="stylesheet" type="text/css">
-    <link href="css/orstyle.css" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/personal.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
+    <!--<linkhref="css/vipstyle.css" rel="stylesheet" type="text/css">-->
+    <link href="{{asset('css/infstyle.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/orstyle.css')}}" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script src="AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+    <script type="text/javascript" src="{{asset('js/jquery-1.7.2.min.js')}}"></script>
+    <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.js')}}"></script>
+    @section("custom-style")
+    @show
 </head>
-<style>
 
-</style>
 
 <body>
 <!--头 -->
@@ -40,10 +40,12 @@
                 </ul>
                 <ul class="message-r">
                     <div class="topMessage home">
-                        <div class="menu-hd"><a href="/index" target="_top" class="h"><i class="am-icon-home am-icon-fw"></i>首页</a></div>
+                        <div class="menu-hd"><a href="/index" target="_top" class="h"><i
+                                        class="am-icon-home am-icon-fw"></i>首页</a></div>
                     </div>
                     <div class="topMessage my-shangcheng">
-                        <div class="menu-hd MyShangcheng"><a href="/home" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+                        <div class="menu-hd MyShangcheng"><a href="/home" target="_top"><i
+                                        class="am-icon-user am-icon-fw"></i>个人中心</a></div>
                     </div>
                 </ul>
             </div>
@@ -52,13 +54,14 @@
 
             <div class="nav white">
                 <div class="logoBig">
-                    <li><img src="images/bylh.png"  style="width: 60%;" /></li>
+                    <li><img src="images/bylh.png" style="width: 60%;"/></li>
                 </div>
 
                 <div class="search-bar pr">
                     <a name="index_none_header_sysc" href="/search"></a>
                     <form>
-                        <input id="searchInput" name="index_none_header_sysc" value="{{$data['keyword'] or ''}}" type="text" placeholder="搜索" autocomplete="off">
+                        <input id="searchInput" name="index_none_header_sysc" value="{{$data['keyword'] or ''}}"
+                               type="text" placeholder="搜索" autocomplete="off">
                         <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
                     </form>
                 </div>
@@ -81,60 +84,75 @@
         </ul>
         <div class="nav-extra">
             <a href="/message" style="color: #f5e79e;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息
-            <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
+                <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
         </div>
     </div>
 </div>
 <b class="line"></b>
-@section('content')
-    @show
-@section('footer')
-    @show
-</div>
-<aside class="menu">
-    <ul>
-        <li class="person active">
-            <a href="/index"><i class="am-icon-user"></i>个人中心</a>
-        </li>
-        <li class="person">
-            <p><i class="am-icon-newspaper-o"></i>个人资料</p>
-            <ul>
-                <li> <a href="/user">个人信息</a></li>
-                <li> <a href="/safety">安全设置</a></li>
-            </ul>
-        </li>
-        <li class="person">
-            <p><i class="am-icon-balance-scale"></i>我的交易</p>
-            <ul>
-                <li><a href="/order">订单管理</a></li>
-                <li> <a href="/comment">评价服务</a></li>
-            </ul>
-        </li>
-        <li class="person">
-            <p><i class="am-icon-dollar"></i>我的服务</p>
-            <ul>
-                <li> <a href="/sendrequest">发布服务</a></li>
-                <li> <a href="/myrequest">服务列表</a></li>
-            </ul>
-        </li>
 
-        <li class="person">
-            <p><i class="am-icon-tags"></i>我的需求</p>
-            <ul>
-                <li> <a href="/sendneed">发布需求</a></li>
-                <li> <a href="/myneed">需求列表</a></li>
-            </ul>
-        </li>
+<div class="center">
+    <div class="col-main">
+        @section('content')
+        @show
 
-        <li class="person">
-            <p><i class="am-icon-qq"></i>信息中心</p>
-            <ul>
-                <li> <a href="/message">站内信</a></li>
-                <li> <a href="/news">我的消息</a></li>
-            </ul>
-        </li>
-    </ul>
-</aside>
+        <div class="footer ">
+            <div class="footer-hd ">
+            </div>
+            <div class="footer-bd ">
+                <p style="text-align: center;">
+                    ©2017-2018 bylh.com 成备xxxxxxxx号<br>
+                    不亦乐乎（成都）有限公司<br>
+                    客服：xxxx-xxx-xxx
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <aside class="menu">
+        <ul>
+            <li class="person active">
+                <a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-newspaper-o"></i>个人资料</p>
+                <ul>
+                    <li><a href="{{asset('user')}}">个人信息</a></li>
+                    <li><a href="{{asset('safety')}}">安全设置</a></li>
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-balance-scale"></i>我的交易</p>
+                <ul>
+                    <li><a href="{{asset('order')}}">订单管理</a></li>
+                    <li><a href="{{asset('comment')}}">评价服务</a></li>
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-dollar"></i>我的服务</p>
+                <ul>
+                    <li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
+                    <li><a href="{{asset('myrequest')}}">服务列表</a></li>
+                </ul>
+            </li>
+
+            <li class="person">
+                <p><i class="am-icon-tags"></i>我的需求</p>
+                <ul>
+                    <li><a href="{{asset('sendneed')}}">发布需求</a></li>
+                    <li><a href="{{asset('myneed')}}">需求列表</a></li>
+                </ul>
+            </li>
+
+            <li class="person">
+                <p><i class="am-icon-qq"></i>信息中心</p>
+                <ul>
+                    <li><a href="{{asset('message')}}">站内信</a></li>
+                    <li><a href="/news">我的消息</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
 </div>
 </body>
 </html>

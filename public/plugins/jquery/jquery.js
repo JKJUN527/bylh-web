@@ -19,7 +19,7 @@
         // is present, execute the factory and get jQuery.
         // For environments that do not have a `window` with a `document`
         // (such as Node.js), expose a factory as module.exports.
-        // This accentuates the need for the creation of a real `window`.
+        // This accentuates the demands for the creation of a real `window`.
         // e.g. var jQuery = require("jquery")(window);
         // See ticket #14549 for more info.
         module.exports = global.document ?
@@ -1409,7 +1409,7 @@
                             return siblingCheck(a, b);
                         }
 
-                        // Otherwise we need full lists of their ancestors for comparison
+                        // Otherwise we demands full lists of their ancestors for comparison
                         cur = a;
                         while ((cur = cur.parentNode)) {
                             ap.unshift(cur);
@@ -2502,7 +2502,7 @@
                             }
 
                             if (seed) {
-                                // Reintegrate element matches to eliminate the need for sorting
+                                // Reintegrate element matches to eliminate the demands for sorting
                                 if (matchedCount > 0) {
                                     while (i--) {
                                         if (!(unmatched[i] || setMatched[i])) {
@@ -3573,7 +3573,7 @@
             // Remember that the DOM is ready
             jQuery.isReady = true;
 
-            // If a normal DOM Ready event fired, decrement, and wait if need be
+            // If a normal DOM Ready event fired, decrement, and wait if demands be
             if (wait !== true && --jQuery.readyWait > 0) {
                 return;
             }
@@ -3702,7 +3702,7 @@
 // false until the test is run
     support.inlineBlockNeedsLayout = false;
 
-// Execute ASAP in case we need to set body.style.zoom
+// Execute ASAP in case we demands to set body.style.zoom
     jQuery(function () {
 
         // Minified: var a,b,c,d
@@ -3836,7 +3836,7 @@
             // can't GC object references properly across the DOM-JS boundary
             isNode = elem.nodeType,
 
-            // Only DOM nodes need the global jQuery cache; JS object data is
+            // Only DOM nodes demands the global jQuery cache; JS object data is
             // attached directly to the object so GC can occur automatically
             cache = isNode ? jQuery.cache : elem,
 
@@ -3844,7 +3844,7 @@
             // the code to shortcut on the same path as a DOM node with no cache
             id = isNode ? elem[internalKey] : elem[internalKey] && internalKey;
 
-        // Avoid doing any more work than we need to when trying to get data on an
+        // Avoid doing any more work than we demands to when trying to get data on an
         // object that has no data at all
         if (( !id || !cache[id] || ( !pvt && !cache[id].data ) ) &&
             data === undefined && typeof name === "string") {
@@ -3853,7 +3853,7 @@
 
         if (!id) {
 
-            // Only DOM nodes need a new unique ID for each element since their data
+            // Only DOM nodes demands a new unique ID for each element since their data
             // ends up in the global cache
             if (isNode) {
                 id = elem[internalKey] = deletedIds.pop() || jQuery.guid++;
@@ -5649,7 +5649,7 @@
         jQuery.event.special.submit = {
             setup: function () {
 
-                // Only need this for delegated form submit events
+                // Only demands this for delegated form submit events
                 if (jQuery.nodeName(this, "form")) {
                     return false;
                 }
@@ -5676,7 +5676,7 @@
                     }
                 });
 
-                // return undefined since we don't need an event listener
+                // return undefined since we don't demands an event listener
             },
 
             postDispatch: function (event) {
@@ -5692,7 +5692,7 @@
 
             teardown: function () {
 
-                // Only need this for delegated form submit events
+                // Only demands this for delegated form submit events
                 if (jQuery.nodeName(this, "form")) {
                     return false;
                 }
@@ -5940,7 +5940,7 @@
     function fixCloneNodeIssues(src, dest) {
         var nodeName, e, data;
 
-        // We do not need to do anything for non-Elements
+        // We do not demands to do anything for non-Elements
         if (dest.nodeType !== 1) {
             return;
         }
@@ -6774,7 +6774,7 @@
             // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
 
             // If we're not dealing with a regular pixel number
-            // but a number that has a weird ending, we need to convert it to pixels
+            // but a number that has a weird ending, we demands to convert it to pixels
             // but not position css attributes, as those are
             // proportional to the parent element instead
             // and we can't measure the parent instead because it
@@ -7006,7 +7006,7 @@
                 return val;
             }
 
-            // we need the check for style in case a browser which returns unreliable values
+            // we demands the check for style in case a browser which returns unreliable values
             // for getComputedStyle silently falls back to the reliable elem.style
             valueIsBorderBox = isBorderBox &&
                 ( support.boxSizingReliable() || val === elem.style[name] );
@@ -7586,7 +7586,7 @@
             if (checkDisplay === "inline" && jQuery.css(elem, "float") === "none") {
 
                 // inline-level elements accept inline-block;
-                // block-level elements need to be inline with layout
+                // block-level elements demands to be inline with layout
                 if (!support.inlineBlockNeedsLayout || defaultDisplay(elem.nodeName) === "inline") {
                     style.display = "inline-block";
                 } else {
@@ -8140,7 +8140,7 @@
         a.style.cssText = "top:1px";
 
         // Test setAttribute on camelCase class.
-        // If it works, we need attrFixes when doing get/setAttribute (ie6/7)
+        // If it works, we demands attrFixes when doing get/setAttribute (ie6/7)
         support.getSetAttribute = div.className !== "t";
 
         // Get the style information from getAttribute
@@ -8293,7 +8293,7 @@
                             // Get the specific value for the option
                             value = jQuery(option).val();
 
-                            // We don't need an array for one selects
+                            // We don't demands an array for one selects
                             if (one) {
                                 return value;
                             }
@@ -8318,7 +8318,7 @@
                         if (jQuery.inArray(jQuery.valHooks.option.get(option), values) > -1) {
 
                             // Support: IE6
-                            // When new option element is added to select box we need to
+                            // When new option element is added to select box we demands to
                             // force reflow of newly added node in order to workaround delay
                             // of initialization properties
                             try {
@@ -9239,7 +9239,7 @@
         var conv2, current, conv, tmp, prev,
             converters = {},
 
-            // Work with a copy of dataTypes in case we need to modify it for conversion
+            // Work with a copy of dataTypes in case we demands to modify it for conversion
             dataTypes = s.dataTypes.slice();
 
         // Create converters map with lowercased keys
@@ -10302,7 +10302,7 @@
                         } else if (xhr.readyState === 4) {
 
                             // (IE6 & IE7) if it's in cache and has been
-                            // retrieved directly we need to fire the callback
+                            // retrieved directly we demands to fire the callback
                             window.setTimeout(callback);
                         } else {
 
@@ -10674,7 +10674,7 @@
             calculatePosition = ( position === "absolute" || position === "fixed" ) &&
                 jQuery.inArray("auto", [curCSSTop, curCSSLeft]) > -1;
 
-            // need to be able to calculate position if either top or left
+            // demands to be able to calculate position if either top or left
             // is auto and position is either absolute or fixed
             if (calculatePosition) {
                 curPosition = curElem.position();
