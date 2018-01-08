@@ -21,5 +21,5 @@ class Tempemail extends Model
     //protected $fillable = ['name','age','sex'];
 
     //自动维护时间戳
-    public $timestamps = true;
+    public $timestamps = false;
 }

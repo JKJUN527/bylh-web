@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => '404138362@qq.com',
-        'name' => '电竞招聘网',
+        'address' => '631642753@qq.com',
+        'name' => '不亦乐乎官网',
     ],
 
     /*

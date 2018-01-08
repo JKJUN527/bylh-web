@@ -6,17 +6,17 @@
         <ul class="message-l">
             <div class="topMessage">
                 <div class="menu-hd">
-                    <a href="{{asset('login')}}" target="_top" class="h">亲，请登录</a>
-                    <a href="{{asset('register')}}" target="_top">免费注册</a>
+                    <a href="account/login" target="_top" class="h">亲，请登录</a>
+                    <a href="account/register" target="_top">免费注册</a>
                 </div>
             </div>
         </ul>
         <ul class="message-r">
             <div class="topMessage my-shangcheng">
-                <div class="menu-hd MyShangcheng"><a href="{{asset('login')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>登录</a></div>
+                <div class="menu-hd MyShangcheng"><a href="account/login" target="_top"><i class="am-icon-user am-icon-fw"></i>登录</a></div>
             </div>
             <div class="topMessage my-shangcheng">
-                <div class="menu-hd MyShangcheng"><a  href="{{asset('register')}}" target="_top"><i class="am-icon-user-plus am-icon-fw"></i>注册</a></div>
+                <div class="menu-hd MyShangcheng"><a  href="account/register" target="_top"><i class="am-icon-user-plus am-icon-fw"></i>注册</a></div>
             </div>
         </ul>
     </div>

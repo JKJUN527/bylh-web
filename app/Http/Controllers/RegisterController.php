@@ -17,7 +17,11 @@ class RegisterController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+//        $this->middleware('guest');
+        $uid = AuthController::getUid();
+        if($uid !=0){
+            return redirect()->back();
+        }
     }
 
     public function index() {
@@ -49,15 +53,13 @@ class RegisterController extends Controller
                 $user = new User();
                 $user->tel = $input['phone'];
                 $user->password = bcrypt($input['password']);
-                $user->type = $input['type'];
                 $user->username = substr($input['phone'], -4);
-                $user->tel_vertify = 1;
+                $user->tel_verify = 1;
 
                 if ($user->save()) {
                     //注册成功用户需一并建立userinfo表
                     $userinfo = new Userinfo();
                     $userinfo->uid = $user->uid;
-                    $userinfo->register_way = 0;
                     $userinfo->save();
                     $data['status'] = 200;
                     $data['msg'] = "注册成功！";

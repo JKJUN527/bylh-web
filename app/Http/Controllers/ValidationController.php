@@ -116,7 +116,7 @@ class ValidationController extends Controller
 
             if($temp->save()) {
                 $e3_email = new E3Email();
-                $e3_email->from = "404138362@qq.com";
+                $e3_email->from = "631642753@qq.com";
                 $e3_email->to = $mail;
                 $e3_email->subject = "不亦乐乎邮箱验证";
                 $e3_email->content = "请于一周内点击该链接，完成验证。http://localhost/validate_email"
@@ -153,7 +153,7 @@ class ValidationController extends Controller
                 if($type ==0) {
                     //修改邮箱验证为已邮箱验证
                     $user = User::find($uid);
-                    $user->email_vertify = 1;
+                    $user->email_verify = 1;
                     $user->save();
 
                     $data = array();
