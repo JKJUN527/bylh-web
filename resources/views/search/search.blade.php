@@ -1,345 +1,112 @@
 @extends('demo.admin')
-@extends('demo.nav')
+
+@section("custom-style")
+    <style>
+        .btn_tap{
+            font-size: 16px;
+            color: #f6f8fd;
+            padding:6px;
+        }
+        .btn_tap_li{
+            background: #ee6363;
+        }
+        .label{
+            background-color: #F84C4C;
+            color: #fff;
+            display: inline-block;
+            font-size:18px;
+            text-align: center;
+            line-height: 16px;
+            border-radius: 2px;
+            padding: 2px;
+        }
+        .demand_content{
+            font-size: 14px;
+            color: #999999;
+            padding-top: 8px;
+            line-height: 160%;
+            min-width: 40rem;
+            max-width: 40rem;
+        }
+    </style>
+@endsection
+
 @section('content')
+    @include('demo.nav')
 <!--搜索界面-->
-<div class="am-g am-g-fixed" style="padding-top: 45px;">
+<div class="am-g am-g-fixed" style="padding-top: 1px;">
     <div class="am-u-lg-8 am-u-md-8 am-u-sm-8">
-        <div class="am-container" style="border-bottom: 2px solid #eee;padding: 20px;background: #fff;margin-top: 20px;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
+        <div class="am-container" style="border-bottom: 2px solid #eee;padding: 20px;background: #fff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
             <div class="am-tabs" data-am-tabs>
                 <ul class="am-tabs-nav am-nav am-nav-tabs" style="border-bottom: 4px solid #ee6363;">
-                    <li class="am-active" style="background: #cfcfcf;"><a href="#tab1" style="font-size: 16px;padding-right: : 10px;color: #fff;padding:6px;">全部需求</a></li>
-                    <li style="background: #cfcfcf;"><a href="#tab2" style="font-size: 16px;padding-right:10px;color: #fff;padding: 6px;">全部服务</a></li>
+                    <li class="am-active btn_tap_li"><a href="#tab1" class="btn_tap">全部需求</a></li>
+                    <li class="btn_tap_li"><a href="#tab2" class="btn_tap">全部服务</a></li>
+                    <li class="btn_tap_li"><a href="#tab3" class="btn_tap">全部新闻</a></li>
                 </ul>
-                <div class="rankit">
-                    <select data-am-selected>
-                        <option value="综合排序" selected>综合排序</option>
-                        <option value="销量优先">销量优先</option>
-                        <option value="价格升序">价格升序</option>
-                        <option value="价格降序">价格降序</option>
-                        <option value="发布时间">发布时间</option>
-                    </select>
-                </div>
-                <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+                {{--<div class="rankit" style="margin-top: 1rem;">--}}
+                    {{--<select data-am-selected>--}}
+                        {{--<option value="综合排序" selected>综合排序</option>--}}
+                        {{--<option value="销量优先">销量优先</option>--}}
+                        {{--<option value="价格升序">价格升序</option>--}}
+                        {{--<option value="价格降序">价格降序</option>--}}
+                        {{--<option value="发布时间">发布时间</option>--}}
+                    {{--</select>--}}
+                {{--</div>--}}
+                {{--<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />--}}
 
                 <div class="am-tabs-bd">
                     <!--需求-->
                     <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                         <table class="xm_list" cellpadding="0" cellspacing="0">
-
                             <tbody>
-
-
+                            @foreach($data['demands'] as $demand)
                             <tr class="line_h   adserveritembg">
                                 <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
                                     <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="公司LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥500</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">公司LOGO设计</span>
+                                        <a href="/" target="_blank" title="{{$demand->title}}"><font class="money" style="font-size: 18px;color: #ff6600;">
+                                             @if($demand->price <0)
+                                                 暂无报价
+                                             @else
+                                                ￥{{$demand->price}}
+                                             @endif
+                                            </font>&nbsp;
+                                            <span class="searchtitle" style="font-size: 16px;color: #056bc3;">
+                                                {{$demand->title}}
+                                            </span>
                                        </a>
-                                        <a href="javascript:;" class="task_ji" title="加急项目" style="background-color: #F84C4C;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">急</a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">LOGO名称：正安检测科技有限公司要求以“正安”汉字或首打字母为主要设计元素，简单，大气，易识别。颜色参考：工业蓝 或 深红...</div>
-
+                                        @if($demand->is_urgency != 0)
+                                            <a href="javascript:;" class="task_ji label">
+                                                @if($demand->is_urgency == 1)
+                                                    急
+                                                @elseif($demand->is_urgency == 2)
+                                                    顶
+                                                @else
+                                                    普
+                                                @endif
+                                            </a>
+                                        @endif
+                                        <div class="xm_xq tsk_show_450988 demand_content">
+                                            {{mb_substr($demand->describe, 0, 35)}}
+                                        </div>
                                         <div class="clear"></div>
                                     </div>
                                     <div class="fujia"></div>
                                 </td>
                                 <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
                                     <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
+                                        <span style="color:#2782b7">{{$data['count'][$demand->id]}}</span> 参与预约
+                                        <span style="color:#2782b7">{{$data["serviceclass1"][$demand->id]}}</span><br>
+                                        <span style="color:#2782b7">{{$demand->city}}</span>
 
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
 
                                     </div></td>
                                 <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
                                     <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
+                                        <button id="date-demand" class="am-btn am-btn-warning am-btn-lg" type="button" data-content="{{$demand->id}}">立即预约</button>
                                     </div>
                                 </td>
                             </tr>
-
-
-                            <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
-                                    <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="公司LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥600</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">Villae Bo  瓦帕碧奥</span>
-                                        </a>
-                                        <a href="javascript:;" class="task_ji" title="加急项目" style="background-color: #F84C4C;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">急</a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">LOGO名称：正安检测科技有限公司要求以“正安”汉字或首打字母为主要设计元素，简单，大气，易识别。颜色参考：工业蓝 或 深红...</div>
-
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="fujia"></div>
-                                </td>
-                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
-                                    <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
-
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
-
-                                    </div></td>
-                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
-                                    <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
-                                    <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="饮品品牌起名"><font class="money" style="font-size: 18px;color: #ff6600;">￥700</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">饮品品牌起名</span>
-                                        </a>
-                                        <a href="javascript:;" class="task_ji" title="置顶项目" style="background-color: #99E400;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">顶</a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
-
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="fujia"></div>
-                                </td>
-                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
-                                    <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
-
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
-
-                                    </div></td>
-                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
-                                    <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
-                                    <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="饮品品牌起名"><font class="money" style="font-size: 18px;color: #ff6600;">￥1188</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">设计圆床</span>
-                                        </a>
-                                        <a href="javascript:;" class="task_ji" title="置顶项目" style="background-color: #99E400;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">顶</a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
-
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="fujia"></div>
-                                </td>
-                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
-                                    <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
-
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
-
-                                    </div></td>
-                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
-                                    <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
-                                    <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="饮品品牌起名"><font class="money" style="font-size: 18px;color: #ff6600;">￥700</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">饮品品牌起名</span>
-                                        </a>
-                                        <a href="javascript:;" class="task_ji" title="加急项目" style="background-color: #FF3300;color: #fff;display: inline-block;font-size:18px;text-align: center;line-height: 16px;border-radius: 2px;padding: 2px;">加</a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
-
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="fujia"></div>
-                                </td>
-                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
-                                    <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
-
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
-
-                                    </div></td>
-                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
-                                    <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
-                                    <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
-                                        </a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
-
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="fujia"></div>
-                                </td>
-                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
-                                    <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
-
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
-
-                                    </div></td>
-                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
-                                    <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
-                                    <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
-                                        </a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
-
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="fujia"></div>
-                                </td>
-                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
-                                    <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
-
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
-
-                                    </div></td>
-                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
-                                    <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
-                                    <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
-                                        </a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
-
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="fujia"></div>
-                                </td>
-                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
-                                    <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
-
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
-
-                                    </div></td>
-                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
-                                    <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
-                                    <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
-                                        </a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
-
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="fujia"></div>
-                                </td>
-                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
-                                    <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
-
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
-
-                                    </div></td>
-                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
-                                    <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
-                                    <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
-                                        </a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
-
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="fujia"></div>
-                                </td>
-                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
-                                    <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
-
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
-
-                                    </div></td>
-                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
-                                    <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
-                                    <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="楼盘LOGO设计"><font class="money" style="font-size: 18px;color: #ff6600;">￥200</font>&nbsp;<span class="searchtitle" style="font-size: 16px;color: #056bc3;">楼盘LOGO设计</span>
-                                        </a>
-                                        <div class="xm_xq tsk_show_450988" style="font-size: 14px;color: #999999;padding-top: 8px;line-height: 160%;">饮品  品牌起名，抢眼，有趣，简单，易懂，要与饮品有关，建议两字到四字！补充说明；茶季，麦甜，撒椒，鲜辣道，花田煮，这几个名...</div>
-
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="fujia"></div>
-                                </td>
-                                <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
-                                    <div class="hh">
-                                        <font style="color:#2782b7">19</font> 人参与 | 悬赏
-
-                                        <br>
-                                        <font style="color:#ff6600">1</font> 天后截止
-
-                                    </div></td>
-                                <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
-                                    <div class="hhb">
-                                        <button class="am-btn am-btn-warning am-btn-lg" type="button">立即参与</button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-
+                            @endforeach
                             <!--分页实现-->
 
                             <tr>
@@ -348,47 +115,16 @@
                                     <div class="pager_container">
 
                                         <ul data-am-widget="pagination"
-                                            class="am-pagination am-pagination-default"
-                                        >
+                                            class="am-pagination am-pagination-default">
 
                                             <li class="am-pagination-first ">
-                                                <a href="#" class="">第一页</a>
-                                            </li>
-
-                                            <li class="am-pagination-prev ">
-                                                <a href="#" class="">上一页</a>
-                                            </li>
-
-
-                                            <li class="">
-                                                <a href="#" class="">1</a>
-                                            </li>
-                                            <li class="am-active">
-                                                <a href="#" class="am-active">2</a>
-                                            </li>
-                                            <li class="">
-                                                <a href="#" class="">3</a>
-                                            </li>
-                                            <li class="">
-                                                <a href="#" class="">4</a>
-                                            </li>
-                                            <li class="">
-                                                <a href="#" class="">5</a>
-                                            </li>
-
-
-                                            <li class="am-pagination-next ">
-                                                <a href="#" class="">下一页</a>
-                                            </li>
-
-                                            <li class="am-pagination-last ">
-                                                <a href="#" class="">最末页</a>
+                                                <nav>
+                                                    {!! $data['demands']->appends(["keyword" => $data['keyword']])->render() !!}
+                                                </nav>
                                             </li>
                                         </ul>
 
                                     </div>
-
-
                                     <div class="clear"></div>
                                 </td>
                             </tr>

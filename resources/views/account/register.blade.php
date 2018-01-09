@@ -21,7 +21,7 @@
 <body>
 
 <div class="login-boxtitle">
-    <a href="/"><img alt="" src="{{asset('images/bylh.png')}}" /></a>
+    <a href="/"><img alt="" src="{{asset('images/bylh2.png')}}" /></a>
 </div>
 
 <div class="res-banner">

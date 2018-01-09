@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Adverts;
+use App\Datetemp;
 use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
@@ -137,8 +138,6 @@ class HomeController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
 
-        $news = array();
-        $position = array();
         //主页搜索功能，传入keywords返回关键字匹配的三类服务，需求及新闻相关数据。
 
         $keywords = "";
@@ -179,14 +178,28 @@ class HomeController extends Controller {
                         $query->orwhere('title', 'like', '%' . $keywords . '%')
                             ->orwhere('describe', 'like', '%' . $keywords . '%');
                     })
-                    ->get();
+//                    ->get();
+                    ->paginate(1);
+                $serviceclass1 = Serviceclass1::select('id','name')->get();
+                $data['serviceclass1'] = array();
+                foreach ($serviceclass1 as $class1){
+                    $data['serviceclass1'][$class1->id] = $class1->name;
+                }
+
+                //计算多少服务商针对需求进行预约
+                foreach ($data['demands'] as $demand){
+                    $data['count'][$demand->id] = Datetemp::where('demand_id',$demand->id)
+                        ->where('state',0)
+                        ->count();
+                }
+
             }
         }
         // ly:添加返回搜索的关键字
         $data['keyword'] = $keywords;
 
-        return $data;
-        return view('search', [
+//        return $data;
+        return view('search.search', [
             "data" => $data,
         ]);
     }

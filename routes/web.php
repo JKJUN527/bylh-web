@@ -2,7 +2,7 @@
 //控制器方法
 Route::get('/', ['uses' => 'HomeController@index']);
 Route::get('/index', ['uses' => 'HomeController@index']);
-Route::any('/index/search', ['uses' => 'HomeController@indexSearch']);
+Route::get('/search', ['uses' => 'HomeController@indexSearch']);
 
 //登录注册
 Route::get('account/login', ['uses' => 'LoginController@index']);
