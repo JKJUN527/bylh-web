@@ -28,6 +28,13 @@
             min-width: 40rem;
             max-width: 40rem;
         }
+        .service_content{
+            font-size: 1rem !important;
+        }
+        .service_img{
+            width: 162px !important;
+            height: 162px !important;
+        }
     </style>
 @endsection
 
@@ -41,7 +48,7 @@
                 <ul class="am-tabs-nav am-nav am-nav-tabs" style="border-bottom: 4px solid #ee6363;">
                     <li class="am-active btn_tap_li"><a href="#tab1" class="btn_tap">全部需求</a></li>
                     <li class="btn_tap_li"><a href="#tab2" class="btn_tap">全部服务</a></li>
-                    <li class="btn_tap_li"><a href="#tab3" class="btn_tap">全部新闻</a></li>
+                    {{--<li class="btn_tap_li"><a href="#tab3" class="btn_tap">全部新闻</a></li>--}}
                 </ul>
                 {{--<div class="rankit" style="margin-top: 1rem;">--}}
                     {{--<select data-am-selected>--}}
@@ -61,7 +68,7 @@
                             <tbody>
                             @foreach($data['demands'] as $demand)
                             <tr class="line_h   adserveritembg">
-                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
+                                <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 25px;">
                                     <div class="aa task_item_i" style="padding: 20px 5px;">
                                         <a href="/" target="_blank" title="{{$demand->title}}"><font class="money" style="font-size: 18px;color: #ff6600;">
                                              @if($demand->price <0)
@@ -96,6 +103,7 @@
                                     <div class="hh">
                                         <span style="color:#2782b7">{{$data['count'][$demand->id]}}</span> 参与预约
                                         <span style="color:#2782b7">{{$data["serviceclass1"][$demand->id]}}</span><br>
+                                        <div class="locus" style="background: url({{asset('images/shop_680.png')}}) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
                                         <span style="color:#2782b7">{{$demand->city}}</span>
 
 
@@ -134,203 +142,83 @@
                     <div class="am-tab-panel am-fade" id="tab2">
                         <div class="findrequest">
                             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
+                                @foreach($data['genlservices'] as $genlservice)
                                 <li>
                                     <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
-                                            <img src="images/f4.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        <a href="" class="">
+                                            <img  class="service_img" src="{{$genlservice->picture or asset('images/f8.jpg')}}" />
+                                            <h3 class="am-gallery-title">{{$genlservice->title}}</h3>
+                                            <div class="am-gallery-desc service_content">{{mb_substr($genlservice->describe,0,20,'utf-8')}}</div>
                                         </a>
                                     </div>
                                 </li>
-                                <li>
+                                @endforeach
+                                @foreach($data['finlservices'] as $finlservices)
+                                 <li>
                                     <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
-                                            <img src="images/f3.png"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        <a href="" class="">
+                                             <img class="service_img" src="{{$finlservices->picture or asset('images/f8.jpg')}}" />
+                                             <h3 class="am-gallery-title">{{$finlservices->title}}</h3>
+                                             <div class="am-gallery-desc service_content">{{mb_substr($finlservices->describe,0,20,'utf-8')}}</div>
                                         </a>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-3.jpg" class="">
-                                            <img src="images/f2.jpg"  alt="米旭品牌设计"/>
-                                            <h3 class="am-gallery-title">米旭品牌设计</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-4.jpg" class="">
-                                            <img src="images/f1.jpg"  alt="龙博品牌设计"/>
-                                            <h3 class="am-gallery-title">龙博品牌设计</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
+                                 </li>
+                                 @endforeach
+                                 @foreach($data['qaservices'] as $qaservices)
+                                        <li>
+                                            <div class="am-gallery-item">
+                                                <a href="" class="">
+                                                    <img class="service_img" src="{{$qaservices->picture or asset('images/f8.jpg')}}" />
+                                                    <h3 class="am-gallery-title">{{$qaservices->title}}</h3>
+                                                    <div class="am-gallery-desc service_content">{{mb_substr($qaservices->describe,0,20,'utf-8')}}</div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                 @endforeach
+
                             </ul>
-                            <!--2-->
-                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
-                                            <img src="images/f4.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
-                                            <img src="images/f3.png"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-3.jpg" class="">
-                                            <img src="images/f2.jpg"  alt="米旭品牌设计"/>
-                                            <h3 class="am-gallery-title">米旭品牌设计</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-4.jpg" class="">
-                                            <img src="images/f1.jpg"  alt="龙博品牌设计"/>
-                                            <h3 class="am-gallery-title">龙博品牌设计</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!--3-->
-                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
-                                            <img src="images/f4.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
-                                            <img src="images/f3.png"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-3.jpg" class="">
-                                            <img src="images/f2.jpg"  alt="米旭品牌设计"/>
-                                            <h3 class="am-gallery-title">米旭品牌设计</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-4.jpg" class="">
-                                            <img src="images/f1.jpg"  alt="龙博品牌设计"/>
-                                            <h3 class="am-gallery-title">龙博品牌设计</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!--4-->
-                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
-                                            <img src="images/f4.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
-                                            <img src="images/f3.png"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-3.jpg" class="">
-                                            <img src="images/f2.jpg"  alt="米旭品牌设计"/>
-                                            <h3 class="am-gallery-title">米旭品牌设计</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="http://s.amazeui.org/media/i/demos/bing-4.jpg" class="">
-                                            <img src="images/f1.jpg"  alt="龙博品牌设计"/>
-                                            <h3 class="am-gallery-title">龙博品牌设计</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!--分页-->
-                            <div class="pager_container">
+                            {{--<!--分页-->--}}
+                            {{--<div class="pager_container">--}}
 
-                                <ul data-am-widget="pagination"
-                                    class="am-pagination am-pagination-default"
-                                >
+                                {{--<ul data-am-widget="pagination"--}}
+                                    {{--class="am-pagination am-pagination-default">--}}
 
-                                    <li class="am-pagination-first ">
-                                        <a href="#" class="">第一页</a>
-                                    </li>
+                                    {{--<li class="am-pagination-first ">--}}
+                                        {{--<a href="#" class="">第一页</a>--}}
+                                    {{--</li>--}}
 
-                                    <li class="am-pagination-prev ">
-                                        <a href="#" class="">上一页</a>
-                                    </li>
+                                    {{--<li class="am-pagination-prev ">--}}
+                                        {{--<a href="#" class="">上一页</a>--}}
+                                    {{--</li>--}}
 
 
-                                    <li class="">
-                                        <a href="#" class="">1</a>
-                                    </li>
-                                    <li class="am-active">
-                                        <a href="#" class="am-active">2</a>
-                                    </li>
-                                    <li class="">
-                                        <a href="#" class="">3</a>
-                                    </li>
-                                    <li class="">
-                                        <a href="#" class="">4</a>
-                                    </li>
-                                    <li class="">
-                                        <a href="#" class="">5</a>
-                                    </li>
+                                    {{--<li class="">--}}
+                                        {{--<a href="#" class="">1</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="am-active">--}}
+                                        {{--<a href="#" class="am-active">2</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="">--}}
+                                        {{--<a href="#" class="">3</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="">--}}
+                                        {{--<a href="#" class="">4</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="">--}}
+                                        {{--<a href="#" class="">5</a>--}}
+                                    {{--</li>--}}
 
 
-                                    <li class="am-pagination-next ">
-                                        <a href="#" class="">下一页</a>
-                                    </li>
+                                    {{--<li class="am-pagination-next ">--}}
+                                        {{--<a href="#" class="">下一页</a>--}}
+                                    {{--</li>--}}
 
-                                    <li class="am-pagination-last ">
-                                        <a href="#" class="">最末页</a>
-                                    </li>
-                                </ul>
+                                    {{--<li class="am-pagination-last ">--}}
+                                        {{--<a href="#" class="">最末页</a>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
 
-                            </div>
+                            {{--</div>--}}
 
 
 
@@ -348,92 +236,57 @@
                 <div class="guess-title" style="font-size: 20px;font-weight: bold;padding: 5px;border-bottom: 3px solid #b84554;margin-bottom: 20px;">
                     推荐服务商
                 </div>
+                @foreach($data['serviceuser'] as $serviceuser)
                 <div class=" fr main-c">
-                    <a class="fws-hd" href="http://shop.680.com/10442660/" title="米旭品牌设计 " target="_blank"><img src="../images/f2.jpg" width="210" height="210" alt="米旭品牌设计 "></a>
-                    <a class="fws-name" href="http://shop.680.com/10442660/" title="米旭品牌设计 " target="_blank" style="padding:20px;font-size: 18px;">米旭品牌设计 </a>
+                    <a class="fws-hd" href="" target="_blank">
+                        <img src="
+                        @if($serviceuser->elogo==null ||$serviceuser->elogo=="")
+                            {{asset('images/f10.jpg')}}
+                        @else
+                                {{$serviceuser->elogo}}
+                        @endif
+                                " width="210" height="210" alt="{{$serviceuser->ename}}"></a>
+                    <a class="fws-name" href="" title="{{$serviceuser->ename}}" target="_blank" style="padding:20px;font-size: 18px;">{{$serviceuser->ename}}</a>
                     <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
                     <div style="clear:both; height:5px"></div>
-                    <div class="main-cb">
-							<span class="fl"><img src="http://js.680.com/images/zuan2.gif" alt="钻石二级
-							积分：1430分" title="钻石二级
-							积分：1430" class="tip" align="absmiddle" style="width: 34px;height: 16px;position: inherit;background: #fff;margin-left: 20px;"></span>
-                        <div class="clear"></div>
-                    </div>
-
+                    {{--<div class="main-cb">--}}
+							{{--<span class="fl"><img src="http://js.680.com/images/zuan2.gif" alt="钻石二级--}}
+							{{--积分：1430分" title="钻石二级--}}
+							{{--积分：1430" class="tip" align="absmiddle" style="width: 34px;height: 16px;position: inherit;background: #fff;margin-left: 20px;"></span>--}}
+                        {{--<div class="clear"></div>--}}
+                    {{--</div>--}}
                     <div style="color: #666;height: 40px;width: 230px;line-height: 30px;padding-left: 20px;font-size: 14px;padding-top: 0;">
                         <div class="fl" style="float: left;">所在地：</div>
-
-                        <div class="locus" style="background: url(images/shop_680.png) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
+                        <div class="locus" style="background: url({{asset('images/shop_680.png')}}) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
                         <div style="float:left; padding-left:3px;width:110px; overflow:hidden;height:30px;">
-                            广东-佛山
-
+                            {{$serviceuser->city}}
                         </div>
                         <div class="clear"></div>
                     </div>
                     <div class="clear"></div>
-                    <div class="shop_zpjmsg" style="float: left;padding-left: 20px;">好评率：<span>100%</span>&nbsp;&nbsp;|&nbsp;&nbsp;总评：<span>5</span>分
+                    <div class="shop_zpjmsg" style="float: left;padding-left: 20px;">
+                        支持线下服务:
+                        <span>
+                            @if($serviceuser->is_offline == 1)
+                                否
+                            @else
+                                是
+                            @endif
+                        </span></br>
+                        含有视频教程：
+                        <span>
+                        @if($serviceuser->has_video == 0)
+                            无
+                        @else
+                            有
+                        @endif
+                        </span>
                     </div><div class="clear"></div>
                 </div>
-                <br>
-                <hr data-am-widget="divider" style="height: 4px;" class="am-divider am-divider-default" />
-                <br>
-                <!--推荐2-->
-                <div class=" fr main-c">
-                    <a class="fws-hd" href="http://shop.680.com/10442660/" title="龙博品牌设计 " target="_blank"><img src="../images/f1.jpg" width="210" height="210" alt="龙博品牌设计 "></a>
-                    <a class="fws-name" href="http://shop.680.com/10442660/" title="龙博品牌设计 " target="_blank" style="padding:20px;font-size: 18px;">龙博品牌设计 </a>
-                    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-                    <div style="clear:both; height:5px"></div>
-                    <div class="main-cb">
-							<span class="fl"><img src="http://js.680.com/images/zuan2.gif" alt="钻石二级
-							积分：1430分" title="钻石二级
-							积分：1430" class="tip" align="absmiddle" style="width: 34px;height: 16px;position: inherit;background: #fff;margin-left: 20px;"></span>
-                        <div class="clear"></div>
-                    </div>
-
-                    <div style="color: #666;height: 40px;width: 230px;line-height: 30px;padding-left: 20px;font-size: 14px;padding-top: 0;">
-                        <div class="fl" style="float: left;">所在地：</div>
-
-                        <div class="locus" style="background: url(images/shop_680.png) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
-                        <div style="float:left; padding-left:3px;width:110px; overflow:hidden;height:30px;">
-                            广东-佛山
-
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="shop_zpjmsg" style="float: left;padding-left: 20px;">好评率：<span>100%</span>&nbsp;&nbsp;|&nbsp;&nbsp;总评：<span>5</span>分
-                    </div><div class="clear"></div>
-                </div>
-                <br>
-                <hr data-am-widget="divider" style="height: 4px;" class="am-divider am-divider-default" />
-                <br>
-                <!--推荐3-->
-                <div class=" fr main-c">
-                    <a class="fws-hd" href="http://shop.680.com/10442660/" title="米旭品牌设计 " target="_blank"><img src="images/f2.jpg" width="210" height="210" alt="米旭品牌设计 "></a>
-                    <a class="fws-name" href="http://shop.680.com/10442660/" title="米旭品牌设计 " target="_blank" style="padding:20px;font-size: 18px;">米旭品牌设计 </a>
-                    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-                    <div style="clear:both; height:5px"></div>
-                    <div class="main-cb">
-							<span class="fl"><img src="http://js.680.com/images/zuan2.gif" alt="钻石二级
-							积分：1430分" title="钻石二级
-							积分：1430" class="tip" align="absmiddle" style="width: 34px;height: 16px;position: inherit;background: #fff;margin-left: 20px;"></span>
-                        <div class="clear"></div>
-                    </div>
-
-                    <div style="color: #666;height: 40px;width: 230px;line-height: 30px;padding-left: 20px;font-size: 14px;padding-top: 0;">
-                        <div class="fl" style="float: left;">所在地：</div>
-
-                        <div class="locus" style="background: url(images/shop_680.png) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
-                        <div style="float:left; padding-left:3px;width:110px; overflow:hidden;height:30px;">
-                            广东-佛山
-
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="shop_zpjmsg" style="float: left;padding-left: 20px;">好评率：<span>100%</span>&nbsp;&nbsp;|&nbsp;&nbsp;总评：<span>5</span>分
-                    </div><div class="clear"></div>
-                </div>
+                    <br>
+                    <hr data-am-widget="divider" style="height: 4px;" class="am-divider am-divider-default" />
+                    <br>
+                @endforeach
 
             </div>
         </div>

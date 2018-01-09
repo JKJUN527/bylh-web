@@ -19,7 +19,6 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
     public function index() {
         $data = array();
         $data['uid'] = AuthController::getUid();

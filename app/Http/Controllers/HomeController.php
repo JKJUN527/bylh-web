@@ -116,7 +116,11 @@ class HomeController extends Controller {
     //搜索热门服务商（根据订单量及订单总和）
     public function searchServiceUser() {
         $data = array();
-
+        //暂时推荐加急服务商
+        $data = Serviceinfo::where('is_urgency',1)
+            ->orderBy('updated_at','desc')
+            ->take(3)
+            ->get();
 
         return $data;
     }
@@ -157,6 +161,7 @@ class HomeController extends Controller {
                             ->orwhere('describe', 'like', '%' . $keywords . '%')
                             ->orwhere('experience', 'like', '%' . $keywords . '%');
                     })
+                    ->take(20)
                     ->get();
                 $data['finlservices'] = Finlservices::where('state', '=', 0)
                     ->where('type', 1)
@@ -164,6 +169,7 @@ class HomeController extends Controller {
                         $query->orwhere('title', 'like', '%' . $keywords . '%')
                             ->orwhere('describe', 'like', '%' . $keywords . '%');
                     })
+                    ->take(20)
                     ->get();
                 $data['qaservices'] = Qaservices::where('state', '=', 0)
                     ->where('type', 2)
@@ -172,7 +178,9 @@ class HomeController extends Controller {
                             ->orwhere('describe', 'like', '%' . $keywords . '%')
                             ->orwhere('experience', 'like', '%' . $keywords . '%');
                     })
+                    ->take(20)
                     ->get();
+                $data['serviceuser'] = HomeController::searchServiceUser();
                 $data['demands'] = Demands::where('state',0)
                     ->where(function ($query) use ($keywords) {
                         $query->orwhere('title', 'like', '%' . $keywords . '%')
@@ -192,6 +200,7 @@ class HomeController extends Controller {
                         ->where('state',0)
                         ->count();
                 }
+
 
             }
         }
