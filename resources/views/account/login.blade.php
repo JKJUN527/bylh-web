@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.css')}}" />
     <link href="{{asset('css/dlstyle.css')}}" rel="stylesheet" type="text/css">
     <script src="{{asset('js/jquery.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
 </head>
 
 <body>
@@ -57,41 +58,29 @@
         </div>
     </div>
 </div>
+<script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
 <script>
     $("input[type='submit']").click(function (event) {
-        alert(1111);
         var username = $('#user');
         var password = $('#password');
-        {{--if (phone.is(':visible') && phone.val() === '') {--}}
-            {{--setError(phone, 'phone', '不能为空');--}}
-            {{--return;--}}
-        {{--} else if (phone.is(":visible") && !/^1[34578]\d{9}$/.test(phone.val())) {--}}
-            {{--setError(phone, 'phone', '手机号格式不正确');--}}
-            {{--return;--}}
-        {{--} else {--}}
-            {{--removeError(phone, 'phone');--}}
-        {{--}--}}
-
-        {{--if (email.is(':visible') && email.val() === '') {--}}
-            {{--setError(email, 'email', '不能为空');--}}
-            {{--return;--}}
-        {{--} else if (email.is(':visible') &&--}}
-                {{--!/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(email.val())) {--}}
-            {{--setError(email, 'email', '邮箱格式不正确');--}}
-            {{--return;--}}
-        {{--} else {--}}
-            {{--removeError(email, 'email')--}}
-        {{--}--}}
-
-        {{--if (password.val() === '') {--}}
-            {{--setError(password, 'password', '不能为空');--}}
-            {{--return;--}}
-        {{--} else {--}}
-            {{--removeError(password, 'password')--}}
-        {{--}--}}
-
+        if (username.val() === '') {
+            swal("","请输入用户名", "error");
+            return;
+        }
+        if (password.val() === '') {
+            swal("","请输入登录密码", "error");
+            return;
+        }
         var formData = new FormData();
-        formData.append("username", username.val());
+
+        if (/^1[34578]\d{9}$/.test(username.val())) {
+            formData.append("phone", username.val());
+        } else if(/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(username.val())) {
+            formData.append("email", username.val());
+        } else{
+            formData.append("username", username.val());
+        }
+
         formData.append("password", password.val());
 
         $.ajax({
@@ -105,11 +94,22 @@
             success: function (data) {
                 //console.log(data);
                 var result = JSON.parse(data);
-                if(result.status == 200){
-                    alert('登陆成功');
+                if (result.status == 200) {
+                    swal({
+                        title: "登录成功",
+                        text: "跳转到首页",
+                        type: "info",
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true
+                    }, function () {
+                        self.location = "/index";
+                    });
+                }else{
+                    swal('',result.msg,'error');
                 }
-//                checkResultWithLocation(result.status, "登录成功，正在跳转", result.msg, "/index");
-
             }
         });
     });

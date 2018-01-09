@@ -17,11 +17,7 @@ class RegisterController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('guest');
-        $uid = AuthController::getUid();
-        if($uid !=0){
-            return redirect()->back();
-        }
+        $this->middleware('guest');
     }
 
     public function index() {

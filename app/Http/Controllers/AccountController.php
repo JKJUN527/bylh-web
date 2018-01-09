@@ -13,6 +13,8 @@ use App\User;
 use App\Userinfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 //处理用户个人中心页面数据
 class AccountController extends Controller {
@@ -447,4 +449,13 @@ class AccountController extends Controller {
         }
 
     }
+    //登出函数
+    public function logout() {
+        Auth::logout();
+        Session::flush();   //清除所有缓存
+
+//        return Session::all();
+        return redirect('index');
+    }
+
 }

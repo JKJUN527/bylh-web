@@ -21,8 +21,8 @@ class LoginController extends Controller {
     use AuthenticatesUsers;
 
     public function __construct() {
-    $this->middleware('guest');
-}
+        $this->middleware('guest');
+    }
 
     //打开登陆页面，传递当前用户信息到前端显示
     public function index() {
@@ -32,7 +32,7 @@ class LoginController extends Controller {
         $data['type'] = AuthController::getType();
 
 
-       # return $data;
+//        return $data;
         return view('account/login', ["data" => $data]);
     }
 
@@ -42,16 +42,20 @@ class LoginController extends Controller {
         $input = $request->all();
 
         //手机登陆
-        if ($request->has('username')) {
-            $phone = $input['username'];
+        if ($request->has('phone')) {
+            $phone = $input['phone'];
             $password = $input['password'];
 
             //判断是否存在该用户
             $isexist = User::where('tel', '=', $phone)
+                ->where(function ($query) {
+                    $query->where('tel_verify',1)
+                        ->orWhere('email_verify',1);
+                })
                 ->get();
             if ($isexist->count()) {
                 $validatorTel = Validator::make($input, [
-                    'username' => 'required|regex:/^1[34578][0-9]{9}$/',
+                    'phone' => 'required|regex:/^1[34578][0-9]{9}$/',
                     'password' => 'required|min:6|max:60'
                 ]);
                 if (!($validatorTel->fails())) {
@@ -69,7 +73,7 @@ class LoginController extends Controller {
                             return $data;
                         }
                     $data['status'] = 400;
-                    $data['msg'] = "用户名或密码错误！";
+                    $data['msg'] = "电话号码或密码错误！";
                     return $data;
 
                 } else {
@@ -88,7 +92,10 @@ class LoginController extends Controller {
             $password = $input['password'];
 
             $isexist = User::where('mail', '=', $email)
-                ->where('email_vertify', '=', 1)
+                ->where(function ($query) {
+                    $query->where('tel_verify',1)
+                        ->orWhere('email_verify',1);
+                })
                 ->get();
             if ($isexist->count()) {
                 $validatorMail = Validator::make($input, [
@@ -101,7 +108,7 @@ class LoginController extends Controller {
                         $uid = Auth::user()->uid;
                         session()->put('frontUid',$uid);
                         $type = User::where('uid', '=', $uid)
-                            ->where('email_vertify','=',1)
+                            ->where('email_verify','=',1)
                             ->select(['type'])
                             ->get();
                         $type = $type[0]['type'];
@@ -111,7 +118,7 @@ class LoginController extends Controller {
                         return $data;
                     } else {
                         $data['status'] = 400;
-                        $data['msg'] = "用户名或密码错误！";
+                        $data['msg'] = "邮箱或密码错误！";
                         return $data;
                     }
                 } else {
@@ -124,19 +131,48 @@ class LoginController extends Controller {
                 $data['msg'] = "该用户未注册或未激活！";
                 return $data;
             }
-        } else {
+        } else if($request->has('username')){
+            $username = $input['username'];
+            $password = $input['password'];
+
+            $isexist = User::where('username', '=', $username)
+                ->where(function ($query) {
+                    $query->where('tel_verify',1)
+                        ->orWhere('email_verify',1);
+                })
+                ->get();
+            if ($isexist->count()) {
+                if (Auth::attempt(array('username' => $username, 'password' => $password))) {
+
+                    $uid = Auth::user()->uid;
+                    session()->put('frontUid',$uid);
+                    $type = User::where('uid', '=', $uid)
+                        ->where(function ($query) {
+                            $query->where('tel_verify',1)
+                                ->orWhere('email_verify',1);
+                        })
+                        ->select(['type'])
+                        ->get();
+                    $type = $type[0]['type'];
+                    session()->put('type', $type);
+                    $data['status'] = 200;
+                    $data['msg'] = "登陆成功！";
+                    return $data;
+                } else {
+                    $data['status'] = 400;
+                    $data['msg'] = "用户名或密码错误！";
+                    return $data;
+                }
+            }else{
+                $data['status'] = 400;
+                $data['msg'] = "该用户未注册或未激活！";
+                return $data;
+            }
+        }else {
             $data['status'] = 400;
             $data['msg'] = "登录失败";
             return $data;
         }
-    }
-
-    //登出函数
-    public function logout() {
-        Auth::logout();
-        Session::flush();   //清除所有缓存
-        // return 123;
-        return redirect('index');
     }
 
 }
