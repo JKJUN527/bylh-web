@@ -213,7 +213,7 @@ if (!Object.create) {
                         // Object.prototype.__proto__ === null
 
     // Check for document.domain and active x support
-    // No need to use active x approach when document.domain is not set
+    // No demands to use active x approach when document.domain is not set
     // see https://github.com/es-shims/es5-shim/issues/150
     // variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
     /* global ActiveXObject */
@@ -1879,7 +1879,7 @@ if (
             var separatorCopy = new RegExp(separator.source, flags + 'g');
             string += ''; // Type-convert
             if (!compliantExecNpcg) {
-                // Doesn't need flags gy, but they don't hurt
+                // Doesn't demands flags gy, but they don't hurt
                 separator2 = new RegExp('^' + separatorCopy.source + '$(?!\\s)', flags);
             }
             /* Values for `limit`, per the spec:

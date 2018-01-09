@@ -1,4 +1,51 @@
 @extends('demo.admin')
+@section('title', '不亦乐乎')
+@section('custom-style')
+<style type="text/css">
+    .comcategory li{
+        font-size:14px;
+        padding: 3px;
+    }
+    .comcategory li a:hover{
+        color: #b84554;
+    }
+    .comcategory li i{
+        color: gray;
+        margin-left: 10px;
+    }
+    .title-first a{
+        text-align: center;
+        padding: 60px;
+        font-size: 18px;
+        color: #000;
+        font-weight: bold;
+    }
+    .title-first a:hover{
+        color: #b84554;
+        font-weight: bold;
+    }
+    .demo li{
+        float: none;
+        width: 100%;
+        padding: 0px 5px;
+        border: none;
+        height: 30px;
+        line-height: 30px;
+    }
+    .title-first{
+        float: none;
+        width: 100%;
+        padding: 0px 5px;
+        border: none;
+        height: 30px;
+        line-height: 30px;
+    }
+    .am-nav-tabs > li.am-active > a, .am-nav-tabs > li.am-active > a:hover, .am-nav-tabs > li.am-active > a:focus, .am-nav-tabs > li > a:hover{
+        background:#ee6363;
+        color: #fff;
+    }
+</style>
+@endsection
 @section('content')
 <div class="hmtop">
     <!--顶部导航条 -->
@@ -149,11 +196,6 @@
                 </a>
             </div>
         </div>
-
-
-        <!--各类活动-->
-        <!--走马灯 -->
-
         <div class="marqueenTwo" style="background-color: #000;">
             <div class="demo">
                 <ul style="padding-top:70px;">
@@ -543,54 +585,6 @@
         <img src="{{asset('images/ad5.jpg')}}">
     </div>
 @endsection
-    @section('footer')
-    <div class="footer " style="border: none;">
-        <div class="footer-hd ">
-        </div>
-        <div class="footer-bd ">
-            <br>
-            <p style="text-align: center;">
-
-                Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
-                客服电话：88888888<br>
-                联系邮箱：不亦乐乎＠bylehu.com
-
-            </p>
-        </div>
-        @endsection
-    </div>
-</div>
-</div>
-</div>
-</div>
-
-<!--引导 -->
-<div class="navCir">
-    <li class="active"><a href="{{asset('index')}}"><i class="am-icon-home "></i>首页</a></li>
-    <li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
-    <li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>订单详情</a></li>
-    <li><a href="{{asset('home')}}"><i class="am-icon-user"></i>我的</a></li>
-</div>
-<!--菜单 -->
-<div class=tip>
-    <div id="sidebar">
-        <div id="wrap">
-            <div id="prof" class="item ">
 
 
-            </div>
 
-
-            <!--回到顶部 -->
-            <div id="quick_links_pop " class="quick_links_pop hide "></div>
-
-        </div>
-
-    </div>
-</div>
-<script>
-    window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
-</script>
-<script type="text/javascript " src="../basic/js/quick_links.js "></script>
-</body>
-</html>

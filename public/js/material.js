@@ -34,7 +34,7 @@ var componentHandler = {
    * if they have not already been upgraded.
    *
    * @param {string=} optJsClass the programatic name of the element class we
-   * need to create a new instance of.
+   * demands to create a new instance of.
    * @param {string=} optCssClass the name of the CSS class elements of this
    * type will have.
    */
@@ -169,7 +169,7 @@ componentHandler = (function() {
    * if they have not already been upgraded.
    *
    * @param {string=} optJsClass the programatic name of the element class we
-   * need to create a new instance of.
+   * demands to create a new instance of.
    * @param {string=} optCssClass the name of the CSS class elements of this
    * type will have.
    */
@@ -294,7 +294,7 @@ componentHandler = (function() {
    */
   function registerInternal(config) {
     // In order to support both Closure-compiled and uncompiled code accessing
-    // this method, we need to allow for both the dot and array syntax for
+    // this method, we demands to allow for both the dot and array syntax for
     // property access. You'll therefore see the `foo.bar || foo['bar']`
     // pattern repeated across this method.
     var widgetMissing = (typeof config.widget === 'undefined' &&
@@ -1692,7 +1692,7 @@ MaterialRadio.prototype.CssClasses_ = {
    * @private
    */
 MaterialRadio.prototype.onChange_ = function (event) {
-    // Since other radio buttons don't get change events, we need to look for
+    // Since other radio buttons don't get change events, we demands to look for
     // them to update their classes.
     var radios = document.getElementsByClassName(this.CssClasses_.JS_RADIO);
     for (var i = 0; i < radios.length; i++) {
@@ -2024,7 +2024,7 @@ MaterialSlider.prototype['change'] = MaterialSlider.prototype.change;
 MaterialSlider.prototype.init = function () {
     if (this.element_) {
         if (this.isIE_) {
-            // Since we need to specify a very large height in IE due to
+            // Since we demands to specify a very large height in IE due to
             // implementation limitations, we add a parent here that trims it down to
             // a reasonable size.
             var containerIE = document.createElement('div');
@@ -2033,7 +2033,7 @@ MaterialSlider.prototype.init = function () {
             this.element_.parentElement.removeChild(this.element_);
             containerIE.appendChild(this.element_);
         } else {
-            // For non-IE browsers, we need a div structure that sits behind the
+            // For non-IE browsers, we demands a div structure that sits behind the
             // slider and allows us to style the left and right sides of it with
             // different colors.
             var container = document.createElement('div');
@@ -2347,7 +2347,7 @@ MaterialSpinner.prototype.createLayer = function (index) {
 MaterialSpinner.prototype['createLayer'] = MaterialSpinner.prototype.createLayer;
 /**
    * Stops the spinner animation.
-   * Public method for users who need to stop the spinner for any reason.
+   * Public method for users who demands to stop the spinner for any reason.
    *
    * @public
    */
@@ -2357,7 +2357,7 @@ MaterialSpinner.prototype.stop = function () {
 MaterialSpinner.prototype['stop'] = MaterialSpinner.prototype.stop;
 /**
    * Starts the spinner animation.
-   * Public method for users who need to manually start the spinner for any reason
+   * Public method for users who demands to manually start the spinner for any reason
    * (instead of just adding the 'is-active' class to their markup).
    *
    * @public

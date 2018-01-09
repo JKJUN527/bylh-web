@@ -15,9 +15,12 @@
   <!--<linkhref="css/vipstyle.css" rel="stylesheet" type="text/css">-->
     <link href="{{asset("css/infstyle.css")}}" rel="stylesheet" type="text/css">
     <link href="{{asset("css/orstyle.css")}}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{{asset('js/jquery-1.7.2.min.js')}}"></script>
+    <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.js')}}"></script>
     @section("custom-style")
     @show
 </head>
+
 
 <body>
 <!--头 -->
@@ -36,10 +39,12 @@
                 </ul>
                 <ul class="message-r">
                     <div class="topMessage home">
-                        <div class="menu-hd"><a href="/index" target="_top" class="h"><i class="am-icon-home am-icon-fw"></i>首页</a></div>
+                        <div class="menu-hd"><a href="/index" target="_top" class="h"><i
+                                        class="am-icon-home am-icon-fw"></i>首页</a></div>
                     </div>
                     <div class="topMessage my-shangcheng">
-                        <div class="menu-hd MyShangcheng"><a href="/home" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+                        <div class="menu-hd MyShangcheng"><a href="/home" target="_top"><i
+                                        class="am-icon-user am-icon-fw"></i>个人中心</a></div>
                     </div>
                 </ul>
             </div>
@@ -54,7 +59,8 @@
                 <div class="search-bar pr">
                     <a name="index_none_header_sysc" href="/search"></a>
                     <form>
-                        <input id="searchInput" name="index_none_header_sysc" value="{{$data['keyword'] or ''}}" type="text" placeholder="搜索" autocomplete="off">
+                        <input id="searchInput" name="index_none_header_sysc" value="{{$data['keyword'] or ''}}"
+                               type="text" placeholder="搜索" autocomplete="off">
                         <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
                     </form>
                 </div>
@@ -77,7 +83,7 @@
         </ul>
         <div class="nav-extra">
             <a href="/message" style="color: #f5e79e;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息
-            <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
+                <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
         </div>
     </div>
 </div>
@@ -123,23 +129,23 @@
             <li class="person">
                 <p><i class="am-icon-dollar"></i>我的服务</p>
                 <ul>
-                    <li><a href="/sendrequest">发布服务</a></li>
-                    <li><a href="/myrequest">服务列表</a></li>
+                    <li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
+                    <li><a href="{{asset('myrequest')}}">服务列表</a></li>
                 </ul>
             </li>
 
             <li class="person">
                 <p><i class="am-icon-tags"></i>我的需求</p>
                 <ul>
-                    <li><a href="/sendneed">发布需求</a></li>
-                    <li><a href="/myneed">需求列表</a></li>
+                    <li><a href="{{asset('sendneed')}}">发布需求</a></li>
+                    <li><a href="{{asset('myneed')}}">需求列表</a></li>
                 </ul>
             </li>
 
             <li class="person">
                 <p><i class="am-icon-qq"></i>信息中心</p>
                 <ul>
-                    <li><a href="/message">站内信</a></li>
+                    <li><a href="{{asset('message')}}">站内信</a></li>
                     <li><a href="/news">我的消息</a></li>
                 </ul>
             </li>

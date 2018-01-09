@@ -1,4 +1,5 @@
 @extends('demo.admin3')
+@section('title', '个人中心')
 @section('content')
 <div class="center">
     <div class="col-main">
@@ -7,14 +8,13 @@
                 <div class="wrap-list">
                     <div class="m-user">
                         <!--个人信息 -->
-
                         <div class="m-userinfo">
                             <a href="news.html">
                                 <div class="tipsBox"><i class="am-icon-envelope"></i></div>
                             </a>
                             <div class="m-baseinfo">
                                 <a class="m-pic" href="information.html" style="width: 120px;height: 120px;">
-                                    <img src="../images/touxiang.jpg">
+                                    <img src="{{asset('images/touxiang.jpg')}}">
                                 </a>
                                 <div class="m-info">
                                     <em class="s-name" style="padding-top: 20px;">小叮当</em>
@@ -23,7 +23,7 @@
                             </div>
                             <div class="m-right">
                                 <div class="m-new">
-                                    <a href="/message"><i class="am-icon-dropbox  am-icon-md" style="padding-right:5px ;"></i>消息盒子</a>
+                                    <a href="{{asset('message')}}"><i class="am-icon-dropbox  am-icon-md" style="padding-right:5px ;"></i>消息盒子</a>
                                 </div>
 
                             </div>
@@ -51,25 +51,25 @@
                         <!--我的钱包-->
                         <div class="wallet">
                             <div class="s-bar">
-                                <a href="/myneed">
+                                <a href="{{asset('myneed"')}}">
                                 <i class="s-icon"></i>我的需求
                                 <label style="float: right;">更多>>></label></a>
                             </div>
                             <p class="m-big squareS">
                                 <a href="#">
-                                    <i><img src="../images/f3.png"/></i>
+                                    <i><img src="{{asset('images/f3.png')}}"/></i>
                                     <span class="m-title">网站建设</span>
                                 </a>
                             </p>
                             <p class="m-big squareA">
                                 <a href="#">
-                                    <i><img src="../images/f1.jpg"/></i>
+                                    <i><img src="{{asset('images/f1.jpg')}}"/></i>
                                     <span class="m-title">产品设计</span>
                                 </a>
                             </p>
                             <p class="m-big squareL">
                                 <a href="#">
-                                    <i><img src="../images/f2.jpg"/></i>
+                                    <i><img src="{{asset('images/f2.jpg"')}}"/></i>
                                     <span class="m-title">取名测字</span>
                                 </a>
                             </p>
@@ -85,24 +85,23 @@
                                 <div class="m-order">
                                     <div class="s-bar">
                                         <i class="s-icon"></i>我的订单
-                                        <a class="i-load-more-item-shadow" href="/order">全部订单</a>
+                                        <a class="i-load-more-item-shadow" href="{{asset('order')}}">全部订单</a>
                                     </div>
                                     <ul>
-                                        <li><a href="order.html"><i><img src="../images/pay.png"/></i><span>待付款</span></a></li>
-                                        <li><a href="order.html"><i><img src="../images/send.png"/></i><span>待发货<em class="m-num">1</em></span></a></li>
-                                        <li><a href="order.html"><i><img src="../images/receive.png"/></i><span>待收货</span></a></li>
-                                        <li><a href="order.html"><i><img src="../images/comment.png"/></i><span>待评价<em class="m-num">3</em></span></a></li>
-                                        <li><a href="change.html"><i><img src="../images/refund.png"/></i><span>退换货</span></a></li>
+                                        <li><a href="{{asset('order')}}"><i><img src="{{asset('images/pay.png')}}"/></i><span>待付款</span></a></li>
+                                        <li><a href="{{asset('order')}}"><i><img src="{{asset('images/send.png')}}"/></i><span>待发货<em class="m-num">1</em></span></a></li>
+                                        <li><a href="{{asset('order')}}"><i><img src="{{asset('images/receive.png')}}"/></i><span>待收货</span></a></li>
+                                        <li><a href="{{asset('order')}}"><i><img src="{{asset('images/comment.png')}}"/></i><span>待评价<em class="m-num">3</em></span></a></li>
                                     </ul>
                                     <div class="orderContentBox">
                                         <div class="orderContent">
                                             <div class="orderContentpic">
                                                 <div class="imgBox">
-                                                    <a href="orderinfo.html"><img src="../images/f1.jpg"></a>
+                                                    <a href="{{asset('orderinfo')}}"><img src="{{asset('images/f1.jpg')}}"></a>
                                                 </div>
                                             </div>
                                             <div class="detailContent">
-                                                <a href="orderinfo.html" class="delivery">已确认</a>
+                                                <a href="{{asset('orderinfo')}}" class="delivery">已确认</a>
                                                 <div class="orderID">
                                                     <span class="time">2016-03-09</span>
                                                     <span class="splitBorder">|</span>
@@ -123,11 +122,11 @@
                                         <div class="orderContent">
                                             <div class="orderContentpic">
                                                 <div class="imgBox">
-                                                    <a href="orderinfo.html"><img src="../images/f2.jpg"></a>
+                                                    <a href="{{asset('orderinfo')}}"><img src="{{asset('images/f2.jpg')}}"></a>
                                                 </div>
                                             </div>
                                             <div class="detailContent">
-                                                <a href="orderinfo.html" class="delivery">已付款</a>
+                                                <a href="{{asset('orderinfo')}}" class="delivery">已付款</a>
                                                 <div class="orderID">
                                                     <span class="time">2016-03-09</span>
                                                     <span class="splitBorder">|</span>
@@ -153,7 +152,7 @@
                             <i class="s-icon"></i>我的常用
                         </div>
                         <ul>
-                            <a href="order.html">
+                            <a href="{{asset('orderinfo')}}">
                                 <li class="am-u-sm-4"><i class="am-icon-truck am-icon-md"></i>
                                     <p>物流查询</p>
                                 </li>
@@ -286,25 +285,8 @@
                         </ul>
                     </div>
                 </div>
-
-
             </div>
             <div class="clear"></div>
         </div>
-
+        @endsection
         <!--底部-->
-        @section('footer')
-        <div class="footer ">
-            <div class="footer-hd ">
-            </div>
-            <div class="footer-bd ">
-                <p style="text-align: center;">
-                    ©2017-2018 bylh.com 成备xxxxxxxx号<br>
-                    不亦乐乎（成都）有限公司<br>
-                    客服：xxxx-xxx-xxx
-
-                </p>
-            </div>
-        </div>
-    @endsection
-@endsection

@@ -365,7 +365,7 @@ class DemandsController extends Controller {
 
         }
 //        return $data;
-        return view('need/needinfo',['data'=>$data]);
+        return view('demands/needinfo',['data'=>$data]);
     }
     //保存编辑服务内容
     //option 123 表示保存一般服务、实习中介、专业问答服务。
