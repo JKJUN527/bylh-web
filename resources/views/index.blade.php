@@ -52,6 +52,7 @@
         <div class="slideall" style="height: auto;">
 
             <!--<div class="long-title"><span class="all-goods">全部分类</span></div>-->
+            <div class="long-title"><span class="all-goods">全部分类</span></div>
             <div class="nav-cont" >
                 <ul>
                     <li class="index"><a href="{{asset('index')}}">首页</a></li>

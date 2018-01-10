@@ -1,4 +1,4 @@
-@extends('demo.admin2')
+@extends('demo.admin3')
 @section('content')
 <div class="center">
     <div class="col-main">

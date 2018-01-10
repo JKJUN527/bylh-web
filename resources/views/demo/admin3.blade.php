@@ -24,18 +24,29 @@
                 <ul class="message-l">
                     <div class="topMessage">
                         <div class="menu-hd">
-                            <a href="{{asset('login')}}" target="_top" class="h">亲，请登录</a>
-                            <a href="{{asset('register')}}" target="_top">免费注册</a>
+                            @if($data['uid'] == 0)
+                                <a href="{{asset('/account/login')}}" target="_top" class="h">亲，请登录</a>
+                                <a href="{{asset('/account/register')}}" target="_top">免费注册</a>
+                            @endif
                         </div>
                     </div>
                 </ul>
                 <ul class="message-r">
-                    <div class="topMessage home">
-                        <div class="menu-hd"><a href="{{asset('index')}}" target="_top" class="h"><i class="am-icon-home am-icon-fw"></i>首页</a></div>
-                    </div>
-                    <div class="topMessage my-shangcheng">
-                        <div class="menu-hd MyShangcheng"><a href="{{asset('home')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
-                    </div>
+                    @if($data['uid'] ==0)
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng"><a href="{{asset('/account/login')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>登录</a></div>
+                        </div>
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng"><a  href="{{asset('/account/register')}}" target="_top"><i class="am-icon-user-plus am-icon-fw"></i>注册</a></div>
+                        </div>
+                    @else
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng"><a href="{{asset('/account/index')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>欢迎你:{{$data['username']}}</a></div>
+                        </div>
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng"><a  href="{{asset('/account/logout')}}" target="_top"><i class="am-icon-outdent am-icon-fw"></i>退出</a></div>
+                        </div>
+                    @endif
                 </ul>
             </div>
 
@@ -43,14 +54,14 @@
 
             <div class="nav white">
                 <div class="logoBig">
-                    <li><img src="{{asset('images/bylh.png')}}"  style="width: 60%;" /></li>
+                    <li><img src="{{asset('images/bylh2.png')}}" onclick="gobackhome();"/></li>
                 </div>
 
                 <div class="search-bar pr">
-                    <a name="index_none_header_sysc" href="{{asset('search')}}"></a>
+                    <a name="index_none_header_sysc" href="#"></a>
                     <form>
-                        <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-                        <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        <input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off">
+                        <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="button">
                     </form>
                 </div>
             </div>
@@ -94,12 +105,12 @@
 <aside class="menu">
     <ul>
         <li class="person active">
-            <a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
+            <a href="{{asset('account/index')}}"><i class="am-icon-user"></i>个人中心</a>
         </li>
         <li class="person">
             <p><i class="am-icon-newspaper-o"></i>个人资料</p>
             <ul>
-                <li> <a href="{{asset('user')}}">个人信息</a></li>
+                <li> <a href="{{asset('/account/baseedit')}}">个人信息</a></li>
                 <li> <a href="{{asset('safety')}}">安全设置</a></li>
             </ul>
         </li>
@@ -144,3 +155,17 @@
 </div>
 </body>
 </html>
+<script>
+    $("#ai-topsearch").click( function () {
+        search();
+    });
+    function search() {
+        var keyword = $("#searchInput").val();
+        if(keyword != ''){
+            window.location.href = "/search?keyword="+keyword;
+        }
+    }
+    function gobackhome() {
+        window.location.href = "/index";
+    }
+</script>

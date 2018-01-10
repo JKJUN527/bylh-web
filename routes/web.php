@@ -34,7 +34,7 @@ Route::get('account/index', ['uses' => 'AccountController@index']);  //完成
 Route::get('account/', ['uses' => 'AccountController@index']);  //完成
 
 //修改个人资料
-Route::get('account/baseedit', ['uses' => 'AccountController@index']);//个人、企业基本信息修改界面
+Route::get('account/baseedit', ['uses' => 'AccountController@usersinfo']);//个人、企业基本信息修改界面
 Route::post('account/baseedit', ['uses' => 'AccountController@editbaseinfo']);//提交修改
 //修改服务用户服务相关信息
 Route::get('account/serviceedit', ['uses' => 'AccountController@serviceinfo']);//服务相关信息修改页面

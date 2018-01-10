@@ -13,7 +13,7 @@
                                 <div class="tipsBox"><i class="am-icon-envelope"></i></div>
                             </a>
                             <div class="m-baseinfo">
-                                <a class="m-pic" href="information.html" style="width: 120px;height: 120px;">
+                                <a class="m-pic" href="/account/baseedit" style="width: 120px;height: 120px;">
                                     <img src="{{asset('images/touxiang.jpg')}}">
                                 </a>
                                 <div class="m-info">

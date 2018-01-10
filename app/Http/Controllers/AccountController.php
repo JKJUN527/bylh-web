@@ -31,27 +31,27 @@ class AccountController extends Controller {
         //暂定初始页面需要返回内容
         //返回已发布的服务列表及需求列表
         //返回个人已发布服务列表
-        switch ($data['type']) {
-            case 1://需求用户
-                $data['demandsList'] = DemandsController::getDemandsList();
-                $info = new InfoController();
-                $data['personInfo'] = $info->getPersonInfo();
-                $data['messageNum'] = $this->getMessageNum();
-                $data['orderNum'] = $this->getOrderNum();
-                break;
-            case 2://服务用户
-                $data['type'] = 2;
-                $info = new InfoController();
-                $data['uid'] = AuthController::getUid();
-                $data['enterpriseInfo'] = $info->getEnprInfo();
-                $data['positionList'] = $this->getPostionList();
-                $data['messageNum'] = $this->getMessageNum();
-                $data['applyList'] = $this->getApplyList();
-                $data['industry'] = Industry::all();
-                break;
-        }
+//        switch ($data['type']) {
+//            case 1://需求用户
+//                $data['demandsList'] = DemandsController::getDemandsList();
+//                $info = new InfoController();
+//                $data['personInfo'] = $info->getPersonInfo();
+//                $data['messageNum'] = $this->getMessageNum();
+//                $data['orderNum'] = $this->getOrderNum();
+//                break;
+//            case 2://服务用户
+//                $data['type'] = 2;
+//                $info = new InfoController();
+//                $data['uid'] = AuthController::getUid();
+//                $data['enterpriseInfo'] = $info->getEnprInfo();
+//                $data['positionList'] = $this->getPostionList();
+//                $data['messageNum'] = $this->getMessageNum();
+//                $data['applyList'] = $this->getApplyList();
+//                $data['industry'] = Industry::all();
+//                break;
+//        }
 
-        return view('account.index',['data'=>$data]);
+        return view('person.home',['data'=>$data]);
     }
     //获取已发布一般服务列表
     public function getGenlservices($uid){
@@ -110,6 +110,23 @@ class AccountController extends Controller {
             return $num;
     }
     //修改个人基本资料主页
+    public function usersinfo() {
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+
+        if ($data['uid'] == 0) {//用户未登陆
+//            $data['status'] = 400;
+//            $data['msg'] = "请先登陆再进行操作";
+//            return $data;
+            return redirect()->back();
+        }
+
+        $data['userinfo'] = Userinfo::where('uid',$data['uid'])->first();
+
+        return view('person.user',['data'=>$data]);
+    }
     public function editbaseinfo(Request $request)
     {
         $data = array();

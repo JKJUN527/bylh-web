@@ -295,25 +295,9 @@
 </div>
 <!--广告-->
 <div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-    <img src="images/ad1.png">
+    <img src="{{$data['ad'][0]->picture or asset('images/ad1.png')}}" alt="{{$data['ad'][0]->title}}">
 </div>
 <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-    <img src="images/ad1.png">
+    <img src="{{$data['ad'][1]->picture or asset('images/ad1.png')}}" alt="{{$data['ad'][1]->title}}">
 </div>
-@section('footer')
-<div class="footer " style="border: none;">
-    <div class="footer-hd ">
-    </div>
-    <div class="footer-bd ">
-        <br>
-        <p style="text-align: center;">
-
-            Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
-            客服电话：88888888<br>
-            联系邮箱：不亦乐乎＠bylehu.com
-
-        </p>
-    </div>
-</div>
-    @endsection
 @endsection

@@ -188,7 +188,9 @@ class HomeController extends Controller {
                     })
 //                    ->get();
                     ->paginate(1);
+                $data['ad'] = Adverts::where('type',0)->orderBy('location','desc')->take(2)->get();
                 $serviceclass1 = Serviceclass1::select('id','name')->get();
+
                 $data['serviceclass1'] = array();
                 foreach ($serviceclass1 as $class1){
                     $data['serviceclass1'][$class1->id] = $class1->name;

@@ -15,6 +15,10 @@
     <script src="{{asset('AmazeUI-2.4.2/assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.min.js')}}"></script>
     <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
+    <link href="{{asset('css/vipstyle.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/infstyle.css')}}" rel="stylesheet" type="text/css">
+
+
     @section("custom-style")
     @show
 </head>
@@ -25,18 +29,29 @@
         <ul class="message-l">
             <div class="topMessage">
                 <div class="menu-hd">
-                    <a href="{{asset('/account/login')}}" target="_top" class="h">亲，请登录</a>
-                    <a href="{{asset('/account/register')}}" target="_top">免费注册</a>
+                    @if($data['uid'] == 0)
+                        <a href="{{asset('/account/login')}}" target="_top" class="h">亲，请登录</a>
+                        <a href="{{asset('/account/register')}}" target="_top">免费注册</a>
+                    @endif
                 </div>
             </div>
         </ul>
         <ul class="message-r">
-            <div class="topMessage my-shangcheng">
-                <div class="menu-hd MyShangcheng"><a href="{{asset('/account/login')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>登录</a></div>
-            </div>
-            <div class="topMessage my-shangcheng">
-                <div class="menu-hd MyShangcheng"><a  href="{{asset('/account/register')}}" target="_top"><i class="am-icon-user-plus am-icon-fw"></i>注册</a></div>
-            </div>
+            @if($data['uid'] ==0)
+                <div class="topMessage my-shangcheng">
+                    <div class="menu-hd MyShangcheng"><a href="{{asset('/account/login')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>登录</a></div>
+                </div>
+                <div class="topMessage my-shangcheng">
+                    <div class="menu-hd MyShangcheng"><a  href="{{asset('/account/register')}}" target="_top"><i class="am-icon-user-plus am-icon-fw"></i>注册</a></div>
+                </div>
+            @else
+                <div class="topMessage my-shangcheng">
+                    <div class="menu-hd MyShangcheng"><a href="{{asset('/account/index')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>欢迎你:{{$data['username']}}</a></div>
+                </div>
+                <div class="topMessage my-shangcheng">
+                    <div class="menu-hd MyShangcheng"><a  href="{{asset('/account/logout')}}" target="_top"><i class="am-icon-outdent am-icon-fw"></i>退出</a></div>
+                </div>
+            @endif
         </ul>
     </div>
 
@@ -83,9 +98,9 @@
 <!--引导 -->
 <div class="navCir">
     <li class="active"><a href="{{asset('index')}}"><i class="am-icon-home "></i>首页</a></li>
-    <li><a href="{{asset('search')}}"><i class="am-icon-list"></i>搜索</a></li>
-    <li><a href="{{asset('order')}}"><i class="am-icon-shopping-basket"></i>订单详情</a></li>
-    <li><a href="{{asset('home')}}"><i class="am-icon-user"></i>我的</a></li>
+    <li><a href="{{asset('service/advanceSearch')}}"><i class="am-icon-list"></i>服务大厅</a></li>
+    <li><a href="{{asset('demands/advanceSearch')}}"><i class="am-icon-shopping-basket"></i>需求大厅</a></li>
+    <li><a href="{{asset('account/index')}}"><i class="am-icon-user"></i>我的主页</a></li>
 </div>
 </body>
 </html>
