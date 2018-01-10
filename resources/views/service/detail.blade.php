@@ -1,5 +1,54 @@
 @extends('demo.admin')
-@extends('demo.nav')
+@section('title','服务详情')
+@section('custom-style')
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
+    <style type="text/css">
+        .comcategory li{
+            font-size:14px;
+            padding: 3px;
+        }
+        .comcategory li a:hover{
+            color: #b84554;
+        }
+        .comcategory li i{
+            color: gray;
+            margin-left: 10px;
+        }
+        .title-first a{
+            text-align: center;
+            padding: 60px;
+            font-size: 18px;
+            color: #000;
+            font-weight: bold;
+        }
+        .title-first a:hover{
+            color: #b84554;
+            font-weight: bold;
+        }
+        .demo li{
+            float: none;
+            width: 100%;
+            padding: 0px 5px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+        }
+        .gzyx_1 {
+            background: #F7CCA2;
+        }
+        .gzyx_2{
+            background: #97DC8E;
+        }
+        .gzyx_3{
+            background: #C7B5F3;
+        }
+        .gzyx_4{
+            background: #88DEE8;
+        }
+    </style>
+    @endsection
 @section('content')
 <!--发布服务-->
 <div class="am-g am-g-fixed" style="padding-top: 45px;">
@@ -285,25 +334,9 @@
 </div>
 <!--广告-->
 <div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-    <img src="images/ad1.png">
+    <img src="{{asset('images/ad4.jpg')}}">
 </div>
 <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-    <img src="images/ad1.png">
+    <img src="{{asset('images/ad5.jpg')}}">
 </div>
-@section('footer')
-<div class="footer " style="border: none;">
-    <div class="footer-hd ">
-    </div>
-    <div class="footer-bd ">
-        <br>
-        <p style="text-align: center;">
-
-            Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
-            客服电话：88888888<br>
-            联系邮箱：不亦乐乎＠bylehu.com
-
-        </p>
-    </div>
-</div>
-    @endsection
 @endsection

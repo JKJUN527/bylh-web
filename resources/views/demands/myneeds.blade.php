@@ -1,9 +1,7 @@
 @extends('demo.admin2')
+@section('title','我的需求')
 @section('content')
-		<div class="center">
-			<div class="col-main">
 				<div class="main-wrap">
-
 					<div class="user-orderinfo">
 						<!--标题 -->
 						<div class="am-cf am-padding">
@@ -27,7 +25,7 @@
 											<p>价格：￥<span class="money">10000</span><br>
 											预约人数：<span class="people">4</span>人</p>
 										</div>
-										<div class="am-u-lg-4 am-u-md-4 am-u-sm-4" style="text-align: center;padding: 20px;"">
+										<div class="am-u-lg-4 am-u-md-4 am-u-sm-4" style="text-align: center;padding: 20px;">
 									<a href="/needappointment" ><button type="button" class="am-btn am-btn-success">查看详情</button></a>
 											<button type="button" class="am-btn am-btn-danger">删除需求</button>
 										</div>
@@ -45,7 +43,7 @@
 											<p>价格：￥<span class="money">10000</span><br>
 											预约人数：<span class="people">4</span>人</p>
 										</div>
-										<div class="am-u-lg-4 am-u-md-4 am-u-sm-4" style="text-align: center;padding: 20px;"">
+										<div class="am-u-lg-4 am-u-md-4 am-u-sm-4" style="text-align: center;padding: 20px;">
 									<a href="/needappointment" ><button type="button" class="am-btn am-btn-success">查看详情</button></a>
 											<button type="button" class="am-btn am-btn-danger">删除需求</button>
 										</div>
@@ -63,7 +61,7 @@
 											<p>价格：￥<span class="money">10000</span><br>
 											预约人数：<span class="people">4</span>人</p>
 										</div>
-										<div class="am-u-lg-4 am-u-md-4 am-u-sm-4" style="text-align: center;padding: 20px;"">
+										<div class="am-u-lg-4 am-u-md-4 am-u-sm-4" style="text-align: center;padding: 20px;">
 									<a href="/needappointment" ><button type="button" class="am-btn am-btn-success">查看详情</button></a>
 											<button type="button" class="am-btn am-btn-danger">删除需求</button>
 										</div>
@@ -81,7 +79,7 @@
 											<p>价格：￥<span class="money">10000</span><br>
 											预约人数：<span class="people">4</span>人</p>
 										</div>
-										<div class="am-u-lg-4 am-u-md-4 am-u-sm-4" style="text-align: center;padding: 20px;"">
+										<div class="am-u-lg-4 am-u-md-4 am-u-sm-4" style="text-align: center;padding: 20px;">
 									<a href="/needappointment" ><button type="button" class="am-btn am-btn-success">查看详情</button></a>
 											<button type="button" class="am-btn am-btn-danger">删除需求</button>
 										</div>
@@ -92,18 +90,49 @@
 					</div>
 				</div>
 				<!--底部-->
-				@section('footer')
-					<div class="footer ">
-						<div class="footer-hd ">
-						</div>
-						<div class="footer-bd ">
-							<p style="text-align: center;">
-								©2017-2018 bylh.com 成备xxxxxxxx号<br>
-								不亦乐乎（成都）有限公司<br>
-								客服：xxxx-xxx-xxx
+@endsection
+@section('aside')
+	<aside class="menu">
+		<ul>
+			<li class="person active">
+				<a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
+			</li>
+			<li class="person">
+				<p><i class="am-icon-newspaper-o"></i>个人资料</p>
+				<ul>
+					<li><a href="{{asset('user')}}">个人信息</a></li>
+					<li><a href="{{asset('safety')}}">安全设置</a></li>
+				</ul>
+			</li>
+			<li class="person">
+				<p><i class="am-icon-balance-scale"></i>我的交易</p>
+				<ul>
+					<li><a href="{{asset('order')}}">订单管理</a></li>
+					<li><a href="{{asset('comment')}}">评价服务</a></li>
+				</ul>
+			</li>
+			<li class="person">
+				<p><i class="am-icon-dollar"></i>我的服务</p>
+				<ul>
+					<li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
+					<li><a href="{{asset('myrequest')}}">服务列表</a></li>
+				</ul>
+			</li>
+			<li class="person">
+				<p><i class="am-icon-tags"></i>我的需求</p>
+				<ul>
+					<li><a href="{{asset('sendneed')}}">发布需求</a></li>
+					<li><a href="{{asset('myneed')}}">需求列表</a></li>
+				</ul>
+			</li>
 
-							</p>
-						</div>
-					</div>
-					@endsection
+			<li class="person">
+				<p><i class="am-icon-qq"></i>信息中心</p>
+				<ul>
+					<li><a href="{{asset('message')}}">站内信</a></li>
+					<li><a href="/news">我的消息</a></li>
+				</ul>
+			</li>
+		</ul>
+	</aside>
 @endsection

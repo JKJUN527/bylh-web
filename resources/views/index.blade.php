@@ -1,6 +1,10 @@
 @extends('demo.admin')
 @section('title', '不亦乐乎')
 @section('custom-style')
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
 <style type="text/css">
     .comcategory li{
         font-size:14px;
@@ -47,30 +51,15 @@
 </style>
 @endsection
 @section('content')
-    <b class="line"></b>
-    <div class="shopNav">
-        <div class="slideall" style="height: auto;">
-
-            <!--<div class="long-title"><span class="all-goods">全部分类</span></div>-->
-            <div class="long-title"><span class="all-goods">全部分类</span></div>
-            <div class="nav-cont" >
-                <ul>
-                    <li class="index"><a href="{{asset('index')}}">首页</a></li>
-                    <li class="qc"><a href="{{asset('demands')}}">需求大厅</a></li>
-                    <li class="qc"><a href="{{asset('advanceSearch')}}">大学生服务</a></li>
-                    <li class="qc"><a href="{{asset('advanceSearch')}}">实习中介</a></li>
-                    <li class="qc last"><a href="{{asset('advanceSearch')}}">专业问答</a></li>
-                </ul>
-            </div>
-
-            <div class="bannerTwo">
-                <!--轮播 -->
-                <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
-                    <ul class="am-slides">
-                        <li class="banner1"><a href="introduction.html"><img src="{{asset('images/3.jpg')}}" /></a></li>
-                    </ul>
-                </div>
-            </div>
+        <!--图片轮播-->
+        <div class="bannerTwo">
+        <!--轮播 -->
+        <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
+            <ul class="am-slides">
+                <li class="banner1"><a href="introduction.html"><img src="{{asset('images/3.jpg')}}" /></a></li>
+            </ul>
+        </div>
+    </div>
         <!--侧边导航 -->
         <div id="nav" class="navfull" style="position: static;">
             <div class="area clearfix">

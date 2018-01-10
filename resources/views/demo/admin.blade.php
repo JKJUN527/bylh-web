@@ -7,18 +7,10 @@
     <title>@yield('title')</title>
     <link href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('AmazeUI-2.4.2/assets/css/admin.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/personal.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/orstyle.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
     <script src="{{asset('AmazeUI-2.4.2/assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.min.js')}}"></script>
-    <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
-    <link href="{{asset('css/vipstyle.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('css/infstyle.css')}}" rel="stylesheet" type="text/css">
-
-
     @section("custom-style")
     @show
 </head>
@@ -74,7 +66,20 @@
 
     <div class="clear"></div>
 </div>
+<b class="line"></b>
+<div class="shopNav">
+    <div class="slideall" style="height: auto;">
 
+        <!--<div class="long-title"><span class="all-goods">全部分类</span></div>-->
+        <div class="nav-cont" >
+            <ul>
+                <li class="index"><a href="{{asset('index')}}">首页</a></li>
+                <li class="qc"><a href="{{asset('demands')}}">需求大厅</a></li>
+                <li class="qc"><a href="{{asset('advanceSearch')}}">大学生服务</a></li>
+                <li class="qc"><a href="{{asset('advanceSearch')}}">实习中介</a></li>
+                <li class="qc last"><a href="{{asset('advanceSearch')}}">专业问答</a></li>
+            </ul>
+        </div>
 @section('content')
     @show
         <!--footer-->
@@ -94,6 +99,8 @@
         </div>
 
     </div>
+    @section('aside')
+        @show
 </div>
 <!--引导 -->
 <div class="navCir">

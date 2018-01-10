@@ -34,16 +34,16 @@ class DemandsController extends Controller {
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-        if($data['uid']==0 || $data['type']!=1){//先登录|登录用户非服务用户
-            return view('account.login',['data'=>$data]);
-        }
+       # if($data['uid']==0 || $data['type']!=1){//先登录|登录用户非服务用户
+         #   return view('account.login',['data'=>$data]);
+      #  }
         //返回一般服务页面所需数据
         $data['serviceclass1']=Serviceclass1::where('type',0)->orderBy('updated_at','asc')->get();
         $data['serviceclass2']=Serviceclass2::where('type',0)->orderBy('updated_at','asc')->get();
         $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
 
-        return $data;
-        return view('demands.publishindex', ["data" => $data]);
+       # return $data;
+        return view('demands.demandPublishIndex', ["data" => $data]);
     }
 
     //需求发布提交方法
@@ -326,7 +326,7 @@ class DemandsController extends Controller {
         $data['condition']['servicetype'] = $request->input('servicetype');
         $data['condition']['keyword'] = $request->input('keyword');
 //        return $data;
-        return view('demands/advanceSearch', ['data' => $data]);
+        return view('demands.advanceSearch', ['data' => $data]);
     }
     //传入需求id返回具体的需求详情
     //需返回需求详情、需求评论、发布者其他需求、以及发布者基本信息
@@ -365,7 +365,7 @@ class DemandsController extends Controller {
 
         }
 //        return $data;
-        return view('demands/needinfo',['data'=>$data]);
+        return view('demands/detail',['data'=>$data]);
     }
     //保存编辑服务内容
     //option 123 表示保存一般服务、实习中介、专业问答服务。

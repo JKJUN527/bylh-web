@@ -48,9 +48,9 @@ Route::get('service/genlpublish', ['uses' => 'ServiceController@genlserviceindex
 Route::get('service/finlpublish', ['uses' => 'ServiceController@finlserviceindex']);//实习中介发布主页
 Route::get('service/qapublish', ['uses' => 'ServiceController@qaserviceindex']);//专业问答发布主页
 //一般服务发布、实习中介服务发布、专业问答服务发布 数据提交
-Route::post('service/genlpublish', ['uses' => 'ServiceController@genlservicePublic']);//一般服务发布
-Route::post('service/finlpublish', ['uses' => 'ServiceController@finlservicePublic']);//实习中介发布
-Route::post('service/qapublish', ['uses' => 'ServiceController@qaservicePublic']);//专业问答发布
+Route::post('service/genlpublish2', ['uses' => 'ServiceController@genlservicePublic']);//一般服务发布
+Route::post('service/finlpublish2', ['uses' => 'ServiceController@finlservicePublic']);//实习中介发布
+Route::post('service/qapublish2', ['uses' => 'ServiceController@qaservicePublic']);//专业问答发布
 
 //服务编辑页面暂时不要
 //服务编辑主页：传入服务id及服务type
@@ -104,11 +104,46 @@ Route::get('demands/detail',['uses' => 'DemandsController@detail']);
 Route::get('demands/reviewDemand',['uses' => 'OrderController@reviewDemand']);
 //需求高级搜索
 Route::any('demands/advanceSearch',['uses' => 'DemandsController@advanceIndex']);
-
-
-
-
-
+//验证邮箱
+Route::any('person/email',function(){
+    return view('person.email');
+});
+//找回密码
+Route::any('person/findPassword',function(){
+    return view('person.findPassword');
+});
+//绑定手机
+Route::any('person/phone',function(){
+    return view('person.phone');
+});
+//安全问题
+Route::any('person/question',function(){
+    return view('person.question');
+});
+//安全中心
+Route::any('person/safety',function(){
+    return view('person.safety');
+});
+//个人信息
+Route::any('person/user',function(){
+    return view('person.user');
+});
+//我的服务
+Route::any('service/myrequest',function(){
+    return view('service.myrequest');
+});
+//我的需求
+Route::any('demands/myneeds',function(){
+    return view('demands.myneeds');
+});
+//预约需求
+Route::any('demands/needappointment',function(){
+    return view('demands.needappointment');
+});
+//发布需求2
+Route::any('demands/sendneed2',function(){
+    return view('demands.sendneed2');
+});
 //站内信模块
 //发送站内信
 Route::post('message/sendMessage',['uses' => 'MessageController@sendMessage']);

@@ -1,5 +1,41 @@
 @extends('demo.admin')
-@extends('demo.nav')
+@section('title', '发布需求第二部')
+@section('custom-style')
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .comcategory li{
+            font-size:14px;
+            padding: 3px;
+        }
+        .comcategory li a:hover{
+            color: #b84554;
+        }
+        .comcategory li i{
+            color: gray;
+            margin-left: 10px;
+        }
+        .title-first a{
+            text-align: center;
+            padding: 60px;
+            font-size: 18px;
+            color: #000;
+            font-weight: bold;
+        }
+        .title-first a:hover{
+            color: #b84554;
+            font-weight: bold;
+        }
+        .demo li{
+            float: none;
+            width: 100%;
+            padding: 0px 5px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+        }
+    </style>
+@endsection
 @section('content')
 <!--发布需求-->
 <div class="am-g am-g-fixed" style="padding-top: 45px;">
@@ -138,20 +174,4 @@
 
     });
 </script>
-@section('footer')
-<div class="footer " style="border: none;">
-    <div class="footer-hd ">
-    </div>
-    <div class="footer-bd ">
-        <br>
-        <p style="text-align: center;">
-
-            Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
-            客服电话：88888888<br>
-            联系邮箱：不亦乐乎＠bylehu.com
-
-        </p>
-    </div>
-</div>
-@endsection
 @endsection

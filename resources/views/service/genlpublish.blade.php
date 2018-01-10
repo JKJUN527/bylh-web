@@ -1,21 +1,57 @@
 @extends('demo.admin')
-@extends('demo.nav')
+@section('title','发布服务')
+@section('custom-style')
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .comcategory li{
+            font-size:14px;
+            padding: 3px;
+        }
+        .comcategory li a:hover{
+            color: #b84554;
+        }
+        .comcategory li i{
+            color: gray;
+            margin-left: 10px;
+        }
+        .title-first a{
+            text-align: center;
+            padding: 60px;
+            font-size: 18px;
+            color: #000;
+            font-weight: bold;
+        }
+        .title-first a:hover{
+            color: #b84554;
+            font-weight: bold;
+        }
+        .demo li{
+            float: none;
+            width: 100%;
+            padding: 0px 5px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+        }
+    </style>
+@endsection
 @section('content')
     <!--发布服务-->
     <div class="am-g am-g-fixed" style="padding-top: 45px;">
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
             <div class="fabu_guide_y" style="height: 3px;background: #df231b;position: absolute;top: 17px;left: 0;z-index: 9;width: 100%"></div>
-            <div class="fabu_guide_sign" style="background: url(images/fabu_y.jpg) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
+            <div class="fabu_guide_sign" style="background: url({{asset('images/fabu_y.jpg')}}) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
             <div class="fabu_guide_text" style="font-size: 16px;color: #555;padding-top: 40px;text-align: center;">选择类目，描述你的服务</div>
         </div>
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
             <div class="fabu_guide_y" style="height: 3px;background: #999;position: absolute;top: 17px;left: 0;z-index: 9;width: 100%"></div>
-            <div class="fabu_guide_sign" style="background: url(images/fabu_q.jpg) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
+            <div class="fabu_guide_sign" style="background: url({{asset('images/fabu_q.jpg')}}) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
             <div class="fabu_guide_text" style="font-size: 16px;color: #555;text-align:center;padding-top: 40px;">确认服务</div>
         </div>
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
             <div class="fabu_guide_y" style="height: 3px;background: #999;position: absolute;top: 17px;left: 0;z-index: 9;width: 100%"></div>
-            <div class="fabu_guide_sign" style="background: url(images/fabu_q.jpg) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
+            <div class="fabu_guide_sign" style="background: url({{asset('images/fabu_q.jpg')}}) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
             <div class="fabu_guide_text" style="font-size: 16px;color: #555;text-align:center;padding-top: 40px;">发布服务</div>
         </div>
     </div>
@@ -24,23 +60,8 @@
             <div class="am-u-lg-12 am-g-u-md-12 am-u-sm-12">
                 <div class="fabu1" style="background:#eee;">
                     <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">请选择你需要做什么</div>
-                    <div class="fb_container" style="padding: 16px 3px;margin-left: 30px;padding-bottom: 30px;margin-bottom: 20px;">
-                    <!--
-                    <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 20px;">
-                        <div class="am-btn-group am-btn-group-justify">
-                            <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">LOGO设计</a>
-                            <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">包装设计</a>
-                            <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">策划设计</a>
-                            <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">家教服务</a>
-
-
-                            <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">营销推广</a>
-                            <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">装修设计</a>
-                            <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">网站开发</a>
-                            <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">起名</a>
-                            <a class="" role="label" >查看更多 More>></a>
-                        </div>
-                    </div>-->
+                    <div class="fb_container" style="
+                    padding: 16px 3px;margin-left: 30px;padding-bottom: 30px;margin-bottom: 20px;">
                     <div class="am-g am-g-fixed">
                         <div class="am-u-lg-2 am-u-md-2 am-u-sm-2 am-dropdown" data-am-dropdown>
                             <button class="am-btn am-btn-danger am-dropdown-toggle" data-am-dropdown-toggle>体育</button>
@@ -209,20 +230,4 @@
 
         });
     </script>
-@section('footer')
-    <div class="footer " style="border: none;">
-        <div class="footer-hd ">
-        </div>
-        <div class="footer-bd ">
-            <br>
-            <p style="text-align: center;">
-
-                Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
-                客服电话：88888888<br>
-                联系邮箱：不亦乐乎＠bylehu.com
-
-            </p>
-        </div>
-    </div>
-@endsection
 @endsection

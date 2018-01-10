@@ -1,7 +1,12 @@
 @extends('demo.admin')
-
 @section("custom-style")
+@section('title', '搜索')
+@section('custom-style')
+
     <style>
+
+      <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+      <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
         .btn_tap{
             font-size: 16px;
             color: #f6f8fd;
@@ -34,6 +39,40 @@
         .service_img{
             width: 162px !important;
             height: 162px !important;
+        }
+        .comcategory li{
+            font-size:14px;
+            padding: 3px;
+        }
+        .comcategory li a:hover{
+            color: #b84554;
+        }
+        .comcategory li i{
+            color: gray;
+            margin-left: 10px;
+        }
+        .title-first a{
+            text-align: center;
+            padding: 60px;
+            font-size: 18px;
+            color: #000;
+            font-weight: bold;
+        }
+        .title-first a:hover{
+            color: #b84554;
+            font-weight: bold;
+        }
+        .demo li{
+            float: none;
+            width: 100%;
+            padding: 0px 5px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+        }
+        .am-nav-tabs > li.am-active > a, .am-nav-tabs > li.am-active > a:hover, .am-nav-tabs > li.am-active > a:focus, .am-nav-tabs > li > a:hover{
+            background:#ee6363;
+            color: #fff;
         }
     </style>
 @endsection

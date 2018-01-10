@@ -268,7 +268,7 @@ class OrderController extends Controller {
         if($request->has('order_id')){
             $data['order']->find($request->input('order_id'));
         }
-        return view('order/detail',['data'=>$data]);
+        return view('order/getdetail',['data'=>$data]);
     }
 
     //需求用户选择服务商主页
@@ -335,18 +335,18 @@ class OrderController extends Controller {
         $data['type'] = AuthController::getType();
         $uid = $data['uid'];
 
-        if ($uid == 0) {//用户未登陆
-            return view('account.login', ['data' => $data]);
-        }
-        $data['orderlist'] = Orders::where(function ($query) use($uid){
-            $query->where('s_uid',$uid)
-                ->orWhere(function ($query) use ($uid) {
-                    $query->where('d_uid',$uid);
-                });
-        })
-        ->paginate(20);
+//        if ($uid == 0) {//用户未登陆
+//            return view('account.login', ['data' => $data]);
+//        }
+//        $data['orderlist'] = Orders::where(function ($query) use($uid){
+//            $query->where('s_uid',$uid)
+//                ->orWhere(function ($query) use ($uid) {
+//                    $query->where('d_uid',$uid);
+//                });
+//        })
+//        ->paginate(20);
 
-        return view('account/orderlist',['data'=>$data]);
+        return view('order/index',['data'=>$data]);
 
     }
 

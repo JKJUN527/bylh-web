@@ -1,5 +1,41 @@
 @extends('demo.admin')
-@extends('demo.nav')
+@section('title', '发布需求')
+@section('custom-style')
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .comcategory li{
+            font-size:14px;
+            padding: 3px;
+        }
+        .comcategory li a:hover{
+            color: #b84554;
+        }
+        .comcategory li i{
+            color: gray;
+            margin-left: 10px;
+        }
+        .title-first a{
+            text-align: center;
+            padding: 60px;
+            font-size: 18px;
+            color: #000;
+            font-weight: bold;
+        }
+        .title-first a:hover{
+            color: #b84554;
+            font-weight: bold;
+        }
+        .demo li{
+            float: none;
+            width: 100%;
+            padding: 0px 5px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+        }
+    </style>
+@endsection
 @section('content')
 <!--发布需求-->
 <div class="am-g am-g-fixed" style="padding-top: 45px;">
@@ -25,19 +61,6 @@
             <div class="fabu1" style="background:#eee;">
                 <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">请选择你需要做什么</div>
                 <div class="fb_container" style="padding: 16px 3px;margin-left: 30px;padding-bottom: 30px;margin-bottom: 20px;">
-                    <!--<div class="am-btn-group am-btn-group-justify">
-                        <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">LOGO设计</a>
-                        <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">包装设计</a>
-                        <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">策划设计</a>
-                        <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">家教服务</a>
-
-
-                        <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">营销推广</a>
-                        <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">装修设计</a>
-                        <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">网站开发</a>
-                        <a class="am-btn am-btn-danger" role="button" style="margin-right: 10px;">起名</a>
-                        <a class="" role="label" >查看更多 More>></a>
-                    </div>-->
                     <div class="am-g am-g-fixed">
                         <div class="am-u-lg-2 am-u-md-2 am-u-sm-2 am-dropdown" data-am-dropdown>
                             <button class="am-btn am-btn-danger am-dropdown-toggle" data-am-dropdown-toggle>体育</button>
@@ -189,20 +212,4 @@
         </div>
     </div>
 </div>
-@section('footer')
-<div class="footer " style="border: none;">
-    <div class="footer-hd ">
-    </div>
-    <div class="footer-bd ">
-        <br>
-        <p style="text-align: center;">
-
-            Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
-            客服电话：88888888<br>
-            联系邮箱：不亦乐乎＠bylehu.com
-
-        </p>
-    </div>
-</div>
-    @endsection
 @endsection

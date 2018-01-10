@@ -1,11 +1,11 @@
 @extends('demo.admin2')
+@section('title', '订单详情')
+@section('custom-style')
+    <link href="{{asset('css/infstyle.css')}}" rel="stylesheet" type="text/css">
+    @endsection
 @section('content')
-<div class="center">
-    <div class="col-main">
         <div class="main-wrap">
-
             <div class="user-orderinfo">
-
                 <!--标题 -->
                 <div class="am-cf am-padding">
                     <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单详情</strong> / <small>Order&nbsp;details</small></div>
@@ -74,7 +74,7 @@
                                             <li class="td td-item">
                                                 <div class="item-pic">
                                                     <a href="#" class="J_MakePoint">
-                                                        <img src="images/f1.jpg" class="itempic J_ItemImg">
+                                                        <img src="{{asset('images/f1.jpg')}}" class="itempic J_ItemImg">
                                                     </a>
                                                 </div>
                                                 <div class="item-info">
@@ -101,7 +101,7 @@
                                             <li class="td td-item">
                                                 <div class="item-pic">
                                                     <a href="#" class="J_MakePoint">
-                                                        <img src="images/f11.jpg" class="itempic J_ItemImg">
+                                                        <img src="{{asset('images/f11.jpg')}}" class="itempic J_ItemImg">
                                                     </a>
                                                 </div>
                                                 <div class="item-info">
@@ -137,7 +137,7 @@
                                             <li class="td td-status">
                                                 <div class="item-status">
                                                     <p class="Mystatus">支付完成待评价</p>
-                                                    <p class="order-info"><a href="/orderinfo">订单详情</a></p>
+                                                    <p class="order-info"><a href="{{asset('order/getdetail')}}">订单详情</a></p>
                                                 </div>
                                             </li>
                                         </div>
@@ -148,21 +148,51 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-        <!--底部-->
-        @section('footer')
-        <div class="footer ">
-            <div class="footer-hd ">
-            </div>
-            <div class="footer-bd ">
-                <p style="text-align: center;">
-                    ©2017-2018 bylh.com 成备xxxxxxxx号<br>
-                    不亦乐乎（成都）有限公司<br>
-                    客服：xxxx-xxx-xxx
-
-                </p>
-            </div>
         </div>
 @endsection
-    @endsection
+@section('aside')
+    <aside class="menu">
+        <ul>
+            <li class="person active">
+                <a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-newspaper-o"></i>个人资料</p>
+                <ul>
+                    <li><a href="{{asset('user')}}">个人信息</a></li>
+                    <li><a href="{{asset('safety')}}">安全设置</a></li>
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-balance-scale"></i>我的交易</p>
+                <ul>
+                    <li><a href="{{asset('order')}}">订单管理</a></li>
+                    <li><a href="{{asset('comment')}}">评价服务</a></li>
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-dollar"></i>我的服务</p>
+                <ul>
+                    <li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
+                    <li><a href="{{asset('myrequest')}}">服务列表</a></li>
+                </ul>
+            </li>
+
+            <li class="person">
+                <p><i class="am-icon-tags"></i>我的需求</p>
+                <ul>
+                    <li><a href="{{asset('sendneed')}}">发布需求</a></li>
+                    <li><a href="{{asset('myneed')}}">需求列表</a></li>
+                </ul>
+            </li>
+
+            <li class="person">
+                <p><i class="am-icon-qq"></i>信息中心</p>
+                <ul>
+                    <li><a href="{{asset('message')}}">站内信</a></li>
+                    <li><a href="/news">我的消息</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+@endsection
