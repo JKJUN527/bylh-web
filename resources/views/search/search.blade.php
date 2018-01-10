@@ -1,20 +1,17 @@
 @extends('demo.admin')
-@section("custom-style")
 @section('title', '搜索')
 @section('custom-style')
-
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
     <style>
-
-      <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
-      <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
-        .btn_tap{
-            font-size: 16px;
-            color: #f6f8fd;
-            padding:6px;
-        }
-        .btn_tap_li{
-            background: #ee6363;
-        }
+        /*.btn_tap{*/
+            /*font-size: 16px;*/
+            /*color: #f6f8fd;*/
+            /*padding:6px;*/
+        /*}*/
+        /*.btn_tap_li{*/
+            /*background: #ee6363;*/
+        /*}*/
         .label{
             background-color: #F84C4C;
             color: #fff;
@@ -76,9 +73,7 @@
         }
     </style>
 @endsection
-
 @section('content')
-    @include('demo.nav')
 <!--搜索界面-->
 <div class="am-g am-g-fixed" style="padding-top: 1px;">
     <div class="am-u-lg-8 am-u-md-8 am-u-sm-8">

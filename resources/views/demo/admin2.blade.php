@@ -4,24 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
     <title>@yield('title')</title>
-<<<<<<< HEAD
-
-    <link href="{{asset("AmazeUI-2.4.2/assets/css/admin.css")}}" rel="stylesheet" type="text/css">
-    <link href="{{asset("AmazeUI-2.4.2/assets/css/amazeui.css")}}" rel="stylesheet" type="text/css">
-
-    <link href="{{asset("css/personal.css")}}" rel="stylesheet" type="text/css">
-    <link href="{{asset("css/stepstyle.css")}}" rel="stylesheet" type="text/css">
-  <!--<linkhref="css/vipstyle.css" rel="stylesheet" type="text/css">-->
-    <link href="{{asset("css/infstyle.css")}}" rel="stylesheet" type="text/css">
-    <link href="{{asset("css/orstyle.css")}}" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="{{asset('js/jquery-1.7.2.min.js')}}"></script>
-=======
     <link href="{{asset('AmazeUI-2.4.2/assets/css/admin.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/personal.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/orstyle.css')}}" rel="stylesheet" type="text/css">
     <script src="{{asset('js/jquery-1.7.2.min.js')}}"></script>
->>>>>>> origin/littlefy
     <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.js')}}"></script>
     @section("custom-style")
     @show
@@ -57,11 +44,7 @@
 
             <div class="nav white">
                 <div class="logoBig">
-<<<<<<< HEAD
-                    <li><img src="{{asset("images/bylh.png")}}"  style="width: 60%;" /></li>
-=======
-                    <li><img src="{{asset('images/bylh.png')}}" style="width: 60%;"/></li>
->>>>>>> origin/littlefy
+                    <li><img src="{{asset("images/bylh2.png")}}"  style="width: 60%;" /></li>
                 </div>
 
                 <div class="search-bar pr">
