@@ -1,6 +1,10 @@
 @extends('demo.admin')
 @section('title', '不亦乐乎')
 @section('custom-style')
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
 <style type="text/css">
     .comcategory li{
         font-size:14px;
@@ -47,6 +51,15 @@
 </style>
 @endsection
 @section('content')
+        <!--图片轮播-->
+        <div class="bannerTwo">
+        <!--轮播 -->
+        <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
+            <ul class="am-slides">
+                <li class="banner1"><a href="introduction.html"><img src="{{asset('images/3.jpg')}}" /></a></li>
+            </ul>
+        </div>
+    </div>
         <!--侧边导航 -->
         <div id="nav" class="navfull" style="position: static;">
             <div class="area clearfix">

@@ -22,7 +22,7 @@
 }(this, function (jQuery) {
 
 /*!
- * Translated default messages for bootstrap-select.
+ * Translated default message for bootstrap-select.
  * Locale: AR (Arabic)
  * Author: Yasser Lotfy <y_l@alive.com>
  */

@@ -1,8 +1,10 @@
-@extends('demo.admin3')
+@extends('demo.admin2')
 @section('title', '个人中心')
+@section('custom-style')
+    <link href="{{asset('css/vipstyle.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/infstyle.css')}}" rel="stylesheet" type="text/css">
+@endsection
 @section('content')
-<div class="center">
-    <div class="col-main">
         <div class="main-wrap">
             <div class="wrap-left">
                 <div class="wrap-list">
@@ -213,8 +215,8 @@
                                     </li>
                                     <li>
                                         <div class="am-gallery-item">
-                                            <a href="images/f1.jpg" class="">
-                                                <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
+                                            <a href="{{asset('images/f1.jpg')}}" class="">
+                                                <img src="{{asset('images/f1.jpg')}}"  alt="某天 也许会相遇 相遇在这个好地方"/>
                                                 <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
                                                 <div class="am-gallery-desc">2375-09-26</div>
                                             </a>
@@ -288,5 +290,50 @@
             </div>
             <div class="clear"></div>
         </div>
-        @endsection
-        <!--底部-->
+@endsection
+@section('aside')
+            <aside class="menu">
+                <ul>
+                    <li class="person active">
+                        <a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
+                    </li>
+                    <li class="person">
+                        <p><i class="am-icon-newspaper-o"></i>个人资料</p>
+                        <ul>
+                            <li><a href="{{asset('user')}}">个人信息</a></li>
+                            <li><a href="{{asset('safety')}}">安全设置</a></li>
+                        </ul>
+                    </li>
+                    <li class="person">
+                        <p><i class="am-icon-balance-scale"></i>我的交易</p>
+                        <ul>
+                            <li><a href="{{asset('order')}}">订单管理</a></li>
+                            <li><a href="{{asset('comment')}}">评价服务</a></li>
+                        </ul>
+                    </li>
+                    <li class="person">
+                        <p><i class="am-icon-dollar"></i>我的服务</p>
+                        <ul>
+                            <li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
+                            <li><a href="{{asset('myrequest')}}">服务列表</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="person">
+                        <p><i class="am-icon-tags"></i>我的需求</p>
+                        <ul>
+                            <li><a href="{{asset('sendneed')}}">发布需求</a></li>
+                            <li><a href="{{asset('myneed')}}">需求列表</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="person">
+                        <p><i class="am-icon-qq"></i>信息中心</p>
+                        <ul>
+                            <li><a href="{{asset('message')}}">站内信</a></li>
+                            <li><a href="/news">我的消息</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+@endsection

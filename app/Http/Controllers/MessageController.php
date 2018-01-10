@@ -26,51 +26,51 @@ class MessageController extends Controller {
         $data['type'] = AuthController::getType();
         $uid = $data['uid'];
 
-        if ($uid == 0) {
-            return view('account.login',['data'=>$data]);
-        }
-
-        $data['listMessages'] = array();
-
-        $temp = array();//保存temp['from'];
-
-        $temp1 = Message::whereRaw('to_id =? and is_delete =?', [$uid, 0])//别人发给我的消息
-            ->orderBy('created_at', 'desc')
-            ->get();
-        foreach ($temp1 as $item) {
-            $id = $item['attributes']['from_id'];
-            //echo "from".$id."<br>";
-            if (in_array($id, $temp)) {
-                continue;
-            } else {
-                $temp[] = $id;
-                $data['listMessages'][] = $item;
-            }
-        }
-        $temp2 = Message::whereRaw('from_id =? and is_delete =?', [$uid, 0])//我发给别人的消息
-        ->orderBy('created_at', 'desc')
-            ->get();
-        foreach ($temp2 as $item) {
-
-            $id = $item['attributes']['to_id'];
-            //echo "to".$id."<br>";
-            if (in_array($id, $temp)) {
-                continue;
-            } else {
-                $temp[] = $id;
-                $data['listMessages'][] = $item;
-            }
-        }
-        foreach ($temp as $item) {
-            $type = User::find($item);
-            if($type['type']!=0) {
-                $data['user'][$item] = User::select('username')
-                    ->where('uid', '=', $item)
-                    ->get();
-            }elseif ($type['type']==0){
-                $data['user'][$item][0]['username']="系统消息";
-            }
-        }
+//               if ($uid == 0) {
+//            return view('account.login',['data'=>$data]);
+//        }
+//
+//        $data['listMessages'] = array();
+//
+//        $temp = array();//保存temp['from'];
+//
+//        $temp1 = Message::whereRaw('to_id =? and is_delete =?', [$uid, 0])//别人发给我的消息
+//        ->orderBy('created_at', 'desc')
+//            ->get();
+//        foreach ($temp1 as $item) {
+//            $id = $item['attributes']['from_id'];
+//            //echo "from".$id."<br>";
+//            if (in_array($id, $temp)) {
+//                continue;
+//            } else {
+//                $temp[] = $id;
+//                $data['listMessages'][] = $item;
+//            }
+//        }
+//        $temp2 = Message::whereRaw('from_id =? and is_delete =?', [$uid, 0])//我发给别人的消息
+//        ->orderBy('created_at', 'desc')
+//            ->get();
+//        foreach ($temp2 as $item) {
+//
+//            $id = $item['attributes']['to_id'];
+//            //echo "to".$id."<br>";
+//            if (in_array($id, $temp)) {
+//                continue;
+//            } else {
+//                $temp[] = $id;
+//                $data['listMessages'][] = $item;
+//            }
+//        }
+//        foreach ($temp as $item) {
+//            $type = User::find($item);
+//            if($type['type']!=0) {
+//                $data['user'][$item] = User::select('username')
+//                    ->where('uid', '=', $item)
+//                    ->get();
+//            }elseif ($type['type']==0){
+//                $data['user'][$item][0]['username']="系统消息";
+//            }
+//        }
 
 //        return $data;
         return view('message.index', ['data' => $data]);

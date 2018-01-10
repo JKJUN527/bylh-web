@@ -1,17 +1,12 @@
 @extends('demo.admin')
-@extends('demo.nav')
+@section('title','服务大厅')
+@section('custom-style')
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/navstyle.css')}}" rel="stylesheet" type="text/css"/>
+    <script src="{{asset('js/jquery-1.4.3.min.js')}}" rel="stylesheet" type="text/css"></script>
+    @endsection
 @section('content')
-<!--轮播
-  <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
-      <ul class="am-slides">
-          <li class="banner1"><a href="introduction.html"><img src="../images/1.jpg" /></a></li>
-      </ul>
-  </div>
-  <div class="clear"></div>
-</div>
-  导航 -->
-<link href="css/navstyle.css" rel="stylesheet" type="text/css"/>
-<script src="js/jquery-1.4.3.min.js" rel="stylesheet" type="text/css"></script>
 <script type="text/javascript">
     (function() {
         $('.am-slider').flexslider();
@@ -31,17 +26,17 @@
 <!--小导航 -->
 <div class="am-g am-g-fixed smallnav">
     <div class="am-u-sm-3">
-        <a href="/need"><img src="images/navsmall.jpg" />
+        <a href="{{asset('demands.demandPublishIndex')}}"><img src="images/navsmall.jpg" />
             <div class="title">发布需求</div>
         </a>
     </div>
     <div class="am-u-sm-3">
-        <a href="/request"><img src="images/huismall.jpg" />
+        <a href="{{asset('service.genlpublish')}}"><img src="images/huismall.jpg" />
             <div class="title">发布服务</div>
         </a>
     </div>
     <div class="am-u-sm-3">
-        <a href="/home"><img src="images/mansmall.jpg" />
+        <a href="{{asset('person.home')}}"><img src="images/mansmall.jpg" />
             <div class="title">个人中心</div>
         </a>
     </div>
@@ -70,45 +65,9 @@
         </div>
 </div>
 -->
-<div class="get" style="background: url(images/00.jpg) top center no-repeat; color: #fff;text-align: center;height: 278px;">
+<div class="get" style="background: url({{asset('images/00.jpg')}}) top center no-repeat; color: #fff;text-align: center;height: 278px;">
     <div class="am-g" style="max-width: 1500px;margin: 0 auto;width: 100%;">
         <div class="am-u-lg-12">
-            <div class="leftpanel am-u-lg-3" style="display: inline-block;">
-                <ul style="padding:0 20px;">
-                    <li style="background-color: #1d354f;padding: 4px;border-bottom: 1px dotted #fff;">
-                        <img src="images/icon_03.png" style="width: 20%;height: 20%;">
-                        <p style="display: inline-block;text-align: center;">
-                            <span style="font-size: 14px;">专业</</span>
-                            <br>
-                            <span>提供专业的方案</span>
-                        </p>
-                    </li>
-                    <li style="background-color: #1d354f;padding: 4px;border-bottom: 1px dotted #fff;">
-                        <img src="images/icon_07.png" style="width: 20%;height: 20%;">
-                        <p style="display: inline-block;">
-                            <span>专业</span>
-                            <br>
-                            <span>提供专业的方案</span>
-                        </p>
-                    </li>
-                    <li style="background-color: #1d354f;padding: 4px;border-bottom: 1px dotted #fff;">
-                        <img src="../images/icon_10.png" style="width: 20%;height: 20%;" >
-                        <p style="display: inline-block;">
-                            <span>专业</span>
-                            <br>
-                            <span>提供专业的方案</span>
-                        </p>
-                    </li>
-                    <li style="background-color: #1d354f;padding: 4px;">
-                        <img src="images/icon_13.png" style="width: 20%;height: 20%;" >
-                        <p style="display: inline-block;">
-                            <span>专业</span>
-                            <br>
-                            <span>提供专业的方案</span>
-                        </p>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 </div>
@@ -670,27 +629,12 @@
 </div>
 <!--广告-->
 <div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-    <img src="images/ad1.png">
+    <img src="{{asset('images/ad4.jpg')}}">
 </div>
 <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-    <img src="images/ad1.png">
+    <img src="{{asset('images/ad5.jpg')}}">
 </div>
-@section('footer')
-<div class="footer " style="border-top: none;">
-    <div class="footer-hd ">
-    </div>
-    <div class="footer-bd ">
-        <br>
-        <p style="text-align: center;">
 
-            Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
-            客服电话：88888888<br>
-            联系邮箱：不亦乐乎＠bylehu.com
-
-        </p>
-    </div>
-</div>
-@endsection
 
 
 <!--引导 -->
@@ -706,5 +650,5 @@
 <script>
     window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
 </script>
-<script type="text/javascript " src="basic/js/quick_links.js "></script>
+<script type="text/javascript " src="{{asset('basic/js/quick_links.js')}} "></script>
 @endsection

@@ -1,5 +1,45 @@
 @extends('demo.admin')
-@extends('demo.nav')
+@section('title', '搜索')
+@section('custom-style')
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .comcategory li{
+            font-size:14px;
+            padding: 3px;
+        }
+        .comcategory li a:hover{
+            color: #b84554;
+        }
+        .comcategory li i{
+            color: gray;
+            margin-left: 10px;
+        }
+        .title-first a{
+            text-align: center;
+            padding: 60px;
+            font-size: 18px;
+            color: #000;
+            font-weight: bold;
+        }
+        .title-first a:hover{
+            color: #b84554;
+            font-weight: bold;
+        }
+        .demo li{
+            float: none;
+            width: 100%;
+            padding: 0px 5px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+        }
+        .am-nav-tabs > li.am-active > a, .am-nav-tabs > li.am-active > a:hover, .am-nav-tabs > li.am-active > a:focus, .am-nav-tabs > li > a:hover{
+            background:#ee6363;
+            color: #fff;
+        }
+    </style>
+@endsection
 @section('content')
 <!--搜索界面-->
 <div class="am-g am-g-fixed" style="padding-top: 45px;">
@@ -25,10 +65,7 @@
                     <!--需求-->
                     <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                         <table class="xm_list" cellpadding="0" cellspacing="0">
-
                             <tbody>
-
-
                             <tr class="line_h   adserveritembg">
                                 <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;">
                                     <div class="aa task_item_i" style="padding: 20px 5px;">
@@ -706,25 +743,9 @@
 </div>
 <!--广告-->
 <div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-    <img src="images/ad1.png">
+    <img src="{{asset('images/ad4.jpg')}}">
 </div>
 <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-    <img src="images/ad1.png">
+    <img src="{{asset('images/ad5.jpg')}}">
 </div>
-@section('footer')
-<div class="footer " style="border: none;">
-    <div class="footer-hd ">
-    </div>
-    <div class="footer-bd ">
-        <br>
-        <p style="text-align: center;">
-
-            Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
-            客服电话：88888888<br>
-            联系邮箱：不亦乐乎＠bylehu.com
-
-        </p>
-    </div>
-</div>
-    @endsection
 @endsection

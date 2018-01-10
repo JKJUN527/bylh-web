@@ -1,6 +1,53 @@
 @extends('demo.admin')
-@extends('demo.nav')
-
+@section('title', '需求详情')
+@section('custom-style')
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .comcategory li{
+            font-size:14px;
+            padding: 3px;
+        }
+        .comcategory li a:hover{
+            color: #b84554;
+        }
+        .comcategory li i{
+            color: gray;
+            margin-left: 10px;
+        }
+        .title-first a{
+            text-align: center;
+            padding: 60px;
+            font-size: 18px;
+            color: #000;
+            font-weight: bold;
+        }
+        .title-first a:hover{
+            color: #b84554;
+            font-weight: bold;
+        }
+        .demo li{
+            float: none;
+            width: 100%;
+            padding: 0px 5px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+        }
+        .title-first{
+            float: none;
+            width: 100%;
+            padding: 0px 5px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+        }
+        .am-dropdown{
+            width: 20%;
+        }
+    </style>
+    <script src="../js/amazeui.dialog.min.js" type="text/javascript"></script>
+@endsection
 @section('content')
 <!--发布需求-->
 <div class="am-g am-g-fixed" style="padding-top: 45px;">
@@ -21,24 +68,24 @@
             <div class="item_process" style="margin-top:20px;background: #F2F2F2;padding: 25px 20px 30px 20px;border: solid 1px #E9E9E9;overflow: hidden;">
                 <div class="jinduline">
                     <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                        <div class="jindu_y_line jindu_out" style="background: url(images/process_red.jpg) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url(../images/process_cr_red.jpg) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
+                        <div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
                         <div class="jindu_y_text">发布需求<br><span class="jd_date"></span></div>
                     </div>
 
                     <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                        <div class="jindu_y_line jindu_out" style="background: url(images/process_red.jpg) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url(../images/process_cr_red.jpg) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
+                        <div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
                         <div class="jindu_y_text">进行中<br><span class="jd_date"></span></div>
                     </div>
 
                     <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                        <div class="jindu_y_line jindu_out" style="background: url(images/process_red.jpg) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url(../images/process_cr_red.jpg) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
+                        <div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
                         <div class="jindu_y_text ">验收付款
                             <br><span class="jd_date">  </span>
                         </div>
                     </div>
 
                     <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                        <div class="jindu_y_line jindu_out" style="background: url(images/process_red.jpg) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url(../images/process_cr_red.jpg) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
+                        <div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
                         <div class="jindu_y_text">评价<br><span class="jd_date"></span> </div>
                     </div>
 
@@ -74,8 +121,8 @@
 							  am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
                 <li>
                     <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                        <a href="{{asset('images/f1.jpg')}}" class="">
+                            <img src="{{asset('images/f1.jpg')}}"  alt="远方 有一个地方 那里种有我们的梦想"/>
                             <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
                             <div class="am-gallery-desc">2375-09-26</div>
                         </a>
@@ -83,8 +130,8 @@
                 </li>
                 <li>
                     <div class="am-gallery-item">
-                        <a href="images/f1.jpg"  class="">
-                            <img src="images/f1.jpg"   alt="某天 也许会相遇 相遇在这个好地方"/>
+                        <a href="{{asset('images/f1.jpg')}}"  class="">
+                            <img src="{{asset('images/f1.jpg')}}"   alt="某天 也许会相遇 相遇在这个好地方"/>
                             <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
                             <div class="am-gallery-desc">2375-09-26</div>
                         </a>
@@ -92,8 +139,8 @@
                 </li>
                 <li>
                     <div class="am-gallery-item">
-                        <a href="images/f1.jpg"  class="">
-                            <img src="images/f1.jpg"   alt="不要太担心 只因为我相信"/>
+                        <a href="{{asset('images/f1.jpg')}}"  class="">
+                            <img src="{{asset('images/f1.jpg')}}"   alt="不要太担心 只因为我相信"/>
                             <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
                             <div class="am-gallery-desc">2375-09-26</div>
                         </a>
@@ -101,22 +148,21 @@
                 </li>
                 <li>
                     <div class="am-gallery-item">
-                        <a href="../images/f1.jpg"  class="">
-                            <img src="../images/f1.jpg"   alt="终会走过这条遥远的道路"/>
+                        <a href="{{asset('images/f1.jpg')}}"  class="">
+                            <img src="{{asset('images/f1.jpg')}}"   alt="终会走过这条遥远的道路"/>
                             <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
                             <div class="am-gallery-desc">2375-09-26</div>
                         </a>
                     </div>
                 </li>
             </ul>
-
         </div>
     </div>
     <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
         <div class="need-user-title" style="margin-left:20px;padding: 33px;border-width: 2px;border-color: #e9e5e5;border-style: solid;background-color: #ffffff;box-shadow: 0px 3px 0px 0px rgba(4, 0, 0, 0.1);">
             <div class="company_left am-u-lg-4 am-u-md-4 am-u-sm-4">
                 <a href="http://hi.680.com/1265780" target="_blank">
-                    <img src="http://p3.680.com/Myfile/2012-5/9/s/2038823_1265780.gif" alt="" style="width: 84px; height: 84px;border: solid 1px #ddd;"></a>
+                    <img src="{{asset('images/head1.gif')}}" alt="" style="width: 84px; height: 84px;border: solid 1px #ddd;"></a>
             </div>
             <div class="company_rigth am-u-lg-4 am-u-md-4 am-u-sm-4" style="float: right; font-family: SimSun;font-weight: 400;line-height: 28px;color: #666666;font-size: 12px;width: 120px;">
                 <a class="company_name" href="http://hi.680.com/1265780" target="_blank" style="font-family: SimSun; color: #333333; font-weight: 700;font-size: 16px;height: 30px;line-height: 30px;display: block;overflow: hidden;">
@@ -136,7 +182,7 @@
                     var $actions = AMUI.dialog.actions({
                         title: '扫一扫微信，完成支付',
                         items: [
-                            {content: '<a href="#" ><img src="/images/wechat.png" style="width:40%;height:40%;text-align:center;"></a>'},
+                            {content: '<a href="#" ><img src="images/wechat.png" style="width:40%;height:40%;text-align:center;"></a>'},
                         ],
                         onConfirm: function(index, target) {
                             console.log(index);
@@ -194,20 +240,4 @@
         </div>
     </div>
 </div>
-@section('footer')
-    <div class="footer " style="border: none;">
-        <div class="footer-hd ">
-        </div>
-        <div class="footer-bd ">
-            <br>
-            <p style="text-align: center;">
-
-                Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
-                客服电话：88888888<br>
-                联系邮箱：不亦乐乎＠bylehu.com
-
-            </p>
-        </div>
-    </div>
-@endsection
 @endsection

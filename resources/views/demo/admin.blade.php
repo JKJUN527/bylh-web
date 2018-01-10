@@ -7,14 +7,10 @@
     <title>@yield('title')</title>
     <link href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('AmazeUI-2.4.2/assets/css/admin.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/personal.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/orstyle.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
     <script src="{{asset('AmazeUI-2.4.2/assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.min.js')}}"></script>
-    <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
     @section("custom-style")
     @show
 </head>
@@ -25,8 +21,8 @@
         <ul class="message-l">
             <div class="topMessage">
                 <div class="menu-hd">
-                    <a href="{{asset('login')}}" target="_top" class="h">亲，请登录</a>
-                    <a href="{{asset('register')}}" target="_top">免费注册</a>
+                    <a href="{{asset('account/login')}}" target="_top" class="h">亲，请登录</a>
+                    <a href="{{asset('account/register')}}" target="_top">免费注册</a>
                 </div>
             </div>
         </ul>
@@ -73,15 +69,6 @@
                 <li class="qc last"><a href="{{asset('advanceSearch')}}">专业问答</a></li>
             </ul>
         </div>
-
-        <div class="bannerTwo">
-            <!--轮播 -->
-            <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
-                <ul class="am-slides">
-                    <li class="banner1"><a href="introduction.html"><img src="{{asset('images/3.jpg')}}" /></a></li>
-                </ul>
-            </div>
-        </div>
 @section('content')
     @show
         <!--footer-->
@@ -101,6 +88,8 @@
         </div>
 
     </div>
+    @section('aside')
+        @show
 </div>
 <!--引导 -->
 <div class="navCir">

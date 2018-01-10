@@ -1,34 +1,16 @@
 @extends('demo.admin2')
+@section('title','安全中心')
+@section('custom-style')
+    <link href="{{asset('css/infstyle.css')}}" rel="stylesheet" type="text/css">
+    @endsection
 @section('content')
-<div class="center">
-    <div class="col-main">
         <div class="main-wrap">
-
             <!--标题 -->
             <div class="user-safety">
                 <div class="am-cf am-padding">
                     <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">账户安全</strong> / <small>Set&nbsp;up&nbsp;Safety</small></div>
                 </div>
                 <hr/>
-
-                <!--头像
-                <div class="user-infoPic">
-
-                    <div class="filePic">
-                        <img class="am-circle am-img-thumbnail" src="../images/getAvatar.do.jpg" alt="" />
-                    </div>
-
-                    <p class="am-form-help">头像</p>
-
-                    <div class="info-m">
-                        <div><b>用户名：<i>小叮当</i></b></div>
-                        <div class="safeText">
-                              <a href="safety.html">账户安全:<em style="margin-left:20px ;">60</em>分</a>
-                            <div class="progressBar"><span style="left: -95px;" class="progress"></span></div>
-                        </div>
-                    </div>
-                </div>
-                -->
                 <div class="check">
                     <ul>
                         <li>
@@ -96,20 +78,48 @@
 
             </div>
         </div>
-        <!--底部-->
-        @section('footer')
-        <div class="footer ">
-            <div class="footer-hd ">
-            </div>
-            <div class="footer-bd ">
-                <p style="text-align: center;">
-                    ©2017-2018 bylh.com 成备xxxxxxxx号<br>
-                    不亦乐乎（成都）有限公司<br>
-                    客服：xxxx-xxx-xxx
-
-                </p>
-            </div>
-        </div>
-    @endsection
-
-    @endsection
+@endsection
+@section('aside')
+    <aside class="menu">
+        <ul>
+            <li class="person active">
+                <a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-newspaper-o"></i>个人资料</p>
+                <ul>
+                    <li><a href="{{asset('user')}}">个人信息</a></li>
+                    <li><a href="{{asset('safety')}}">安全设置</a></li>
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-balance-scale"></i>我的交易</p>
+                <ul>
+                    <li><a href="{{asset('order')}}">订单管理</a></li>
+                    <li><a href="{{asset('comment')}}">评价服务</a></li>
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-dollar"></i>我的服务</p>
+                <ul>
+                    <li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
+                    <li><a href="{{asset('myrequest')}}">服务列表</a></li>
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-tags"></i>我的需求</p>
+                <ul>
+                    <li><a href="{{asset('sendneed')}}">发布需求</a></li>
+                    <li><a href="{{asset('myneed')}}">需求列表</a></li>
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-qq"></i>信息中心</p>
+                <ul>
+                    <li><a href="{{asset('message')}}">站内信</a></li>
+                    <li><a href="/news">我的消息</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+@endsection

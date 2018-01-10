@@ -185,8 +185,8 @@ class HomeController extends Controller {
         // ly:添加返回搜索的关键字
         $data['keyword'] = $keywords;
 
-        return $data;
-        return view('search', [
+        #return $data;
+        return view('search/search', [
             "data" => $data,
         ]);
     }
