@@ -32,13 +32,26 @@ class InfoController extends Controller
         if ($uid == 0) {
             return redirect('index');
         }
-//        $type = $auth->getType();
         if ($uid) {
             $personInfo = Userinfo::where('uid', '=', $uid)
-                ->get();
+                ->first();
             return $personInfo;
         }
 
+        return null;
+    }
+    public function getServiceInfo() {
+        $auth = new AuthController();
+        $uid = $auth->getUid();
+        $type = $auth->getType();
+        if($uid == 0){
+            return redirect('index');
+        }
+        if ($uid && $type == 2) {
+            $Info = Serviceinfo::where('uid', '=', $uid)
+                ->get();
+            return $Info;
+        }
         return null;
     }
 }

@@ -16,11 +16,17 @@
                             </a>
                             <div class="m-baseinfo">
                                 <a class="m-pic" href="/account/baseedit" style="width: 120px;height: 120px;">
-                                    <img src="{{asset('images/touxiang.jpg')}}">
+                                    <img src="
+                                         @if($data['personInfo']->photo ==null ||$data['personInfo']->photo =="")
+                                            {{asset('images/touxiang.jpg')}}
+                                         @else
+                                            {{$data['personInfo']->photo}}
+                                         @endif
+                                            ">
                                 </a>
                                 <div class="m-info">
-                                    <em class="s-name" style="padding-top: 20px;">小叮当</em>
-                                    <div class="vip1"><a href="#"><span>13942123@qq.com</span><em></em></a></div>
+                                    <em class="s-name" style="padding-top: 20px;">{{$data['username']}}</em>
+                                    <div class="vip1"><a href="#"><span>{{$data['personInfo']->mail}}</span><em></em></a></div>
                                 </div>
                             </div>
                             <div class="m-right">
@@ -34,10 +40,10 @@
                         <!--基本资料-->
                         <div class="m-userproperty">
                             <div class="s-bar">
-                                <i class="s-icon"></i>基本资料
+                                <i class="s-icon"></i><a href="/account/baseedit">基本资料</a>
                             </div>
                             <p class="m-age">
-                                <em class="m-num">24</em>
+                                <em class="m-num">{{ date('Y')-$data['personInfo']->birthday}}</em>
                                 <span class="m-title">年龄</span>
                             </p>
                             <p class="m-sex">
@@ -53,23 +59,25 @@
                         <!--我的钱包-->
                         <div class="wallet">
                             <div class="s-bar">
-                                <a href="{{asset('myneed"')}}">
+                                <a href="{{asset('demands/getDemandsList"')}}">
                                 <i class="s-icon"></i>我的需求
                                 <label style="float: right;">更多>>></label></a>
                             </div>
-                            <p class="m-big squareS">
+                            @foreach($data['demandsList'] as $demand)
+                            <p class="m-big">
                                 <a href="#">
                                     <i><img src="{{asset('images/f3.png')}}"/></i>
                                     <span class="m-title">网站建设</span>
                                 </a>
                             </p>
-                            <p class="m-big squareA">
+                            @endforeach
+                            <p class="m-big">
                                 <a href="#">
                                     <i><img src="{{asset('images/f1.jpg')}}"/></i>
                                     <span class="m-title">产品设计</span>
                                 </a>
                             </p>
-                            <p class="m-big squareL">
+                            <p class="m-big">
                                 <a href="#">
                                     <i><img src="{{asset('images/f2.jpg"')}}"/></i>
                                     <span class="m-title">取名测字</span>
@@ -295,12 +303,12 @@
             <aside class="menu">
                 <ul>
                     <li class="person active">
-                        <a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
+                        <a href="{{asset('account/index')}}"><i class="am-icon-user"></i>个人中心</a>
                     </li>
                     <li class="person">
                         <p><i class="am-icon-newspaper-o"></i>个人资料</p>
                         <ul>
-                            <li><a href="{{asset('user')}}">个人信息</a></li>
+                            <li><a href="{{asset('account/baseedit')}}">个人信息</a></li>
                             <li><a href="{{asset('safety')}}">安全设置</a></li>
                         </ul>
                     </li>

@@ -374,6 +374,14 @@ class DemandsController extends Controller {
         $data['uid']=AuthController::getUid();
 
     }
+    static public function getDemandsList(){
+        $uid = AuthController::getUid();
+        $data = Demands::where('uid',$uid)
+            ->where('state',0)
+            ->orderBy('created_at','desc')
+            ->get();
+        return $data;
+    }
 
 
 

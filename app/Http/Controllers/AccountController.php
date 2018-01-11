@@ -8,9 +8,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Demands;
+use App\News;
+use App\Orders;
 use App\Serviceinfo;
 use App\User;
 use App\Userinfo;
+use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -28,35 +32,57 @@ class AccountController extends Controller {
         if($data['uid']==0){//先登录
             return view('account.login',['data'=>$data]);
         }
-        //暂定初始页面需要返回内容
-        //返回已发布的服务列表及需求列表
-        //返回个人已发布服务列表
-//        switch ($data['type']) {
-//            case 1://需求用户
-//                $data['demandsList'] = DemandsController::getDemandsList();
-//                $info = new InfoController();
-//                $data['personInfo'] = $info->getPersonInfo();
-//                $data['messageNum'] = $this->getMessageNum();
-//                $data['orderNum'] = $this->getOrderNum();
-//                break;
-//            case 2://服务用户
-//                $data['type'] = 2;
-//                $info = new InfoController();
-//                $data['uid'] = AuthController::getUid();
-//                $data['enterpriseInfo'] = $info->getEnprInfo();
-//                $data['positionList'] = $this->getPostionList();
-//                $data['messageNum'] = $this->getMessageNum();
-//                $data['applyList'] = $this->getApplyList();
-//                $data['industry'] = Industry::all();
-//                break;
-//        }
-
+//        暂定初始页面需要返回内容
+//        个人主页返回 user基本信息、三个最新需求、待处理订单、推荐服务商6个、站内信未读消息个数、网站公告
+//        服务主页返回 user基本信息、服务基本信息、最新服务3个、待处理订单、推荐服务商6个、站内信未读消息个数、网站公告
+        switch ($data['type']) {
+            case 1://需求用户
+                //三个最新需求
+                $data['demandsList'] = $this->getDemands($data['uid']);
+                break;
+            case 2://服务用户
+                $info = new InfoController();
+                $data['serviceInfo'] = $info->getServiceInfo();
+                //当前用户最新服务
+                $data['servicesList'] = array();
+                $data['servicesList'][] = $this->getGenlservices($data['uid']);
+                $data['servicesList'][] = $this->getFinlservices($data['uid']);
+                $data['servicesList'][] = $this->getQaservices($data['uid']);
+                break;
+        }
+        $info = new InfoController();
+        //user基本信息
+        $data['personInfo'] = $info->getPersonInfo();
+        //未读站内信个数
+        $data['messageNum'] = $this->getMessageNum();
+        //获取待处理订单
+        $data['order'] = $this->getOrder($data['uid']);
+        $data['orderNum'] = $this->getOrderNum();
+        //网站公告
+        $data['news'] = News::orderBy('created_at','desc')->take(5)->get();
+        //推荐服务商
+        $data['adservers'] = Serviceinfo::where('is_urgency',1)->orderBy('created_at','desc')
+            ->take(6)
+            ->get();
+//        return $data;
         return view('person.home',['data'=>$data]);
+    }
+    //
+    public function getOrder($uid){
+        $data = Orders::where('state','!=',3)
+            ->where(function ($query) use($uid){
+                $query->where('s_uid',$uid)
+                    ->orwhere('d_uid',$uid);
+            })
+            ->orderBy('updated_at','desc')
+            ->get();
+        return $data;
     }
     //获取已发布一般服务列表
     public function getGenlservices($uid){
         $genlservices = Genlservices::where('uid',$uid)
             ->where('state',0)
+            ->orderby('created_at','desc')
             ->get();
         return $genlservices;
     }
@@ -64,6 +90,7 @@ class AccountController extends Controller {
     public function getFinlservices($uid){
         $finlservices = Finlservices::where('uid',$uid)
             ->where('state',0)
+            ->orderby('created_at','desc')
             ->get();
         return $finlservices;
     }
@@ -71,6 +98,7 @@ class AccountController extends Controller {
     public function getQaservices($uid){
         $qaservices = Qaservices::where('uid',$uid)
             ->where('state',0)
+            ->orderby('created_at','desc')
             ->get();
         return $qaservices;
     }
@@ -78,6 +106,8 @@ class AccountController extends Controller {
     public function getDemands($uid){
         $demands = Demands::where('uid',$uid)
             ->where('state',0)
+            ->orderBy('created_at','desc')
+            ->take(3)
             ->get();
         return $demands;
     }

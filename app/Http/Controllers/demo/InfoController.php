@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Enprinfo;
 use App\Personinfo;
+use App\Serviceinfo;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -71,7 +72,7 @@ class InfoController extends Controller {
         return null;
     }
 
-    public function getEnprInfo() {
+    public function getServiceInfo() {
         $auth = new AuthController();
         $uid = $auth->getUid();
         $type = $auth->getType();
@@ -79,9 +80,9 @@ class InfoController extends Controller {
             return redirect('index');
         }
         if ($uid && $type == 2) {
-            $enprInfo = Enprinfo::where('uid', '=', $uid)
+            $Info = Serviceinfo::where('uid', '=', $uid)
                 ->get();
-            return $enprInfo;
+            return $Info;
         }
         return null;
     }

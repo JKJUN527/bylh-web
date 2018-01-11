@@ -104,6 +104,9 @@ Route::get('demands/detail',['uses' => 'DemandsController@detail']);
 Route::get('demands/reviewDemand',['uses' => 'OrderController@reviewDemand']);
 //需求高级搜索
 Route::any('demands/advanceSearch',['uses' => 'DemandsController@advanceIndex']);
+//获取发布需求列表
+Route::any('demands/getDemandsList',['uses' => 'DemandsController@getDemandsList']);
+
 //验证邮箱
 Route::any('person/email',function(){
     return view('person.email');
