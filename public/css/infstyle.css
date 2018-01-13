@@ -24,7 +24,10 @@ p.am-form-help{ font-size:14px;font-weight: 600; margin:0px auto; position:absol
 .user-safety{width:100%; max-width:900px;overflow:hidden;}
 
 /*按钮*/
-.info-btn{text-align: center;}
+.info-btn{
+    text-align: center;
+    margin-top: 5rem;
+}
 .fore3 .am-btn-secondary {color: #000;background-color:transparent;border:none;}
 
 /*地址*/
@@ -41,7 +44,10 @@ p.new-mu_l2cw span{height:17px;line-height:17px ;}
 .user-safety .check .fore1 {width:80px;font-size: 14px; font-weight:600; line-height:21px;padding-top:5px ;}
 .user-safety .check .fore2 { display:none;text-align:left;font-size: 12px; line-height:21px;}
 .user-safety .check .fore3 {text-align:center;font-size: 12px; float:right; line-height:21px;}
-.am-btn{ padding:5px;}
+.am-btn{
+    padding:5px;
+    width: 8rem;
+}
 .user-safety .check i{margin-left:10px}
 .user-safety .fore3 .am-btn{width:70px;}
 
