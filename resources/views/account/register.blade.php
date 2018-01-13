@@ -103,7 +103,6 @@
         </div>
     </div>
 
-@include('demo.footer')
     {{--<div class="footer ">--}}
         {{--<div class="footer-hd ">--}}
         {{--</div>--}}

@@ -52,16 +52,16 @@
             <!--悬浮搜索框-->
 
             <div class="nav white">
+                {{--<div class="logo"><img src="{{asset('images/bylh2.png')}}" onclick="gobackhome();"/></div>--}}
                 <div class="logoBig">
-                    <li><img src="{{asset("images/bylh2.png")}}"  style="width: 60%;" /></li>
+                    <li><img src="{{asset('images/bylh2.png')}}" onclick="gobackhome();"/></li>
                 </div>
 
                 <div class="search-bar pr">
-                    <a name="index_none_header_sysc" href="{{asset('search')}}"></a>
+                    <a name="index_none_header_sysc" href="#"></a>
                     <form>
-                        <input id="searchInput" name="index_none_header_sysc" value="{{$data['keyword'] or ''}}"
-                               type="text" placeholder="搜索" autocomplete="off">
-                        <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        <input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off">
+                        <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="button">
                     </form>
                 </div>
             </div>
@@ -116,3 +116,17 @@
 @show
 </body>
 </html>
+<script>
+    $("#ai-topsearch").click( function () {
+        search();
+    });
+    function search() {
+        var keyword = $("#searchInput").val();
+        if(keyword != ''){
+            window.location.href = "/search?keyword="+keyword;
+        }
+    }
+    function gobackhome() {
+        window.location.href = "/index";
+    }
+</script>
