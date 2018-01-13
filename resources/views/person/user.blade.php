@@ -2,6 +2,15 @@
 @section('title','个人资料')
 @section('custom-style')
     <link href="{{asset('css/infstyle.css')}}" rel="stylesheet" type="text/css">
+    <style>
+    .user_info{
+        width: 80% !important;
+        display: inline !important;
+    }
+    .label_tip{
+        height: 2.4rem;
+    }
+    </style>
 @endsection
 @section('content')
     <div class="main-wrap">
@@ -17,16 +26,20 @@
 
                     <div class="filePic">
                         <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
-                        <img class="am-circle am-img-thumbnail" src="images/touxiang.jpg" alt="" />
+                        <img class="am-circle am-img-thumbnail" src="
+                            @if($data['userinfo']->photo =='' ||$data['userinfo']->photo ==null)
+                                {{asset('images/mansmall.jpg')}}
+                            @else
+                                {{$data['userinfo']->photo}}
+                            @endif
+                                " alt="" />
                     </div>
 
                     <p class="am-form-help">头像</p>
 
                     <div class="info-m">
-                        <div><b>用户名：<i>小叮当</i></b></div>
-                        <div class="vip">
-                            <span></span><a href="#">会员专享</a>
-                        </div>
+                        <div><b>用户名：<i>{{$data['username']}}</i></b></div>
+                        <div><b>个人签名：<i>{{$data['userinfo']->note}}</i></b></div>
                     </div>
                 </div>
 
@@ -36,7 +49,7 @@
                         <fieldset>
                             <div class="am-form-group">
                                 <label for="doc-vld-name-2-1">用户名：</label>
-                                <input type="text" id="doc-vld-name-2-1" minlength="3" placeholder="输入用户名（至少 3 个字符）" required/>
+                                <input  class="user_info" type="text" id="doc-vld-name-2-1" minlength="3" placeholder="输入用户名（至少 3 个字符）" required/>
                             </div>
                             <div class="am-form-group">
                                 <label>性别： </label>
@@ -46,22 +59,18 @@
                                 <label class="am-radio-inline">
                                     <input type="radio" name="docVlGender"> 女
                                 </label>
-                                <label class="am-radio-inline">
-                                    <input type="radio" name="docVlGender"> 其他
-                                </label>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="doc-vld-age-2-1">生日：</label>
+                                <input class="user_info" type="date" class=""  id="doc-vld-age-2-1" placeholder="" required />
                             </div>
                             <div class="am-form-group">
                                 <label for="doc-vld-email-2-1">邮箱：</label>
-                                <input type="email" id="doc-vld-email-2-1" data-validation-message="请输入合法的邮箱" placeholder="输入邮箱" required/>
+                                <input class="user_info" type="email" id="doc-vld-email-2-1" data-validation-message="请输入合法的邮箱" placeholder="输入邮箱" required/>
                             </div>
-                            <div class="am-form-group">
-                                <label for="doc-vld-age-2-1">年龄：</label>
-                                <input type="number" class=""  id="doc-vld-age-2-1" placeholder="输入年龄  3-120" min="3" max="120" required />
-                            </div>
-
                             <div class="am-form-group">
                                 <label for="doc-vld-tel-2-1">电话：</label>
-                                <input id="user-phone" placeholder="输入电话" type="tel"  data-validation-message="请输入合法的电话" required/>
+                                <input class="user_info" id="user-phone" placeholder="输入电话" type="tel"  data-validation-message="请输入合法的电话" required/>
                             </div>
 
                             <div class="am-form-group">
@@ -95,7 +104,7 @@
                         var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
 
                         if (!$alert.length) {
-                            $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+                            $alert = $('<div class="am-alert am-alert-danger label_tip"></div>').hide().
                             appendTo($group);
                         }
 
@@ -106,46 +115,5 @@
         </script>
 @endsection
 @section('aside')
-    <aside class="menu">
-        <ul>
-            <li class="person active">
-                <a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-newspaper-o"></i>个人资料</p>
-                <ul>
-                    <li><a href="{{asset('user')}}">个人信息</a></li>
-                    <li><a href="{{asset('safety')}}">安全设置</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-balance-scale"></i>我的交易</p>
-                <ul>
-                    <li><a href="{{asset('order')}}">订单管理</a></li>
-                    <li><a href="{{asset('comment')}}">评价服务</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-dollar"></i>我的服务</p>
-                <ul>
-                    <li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
-                    <li><a href="{{asset('myrequest')}}">服务列表</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-tags"></i>我的需求</p>
-                <ul>
-                    <li><a href="{{asset('sendneed')}}">发布需求</a></li>
-                    <li><a href="{{asset('myneed')}}">需求列表</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-qq"></i>信息中心</p>
-                <ul>
-                    <li><a href="{{asset('message')}}">站内信</a></li>
-                    <li><a href="/news">我的消息</a></li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
+@include('demo.aside',['type'=>$data['type']])
 @endsection

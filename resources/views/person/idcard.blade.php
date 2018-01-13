@@ -272,3 +272,6 @@
         }
     </script>
 @endsection
+@section('aside')
+    @include('demo.aside',['type'=>$data['type']])
+@endsection
