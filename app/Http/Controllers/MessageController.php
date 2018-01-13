@@ -20,63 +20,58 @@ class MessageController extends Controller {
     //站内信主页，需返回数据站内信详情、及发送人信息（id、pic）
 
     public function index(Request $request) {
-//        $data = array();
-//        $data['uid'] = AuthController::getUid();
-//        $data['username'] = InfoController::getUsername();
-//        $data['type'] = AuthController::getType();
-//        $uid = $data['uid'];
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+        $uid = $data['uid'];
 
-        //todo 伪造登录验证信息
-        $data["uid"] = 1;
-        $data["username"] = "jkjun";
-        $data["type"] = 1;
-        $uid = $data["uid"];
 
-//               if ($uid == 0) {
-//            return view('account.login',['data'=>$data]);
-//        }
-//
-//        $data['listMessages'] = array();
-//
-//        $temp = array();//保存temp['from'];
-//
-//        $temp1 = Message::whereRaw('to_id =? and is_delete =?', [$uid, 0])//别人发给我的消息
-//        ->orderBy('created_at', 'desc')
-//            ->get();
-//        foreach ($temp1 as $item) {
-//            $id = $item['attributes']['from_id'];
-//            //echo "from".$id."<br>";
-//            if (in_array($id, $temp)) {
-//                continue;
-//            } else {
-//                $temp[] = $id;
-//                $data['listMessages'][] = $item;
-//            }
-//        }
-//        $temp2 = Message::whereRaw('from_id =? and is_delete =?', [$uid, 0])//我发给别人的消息
-//        ->orderBy('created_at', 'desc')
-//            ->get();
-//        foreach ($temp2 as $item) {
-//
-//            $id = $item['attributes']['to_id'];
-//            //echo "to".$id."<br>";
-//            if (in_array($id, $temp)) {
-//                continue;
-//            } else {
-//                $temp[] = $id;
-//                $data['listMessages'][] = $item;
-//            }
-//        }
-//        foreach ($temp as $item) {
-//            $type = User::find($item);
-//            if($type['type']!=0) {
-//                $data['user'][$item] = User::select('username')
-//                    ->where('uid', '=', $item)
-//                    ->get();
-//            }elseif ($type['type']==0){
-//                $data['user'][$item][0]['username']="系统消息";
-//            }
-//        }
+         if ($uid == 0) {
+            return view('account.login',['data'=>$data]);
+        }
+
+        $data['listMessages'] = array();
+
+        $temp = array();//保存temp['from'];
+
+        $temp1 = Message::whereRaw('to_id =? and is_delete =?', [$uid, 0])//别人发给我的消息
+        ->orderBy('created_at', 'desc')
+            ->get();
+        foreach ($temp1 as $item) {
+            $id = $item['attributes']['from_id'];
+            //echo "from".$id."<br>";
+            if (in_array($id, $temp)) {
+                continue;
+            } else {
+                $temp[] = $id;
+                $data['listMessages'][] = $item;
+            }
+        }
+        $temp2 = Message::whereRaw('from_id =? and is_delete =?', [$uid, 0])//我发给别人的消息
+        ->orderBy('created_at', 'desc')
+            ->get();
+        foreach ($temp2 as $item) {
+
+            $id = $item['attributes']['to_id'];
+            //echo "to".$id."<br>";
+            if (in_array($id, $temp)) {
+                continue;
+            } else {
+                $temp[] = $id;
+                $data['listMessages'][] = $item;
+            }
+        }
+        foreach ($temp as $item) {
+            $type = User::find($item);
+            if($type['type']!=0) {
+                $data['user'][$item] = User::select('username')
+                    ->where('uid', '=', $item)
+                    ->get();
+            }elseif ($type['type']==0){
+                $data['user'][$item][0]['username']="系统消息";
+            }
+        }
 
         //return $data;
         return view('messages.index', ['data' => $data]);
@@ -105,9 +100,6 @@ class MessageController extends Controller {
     //发送站内信，传入to_id(原对话from_id)|message,数组形式
     public static function sendMessage(Request $request,$toid='',$content='') {
         $from_id = AuthController::getUid();
-
-        //todo 伪造登录验证信息
-        $from_id = 1;
 
         if ($from_id == 0) {
             return view('account.login');
@@ -218,12 +210,6 @@ class MessageController extends Controller {
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
         $to_id = AuthController::getUid();
-
-        //todo 伪造登录验证信息
-        $data["uid"] = 1;
-        $data["username"] = "jkjun";
-        $data["type"] = 1;
-        $to_id = $data["uid"];
 
         if ($to_id == 0) {
             $data['status'] = 400;

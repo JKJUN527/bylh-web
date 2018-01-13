@@ -34,8 +34,8 @@ class AccountController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
-        if($data['uid']==0){//先登录
-            return view('account.login',['data'=>$data]);
+        if ($data['uid'] == 0) {//先登录
+            return view('account.login', ['data' => $data]);
         }
 //        暂定初始页面需要返回内容
 //        个人主页返回 user基本信息、三个最新需求、待处理订单、推荐服务商6个、站内信未读消息个数、网站公告
@@ -64,22 +64,23 @@ class AccountController extends Controller {
         $data['order'] = $this->getOrder($data['uid']);
         $data['orderNum'] = $this->getOrderNum();
         //网站公告
-        $data['news'] = News::orderBy('created_at','desc')->take(5)->get();
+        $data['news'] = News::orderBy('created_at', 'desc')->take(5)->get();
         //推荐服务商
-        $data['adservers'] = Serviceinfo::where('is_urgency',1)->orderBy('created_at','desc')
+        $data['adservers'] = Serviceinfo::where('is_urgency', 1)->orderBy('created_at', 'desc')
             ->take(6)
             ->get();
 //        return $data;
-        return view('person.home',['data'=>$data]);
+        return view('person.home', ['data' => $data]);
     }
+
     //
-    public function getOrder($uid){
-        $data['orderlist'] = Orders::where('state','!=',3)
-            ->where(function ($query) use($uid){
-                $query->where('s_uid',$uid)
-                    ->orwhere('d_uid',$uid);
+    public function getOrder($uid) {
+        $data = Orders::where('state', '!=', 3)
+            ->where(function ($query) use ($uid) {
+                $query->where('s_uid', $uid)
+                    ->orwhere('d_uid', $uid);
             })
-            ->orderBy('updated_at','desc')
+            ->orderBy('updated_at', 'desc')
             ->get();
         $data['orderinfo'] = array();
         foreach ( $data['orderlist'] as $order){
@@ -116,55 +117,61 @@ class AccountController extends Controller {
         }
         return $data;
     }
+
     //获取已发布一般服务列表
-    public function getGenlservices($uid){
-        $genlservices = Genlservices::where('uid',$uid)
-            ->where('state',0)
-            ->orderby('created_at','desc')
+    public function getGenlservices($uid) {
+        $genlservices = Genlservices::where('uid', $uid)
+            ->where('state', 0)
+            ->orderby('created_at', 'desc')
             ->get();
         return $genlservices;
     }
+
     //获取已发布实习中介服务列表
-    public function getFinlservices($uid){
-        $finlservices = Finlservices::where('uid',$uid)
-            ->where('state',0)
-            ->orderby('created_at','desc')
+    public function getFinlservices($uid) {
+        $finlservices = Finlservices::where('uid', $uid)
+            ->where('state', 0)
+            ->orderby('created_at', 'desc')
             ->get();
         return $finlservices;
     }
+
     //获取已发布专业问答服务列表
-    public function getQaservices($uid){
-        $qaservices = Qaservices::where('uid',$uid)
-            ->where('state',0)
-            ->orderby('created_at','desc')
+    public function getQaservices($uid) {
+        $qaservices = Qaservices::where('uid', $uid)
+            ->where('state', 0)
+            ->orderby('created_at', 'desc')
             ->get();
         return $qaservices;
     }
+
     //获取需求列表
-    public function getDemands($uid){
-        $demands = Demands::where('uid',$uid)
-            ->where('state',0)
-            ->orderBy('created_at','desc')
+    public function getDemands($uid) {
+        $demands = Demands::where('uid', $uid)
+            ->where('state', 0)
+            ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();
         return $demands;
     }
+
     //获取未完成订单个数
-    public function getOrderNum(){
+    public function getOrderNum() {
         $uid = AuthController::getUid();
-        $num = Orders::where(function ($query) use($uid){
-            $query->where('s_uid',$uid)
+        $num = Orders::where(function ($query) use ($uid) {
+            $query->where('s_uid', $uid)
                 ->orWhere(function ($query) use ($uid) {
-                    $query->where('d_uid',$uid);
+                    $query->where('d_uid', $uid);
                 });
         })
-            ->where('state','!=',3)
+            ->where('state', '!=', 3)
             ->count();
         if ($num > 99)
             return 99;
         else
             return $num;
     }
+
     //获取未读消息个数
     public function getMessageNum() {
         $uid = AuthController::getUid();
@@ -177,6 +184,7 @@ class AccountController extends Controller {
         else
             return $num;
     }
+
     //修改个人基本资料主页
     public function usersinfo() {
         $data = array();
@@ -191,12 +199,12 @@ class AccountController extends Controller {
             return redirect()->back();
         }
 
-        $data['userinfo'] = Userinfo::where('uid',$data['uid'])->first();
+        $data['userinfo'] = Userinfo::where('uid', $data['uid'])->first();
 
-        return view('person.user',['data'=>$data]);
+        return view('person.user', ['data' => $data]);
     }
-    public function editbaseinfo(Request $request)
-    {
+
+    public function editbaseinfo(Request $request) {
         $data = array();
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
@@ -270,8 +278,9 @@ class AccountController extends Controller {
             return $data;
         }
 
-        return view('account/edit',['data'=>$data]);
+        return view('account/edit', ['data' => $data]);
     }
+
     public function editserviceinfo(Request $request) {
         $data = array();
         $data['uid'] = AuthController::getUid();
@@ -287,8 +296,8 @@ class AccountController extends Controller {
             $data['msg'] = "用户非法，请登录企业号";
             return $data;
         }
-        $is_exist = Serviceinfo::where('uid',$data['uid'])->first();
-        if(empty($is_exist)){
+        $is_exist = Serviceinfo::where('uid', $data['uid'])->first();
+        if (empty($is_exist)) {
             $data['status'] = 400;
             $data['msg'] = "未存在该用户的服务信息表";
             return $data;
@@ -335,48 +344,48 @@ class AccountController extends Controller {
     //实名认证页面\返回对应企业信息
     //如果option  012 分别代表不同的认证上传页面
     //返回值为$data数组
-    public function authindex(Request $request,$option) {
+    public function authindex(Request $request, $option) {
         $data = array();
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-        if($data['uid']==0){
-            return view('account.login',['data'=>$data]);
+        if ($data['uid'] == 0) {
+            return view('account.login', ['data' => $data]);
         }
-        $state = User::where('uid',$data['uid'])
-            ->where('status',0)
+        $state = User::where('uid', $data['uid'])
+            ->where('status', 0)
             ->first();
-        if(count($state)>0){//用户合法、存在
-            $data['userinfo'] = Userinfo::where('uid',$data['uid'])->first();//取得用户基本信息（电话邮箱之类）
-            switch ($option){
+        if (count($state) > 0) {//用户合法、存在
+            $data['userinfo'] = Userinfo::where('uid', $data['uid'])->first();//取得用户基本信息（电话邮箱之类）
+            switch ($option) {
                 case 0://实名认证
                     //查看用户审核情况(普通用户未验证)
                     //返回用户实名认证情况
-                    $situation = Userinfo::where('uid',$data['uid'])->select('realname_statue')->first();
-                    $data['is_vertify']=$situation['realname_statue'];
+                    $situation = Userinfo::where('uid', $data['uid'])->select('realname_statue')->first();
+                    $data['is_vertify'] = $situation['realname_statue'];
                     break;
                 case 1://实习中介认证
-                    $situation = Userinfo::where('uid',$data['uid'])->select('finance_statue')->first();
-                    $data['is_vertify']=$situation['finance_statue'];
+                    $situation = Userinfo::where('uid', $data['uid'])->select('finance_statue')->first();
+                    $data['is_vertify'] = $situation['finance_statue'];
                     break;
                 case 2:
-                    $situation = Userinfo::where('uid',$data['uid'])->select('majors_statue')->first();
-                    $data['is_vertify']=$situation['majors_statue'];
+                    $situation = Userinfo::where('uid', $data['uid'])->select('majors_statue')->first();
+                    $data['is_vertify'] = $situation['majors_statue'];
                     break;
                 default:
                     return "error";
             }
-        }else
-            return view('account.login',['data'=>$data]);
+        } else {
+            return view('account.login', ['data' => $data]);
+        }
 
-        return $data;
-        return view("account.vertifyindex", ['data' => $data]);
+        //return $data;
+        return view("person.idcard", ['data' => $data]);
     }
 
     //上传实名验证证件照片
-    public function uploadauth(Request $request,$option)
-    {
+    public function uploadauth(Request $request, $option) {
         $data = array();
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
@@ -390,27 +399,35 @@ class AccountController extends Controller {
                     $data['msg'] = "用户已提交审核，无需重复提交";
                     return $data;
                 }
-                if ($request->has('real_name') && $request->has('id_card') && $request->hasFile('idcard_photo')) {
+                if ($request->has('real_name') && $request->has('id_card') && $request->hasFile('idcard1_photo')) {
                     $userinfo = Userinfo::find($infoid['id']);
+
                     if ($request->isMethod('POST')) {
-                        $idcard_photo = $request->file('idcard_photo');//取得上传文件信息
+                        $idcard1_photo = $request->file('idcard1_photo');//取得上传文件信息
+                        $idcard2_photo = $request->file('idcard2_photo');//取得上传文件信息
 
-                        if ($idcard_photo->isValid()) {//判断文件是否上传成功
+                        if ($idcard1_photo->isValid() && $idcard2_photo->isValid()) {//判断文件是否上传成功
                             //原文件名
-//                            $originalName1 = $idcard_photo->getClientOriginalName();
+//                          //$originalName1 = $idcard1_photo->getClientOriginalName();
                             //扩展名
-                            $ext = $idcard_photo->getClientOriginalExtension();
+                            $ext1 = $idcard1_photo->getClientOriginalExtension();
+                            $ext2 = $idcard2_photo->getClientOriginalExtension();
                             //mimetype
-                            $type1 = $idcard_photo->getClientMimeType();
+                            //$type1 = $idcard1_photo->getClientMimeType();
                             //临时觉得路径
-                            $realPath = $idcard_photo->getRealPath();
+                            $realPath1 = $idcard1_photo->getRealPath();
+                            $realPath2 = $idcard2_photo->getRealPath();
 
-                            $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'idcard_photo' . '.' . $ext;
+                            $filename1 = date('Y-m-d-H-i-s') . '-' . uniqid() . 'idcard1_photo' . '.' . $ext1;
+                            $filename2 = date('Y-m-d-H-i-s') . '-' . uniqid() . 'idcard2_photo' . '.' . $ext2;
 
-                            $bool = Storage::disk('authentication')->put($filename, file_get_contents($realPath));
-                            if ($bool) {
+                            $bool1 = Storage::disk('authentication')->put($filename1, file_get_contents($realPath1));
+                            $bool2 = Storage::disk('authentication')->put($filename2, file_get_contents($realPath2));
+
+                            if ($bool1 and $bool2) {
                                 //文件名保存到数据库中
-                                $userinfo->idcard_photo = asset('storage/authentication/' . $filename);
+                                $userinfo->idcard_photo = asset('storage/authentication/' . $filename1) ."+@+".
+                                    asset('storage/authentication/' . $filename2);
                             }
                             $userinfo->tel = $request->input('tel');
                             $userinfo->mail = $request->input('mail');
@@ -425,11 +442,15 @@ class AccountController extends Controller {
                                 //return redirect('account/enterpriseVerify?eid='.$eid)->with('success', '上传证件成功');
                             } else {
                                 $data['status'] = 400;
-                                $data['msg'] = "上传失败";
+                                $data['msg'] = "保存失败";
                                 return $data;
                                 //return redirect('account/enterpriseVerify?eid='.$eid)->with('error', '上传证件失败');
                             }
                         }
+                    } else {
+                        $data['status'] = 400;
+                        $data['msg'] = "上传失败";
+                        return $data;
                     }
                 }
                 break;
@@ -446,20 +467,20 @@ class AccountController extends Controller {
 
                         if ($finance_photo->isValid()) {//判断文件是否上传成功
                             //原文件名
-//                            $originalName1 = $idcard_photo->getClientOriginalName();
+//                            $originalName1 = $idcard1_photo->getClientOriginalName();
                             //扩展名
-                            $ext = $finance_photo->getClientOriginalExtension();
+                            $ext1 = $finance_photo->getClientOriginalExtension();
                             //mimetype
                             $type1 = $finance_photo->getClientMimeType();
                             //临时觉得路径
-                            $realPath = $finance_photo->getRealPath();
+                            $realPath1 = $finance_photo->getRealPath();
 
-                            $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'finance_photo' . '.' . $ext;
+                            $filename1 = date('Y-m-d-H-i-s') . '-' . uniqid() . 'finance_photo' . '.' . $ext1;
 
-                            $bool = Storage::disk('authentication')->put($filename, file_get_contents($realPath));
+                            $bool = Storage::disk('authentication')->put($filename1, file_get_contents($realPath1));
                             if ($bool) {
                                 //文件名保存到数据库中
-                                $userinfo->finance_photo = asset('storage/authentication/' . $filename);
+                                $userinfo->finance_photo = asset('storage/authentication/' . $filename1);
                             }
                             $userinfo->tel = $request->input('tel');
                             $userinfo->mail = $request->input('mail');
@@ -493,20 +514,20 @@ class AccountController extends Controller {
 
                         if ($majors_photo->isValid()) {//判断文件是否上传成功
                             //原文件名
-//                            $originalName1 = $idcard_photo->getClientOriginalName();
+//                            $originalName1 = $idcard1_photo->getClientOriginalName();
                             //扩展名
-                            $ext = $majors_photo->getClientOriginalExtension();
+                            $ext1 = $majors_photo->getClientOriginalExtension();
                             //mimetype
                             $type1 = $majors_photo->getClientMimeType();
                             //临时觉得路径
-                            $realPath = $majors_photo->getRealPath();
+                            $realPath1 = $majors_photo->getRealPath();
 
-                            $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'majors_photo' . '.' . $ext;
+                            $filename1 = date('Y-m-d-H-i-s') . '-' . uniqid() . 'majors_photo' . '.' . $ext1;
 
-                            $bool = Storage::disk('authentication')->put($filename, file_get_contents($realPath));
+                            $bool = Storage::disk('authentication')->put($filename1, file_get_contents($realPath1));
                             if ($bool) {
                                 //文件名保存到数据库中
-                                $userinfo->majors_photo = asset('storage/authentication/' . $filename);
+                                $userinfo->majors_photo = asset('storage/authentication/' . $filename1);
                             }
                             $userinfo->tel = $request->input('tel');
                             $userinfo->mail = $request->input('mail');
@@ -534,6 +555,7 @@ class AccountController extends Controller {
         }
 
     }
+
     //登出函数
     public function logout() {
         Auth::logout();
