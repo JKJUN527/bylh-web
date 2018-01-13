@@ -9,13 +9,18 @@
 namespace App\Http\Controllers;
 
 use App\Demands;
+use App\Finlservices;
+use App\Genlservices;
 use App\News;
 use App\Orders;
+use App\Qaservices;
 use App\Serviceinfo;
 use App\User;
 use App\Userinfo;
 use App\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -69,13 +74,46 @@ class AccountController extends Controller {
     }
     //
     public function getOrder($uid){
-        $data = Orders::where('state','!=',3)
+        $data['orderlist'] = Orders::where('state','!=',3)
             ->where(function ($query) use($uid){
                 $query->where('s_uid',$uid)
                     ->orwhere('d_uid',$uid);
             })
             ->orderBy('updated_at','desc')
             ->get();
+        $data['orderinfo'] = array();
+        foreach ( $data['orderlist'] as $order){
+            //返回订单对应服务的信息
+            if($order->service_id != null || $order->service_id != ""){
+                switch ($order->type){
+                    case 0:
+                        $info = Genlservices::select('id','title','picture')
+                            ->where('id',$order->service_id)
+                            ->first();
+                        break;
+                    case 1:
+                        $info = Finlservices::select('id','title','picture')
+                            ->where('id',$order->service_id)
+                            ->first();
+                        break;
+                    case 2:
+                        $info = Qaservices::select('id','title','picture')
+                            ->where('id',$order->service_id)
+                            ->first();
+                        break;
+                    default:
+                        $info = Genlservices::select('id','title','picture')
+                            ->where('id',$order->service_id)
+                            ->first();
+                        break;
+                }
+            }else{
+               $info = Demands::select('id','title','picture')
+                   ->where('id',$order->demand_id)
+                   ->first();
+            }
+            $data['orderinfo'][$order->id] = $info;
+        }
         return $data;
     }
     //获取已发布一般服务列表

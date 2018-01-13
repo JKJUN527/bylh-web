@@ -31,7 +31,7 @@
                             </div>
                             <div class="m-right">
                                 <div class="m-new">
-                                    <a href="{{asset('message')}}"><i class="am-icon-dropbox  am-icon-md" style="padding-right:5px ;"></i>消息盒子</a>
+                                    <a href="{{asset('/message')}}"><i class="am-icon-dropbox  am-icon-md" style="padding-right:5px ;"></i>消息盒子</a>
                                 </div>
 
                             </div>
@@ -47,43 +47,90 @@
                                 <span class="m-title">年龄</span>
                             </p>
                             <p class="m-sex">
-                                <em class="m-num">男</em>
+                                <em class="m-num">
+                                    @if($data['personInfo']->sex ==0)
+                                        男
+                                    @else
+                                        女
+                                    @endif
+                                </em>
                                 <span class="m-title">性别</span>
                             </p>
                             <p class="tel">
-                                <em class="m-num">18281878123</em>
+                                <em class="m-num">{{$data['personInfo']->tel}}</em>
                                 <span class="m-title">电话</span>
+                            </p>
+                            <p class="mail">
+                                <span class="m-title">邮箱</span>
+                                <em class="m-num" style="margin-top: 1.5rem;">{{$data['personInfo']->mail}}</em>
                             </p>
                         </div>
 
-                        <!--我的钱包-->
+                        @if($data['type'] ==1)
+                        <!--我的需求-->
                         <div class="wallet">
                             <div class="s-bar">
                                 <a href="{{asset('demands/getDemandsList"')}}">
                                 <i class="s-icon"></i>我的需求
                                 <label style="float: right;">更多>>></label></a>
                             </div>
+                            <?php $i=0 ?>
                             @foreach($data['demandsList'] as $demand)
-                            <p class="m-big">
-                                <a href="#">
-                                    <i><img src="{{asset('images/f3.png')}}"/></i>
-                                    <span class="m-title">网站建设</span>
-                                </a>
-                            </p>
+                                @if($i++ <=3)
+                                    <p class="m-big">
+                                        <a href="#">
+                                            <i><img src="
+                                                @if($demand->picture == "" || $demand->picture == null)
+                                                    {{asset('images/f3.png')}}
+                                                @else
+                                                        {{$demand->picture}}
+                                                @endif
+                                                        "/></i>
+                                            <span class="m-title">{{$demand->title}}</span>
+                                        </a>
+                                    </p>
+                                @endif
                             @endforeach
-                            <p class="m-big">
-                                <a href="#">
-                                    <i><img src="{{asset('images/f1.jpg')}}"/></i>
-                                    <span class="m-title">产品设计</span>
-                                </a>
-                            </p>
-                            <p class="m-big">
-                                <a href="#">
-                                    <i><img src="{{asset('images/f2.jpg"')}}"/></i>
-                                    <span class="m-title">取名测字</span>
-                                </a>
-                            </p>
+                            {{--<p class="m-big">--}}
+                                {{--<a href="#">--}}
+                                    {{--<i><img src="{{asset('images/f1.jpg')}}"/></i>--}}
+                                    {{--<span class="m-title">产品设计</span>--}}
+                                {{--</a>--}}
+                            {{--</p>--}}
+                            {{--<p class="m-big">--}}
+                                {{--<a href="#">--}}
+                                    {{--<i><img src="{{asset('images/f2.jpg"')}}"/></i>--}}
+                                    {{--<span class="m-title">取名测字</span>--}}
+                                {{--</a>--}}
+                            {{--</p>--}}
                         </div>
+                        @elseif($data['type'] == 2)
+                        <!--我的服务-->
+                        <div class="wallet">
+                            <div class="s-bar">
+                                <a href="{{asset('demands/getDemandsList"')}}">
+                                    <i class="s-icon"></i>我的服务
+                                    <label style="float: right;">更多>>></label></a>
+                            </div>
+                            <?php $i=0 ?>
+                            @foreach($data['servicesList'] as $service)
+                                @if($i++ <=3)
+                                    <p class="m-big">
+                                        <a href="#">
+                                            <i><img src="
+                                                @if($service->picture == "" || $service->picture == null)
+                                                {{asset('images/f3.png')}}
+                                                @else
+                                                {{$service->picture}}
+                                                @endif
+                                                        "/></i>
+                                            <span class="m-title">{{$service->title}}</span>
+                                        </a>
+                                    </p>
+                                @endif
+                            @endforeach
+                        </div>
+                        @endif
 
                     </div>
                     <div class="box-container-bottom"></div>
@@ -94,7 +141,7 @@
                             <div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
                                 <div class="m-order">
                                     <div class="s-bar">
-                                        <i class="s-icon"></i>我的订单
+                                        <i class="s-icon"></i>待处理订单<span>{{$data['orderNum']}}</span>
                                         <a class="i-load-more-item-shadow" href="{{asset('order')}}">全部订单</a>
                                     </div>
                                     <ul>
@@ -103,98 +150,104 @@
                                         <li><a href="{{asset('order')}}"><i><img src="{{asset('images/receive.png')}}"/></i><span>待收货</span></a></li>
                                         <li><a href="{{asset('order')}}"><i><img src="{{asset('images/comment.png')}}"/></i><span>待评价<em class="m-num">3</em></span></a></li>
                                     </ul>
+                                    @foreach($data['order']['orderlist'] as $order)
                                     <div class="orderContentBox">
                                         <div class="orderContent">
                                             <div class="orderContentpic">
                                                 <div class="imgBox">
-                                                    <a href="{{asset('orderinfo')}}"><img src="{{asset('images/f1.jpg')}}"></a>
+                                                    <a href="/order/getdetail?order_id={{$order->id}}">
+                                                        <img src="
+                                                            @if($data['order']['orderinfo'][$order->id]->picture =="" ||$data['order']['orderinfo'][$order->id]->picture ==null)
+                                                                {{asset('images/f1.jpg')}}
+                                                            @else
+                                                                {{$data['order']['orderinfo'][$order->id]->picture}}
+                                                            @endif
+                                                        ">
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="detailContent">
-                                                <a href="{{asset('orderinfo')}}" class="delivery">已确认</a>
+                                                <a href="/order/getdetail?order_id={{$order->id}}" class="delivery">
+                                                    @if($order->state == -1)
+                                                        交易失败
+                                                    @elseif($order->state == 0)
+                                                        待支付
+                                                    @elseif($order->state == 1)
+                                                        待收款
+                                                    @elseif($order->state == 2)
+                                                        待评价
+                                                    @endif
+                                                </a>
                                                 <div class="orderID">
-                                                    <span class="time">2016-03-09</span>
+                                                    <span class="time">{{mb_substr($order->created_at,0,10,'utf-8')}}</span>
                                                     <span class="splitBorder">|</span>
-                                                    <span class="time">21:52:47</span>
+                                                    <span class="time">{{mb_substr($order->created_at,10,18,'utf-8')}}</span>
                                                 </div>
                                                 <div class="orderID">
-                                                    <span class="num">网站开发</span>
+                                                    <span class="num">{{$order->title}}</span>
                                                 </div>
                                             </div>
-                                            <div class="state">待评价</div>
-                                            <div class="price"><span class="sym">¥</span>23.<span class="sym">80</span></div>
+                                            <div class="state">
+                                                @if($order->state == -1)
+                                                    交易失败
+                                                @elseif($order->state == 0)
+                                                    待支付
+                                                @elseif($order->state == 1)
+                                                    待收款
+                                                @elseif($order->state == 2)
+                                                    待评价
+                                                @endif
+                                            </div>
+                                            <?php $price = explode('.',$order->price) ?>
+                                            <div class="price"><span class="sym">¥</span>{{$price[0]}}.<span class="sym"><?php if(count($price) >1) echo $price[1]; else print 00;?></span></div>
 
                                         </div>
-                                        <a href="javascript:void(0);" class="btnPay">再次购买</a>
+                                        <a href="/order/getdetail?order_id={{$order->id}}" class="btnPay">立即处理</a>
                                     </div>
-
-                                    <div class="orderContentBox">
-                                        <div class="orderContent">
-                                            <div class="orderContentpic">
-                                                <div class="imgBox">
-                                                    <a href="{{asset('orderinfo')}}"><img src="{{asset('images/f2.jpg')}}"></a>
-                                                </div>
-                                            </div>
-                                            <div class="detailContent">
-                                                <a href="{{asset('orderinfo')}}" class="delivery">已付款</a>
-                                                <div class="orderID">
-                                                    <span class="time">2016-03-09</span>
-                                                    <span class="splitBorder">|</span>
-                                                    <span class="time">21:52:47</span>
-                                                </div>
-                                                <div class="orderID">
-                                                    <span class="num">java小程序设计</span>
-                                                </div>
-                                            </div>
-                                            <div class="state">待确认</div>
-                                            <div class="price"><span class="sym">¥</span>246.<span class="sym">50</span></div>
-
-                                        </div>
-                                        <a href="javascript:void(0);" class="btnPay">再次购买</a>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!--九宫格-->
-                    <div class="user-squaredIcon">
-                        <div class="s-bar">
-                            <i class="s-icon"></i>我的常用
-                        </div>
-                        <ul>
-                            <a href="{{asset('orderinfo')}}">
-                                <li class="am-u-sm-4"><i class="am-icon-truck am-icon-md"></i>
-                                    <p>物流查询</p>
-                                </li>
-                            </a>
-                            <a href="collection.html">
-                                <li class="am-u-sm-4"><i class="am-icon-heart am-icon-md"></i>
-                                    <p>我的收藏</p>
-                                </li>
-                            </a>
-                            <a href="foot.html">
-                                <li class="am-u-sm-4"><i class="am-icon-paw am-icon-md"></i>
-                                    <p>我的足迹</p>
-                                </li>
-                            </a>
-                            <a href="#">
-                                <li class="am-u-sm-4"><i class="am-icon-gift am-icon-md"></i>
-                                    <p>为你推荐</p>
-                                </li>
-                            </a>
-                            <a href="blog.html">
-                                <li class="am-u-sm-4"><i class="am-icon-share-alt am-icon-md"></i>
-                                    <p>我的分享</p>
-                                </li>
-                            </a>
-                            <a href="home/home2.html">
-                                <li class="am-u-sm-4"><i class="am-icon-clock-o am-icon-md"></i>
-                                    <p>限时活动</p>
-                                </li>
-                            </a>
+                    {{--<div class="user-squaredIcon">--}}
+                        {{--<div class="s-bar">--}}
+                            {{--<i class="s-icon"></i>我的常用--}}
+                        {{--</div>--}}
+                        {{--<ul>--}}
+                            {{--<a href="{{asset('orderinfo')}}">--}}
+                                {{--<li class="am-u-sm-4"><i class="am-icon-truck am-icon-md"></i>--}}
+                                    {{--<p>物流查询</p>--}}
+                                {{--</li>--}}
+                            {{--</a>--}}
+                            {{--<a href="collection.html">--}}
+                                {{--<li class="am-u-sm-4"><i class="am-icon-heart am-icon-md"></i>--}}
+                                    {{--<p>我的收藏</p>--}}
+                                {{--</li>--}}
+                            {{--</a>--}}
+                            {{--<a href="foot.html">--}}
+                                {{--<li class="am-u-sm-4"><i class="am-icon-paw am-icon-md"></i>--}}
+                                    {{--<p>我的足迹</p>--}}
+                                {{--</li>--}}
+                            {{--</a>--}}
+                            {{--<a href="#">--}}
+                                {{--<li class="am-u-sm-4"><i class="am-icon-gift am-icon-md"></i>--}}
+                                    {{--<p>为你推荐</p>--}}
+                                {{--</li>--}}
+                            {{--</a>--}}
+                            {{--<a href="blog.html">--}}
+                                {{--<li class="am-u-sm-4"><i class="am-icon-share-alt am-icon-md"></i>--}}
+                                    {{--<p>我的分享</p>--}}
+                                {{--</li>--}}
+                            {{--</a>--}}
+                            {{--<a href="home/home2.html">--}}
+                                {{--<li class="am-u-sm-4"><i class="am-icon-clock-o am-icon-md"></i>--}}
+                                    {{--<p>限时活动</p>--}}
+                                {{--</li>--}}
+                            {{--</a>--}}
 
-                        </ul>
-                    </div>
+                        {{--</ul>--}}
+                    {{--</div>--}}
 
                     <div class="user-suggestion">
                         <div class="s-bar">
@@ -212,60 +265,23 @@
                             <div class="Box">
                                 <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
 				  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
+                                    @foreach($data['adservers'] as $adserver)
                                     <li>
                                         <div class="am-gallery-item">
-                                            <a href="../images/f1.jpg" class="">
-                                                <img src="../images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                                                <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                                <div class="am-gallery-desc">2375-09-26</div>
+                                            <a href="/service/getAllservices?uid={{$adserver->uid}}" class="">
+                                                <img src="
+                                                @if($adserver->elogo == "" || $adserver->elogo == null)
+                                                        {{asset('images/avatar.png')}}
+                                                @else
+                                                        {{$adserver->elogo}}
+                                                @endif
+                                                        "  alt="{{$adserver->ename}}"/>
+                                                <h3 class="am-gallery-title" style="font-size: 0.8rem">{{$adserver->ename}}</h3>
+                                                <div class="am-gallery-desc" style="font-size: 1rem; margin-left: 2.5rem;">{{$adserver->city}}</div>
                                             </a>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="am-gallery-item">
-                                            <a href="{{asset('images/f1.jpg')}}" class="">
-                                                <img src="{{asset('images/f1.jpg')}}"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                                                <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                                <div class="am-gallery-desc">2375-09-26</div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="am-gallery-item">
-                                            <a href="images/f1.jpg" class="">
-                                                <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                                                <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                                                <div class="am-gallery-desc">2375-09-26</div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="am-gallery-item">
-                                            <a href="images/f1.jpg" class="">
-                                                <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                                                <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                                <div class="am-gallery-desc">2375-09-26</div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="am-gallery-item">
-                                            <a href="images/f1.jpg" class="">
-                                                <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                                                <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                                <div class="am-gallery-desc">2375-09-26</div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="am-gallery-item">
-                                            <a href="images/f1.jpg" class="">
-                                                <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                                                <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                                <div class="am-gallery-desc">2375-09-26</div>
-                                            </a>
-                                        </div>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -277,21 +293,17 @@
                 <!-- 日历-->
                 <div class="day-list">
                     <div class="s-title">
-                        公告
+                        网站新闻
                     </div>
                     <div class="s-box">
                         <ul>
-                            <li><a target="_blank" href="#">
-                                    <span style="color: #b84554;">[公告]</span>欢迎来到不亦乐乎
-                                </a></li>
-                            <li style="overflow:visible;"><a target="_blank" href="#">
-                                    <span style="color: #b84554;">[公告]</span>创意服务 上不亦乐乎
-                                </a></li>
-                            <li><a target="_blank" href="#">企业一站式众包服务平台	</a></li>
-                            <li><a target="_blank" href="#">威客基地</a></li>
-                            <li><a target="_blank" href="#">让你的知识变成财富！</a></li>
-                            <li><a target="_blank" href="#">加入我们，发现新的自己</a></li>
-                            <li><a target="_blank" href="#">把你的建议告诉我们</a></li>
+                            @foreach($data['news'] as $new)
+                            <li>
+                                <a target="_blank" href="/news/detail?nid={{$new->nid}}">
+                                    <span style="color: #b84554;">[{{$new->quote}}]</span>{{mb_substr($new->title,0,10,'utf-8')}}
+                                </a>
+                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -302,16 +314,30 @@
 @section('aside')
             <aside class="menu">
                 <ul>
-                    <li class="person active">
-                        <a href="{{asset('account/index')}}"><i class="am-icon-user"></i>个人中心</a>
-                    </li>
-                    <li class="person">
-                        <p><i class="am-icon-newspaper-o"></i>个人资料</p>
-                        <ul>
-                            <li><a href="{{asset('account/baseedit')}}">个人信息</a></li>
-                            <li><a href="{{asset('safety')}}">安全设置</a></li>
-                        </ul>
-                    </li>
+                    @if($data['type'] == 1)
+                        <li class="person active">
+                            <a href="{{asset('account/index')}}"><i class="am-icon-user"></i>个人中心</a>
+                        </li>
+                        <li class="person">
+                            <p><i class="am-icon-newspaper-o"></i>个人资料</p>
+                            <ul>
+                                <li><a href="{{asset('account/baseedit')}}">个人信息</a></li>
+                                <li><a href="{{asset('safety')}}">安全设置</a></li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="person active">
+                            <a href="{{asset('account/index')}}"><i class="am-icon-user"></i>服务中心</a>
+                        </li>
+                        <li class="person">
+                            <p><i class="am-icon-newspaper-o"></i>服务资料</p>
+                            <ul>
+                                <li><a href="{{asset('account/baseedit')}}">个人信息</a></li>
+                                <li><a href="{{asset('account/serviceedit')}}">服务信息</a></li>
+                                <li><a href="{{asset('safety')}}">安全设置</a></li>
+                            </ul>
+                        </li>
+                    @endif
                     <li class="person">
                         <p><i class="am-icon-balance-scale"></i>我的交易</p>
                         <ul>
@@ -319,6 +345,7 @@
                             <li><a href="{{asset('comment')}}">评价服务</a></li>
                         </ul>
                     </li>
+                    @if($data['type'] == 2)
                     <li class="person">
                         <p><i class="am-icon-dollar"></i>我的服务</p>
                         <ul>
@@ -326,6 +353,7 @@
                             <li><a href="{{asset('myrequest')}}">服务列表</a></li>
                         </ul>
                     </li>
+                    @endif
 
                     <li class="person">
                         <p><i class="am-icon-tags"></i>我的需求</p>

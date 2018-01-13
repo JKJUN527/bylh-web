@@ -9,7 +9,6 @@
 namespace App\Http\Controllers;
 
 use App\News;
-use App\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -34,15 +33,15 @@ class NewsController extends Controller {
             $news->view_count += 1;//浏览次数加1
             $news->save();
 
-            $data['review'] = DB::table('jobs_users')
-                ->select('jobs_newsreview.uid', 'username', 'type' ,'photo','elogo','content', 'jobs_newsreview.created_at')
-                ->leftjoin('jobs_enprinfo', 'jobs_enprinfo.uid', '=', 'jobs_users.uid')
-                ->leftjoin('jobs_personinfo', 'jobs_personinfo.uid', '=', 'jobs_users.uid')
-                ->rightjoin('jobs_newsreview','jobs_newsreview.uid','=','jobs_users.uid')
-                ->where('nid', '=', $nid)
-                ->where('is_valid', '=', 1)
-                ->orderBy('jobs_newsreview.created_at', 'desc')
-                ->paginate(10);//默认显示10条评论
+//            $data['review'] = DB::table('jobs_users')
+//                ->select('jobs_newsreview.uid', 'username', 'type' ,'photo','elogo','content', 'jobs_newsreview.created_at')
+//                ->leftjoin('jobs_enprinfo', 'jobs_enprinfo.uid', '=', 'jobs_users.uid')
+//                ->leftjoin('jobs_personinfo', 'jobs_personinfo.uid', '=', 'jobs_users.uid')
+//                ->rightjoin('jobs_newsreview','jobs_newsreview.uid','=','jobs_users.uid')
+//                ->where('nid', '=', $nid)
+//                ->where('is_valid', '=', 1)
+//                ->orderBy('jobs_newsreview.created_at', 'desc')
+//                ->paginate(10);//默认显示10条评论
         }
 
 //        return $data;

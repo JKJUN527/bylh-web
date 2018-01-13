@@ -23,20 +23,29 @@
                 <ul class="message-l">
                     <div class="topMessage">
                         <div class="menu-hd">
-                            <a href="{{asset('account/login')}}" target="_top" class="h">亲，请登录</a>
-                            <a href="{{asset('account/register')}}" target="_top">免费注册</a>
+                            @if($data['uid'] == 0)
+                                <a href="{{asset('/account/login')}}" target="_top" class="h">亲，请登录</a>
+                                <a href="{{asset('/account/register')}}" target="_top">免费注册</a>
+                            @endif
                         </div>
                     </div>
                 </ul>
                 <ul class="message-r">
-                    <div class="topMessage home">
-                        <div class="menu-hd"><a href="{{asset('index')}}" target="_top" class="h"><i
-                                        class="am-icon-home am-icon-fw"></i>首页</a></div>
-                    </div>
-                    <div class="topMessage my-shangcheng">
-                        <div class="menu-hd MyShangcheng"><a href="{{asset('home')}}" target="_top"><i
-                                        class="am-icon-user am-icon-fw"></i>个人中心</a></div>
-                    </div>
+                    @if($data['uid'] ==0)
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng"><a href="{{asset('/account/login')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>登录</a></div>
+                        </div>
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng"><a  href="{{asset('/account/register')}}" target="_top"><i class="am-icon-user-plus am-icon-fw"></i>注册</a></div>
+                        </div>
+                    @else
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng"><a href="{{asset('/account/index')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>欢迎你:{{$data['username']}}</a></div>
+                        </div>
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng"><a  href="{{asset('/account/logout')}}" target="_top"><i class="am-icon-outdent am-icon-fw"></i>退出</a></div>
+                        </div>
+                    @endif
                 </ul>
             </div>
 
@@ -73,7 +82,7 @@
             <li class="qc last"><a href="{{asset('services/advanceSearch')}}">专业问答</a></li>
         </ul>
         <div class="nav-extra">
-            <a href="{{asset('message')}}" style="color: #f5e79e;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息
+            <a href="{{asset('/message')}}" style="color: #f5e79e;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息
                 <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
         </div>
     </div>

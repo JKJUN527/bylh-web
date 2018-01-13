@@ -693,6 +693,8 @@ class ServiceController extends Controller
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
+
+
         return view('service.reviewService', ['data' => $data]);
     }
 }

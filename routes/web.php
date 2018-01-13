@@ -68,7 +68,7 @@ Route::any('service/detail',['uses' => 'ServiceController@detail']);
 //评论服务
 Route::any('service/reviewService',['uses' => 'serviceController@reviewService']);
 //获取用户发布所有需求、服务列表
-Route::get('service/reviewService',['uses' => 'serviceController@reviewService']);
+Route::get('service/getAllservices',['uses' => 'serviceController@getAllservices']);
 
 //订单模块
 
@@ -162,6 +162,8 @@ Route::post('message/isread',['uses' => 'MessageController@isRead']);
 //删除站内信单条消息
 Route::post('message/delmessage',['uses' => 'MessageController@delMessage']);
 
+//新闻模块
+Route::get('news/detail',['uses' => 'NewsController@detail']);
 
 
 
