@@ -15,7 +15,7 @@
     @show
 </head>
 <body>
-<div class="hmtop">
+<div class="hmtop" style="background-image:url({{asset('images/background4.png')}});">
     <!--顶部导航条 -->
     <div class="am-container header">
         <ul class="message-l">
@@ -51,7 +51,7 @@
 
     <div class="nav white">
         <div class="logo"><img src="{{asset('images/bylh2.png')}}" onclick="gobackhome();"/></div>
-        <div class="logoBig">
+        <div class="logoBig" style="margin-top: -15px;margin-left: -50px;">
             <li><img src="{{asset('images/bylh2.png')}}" onclick="gobackhome();"/></li>
         </div>
 
@@ -71,7 +71,7 @@
     <div class="slideall" style="height: auto;">
 
         <!--<div class="long-title"><span class="all-goods">全部分类</span></div>-->
-        <div class="nav-cont" >
+        <div class="nav-cont" style="background: #ff9933bd;">
             <ul>
                 <li class="index"><a href="{{asset('index')}}">首页</a></li>
                 <li class="qc"><a href="{{asset('demands')}}">需求大厅</a></li>
@@ -100,14 +100,14 @@
 
     </div>
     @section('aside')
-        @show
+    @show
 </div>
 <!--引导 -->
 <div class="navCir">
     <li class="active"><a href="{{asset('index')}}"><i class="am-icon-home "></i>首页</a></li>
     <li><a href="{{asset('service/advanceSearch')}}"><i class="am-icon-list"></i>服务大厅</a></li>
     <li><a href="{{asset('demands/advanceSearch')}}"><i class="am-icon-shopping-basket"></i>需求大厅</a></li>
-    <li><a href="{{asset('account/index')}}"><i class="am-icon-user"></i>我的主页</a></li>
+    <li><a href="{{asset('account/index')}}"><i class="am-icon-user"></i>个人中心</a></li>
 </div>
 </body>
 </html>

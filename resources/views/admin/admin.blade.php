@@ -1,6 +1,5 @@
 @extends('layout.admin')
 @section('title', '管理员')
-
 @section('custom-style')
     <style>
         ul.mdl-menu,

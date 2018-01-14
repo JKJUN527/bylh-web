@@ -6,9 +6,23 @@
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
     <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
 <style type="text/css">
+    .floor-title{
+        color: #003366;
+    }
+    .needtype1,.needtype2,.needtype3{
+        padding-top: 20px;
+    }
+    .more2more{
+        margin-top:-8px;
+    }
+    .comcategory{
+        padding-top: 10px;
+
+    }
     .comcategory li{
         font-size:14px;
         padding: 3px;
+        line-height: 1.5;
     }
     .comcategory li a:hover{
         color: #b84554;
@@ -26,6 +40,11 @@
     }
     .title-first a:hover{
         color: #b84554;
+        font-weight: bold;
+    }
+    .comh1{
+        font-size: 18px;
+        padding: 3px;
         font-weight: bold;
     }
     .demo li{
@@ -48,61 +67,99 @@
         background:#ee6363;
         color: #fff;
     }
+    .showNews{
+        width: 300px;
+        right: 0;
+        border: 2px solid #e64d2e;
+    }
+    .marqueenOne{
+        margin-top: -10px;
+        margin-left: -5px;
+    }
+    {{--.category-content .menu-item {--}}
+        {{--background-image: url({{asset('images/bear.png')}});--}}
+    {{--}--}}
+    @media screen and (max-width:1000px){
+        .marqueenTwo{display:none;}
+        .leftpanel{display:none;}
+        .shopMain{width:100%;}
+        .index-category-left{width:100%;text-align:center;}
+        .index-category-right{width:100%;text-align:center;}
+        .request_rank{display:none;}
+        .pictureshow{width:500px;}
+    }
 </style>
 @endsection
 @section('content')
-        <!--图片轮播-->
-        <div class="bannerTwo">
-        <!--轮播 -->
-        <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
-            <ul class="am-slides">
-                <li class="banner1"><a href="introduction.html"><img src="{{asset('images/3.jpg')}}" /></a></li>
-            </ul>
-        </div>
-    </div>
-        <!--侧边导航 -->
-        <div id="nav" class="navfull" style="position: static;">
-            <div class="area clearfix">
-                <div class="category-content" id="guide_2">
+    <div class="am-g am-g-fixed">
+        <div class="am-u-lg-2">
+            <div id="nav" class="navfull" style="position: static;">
+                <div class="area clearfix">
+                    <div class="category-content" id="guide_2">
 
-                    <div class="category" style="box-shadow:none ;margin-top: 2px;">
-                        <ul class="category-list navTwo" id="js_climit_li">
-                            @foreach($data['serviceclass1'] as $serviceclass1)
-                            <li>
-                                <div class="category-info">
-                                    <h3 class="category-name b-category-name"><a class="ml-22" title="{{$serviceclass1->name}}">{{$serviceclass1->name}}</a></h3>
-                                    <em>&gt;</em></div>
-                                <div class="menu-item menu-in top">
-                                    <div class="area-in">
-                                        <div class="area-bg">
-                                            <div class="menu-srot">
-                                                <div class="sort-side">
-                                                    @foreach($data['serviceclass2'] as $serviceclass2)
-                                                        @if($serviceclass2['class1_id']==$serviceclass1['id'])
-                                                    <dl class="dl-sort">
-                                                        <dt><span title="蛋糕">{{$serviceclass2->name}}</span></dt>
-                                                        @foreach($data['serviceclass3'] as $serviceclass3)
-                                                            @if($serviceclass3['class2_id']==$serviceclass2['id'])
-                                                        <dd><a title="{{$serviceclass3->name}}" href="#"><span>{{$serviceclass3->name}}</span></a></dd>
-                                                            @endif
-                                                        @endforeach
-                                                    </dl>
-                                                        @endif
-                                                    @endforeach
+                        <div class="category" style="box-shadow:none ;margin-top: 2px;">
+                            <ul class="category-list navTwo" id="js_climit_li">
+                                @foreach($data['serviceclass1'] as $serviceclass1)
+                                    <li>
+                                        <div class="category-info">
+                                            <h3 class="category-name b-category-name"><a class="ml-22" title="{{$serviceclass1->name}}">{{$serviceclass1->name}}</a></h3>
+                                            <em>&gt;</em></div>
+                                        <div class="menu-item menu-in top">
+                                            <div class="area-in">
+                                                <div class="area-bg">
+                                                    <div class="menu-srot">
+                                                        <div class="sort-side">
+                                                            @foreach($data['serviceclass2'] as $serviceclass2)
+                                                                @if($serviceclass2['class1_id']==$serviceclass1['id'])
+                                                                    <dl class="dl-sort">
+                                                                        <dt><span title="{{$serviceclass2->name}}">{{$serviceclass2->name}}</span></dt>
+                                                                        @foreach($data['serviceclass3'] as $serviceclass3)
+                                                                            @if($serviceclass3['class2_id']==$serviceclass2['id'])
+                                                                                <dd><a title="{{$serviceclass3->name}}" href="#"><span>{{$serviceclass3->name}}</span></a></dd>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </dl>
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <b class="arrow"></b>
-                            </li>
-                            @endforeach
-                        </ul>
+                                        <b class="arrow"></b>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
+        <div class="am-u-lg-7 am-u-sm-4 am-u-md-4">
+            <div class="pictureshow">
+                <ul class="">
+                    <li class=""><a href="introduction.html"><img src="{{asset('images/3.jpg')}}" style="width: 1200px;margin-left:-200px;height: 350px;"/></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="am-u-lg-3">
+            <div class="marqueenTwo">
+                <div class="demo">
+                    <ul style="padding-top:70px;">
+                        <li class="title-first"><a target="_blank" href="#">
+                                <label style="height: 35px;margin-left: -80px;width: 100%;border: none;font-size: 16px;background: url(../images/green.png);text-align: -webkit-right;padding-right: 40px;">发布需求</label>
+                            </a></li>
+                        <li class="title-first"><a target="_blank" href="#">
+                                <label style="height: 35px;margin-left: -80px;width: 100%;border: none;font-size: 16px;background: url(../images/Lime.png);text-align: -webkit-right;padding-right: 40px;">发布服务</label>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!--侧边导航 -->
         <!--导航 -->
         <script type="text/javascript">
             (function() {
@@ -120,8 +177,6 @@
                 });
             })
         </script>
-
-
         <!--小导航 -->
         <div class="am-g am-g-fixed smallnav">
             <div class="am-u-sm-3">
@@ -130,7 +185,7 @@
                 </a>
             </div>
             <div class="am-u-sm-3">
-                <a href="#"><img src="{{asset('images/huismall.jpg')}}" />
+                <a href="#"><img src="{{asset('images/servicesmall.jpg')}}" />
                     <div class="title">发布服务</div>
                 </a>
             </div>
@@ -140,58 +195,28 @@
                 </a>
             </div>
             <div class="am-u-sm-3">
-                <a href="#"><img src="{{asset('images/moneysmall.jpg')}}" />
+                <a href="#"><img src="{{asset('images/aboutus.jpg')}}" />
                     <div class="title">关于我们</div>
                 </a>
             </div>
         </div>
-        <div class="marqueenTwo" style="background-color: #000;">
-            <div class="demo">
-                <ul style="padding-top:70px;">
-                    <li class="title-first"><a target="_blank" href="#">
-                            <button style="border: none;background: #fff;">发布需求</button>
-                        </a></li>
-                    <li class="title-first"><a target="_blank" href="#">
-                            <button style="border: none;background: #fff;">发布服务</button>
-                        </a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <script type="text/javascript">
-        if ($(window).width() < 640) {
-            function autoScroll(obj) {
-                $(obj).find("ul").animate({
-                    marginTop: "-39px"
-                }, 500, function() {
-                    $(this).css({
-                        marginTop: "0px"
-                    }).find("li:first").appendTo(this);
-                })
-            }
-            $(function() {
-                setInterval('autoScroll(".demo")', 3000);
-            })
-        }
-    </script>
-</div>
 <div class="shopMainbg">
     <!--广告1-->
     <div class="advertisement" style="padding: 10px;">
-        <img src="../images/ad1.png" style="width: 100%;padding: 0 150px;">
+        <img src="{{asset('images/ad3.jpg')}}" style="width: 100%;">
     </div>
     <!--需求大厅-->
     <div class="am-g am-g-fixed">
-        <div class="am-u-lg-4 am-u-md-4 am-u-sm-4" style="padding-bottom: 10px;">
-            <div class="index-category-left">
+        <div class="am-u-lg-4 am-u-md-4 am-u-sm-4 leftpanel" style="padding-bottom: 10px;">
+            <div class="index-category-left showNews">
                 <div class="marqueenOne">
-                    <span class="marqueen-title"><i class="am-icon-volume-up am-icon-fw"></i>新闻栏<em class="am-icon-angle-double-right"></em></span>
+                    <span class="marqueen-title" style="height:100px;background-image: url({{asset('images/float_box2.png')}});background-repeat: no-repeat;font-size: 18px;color: #fff;"><i class="am-icon-volume-up am-icon-fw" style="padding-top: 30px;
+    padding-left: 110px;"></i><i style=";padding-left: 20px;font-size: 18px;color: #fff;">新闻栏</i></span>
                     <div class="demo">
-                        <ul style="padding-top: 20px;">
+                        <ul>
                             @foreach($data['news'] as $news)
                             <li><a target="_blank" href="#">
-                                    <span>[{{$news->tag}}]</span>{{$news->content}}
+                                    <span style="font-size: 16px;color: #b84554;padding-right: 3px;">[{{$news->tag}}]</span>{{$news->content}}
                                 </a></li>
                             @endforeach
                         </ul>
@@ -199,25 +224,26 @@
                 </div>
             </div>
         </div>
-        <div class="am-u-lg-8  am-u-md-8 am-u-sm-8">
+        <div class="am-u-lg-8  am-u-md-8 am-u-sm-12">
             <div class="shopMain" id="shopmain">
                 <div class="am-container " >
-                    <div class="shopTitle ">
+                    <div class="shopTitle" style="margin-left: -20px;">
                         <h4 class="floor-title">需求大厅</h4>
-                        <div class="today-brands " style="right:0px ;top:13px;">
-                            <button class="am-btn am-btn-danger am-round">查看更多</button>
+                        <div class="today-brands " style="right:0px;">
+                            <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
                         </div>
 
                     </div>
                 </div>
 
                 <div class="am-g am-g-fixed floodSix ">
-                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4 needtype1">
                         <div class="index-category-left">
-                            <h1 class="comh1" style="font-size: 16px;padding: 3px;font-weight: bold;">
-                                家教信息
-                                <em>
-                                    <a href="#"><b>MORE</b><i class="am-icon-angle-double-right"></i></a>
+                            <a href="#">
+                            <h1 class="comh1">
+                                一般需求
+                                <em style="color: #b84554;">
+                                    <b>MORE</b><i class="am-icon-angle-double-right"></i></a>
                                 </em>
                             </h1>
                             <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
@@ -228,12 +254,13 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4 needtype2">
                         <div class="index-category-right">
-                            <h1 class="comh1" style="font-size: 16px;padding: 3px;font-weight: bold;">
-                                家教信息
-                                <em>
-                                    <a href="#"><b>MORE</b><i class="am-icon-angle-double-right"></i></a>
+                            <a href="#">
+                            <h1 class="comh1">
+                                实习中介
+                                <em style="color: #b84554;">
+                                    <b>MORE</b><i class="am-icon-angle-double-right"></i></a>
                                 </em>
                             </h1>
                             <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
@@ -244,12 +271,13 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4 needtype3">
                         <div class="index-category-right">
-                            <h1 class="comh1" style="font-size: 16px;padding: 3px;font-weight: bold;">
-                                家教信息
-                                <em>
-                                    <a href="#"><b>MORE</b><i class="am-icon-angle-double-right"></i></a>
+                            <a href="#">
+                            <h1 class="comh1">
+                                专业问答
+                                <em style="color:#b84554;">
+                                   <b>MORE</b><i class="am-icon-angle-double-right"></i></a>
                                 </em>
                             </h1>
                             <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
@@ -277,10 +305,10 @@
         <div class="am-u-lg-8 am-u-md-8">
             <div class="shopMain" id="shopmain">
                 <div class="am-container " >
-                    <div class="shopTitle ">
+                    <div class="shopTitle " style="width:110%;">
                         <h4 class="floor-title">一般服务</h4>
                         <div class="today-brands " style="right:0px ;top:13px;">
-                            <button class="am-btn am-btn-danger am-round">查看更多</button>
+                            <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
                         </div>
 
                     </div>
@@ -295,15 +323,45 @@
                                     <a href="{{$hotest1->picture}}" class="">
                                         <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
                                         <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
+                        <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
+                        </a>
+                    </div>
+                    </li>
+                    @endforeach
+                    </ul>
+                    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
+  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
+                        @foreach($data['hotest1'] as $hotest1)
+                            <li>
+                                <div class="am-gallery-item">
+                                    <a href="{{$hotest1->picture}}" class="">
+                                        <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
+                                        <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
                                         <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
                                     </a>
                                 </div>
                             </li>
-                            @endforeach
-                        </ul>
-                        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                            @foreach($data['hotest1'] as $hotest1)
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--实习中介-->
+        <div class="shopMain" id="shopmain">
+            <div class="am-container " >
+                <div class="shopTitle" style="width:110%;" >
+                    <h4 class="floor-title">实习中介</h4>
+                    <div class="today-brands " style="right:0px ;top:13px;">
+                        <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
+                    </div>
+
+                    </div>
+                </div>
+                <div class="am-g am-g-fixed">
+                    <div class="am-u-lg-6 am-u-md-6" style="padding:10px;">
+                        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  							am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }" >
+                                @for($i=0;$i<2;$i++)
                                 <li>
                                     <div class="am-gallery-item">
                                         <a href="{{$hotest1->picture}}" class="">
@@ -313,52 +371,24 @@
                                         </a>
                                     </div>
                                 </li>
-                            @endforeach
+                                @endfor
+                        </ul>
+                        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  							am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }" >
+                            @for($i=0;$i<2;$i++)
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="{{$hotest1->picture}}" class="">
+                                            <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
+                                            <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
+                                            <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
+                                        </a>
+                                    </div>
+                                </li>
+                            @endfor
                         </ul>
                     </div>
-                </div>
-            </div>
-            <!--实习中介-->
-            <div class="shopMain" id="shopmain">
-                <div class="am-container " >
-                    <div class="shopTitle ">
-                        <h4 class="floor-title">实习中介</h4>
-                        <div class="today-brands " style="right:0px ;top:13px;">
-                            <button class="am-btn am-btn-danger am-round">查看更多</button>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="am-g am-g-fixed">
-                    <div class="am-u-lg-3 am-u-md-4" style="padding:10px;">
-                        <a href="#">
-                            <img src="../images/img_06.jpg">
-                        </a>
-                        <div class="left_bottom" style="background-color: gray;text-align: center;padding: 3px;color:#fff;">
-                            <a href="#" style="color: #fff">
-                                发布类似项目
-                            </a>
-                            <p>获得众多设计创意，体验一呼百应</p>
-                        </div>
-                    </div>
-                    <div class="am-u-lg-5 am-u-md-4" style="padding: 10px;float: left;">
-                        <ul>
-                            <li>
-                                <div class="box1"></div>
-                                <div class="outer-con " style="padding: 10px;">
-                                    <a href="# "><img src="../images/f2.jpg" style="width: auto;" />
-                                        <div class="title ">
-                                            专业1
-                                        </div>
-                                        <div class="sub-title ">
-                                            好评率 100%
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">
+                    <div class="am-u-lg-6 am-u-md-6" style="padding: 10px;">
                         <ul>
                             @foreach($data['hotest2'] as $hotest2)
                             <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥{{$hotest2->price}}</font>&nbsp;&nbsp;&nbsp;&nbsp;{{$hotest2->title}}</a><span style="color: gray;float: right;">查看详情</span></li>
@@ -406,120 +436,42 @@
                     <div class="shopTitle ">
                         <h4 class="floor-title">专业问答</h4>
                         <div class="today-brands " style="right:0px ;top:13px">
-                            <button class="am-btn am-btn-danger am-round">查看更多</button>
+                            <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
                         </div>
                     </div>
                 </div>
-                <div class="am-g am-g-fixed floodSeven">
-                    <div class="am-u-sm-5 am-u-md-4 text-one list ">
-
-                        <a href="# ">
-                            <img src="../images/fig.png" />
-                            <div class="outer-con ">
-                                <div class="title ">
-                                    答主1
-                                </div>
-                                <div class="sub-title ">
-                                    好评率 100%
-                                </div>
-                            </div>
-                        </a>
-                        <div class="triangle-topright"></div>
+                <div class="am-g am-g-fixed">
+                    <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
+                        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
+  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
+                            @foreach($data['hotest1'] as $hotest1)
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="{{$hotest1->picture}}" class="">
+                                            <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
+                                            <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
+                                            <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
+                                        </a>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
+  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
+                            @foreach($data['hotest1'] as $hotest1)
+                                <li>
+                                    <div class="am-gallery-item">
+                                        <a href="{{$hotest1->picture}}" class="">
+                                            <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
+                                            <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
+                                            <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
+                                        </a>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
-
-                    <div class="am-u-sm-7 am-u-md-4 text-two big">
-
-                        <div class="outer-con ">
-                            <div class="title ">
-                                答主2
-
-                            </div>
-                            <div class="sub-title ">
-                                好评率 100%
-                            </div>
-
-                        </div>
-                        <a href="# "><img src="../images/fig.png " /></a>
-
-                    </div>
-
-                    <li>
-                        <div class="am-u-sm-7 am-u-md-4 text-two">
-                            <div class="boxLi"></div>
-                            <div class="outer-con ">
-                                <div class="title ">
-
-                                    答主3
-
-                                </div>
-                                <div class="sub-title ">
-                                    好评率 100%
-                                </div>
-
-                            </div>
-                            <a href="# "><img src="../images/fig.png" /></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="am-u-sm-3 am-u-md-2 text-three sug">
-                            <div class="boxLi"></div>
-                            <div class="outer-con ">
-                                <div class="title ">
-                                    答主4
-                                </div>
-                                <div class="sub-title ">
-                                    好评率 98%
-                                </div>
-
-                            </div>
-                            <a href="# "><img src="../images/fig.png" /></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="am-u-sm-3 am-u-md-2 text-three big">
-                            <div class="boxLi"></div>
-                            <div class="outer-con ">
-                                <div class="title ">
-                                    答主5
-                                </div>
-                                <div class="sub-title ">
-                                    好评率 100%
-                                </div>
-
-                            </div>
-                            <a href="# "><img src="../images/fig.png" /></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="am-u-sm-3 am-u-md-2 text-three ">
-                            <div class="boxLi"></div>
-                            <div class="outer-con ">
-                                <ul>
-                                    <li>
-                                        <a href="#">排名6</a>
-                                    </li>
-                                </ul>
-
-                            </div>
-                            <a href="# "><img src="../images/fig.png" /></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="am-u-sm-3 am-u-md-2 text-three ">
-                            <div class="boxLi"></div>
-                            <div class="outer-con ">
-                                <ul>
-                                    <li>
-                                        <a href="#">排名7</a>
-                                    </li>
-                                </ul>
-
-                            </div>
-                            <a href="# "><img src="../images/fig.png" /></a>
-                        </div>
-                    </li>
                 </div>
-                <div class="clear "></div>
             </div>
         </div>
     </div>
