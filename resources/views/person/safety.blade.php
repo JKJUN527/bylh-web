@@ -20,7 +20,7 @@
                                 <div class="fore2"><small>为保证您购物安全，建议您定期更改密码以保护账户安全。</small></div>
                             </div>
                             <div class="fore3">
-                                <a href="/password">
+                                <a href="/account/resetPassword">
                                     <div class="am-btn am-btn-secondary">修改</div>
                                 </a>
                             </div>

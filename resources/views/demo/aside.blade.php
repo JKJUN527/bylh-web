@@ -8,7 +8,7 @@
                 <p><i class="am-icon-newspaper-o"></i>个人资料</p>
                 <ul>
                     <li><a href="{{asset('account/baseedit')}}">个人信息</a></li>
-                    <li><a href="{{asset('safety')}}">安全设置</a></li>
+                    <li><a href="{{asset('account/safety')}}">安全设置</a></li>
                 </ul>
             </li>
         @else

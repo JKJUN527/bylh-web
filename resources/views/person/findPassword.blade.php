@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="info-btn">
-                        <div class="am-btn am-btn-danger">保存修改</div>
+                        <div class="am-btn am-btn-danger" id="change_pwd">保存修改</div>
                     </div>
                 </fieldset>
             </form>
@@ -56,4 +56,52 @@
 @endsection
 @section('aside')
     @include('demo.aside',['type'=>$data['type']])
+@endsection
+@section('custom-script')
+        <script>
+            $('#change_pwd').click(function () {
+
+                var old_pwd = $('#doc-vld-name-2');
+                var new_pwd = $('#doc-vld-pwd-1');
+                var new_pwdRE = $('#doc-vld-pwd-2');
+                if(old_pwd.val().length <6){
+                    swal("","密码长度不能小于6位", "error");
+                    return;
+                }
+                if(new_pwd == "" ||new_pwd.val().length <6){
+                    swal("","新密码长度不能小于6位", "error");
+                    return;
+                }
+                if(new_pwd.val() != new_pwdRE.val()){
+                    swal("","两次输入密码不一致", "error");
+                    return;
+                }
+                var formData = new FormData();
+
+                formData.append("oldPassword", old_pwd.val());
+                formData.append("password", new_pwd.val());
+                formData.append("passwordConfirm", new_pwdRE.val());
+
+                $.ajax({
+                    url: "/account/resetPassword",
+                    type: "post",
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (data) {
+                        //console.log(data);
+                        var result = JSON.parse(data);
+                        if (result.status == 200) {
+                            swal("","修改成功","success");
+                            self.location = "/account/logout";
+                            return;
+                        }else{
+                            swal('',result.msg,'error');
+                        }
+                    }
+                });
+            })
+        </script>
 @endsection

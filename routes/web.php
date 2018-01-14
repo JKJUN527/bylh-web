@@ -22,8 +22,9 @@ Route::any('validate_email', ['uses' => 'ValidationController@verifyEmailCode'])
 Route::get('account/findPassword', ['uses' => 'ForgetPwController@index']);
 Route::post('account/findPassword/{option}', ['uses' => 'ForgetPwController@resetpw'])->where('option', '[0-2]{1}');
 //修改密码
-Route::get('account/resetPassword', ['uses' => 'FixPasswordController@index']);
-Route::post('account/resetPassword', ['uses' => 'FixPasswordController@index']);
+Route::get('account/safety', ['uses' => 'FixPasswordController@index']);//安全设置主页
+Route::get('account/resetPassword', ['uses' => 'FixPasswordController@resetPWindex']);
+Route::post('account/resetPassword', ['uses' => 'FixPasswordController@resetPassword']);
 
 //权限获取
 Route::get('account/getType', ['uses' => 'AuthController@getType']);  //完成
@@ -126,6 +127,7 @@ Route::any('person/question',function(){
 });
 //安全中心
 Route::any('person/safety',function(){
+
     return view('person.safety');
 });
 //个人信息
