@@ -9,6 +9,8 @@
     <link href="{{asset('AmazeUI-2.4.2/assets/css/admin.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/personal.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/orstyle.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
+    <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{asset('AmazeUI-2.4.2/assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.min.js')}}"></script>
     @section("custom-style")

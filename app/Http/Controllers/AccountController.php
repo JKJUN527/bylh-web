@@ -75,7 +75,7 @@ class AccountController extends Controller {
 
     //
     public function getOrder($uid) {
-        $data = Orders::where('state', '!=', 3)
+        $data['orderlist'] = Orders::where('state', '!=', 3)
             ->where(function ($query) use ($uid) {
                 $query->where('s_uid', $uid)
                     ->orwhere('d_uid', $uid);
@@ -185,6 +185,24 @@ class AccountController extends Controller {
             return $num;
     }
 
+    //查询用户名是否存在
+    public function HasUsername(Request $request){
+        $data = array();
+        if($request->has('username')){
+            $username = $request->input('username');
+            $is_exist = User::where('username',$username)->get();
+            if(count($is_exist) >0){
+                $data['status'] = 400;
+                $data['msg'] = "用户名已存在";
+                return $data;
+            }else{
+                $data['status'] = 200;
+                return $data;
+            }
+
+        }
+    }
+
     //修改个人基本资料主页
     public function usersinfo() {
         $data = array();
@@ -238,7 +256,6 @@ class AccountController extends Controller {
                     }
                 }
             }
-            $userinfo->real_name = $request->input('real_name');
             $userinfo->note = $request->input('note');
             $userinfo->birthday = $request->input('birthday');
             $userinfo->sex = $request->input('sex');

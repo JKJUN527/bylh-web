@@ -113,7 +113,8 @@
                                     <label style="float: right;">更多>>></label></a>
                             </div>
                             <?php $i=0 ?>
-                            @foreach($data['servicesList'] as $service)
+                            @foreach($data['servicesList'] as $services)
+                                @foreach($services as $service)
                                 @if($i++ <=3)
                                     <p class="m-big">
                                         <a href="#">
@@ -128,6 +129,7 @@
                                         </a>
                                     </p>
                                 @endif
+                                @endforeach
                             @endforeach
                         </div>
                         @endif
@@ -312,5 +314,5 @@
         </div>
 @endsection
 @section('aside')
-@include('demo.aside',['type'=>$data['type']])
+    @include('demo.aside',['type'=>$data['type']])
 @endsection
