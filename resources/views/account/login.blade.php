@@ -60,6 +60,12 @@
 </div>
 <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
 <script>
+    $("#password").keyup(function (event) {
+        if (event.keyCode == 13) {
+            $("input[type='submit']").click();
+        }
+        return event;
+    });
     $("input[type='submit']").click(function (event) {
         var username = $('#user');
         var password = $('#password');

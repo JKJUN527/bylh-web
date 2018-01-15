@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,9 @@ class FixPasswordController extends Controller
         if($data['uid']==0){
             return view('account/login');
         }
+        $data['userinfo'] = User::where('uid',$data['uid'])
+            ->select('tel','mail','tel_verify','email_verify','realname_verify','finance_verify','majors_verify')
+            ->first();
 
         return view('person/safety',['data'=>$data]);
     }

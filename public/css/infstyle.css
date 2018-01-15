@@ -117,6 +117,7 @@ width: 40px;height: 40px;position: absolute;margin-top:5px ;}
 .i-safety-iphone{background-position: -45px 0px;}
 .i-safety-mail {background-position: 0px -90px}
 .i-safety-idcard {background-position: -90px -90px;}
+.i-safety-final {background-position: -135px -90px;}
 .i-safety-security {background-position: -135px -45px;}
 
 .user-safety .check .m-left{margin-left:70px;}
