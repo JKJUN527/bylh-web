@@ -8,6 +8,10 @@
     <link href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/personal.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/orstyle.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/infstyle.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
+    <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{asset('js/jquery-1.7.2.min.js')}}"></script>
     <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.js')}}"></script>
     @section("custom-style")
@@ -52,22 +56,21 @@
             <!--悬浮搜索框-->
 
             <div class="nav white">
+                {{--<div class="logo"><img src="{{asset('images/bylh2.png')}}" onclick="gobackhome();"/></div>--}}
                 <div class="logoBig">
-                    <li><img src="{{asset("images/bylh2.png")}}"  style="width: 60%;" /></li>
+                    <li><img src="{{asset('images/bylh2.png')}}" onclick="gobackhome();"/></li>
                 </div>
 
                 <div class="search-bar pr">
-                    <a name="index_none_header_sysc" href="{{asset('search')}}"></a>
+                    <a name="index_none_header_sysc" href="#"></a>
                     <form>
-                        <input id="searchInput" name="index_none_header_sysc" value="{{$data['keyword'] or ''}}"
-                               type="text" placeholder="搜索" autocomplete="off">
-                        <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        <input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off">
+                        <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="button">
                     </form>
                 </div>
             </div>
 
             <div class="clear"></div>
-        </div>
         </div>
     </article>
 </header>
@@ -105,8 +108,9 @@
             </div>
         </div>
     </div>
-@section('aside')
-    @show
+
+   @section('aside')
+       @show
 </div>
 
 <script type="text/javascript" src="{{asset("js/jquery-1.7.2.min.js")}}"></script>
@@ -116,3 +120,17 @@
 @show
 </body>
 </html>
+<script>
+    $("#ai-topsearch").click( function () {
+        search();
+    });
+    function search() {
+        var keyword = $("#searchInput").val();
+        if(keyword != ''){
+            window.location.href = "/search?keyword="+keyword;
+        }
+    }
+    function gobackhome() {
+        window.location.href = "/index";
+    }
+</script>

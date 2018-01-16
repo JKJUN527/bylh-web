@@ -2,6 +2,7 @@
 @section("title", "站内信详情")
 
 @section("custom-style")
+    <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
     <style type="text/css">
         .msgmanage {
             font-size: 16px;
@@ -202,13 +203,21 @@
 @endsection
 
 @section('custom-script')
+    <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
     <script type="text/javascript">
         $("#send-msg").click(function () {
             var msg = $("input[name='msg-content']").val();
 
             msg = $.trim(msg);
             if (msg === "") {
-                alert("回复信息不能为空");
+                swal({
+                    title: "",
+                    text: "回复信息不能为空",
+                    type: "error",
+                    confirmButtonText: "确定",
+                    showCancelButton: false,
+                    closeOnConfirm: false
+                });
             } else {
 
                 var to_id = $("input[name='to_id']").val();
@@ -230,7 +239,14 @@
                         if(result.status === 200) {
                             location.reload();
                         } else if (result.status === 400) {
-                            alert("信息回复失败\n" + result.msg);
+                            swal({
+                                title: "信息回复失败",
+                                text: result.msg,
+                                type: "error",
+                                confirmButtonText: "确定",
+                                showCancelButton: false,
+                                closeOnConfirm: false
+                            });
                         }
                     }
                 })

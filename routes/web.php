@@ -22,8 +22,9 @@ Route::any('validate_email', ['uses' => 'ValidationController@verifyEmailCode'])
 Route::get('account/findPassword', ['uses' => 'ForgetPwController@index']);
 Route::post('account/findPassword/{option}', ['uses' => 'ForgetPwController@resetpw'])->where('option', '[0-2]{1}');
 //修改密码
-Route::get('account/resetPassword', ['uses' => 'FixPasswordController@index']);
-Route::post('account/resetPassword', ['uses' => 'FixPasswordController@index']);
+Route::get('account/safety', ['uses' => 'FixPasswordController@index']);//安全设置主页
+Route::get('account/resetPassword', ['uses' => 'FixPasswordController@resetPWindex']);
+Route::post('account/resetPassword', ['uses' => 'FixPasswordController@resetPassword']);
 
 //权限获取
 Route::get('account/getType', ['uses' => 'AuthController@getType']);  //完成
@@ -33,7 +34,8 @@ Route::get('account/getUid', ['uses' => 'AuthController@getUid']);  //完成
 Route::get('account/index', ['uses' => 'AccountController@index']);  //完成
 Route::get('account/', ['uses' => 'AccountController@index']);  //完成
 
-//修改个人资料
+//修改个人资料HasUsername
+Route::post('account/HasUsername', ['uses' => 'AccountController@HasUsername']);//查询用户名是否存在
 Route::get('account/baseedit', ['uses' => 'AccountController@usersinfo']);//个人、企业基本信息修改界面
 Route::post('account/baseedit', ['uses' => 'AccountController@editbaseinfo']);//提交修改
 //修改服务用户服务相关信息
@@ -42,6 +44,15 @@ Route::post('account/serviceedit', ['uses' => 'AccountController@editserviceinfo
 //实名认证页面、实习中介认证、专业问答认证
 Route::get('account/authentication/{option}', ['uses' => 'AccountController@authindex'])->where('option', '[0-2]{1}');//服务相关信息修改页面
 Route::post('account/authentication/{option}', ['uses' => 'AccountController@uploadauth'])->where('option', '[0-2]{1}');//服务相关信息提交页面
+//绑定手机
+Route::get('account/setphone', ['uses' => 'AccountController@setphone']);//用户绑定手机
+Route::post('account/sendSms', ['uses' => 'AccountController@sendSms']);//发送验证码
+Route::post('account/verifySmsCode', ['uses' => 'AccountController@verifySmsCode']);//验证手机号及验证码是否正确
+Route::post('account/update_tel', ['uses' => 'AccountController@update_tel']);//更换绑定手机
+//绑定邮箱
+Route::get('account/setemail', ['uses' => 'AccountController@setemail']);//用户绑定邮箱
+Route::post('account/sendMailCode', ['uses' => 'AccountController@sendMailCode']);//发送验证码
+Route::post('account/verifyEmailCode', ['uses' => 'AccountController@verifyEmailCode']);//验证邮箱及验证码是否正确//更换绑定邮箱
 
 //一般服务发布主页、实习中介服务发布主页、专业问答服务发布主页
 Route::get('service/genlpublish', ['uses' => 'ServiceController@genlserviceindex']);//一般服务发布主页
@@ -125,6 +136,7 @@ Route::any('person/question',function(){
 });
 //安全中心
 Route::any('person/safety',function(){
+
     return view('person.safety');
 });
 //个人信息

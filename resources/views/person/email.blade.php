@@ -2,6 +2,11 @@
 @section('title','验证邮箱')
 @section('custom-style')
     <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
+    <style>
+        .input_code{
+            width: 28rem !important;
+        }
+    </style>
 @endsection
 @section('content')
         <div class="main-wrap">
@@ -35,89 +40,146 @@
                         <input type="email" id="doc-vld-email-2-1" data-validation-message="请输入合法的邮箱" placeholder="输入邮箱" required/>
                     </div>
                 </div>
-                <div class="am-form-group code">
+                <div class="am-form-group code" style="margin-top: 2rem;">
                     <label for="user-code" class="am-form-label">验证码</label>
                     <div class="am-form-content">
-                        <input type="tel" id="user-code" placeholder="验证码">
+                        <input type="tel" class="input_code" id="user-code" placeholder="验证码">
                     </div>
-                    <a class="btn" href="javascript:void(0);" onclick="sendMobileCode();" id="sendMobileCode">
-                        <div class="am-btn am-btn-danger">验证码</div>
+                    <a class="btn" href="javascript:void(0);" onclick="sendEmailCode();" id="sendEmailCode">
+                        <div class="am-btn am-btn-danger" id="email_code">验证码</div>
                     </a>
                 </div>
                 <div class="info-btn">
-                    <div class="am-btn am-btn-danger">保存修改</div>
+                    <div class="am-btn am-btn-danger" id="update_mail">保存修改</div>
                 </div>
 
             </form>
 
         </div>
-        <script type="text/javascript">
-            $(function() {
-                $('#doc-vld-msg').validator({
-                    onValid: function(validity) {
-                        $(validity.field).closest('.am-form-group').find('.am-alert').hide();
-                    },
-
-                    onInValid: function(validity) {
-                        var $field = $(validity.field);
-                        var $group = $field.closest('.am-form-group');
-                        var $alert = $group.find('.am-alert');
-                        // 使用自定义的提示信息 或 插件内置的提示信息
-                        var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
-
-                        if (!$alert.length) {
-                            $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
-                            appendTo($group);
-                        }
-
-                        $alert.html(msg).show();
-                    }
-                });
-            });
-        </script>
         <!--底部-->
 @endsection
 @section('aside')
-    <aside class="menu">
-        <ul>
-            <li class="person active">
-                <a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-newspaper-o"></i>个人资料</p>
-                <ul>
-                    <li><a href="{{asset('user')}}">个人信息</a></li>
-                    <li><a href="{{asset('safety')}}">安全设置</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-balance-scale"></i>我的交易</p>
-                <ul>
-                    <li><a href="{{asset('order')}}">订单管理</a></li>
-                    <li><a href="{{asset('comment')}}">评价服务</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-dollar"></i>我的服务</p>
-                <ul>
-                    <li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
-                    <li><a href="{{asset('myrequest')}}">服务列表</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-tags"></i>我的需求</p>
-                <ul>
-                    <li><a href="{{asset('sendneed')}}">发布需求</a></li>
-                    <li><a href="{{asset('myneed')}}">需求列表</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-qq"></i>信息中心</p>
-                <ul>
-                    <li><a href="{{asset('message')}}">站内信</a></li>
-                    <li><a href="/news">我的消息</a></li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
+    @include('demo.aside',['type'=>$data['type']])
+@endsection
+@section('custom-script')
+    <script type="text/javascript">
+        $(function() {
+            $('#doc-vld-msg').validator({
+                onValid: function(validity) {
+                    $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+                },
+
+                onInValid: function(validity) {
+                    var $field = $(validity.field);
+                    var $group = $field.closest('.am-form-group');
+                    var $alert = $group.find('.am-alert');
+                    // 使用自定义的提示信息 或 插件内置的提示信息
+                    var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+                    if (!$alert.length) {
+                        $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+                        appendTo($group);
+                    }
+
+                    $alert.html(msg).show();
+                }
+            });
+        });
+        function sendEmailCode() {
+            var email = $('#doc-vld-email-2-1');
+            if(email.val() === ''){
+                swal("","邮箱不能为空", "error");
+                return;
+            }else if(!/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(email.val())){
+                swal("", "邮箱格式不正确", "error");
+                return;
+            }
+            var form_data = new FormData();
+            form_data.append('email', email.val());
+            $.ajax({
+                url: "/account/sendMailCode",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: "post",
+                data: form_data,
+                success: function (data) {
+                    console.log(data);
+                    var result = JSON.parse(data);
+                    if (result.status === 200) {
+                        swal("",result.msg,'success');
+                        email.attr("disabled", true);
+                        // 倒计时30秒
+                        countDown(60);
+                    } else if (result.status === 400) {
+                        swal(result.msg);
+                    }
+                }
+            });
+        }
+        function countDown(second) {
+            var obj = $("#email_code");
+            var btn = $("#sendEmailCode");
+            // 如果秒数还是大于0，则表示倒计时还没结束
+            if (second >= 0) {
+                // 获取默认按钮上的文字
+                // 按钮置为不可点击状态
+                btn.attr('onclick', "");
+                obj.attr('disabled', "true");
+                // 按钮里的内容呈现倒计时状态
+                obj.text(' (' + second + ')s');
+                // 时间减一
+                second--;
+                // 一秒后重复执行
+                setTimeout(function () {
+                    countDown(second, "old");
+                }, 1000);
+                // 否则，按钮重置为初始状态
+            } else {
+                // 按钮置未可点击状态
+                obj.removeAttr('disabled');
+                btn.attr('onclick', "sendEmailCode();");
+                // 按钮里的内容恢复初始状态
+                obj.text("验证码");
+            }
+        }
+        $('#update_mail').click(function () {
+            var email = $('#doc-vld-email-2-1');
+            var code = $('#user-code');
+            if(email.val() === ''){
+                swal("","邮箱不能为空", "error");
+                return;
+            }else if(!/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(email.val())){
+                swal("", "邮箱格式不正确", "error");
+                return;
+            }
+            if(code.val() == '' ||code.val().length !=6 ){
+                swal("","验证码格式不正确","error");
+                return;
+            }
+            var form_data = new FormData();
+            form_data.append('email', email.val());
+            form_data.append('code', code.val());
+            $.ajax({
+                url: "/account/verifyEmailCode",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: "post",
+                data: form_data,
+                success: function (data) {
+                    console.log(data);
+                    var result = JSON.parse(data);
+                    if (result.status === 200) {
+                        swal("",result.msg,'success');
+                        self.location = "/account/safety";
+                    } else if (result.status === 400) {
+                        swal(result.msg);
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

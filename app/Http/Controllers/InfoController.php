@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Serviceinfo;
 use App\User;
 use App\Userinfo;
 use Illuminate\Http\Request;

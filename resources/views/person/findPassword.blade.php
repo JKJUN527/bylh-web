@@ -48,55 +48,60 @@
                     </div>
 
                     <div class="info-btn">
-                        <div class="am-btn am-btn-danger">保存修改</div>
+                        <div class="am-btn am-btn-danger" id="change_pwd">保存修改</div>
                     </div>
                 </fieldset>
             </form>
         </div>
 @endsection
 @section('aside')
-    <aside class="menu">
-        <ul>
-            <li class="person active">
-                <a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-newspaper-o"></i>个人资料</p>
-                <ul>
-                    <li><a href="{{asset('user')}}">个人信息</a></li>
-                    <li><a href="{{asset('safety')}}">安全设置</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-balance-scale"></i>我的交易</p>
-                <ul>
-                    <li><a href="{{asset('order')}}">订单管理</a></li>
-                    <li><a href="{{asset('comment')}}">评价服务</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-dollar"></i>我的服务</p>
-                <ul>
-                    <li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
-                    <li><a href="{{asset('myrequest')}}">服务列表</a></li>
-                </ul>
-            </li>
+    @include('demo.aside',['type'=>$data['type']])
+@endsection
+@section('custom-script')
+        <script>
+            $('#change_pwd').click(function () {
 
-            <li class="person">
-                <p><i class="am-icon-tags"></i>我的需求</p>
-                <ul>
-                    <li><a href="{{asset('sendneed')}}">发布需求</a></li>
-                    <li><a href="{{asset('myneed')}}">需求列表</a></li>
-                </ul>
-            </li>
+                var old_pwd = $('#doc-vld-name-2');
+                var new_pwd = $('#doc-vld-pwd-1');
+                var new_pwdRE = $('#doc-vld-pwd-2');
+                if(old_pwd.val().length <6){
+                    swal("","密码长度不能小于6位", "error");
+                    return;
+                }
+                if(new_pwd == "" ||new_pwd.val().length <6){
+                    swal("","新密码长度不能小于6位", "error");
+                    return;
+                }
+                if(new_pwd.val() != new_pwdRE.val()){
+                    swal("","两次输入密码不一致", "error");
+                    return;
+                }
+                var formData = new FormData();
 
-            <li class="person">
-                <p><i class="am-icon-qq"></i>信息中心</p>
-                <ul>
-                    <li><a href="{{asset('message')}}">站内信</a></li>
-                    <li><a href="/news">我的消息</a></li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
+                formData.append("oldPassword", old_pwd.val());
+                formData.append("password", new_pwd.val());
+                formData.append("passwordConfirm", new_pwdRE.val());
+
+                $.ajax({
+                    url: "/account/resetPassword",
+                    type: "post",
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (data) {
+                        //console.log(data);
+                        var result = JSON.parse(data);
+                        if (result.status == 200) {
+                            swal("","修改成功","success");
+                            self.location = "/account/logout";
+                            return;
+                        }else{
+                            swal('',result.msg,'error');
+                        }
+                    }
+                });
+            })
+        </script>
 @endsection

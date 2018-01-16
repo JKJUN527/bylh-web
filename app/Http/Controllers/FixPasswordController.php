@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +16,29 @@ use Illuminate\Support\Facades\Validator;
 
 class FixPasswordController extends Controller
 {
+    //安全设置主页
     public function index(){
         $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
         if($data['uid']==0){
             return view('account/login');
         }
-        return view('account/resetpw');
+        $data['userinfo'] = User::where('uid',$data['uid'])
+            ->select('tel','mail','tel_verify','email_verify','realname_verify','finance_verify','majors_verify')
+            ->first();
+
+        return view('person/safety',['data'=>$data]);
+    }
+    public function resetPWindex(){
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+        if($data['uid']==0){
+            return view('account/login');
+        }
+
+        return view('person.findPassword',['data'=>$data]);
     }
     //重置密码需要再账户登录的状态下
     public function resetPassword(Request $request) {
