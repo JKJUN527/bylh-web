@@ -572,7 +572,69 @@ class AccountController extends Controller {
         }
 
     }
+    public function setphone(){
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+        if($data['uid']==0){
+            return view('account/login');
+        }
+        $data['userinfo'] = User::where('uid',$data['uid'])
+            ->select('tel','mail','tel_verify','email_verify','realname_verify','finance_verify','majors_verify')
+            ->first();
 
+        return view('person.phone',['data'=>$data]);
+    }
+    public function sendSms(Request $request){
+        $data = array();
+        $data['status'] = 400;
+        $data['msg'] = "参数错误";
+        if($request->has('phone')){
+            $phone = $request->input('phone');
+            if (ValidationController::sendSMS($phone)) {
+                $data['status'] = 200;
+                $data['msg'] = "验证码发送成功";
+            }else{
+                $data['msg'] = "验证码发送失败！";
+            }
+        }
+        return $data;
+    }
+    public function verifySmsCode(Request $request){
+        $data = array();
+        $data['status'] = 400;
+        $data['msg'] = "参数错误";
+        if($request->has('phone') &&$request->has('code')){
+            $phone = $request->input('phone');
+            $code = $request->input('code');
+            if (ValidationController::verifySmsCode($phone, $code)) {//验证码正确
+                $data['status'] = 200;
+                $data['msg'] = "验证码正确";
+            }else{
+                $data['msg'] = "验证码错误";
+            }
+        }
+        return $data;
+    }
+    public function update_tel(Request $request){
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['status'] = 400;
+        $data['msg'] = "参数错误";
+        if($request->has('phone')){
+            $phone = $request->input('phone');
+            $settel = User::where('uid',$data['uid'])
+                ->update(['tel' => $phone,'tel_verify' =>1]);
+            if($settel){
+                $data['status'] = 200;
+                $data['msg'] = "绑定成功";
+            }else{
+                $data['msg'] = "绑定失败";
+            }
+        }
+        return $data;
+    }
     //登出函数
     public function logout() {
         Auth::logout();

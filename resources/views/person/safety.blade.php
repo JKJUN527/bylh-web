@@ -36,7 +36,7 @@
                                 @endif
                             </div>
                             <div class="fore3">
-                                <a href="/phone">
+                                <a href="/account/setphone">
                                     @if($data['userinfo']->tel_verify == 1)
                                         <div class="am-btn am-btn-secondary">换绑</div>
                                     @else
@@ -49,15 +49,15 @@
                             <i class="i-safety-mail"></i>
                             <div class="m-left">
                                 <div class="fore1">邮箱验证</div>
-                                @if($data['userinfo']->mail_verify == 1)
-                                    <div class="fore2"><small>您验证的邮箱:{{substr(explode('@',$data['userinfo']->mail)[0],0,3)}}xxxx@ {{explode('@',$data['userinfo']->mail)[2]}}若已丢失或停用，请立即更换</small></div>
+                                @if($data['userinfo']->email_verify == 1)
+                                    <div class="fore2"><small>您验证的邮箱:{{substr(explode('@',$data['userinfo']->mail)[0],0,3)}}xxxx@ {{explode('@',$data['userinfo']->mail)[1]}}若已丢失或停用，请立即更换</small></div>
                                 @else
                                     <div class="fore2"><small>您还未绑定邮箱，请立即绑定，绑定后可通过邮箱登陆！</small></div>
                                 @endif
                             </div>
                             <div class="fore3">
                                 <a href="/email">
-                                    @if($data['userinfo']->mail_verify == 1)
+                                    @if($data['userinfo']->email_verify == 1)
                                         <div class="am-btn am-btn-secondary">换绑</div>
                                     @else
                                         <div class="am-btn am-btn-secondary">绑定</div>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="fore3">
                                 @if($data['userinfo']->realname_verify == -1)
-                                    <a href="/idcard">
+                                    <a href="/account/authentication/0">
                                         <div class="am-btn am-btn-secondary">认证</div>
                                     </a>
                                 @elseif($data['userinfo']->realname_verify == 0)
@@ -97,27 +97,37 @@
                             <i class="i-safety-final"></i>
                             <div class="m-left">
                                 <div class="fore1">实习中介认证</div>
-                                @if($data['userinfo']->finance_verify == -1)
-                                    <div class="fore2"><small>认证通过后可进行实习中介服务发布，同时可进一步提高账户安全性。</small></div>
-                                @elseif($data['userinfo']->finance_verify == 0)
-                                    <div class="fore2"><small>您已提交审核，请耐心等待审核结果。</small></div>
+                                @if($data['userinfo']->realname_verify != 1)
+                                    <div class="fore2"><small>先通过实名认证后才能提交实习中介认证！</small></div>
                                 @else
-                                    <div class="fore2"><small>恭喜您已通过实习中介认证</small></div>
+                                    @if($data['userinfo']->finance_verify == -1)
+                                        <div class="fore2"><small>认证通过后可进行实习中介服务发布，同时可进一步提高账户安全性。</small></div>
+                                    @elseif($data['userinfo']->finance_verify == 0)
+                                        <div class="fore2"><small>您已提交审核，请耐心等待审核结果。</small></div>
+                                    @else
+                                        <div class="fore2"><small>恭喜您已通过实习中介认证</small></div>
+                                    @endif
                                 @endif
                             </div>
                             <div class="fore3">
-                                @if($data['userinfo']->finance_verify == -1)
-                                    <a href="/idcard">
-                                        <div class="am-btn am-btn-secondary">认证</div>
-                                    </a>
-                                @elseif($data['userinfo']->finance_verify == 0)
+                                @if($data['userinfo']->realname_verify != 1)
                                     <a href="#">
-                                        <div class="am-btn am-btn-secondary" style="opacity:0.5;">审核中</div>
+                                        <div class="am-btn am-btn-secondary" style="opacity:0.5;">认证</div>
                                     </a>
                                 @else
-                                    <a href="#">
-                                        <div class="am-btn am-btn-secondary" style="opacity:0.5;">通过</div>
-                                    </a>
+                                    @if($data['userinfo']->finance_verify == -1)
+                                        <a href="/account/authentication/1">
+                                            <div class="am-btn am-btn-secondary">认证</div>
+                                        </a>
+                                    @elseif($data['userinfo']->finance_verify == 0)
+                                        <a href="#">
+                                            <div class="am-btn am-btn-secondary" style="opacity:0.5;">审核中</div>
+                                        </a>
+                                    @else
+                                        <a href="#">
+                                            <div class="am-btn am-btn-secondary" style="opacity:0.5;">通过</div>
+                                        </a>
+                                    @endif
                                 @endif
                             </div>
                         </li>
@@ -125,27 +135,37 @@
                             <i class="i-safety-security"></i>
                             <div class="m-left">
                                 <div class="fore1">专业技能认证</div>
-                                @if($data['userinfo']->majors_verify == -1)
-                                    <div class="fore2"><small>认证通过后可进行专业问答服务发布，同时可进一步提高账户安全性。</small></div>
-                                @elseif($data['userinfo']->majors_verify == 0)
-                                    <div class="fore2"><small>您已提交审核，请耐心等待审核结果。</small></div>
+                                @if($data['userinfo']->realname_verify != 1)
+                                    <div class="fore2"><small>先通过实名认证后才能提交专业技能认证！</small></div>
                                 @else
-                                    <div class="fore2"><small>恭喜您已通过专业技能认证</small></div>
+                                    @if($data['userinfo']->majors_verify == -1)
+                                        <div class="fore2"><small>认证通过后可进行专业问答服务发布，同时可进一步提高账户安全性。</small></div>
+                                    @elseif($data['userinfo']->majors_verify == 0)
+                                        <div class="fore2"><small>您已提交审核，请耐心等待审核结果。</small></div>
+                                    @else
+                                        <div class="fore2"><small>恭喜您已通过专业技能认证</small></div>
+                                    @endif
                                 @endif
                             </div>
                             <div class="fore3">
-                                @if($data['userinfo']->majors_verify == -1)
-                                    <a href="/idcard">
-                                        <div class="am-btn am-btn-secondary">认证</div>
-                                    </a>
-                                @elseif($data['userinfo']->majors_verify == 0)
+                                @if($data['userinfo']->realname_verify != 1)
                                     <a href="#">
-                                        <div class="am-btn am-btn-secondary" style="opacity:0.5;">审核中</div>
+                                        <div class="am-btn am-btn-secondary" style="opacity:0.5;">认证</div>
                                     </a>
                                 @else
-                                    <a href="#">
-                                        <div class="am-btn am-btn-secondary" style="opacity:0.5;">通过</div>
-                                    </a>
+                                    @if($data['userinfo']->majors_verify == -1)
+                                        <a href="/account/authentication/2">
+                                            <div class="am-btn am-btn-secondary">认证</div>
+                                        </a>
+                                    @elseif($data['userinfo']->majors_verify == 0)
+                                        <a href="#">
+                                            <div class="am-btn am-btn-secondary" style="opacity:0.5;">审核中</div>
+                                        </a>
+                                    @else
+                                        <a href="#">
+                                            <div class="am-btn am-btn-secondary" style="opacity:0.5;">通过</div>
+                                        </a>
+                                    @endif
                                 @endif
                             </div>
                         </li>

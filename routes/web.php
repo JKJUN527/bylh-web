@@ -44,6 +44,11 @@ Route::post('account/serviceedit', ['uses' => 'AccountController@editserviceinfo
 //实名认证页面、实习中介认证、专业问答认证
 Route::get('account/authentication/{option}', ['uses' => 'AccountController@authindex'])->where('option', '[0-2]{1}');//服务相关信息修改页面
 Route::post('account/authentication/{option}', ['uses' => 'AccountController@uploadauth'])->where('option', '[0-2]{1}');//服务相关信息提交页面
+//绑定手机
+Route::get('account/setphone', ['uses' => 'AccountController@setphone']);//用户绑定手机
+Route::post('account/sendSms', ['uses' => 'AccountController@sendSms']);//发送验证码
+Route::post('account/verifySmsCode', ['uses' => 'AccountController@verifySmsCode']);//验证手机号及验证码是否正确
+Route::post('account/update_tel', ['uses' => 'AccountController@update_tel']);//更换绑定手机
 
 //一般服务发布主页、实习中介服务发布主页、专业问答服务发布主页
 Route::get('service/genlpublish', ['uses' => 'ServiceController@genlserviceindex']);//一般服务发布主页
