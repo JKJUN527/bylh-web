@@ -28,14 +28,16 @@
                 <div class="user-infoPic">
 
                     <div class="filePic">
-                        <input type="file" id="user_picture" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
-                        <img class="am-circle am-img-thumbnail" src="
+                        <input type="file" id="user_picture" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" onchange="loadPreview()">
+                        <img class="am-circle am-img-thumbnail" id="head-preview" src="
                             @if($data['userinfo']->photo =='' ||$data['userinfo']->photo ==null)
                                 {{asset('images/mansmall.jpg')}}
                             @else
                                 {{$data['userinfo']->photo}}
                             @endif
                                 " alt="" />
+
+
                     </div>
 
                     <p class="am-form-help">头像</p>
@@ -48,11 +50,11 @@
 
                 <!--个人信息 -->
                 <div class="info-main">
-                    <form action="" class="am-form" id="doc-vld-msg">
+                    <form class="am-form" id="doc-vld-msg">
                         <fieldset>
                             <div class="am-form-group">
                                 <label for="doc-vld-name-2-1" class="label_title">用户名：</label>
-                                <input  class="user_info" type="text" id="doc-vld-name-2-1" minlength="3" placeholder="输入用户名（至少 3 个字符）"
+                                <input  class="user_info" name="username" type="text" id="doc-vld-name-2-1" minlength="3" placeholder="输入用户名（至少 3 个字符）"
                                         value="{{$data['username']}}" required/>
                             </div>
                             <div class="am-form-group">
@@ -161,6 +163,8 @@
 
         });
         $('#changeinfo').click(function (event) {
+            event.preventDefault();
+
            var username = $('#doc-vld-name-2-1');
            var photo = $('#user_picture');
            var birthday = $('#doc-vld-age-2-1');
@@ -170,15 +174,15 @@
            var note = $('#user-note');
            var city = $('#doc-vld-city-2-1');
 
-            if(username.val() == "" ||username.val().length()<3){
+            if(username.val() === "" ||username.val().length<3){
                 swal('','用户名长度需大于3个字符','error');
                 return;
             }
-            if(birthday.val()){
+            if(birthday.val() === ""){
                 swal('','请选择生日','error');
                 return;
             }
-            if(sex.val()==''){
+            if(sex.val()===''){
                 swal('','请选择性别','error');
                 return;
             }
@@ -190,7 +194,7 @@
                 swal('','电话格式非法','error');
                 return;
             }
-            if(note.val() == '' || note.val().length() <4){
+            if(note.val() === '' || note.val().length <4){
                 swal('','个人签名长度不能小于4个字符','error');
                 return;
             }
@@ -212,7 +216,7 @@
                 formData.append('photo', photo.prop("files")[0]);
             }
             $.ajax({
-                url: "account/baseedit",
+                url: "/account/baseedit",
                 type: 'post',
                 dataType: 'text',
                 cache: false,
@@ -222,7 +226,7 @@
                 success: function (data) {
                     var result = JSON.parse(data);
                     if(result.status = 400){
-                        swal('',result.msg,"error");
+                        swal('',result.msg,"success");
                         return false;
                     }else{
                         location.href = "/account/index";
@@ -233,7 +237,9 @@
         });
 
         
-        
+        function loadPreview() {
+            $("#head-preview").attr("src", "path___");
+        }
 
     </script>
 @endsection

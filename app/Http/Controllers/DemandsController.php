@@ -301,7 +301,7 @@ class DemandsController extends Controller {
                 }
             })
             ->orderBy($orderBy, $desc)
-            ->paginate(15);
+            ->paginate(1);
         return $data;
     }
 

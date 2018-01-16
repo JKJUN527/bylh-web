@@ -343,7 +343,7 @@ text-align: center;float:none}
 .am-g-fixed{max-width:1000px;}
 .flood li{width:20%;} 
 
-.demo,.marqueenTwo .demo{ margin-left: 0px;}
+.demo,.marqueenTwo .demo{ margin-left: 20px;}
 /*菜单布局*/	
 .topmenu .toptitle {height:35px;line-height:35px;}
 .shopNavfloat{float:left; position:static; margin-top:-4px;display: block;}
@@ -423,7 +423,7 @@ top: 11px;text-align: right;}
 .sort-side .dl-sort{ float:left; width:100%; }
 .sort-side dt { margin-top: 5px; font-size: 14px; font-weight: bold; color: #db3e54; text-align: left;}
 .sort-side dd { float:left; margin: 2px 6px 4px 0;}
-.sort-side dd a{ float:left; width: auto; letter-spacing:0.5px;  line-height: 14px;  color:#888; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; padding: 3px 10px; border:1px solid #e6e6e6; }
+.sort-side dd a{ float:left; width: auto; letter-spacing:0.5px;  line-height: 14px;  color:#fff; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; padding: 3px 10px; border:1px solid #e6e6e6; }
 .sort-side dd a span.red{ color:#DB3E54; }
 .menu-srot .brand-side{ float: left; position: relative;margin-left: -10px; padding-top: 10px; }
 .brand-side {margin-top: 50px; border-top: 1px solid #eae9e9;}
@@ -442,7 +442,7 @@ top: 11px;text-align: right;}
 /*导航图标*/
 #meauBack{display: none;}
 .sort-side .dl-sort{ float:left; width:50%; }
-.category-list li.hover .menu-in { border: 1px solid #333; }
+.category-list li.hover { border: 1px solid #333; }
 /*.category-list li.hover{border: 2px solid #d83e54; border-right: none; }*/
 /*.category-list li.last.hover ,.category-list li.hover .menu-in{border-bottom-color:transparent ;}*/
 /*小三角*/
@@ -722,7 +722,7 @@ filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#f8c375',endCo
 .advTip img{width:100% ;}  
 
 /*第二套公告*/
-.marqueenTwo{ position:absolute;top:55px;right:0px;width:245px;height:320px ;border:  1px solid #eee;padding:10px ;background: #f8f8f8;}
+.marqueenTwo{ position:absolute;width:245px;height:320px ;border:  1px solid #eee;padding:10px ;background: #f8f8f8;}
 .marqueenTwo .marqueen-title {display:block;margin: 10px 5px 0px;padding-bottom:10px ;text-align: left;border-bottom:1px solid #eee; ;}
 .marqueenTwo .demo{padding-top:5px ;}
 .marqueenTwo .demo li,.marqueenTwo .demo li.title-first{float: none;width: 100%;padding:0px 5px;border:none ;height: 80px;line-height:30px ;}
@@ -736,8 +736,8 @@ filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#f8c375',endCo
 #nav .category-content{ position:relative; width: 180px; float: left; z-index: 113; }
 #nav .category-content .all-goods {width:180px;}
 .category-content .category{  width:180px;}
-.category-content .category-info {padding-left: 12px;width: 182px;overflow: hidden;}
-.category-content .menu-item {left: 173px;}
+.category-content .category-info {padding-left: 12px;width: 173px;overflow: hidden;}
+.category-content .menu-item {left: 173px;background: rgba(0, 0, 0, 0.7);}
 .category-content .category-list li {height:45px ;}
 
 
