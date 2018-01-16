@@ -85,6 +85,7 @@ class VerificationController extends Controller {
         if ($request->has('uid') && $request->has('status') && $request->has('type')) {
 
             $isPass = Userinfo::find($request->input('uid'));
+            $user = User::find($request->input('uid'));
             if (empty($isPass)) {
                 $data['msg'] = "无此用户";
                 return $data;
@@ -113,6 +114,10 @@ class VerificationController extends Controller {
                 case '0'://审核拒绝
                     $isPass->$is_verify = 2;//审核拒绝
                     $isPass->save();
+                    //更改user表状态
+                    $user->$user_verify = -1;//可重新提交认证
+                    $user->save();
+
 //                    发送站内信
                     $content = "很抱歉！由于" . $reason . "您的".$mes."审核未通过,尝试重新发布";
                     $mesage = new Message();
@@ -127,13 +132,20 @@ class VerificationController extends Controller {
                 case '1': //审核通过
                     $isPass->$is_verify = 1;//审核通过
                     $isPass->save();
+                    //更改user表状态
+                    $user->$user_verify = 1;
                     //如果通过了实名认证，则用户成为一般服务用户。
                     //新建一般服务用户信息表
                     if($is_verify =="realname_statue"){
-                        $serviceinfo = new Serviceinfo();
-                        $serviceinfo->uid = $isPass->uid;
-                        $serviceinfo->city = $isPass->city;
-                        $serviceinfo->save();
+                        $user->type = 2;//升级用户为服务用户
+                        $user->save();
+                        $is_exist = Serviceinfo::where('uid',$isPass->uid)->get();
+                        if($is_exist->count() <=0){
+                            $serviceinfo = new Serviceinfo();
+                            $serviceinfo->uid = $isPass->uid;
+                            $serviceinfo->city = $isPass->city;
+                            $serviceinfo->save();
+                        }
                     }
                     //设置用户登录信息表
                     $set_user = User::find($isPass->uid);

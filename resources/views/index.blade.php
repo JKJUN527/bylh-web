@@ -88,6 +88,11 @@
         .request_rank{display:none;}
         .pictureshow{width:500px;}
     }
+    .demo_btn{
+        width: 10rem;
+        height: 3rem;
+        margin-top: 5rem;
+    }
 </style>
 @endsection
 @section('content')
@@ -144,17 +149,12 @@
                 </ul>
             </div>
         </div>
+
         <div class="am-u-lg-3">
-            <div class="marqueenTwo">
+            <div class="marqueenTwo" style="background:transparent;border:0px;">
                 <div class="demo">
-                    <ul style="padding-top:70px;">
-                        <li class="title-first"><a target="_blank" href="#">
-                                <label style="height: 35px;margin-left: -80px;width: 100%;border: none;font-size: 16px;background: url(../images/green.png);text-align: -webkit-right;padding-right: 40px;">发布需求</label>
-                            </a></li>
-                        <li class="title-first"><a target="_blank" href="#">
-                                <label style="height: 35px;margin-left: -80px;width: 100%;border: none;font-size: 16px;background: url(../images/Lime.png);text-align: -webkit-right;padding-right: 40px;">发布服务</label>
-                            </a></li>
-                    </ul>
+                    <button type="button" class="am-btn am-btn-warning am-round demo_btn">发布需求</button>
+                    <button type="button" class="am-btn am-btn-primary am-round demo_btn">发布服务</button>
                 </div>
             </div>
         </div>

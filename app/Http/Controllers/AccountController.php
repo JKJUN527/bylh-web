@@ -292,13 +292,13 @@ class AccountController extends Controller {
             $data['msg'] = "请先登陆再进行操作";
             return $data;
         }
-        if ($data['type'] != 1) {
+        if ($data['type'] != 2) {
             $data['status'] = 400;
             $data['msg'] = "用户非法，请登录企业号";
             return $data;
         }
 
-        return view('account/edit', ['data' => $data]);
+        return view('person/user', ['data' => $data]);
     }
 
     public function editserviceinfo(Request $request) {
