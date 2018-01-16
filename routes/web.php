@@ -93,7 +93,7 @@ Route::any('order/ConfirmPayment',['uses' => 'OrderController@ConfirmPayment']);
 //点击确认收款
 Route::post('order/ConfirmGetPayment',['uses' => 'OrderController@ConfirmGetPayment']);
 //获取订单详情
-Route::get('order/getdetail',['uses' => 'OrderController@getdetail']);
+Route::get('order/detail',['uses' => 'OrderController@getdetail']);
 //服务用户预约需求
 Route::post('order/reservationDemand',['uses' => 'OrderController@reservationDemand']);
 

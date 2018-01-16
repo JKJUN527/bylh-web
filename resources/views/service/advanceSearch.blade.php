@@ -1,28 +1,13 @@
 @extends('demo.admin')
 @section('title','服务大厅')
+
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/navstyle.css')}}" rel="stylesheet" type="text/css"/>
-    <script src="{{asset('js/jquery-1.4.3.min.js')}}" rel="stylesheet" type="text/css"></script>
-    @endsection
+@endsection
+
 @section('content')
-<script type="text/javascript">
-    (function() {
-        $('.am-slider').flexslider();
-    });
-    $(document).ready(function() {
-        $("li").hover(function() {
-            $(".category-content .category-list li.first .menu-in").css("display", "none");
-            $(".category-content .category-list li.first").removeClass("hover");
-            $(this).addClass("hover");
-            $(this).children("div.menu-in").css("display", "block")
-        }, function() {
-            $(this).removeClass("hover")
-            $(this).children("div.menu-in").css("display", "none")
-        });
-    })
-</script>
 <!--小导航 -->
 <div class="am-g am-g-fixed smallnav">
     <div class="am-u-sm-3">
@@ -362,7 +347,7 @@
     </div>
     <div class="am-u-lg-4 am-u-md-4">
         <div class="request_rank">
-            <div class="rank_title" style="background:url(../images/tit_bg.jpg)no-repeat center;height: 114px;">
+            <div class="rank_title" style="background:url('../images/tit_bg.jpg')no-repeat center;height: 114px;">
                 <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 20px;">服务商排行榜</p>
             </div>
             <div class="rank_content" style="margin: 0 60px;border-bottom: 2px solid #df3536;border-left: 2px solid #df3536;border-right: 2px solid #df3536;">
@@ -647,8 +632,13 @@
 <!--菜单 -->
 <div class=tip>
 </div>
-<script>
-    window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
-</script>
-<script type="text/javascript " src="{{asset('basic/js/quick_links.js')}} "></script>
+@endsection
+
+
+@section("custom-script")
+    <script src="{{asset('js/jquery-1.4.3.min.js')}}" rel="stylesheet" type="text/css"></script>
+    <script type="text/javascript " src="{{asset('basic/js/quick_links.js')}} "></script>
+    <script>
+        window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
+    </script>
 @endsection
