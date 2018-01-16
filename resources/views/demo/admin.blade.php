@@ -10,9 +10,6 @@
     <link href="{{asset('css/personal.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/orstyle.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
-    <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
-    <script src="{{asset('AmazeUI-2.4.2/assets/js/jquery.min.js')}}"></script>
-    <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.min.js')}}"></script>
     @section("custom-style")
     @show
 </head>
@@ -111,15 +108,18 @@
     <li><a href="{{asset('demands/advanceSearch')}}"><i class="am-icon-shopping-basket"></i>需求大厅</a></li>
     <li><a href="{{asset('account/index')}}"><i class="am-icon-user"></i>我的主页</a></li>
 </div>
-</body>
-</html>
-<script>
+
+<script src="{{asset('js/jquery-1.4.3.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('AmazeUI-2.4.2/assets/js/jquery.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
     $("#ai-topsearch").click( function () {
         search();
     });
     function search() {
         var keyword = $("#searchInput").val();
-        if(keyword != ''){
+        if(keyword !== ''){
             window.location.href = "/search?keyword="+keyword;
         }
     }
@@ -127,4 +127,10 @@
         window.location.href = "/index";
     }
 </script>
+
+@section("custom-script")
+@show
+</body>
+</html>
+
 

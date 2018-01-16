@@ -4,7 +4,21 @@
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/navstyle.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
-    <script src="{{asset('js/jquery-1.4.3.min.js')}}" rel="stylesheet" type="text/css"></script>
+
+    <style>
+        .listIndex dd {
+            height: 35px !important;
+        }
+
+        .listIndex dd a {
+            padding: 4px;
+            margin:4px;
+        }
+        .selected {
+            background-color: #03A9F4;
+            color: #ffffff!important;
+        }
+    </style>
 @endsection
 @section('content')
 <div class="am-g am-g-fixed smallnav">
@@ -50,7 +64,7 @@
         <dl class="listIndex" attr="terminal_brand_s">
             <dt>分类：</dt>
             <dd>
-                <a href="javascript:void(0)" values2="" values1="" attrval="全部">全部</a>
+                <a href="javascript:void(0)" values2="" values1="" attrval="全部" class="selected">全部</a>
                 <a href="javascript:void(0)" values2="" values1="" attrval="体育">体育</a>
                 <a href="javascript:void(0)" values2="" values1="" attrval="艺术">艺术</a>
                 <a href="javascript:void(0)" values2="" values1="" attrval="家教">家教</a>
@@ -68,7 +82,7 @@
         <dl class="listIndex" attr="价格范围">
             <dt>价格范围：</dt>
             <dd>
-                <a href="javascript:void(0)" values2="" values1="" attrval="不限">不限</a>
+                <a href="javascript:void(0)" values2="" values1="" attrval="不限" class="selected">不限</a>
                 <a href="javascript:void(0)" values2="499" values1="1" attrval="1-499">1-499</a>
                 <a href="javascript:void(0)" values2="999" values1="500" attrval="500-999">500-999</a>
                 <a href="javascript:void(0)" values2="1999" values1="1000" attrval="1000-1999">1000-1999</a>
@@ -82,83 +96,31 @@
         <dl class=" listIndex" attr="terminal_os_s">
             <dt>地区：</dt>
             <dd>
-                <a href="javascript:void(0)" values2="" values1="" attrval="不限">不限</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="北京">北京</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="上海">上海</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="广州">广州</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="深圳">深圳</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="杭州">杭州</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="成都">成都</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="重庆">重庆</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="武汉">武汉</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="西安">西安</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="宁波">宁波</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="合肥">合肥</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="天津">天津</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="常州">常州</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="厦门">厦门</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="南京">南京</a>
-                <a href="javascript:void(0)" values2="" values1="" attrval="苏州">苏州</a>
+                <a href="javascript:void(0)" data-content="0" @if(!isset($data["condition"]["region"])) class="selected" @endif>不限</a>
+                @foreach($data["region"] as $region)
+                    <a href="javascript:void(0)" data-content="{{$region->id}}"
+                    @if(isset($data["condition"]["region"]) && $data["condition"]["region"] == $region->id)
+                        class="selected"
+                    @endif>{{$region->name}}</a>
+                @endforeach
             </dd>
         </dl>
 
 
     </div>
 
-    <div class="hasBeenSelected">
-        <dl>
-            <dt>您已选择：</dt>
-            <dd style="display:none" class="clearDd">
-                <div class="clearList"></div>
-                <div style="display:none;" class="eliminateCriteria">清除筛选条件</div>
-            </dd>
-        </dl>
-    </div>
+    {{--<div class="hasBeenSelected">--}}
+        {{--<dl>--}}
+            {{--<dt>您已选择：</dt>--}}
+            {{--<dd style="display:none" class="clearDd">--}}
+                {{--<div class="clearList"></div>--}}
+                {{--<div style="display:none;" class="eliminateCriteria">清除筛选条件</div>--}}
+            {{--</dd>--}}
+        {{--</dl>--}}
+    {{--</div>--}}
 
 </div>
 
-<script type="text/javascript">
-    var dlNum  =$("#selectList").find("dl");
-    for (i = 0; i < dlNum.length; i++) {
-        $(".hasBeenSelected .clearList").append("<div class=\"selectedInfor selectedShow\" style=\"display:none\"><span></span><label></label><em></em></div>");
-    }
-
-    var refresh = "true";
-
-    $(".listIndex").on("click",'a',function(){
-        var text =$(this).text();
-        var selectedShow = $(".selectedShow");
-        var textTypeIndex =$(this).parents("dl").index();
-        var textType =$(this).parent("dd").siblings("dt").text();
-        index = textTypeIndex -(2);
-        $(".clearDd").show();
-        $(".selectedShow").eq(index).show();
-        $(this).addClass("selected").siblings().removeClass("selected");
-        selectedShow.eq(index).find("span").text(textType);
-        selectedShow.eq(index).find("label").text(text);
-        var show = $(".selectedShow").length - $(".selectedShow:hidden").length;
-        if (show > 1) {
-            $(".eliminateCriteria").show();
-        }
-
-    });
-    $(".selectedShow").on("click",'em',function(){
-        $(this).parents(".selectedShow").hide();
-        var textTypeIndex =$(this).parents(".selectedShow").index();
-        index = textTypeIndex;
-        $(".listIndex").eq(index).find("a").removeClass("selected");
-
-        if($(".listIndex .selected").length < 2){
-            $(".eliminateCriteria").hide();
-        }
-    });
-
-    $(".eliminateCriteria").on("click",function(){
-        $(".selectedShow").hide();
-        $(this).hide();
-        $(".listIndex a ").removeClass("selected");
-    });
-</script>
 <!--需求展示-->
 <div class="shopMain" id="shopmain" style="background:white;">
     <div class="am-container " >
@@ -180,81 +142,19 @@
         <div class="am-u-lg-8 am-u-md-8" style="padding: 10px;float: left;">
             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
   							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                            <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                            <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
+
+                @foreach($data["result"]["demands"] as $demand)
+                    <li>
+                        <div class="am-gallery-item">
+                            <a href="#" class="">
+                                <img src="{{asset("images/f1.jpg")}}"  alt="img"/>
+                                <h3 class="am-gallery-title">{{$demand->title}}</h3>
+                                <div class="am-gallery-desc">{{mb_substr($demand->describe, 0, 20, 'utf-8')}}</div>
+                            </a>
+                        </div>
+                    </li>
+                @endforeach
+
             </ul>
         </div>
         <div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">
@@ -288,42 +188,25 @@
         </div>
     </div>
     <!--分页-->
-    <ul class="am-pagination am-pagination-centered">
-        <li class="am-disabled"><a href="#">&laquo;</a></li>
-        <li class="am-active am-warning"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-    </ul>
+
+    <nav>
+        {!! $data['result']['demands']->appends($data["condition"])->render() !!}
+    </nav>
+
 </div>
 <!--广告-->
-<div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-    <img src="{{asset('images/ad4.png')}}">
-</div>
-<div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-    <img src="{{asset('images/ad5.png')}}">
-</div>
-<script type="text/javascript">
-    (function() {
-        $('.am-slider').flexslider();
-    });
-    $(document).ready(function() {
-        $("li").hover(function() {
-            $(".category-content .category-list li.first .menu-in").css("display", "none");
-            $(".category-content .category-list li.first").removeClass("hover");
-            $(this).addClass("hover");
-            $(this).children("div.menu-in").css("display", "block")
-        }, function() {
-            $(this).removeClass("hover")
-            $(this).children("div.menu-in").css("display", "none")
-        });
-    })
-</script>
-<script>
-    window.jQuery || document.write('<script src="{{asset('basic/js/jquery.min.js')}} "><\/script>');
-</script>
-<script type="text/javascript " src="{{asset('basic/js/quick_links.js')}} "></script>
+{{--<div class="advertisement" style="padding: 10px;width: 50%;float: left;">--}}
+    {{--<img src="{{asset('images/ad4.png')}}">--}}
+{{--</div>--}}
+{{--<div class="advertisement" style="padding: 10px;width: 50%;float: right;">--}}
+    {{--<img src="{{asset('images/ad5.png')}}">--}}
+{{--</div>--}}
+@endsection
+
+@section("custom-script")
+    <script type="text/javascript " src="{{asset('basic/js/quick_links.js')}} "></script>
+    <script type="text/javascript">
+
+    </script>
 @endsection
 
