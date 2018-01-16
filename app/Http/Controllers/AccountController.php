@@ -689,10 +689,15 @@ class AccountController extends Controller {
             $is_exist = Tempemail::where('uid',$uid)->first();
             if($is_exist){
                 if($is_exist->code == $code){
-                    $update_mail = User::where('uid',$uid)
-                        ->update(['mail'=>$email,'email_verify'=>1]);
-                    $data['status'] = 200;
-                    $data['msg'] = "绑定成功";
+                    $searchmail = User::where('mail',$email)->get();
+                    if($searchmail->count() >0 ){
+                        $data['msg'] = "邮箱已有其他账号绑定，请先解绑";
+                    }else{
+                        $update_mail = User::where('uid',$uid)
+                            ->update(['mail'=>$email,'email_verify'=>1]);
+                        $data['status'] = 200;
+                        $data['msg'] = "绑定成功";
+                    }
                 }else
                     $data['msg'] = "验证码错误";
             }else{
@@ -708,13 +713,18 @@ class AccountController extends Controller {
         $data['msg'] = "参数错误";
         if($request->has('phone')){
             $phone = $request->input('phone');
-            $settel = User::where('uid',$data['uid'])
-                ->update(['tel' => $phone,'tel_verify' =>1]);
-            if($settel){
-                $data['status'] = 200;
-                $data['msg'] = "绑定成功";
+            $searchphone = User::where('tel',$phone)->get();
+            if($searchphone->count() >0 ) {
+                $data['msg'] = "该手机已有其他账号绑定，请先解绑";
             }else{
-                $data['msg'] = "绑定失败";
+                $settel = User::where('uid',$data['uid'])
+                    ->update(['tel' => $phone,'tel_verify' =>1]);
+                if($settel){
+                    $data['status'] = 200;
+                    $data['msg'] = "绑定成功";
+                }else{
+                    $data['msg'] = "绑定失败";
+                }
             }
         }
         return $data;
