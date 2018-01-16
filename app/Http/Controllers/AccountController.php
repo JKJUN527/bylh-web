@@ -230,8 +230,9 @@ class AccountController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
-
-        if ($data['uid'] != 0 && ($data['type'] == 0 || $data['type'] == 1))   //确认为合法个人用户
+        $data['status'] = 400;
+        $data['msg'] = "非法用户";
+        if ($data['uid'] != 0 && ($data['type'] == 1 || $data['type'] == 2))   //确认为合法个人用户
         {
             if ($data['uid'] == 0) {//用户未登陆
                 return view('account.login', ['data' => $data]);
@@ -276,9 +277,8 @@ class AccountController extends Controller {
                 $data['status'] = 400;
                 $data['msg'] = "操作失败";
             }
-
-            return $data;
         }
+        return $data;
     }
 
     //修改服务用户服务相关资料主页

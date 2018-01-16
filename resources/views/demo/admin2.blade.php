@@ -112,13 +112,13 @@
     <aside class="menu">
         <ul>
             <li class="person active">
-                <a href="{{asset('home')}}"><i class="am-icon-user"></i>个人中心</a>
+                <a href="{{asset('account/')}}"><i class="am-icon-user"></i>个人中心</a>
             </li>
             <li class="person">
                 <p><i class="am-icon-newspaper-o"></i>个人资料</p>
                 <ul>
-                    <li><a href="{{asset('user')}}">个人信息</a></li>
-                    <li><a href="{{asset('safety')}}">安全设置</a></li>
+                    <li><a href="{{asset('account/baseedit')}}">个人信息</a></li>
+                    <li><a href="{{asset('account/safety')}}">安全设置</a></li>
                 </ul>
             </li>
             <li class="person">

@@ -28,16 +28,14 @@
                 <div class="user-infoPic">
 
                     <div class="filePic">
-                        <input type="file" id="user_picture" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" onchange="loadPreview()">
-                        <img class="am-circle am-img-thumbnail" id="head-preview" src="
+                        <input type="file" id="user_picture" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" onchange="loadPreview(this)">
+                        <img class="am-circle am-img-thumbnail"  id="head-preview" src="
                             @if($data['userinfo']->photo =='' ||$data['userinfo']->photo ==null)
                                 {{asset('images/mansmall.jpg')}}
                             @else
                                 {{$data['userinfo']->photo}}
                             @endif
-                                " alt="" />
-
-
+                                " alt="" style="width: 100px;height: 100px"/>
                     </div>
 
                     <p class="am-form-help">头像</p>
@@ -212,7 +210,6 @@
                 console.log("file is empty");
                 //formData.append('photo', "");
             } else {
-
                 formData.append('photo', photo.prop("files")[0]);
             }
             $.ajax({
@@ -225,10 +222,10 @@
                 data: formData,
                 success: function (data) {
                     var result = JSON.parse(data);
-                    if(result.status = 400){
-                        swal('',result.msg,"success");
-                        return false;
+                    if(result.status == 400){
+                        swal('',result.msg,"error");
                     }else{
+                        swal('',result.msg,"success");
                         location.href = "/account/index";
                     }
                 }
@@ -236,9 +233,36 @@
 
         });
 
-        
-        function loadPreview() {
-            $("#head-preview").attr("src", "path___");
+        function loadPreview(element) {
+            var file = element.files[0];
+            var anyWindow = window.URL || window.webkitURL;
+            var objectUrl = anyWindow.createObjectURL(file);
+            window.URL.revokeObjectURL(file);
+
+            var idCardPath = $("input[id='user_picture']").val();
+
+            if (!/.(jpg|jpeg|png|JPG|JPEG|PNG)$/.test(idCardPath)) {
+                isCorrect = false;
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "图片格式错误，支持：.jpg .jpeg .png类型。请选择正确格式的图片后再试！",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+            } else if (file.size > 2 * 1024 * 1024) {
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "图片文件最大支持：2MB",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+            } else {
+                $("#head-preview").attr("src", objectUrl);
+            }
         }
 
     </script>
