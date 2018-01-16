@@ -11,16 +11,19 @@ namespace App\Http\Controllers;
 use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
+use APP\Models\E3Email;
 use App\News;
 use App\Orders;
 use App\Qaservices;
 use App\Serviceinfo;
+use App\Tempemail;
 use App\User;
 use App\Userinfo;
 use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -572,6 +575,20 @@ class AccountController extends Controller {
         }
 
     }
+    public function setemail(){
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+        if($data['uid']==0){
+            return view('account/login');
+        }
+        $data['userinfo'] = User::where('uid',$data['uid'])
+            ->select('tel','mail','tel_verify','email_verify','realname_verify','finance_verify','majors_verify')
+            ->first();
+
+        return view('person.email',['data'=>$data]);
+    }
     public function setphone(){
         $data = array();
         $data['uid'] = AuthController::getUid();
@@ -585,6 +602,50 @@ class AccountController extends Controller {
             ->first();
 
         return view('person.phone',['data'=>$data]);
+    }
+    public function sendMailCode(Request $request){
+        $data = array();
+        $data['status'] = 400;
+        $data['msg'] = "参数错误";
+        $uid = AuthController::getUid();
+        if($request->has('email')){
+            $email = $request->input('email');
+            if($email != "" && $uid != "") {
+                $res = Tempemail::where('uid', '=', $uid)
+                    ->where('type', '=', 0)//注册验证
+                    ->first();
+                //获取验证码
+                $ecode = ValidationController::generate_rand(6);
+                if ($res->count()) {
+                    $num = Tempemail::where('uid', '=', $uid)
+                        ->update([
+                            'code' => $ecode,
+                            'deadline' => date('Y-m-d H:i:s', strtotime('+7 day')),
+                        ]);
+                } else {
+                    $temp = new Tempemail();
+                    $temp->code = $ecode;
+                    $temp->uid = $uid;
+                    $temp->type = 0;
+                    $temp->deadline = date('Y-m-d H:i:s', strtotime('+7 day'));
+                    $temp->save();
+                }
+                $e3_email = new E3Email();
+                $e3_email->from = "631642753@qq.com";
+                $e3_email->to = $email;
+                $e3_email->subject = "不亦乐乎邮箱验证";
+                $e3_email->content = "您正在使用不亦乐乎邮箱验证，验证码：" . $ecode . "如非本人操作请忽略此邮件。";
+                //发送纯文本邮件
+                Mail::raw($e3_email->content, function ($message) use ($e3_email) {
+                    $message->from($e3_email->from, '不亦乐乎官网');
+                    $message->subject($e3_email->subject);
+                    $message->to($e3_email->to);
+                });
+                $data['status'] = 200;
+                $data['msg'] = "验证邮件发送成功，请登录邮箱查看验证码";
+            }
+        }
+        return $data;
     }
     public function sendSms(Request $request){
         $data = array();
@@ -613,6 +674,29 @@ class AccountController extends Controller {
                 $data['msg'] = "验证码正确";
             }else{
                 $data['msg'] = "验证码错误";
+            }
+        }
+        return $data;
+    }
+    public function verifyEmailCode(Request $request){
+        $data = array();
+        $uid = AuthController::getUid();
+        $data['status'] = 400;
+        $data['msg'] = "参数错误";
+        if($request->has('email') && $request->has('code')){
+            $email = $request->input('email');
+            $code = $request->input('code');
+            $is_exist = Tempemail::where('uid',$uid)->first();
+            if($is_exist){
+                if($is_exist->code == $code){
+                    $update_mail = User::where('uid',$uid)
+                        ->update(['mail'=>$email,'email_verify'=>1]);
+                    $data['status'] = 200;
+                    $data['msg'] = "绑定成功";
+                }else
+                    $data['msg'] = "验证码错误";
+            }else{
+                $data['msg'] = "未发送验证码";
             }
         }
         return $data;

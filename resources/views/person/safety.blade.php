@@ -56,7 +56,7 @@
                                 @endif
                             </div>
                             <div class="fore3">
-                                <a href="/email">
+                                <a href="/account/setemail">
                                     @if($data['userinfo']->email_verify == 1)
                                         <div class="am-btn am-btn-secondary">换绑</div>
                                     @else

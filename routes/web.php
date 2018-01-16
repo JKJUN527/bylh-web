@@ -49,6 +49,10 @@ Route::get('account/setphone', ['uses' => 'AccountController@setphone']);//用�
 Route::post('account/sendSms', ['uses' => 'AccountController@sendSms']);//发送验证码
 Route::post('account/verifySmsCode', ['uses' => 'AccountController@verifySmsCode']);//验证手机号及验证码是否正确
 Route::post('account/update_tel', ['uses' => 'AccountController@update_tel']);//更换绑定手机
+//绑定邮箱
+Route::get('account/setemail', ['uses' => 'AccountController@setemail']);//用户绑定邮箱
+Route::post('account/sendMailCode', ['uses' => 'AccountController@sendMailCode']);//发送验证码
+Route::post('account/verifyEmailCode', ['uses' => 'AccountController@verifyEmailCode']);//验证邮箱及验证码是否正确//更换绑定邮箱
 
 //一般服务发布主页、实习中介服务发布主页、专业问答服务发布主页
 Route::get('service/genlpublish', ['uses' => 'ServiceController@genlserviceindex']);//一般服务发布主页
