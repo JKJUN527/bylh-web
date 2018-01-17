@@ -35,7 +35,9 @@
             <li class="person">
                 <p><i class="am-icon-dollar"></i>我的服务</p>
                 <ul>
-                    <li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
+                    <li><a href="{{asset('service/genlpublish')}}">一般服务</a></li>
+                    <li><a href="{{asset('service/finlpublish')}}">实习中介</a></li>
+                    <li><a href="{{asset('service/qapublish')}}">专业问答</a></li>
                     <li><a href="{{asset('myrequest')}}">服务列表</a></li>
                 </ul>
             </li>

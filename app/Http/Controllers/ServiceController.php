@@ -34,20 +34,20 @@ class ServiceController extends Controller
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-//        if($data['uid']==0 || $data['type']!=1){//先登录|登录用户非服务用户
-//            return view('account.login',['data'=>$data]);
-//        }
-//        $is_vertify = User::where('uid',$data['uid'])->first();
-//        if(!$is_vertify->realname_verify){//未通过实名认证、跳转到实名认证页面
-//            return redirect('account/authentication/1');
-//        }else{
-//            //返回一般服务页面所需数据
-//            $data['serviceclass1']=Serviceclass1::where('type',0)->orderBy('updated_at','asc')->get();
-//            $data['serviceclass2']=Serviceclass2::where('type',0)->orderBy('updated_at','asc')->get();
+        if($data['uid']==0 || $data['type']!=2){//先登录|登录用户非服务用户
+            return view('account.login',['data'=>$data]);
+        }
+        $is_vertify = User::where('uid',$data['uid'])->first();
+        if(!$is_vertify->realname_verify){//未通过实名认证、跳转到实名认证页面
+            return redirect()->back();
+        }else{
+            //返回一般服务页面所需数据
+            $data['serviceclass1']=Serviceclass1::where('type',0)->orderBy('updated_at','asc')->get();
+            $data['serviceclass2']=Serviceclass2::where('type',0)->orderBy('updated_at','asc')->get();
 //            $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
-//        }
+        }
 
-        # return $data;
+//        return $data;
         return view('service.genlpublish', ["data" => $data]);
     }
 
