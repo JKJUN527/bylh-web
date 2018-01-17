@@ -24,10 +24,13 @@ class FixPasswordController extends Controller
         if($data['uid']==0){
             return view('account/login');
         }
-        $data['userinfo'] = User::where('uid',$data['uid'])
-            ->select('tel','mail','tel_verify','email_verify','realname_verify','finance_verify','majors_verify')
+//        $data['userinfo'] = User::where('uid',$data['uid'])
+        $data['userinfo'] = DB::table('bylh_users')
+            ->leftjoin('bylh_userinfo','bylh_userinfo.uid','bylh_users.uid')
+            ->select('bylh_users.tel','bylh_users.mail','tel_verify','email_verify','realname_statue','finance_statue','majors_statue')
             ->first();
 
+//        return $data;
         return view('person/safety',['data'=>$data]);
     }
     public function resetPWindex(){

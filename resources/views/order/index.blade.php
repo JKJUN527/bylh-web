@@ -165,6 +165,9 @@
     </div>
     <!--底部-->
 @endsection
+@section('aside')
+    @include('demo.aside',['type'=>$data['type']])
+@endsection
 
 @section('custom-script')
     <script type="text/javascript">

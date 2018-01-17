@@ -328,6 +328,7 @@ class OrderController extends Controller {
     }
 
     //查看与自己相关订单列表
+    //返回对应订单id，商品提供者（服务或者需求）用户名及id，服务或需求的图片及标题，订单创建时间,成交价格等信息
     public function orderlist(){
         $data = array();
         $data['uid'] = AuthController::getUid();
@@ -346,6 +347,33 @@ class OrderController extends Controller {
                 });
         })
         ->paginate(20);
+        foreach ($data['orderlist'] as $order){
+            if($order->service_id =='' ||$order->service_id ==null){
+                //
+                $data['orderinfo'][$order->id]= DB::table('bylh_demands')
+                    ->leftjoin('bylh_users','bylh_users.uid','bylh_demands.uid')
+                    ->where('bylh_demands.id',$order->demand_id)
+                    ->select('bylh_demands.uid','title','picture','username')
+                    ->first();
+            }else{
+                switch ($order->type){
+                    case 0:
+                        $serverTable = "bylh_genlservices";
+                        break;
+                    case 1:
+                        $serverTable = "bylh_finlservices";
+                        break;
+                    case 2:
+                        $serverTable = "bylh_qaservices";
+                        break;
+                }
+                $data['orderinfo'][$order->id]= DB::table($serverTable)
+                    ->leftjoin('bylh_users','bylh_users.uid',$serverTable.'.uid')
+                    ->where($serverTable.".id",$order->service_id)
+                    ->select($serverTable.".uid",'title','picture','username')
+                    ->first();
+            }
+        }
 
 //        return $data;
         return view('order/index',['data'=>$data]);

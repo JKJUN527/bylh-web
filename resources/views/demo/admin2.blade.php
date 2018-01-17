@@ -108,49 +108,8 @@
             </div>
         </div>
     </div>
-
-    <aside class="menu">
-        <ul>
-            <li class="person active">
-                <a href="{{asset('account/')}}"><i class="am-icon-user"></i>个人中心</a>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-newspaper-o"></i>个人资料</p>
-                <ul>
-                    <li><a href="{{asset('account/baseedit')}}">个人信息</a></li>
-                    <li><a href="{{asset('account/safety')}}">安全设置</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-balance-scale"></i>我的交易</p>
-                <ul>
-                    <li><a href="{{asset('order')}}">订单管理</a></li>
-                    <li><a href="{{asset('comment')}}">评价服务</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-dollar"></i>我的服务</p>
-                <ul>
-                    <li><a href="{{asset('advanceSearch')}}">发布服务</a></li>
-                    <li><a href="{{asset('myrequest')}}">服务列表</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-tags"></i>我的需求</p>
-                <ul>
-                    <li><a href="{{asset('sendneed')}}">发布需求</a></li>
-                    <li><a href="{{asset('myneed')}}">需求列表</a></li>
-                </ul>
-            </li>
-            <li class="person">
-                <p><i class="am-icon-qq"></i>信息中心</p>
-                <ul>
-                    <li><a href="{{asset('message')}}">站内信</a></li>
-                    <li><a href="/news">我的消息</a></li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
+    @section('aside')
+        @show
 </div>
 
 <script type="text/javascript" src="{{asset("js/jquery-1.7.2.min.js")}}"></script>
