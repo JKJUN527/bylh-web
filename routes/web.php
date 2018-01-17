@@ -159,6 +159,10 @@ Route::any('demands/needappointment',function(){
 Route::any('demands/sendneed2',function(){
     return view('demands.sendneed2');
 });
+//找回密码
+Route::any('recallPassword',function(){
+    return view('account.recallPassword');
+});
 //站内信模块
 //发送站内信
 Route::post('message/sendMessage',['uses' => 'MessageController@sendMessage']);
