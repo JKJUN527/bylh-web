@@ -40,12 +40,12 @@
                             <div class="verification">
                                 <label for="code"><i class="am-icon-code-fork"></i></label>
                                 <input type="tel" name="" id="email-verify-code" placeholder="请输入验证码">
-                                <a class="btn" href="javascript:void(0);">
-                                    <span id="dyMobileButton" id="send-email">获取</span></a>
+                                <a class="btn" href="javascript:void(0);" onclick="sendEmailCode();" id="sendEmailCode">
+                                    <span id="dyEmailButton">获取</span></a>
                             </div>
                         </form>
                         <div class="am-cf">
-                            <input type="submit" name="" value="下一步" class="am-btn am-btn-primary am-btn-sm am-fl" id="changeShow">
+                            <input type="button" name="next_step" value="下一步" class="am-btn am-btn-primary am-btn-sm am-fl" onclick="changeEmailshow();">
                         </div>
                     </div>
                     <div class="am-tab-panel">
@@ -57,12 +57,12 @@
                             <div class="verification">
                                 <label for="code"><i class="am-icon-code-fork"></i></label>
                                 <input type="tel" name="" id="phone-verify-code" placeholder="请输入验证码">
-                                <a class="btn" href="javascript:void(0);" onclick="sendMobileCode()">
-                                    <span id="dyMobileButton"  id="send-SMS">获取</span></a>
+                                <a class="btn" href="javascript:void(0);" onclick="sendMobileCode();" id="sendMobileCode">
+                                    <span id="dyMobileButton" >获取</span></a>
                             </div>
                         </form>
                         <div class="am-cf">
-                            <input type="submit" name="" value="下一步" class="am-btn am-btn-primary am-btn-sm am-fl" id="changeShow">
+                            <input type="button" name="next_step" value="下一步" class="am-btn am-btn-primary am-btn-sm am-fl" onclick="changePhoneshow();">
                         </div>
 
                         <hr>
@@ -97,269 +97,11 @@
                     </form>
                 </div>
                 <div class="am-cf">
-                    <input type="submit" name="" value="完成" class="am-btn am-btn-primary am-btn-sm" style="margin-top: 30px;">
+                    <input type="text" id="user_id" style="display: none">
+                    <input type="submit" id="update_password" value="完成" class="am-btn am-btn-primary am-btn-sm" style="margin-top: 30px;">
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
-            // $phoneVerifyCode = $("#phone-verify-code");
-            // $phoneVerifyCode.prop("disabled", true);
-            // $emailVerifyCode = $("#email-verify-code");
-            // $emailVerifyCode.prop("disabled", true);
-            // $('#changePhoneshow').click(function(){
-            //             var formData1 = new FormData();
-            //                 var phone = $("#phone");
-            //                 var phoneCode = $phoneVerifyCode.val();
-            //                 if (phone.val() === '') {
-            //                     setError(phone, 'phone', "不能为空");
-            //                     return;
-            //                 } else {
-            //                     removeError(phone, 'phone');
-            //                 }
-            //                 if (phoneCode === '') {
-            //                     setError($phoneVerifyCode, 'phone-verify-code', '不能为空');
-            //                     return;
-            //                 } else {
-            //                     removeError($phoneVerifyCode, 'phone-verify-code');
-            //                 }
-            //                 formData.append("tel", phone.val());
-            //                 formData.append("code", phoneCode);
-            //                 $('.findpassword1').hide();
-            //                 $('.findpassword2').show();
-
-            //     $.ajax({
-            //         url: "/account/recallPassword",
-            //         dataType: 'text',
-            //         cache: false,
-            //         contentType: false,
-            //         processData: false,
-            //         type: "post",
-            //         data: formData1,
-            //         success: function (data) {
-            //             var result = JSON.parse(data);
-            //
-            //             if (result.status === 200) {
-            //                 swal({
-            //                     type: "success",
-            //                     title: "密码已重置",
-            //                     confirmButtonText: "关闭"
-            //                 });
-            //
-            //                 setTimeout(function () {
-            //                     self.location = '/account/login';
-            //                 }, 1000);
-            //             } else {
-            //                 currentStep = 3;
-            //                 swal({
-            //                     type: "error",
-            //                     title: "密码重置失败",
-            //                     confirmButtonText: "关闭"
-            //                 });
-            //             }
-            //
-            //         }
-            //     });
-            //  })
-            // $('#changeEmailshow').click(function(){
-            //     formData2 = new FormData();
-            //     var email = $("#email");
-            //     var emailCode = $emailVerifyCode.val();
-            //     if (email.val() === '') {
-            //         setError(email, 'email', "不能为空");
-            //         return;
-            //     } else {
-            //         removeError(email, 'email');
-            //     }
-            //     if (emailCode === '') {
-            //         setError($emailVerifyCode, 'email-verify-code', '不能为空');
-            //         return;
-            //     } else {
-            //         removeError($emailVerifyCode, 'email-verify-code');
-            //     }
-            //
-            //     formData.append('email', email.val());
-            //     formData.append('code', emailCode);
-            //
-            //     $('.findpassword1').hide();
-            //     $('.findpassword2').show();
-            // })
-            // $('#send-SMS').click(function(){
-            //     var phone = $('#phone');
-            //     if (phone.val() === ''){
-            //         setError(phone, 'phone', '不能为空');
-            //         alert('电话不能为空！')
-            //     } else if (phone.is(":visible") && !/^1[34578]\d{9}$/.test(phone.val())) {
-            //         setError(phone, 'phone', '手机号格式不正确');
-            //     } else {
-            //         removeError(phone, 'phone');
-            //         var form_data = new FormData();
-            //         form_data.append('tel', phone.val());
-            //         countDown(this, 60);
-            //         $.ajax({
-            //             url: "/recallPassword",
-            //             dataType: 'text',
-            //             cache: false,
-            //             contentType: false,
-            //             processData: false,
-            //             type: "post",
-            //             data: form_data,
-            //             success: function (data) {
-            //                 console.log(data);
-            //                 var result = JSON.parse(data);
-            //                 if (result.status === 200) {
-            //                     swal({
-            //                         type: "success",
-            //                         title: "短信验证码已发送",
-            //                         confirmButtonText: "关闭"
-            //                     });
-            //                     uid = result.uid;
-            //                     $phoneVerifyCode.prop("disabled", false);
-            //                     $phoneVerifyCode.focus();
-            //                 } else {
-            //                     swal({
-            //                         type: "error",
-            //                         title: "短信验证码发送失败",
-            //                         confirmButtonText: "关闭"
-            //                     });
-            //                 }
-            //             },
-            //             error:function(xhr, ajaxOptions, thrownError){
-            //                 swal(xhr.status + "：" + thrownError);
-            //                 //checkResult(400, "", xhr.status + "：" + thrownError, null);
-            //             }
-            //         })
-            //
-            //     }
-            //
-            // });
-            function sendMobileCode() {
-                var phone = $('#phone');
-
-                if (phone.val() === '') {
-                    swal("电话不能为空",'', "error");
-                    return;
-                } else if (!/^1[34578]\d{9}$/.test(phone.val())) {
-                    swal("手机号格式不正确",'', "error");
-                    return;
-                }
-
-                var form_data = new FormData();
-                form_data.append('telnum', phone.val());
-                swal({
-                    title: phone.val(),
-                    text: "将发送短信验证码到此手机号",
-                    type: "info",
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true
-                }, function () {
-                    $.ajax({
-                        url: "/account/sms",
-                        dataType: 'text',
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        type: "post",
-                        data: form_data,
-                        success: function (data) {
-                            console.log(data);
-                            var result = JSON.parse(data);
-                            if (result.status === 200) {
-                                swal("短信验证码已发送");
-
-                                // 倒计时30秒
-                                countDown(30);
-
-                            } else if (result.status === 400) {
-                                swal(result.msg);
-                            }
-                        }
-                    });
-                });
-            }
-            function countDown(second) {
-                var obj = $("#dyMobileButton");
-                var btn = $("#sendMobileCode");
-                // 如果秒数还是大于0，则表示倒计时还没结束
-                if (second >= 0) {
-                    // 获取默认按钮上的文字
-                    // 按钮置为不可点击状态
-                    btn.attr('disabled',"true");
-                    obj.attr('disabled',"true");
-                    // 按钮里的内容呈现倒计时状态
-                    obj.text(' (' + second + ')s');
-                    // 时间减一
-                    second--;
-                    // 一秒后重复执行
-                    setTimeout(function () {
-                        countDown(second);
-                    }, 1000);
-                    // 否则，按钮重置为初始状态
-                } else {
-                    // 按钮置未可点击状态
-                    obj.disabled = false;
-                    // 按钮里的内容恢复初始状态
-                    obj.text("获取");
-                }
-            }
-            $('#send-email').click(function(){
-                var email = $("#email");
-                if(email.val() === ''){
-                    setError(email, 'email', "不能为空");
-                } else if (email.is(":visible") &&
-                    !/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email.val())){
-                    setError(email, 'email', "请输入格式正确的邮箱");
-                } else {
-                    removeError(email, 'email');
-
-                    var form_data = new FormData();
-                    form_data.append('email', email.val());
-
-                    countDown(this, 30);
-
-                    $.ajax({
-                        url: "/recallPassword",
-                        dataType: 'text',
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        type: "post",
-                        data: form_data,
-                        success: function (data) {
-                            console.log(data);
-                            var result = JSON.parse(data);
-                            if (result.status === 200) {
-                                swal({
-                                    type: "success",
-                                    title: "验证码已发送至您的邮箱",
-                                    confirmButtonText: "关闭"
-                                });
-                                uid = result.uid;
-                                $emailVerifyCode.prop("disabled", false);
-                                $emailVerifyCode.focus();
-                            } else {
-                                swal({
-                                    type: "error",
-                                    title: "邮箱验证码发送失败",
-                                    confirmButtonText: "关闭"
-                                });
-                            }
-
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                            swal(xhr.status + "：" + thrownError);
-                            //checkResult(400, "", xhr.status + "：" + thrownError, null);
-                        }
-                    })
-                }
-            });
-            $('#changeShow').click(function(){
-                $('.findpassword1').hide();
-                $('.findpassword2').show();
-            });
-        </script>
     </div>
 
 
@@ -376,5 +118,307 @@
             </p>
         </div>
     </div>
+</div>
 </body>
 </html>
+<script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
+<script type="text/javascript">
+     $phoneVerifyCode = $("#phone-verify-code");
+//     $phoneVerifyCode.prop("disabled", true);
+     $emailVerifyCode = $("#email-verify-code");
+//     $emailVerifyCode.prop("disabled", true);
+     function changePhoneshow() {
+         var formData1 = new FormData();
+         var phone = $("#phone");
+         var phoneCode = $phoneVerifyCode.val();
+         if (phone.val() === '') {
+             swal("", "手机号不能为空", "error");
+             return;
+         } else if (!/^1[34578]\d{9}$/.test(phone.val())) {
+             swal("", "手机号格式不正确", "error");
+             return;
+         }
+         if (phoneCode === '') {
+             swal("", "验证码不能为空", "error");
+             return;
+         } else if (!/^\d{6}$/.test(phoneCode)) {
+             swal("", "验证码格式不正确", "error");
+             return;
+         }
+         formData1.append("tel", phone.val());
+         formData1.append("code", phoneCode);
+
+         $.ajax({
+             url: "/account/findPassword/1",
+             dataType: 'text',
+             cache: false,
+             contentType: false,
+             processData: false,
+             type: "post",
+             data: formData1,
+             success: function (data) {
+                 var result = JSON.parse(data);
+                 if (result.status === 200) {
+                     $('#user_id').val(result.uid);
+                     $('.findpassword1').hide();
+                     $('.findpassword2').show();
+                 } else {
+                    swal("","验证码错误","error");
+                 }
+             }
+         });
+     }
+     function changeEmailshow() {
+         var formData2 = new FormData();
+         var email = $("#email");
+         var emailCode = $emailVerifyCode.val();
+         if(email.val() === ''){
+             swal("","邮箱不能为空", "error");
+             return;
+         }else if(!/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(email.val())){
+             swal("", "邮箱格式不正确", "error");
+             return;
+         }
+         if (emailCode === '') {
+             swal("", "验证码不能为空", "error");
+             return;
+         } else if (!/\w{6}$/.test(emailCode)) {
+             swal("", "验证码格式不正确", "error");
+             return;
+         }
+
+         formData2.append('email', email.val());
+         formData2.append('code', emailCode);
+         $.ajax({
+             url: "/account/findPassword/1",
+             dataType: 'text',
+             cache: false,
+             contentType: false,
+             processData: false,
+             type: "post",
+             data: formData2,
+             success: function (data) {
+                 var result = JSON.parse(data);
+                 if (result.status === 200) {
+                     $('#user_id').val(result.uid);
+                     $('.findpassword1').hide();
+                     $('.findpassword2').show();
+                 } else {
+                     swal("",result.msg,"error");
+                 }
+             }
+         });
+     }
+     $('#send-SMS').click(function(){
+         var phone = $('#phone');
+         if (phone.val() === ''){
+             setError(phone, 'phone', '不能为空');
+             alert('电话不能为空！')
+         } else if (phone.is(":visible") && !/^1[34578]\d{9}$/.test(phone.val())) {
+             setError(phone, 'phone', '手机号格式不正确');
+         } else {
+             removeError(phone, 'phone');
+             var form_data = new FormData();
+             form_data.append('tel', phone.val());
+             countDown(this, 60);
+             $.ajax({
+                 url: "/recallPassword",
+                 dataType: 'text',
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 type: "post",
+                 data: form_data,
+                 success: function (data) {
+                     console.log(data);
+                     var result = JSON.parse(data);
+                     if (result.status === 200) {
+                         swal({
+                             type: "success",
+                             title: "短信验证码已发送",
+                             confirmButtonText: "关闭"
+                         });
+                         uid = result.uid;
+                         $phoneVerifyCode.prop("disabled", false);
+                         $phoneVerifyCode.focus();
+                     } else {
+                         swal({
+                             type: "error",
+                             title: "短信验证码发送失败",
+                             confirmButtonText: "关闭"
+                         });
+                     }
+                 },
+                 error:function(xhr, ajaxOptions, thrownError){
+                     swal(xhr.status + "：" + thrownError);
+                     //checkResult(400, "", xhr.status + "：" + thrownError, null);
+                 }
+             })
+
+         }
+
+     });
+    function sendMobileCode() {
+        var phone = $('#phone');
+        if (phone.val() === '') {
+            swal("","电话不能为空", "error");
+            return;
+        } else if (!/^1[34578]\d{9}$/.test(phone.val())) {
+            swal("","手机号格式不正确", "error");
+            return;
+        }
+        var form_data = new FormData();
+        form_data.append('phone', phone.val());
+        $.ajax({
+            url: "/account/findPassword/0",
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: "post",
+            data: form_data,
+            success: function (data) {
+                console.log(data);
+                var result = JSON.parse(data);
+                if (result.status === 200) {
+                    swal("短信验证码已发送","","success");
+                    phone.attr("disabled", true);
+                    $('#user_id').val(result.uid);
+                    // 倒计时30秒
+                    countDown(30,'tel');
+                } else if (result.status === 400) {
+                    swal(result.msg);
+                }
+            }
+        });
+    }
+    function countDown(second,type) {
+        if(type ==="tel"){
+            var obj = $("#dyMobileButton");
+            var btn = $("#sendMobileCode");
+            // 如果秒数还是大于0，则表示倒计时还没结束
+            if (second >= 0) {
+                // 获取默认按钮上的文字
+                // 按钮置为不可点击状态
+                btn.attr('onclick',"");
+                obj.attr('disabled',"true");
+                // 按钮里的内容呈现倒计时状态
+                obj.text(' (' + second + ')s');
+                // 时间减一
+                second--;
+                // 一秒后重复执行
+                setTimeout(function () {
+                    countDown(second,'tel');
+                }, 1000);
+                // 否则，按钮重置为初始状态
+            } else {
+                // 按钮置未可点击状态
+                obj.removeAttr('disabled');
+                btn.attr('onclick',"sendMobileCode();");
+                // 按钮里的内容恢复初始状态
+                obj.text("获取");
+            }
+        }else{
+            var obj = $("#dyEmailButton");
+            var btn = $("#sendEmailCode");
+            // 如果秒数还是大于0，则表示倒计时还没结束
+            if (second >= 0) {
+                // 获取默认按钮上的文字
+                // 按钮置为不可点击状态
+                btn.attr('onclick',"");
+                obj.attr('disabled',"true");
+                // 按钮里的内容呈现倒计时状态
+                obj.text(' (' + second + ')s');
+                // 时间减一
+                second--;
+                // 一秒后重复执行
+                setTimeout(function () {
+                    countDown(second,'mail');
+                }, 1000);
+                // 否则，按钮重置为初始状态
+            } else {
+                // 按钮置未可点击状态
+                obj.removeAttr('disabled');
+                btn.attr('onclick',"sendEmailCode();");
+                // 按钮里的内容恢复初始状态
+                obj.text("获取");
+            }
+        }
+    }
+     function sendEmailCode() {
+        var email = $("#email");
+         if(email.val() === ''){
+             swal("","邮箱不能为空", "error");
+             return;
+         }else if(!/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(email.val())){
+             swal("", "邮箱格式不正确", "error");
+             return;
+         }
+         var form_data = new FormData();
+         form_data.append('email', email.val());
+         $.ajax({
+             url: "/account/ForgetPw/sendMailCode",
+             dataType: 'text',
+             cache: false,
+             contentType: false,
+             processData: false,
+             type: "post",
+             data: form_data,
+             success: function (data) {
+//                 console.log(data);
+                 var result = JSON.parse(data);
+                 if (result.status === 200) {
+                     swal("",result.msg,'success');
+                     email.attr("disabled", true);
+                     // 倒计时30秒
+                     countDown(60);
+                 } else if (result.status === 400) {
+                     swal(result.msg);
+                 }
+             }
+         });
+    }
+    $('#update_password').click(function (event) {
+        event.preventDefault();
+        var uid = $('#user_id');
+        var password = $('#password');
+        var passwordRe = $('#passwordRepeat');
+
+        if(password.val().length <6){
+            swal("","密码长度不能小于6位",'error');
+            return;
+        }
+        if(password.val() != passwordRe.val()){
+            swal("","两次密码输入不一致",'error');
+            return;
+        }
+        var formData = new FormData();
+        formData.append("password", password.val());
+        formData.append("uid", uid.val());
+        $.ajax({
+            url: "/account/findPassword/2",
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: "post",
+            data: formData,
+            success: function (data) {
+                var result = JSON.parse(data);
+                if (result.status === 200) {
+                    swal('',result.msg,'success');
+                    setTimeout(function () {
+                        location.href = "/account/login";
+                    }, 1000);
+                } else {
+                    swal('',result.msg,'error');
+                }
+            }
+        });
+
+    });
+//    $('#changeShow').click(function(){
+//        $('.findpassword1').hide();
+//        $('.findpassword2').show();
+//    });
+</script>

@@ -20,6 +20,7 @@ Route::any('validate_email', ['uses' => 'ValidationController@verifyEmailCode'])
 
 //忘记密码
 Route::get('account/findPassword', ['uses' => 'ForgetPwController@index']);
+Route::post('account/ForgetPw/sendMailCode', ['uses' => 'ForgetPwController@sendMailCode']);//忘记密码，发送邮箱验证码逻辑
 Route::post('account/findPassword/{option}', ['uses' => 'ForgetPwController@resetpw'])->where('option', '[0-2]{1}');
 //修改密码
 Route::get('account/safety', ['uses' => 'FixPasswordController@index']);//安全设置主页
