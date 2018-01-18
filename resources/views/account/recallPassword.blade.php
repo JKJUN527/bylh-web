@@ -107,7 +107,7 @@
             // $emailVerifyCode = $("#email-verify-code");
             // $emailVerifyCode.prop("disabled", true);
             // $('#changePhoneshow').click(function(){
-            //             var formData1 = new FormData();
+            //             var formData1 = news FormData();
             //                 var phone = $("#phone");
             //                 var phoneCode = $phoneVerifyCode.val();
             //                 if (phone.val() === '') {
@@ -161,7 +161,7 @@
             //     });
             //  })
             // $('#changeEmailshow').click(function(){
-            //     formData2 = new FormData();
+            //     formData2 = news FormData();
             //     var email = $("#email");
             //     var emailCode = $emailVerifyCode.val();
             //     if (email.val() === '') {
@@ -192,7 +192,7 @@
             //         setError(phone, 'phone', '手机号格式不正确');
             //     } else {
             //         removeError(phone, 'phone');
-            //         var form_data = new FormData();
+            //         var form_data = news FormData();
             //         form_data.append('tel', phone.val());
             //         countDown(this, 60);
             //         $.ajax({

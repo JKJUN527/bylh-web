@@ -47,7 +47,7 @@ if (token) {
 
 // window.Pusher = require('pusher-js');
 
-// window.Echo = new Echo({
+// window.Echo = news Echo({
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });

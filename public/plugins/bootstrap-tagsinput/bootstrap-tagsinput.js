@@ -58,7 +58,7 @@
     constructor: TagsInput,
 
     /**
-     * Adds the given item as a new tag. Pass true to dontPushVal to prevent
+     * Adds the given item as a news tag. Pass true to dontPushVal to prevent
      * updating the elements val()
      */
     add: function(item, dontPushVal, options) {
@@ -540,7 +540,7 @@
 
     this.each(function() {
       var tagsinput = $(this).data('tagsinput');
-      // Initialize a new tags input
+      // Initialize a news tags input
       if (!tagsinput) {
           tagsinput = new TagsInput(this, arg1);
           $(this).data('tagsinput', tagsinput);

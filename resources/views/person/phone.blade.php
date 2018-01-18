@@ -66,7 +66,7 @@
                         <div class="am-form-content">
                             <input type="tel" id="user-new-code" class="input_code" placeholder="短信验证码">
                         </div>
-                        <a class="btn" href="javascript:void(0);" onclick="sendMobileCode('new');" id="sendMobileCode2">
+                        <a class="btn" href="javascript:void(0);" onclick="sendMobileCode('news');" id="sendMobileCode2">
                             <div class="am-btn am-btn-danger" id="new_code">验证码</div>
                         </a>
                     </div>
@@ -85,7 +85,7 @@
                         <div class="am-form-content">
                             <input type="tel" id="user-new-code" class="input_code" placeholder="短信验证码">
                         </div>
-                        <a class="btn" href="javascript:void(0);" onclick="sendMobileCode('new');" id="sendMobileCode2">
+                        <a class="btn" href="javascript:void(0);" onclick="sendMobileCode('news');" id="sendMobileCode2">
                             <div class="am-btn am-btn-danger" id="new_code">验证码</div>
                         </a>
                     </div>
@@ -131,7 +131,7 @@
                     }
                 });
             }else{
-                var phone = $('#user-new-phone');
+                var phone = $('#user-news-phone');
 
                 if (phone.val() === '') {
                     swal("","电话不能为空", "error");
@@ -158,7 +158,7 @@
                             swal("短信验证码已发送");
                             phone.attr("disabled", true);
                             // 倒计时30秒
-                            countDown(30,'new');
+                            countDown(30,'news');
 
                         } else if (result.status === 400) {
                             swal(result.msg);
@@ -208,13 +208,13 @@
                     second--;
                     // 一秒后重复执行
                     setTimeout(function () {
-                        countDown(second,"new");
+                        countDown(second,"news");
                     }, 1000);
                     // 否则，按钮重置为初始状态
                 } else {
                     // 按钮置未可点击状态
                     obj.removeAttr('disabled');
-                    btn.attr('onclick',"sendMobileCode('new');");
+                    btn.attr('onclick',"sendMobileCode('news');");
                     // 按钮里的内容恢复初始状态
                     obj.text("验证码");
                 }
@@ -258,8 +258,8 @@
             new_one.show();
         }
         $('#update_phone').click(function () {
-            var new_phone = $('#user-new-phone')
-            var new_code = $('#user-new-code')
+            var new_phone = $('#user-news-phone')
+            var new_code = $('#user-news-code')
             if(new_code.val() ===''){
                 swal("","验证码不能为空", "error");
                 return;

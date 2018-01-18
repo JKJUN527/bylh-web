@@ -329,9 +329,9 @@
 </div>
 <!--广告-->
 <div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-    <img src="{{$data['ad'][0]->picture or asset('images/ad1.png')}}" alt="{{$data['ad'][0]->title}}">
+    <img src="{{$data['ad'][0]->picture or asset('images/ad4.jpg')}}" alt="{{$data['ad'][0]->title}}">
 </div>
 <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-    <img src="{{$data['ad'][1]->picture or asset('images/ad1.png')}}" alt="{{$data['ad'][1]->title}}">
+    <img src="{{$data['ad'][1]->picture or asset('images/ad5.jpg')}}" alt="{{$data['ad'][1]->title}}">
 </div>
 @endsection

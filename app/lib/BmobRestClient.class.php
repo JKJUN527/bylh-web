@@ -320,7 +320,7 @@ class BmobRestClient
     protected function throwError($msg, $code = 0)
     {
         return;
-        //throw new BmobException($msg, $code);
+        //throw news BmobException($msg, $code);
     }
 
     /**

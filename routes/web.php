@@ -178,9 +178,10 @@ Route::post('message/isread',['uses' => 'MessageController@isRead']);
 //删除站内信单条消息
 Route::post('message/delmessage',['uses' => 'MessageController@delMessage']);
 
-//新闻模块
+//新闻详情
 Route::get('news/detail',['uses' => 'NewsController@detail']);
-
+//新闻主页
+Route::get('news/index',['uses' => 'NewsController@SearchNews']);
 
 
 //获取订单列表

@@ -130,7 +130,7 @@ class ServiceController extends Controller
 //                return $data;
 //            }else{//通过敏感词检测
 //                //接收数据
-//                $genlser = new Genlservices();
+//                $genlser = news Genlservices();
 //                if($request->has('pictures')) {//pictures 为字符串，标记上传图片个数及对应input域 name值。
 //                    //接收图片--注意图片可上传多张。
 //                    $picture = $request->input('pictures');

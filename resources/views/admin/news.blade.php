@@ -117,7 +117,7 @@
                 url: "/admin/news/detail?nid=" + nid,
                 type: "get",
                 success: function (data) {
-                    var news = data['new'];
+                    var news = data['news'];
 
                     $("#defaultModalLabel").html(news['title']);
                     $(".news-time").html(news['created_at']);
