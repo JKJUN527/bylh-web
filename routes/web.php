@@ -60,9 +60,9 @@ Route::get('service/genlpublish', ['uses' => 'ServiceController@genlserviceindex
 Route::get('service/finlpublish', ['uses' => 'ServiceController@finlserviceindex']);//实习中介发布主页
 Route::get('service/qapublish', ['uses' => 'ServiceController@qaserviceindex']);//专业问答发布主页
 //一般服务发布、实习中介服务发布、专业问答服务发布 数据提交
-Route::post('service/genlpublish2', ['uses' => 'ServiceController@genlservicePublic']);//一般服务发布
-Route::post('service/finlpublish2', ['uses' => 'ServiceController@finlservicePublic']);//实习中介发布
-Route::post('service/qapublish2', ['uses' => 'ServiceController@qaservicePublic']);//专业问答发布
+Route::post('service/genlpublish', ['uses' => 'ServiceController@genlservicePublic']);//一般服务发布
+Route::post('service/finlpublish', ['uses' => 'ServiceController@finlservicePublic']);//实习中介发布
+Route::post('service/qapublish', ['uses' => 'ServiceController@qaservicePublic']);//专业问答发布
 
 //服务编辑页面暂时不要
 //服务编辑主页：传入服务id及服务type

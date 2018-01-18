@@ -110,7 +110,7 @@
                         closeOnConfirm: false,
                         showLoaderOnConfirm: true
                     }, function () {
-                        self.location = "/index";
+                        self.location = "/";
                     });
                 }else{
                     swal('',result.msg,'error');

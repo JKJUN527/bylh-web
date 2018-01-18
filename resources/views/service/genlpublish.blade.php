@@ -90,6 +90,30 @@
             text-align: left;
             margin-top: 1rem;
         }
+        span.insert:hover {
+            text-decoration: underline;
+        }
+
+        span.delete:hover {
+            background-color: #ebebeb;
+        }
+
+        span.delete {
+            color: #aaaaaa;
+            border: 2px solid #ebebeb;
+            background-color: #f5f5f5;
+        }
+
+        span.insert {
+            color: #4CAF50;
+        }
+        .preview_img{
+            width: 100px;
+            height: 100px;
+        }
+        .am-selected-status{
+            text-align: right;
+        }
     </style>
 @endsection
 @section('content')
@@ -140,7 +164,7 @@
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
                             <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">电子邮件</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
-                                <input type="email" id="email" class="am-form-field" placeholder="输入你的电子邮件">
+                                <input type="email" id="email" class="am-form-field" placeholder="输入你的电子邮件" value="{{$data['userinfo']->mail}}">
                                 <span id="email_warning" class="am-icon-warning" style="display: none;color: red;"></span>
                             </div>
                         </div>
@@ -149,7 +173,7 @@
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
                             <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">电话号码</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
-                                <input type="tel" id="phone" class="am-form-field" placeholder="输入你的电话号码">
+                                <input type="tel" id="phone" class="am-form-field" placeholder="输入你的电话号码" value="{{$data['userinfo']->tel}}">
                                 <span id="tel_warning" class="am-icon-warning" style="display: none; color: red;"></span>
                             </div>
                         </div>
@@ -162,13 +186,13 @@
                             <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">服务类型</label>
                             <div class="am-u-sm-8" style="float: left;margin-left: 30px;">
                                 <label class="am-checkbox-inline">
-                                    <input type="radio"  name="service_type" value="0" data-am-ucheck checked> 一般服务
+                                    <input type="radio" disabled name="service_type" value="0" data-am-ucheck @if($data['type'] === '0') checked @endif> 一般服务
                                 </label>
                                 <label class="am-checkbox-inline">
-                                    <input type="radio"  name="service_type" value="1" data-am-ucheck> 实习中介
+                                    <input type="radio" disabled name="service_type" value="1" data-am-ucheck @if($data['type'] === '1') checked @endif> 实习中介
                                 </label>
                                 <label class="am-checkbox-inline">
-                                    <input type="radio"  name="service_type" value="2" data-am-ucheck> 专业问答
+                                    <input type="radio" disabled  name="service_type" value="2" data-am-ucheck @if($data['type'] === '2') checked @endif> 专业问答
                                 </label>
                             </div>
                         </div>
@@ -200,7 +224,7 @@
                             <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">赏金预算：</label>
                             <div class="am-u-sm-4" style="float: left;margin-left: 30px;">
                                 <label class="am-checkbox-inline">
-                                    <input type="checkbox"  value="价格面议" data-am-ucheck> 价格面议
+                                    <input type="checkbox" id="is_NoPrice" onclick="setNonePrice(this);" value="价格面议" data-am-ucheck> 价格面议
                                 </label>
                                 <input type="text" id="service_price" class="am-form-field" placeholder="单次服务价格" style="float: left;">
                             </div>
@@ -216,7 +240,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="fabu1" style="background:#eee;height: 600px;">
+                <div class="fabu1" style="background:#eee;height: 650px;">
                     <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">服务信息填写</div>
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
 						0px;">
@@ -232,16 +256,18 @@
 						0px;">
 
                         <form class="am-form-group am-form-danger am-form-icon am-padding-sm">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;padding-left: 20px;
-">你所在城市</label>
-                            <div class="am-form-group am-input-group" id="address3" style="padding-left: 20px;
-">
-							<span class="am-input-group-label">
-							    <i class="am-icon am-icon-home" style="padding-left: 20px;"></i>
-                                <span class="am-padding-horizontal-xs">省市</span>
-							</span>
-                                <input readonly type="text" name="nickname" class="am-form-field am-radius" placeholder="请选择地址" required="" value="" style="width: 50%;">
-                            </div>
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;padding-left: 20px;margin-right: 1.2rem">你所在城市</label>
+                            <select data-am-selected="{btnWidth: '20%', btnSize: 'sm', btnStyle: 'secondary', searchBox: 1}" id="select_city">
+                                @foreach($data['province'] as $province)
+                                <optgroup label="{{$province->name}}">
+                                    @foreach($data['city'] as $city)
+                                        @if($city->parent_id == $province->id)
+                                            <option value="{{$city->id}}">{{$city->name}}</option>
+                                        @endif
+                                    @endforeach
+                                </optgroup>
+                                @endforeach
+                            </select>
                         </form>
                     </div>
 
@@ -250,7 +276,7 @@
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
                             <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">描述需求</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
-                                <textarea class="" rows="8" id="doc-ta-1" style="width: 100%;"></textarea>
+                                <textarea class="" rows="8" name="description" id="doc-ta-1" style="width: 100%;"></textarea>
                             </div>
                         </div>
                     </div>
@@ -260,20 +286,26 @@
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
                             <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">上传服务照片</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
-                                <input type="file" class="am-btn am-btn-default am-btn-sm">
-                                <img src="/images/add.png" style="width: 100px;height: 100px;">
-                                <img src="/images/add.png" style="width: 100px;height: 100px;">
-                                <img src="/images/add.png" style="width: 100px;height: 100px;" onclick="addimages();">
+                                <input type="text" style="display: none" id="pic_info">
+                                <img src="/images/add.png" style="width: 50px;height: 50px;" id="insert_img">
+                            </div>
+                            <div class="am-u-sm-6" id="preview-holder" style="float: left;margin-left: 15rem;margin-bottom: 1rem;margin-top: -5rem;">
+                                {{--<img src="/images/add.png" style="width: 100px;height: 100px;">--}}
+                                {{--<span class='delete' onclick='deleteImage(this)'>删除</span>--}}
+                                {{--<img src="/images/add.png" style="width: 100px;height: 100px;">--}}
+                                {{--<span class='delete' onclick='deleteImage(this)'>删除</span>--}}
+                                {{--<img src="/images/add.png" style="width: 100px;height: 100px;" onclick="addimages();">--}}
+                                {{--<span class='delete' onclick='deleteImage(this)'>删除</span>--}}
                             </div>
 
                         </div>
                     </div>
                     <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
                     <label class="am-checkbox am-default" style="font-size: 16px;margin-left:20px;">
-                        <input type="checkbox"  value="" data-am-ucheck><h2 data-am-modal="{target: '#my-popup'}">同意《不亦乐乎》协议</h2>
+                        <input type="checkbox"  id="protocol" value="" data-am-ucheck><h2 data-am-modal="{target: '#my-popup'}">同意《不亦乐乎》协议</h2>
                     </label>
-                    <button class="am-btn am-btn-danger am-round am-btn-lg" style="margin:20px;width: 15%;">上一步</button>
-                    <button class="am-btn am-btn-success am-round am-btn-lg" style="margin:20px;width: 15%;float: right;">已确认，下一步</button>
+                    <button id="back_step1" class="am-btn am-btn-danger am-round am-btn-lg" style="margin:20px;width: 15%;">上一步</button>
+                    <button id="submit_info" class="am-btn am-btn-success am-round am-btn-lg" style="margin:20px;width: 15%;float: right;">已确认，下一步</button>
                 </div>
 
             </div>
@@ -292,23 +324,26 @@
     </div>
 @endsection
 @section('custom-script')
-    <script src="dist/iscroll.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="dist/address.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-        $(function() {
-            document.addEventListener('touchmove', function (e) {
-                e.preventDefault();
-            }, false);
-
-            //	配置级联层数
-            $("#address3").address({
-                prov: "广东省",
-                city: "中山市",
-                scrollToCenter: true,
-                selectNumber: 2,
-            });
-
+//        $(function() {
+//            document.addEventListener('touchmove', function (e) {
+//                e.preventDefault();
+//            }, false);
+//        });
+        $('#back_step1').click(function () {
+            var step1 = $('#publish_step1');
+            var step2 = $('#publish_step2');
+            step2.hide();
+            step1.show();
         });
+        function setNonePrice() {
+            if($("#is_NoPrice").is(':checked')){
+                $('#service_price').hide();
+            }else{
+                $('#service_price').show();
+            }
+
+        }
         function select_class(element) {
             var btn1 = $('#select_class1')
             var btn2 = $('#select_class2')
@@ -330,40 +365,255 @@
             var step1 = $('#publish_step1');
             var step2 = $('#publish_step2');
 
-            {{--if(btn1.attr('data-content') === "" ||btn2.attr('data-content') === ""){--}}
-                {{--swal('',"请选择服务领域","error");--}}
-                {{--return;--}}
-            {{--}--}}
-            {{--if(email.val() === ""){--}}
-                {{--swal('',"邮箱不能为空","error");--}}
-                {{--return;--}}
-            {{--}else if(!/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(email.val())) {--}}
-                {{--swal("", "邮箱格式不正确", "error");--}}
-                {{--return;--}}
-            {{--}--}}
-            {{--if(tel.val() === ""){--}}
-                {{--swal("","电话不能为空", "error");--}}
-                {{--return;--}}
-            {{--}else if(!/^1[34578]\d{9}$/.test(tel.val())){--}}
-                {{--swal("","手机号格式不正确", "error");--}}
-                {{--return;--}}
-            {{--}--}}
-            {{--//打开下一步--}}
-            {{--var baseinfo_tel = $('#baseinfo_tel');--}}
-            {{--var baseinfo_email = $('#baseinfo_email');--}}
-            {{--var baseinfo_type = $('#baseinfo_type');--}}
-            {{--var baseinfo_class = $('#baseinfo_class');--}}
-            {{--var base_type;--}}
-            {{--if(type === '0') base_type = "一般服务";--}}
-            {{--if(type === '1') base_type = "实习中介";--}}
-            {{--if(type === '2') base_type = "专业问答";--}}
-            {{--baseinfo_tel.find("span").html(tel.val());--}}
-            {{--baseinfo_email.find("span").html(email.val());--}}
-            {{--baseinfo_type.find("span").html(base_type);--}}
-            {{--baseinfo_class.find("span").html(btn1.html()+"-"+btn2.html());--}}
+            if(btn1.attr('data-content') === "" ||btn2.attr('data-content') === ""){
+                swal('',"请选择服务领域","error");
+                return;
+            }
+            if(email.val() === ""){
+                swal('',"邮箱不能为空","error");
+                return;
+            }else if(!/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(email.val())) {
+                swal("", "邮箱格式不正确", "error");
+                return;
+            }
+            if(tel.val() === ""){
+                swal("","电话不能为空", "error");
+                return;
+            }else if(!/^1[34578]\d{9}$/.test(tel.val())){
+                swal("","手机号格式不正确", "error");
+                return;
+            }
+            //打开下一步
+            var baseinfo_tel = $('#baseinfo_tel');
+            var baseinfo_email = $('#baseinfo_email');
+            var baseinfo_type = $('#baseinfo_type');
+            var baseinfo_class = $('#baseinfo_class');
+            var base_type;
+            if(type === '0') base_type = "一般服务";
+            if(type === '1') base_type = "实习中介";
+            if(type === '2') base_type = "专业问答";
+            baseinfo_tel.find("span").html(tel.val());
+            baseinfo_email.find("span").html(email.val());
+            baseinfo_type.find("span").html(base_type);
+            baseinfo_class.find("span").html(btn1.html()+"-"+btn2.html());
             step1.hide();
             step2.show();
         }
+        var index = 1;
+        var previewHolder = $("#preview-holder");
+        var appendFileInput = true;
+        $('#insert_img').click(function (event) {
+            var pictureIndex = $("input[id='pic_info']");
+            var pictureIndex = $("input[id='pic_info']");
+            num = pictureIndex.val().split("@");
+//            alert(num.length);
+            if (appendFileInput && num.length <= 3) {
+                previewHolder.append("<input type='file' name='pic" + index + "' style='display: none' onchange='showPreview(this, index)'/>");
+                appendFileInput = false;
+                $("input[name='pic" + index + "']").click();
+            }else{
+                swal('',"最多上传三张图片","error");
+                return;
+            }
+
+        });
+        function showPreview(element, i) {
+            var isCorrect = true;
+
+            var file = element.files[0];
+            var anyWindow = window.URL || window.webkitURL;
+            var objectUrl = anyWindow.createObjectURL(file);
+            window.URL.revokeObjectURL(file);
+
+            var picture = $("input[name='pic" + i + "']");
+            var imagePath = picture.val();
+
+            if (!/.(jpg|jpeg|png|JPG|JPEG|PNG)$/.test(imagePath)) {
+                isCorrect = false;
+                picture.val("");
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "图片格式错误，支持：.jpg .jpeg .png类型。请选择正确格式的图片后再试！",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+            } else if (file.size > 2 * 1024 * 1024) {
+                isCorrect = false;
+                picture.val("");
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "图片文件最大支持：2MB",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+            } else {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var data = e.target.result;
+                    //加载图片获取图片真实宽度和高度
+                    var image = new Image();
+                    image.onload = function () {
+                        var width = image.width;
+                        var height = image.height;
+                        console.log(width + "//" + height);
+
+                        if (width > 1000 || height > 1000) {
+                            isCorrect = false;
+                            picture.val("");
+                            swal({
+                                title: "错误",
+                                type: "error",
+                                text: "当前选择图片分辨率为: " + width + "px * " + height + "px \n图片分辨率应小于 1000像素 * 1000像素",
+                                cancelButtonText: "关闭",
+                                showCancelButton: true,
+                                showConfirmButton: false
+                            });
+                        } else if (isCorrect) {
+                            previewHolder.append("<img src='" + objectUrl + "' class='preview_img' name='pic"+ i + "'>" +
+                                    "<span class='delete' onclick='deleteImage(this, " + i + ")'>删除</span>");
+
+                            insertImageCode(i);
+
+                            index++;
+                            appendFileInput = true;
+                        }
+                    };
+                    image.src = data;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function deleteImage(element, i) {
+            swal({
+                title: "确认",
+                text: "确认删除图片吗",
+                type: "info",
+                confirmButtonText: "确认",
+                cancelButtonText: "取消",
+                showCancelButton: true,
+                closeOnConfirm: false
+            }, function () {
+                swal("图片已删除");
+
+                var pictureIndex = $("input[id='pic_info']");
+
+                pictureIndex.val(pictureIndex.val().replace("@" + i, ""));
+
+
+                $("input[name='pic" + i + "']").remove();
+                $("img[name='pic" + i + "']").remove();
+                element.remove();
+//                alert( pictureIndex.val());
+            });
+        }
+
+        function insertImageCode(i) {
+            var pictureIndex = $("input[id='pic_info']");
+
+            pictureIndex.val(pictureIndex.val() + i + "@");
+//            alert( pictureIndex.val());
+        }
+
+/**
+ * 提交service所有信息到服务器端
+ */
+        $('#submit_info').click(function () {
+            var city = $('#select_city'); //城市
+            var tel = $('#phone'); //电话号码
+            var email = $('#email');//邮箱
+            var btn1 = $('#select_class1');//class1  btn1.attr('data-content')
+            var btn2 = $('#select_class2');//class2  btn2.attr('data-content')
+            var type = $('input:radio[name="service_type"]:checked').val(); //服务类型
+            var price = $('#service_price');
+            var home_page = $('#home_page');
+            var title = $('#doc-ipt-3-a');
+            var pictureIndex = $("input[id='pic_info']");//图片index
+
+            var description_raw = $("textarea[name='description']");
+            var description = description_raw.val().replace(/\r\n/g, '</br>');
+            description = description.replace(/\n/g, '</br>');
+
+            if(!$('#protocol').is(':checked')){
+                swal("","请先勾选不亦乐乎协议","error");
+                return;
+            }
+            var formdata = new FormData();
+            //设置price
+            if($("#is_NoPrice").is(':checked')){
+                formdata.append('price',-1);
+            }else{
+                if(price.val() ==="" || price.val() ===null){
+                    swal("","请设置服务价格","error");
+                    return;
+                }else{
+                    formdata.append('price',price.val());
+                }
+            }
+            if(title.val() ==="" ||title.val() ===null){
+                swal("","请设置服务标题","error");
+                return;
+            }else
+                formdata.append('title',title.val());
+            if(description ===""){
+                swal("","请认真填写服务描述","error");
+                return;
+            }else
+                formdata.append('describe',description);
+            //上传图片
+            formdata.append("pictures", pictureIndex.val());
+//            alert(pictureIndex.val());
+
+            var pictureIndexArray = pictureIndex.val().split('@');
+            console.log(pictureIndexArray);
+            if (pictureIndexArray[0] !== "") {
+                for (var i in pictureIndexArray) {
+                    console.log(i);
+                    if(pictureIndexArray[i + ''] === "")
+                        break;
+                    var index = 'pic' + pictureIndexArray[i + ''];
+                    console.log(index);
+                    formdata.append(index, $("input[name='" + index + "']").prop("files")[0]);
+                }
+            }
+            formdata.append('city',city.val());
+            formdata.append('tel',tel.val());
+            formdata.append('email',email.val());
+            formdata.append('class1',btn1.attr('data-content'));
+            formdata.append('class2',btn2.attr('data-content'));
+            formdata.append('type',type);
+            formdata.append('home_page',home_page.val());
+            $.ajax({
+                url: "/service/genlpublish",
+                type: "post",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if (result.status === 200) {
+                        swal("",result.msg,"success");
+                        setTimeout(function () {
+                            self.location = '/account/';
+                        }, 1200);
+                    }else{
+                        swal("",result.msg,"error");
+                        return;
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    swal(xhr.status + "：" + thrownError);
+                }
+            })
+
+        });
+
 
     </script>
 @endsection
