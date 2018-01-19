@@ -15,6 +15,7 @@ use APP\Models\E3Email;
 use App\News;
 use App\Orders;
 use App\Qaservices;
+use App\Region;
 use App\Serviceinfo;
 use App\Tempemail;
 use App\User;
@@ -297,8 +298,11 @@ class AccountController extends Controller {
             $data['msg'] = "用户非法，请登录企业号";
             return $data;
         }
+        $data['serviceinfo'] = Serviceinfo::where('uid', $data['uid'])->first();
+        $data['province'] = Region::where('parent_id',0)->get();
+        $data['city'] = Region::where('parent_id','!=',0)->get();
 
-        return view('person/user', ['data' => $data]);
+        return view('person/serviceinfo', ['data' => $data]);
     }
 
     public function editserviceinfo(Request $request) {
