@@ -119,31 +119,6 @@ Route::any('demands/advanceSearch',['uses' => 'DemandsController@advanceIndex'])
 //获取发布需求列表
 Route::any('demands/getDemandsList',['uses' => 'DemandsController@getDemandsList']);
 
-//验证邮箱
-Route::any('person/email',function(){
-    return view('person.email');
-});
-//找回密码
-Route::any('person/findPassword',function(){
-    return view('person.findPassword');
-});
-//绑定手机
-Route::any('person/phone',function(){
-    return view('person.phone');
-});
-//安全问题
-Route::any('person/question',function(){
-    return view('person.question');
-});
-//安全中心
-Route::any('person/safety',function(){
-
-    return view('person.safety');
-});
-//个人信息
-Route::any('person/user',function(){
-    return view('person.user');
-});
 //我的服务
 Route::any('service/myrequest',function(){
     return view('service.myrequest');
@@ -159,10 +134,6 @@ Route::any('demands/needappointment',function(){
 //发布需求2
 Route::any('demands/sendneed2',function(){
     return view('demands.sendneed2');
-});
-//找回密码
-Route::any('recallPassword',function(){
-    return view('account.recallPassword');
 });
 //站内信模块
 //发送站内信
@@ -183,6 +154,7 @@ Route::post('message/delmessage',['uses' => 'MessageController@delMessage']);
 Route::get('news/detail',['uses' => 'NewsController@detail']);
 //新闻主页
 Route::get('news/index',['uses' => 'NewsController@SearchNews']);
+Route::get('news/content', ['uses' => 'NewsController@requestNewsContent']);
 
 
 //获取订单列表

@@ -77,6 +77,7 @@
                 <li class="qc"><a href="{{asset('advanceSearch')}}">大学生服务</a></li>
                 <li class="qc"><a href="{{asset('advanceSearch')}}">实习中介</a></li>
                 <li class="qc last"><a href="{{asset('advanceSearch')}}">专业问答</a></li>
+                <li class="qc last"><a href="{{asset('news/index')}}">新闻动态</a></li>
             </ul>
         </div>
 @section('content')
