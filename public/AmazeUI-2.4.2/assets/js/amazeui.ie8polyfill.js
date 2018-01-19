@@ -277,7 +277,7 @@ if (!Object.create) {
     } else {
         // In old IE __proto__ can't be used to manually set `null`, nor does
         // any other method exist to make an object that inherits from nothing,
-        // aside from Object.prototype itself. Instead, create a new global
+        // aside from Object.prototype itself. Instead, create a news global
         // object and *steal* its Object.prototype and strip it bare. This is
         // used as the prototype to create nullary objects.
         createEmpty = function () {
@@ -407,7 +407,7 @@ if (!Object.defineProperty || definePropertyFallback) {
                 ('enumerable' in descriptor && !descriptor.enumerable) ||
                 ('configurable' in descriptor && !descriptor.configurable)
             ))
-                throw new RangeError(
+                throw news RangeError(
                     'This implementation of Object.defineProperty does not support configurable, enumerable, or writable.'
                 );
             */
@@ -774,11 +774,11 @@ defineProperties(FunctionPrototype, {
         if (!isCallable(target)) {
             throw new TypeError('Function.prototype.bind called on incompatible ' + target);
         }
-        // 3. Let A be a new (possibly empty) internal list of all of the
+        // 3. Let A be a news (possibly empty) internal list of all of the
         //   argument values provided after thisArg (arg1, arg2 etc), in order.
         // XXX slicedArgs will stand in for "A" if used
         var args = array_slice.call(arguments, 1); // for normal call
-        // 4. Let F be a new native ECMAScript object.
+        // 4. Let F be a news native ECMAScript object.
         // 11. Set the [[Prototype]] internal property of F to the standard
         //   built-in Function prototype object as specified in 15.3.3.1.
         // 12. Set the [[Call]] internal property of F as described in
@@ -801,7 +801,7 @@ defineProperties(FunctionPrototype, {
                 //   TypeError exception is thrown.
                 // 3. Let boundArgs be the value of F's [[BoundArgs]] internal
                 //   property.
-                // 4. Let args be a new list containing the same values as the
+                // 4. Let args be a news list containing the same values as the
                 //   list boundArgs in the same order followed by the same
                 //   values as the list ExtraArgs in the same order.
                 // 5. Return the result of calling the [[Construct]] internal
@@ -828,7 +828,7 @@ defineProperties(FunctionPrototype, {
                 //   property.
                 // 3. Let target be the value of F's [[TargetFunction]] internal
                 //   property.
-                // 4. Let args be a new list containing the same values as the
+                // 4. Let args be a news list containing the same values as the
                 //   list boundArgs in the same order followed by the same
                 //   values as the list ExtraArgs in the same order.
                 // 5. Return the result of calling the [[Call]] internal method
@@ -2111,7 +2111,7 @@ if (parseInt(ws + '08') !== 8 || parseInt(ws + '0x16') !== 22) {
           matchCSS( preCSS[j], CSSLinks[j] );
         }
 
-        if( ( links = importLinks.slice(0) ).length > 0 ){ //after finishing all current links, set links equal to the new imports found
+        if( ( links = importLinks.slice(0) ).length > 0 ){ //after finishing all current links, set links equal to the news imports found
           CSSLinks = [];
           preCSS = [];
           importLinks = [];
@@ -2152,7 +2152,7 @@ if (parseInt(ws + '08') !== 8 || parseInt(ws + '0x16') !== 22) {
       for( var i = 0; i < found.length; i++ ){
         rules = rules + found[i].substr(0,found[i].indexOf("{")+1); // save the selector portion of each rule with a rem value
         var current = found[i].match( pattern );
-        for( var j = 0; j<current.length; j++ ){ // build a new set of with only the selector and properties that have rem in the value
+        for( var j = 0; j<current.length; j++ ){ // build a news set of with only the selector and properties that have rem in the value
           rules = rules + current[j];
           if( j === current.length-1 && rules[rules.length-1] !== "}" ){
             rules = rules + "\n}";
@@ -2171,7 +2171,7 @@ if (parseInt(ws + '08') !== 8 || parseInt(ws + '0x16') !== 22) {
       loadCSS();
     },
 
-    loadCSS = function () { // replace and load the new rules
+    loadCSS = function () { // replace and load the news rules
       for( var i = 0; i < css.length; i++ ){ // only run this loop as many times as css has entries
         if( css[i] ){
           rules = rules.replace( foundProps[i],css[i] ); // replace old rules with our processed rules
@@ -2180,7 +2180,7 @@ if (parseInt(ws + '08') !== 8 || parseInt(ws + '0x16') !== 22) {
       var remcss = document.createElement( 'style' );
       remcss.setAttribute( 'type', 'text/css' );
       remcss.id = 'remReplace';
-      document.getElementsByTagName( 'head' )[0].appendChild( remcss );   // create the new element
+      document.getElementsByTagName( 'head' )[0].appendChild( remcss );   // create the news element
       if( remcss.styleSheet ) {
         remcss.styleSheet.cssText = rules; // IE8 will not support innerHTML on read-only elements, such as STYLE
       } else {
@@ -2188,7 +2188,7 @@ if (parseInt(ws + '08') !== 8 || parseInt(ws + '0x16') !== 22) {
       }
     },
 
-    xhr = function ( url, callback ) { // create new XMLHttpRequest object and run it
+    xhr = function ( url, callback ) { // create news XMLHttpRequest object and run it
       try {
         //try to create a request object
         //arranging the two conditions this way is for IE7/8's benefit

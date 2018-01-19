@@ -755,7 +755,7 @@
               slider.currentSlide = slider.animatingTo;
             }
             
-            // Unbind previous transitionEnd events and re-bind new transitionEnd event
+            // Unbind previous transitionEnd events and re-bind news transitionEnd event
             slider.container.unbind("webkitTransitionEnd transitionend");
             slider.container.bind("webkitTransitionEnd transitionend", function() {
               clearTimeout(slider.ensureAnimationEnd);
@@ -1035,7 +1035,7 @@
       slider.count += 1;
       slider.last = slider.count - 1;
 
-      // append new slide
+      // append news slide
       if (vertical && reverse) {
         (pos !== undefined) ? slider.slides.eq(slider.count - pos).after($obj) : slider.container.prepend($obj);
       } else {
@@ -1047,7 +1047,7 @@
 
       // update slider.slides
       slider.slides = $(slider.vars.selector + ':not(.clone)', slider);
-      // re-setup the slider to accomdate new slide
+      // re-setup the slider to accomdate news slide
       slider.setup();
 
       //FlexSlider: added() Callback
@@ -1073,7 +1073,7 @@
 
       // update slider.slides
       slider.slides = $(slider.vars.selector + ':not(.clone)', slider);
-      // re-setup the slider to accomdate new slide
+      // re-setup the slider to accomdate news slide
       slider.setup();
 
       // FlexSlider: removed() Callback
@@ -1599,7 +1599,7 @@ window.Modernizr = (function( window, document, undefined ) {
      * -----
      */
 
-    // The *new* flexbox
+    // The *news* flexbox
     // dev.w3.org/csswg/css3-flexbox
 
     tests['flexbox'] = function() {
@@ -2049,7 +2049,7 @@ window.Modernizr = (function( window, document, undefined ) {
     // Hold this guy to execute in a moment.
     function webforms() {
         /*>>input*/
-        // Run through HTML5's new input attributes to see if the UA understands any.
+        // Run through HTML5's news input attributes to see if the UA understands any.
         // We're using f which is the <input> element created early on
         // Mike Taylr has created a comprehensive resource for testing these attributes
         //   when applied to all input types:
@@ -2073,7 +2073,7 @@ window.Modernizr = (function( window, document, undefined ) {
         /*>>input*/
 
         /*>>inputtypes*/
-        // Run through HTML5's new input types to see if the UA understands any.
+        // Run through HTML5's news input types to see if the UA understands any.
         //   This is put behind the tests runloop because it doesn't return a
         //   true/false like all the other tests; instead, it returns an object
         //   containing each input type with its corresponding true/false value
@@ -2181,7 +2181,7 @@ window.Modernizr = (function( window, document, undefined ) {
          if ( Modernizr[feature] !== undefined ) {
            // we're going to quit if you're trying to overwrite an existing test
            // if we were to allow it, we'd do this:
-           //   var re = new RegExp("\\b(no-)?" + feature + "\\b");
+           //   var re = news RegExp("\\b(no-)?" + feature + "\\b");
            //   docElement.className = docElement.className.replace( re, '' );
            // but, no rly, stuff 'em.
            return Modernizr;
@@ -2598,7 +2598,7 @@ window.Modernizr = (function( window, document, undefined ) {
     // Remove "no-js" class from <html> element, if it exists:
     docElement.className = docElement.className.replace(/(^|\s)no-js(\s|$)/, '$1$2') +
 
-                            // Add the new classes to the <html> element.
+                            // Add the news classes to the <html> element.
                             (enableClasses ? ' js ' + classes.join(' ') : '');
     /*>>cssclasses*/
 

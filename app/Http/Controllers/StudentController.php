@@ -156,7 +156,7 @@ class StudentController extends Controller
     }
     public function orm2(){
         //使用模型新增数据
-//        $student = new Student();
+//        $student = news Student();
 //        $student->name = 'jiangjunliang';
 //        $student->age = 20;
 //        $student->save();

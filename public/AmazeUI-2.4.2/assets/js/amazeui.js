@@ -20,7 +20,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
 
-/******/ 		// Create a new module (and put it into the cache)
+/******/ 		// Create a news module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
@@ -1099,7 +1099,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var PROPS_CLIENT_XY = ['clientX', 'clientY'];
 
 	/**
-	 * create new input type manager
+	 * create news input type manager
 	 * @param {Manager} manager
 	 * @param {Function} callback
 	 * @returns {Input}
@@ -1152,7 +1152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	/**
-	 * create new input type manager
+	 * create news input type manager
 	 * called by the Manager constructor
 	 * @param {Hammer} manager
 	 * @returns {Input}
@@ -2182,7 +2182,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {Object} inputData
 	   */
 	  recognize: function(inputData) {
-	    // make a new copy of the inputData
+	    // make a news copy of the inputData
 	    // so we can change the inputData without messing up the other recognizers
 	    var inputDataClone = extend({}, inputData);
 
@@ -2797,7 +2797,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  /**
 	   * Default recognizer setup when calling `Hammer()`
-	   * When creating a new Manager these will be skipped.
+	   * When creating a news Manager these will be skipped.
 	   * @type {Array}
 	   */
 	  preset: [
@@ -2813,7 +2813,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  /**
 	   * Some CSS properties can be used to improve the working of Hammer.
-	   * Add them to this method and they will be set when creating a new Manager.
+	   * Add them to this method and they will be set when creating a news Manager.
 	   * @namespace
 	   */
 	  cssProps: {
@@ -2920,7 +2920,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  /**
 	   * stop recognizing for this session.
-	   * This session will be discarded, when a new [input]start event is fired.
+	   * This session will be discarded, when a news [input]start event is fired.
 	   * When forced, the recognizer cycle is stopped immediately.
 	   * @param {Boolean} [force]
 	   */
@@ -2952,7 +2952,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var curRecognizer = session.curRecognizer;
 
 	    // reset when the last recognizer is recognized
-	    // or when we're in a new session
+	    // or when we're in a news session
 	    if (!curRecognizer || (curRecognizer && curRecognizer.state & STATE_RECOGNIZED)) {
 	      curRecognizer = session.curRecognizer = null;
 	    }
@@ -4556,7 +4556,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if ((prevM < month && prevY === year) || prevY < year) {
 	      className += ' am-datepicker-old';
 	    } else if ((prevM > month && prevY === year) || prevY > year) {
-	      className += ' am-datepicker-new';
+	      className += ' am-datepicker-news';
 	    }
 
 	    if (prevMonth.valueOf() === currentDate) {
@@ -4697,7 +4697,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          month = this.viewDate.getMonth();
 	          if ($target.is('.am-datepicker-old')) {
 	            month -= 1;
-	          } else if ($target.is('.am-datepicker-new')) {
+	          } else if ($target.is('.am-datepicker-news')) {
 	            month += 1;
 	          }
 	          year = this.viewDate.getFullYear();
@@ -6074,7 +6074,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            slider.currentSlide = slider.animatingTo;
 	          }
 
-	          // Unbind previous transitionEnd events and re-bind new transitionEnd event
+	          // Unbind previous transitionEnd events and re-bind news transitionEnd event
 	          slider.container.unbind("webkitTransitionEnd transitionend");
 	          slider.container.bind("webkitTransitionEnd transitionend", function() {
 	            clearTimeout(slider.ensureAnimationEnd);
@@ -6374,7 +6374,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    slider.count += 1;
 	    slider.last = slider.count - 1;
 
-	    // append new slide
+	    // append news slide
 	    if (vertical && reverse) {
 	      (pos !== undefined) ? slider.slides.eq(slider.count - pos).after($obj) : slider.container.prepend($obj);
 	    } else {
@@ -6386,7 +6386,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    // update slider.slides
 	    slider.slides = $(slider.vars.selector + ':not(.clone)', slider);
-	    // re-setup the slider to accomdate new slide
+	    // re-setup the slider to accomdate news slide
 	    slider.setup();
 
 	    //FlexSlider: added() Callback
@@ -6412,7 +6412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    // update slider.slides
 	    slider.slides = $(slider.vars.selector + ':not(.clone)', slider);
-	    // re-setup the slider to accomdate new slide
+	    // re-setup the slider to accomdate news slide
 	    slider.setup();
 
 	    // FlexSlider: removed() Callback
@@ -9884,7 +9884,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // NOTE:
 	  // trigger this event manually if MutationObserver not supported
-	  //   when new images appended, or call refreshSlides()
+	  //   when news images appended, or call refreshSlides()
 	  // if (!UI.support.mutationobserver) $element.trigger('changed.dom.amui')
 	  $element.on('changed.dom.amui', function(e) {
 	    e.stopPropagation();
@@ -10443,7 +10443,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    // calculate t, position of animation in [0..1]
 	    t = Math.min(1, Math.max((now - start) / speed, 0));
-	    // calculate the new scrollTop position (don't forget to smooth)
+	    // calculate the news scrollTop position (don't forget to smooth)
 	    y = Math.round(initialY + delta * smooth(t));
 	    // bracket scrollTop so we're never over-scrolling
 	    if (delta > 0 && y > targetY) {
@@ -15056,7 +15056,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'fullscreenchange',
 	        'fullscreenerror'
 	      ],
-	      // new WebKit
+	      // news WebKit
 	      [
 	        'webkitRequestFullscreen',
 	        'webkitExitFullscreen',

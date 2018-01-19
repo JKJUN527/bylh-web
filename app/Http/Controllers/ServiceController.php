@@ -120,7 +120,6 @@ class ServiceController extends Controller
         $data['msg'] = "未知错误";
         $data['uid'] = AuthController::getUid();
         $data['type'] = AuthController::getType();
-
         if($data['uid']==0 ||$data['type']!=2){
             $data['msg']="未登陆用户或非服务用户";
             return $data;

@@ -184,7 +184,7 @@ class ResumeController extends Controller {
     //基本信息的获取
 //    public function generateRid() {
 //        $uid = AuthController::getUid();
-//        $resume = new Resumes();
+//        $resume = news Resumes();
 //        $resume->uid = $uid;
 //        $nums = Resumes::where('uid', '=', $uid)->count();       //ORM聚合函数的用法
 //        if ($nums > 2)

@@ -366,7 +366,7 @@ $.widget = function( name, base, prototype ) {
 	};
 
 	var basePrototype = new base();
-	// we demands to make the options hash a property directly on the new instance
+	// we demands to make the options hash a property directly on the news instance
 	// otherwise we'll modify the options hash on the prototype that we're
 	// inheriting from
 //	$.each( basePrototype, function( key, val ) {
@@ -535,7 +535,7 @@ $.Widget.prototype = {
 			this.widgetEventPrefix + type ).toLowerCase();
 		data = data || {};
 
-		// copy original event properties over to the new event
+		// copy original event properties over to the news event
 		// this would happen if we could call $.event.fix instead of $.Event
 		// but we don't have a way to force an event to be fixed multiple times
 		if ( event.originalEvent ) {
@@ -1250,7 +1250,7 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 					this.instance.isOver = 1;
 					//Now we fake the start of dragging for the sortable instance,
 					//by cloning the list group item, appending it to the sortable and using it as inst.currentItem
-					//We can then fire the start event of the sortable with our passed browser event, and our own helper (so it doesn't create a new one)
+					//We can then fire the start event of the sortable with our passed browser event, and our own helper (so it doesn't create a news one)
 					this.instance.currentItem = $(self).clone().appendTo(this.instance.element).data("sortable-item", true);
 					this.instance.options._helper = this.instance.options.helper; //Store helper option to later restore it
 					this.instance.options.helper = function() { return ui.helper[0]; };
@@ -1259,7 +1259,7 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 					this.instance._mouseCapture(event, true);
 					this.instance._mouseStart(event, true, true);
 
-					//Because the browser event is way off the new appended portlet, we modify a couple of variables to reflect the changes
+					//Because the browser event is way off the news appended portlet, we modify a couple of variables to reflect the changes
 					this.instance.offset.click.top = inst.offset.click.top;
 					this.instance.offset.click.left = inst.offset.click.left;
 					this.instance.offset.parent.left -= inst.offset.parent.left - this.instance.offset.parent.left;
@@ -1843,7 +1843,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 			if (/relative/.test(this.element.css('position')) && $.browser.opera)
 				this.element.css({ position: 'relative', top: 'auto', left: 'auto' });
 
-			//Create a wrapper element and set the wrapper to the new current internal element
+			//Create a wrapper element and set the wrapper to the news current internal element
 			this.element.wrap(
 				$('<div class="ui-wrapper" style="overflow: hidden;"></div>').css({
 					position: this.element.css('position'),
@@ -3589,7 +3589,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 			this.containers[innermostIndex].containerCache.over = 1;
 		} else if(this.currentContainer != this.containers[innermostIndex]) { 
 
-			//When entering a new container, we will find the item with the least distance and append our item near it 
+			//When entering a news container, we will find the item with the least distance and append our item near it 
 			var dist = 10000; var itemWithLeastDistance = null; var base = this.positionAbs[this.containers[innermostIndex].floating ? 'left' : 'top']; 
 			for (var j = this.items.length - 1; j >= 0; j--) { 
 				if(!$.ui.contains(this.containers[innermostIndex].element[0], this.items[j].item[0])) continue; 
@@ -7132,7 +7132,7 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Override the default settings for all instances of the date picker.
-	   @param  settings  object - the new settings to use as defaults (anonymous object)
+	   @param  settings  object - the news settings to use as defaults (anonymous object)
 	   @return the manager object */
 	setDefaults: function(settings) {
 		extendRemove(this._defaults, settings || {});
@@ -7141,7 +7141,7 @@ $.extend(Datepicker.prototype, {
 
 	/* Attach the date picker to a jQuery selection.
 	   @param  target    element - the target input field or division or span
-	   @param  settings  object - the new settings to use for this date picker instance (anonymous) */
+	   @param  settings  object - the news settings to use for this date picker instance (anonymous) */
 	_attachDatepicker: function(target, settings) {
 		// check for settings on the control itself - in namespace 'date:'
 		var inlineSettings = null;
@@ -7171,7 +7171,7 @@ $.extend(Datepicker.prototype, {
 		}
 	},
 
-	/* Create a new instance object. */
+	/* Create a news instance object. */
 	_newInst: function(target, inline) {
 		var id = target[0].id.replace(/([^A-Za-z0-9_])/g, '\\\\$1'); // escape jQuery meta chars
 		return {id: id, input: target, // associated target
@@ -7426,11 +7426,11 @@ $.extend(Datepicker.prototype, {
 
 	/* Update or retrieve the settings for a date picker attached to an input field or division.
 	   @param  target  element - the target input field or division or span
-	   @param  name    object - the new settings to update or
+	   @param  name    object - the news settings to update or
 	                   string - the name of the setting to change or retrieve,
 	                   when retrieving also 'all' for all instance settings or
 	                   'defaults' for all global defaults
-	   @param  value   any - the new value for the setting
+	   @param  value   any - the news value for the setting
 	                   (omit if above is an object or to retrieve a value) */
 	_optionDatepicker: function(target, name, value) {
 		var inst = this._getInst(target);
@@ -7473,7 +7473,7 @@ $.extend(Datepicker.prototype, {
 
 	/* Set the dates for a jQuery selection.
 	   @param  target   element - the target input field or division or span
-	   @param  date     Date - the new date */
+	   @param  date     Date - the news date */
 	_setDateDatepicker: function(target, date) {
 		var inst = this._getInst(target);
 		if (inst) {
@@ -7836,7 +7836,7 @@ $.extend(Datepicker.prototype, {
 		this._adjustDate(target);
 	},
 
-	/* Action for selecting a new month/year. */
+	/* Action for selecting a news month/year. */
 	_selectMonthYear: function(id, select, period) {
 		var target = $(id);
 		var inst = this._getInst(target[0]);
@@ -8700,7 +8700,7 @@ function isArray(a) {
 
 /* Invoke the datepicker functionality.
    @param  options  string - a command, optionally followed by additional parameters or
-                    Object - settings for attaching new datepicker functionality
+                    Object - settings for attaching news datepicker functionality
    @return  jQuery object */
 $.fn.datepicker = function(options){
 
@@ -10992,7 +10992,7 @@ $.widget( "ui.tabs", {
 				self._cookie( o.selected, o.cookie );
 			}
 
-			// show new tab
+			// show news tab
 			if ( $show.length ) {
 				if ( $hide.length ) {
 					self.element.queue( "tabs", function() {
@@ -11095,7 +11095,7 @@ $.widget( "ui.tabs", {
 
 		$li.addClass( "ui-state-default ui-corner-top" ).data( "destroy.tabs", true );
 
-		// try to find an existing element before creating a new one
+		// try to find an existing element before creating a news one
 		var $panel = $( "#" + id );
 		if ( !$panel.length ) {
 			$panel = $( o.panelTemplate )

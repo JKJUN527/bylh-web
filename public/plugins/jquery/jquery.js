@@ -117,10 +117,10 @@
         },
 
         // Take an array of elements and push it onto the stack
-        // (returning the new matched element set)
+        // (returning the news matched element set)
         pushStack: function (elems) {
 
-            // Build a new jQuery matched element set
+            // Build a news jQuery matched element set
             var ret = jQuery.merge(this.constructor(), elems);
 
             // Add the old object onto the stack (as a reference)
@@ -476,7 +476,7 @@
                 i = 0,
                 ret = [];
 
-            // Go through the array, translating each of the items to their new values
+            // Go through the array, translating each of the items to their news values
             if (isArrayLike(elems)) {
                 length = elems.length;
                 for (; i < length; i++) {
@@ -1555,7 +1555,7 @@
                     }
                 } else if (nodeType === 1 || nodeType === 9 || nodeType === 11) {
                     // Use textContent for elements
-                    // innerText usage removed for consistency of new lines (jQuery #11153)
+                    // innerText usage removed for consistency of news lines (jQuery #11153)
                     if (typeof elem.textContent === "string") {
                         return elem.textContent;
                     } else {
@@ -2092,7 +2092,7 @@
                 Expr.pseudos[i] = createButtonPseudo(i);
             }
 
-// Easy API for creating new setFilters
+// Easy API for creating news setFilters
             function setFilters() {
             }
 
@@ -3853,7 +3853,7 @@
 
         if (!id) {
 
-            // Only DOM nodes demands a new unique ID for each element since their data
+            // Only DOM nodes demands a news unique ID for each element since their data
             // ends up in the global cache
             if (isNode) {
                 id = elem[internalKey] = deletedIds.pop() || jQuery.guid++;
@@ -5513,7 +5513,7 @@
 
     jQuery.Event = function (src, props) {
 
-        // Allow instantiation without the 'new' keyword
+        // Allow instantiation without the 'news' keyword
         if (!( this instanceof jQuery.Event )) {
             return new jQuery.Event(src, props);
         }
@@ -6038,7 +6038,7 @@
                 fragment = first;
             }
 
-            // Require either new content or an interest in ignored elements to invoke the callback
+            // Require either news content or an interest in ignored elements to invoke the callback
             if (first || ignored) {
                 scripts = jQuery.map(getAll(fragment, "script"), disableScript);
                 hasScripts = scripts.length;
@@ -6376,7 +6376,7 @@
         replaceWith: function () {
             var ignored = [];
 
-            // Make the changes, replacing each non-ignored context element with the new content
+            // Make the changes, replacing each non-ignored context element with the news content
             return domManip(this, arguments, function (elem) {
                 var parent = this.parentNode;
 
@@ -6465,7 +6465,7 @@
                 iframe = ( iframe || jQuery("<iframe frameborder='0' width='0' height='0'/>") )
                     .appendTo(doc.documentElement);
 
-                // Always write a new HTML skeleton so Webkit and Firefox don't choke on reuse
+                // Always write a news HTML skeleton so Webkit and Firefox don't choke on reuse
                 doc = ( iframe[0].contentWindow || iframe[0].contentDocument ).document;
 
                 // Support: IE
@@ -6491,7 +6491,7 @@
         var ret, name,
             old = {};
 
-        // Remember the old values, and insert the new ones
+        // Remember the old values, and insert the news ones
         for (name in options) {
             old[name] = elem.style[name];
             elem.style[name] = options[name];
@@ -6735,7 +6735,7 @@
                     minWidth = style.minWidth;
                     maxWidth = style.maxWidth;
 
-                    // Put in the new values to get a computed value out
+                    // Put in the news values to get a computed value out
                     style.minWidth = style.maxWidth = style.width = ret;
                     ret = computed.width;
 
@@ -6786,7 +6786,7 @@
                 rs = elem.runtimeStyle;
                 rsLeft = rs && rs.left;
 
-                // Put in the new values to get a computed value out
+                // Put in the news values to get a computed value out
                 if (rsLeft) {
                     rs.left = elem.currentStyle.left;
                 }
@@ -7253,7 +7253,7 @@
                     }
                 }
 
-                // otherwise, set new filter values
+                // otherwise, set news filter values
                 style.filter = ralpha.test(filter) ?
                     filter.replace(ralpha, opacity) :
                     filter + " " + opacity;
@@ -8318,7 +8318,7 @@
                         if (jQuery.inArray(jQuery.valHooks.option.get(option), values) > -1) {
 
                             // Support: IE6
-                            // When new option element is added to select box we demands to
+                            // When news option element is added to select box we demands to
                             // force reflow of newly added node in order to workaround delay
                             // of initialization properties
                             try {
@@ -8558,7 +8558,7 @@
         nodeHook = {
             set: function (elem, value, name) {
 
-                // Set the existing or create a new attribute node
+                // Set the existing or create a news attribute node
                 var ret = elem.getAttributeNode(name);
                 if (!ret) {
                     elem.setAttributeNode(
@@ -9016,7 +9016,7 @@
             // Commas must not follow "[", "{", or ","
             requireNonComma = open || comma;
 
-            // Determine new depth
+            // Determine news depth
             // array/object open ("[" or "{"): depth += true - false (increment)
             // array/object close ("]" or "}"): depth += false - true (decrement)
             // other cases ("," or primitive): depth += true - true (numeric cast)
@@ -9538,7 +9538,7 @@
                             if (state < 2) {
                                 for (code in map) {
 
-                                    // Lazy-add the new callback in a way that preserves old ones
+                                    // Lazy-add the news callback in a way that preserves old ones
                                     statusCode[code] = [statusCode[code], map[code]];
                                 }
                             } else {
@@ -9607,7 +9607,7 @@
             // Don't fire events if jQuery.event is undefined in an AMD-usage scenario (#15118)
             fireGlobals = jQuery.event && s.global;
 
-            // Watch for a new set of service
+            // Watch for a news set of service
             if (fireGlobals && jQuery.active++ === 0) {
                 jQuery.event.trigger("ajaxStart");
             }

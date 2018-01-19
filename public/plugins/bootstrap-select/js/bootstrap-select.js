@@ -512,7 +512,7 @@
           _li = [],
           optID = 0,
           titleOption = document.createElement('option'),
-          liIndex = -1; // increment liIndex whenever a new <li> element is created to ensure liObj is correct
+          liIndex = -1; // increment liIndex whenever a news <li> element is created to ensure liObj is correct
 
       // Helper functions
       /**
@@ -549,7 +549,7 @@
       };
 
       if (this.options.title && !this.multiple) {
-        // this option doesn't create a new <li> element, but does add a new option, so liIndex is decreased
+        // this option doesn't create a news <li> element, but does add a news option, so liIndex is decreased
         // since liObj is recalculated on every refresh, liIndex needs to be decreased even if the titleOption is already appended
         liIndex--;
 

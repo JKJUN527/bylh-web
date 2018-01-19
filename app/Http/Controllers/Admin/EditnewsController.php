@@ -38,7 +38,7 @@ class EditnewsController extends Controller {
             $nid = $request->input('nid');
         } else
             $nid = 1;
-        $data['new'] = News::find($nid);
+        $data['news'] = News::find($nid);
 
         return $data;
     }

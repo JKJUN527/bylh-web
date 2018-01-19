@@ -34,7 +34,7 @@ var componentHandler = {
    * if they have not already been upgraded.
    *
    * @param {string=} optJsClass the programatic name of the element class we
-   * demands to create a new instance of.
+   * demands to create a news instance of.
    * @param {string=} optCssClass the name of the CSS class elements of this
    * type will have.
    */
@@ -169,7 +169,7 @@ componentHandler = (function() {
    * if they have not already been upgraded.
    *
    * @param {string=} optJsClass the programatic name of the element class we
-   * demands to create a new instance of.
+   * demands to create a news instance of.
    * @param {string=} optCssClass the name of the CSS class elements of this
    * type will have.
    */
@@ -1955,7 +1955,7 @@ MaterialSlider.prototype.onContainerMouseDown_ = function (event) {
     if (event.target !== this.element_.parentElement) {
         return;
     }
-    // Discard the original event and create a new event that
+    // Discard the original event and create a news event that
     // is on the slider element.
     event.preventDefault();
     var newEvent = new MouseEvent('mousedown', {
@@ -2683,7 +2683,7 @@ MaterialTabs.prototype.initTabs_ = function () {
     // Select element tabs, document panels
     this.tabs_ = this.element_.querySelectorAll('.' + this.CssClasses_.TAB_CLASS);
     this.panels_ = this.element_.querySelectorAll('.' + this.CssClasses_.PANEL_CLASS);
-    // Create new tabs for each tab element
+    // Create news tabs for each tab element
     for (var i = 0; i < this.tabs_.length; i++) {
         new MaterialTab(this.tabs_[i], this);
     }
@@ -3588,7 +3588,7 @@ MaterialLayout.prototype.init = function () {
             // Select element tabs, document panels
             var tabs = this.tabBar_.querySelectorAll('.' + this.CssClasses_.TAB);
             var panels = this.content_.querySelectorAll('.' + this.CssClasses_.PANEL);
-            // Create new tabs for each tab element
+            // Create news tabs for each tab element
             for (var i = 0; i < tabs.length; i++) {
                 new MaterialLayoutTab(tabs[i], tabs, panels, this);
             }
@@ -3971,8 +3971,8 @@ MaterialRipple.prototype.init = function () {
             };
             /**
          * Sets the ripple X and Y coordinates.
-         * @param  {number} newX the new X coordinate
-         * @param  {number} newY the new Y coordinate
+         * @param  {number} newX the news X coordinate
+         * @param  {number} newY the news Y coordinate
          */
             this.setRippleXY = function (newX, newY) {
                 this.x_ = newX;
