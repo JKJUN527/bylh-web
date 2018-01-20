@@ -66,7 +66,8 @@
                             </div>
                             <div class="am-form-group">
                                 <label for="doc-vld-age-2-1" class="label_title">生日：</label>
-                                <input class="user_info" type="date"   id="doc-vld-age-2-1" placeholder="" value="{{$data['userinfo']->birthday}}" required />
+                                <input type="text" class="user_info" id="doc-vld-age-2-1" placeholder="选择你的生日" value="{{substr($data['userinfo']->birthday,0,10)}}" data-am-datepicker readonly required />
+                                {{--<input class="user_info" type="date"   id="doc-vld-age-2-1" placeholder="" value="{{$data['userinfo']->birthday}}" required />--}}
                             </div>
                             <div class="am-form-group">
                                 <label for="doc-vld-email-2-1" class="label_title">邮箱：</label>
@@ -136,12 +137,12 @@
         }
         //判断用户名是否存在
         $('#doc-vld-name-2-1').blur(function() {
-            var username = $('#doc-vld-name-2-1').val();
-            if(username == ''){
+            var username = $('#doc-vld-name-2-1');
+            if(username.val() == ''){
                 return;
             }
             var formData = new FormData();
-            formData.append('username', username);
+            formData.append('username', username.val());
 
             $.ajax({
                 url: "/account/HasUsername",
@@ -155,6 +156,7 @@
                     var result = JSON.parse(data);
                     if(result.status == 400){
                         swal('','用户名已存在',"error");
+                        username.val("");
                     }
                 }
             })
@@ -196,7 +198,6 @@
                 swal('','个人签名长度不能小于4个字符','error');
                 return;
             }
-
            var formData = new FormData();
            formData.append('username', username.val());
            formData.append('birthday', birthday.val());

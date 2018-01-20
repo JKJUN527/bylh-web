@@ -114,19 +114,30 @@
         .am-selected-status{
             text-align: right;
         }
+        .warning{
+            text-align: center;
+            font-size: large;
+        }
     </style>
 @endsection
 @section('content')
     <!--发布服务-->
+    @if($data['verification'] == 0)
+        <div style="min-height: 450px">
+            <div class="am-alert am-alert-warning warning">
+                <a href="/account/serviceedit" style="font-size: large;color: white">请先设置服务基本信息！点击设置。。。。</a>
+            </div>
+        </div>
+    @else
     <div class="am-g am-g-fixed" style="padding-top: 45px;">
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
-            <div class="fabu_guide_y guide_line guide_line"></div>
+            <div class="fabu_guide_y guide_line"></div>
             <div class="fabu_guide_sign guide_pic" style="background: url({{asset('images/fabu_y.png')}}) center top no-repeat;"></div>
             <div class="fabu_guide_text guide_font">选择类目，描述你的服务</div>
         </div>
-        <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
-            <div class="fabu_guide_y guide_line" style="background: #999;"></div>
-            <div class="fabu_guide_sign guide_pic" style="background: url('/images/fabu_q.png') center top no-repeat;"></div>
+        <div id="step2" class="am-u-lg-4 am-u-md-4 am-u-sm-4">
+            <div id="step2-1" class="fabu_guide_y guide_line" style="background: #999;"></div>
+            <div id="step2-2" class="fabu_guide_sign guide_pic" style="background: url('/images/fabu_q.png') center top no-repeat;"></div>
             <div class="fabu_guide_text guide_font">确认服务</div>
         </div>
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
@@ -311,6 +322,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="am-popup" id="my-popup">
         <div class="am-popup-inner">
             <div class="am-popup-hd">
@@ -364,6 +376,8 @@
             var type = $('input:radio[name="service_type"]:checked').val();
             var step1 = $('#publish_step1');
             var step2 = $('#publish_step2');
+            var guide_color = $('#step2-1');
+            var guide_pic = $('#step2-2');
 
             if(btn1.attr('data-content') === "" ||btn2.attr('data-content') === ""){
                 swal('',"请选择服务领域","error");
@@ -396,6 +410,10 @@
             baseinfo_email.find("span").html(email.val());
             baseinfo_type.find("span").html(base_type);
             baseinfo_class.find("span").html(btn1.html()+"-"+btn2.html());
+
+            //
+            guide_color.attr('style','');
+            guide_pic.css("background-image","url(/images/fabu_y.png)");
             step1.hide();
             step2.show();
         }

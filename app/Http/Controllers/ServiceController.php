@@ -53,7 +53,16 @@ class ServiceController extends Controller
             $data['userinfo'] = User::where('uid',$data['uid'])
                 ->select('tel','mail')
                 ->first();
+            //验证服务用户是否填写了服务基本信息，如未填写，则不能发布一般服务
+            $serviceinfo = Serviceinfo::where('uid',$data['uid'])
+                ->first();
+            if($serviceinfo->pay_code !=""){
+                $data['verification'] =1;
+            }else
+                $data['verification'] =0;
+
             $data['type'] = "0";
+
         }
 
 //        return $data;

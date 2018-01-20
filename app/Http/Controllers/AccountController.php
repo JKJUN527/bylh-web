@@ -192,9 +192,12 @@ class AccountController extends Controller {
     //查询用户名是否存在
     public function HasUsername(Request $request){
         $data = array();
+        $uid = AuthController::getUid();
         if($request->has('username')){
             $username = $request->input('username');
-            $is_exist = User::where('username',$username)->get();
+            $is_exist = User::where('username',$username)
+                ->where('uid','!=',$uid)
+                ->get();
             if(count($is_exist) >0){
                 $data['status'] = 400;
                 $data['msg'] = "用户名已存在";
@@ -205,6 +208,29 @@ class AccountController extends Controller {
             }
 
         }
+        $data['status'] = 400;
+        return $data;
+    }
+    //查询企业名是否存在
+    public function HasServicename(Request $request){
+        $data = array();
+        $uid = AuthController::getUid();
+        if($request->has('ename')){
+            $ename = $request->input('ename');
+            $is_exist = Serviceinfo::where('ename',$ename)
+                ->where('uid','!=',$uid)
+                ->get();
+            if(count($is_exist) >0){
+                $data['status'] = 400;
+                $data['msg'] = "企业名已存在";
+                return $data;
+            }else{
+                $data['status'] = 200;
+                return $data;
+            }
+        }
+        $data['status'] = 400;
+        return $data;
     }
 
     //修改个人基本资料主页
@@ -315,7 +341,7 @@ class AccountController extends Controller {
             $data['msg'] = "请先登陆再进行操作";
             return $data;
         }
-        if ($data['type'] != 1) {
+        if ($data['type'] != 2) {
             $data['status'] = 400;
             $data['msg'] = "用户非法，请登录企业号";
             return $data;
@@ -327,7 +353,7 @@ class AccountController extends Controller {
             return $data;
         }
         $serviceinfo = Serviceinfo::find($is_exist->id);
-        //接收数据
+        //接收收款二维码数据
         if ($request->hasFile('paycode')) {
             //验证输入的图片格式,验证图片尺寸比例为一比一
 //            $this->validate($request, [
@@ -343,16 +369,34 @@ class AccountController extends Controller {
 
                 $bool = Storage::disk('paycode')->put($filename, file_get_contents($realPath));
                 if ($bool) {
-                    $serviceinfo->paycode = asset('storage/paycode/' . $filename);
+                    $serviceinfo->pay_code = asset('storage/paycode/' . $filename);
                 }
             }
         }
+        //接收企业elogo数据
+        if ($request->hasFile('elogo')) {
+            $elogo = $request->file('elogo');
+            if ($elogo->isValid()) {//判断文件是否上传成功
+                $ext = $elogo->getClientOriginalExtension();
+                //临时觉得路径
+                $realPath = $elogo->getRealPath();
+
+                $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'elogo' . '.' . $ext;
+
+                $bool = Storage::disk('profile')->put($filename, file_get_contents($realPath));
+                if ($bool) {
+                    $serviceinfo->elogo = asset('storage/profiles/' . $filename);
+                }
+            }
+        }
+        $serviceinfo->ename = $request->input('ename');
         $serviceinfo->city = $request->input('city');
-        $serviceinfo->current_edu = $request->input('current_edu');
-        $serviceinfo->graduate_edu = $request->input('graduate_edu');
-        $serviceinfo->is_offline = $request->input('is_offline');
-        $serviceinfo->has_video = $request->input('has_video');
-        $serviceinfo->pay_way = $request->input('pay_way');
+        $serviceinfo->current_edu = $request->input('current');
+        $serviceinfo->graduate_edu = $request->input('graduation');
+        $serviceinfo->is_offline = $request->input('offline');
+        $serviceinfo->has_video = $request->input('hasvideo');
+        $serviceinfo->pay_way = $request->input('payway');
+        $serviceinfo->brief = $request->input('description');
 
         if ($serviceinfo->save()) {
             $data['status'] = 200;
@@ -361,7 +405,6 @@ class AccountController extends Controller {
             $data['status'] = 400;
             $data['msg'] = "操作失败";
         }
-
         return $data;
     }
 

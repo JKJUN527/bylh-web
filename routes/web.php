@@ -41,6 +41,7 @@ Route::get('account/baseedit', ['uses' => 'AccountController@usersinfo']);//个�
 Route::post('account/baseedit', ['uses' => 'AccountController@editbaseinfo']);//提交修改
 //修改服务用户服务相关信息
 Route::get('account/serviceedit', ['uses' => 'AccountController@serviceinfo']);//服务相关信息修改页面
+Route::post('account/HasServicename', ['uses' => 'AccountController@HasServicename']);//查询企业名是否存在
 Route::post('account/serviceedit', ['uses' => 'AccountController@editserviceinfo']);//提交修改
 //实名认证页面、实习中介认证、专业问答认证
 Route::get('account/authentication/{option}', ['uses' => 'AccountController@authindex'])->where('option', '[0-2]{1}');//服务相关信息修改页面

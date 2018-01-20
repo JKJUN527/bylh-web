@@ -18,6 +18,20 @@
         display: inline !important;
         height: 2.4rem;
     }
+    .pay_code{
+        width: 100%;
+        text-align: center;
+        margin-top: 5rem;
+    }
+    .paypic{
+        cursor: pointer;
+        opacity: 0;
+        width: 150px;
+        height: 150px;
+        z-index: 9;
+        margin-left: 17%;
+        position: absolute;
+    }
     </style>
 @endsection
 @section('content')
@@ -47,7 +61,7 @@
 
                     <div class="info-m">
                         <div onclick="focususername();"><b>企业名称：<i>{{$data['serviceinfo']->ename}}</i></b></div>
-                        <div onclick="focususernote();"><b>服务者自述：<i>{{$data['serviceinfo']->brief}}</i></b></div>
+                        <div onclick="focususernote();"><b>服务者自述：</b><br><i>{!! $data['serviceinfo']->brief !!}</i></div>
                     </div>
                 </div>
 
@@ -62,45 +76,96 @@
                             </div>
                             <div class="am-form-group">
                                 <label for="doc-vld-age-2-1" class="label_title">服务城市：</label>
-                                <input class="service_info" type="text"   id="service_city" placeholder="你所在的城市（eg:成都）" value="" required />
+                                <input class="service_info" type="text"   id="service_city" placeholder="你所在的城市（eg:成都）" value="{{$data['serviceinfo']->city}}" required />
                             </div>
+                            @if($data['serviceinfo']->graduate_edu === "" || $data['serviceinfo']->graduate_edu ===null)
+                                <?php
+                                    $degree1 =0;
+                                ?>
+                            @else
+                                <?php
+                                $degree1 = explode("@",$data['serviceinfo']->graduate_edu)[1];
+                                ?>
+                            @endif
                             <div class="am-form-group">
                                 <label for="doc-vld-email-2-1" class="label_title">毕业院校：</label>
-                                <input class="label_two" type="text" id="service_grdu_school" placeholder="输入毕业院校及取得学位" value="" required/>
+                                <input class="label_two" type="text" id="service_grdu_school" placeholder="输入毕业院校及取得学位" value="{{explode("@",$data['serviceinfo']->graduate_edu)[0]}}" required/>
                                 <select class="label_two" id="service_grdu_degree" required>
-                                    <option value="0">博士及以上</option>
-                                    <option value="1">硕士</option>
-                                    <option value="2">学士</option>
-                                    <option value="3">高中及以下</option>
+                                    <option value="0" @if($degree1 ==0 ) selected @endif>博士及以上</option>
+                                    <option value="1" @if($degree1 ==1 ) selected @endif>硕士</option>
+                                    <option value="2" @if($degree1 ==2 ) selected @endif>学士</option>
+                                    <option value="3" @if($degree1 ==3 ) selected @endif>高中及以下</option>
                                 </select>
                             </div>
+                            @if($data['serviceinfo']->current_edu === "" || $data['serviceinfo']->current_edu ===null)
+                                <?php
+                                $degree2 =0;
+                                ?>
+                            @else
+                                <?php
+                                $degree2 = explode("@",$data['serviceinfo']->current_edu)[1];
+                                ?>
+                            @endif
                             <div class="am-form-group">
                                 <label for="doc-vld-email-2-1" class="label_title">就读院校：</label>
-                                <input class="label_two" type="text" id="service_current_school" placeholder="(选填)正在攻读院校、攻读学位" value="" />
+                                <input class="label_two" type="text" id="service_current_school" placeholder="(选填)正在攻读院校、攻读学位" value="{{explode("@",$data['serviceinfo']->current_edu)[0]}}" />
                                 <select class="label_two" id="service_current_degree">
-                                    <option value="0">博士及以上</option>
-                                    <option value="1">硕士</option>
-                                    <option value="2">学士</option>
-                                    <option value="3">高中及以下</option>
+                                    <option value="0" @if($degree2 ==0 ) selected @endif>博士及以上</option>
+                                    <option value="1" @if($degree2 ==1 ) selected @endif>硕士</option>
+                                    <option value="2" @if($degree2 ==2 ) selected @endif>学士</option>
+                                    <option value="3" @if($degree2 ==3 ) selected @endif>高中及以下</option>
                                 </select>
                             </div>
-                            <div class="am-form-group">
-                                <label for="doc-vld-tel-2-1" class="label_title">最高：</label>
-                                <input class="service_info" id="user-phone" placeholder="输入电话" type="tel"  data-validation-message="请输入合法的电话" value="" required/>
+                            <div class="am-form-group" style="width: 50%;display: inline">
+                                <label for="doc-vld-tel-2-1" class="label_title">是否支持线下服务:</label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="offline" value="0" data-am-ucheck @if($data['serviceinfo']->is_offline == 0) checked @endif> 仅线下
+                                </label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="offline" value="1" data-am-ucheck @if($data['serviceinfo']->is_offline == 1) checked @endif> 仅线上
+                                </label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="offline" value="2" data-am-ucheck @if($data['serviceinfo']->is_offline == 2) checked @endif> 线上线下均支持
+                                </label>
+                            </div>
+                            <div class="am-form-group" style="width: 50%;display:inline">
+                                <label for="doc-vld-tel-2-1" class="label_title">是否有视频教程:</label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="hasvideo" value="1" data-am-ucheck @if($data['serviceinfo']->has_video == 1) checked @endif> 有
+                                </label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="hasvideo" value="0" data-am-ucheck @if($data['serviceinfo']->has_video == 0) checked @endif> 没有
+                                </label>
                             </div>
 
                             <div class="am-form-group">
-                                <label for="doc-vld-ta-2-1" class="label_title">签名：</label>
-                                <input class="service_info" id="user-note" placeholder="输入个人签名" type="text" minlength="4"  data-validation-message="请输入长度大于4个字符" value="{{$data['serviceinfo']->brief}}" required/>
+                                {{--<input class="service_info" id="user-note" placeholder="描述你的服务经历、个人能力等" type="text" minlength="4"  data-validation-message="请输入长度大于4个字符" value="{{$data['serviceinfo']->brief}}" required/>--}}
+                                <div class="am-u-sm-12">
+                                    <label for="doc-vld-ta-2-1" class="label_title">服务者自述：</label>
+                                    <input value="{{$data['serviceinfo']->brief}}" style="display: none" id="brief" />
+                                    <textarea class="" rows="8" name="description" placeholder="描述你的服务经历、个人能力等" id="service-note"></textarea>
+                                </div>
                             </div>
-                            <div class="am-form-group">
-                                <label for="doc-vld-name-2-1" class="label_title">所在城市：</label>
-                                <input  class="service_info" type="text" id="doc-vld-city-2-1" minlength="2" placeholder="输入城市(eg:上海)"
-                                        value="" required/>
+                            <div class="am-form-group" style="padding-top: 10rem;">
+                                <label for="doc-vld-email-2-1" class="label_title">选择付款方式:</label>
+                                <select class="service_info" id="pay_way" required>
+                                    <option value="0" @if($data['serviceinfo']->pay_way ==0 ) selected @endif>支付宝扫码</option>
+                                    <option value="1" @if($data['serviceinfo']->pay_way ==1 ) selected @endif>微信扫码</option>
+                                </select>
                             </div>
+                                <div class="pay_code">
+                                    <input type="file" id="paycode_picture" class="paypic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" onchange="loadPreviewPaycode(this)">
+                                    <img class="am-radius am-img-thumbnail "  id="paypic-preview" src="
+                            @if($data['serviceinfo']->pay_code =='' ||$data['serviceinfo']->pay_code ==null)
+                                    {{asset('images/paycode.png')}}
+                                    @else
+                                    {{$data['serviceinfo']->pay_code}}
+                                    @endif
+                                            " alt="" style="width: 150px;height: 150px"/>
+                                </div>
 
                             <div class="info-btn">
-                                <button class="am-btn am-btn-danger" id="changeinfo">提交</button>
+                                <button class="am-btn am-btn-danger" id="changeinfo" >提交</button>
                             </div>
                         </fieldset>
                     </form>
@@ -137,26 +202,31 @@
                     $alert.html(msg).show();
                 }
             });
+            var brief = $('#brief');
+            var service_note = $('#service-note');
+            if(brief.val()){
+                service_note.val(brief.val().replace(/<\/br>/g, "\r\n"));
+            }
         });
         function focususername() {
-            var username = $("#doc-vld-name-2-1");
+            var username = $("#service_name");
             username.focus();
         }
         function focususernote() {
-            var usernote = $("#user-note");
+            var usernote = $("#service-note");
             usernote.focus();
         }
         //判断用户名是否存在
-        $('#doc-vld-name-2-1').blur(function() {
-            var username = $('#doc-vld-name-2-1').val();
-            if(username == ''){
+        $('#service_name').blur(function() {
+            var ename = $('#service_name');
+            if(ename.val() == ''){
                 return;
             }
             var formData = new FormData();
-            formData.append('username', username);
+            formData.append('ename', ename.val());
 
             $.ajax({
-                url: "/account/HasUsername",
+                url: "/account/HasServicename",
                 type: 'post',
                 dataType: 'text',
                 cache: false,
@@ -166,85 +236,13 @@
                 success: function (data) {
                     var result = JSON.parse(data);
                     if(result.status == 400){
-                        swal('','用户名已存在',"error");
+                        swal('','企业名已存在',"error");
+                        ename.val("");
                     }
                 }
             })
 
         });
-        $('#changeinfo').click(function (event) {
-            event.preventDefault();
-
-           var username = $('#doc-vld-name-2-1');
-           var photo = $('#user_picture');
-           var birthday = $('#doc-vld-age-2-1');
-           var sex = $("input[name='docVlGender']:checked");
-           var email = $('#doc-vld-email-2-1');
-           var tel = $('#user-phone');
-           var note = $('#user-note');
-           var city = $('#doc-vld-city-2-1');
-
-            if(username.val() === "" ||username.val().length<3){
-                swal('','用户名长度需大于3个字符','error');
-                return;
-            }
-            if(birthday.val() === ""){
-                swal('','请选择生日','error');
-                return;
-            }
-            if(sex.val()===''){
-                swal('','请选择性别','error');
-                return;
-            }
-            if(!/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(email.val())){
-                swal('','邮箱格式非法','error');
-                return;
-            }
-            if(!/^1[34578]\d{9}$/.test(tel.val())){
-                swal('','电话格式非法','error');
-                return;
-            }
-            if(note.val() === '' || note.val().length <4){
-                swal('','个人签名长度不能小于4个字符','error');
-                return;
-            }
-
-           var formData = new FormData();
-           formData.append('username', username.val());
-           formData.append('birthday', birthday.val());
-           formData.append('sex', sex.val());
-           formData.append('mail', email.val());
-           formData.append('tel', tel.val());
-           formData.append('note', note.val());
-           formData.append('city', city.val());
-
-            if (photo.prop("files")[0] === undefined) {
-                console.log("file is empty");
-                //formData.append('photo', "");
-            } else {
-                formData.append('photo', photo.prop("files")[0]);
-            }
-            $.ajax({
-                url: "/account/baseedit",
-                type: 'post',
-                dataType: 'text',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: formData,
-                success: function (data) {
-                    var result = JSON.parse(data);
-                    if(result.status == 400){
-                        swal('',result.msg,"error");
-                    }else{
-                        swal('',result.msg,"success");
-                        location.href = "/account/index";
-                    }
-                }
-            })
-
-        });
-
         function loadPreview(element) {
             var file = element.files[0];
             var anyWindow = window.URL || window.webkitURL;
@@ -276,6 +274,118 @@
                 $("#head-preview").attr("src", objectUrl);
             }
         }
+        $('#paypic-preview').click(function () {
+            var user_picture = $('#user_picture');
+            user_picture.click();
+        });
+        function loadPreviewPaycode(element) {
+//            alert(123);
+            var file = element.files[0];
+            var anyWindow = window.URL || window.webkitURL;
+            var objectUrl = anyWindow.createObjectURL(file);
+            window.URL.revokeObjectURL(file);
+
+            var idCardPath = $("input[id='paycode_picture']").val();
+
+            if (!/.(jpg|jpeg|png|JPG|JPEG|PNG)$/.test(idCardPath)) {
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "图片格式错误，支持：.jpg .jpeg .png类型。请选择正确格式的图片后再试！",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+            } else if (file.size > 2 * 1024 * 1024) {
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "图片文件最大支持：2MB",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+            } else {
+                $("#paypic-preview").attr("src", objectUrl);
+            }
+        }
+        $('#changeinfo').click(function (event) {
+            event.preventDefault();
+
+            var ename = $('#service_name');
+            var elogo = $('#user_picture');
+            var paycode = $('#paycode_picture');
+            var city = $('#service_city');
+            var grdu_school = $('#service_grdu_school');
+            var grdu_degree = $('#service_grdu_degree');
+            var current_degree = $('#service_current_degree');
+            var current_school = $('#service_current_school');
+            var offline = $('input:radio[name="offline"]:checked').val();
+            var hasvideo = $('input:radio[name="hasvideo"]:checked').val();
+            var payway = $('#pay_way');
+            var description_raw = $("textarea[name='description']");
+            var description = description_raw.val().replace(/\r\n/g, '</br>');
+            description = description.replace(/\n/g, '</br>');
+            var formData = new FormData();
+
+            if(ename.val() === "" ||ename.val().length<3){
+                swal('','企业名称长度需大于3个字符','error');
+                return;
+            }
+            if(city.val() === ""){
+                swal('','请填写你所在城市名称（eg:成都）','error');
+                return;
+            }
+            if(grdu_school.val()==='' ){
+                swal('','请务必设置毕业学校','error');
+                return;
+            }
+            if (paycode.prop("files")[0] === undefined && $('#paypic-preview').attr('src') ==="images/paycode.png") {
+                console.log("file is empty");
+                swal('','必须上传收款二维码','error');
+                return;
+            } else {
+                formData.append('paycode', paycode.prop("files")[0]);
+            }
+
+            formData.append('ename', ename.val());
+            formData.append('city', city.val());
+            formData.append('graduation', grdu_school.val()+"@"+grdu_degree.val());
+            if(current_school.val() !=""){
+                formData.append('current', current_school.val()+"@"+current_degree.val());
+            }else
+                formData.append('current', "");
+            formData.append('offline', offline);
+            formData.append('hasvideo', hasvideo);
+            formData.append('payway', payway.val());
+            formData.append('description', description);
+
+            if (elogo.prop("files")[0] === undefined) {
+                console.log("file is empty");
+                //formData.append('photo', "");
+            } else {
+                formData.append('elogo', elogo.prop("files")[0]);
+            }
+            $.ajax({
+                url: "/account/serviceedit",
+                type: 'post',
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if(result.status == 400){
+                        swal('',result.msg,"error");
+                    }else{
+                        swal('',result.msg,"success");
+                        location.href = "/account/index";
+                    }
+                }
+            })
+
+        });
 
     </script>
 @endsection
