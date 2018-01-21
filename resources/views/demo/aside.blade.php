@@ -46,7 +46,7 @@
         <li class="person">
             <p><i class="am-icon-tags"></i>我的需求</p>
             <ul>
-                <li><a href="{{asset('sendneed')}}">发布需求</a></li>
+                <li><a href="{{asset('demands/demandPublishIndex')}}">发布需求</a></li>
                 <li><a href="{{asset('myneed')}}">需求列表</a></li>
             </ul>
         </li>

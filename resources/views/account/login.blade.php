@@ -100,18 +100,10 @@
                 //console.log(data);
                 var result = JSON.parse(data);
                 if (result.status == 200) {
-                    swal({
-                        title: "登录成功",
-                        text: "跳转到首页",
-                        type: "info",
-                        confirmButtonText: "确定",
-                        cancelButtonText: "取消",
-                        showCancelButton: true,
-                        closeOnConfirm: false,
-                        showLoaderOnConfirm: true
-                    }, function () {
-                        self.location = "/";
-                    });
+                    swal("登录成功");
+                    setTimeout(function () {
+                        self.location = "/account/index";
+                    }, 1000);
                 }else{
                     swal('',result.msg,'error');
                 }

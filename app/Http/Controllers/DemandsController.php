@@ -43,6 +43,7 @@ class DemandsController extends Controller {
         $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
 
        # return $data;
+        return view('demands.needappointment', ["data" => $data]);
         return view('demands.demandPublishIndex', ["data" => $data]);
     }
 
