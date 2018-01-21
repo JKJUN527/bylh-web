@@ -251,38 +251,41 @@ class DemandsController extends Controller {
 //            ->where('position_status', '=', 1)
             ->where(function ($query) use ($request) {
                 if ($request->has('class1')) {//行业
-                    $query->where('class1', '=', $request->input('class1'));
+                    $query->where('class1_id', '=', $request->input('class1'));
                 }
                 if ($request->has('class2')) {
-                    $query->where('class2', '=', $request->input('class2'));
+                    $query->where('class2_id', '=', $request->input('class2'));
+                }
+                if ($request->has('class3')) {
+                    $query->where('class3_id', '=', $request->input('class3'));
                 }
                 if ($request->has('price')) {
                     switch ($request->input('price')) {
                         case 1:
-                            $query->where('price', '<', 50);
+                            $query->where('price', '<=', 50);
                             break;
                         case 2:
                             $query->where('price', '>=', 50);
-                            $query->where('price', '<', 100);
+                            $query->where('price', '<=', 100);
                             break;
                         case 3:
                             $query->where('price', '>=', 100);
-                            $query->where('price', '<', 500);
+                            $query->where('price', '<=', 500);
                             break;
                         case 4:
                             $query->where('price', '>=', 500);
-                            $query->where('price', '<', 2000);
+                            $query->where('price', '<=', 2000);
                             break;
                         case 5:
                             $query->where('price', '>=', 2000);
-                            $query->where('price', '<', 5000);
+                            $query->where('price', '<=', 5000);
                             break;
                         case 6:
                             $query->where('price', '>=', 5000);
-                            $query->where('price', '<', 10000);
+                            $query->where('price', '<=', 10000);
                             break;
                         case 7:
-                            $query->where('price', '>', 10000);
+                            $query->where('price', '>=', 10000);
                             break;
                         default:
                             break;
@@ -301,7 +304,7 @@ class DemandsController extends Controller {
                 }
             })
             ->orderBy($orderBy, $desc)
-            ->paginate(1);
+            ->paginate(30);
         return $data;
     }
 
@@ -322,6 +325,7 @@ class DemandsController extends Controller {
         $data['condition']['class1'] = $request->input('class1');
         $data['condition']['class2'] = $request->input('class2');
         $data['condition']['class3'] = $request->input('class3');
+        $data['condition']['price'] = $request->input("price");
         $data['condition']['region'] = $request->input('region');
         $data['condition']['servicetype'] = $request->input('servicetype');
         $data['condition']['keyword'] = $request->input('keyword');
