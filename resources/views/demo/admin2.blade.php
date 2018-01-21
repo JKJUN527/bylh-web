@@ -19,7 +19,7 @@
 </head>
 <body>
 <!--头 -->
-<header>
+<header style="background-image:url({{asset('images/background4.png')}});">
     <article>
         <div class="mt-logo">
             <!--顶部导航条 -->
@@ -57,7 +57,7 @@
 
             <div class="nav white">
                 {{--<div class="logo"><img src="{{asset('images/bylh2.png')}}" onclick="gobackhome();"/></div>--}}
-                <div class="logoBig">
+                <div class="logoBig" style="margin-top: -15px;margin-left: -50px;">
                     <li><img src="{{asset('images/bylh2.png')}}" onclick="gobackhome();"/></li>
                 </div>
 
@@ -76,7 +76,7 @@
 </header>
 <div class="nav-table">
     <div class="long-title"><span class="all-goods">全部分类</span></div>
-    <div class="nav-cont">
+    <div class="nav-cont" style="background: #ff9933bd;">
         <ul>
             <li class="index"><a href="{{asset('index')}}">首页</a></li>
             <li class="qc"><a href="{{asset('demands/advanceSearch')}}">需求大厅</a></li>
@@ -85,7 +85,7 @@
             <li class="qc last"><a href="{{asset('services/advanceSearch')}}">专业问答</a></li>
         </ul>
         <div class="nav-extra">
-            <a href="{{asset('/message')}}" style="color: #f5e79e;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息
+            <a href="{{asset('/message')}}" style="color:#f03726;font-weight:bold;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息
                 <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
         </div>
     </div>
