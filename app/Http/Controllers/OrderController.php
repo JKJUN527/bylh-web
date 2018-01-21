@@ -266,8 +266,10 @@ class OrderController extends Controller {
         $data['type'] = AuthController::getType();
 
         if($request->has('order_id')){
-            $data['order']->find($request->input('order_id'));
+            $data['order'] = Orders::find($request->input('order_id'));
         }
+
+        //return $data;
         return view('order/detail',['data'=>$data]);
     }
 
@@ -375,7 +377,7 @@ class OrderController extends Controller {
             }
         }
 
-//        return $data;
+        //return $data;
         return view('order/index',['data'=>$data]);
 
     }

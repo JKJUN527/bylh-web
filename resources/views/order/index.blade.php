@@ -51,16 +51,15 @@
                                             <div class="order-left">
                                                 <ul class="item-list">
                                                     <li class="td td-item">
-                                                        {{--<div class="item-pic">--}}
-                                                        {{--<a href="#" class="J_MakePoint">--}}
-                                                        {{--<img src="images/f2.jpg" class="itempic J_ItemImg">--}}
-                                                        {{--</a>--}}
-                                                        {{--</div>--}}
+                                                        <div class="item-pic">
+                                                            <a href="#" class="J_MakePoint">
+                                                                <img src="images/f2.jpg" class="itempic J_ItemImg">
+                                                            </a>
+                                                        </div>
                                                         <div class="item-info">
                                                             <div class="item-basic-info">
-                                                                <a href="#">
-                                                                    <p>[Service ID: {{$order->service_id}}]米旭品牌设计
-                                                                        专业品牌塑造者</p>
+                                                                <a href="/order/detail?order_id={{$order->id}}">
+                                                                    <p>{{$data["orderinfo"][$order->service_id]->title}}</p>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -88,14 +87,14 @@
                                                                 <p class="Mystatus">交易成功</p>
                                                             @endif
 
-                                                            <p class="order-info"><a href="order/detail">订单详情</a></p>
+                                                            <p class="order-info"><a href="/order/detail?order_id={{$order->id}}">订单详情</a></p>
                                                         </div>
                                                     </li>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    @endforeach
+                                @endforeach
                             </div>
 
                         </div>
@@ -117,6 +116,63 @@
 
                         <div class="order-main">
                             <div class="order-list" id="tab2_content">
+                                @foreach($data["orderlist"] as $order)
+                                    @if($order->type == 0)
+                                        <div class="order-status5">
+                                            <div class="order-title">
+                                                {{--<div class="dd-num">订单编号：<a href="javascript:;">1601430</a></div>--}}
+                                                <span>成交时间：{{$order->created_at}}</span>
+                                            </div>
+                                            <div class="order-content">
+                                                <div class="order-left">
+                                                    <ul class="item-list">
+                                                        <li class="td td-item">
+                                                            <div class="item-pic">
+                                                                <a href="#" class="J_MakePoint">
+                                                                    <img src="images/f2.jpg" class="itempic J_ItemImg">
+                                                                </a>
+                                                            </div>
+                                                            <div class="item-info">
+                                                                <div class="item-basic-info">
+                                                                    <a href="/order/detail?order_id={{$order->id}}">
+                                                                        <p>{{$data["orderinfo"][$order->service_id]->title}}</p>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="td td-price">
+                                                            <div class="item-price">
+                                                                {{$order->price}}¥
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="order-right">
+                                                    <div class="move-right">
+                                                        <li class="td td-status">
+                                                            <div class="item-status">
+                                                                @if($order->state == -1)
+                                                                    <p class="Mystatus">交易失败</p>
+                                                                @elseif($order->state == 0)
+                                                                    <p class="Mystatus">待支付</p>
+                                                                @elseif($order->state == 1)
+                                                                    <p class="Mystatus">待收款</p>
+                                                                @elseif($order->state == 2)
+                                                                    <p class="Mystatus">支付完成待评价</p>
+                                                                @elseif($order->state == 3)
+                                                                    <p class="Mystatus">交易成功</p>
+                                                                @endif
+
+                                                                <p class="order-info"><a href="/order/detail?order_id={{$order->id}}">订单详情</a>
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -135,6 +191,63 @@
 
                         <div class="order-main">
                             <div class="order-list" id="tab3_content">
+                                @foreach($data["orderlist"] as $order)
+                                    @if($order->type == 1)
+                                        <div class="order-status5">
+                                            <div class="order-title">
+                                                {{--<div class="dd-num">订单编号：<a href="javascript:;">1601430</a></div>--}}
+                                                <span>成交时间：{{$order->created_at}}</span>
+                                            </div>
+                                            <div class="order-content">
+                                                <div class="order-left">
+                                                    <ul class="item-list">
+                                                        <li class="td td-item">
+                                                            <div class="item-pic">
+                                                                <a href="#" class="J_MakePoint">
+                                                                    <img src="images/f2.jpg" class="itempic J_ItemImg">
+                                                                </a>
+                                                            </div>
+                                                            <div class="item-info">
+                                                                <div class="item-basic-info">
+                                                                    <a href="/order/detail?order_id={{$order->id}}">
+                                                                        <p>{{$data["orderinfo"][$order->service_id]->title}}</p>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="td td-price">
+                                                            <div class="item-price">
+                                                                {{$order->price}}¥
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="order-right">
+                                                    <div class="move-right">
+                                                        <li class="td td-status">
+                                                            <div class="item-status">
+                                                                @if($order->state == -1)
+                                                                    <p class="Mystatus">交易失败</p>
+                                                                @elseif($order->state == 0)
+                                                                    <p class="Mystatus">待支付</p>
+                                                                @elseif($order->state == 1)
+                                                                    <p class="Mystatus">待收款</p>
+                                                                @elseif($order->state == 2)
+                                                                    <p class="Mystatus">支付完成待评价</p>
+                                                                @elseif($order->state == 3)
+                                                                    <p class="Mystatus">交易成功</p>
+                                                                @endif
+
+                                                                <p class="order-info"><a href="/order/detail?order_id={{$order->id}}">订单详情</a>
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -153,6 +266,63 @@
 
                         <div class="order-main">
                             <div class="order-list" id="tab4_content">
+                                @foreach($data["orderlist"] as $order)
+                                    @if($order->type == 2)
+                                        <div class="order-status5">
+                                            <div class="order-title">
+                                                {{--<div class="dd-num">订单编号：<a href="javascript:;">1601430</a></div>--}}
+                                                <span>成交时间：{{$order->created_at}}</span>
+                                            </div>
+                                            <div class="order-content">
+                                                <div class="order-left">
+                                                    <ul class="item-list">
+                                                        <li class="td td-item">
+                                                            <div class="item-pic">
+                                                                <a href="#" class="J_MakePoint">
+                                                                    <img src="images/f2.jpg" class="itempic J_ItemImg">
+                                                                </a>
+                                                            </div>
+                                                            <div class="item-info">
+                                                                <div class="item-basic-info">
+                                                                    <a href="/order/detail?order_id={{$order->id}}">
+                                                                        <p>{{$data["orderinfo"][$order->service_id]->title}}</p>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="td td-price">
+                                                            <div class="item-price">
+                                                                {{$order->price}}¥
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="order-right">
+                                                    <div class="move-right">
+                                                        <li class="td td-status">
+                                                            <div class="item-status">
+                                                                @if($order->state == -1)
+                                                                    <p class="Mystatus">交易失败</p>
+                                                                @elseif($order->state == 0)
+                                                                    <p class="Mystatus">待支付</p>
+                                                                @elseif($order->state == 1)
+                                                                    <p class="Mystatus">待收款</p>
+                                                                @elseif($order->state == 2)
+                                                                    <p class="Mystatus">支付完成待评价</p>
+                                                                @elseif($order->state == 3)
+                                                                    <p class="Mystatus">交易成功</p>
+                                                                @endif
+
+                                                                <p class="order-info"><a href="/order/detail?order_id={{$order->id}}">订单详情</a>
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -171,16 +341,6 @@
 
 @section('custom-script')
     <script type="text/javascript">
-        $("a[href='#tab2']").click(function () {
-            $("#tab2_content").html("tab2");
-        });
 
-        $("a[href='#tab3']").click(function () {
-            $("#tab3_content").html("tab3");
-        });
-
-        $("a[href='#tab4']").click(function () {
-            $("#tab4_content").html("tab4");
-        });
     </script>
 @endsection
