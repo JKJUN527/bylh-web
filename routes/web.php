@@ -120,14 +120,9 @@ Route::any('demands/advanceSearch',['uses' => 'DemandsController@advanceIndex'])
 //获取发布需求列表
 Route::any('demands/getDemandsList',['uses' => 'DemandsController@getDemandsList']);
 
-//我的服务
-Route::any('service/myrequest',function(){
-    return view('service.myrequest');
-});
-//我的需求
-Route::any('demands/myneeds',function(){
-    return view('demands.myneeds');
-});
+//需求列表页面
+Route::any('demands/myneeds',['uses' => 'DemandsController@myneeds']);
+
 //预约需求
 Route::any('demands/needappointment',function(){
     return view('demands.needappointment');

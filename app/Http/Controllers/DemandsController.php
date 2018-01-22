@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Datetemp;
 use App\Demandreviews;
 use App\Demands;
 use App\Finlservices;
@@ -197,7 +198,7 @@ class DemandsController extends Controller {
         $uid=AuthController::getUid();
         $data['status']=400;
         $data['msg']="参数错误";
-        if($request->has('did') && $request->has('type')){
+        if($request->has('did')){
             $did = $request->input('did');
 
             $demand = Demands::find($did);
@@ -397,6 +398,26 @@ class DemandsController extends Controller {
             ->orderBy('created_at','desc')
             ->get();
         return $data;
+    }
+    public function myneeds(){
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+
+        $data['demands'] = Demands::where('uid',$data['uid'])
+            ->where('state',0)
+            ->orderBy('created_at','desc')
+            ->paginate(10);
+        //预约人数
+        foreach ($data['demands'] as $demand){
+            $data['datenum'][$demand->id] = Datetemp::where('did',$data['uid'])
+                ->where('demand_id',$demand->id)
+                ->where('state',0)
+                ->count();
+        }
+
+        return view('demands/myneeds',['data'=>$data]);
     }
 
 
