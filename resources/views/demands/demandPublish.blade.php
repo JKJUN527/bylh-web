@@ -1,5 +1,5 @@
 @extends('demo.admin')
-@section('title','发布服务')
+@section('title','发布需求')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
@@ -121,36 +121,29 @@
     </style>
 @endsection
 @section('content')
-    <!--发布服务-->
-    @if($data['verification'] == 0)
-        <div style="min-height: 450px">
-            <div class="am-alert am-alert-warning warning">
-                <a href="/account/serviceedit" style="font-size: large;color: white">请先设置服务基本信息！点击设置。。。。</a>
-            </div>
-        </div>
-    @else
+    <!--发布需求-->
     <div class="am-g am-g-fixed" style="padding-top: 45px;">
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
             <div class="fabu_guide_y guide_line"></div>
             <div class="fabu_guide_sign guide_pic" style="background: url({{asset('images/fabu_y.png')}}) center top no-repeat;"></div>
-            <div class="fabu_guide_text guide_font">选择类目，描述你的服务</div>
+            <div class="fabu_guide_text guide_font">选择类目，描述你的需求</div>
         </div>
         <div id="step2" class="am-u-lg-4 am-u-md-4 am-u-sm-4">
             <div id="step2-1" class="fabu_guide_y guide_line" style="background: #999;"></div>
             <div id="step2-2" class="fabu_guide_sign guide_pic" style="background: url('/images/fabu_q.png') center top no-repeat;"></div>
-            <div class="fabu_guide_text guide_font">确认服务</div>
+            <div class="fabu_guide_text guide_font">确认需求</div>
         </div>
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
             <div class="fabu_guide_y guide_line" style="background: #999;"></div>
             <div class="fabu_guide_sign guide_pic" style="background: url('/images/fabu_q.png') center top no-repeat;"></div>
-            <div class="fabu_guide_text guide_font">发布服务</div>
+            <div class="fabu_guide_text guide_font">发布需求</div>
         </div>
     </div>
     <div class="am-container" style="padding: 60px;" id="publish_step1">
         <div class="fabu_step1 am-g am-g-fixed">
             <div class="am-u-lg-12 am-g-u-md-12 am-u-sm-12">
                 <div class="fabu1" style="background:#eee;">
-                    <div class="fabu_showtitle title_tip_first">请选择你的服务领域:</div>
+                    <div class="fabu_showtitle title_tip_first">请选择你的需求范围:</div>
                     <button id='select_class1' data-content="" class="am-btn am-btn-warning am-radius " style="display:none;margin-bottom: 0.5rem">btn1</button>
                     <button id='select_class2' data-content="" class="am-btn am-btn-warning am-radius " style="display:none;margin-bottom: 0.5rem">btn2</button>
                     <div class="fb_container sub_title_tip">
@@ -194,16 +187,16 @@
                     <div class="fabu_showtitle title_tip">请选择你的需求类型</div>
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 20px;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback" style="padding-bottom:20px;">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">服务类型</label>
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">需求类型</label>
                             <div class="am-u-sm-8" style="float: left;margin-left: 30px;">
                                 <label class="am-checkbox-inline">
-                                    <input type="radio" disabled name="service_type" value="0" data-am-ucheck @if($data['type'] === '0') checked @endif> 一般服务
+                                    <input type="radio"  name="service_type" value="0" data-am-ucheck checked > 一般服务
                                 </label>
                                 <label class="am-checkbox-inline">
-                                    <input type="radio" disabled name="service_type" value="1" data-am-ucheck @if($data['type'] === '1') checked @endif> 实习中介
+                                    <input type="radio"  name="service_type" value="1" data-am-ucheck @if($data['type'] === '1') checked @endif> 实习中介
                                 </label>
                                 <label class="am-checkbox-inline">
-                                    <input type="radio" disabled  name="service_type" value="2" data-am-ucheck @if($data['type'] === '2') checked @endif> 专业问答
+                                    <input type="radio"  name="service_type" value="2" data-am-ucheck @if($data['type'] === '2') checked @endif> 专业问答
                                 </label>
                             </div>
                         </div>
@@ -219,16 +212,16 @@
         <div class="fabu_step1 am-g am-g-fixed">
             <div class="am-u-lg-12 am-g-u-md-12 am-u-sm-12">
                 <div class="fabu1" style="background:#eee;margin-bottom: 10px;height:300px;">
-                    <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">服务基本信息</div>
+                    <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">需求基本信息</div>
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 20px;">
                         <p id="baseinfo_tel" class="am-form-label base_info">联系电话:<span>fdsfsdf</span></p>
                         <p id="baseinfo_email" class="am-form-label base_info">联系邮箱:<span>gfdgdfgfd</span></p>
-                        <p id="baseinfo_type" class="am-form-label base_info">服务类型:<span>hfghfgh</span></p>
-                        <p id="baseinfo_class" class="am-form-label base_info">服务类别:<span>rwerwe</span></p>
+                        <p id="baseinfo_type" class="am-form-label base_info">需求类型:<span>hfghfgh</span></p>
+                        <p id="baseinfo_class" class="am-form-label base_info">需求类别:<span>rwerwe</span></p>
                     </div>
                 </div>
-                <div class="fabu1" style="background:#eee;margin-bottom:10px;">
-                    <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">设置服务金额</div>
+                <div class="fabu1" style="background:#eee;">
+                    <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">设置需求赏金</div>
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
 						0px;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
@@ -237,26 +230,17 @@
                                 <label class="am-checkbox-inline">
                                     <input type="checkbox" id="is_NoPrice" onclick="setNonePrice(this);" value="价格面议" data-am-ucheck> 价格面议
                                 </label>
-                                <input type="text" id="service_price" class="am-form-field" placeholder="单次服务价格" style="float: left;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
-						0px;margin-top:20px;">
-                        <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">展示网站</label>
-                            <div class="am-u-sm-4" style="float: left;margin-left: 30px;">
-                                <input type="text" id="home_page" class="am-form-field" placeholder="(选填)展示网站eg:www.xxxx.com">
+                                <input type="text" id="service_price" class="am-form-field" placeholder="单次需求价格" style="float: left;">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="fabu1" style="background:#eee;height: 650px;">
-                    <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">服务信息填写</div>
+                    <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">需求信息填写</div>
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
 						0px;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">服务标题</label>
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">需求标题</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
                                 <input type="service_title" id="doc-ipt-3-a" class="am-form-field" placeholder="好的标题更能吸引眼球哟">
                             </div>
@@ -292,10 +276,9 @@
                         </div>
                     </div>
 
-                    <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
-						0px;margin-top: 100px;">
+                    <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 20px;margin-top: 10rem;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">上传服务照片</label>
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">上传需求照片</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
                                 <input type="text" style="display: none" id="pic_info">
                                 <img src="/images/add.png" style="width: 50px;height: 50px;" id="insert_img">
@@ -322,8 +305,7 @@
             </div>
         </div>
     </div>
-    @endif
-    @include('demo.protocol')
+@include('demo.protocol')
 @endsection
 @section('custom-script')
     <script type="text/javascript">
@@ -370,7 +352,7 @@
             var guide_pic = $('#step2-2');
 
             if(btn1.attr('data-content') === "" ||btn2.attr('data-content') === ""){
-                swal('',"请选择服务领域","error");
+                swal('',"请选择需求所属领域","error");
                 return;
             }
             if(email.val() === ""){
@@ -538,7 +520,6 @@
             var btn2 = $('#select_class2');//class2  btn2.attr('data-content')
             var type = $('input:radio[name="service_type"]:checked').val(); //服务类型
             var price = $('#service_price');
-            var home_page = $('#home_page');
             var title = $('#doc-ipt-3-a');
             var pictureIndex = $("input[id='pic_info']");//图片index
 
@@ -556,19 +537,19 @@
                 formdata.append('price',-1);
             }else{
                 if(price.val() ==="" || price.val() ===null){
-                    swal("","请设置服务价格","error");
+                    swal("","请设置需求赏金","error");
                     return;
                 }else{
                     formdata.append('price',price.val());
                 }
             }
             if(title.val() ==="" ||title.val() ===null){
-                swal("","请设置服务标题","error");
+                swal("","请设置需求标题","error");
                 return;
             }else
                 formdata.append('title',title.val());
             if(description ===""){
-                swal("","请认真填写服务描述","error");
+                swal("","请认真填写需求描述","error");
                 return;
             }else
                 formdata.append('describe',description);
@@ -594,9 +575,8 @@
             formdata.append('class1',btn1.attr('data-content'));
             formdata.append('class2',btn2.attr('data-content'));
             formdata.append('type',type);
-            formdata.append('home_page',home_page.val());
             $.ajax({
-                url: "/service/genlpublish",
+                url: "/demands/PublishPost",
                 type: "post",
                 dataType: 'text',
                 cache: false,

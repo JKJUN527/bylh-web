@@ -24,6 +24,7 @@ use App\Userinfo;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DemandsController extends Controller {
 
@@ -34,17 +35,22 @@ class DemandsController extends Controller {
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-       # if($data['uid']==0 || $data['type']!=1){//先登录|登录用户非服务用户
-         #   return view('account.login',['data'=>$data]);
-      #  }
+        if($data['uid']==0){//先登录|登录用户非服务用户
+            return view('account.login',['data'=>$data]);
+        }
         //返回一般服务页面所需数据
-        $data['serviceclass1']=Serviceclass1::where('type',0)->orderBy('updated_at','asc')->get();
-        $data['serviceclass2']=Serviceclass2::where('type',0)->orderBy('updated_at','asc')->get();
-        $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
-
+        $data['serviceclass1']=Serviceclass1::orderBy('updated_at','asc')->get();
+        $data['serviceclass2']=Serviceclass2::orderBy('updated_at','asc')->get();
+//        $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
+        $data['province'] = Region::where('parent_id',0)->get();
+        $data['city'] = Region::where('parent_id','!=',0)->get();
+        //确认联系方式
+        $data['userinfo'] = User::where('uid',$data['uid'])
+            ->select('tel','mail')
+            ->first();
        # return $data;
 //        return view('demands.needappointment', ["data" => $data]);
-        return view('demands.demandPublishIndex', ["data" => $data]);
+        return view('demands.demandPublish', ["data" => $data]);
     }
 
     //需求发布提交方法
@@ -75,7 +81,8 @@ class DemandsController extends Controller {
                     $pictures = explode('@', $picture);
                     $picfilepath = "";
                     foreach ($pictures as $Item) {//对每一个照片进行操作。
-
+                        if($Item === "")
+                            continue;
                         $pic = $request->file('pic' . $Item);//取得上传文件信息
                         if ($pic->isValid()) {//判断文件是否上传成功
                             //扩展名
@@ -98,10 +105,14 @@ class DemandsController extends Controller {
                 $demands->city = $request->input('city');
                 $demands->class1_id = $request->input('class1_id');
                 $demands->class2_id = $request->input('class2_id');
-                $demands->class3_id = $request->input('class3_id');
                 $demands->describe = $request->input('describe');
                 $demands->price = $request->input('price');
                     if ($demands->save()) {
+                        //设置服务商电话及邮箱
+                        $tel = $request->input('tel');
+                        $email = $request->input('email');
+                        $userinfo = Userinfo::where('uid',$data['uid'])
+                            ->update(['tel'=>$tel,'mail'=>$email]);
                         $data['status'] = 200;
                         $data['msg'] = "操作成功";
                         $data['services'] = $this->recommendServices($request);

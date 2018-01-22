@@ -77,13 +77,21 @@
                             <?php $i=0 ?>
                             @foreach($data['demandsList'] as $demand)
                                 @if($i++ <=3)
+                                    @if($demand->picture != null)
+                                        <?php
+                                        $pics = explode(';', $demand->picture);
+                                        $baseurl = explode('@', $pics[0])[0];
+                                        $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                        $imagepath = explode('@', $pics[0])[1];
+                                        ?>
+                                    @endif
                                     <p class="m-big">
                                         <a href="#">
                                             <i><img src="
                                                 @if($demand->picture == "" || $demand->picture == null)
                                                     {{asset('images/f3.png')}}
                                                 @else
-                                                        {{$demand->picture}}
+                                                    {{$baseurl}}{{$imagepath}}
                                                 @endif
                                                         "/></i>
                                             <span class="m-title">{{$demand->title}}</span>
