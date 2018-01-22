@@ -286,11 +286,15 @@ class OrderController extends Controller {
             if($data['demand']->uid != $data['uid']){//用户不能查看非自己发布需求
                 return redirect()->back();
             }
-            $data['selectlist'] = Datetemp::where('did',$data['uid'])
+            $data['selectlist'] = DB::table('bylh_datetemp')
+                ->select('bylh_datetemp.sid','ename','elogo','price','brief','city','bylh_datetemp.created_at')
+                ->leftjoin('bylh_serviceinfo','bylh_serviceinfo.uid','bylh_datetemp.sid')
+                ->where('did',$data['uid'])
                 ->where('demand_id',$request->input('did'))
                 ->where('state',0)
-                ->paginate(20);//默认每页显示20条报价记录
+                ->paginate(10);//默认每页显示20条报价记录
         }
+//        return $data;
         return view('demands.needappointment', ["data" => $data]);
     }
     //需求发布用户，选择相应的服务商后，删除对应的其他服务提供temp信息。
@@ -327,6 +331,7 @@ class OrderController extends Controller {
                 $data['msg'] = "此服务用户未预约该需求";
             }
         }
+        return $data;
     }
 
     //查看与自己相关订单列表

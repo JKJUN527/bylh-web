@@ -692,7 +692,7 @@ class ServiceController extends Controller
                     ->where('state',0)
                     ->take(12)
                     ->get();
-                $data['userinfo'] =where('uid',$uid)->first();
+                $data['userinfo'] =Userinfo::where('uid',$uid)->first();
                 return view('service/getallservices',['data'=>$data]);
             }else{
                 return redirect()->back();
