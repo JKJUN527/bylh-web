@@ -270,7 +270,7 @@ class OrderController extends Controller {
         }
 
         //return $data;
-        return view('order/detail',['data'=>$data]);
+        return view('order/getdetail',['data'=>$data]);
     }
 
     //需求用户选择服务商主页
