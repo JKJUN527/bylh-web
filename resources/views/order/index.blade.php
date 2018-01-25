@@ -59,7 +59,7 @@
                                                         <div class="item-info">
                                                             <div class="item-basic-info">
                                                                 <a href="/order/detail?order_id={{$order->id}}">
-                                                                    <p>{{$data["orderinfo"][$order->service_id]->title}}</p>
+                                                                    <p>{{$data["orderinfo"][$order->id]->title}}</p>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -135,7 +135,7 @@
                                                             <div class="item-info">
                                                                 <div class="item-basic-info">
                                                                     <a href="/order/detail?order_id={{$order->id}}">
-                                                                        <p>{{$data["orderinfo"][$order->service_id]->title}}</p>
+                                                                        <p>{{$data["orderinfo"][$order->id]->title}}</p>
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -210,7 +210,7 @@
                                                             <div class="item-info">
                                                                 <div class="item-basic-info">
                                                                     <a href="/order/detail?order_id={{$order->id}}">
-                                                                        <p>{{$data["orderinfo"][$order->service_id]->title}}</p>
+                                                                        <p>{{$data["orderinfo"][$order->id]->title}}</p>
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -285,7 +285,7 @@
                                                             <div class="item-info">
                                                                 <div class="item-basic-info">
                                                                     <a href="/order/detail?order_id={{$order->id}}">
-                                                                        <p>{{$data["orderinfo"][$order->service_id]->title}}</p>
+                                                                        <p>{{$data["orderinfo"][$order->id]->title}}</p>
                                                                     </a>
                                                                 </div>
                                                             </div>
