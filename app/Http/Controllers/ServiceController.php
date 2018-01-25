@@ -608,8 +608,8 @@ class ServiceController extends Controller {
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-        if ($request->has('sid') && $request->has('type')) {
-            $sid = $request->input('sid');
+        if ($request->has('id') && $request->has('type')) {
+            $sid = $request->input('id');
             switch ($request->input('type')) {
                 case 0:
                     $data['detail'] = Genlservices::where('id', $sid)
@@ -655,9 +655,9 @@ class ServiceController extends Controller {
                 ->orderby('created_at', 'desc')
                 ->paginate(10);//默认一页显示10条评价
             //服务商服务相关信息
-            $data['serviceinfo'] = Serviceinfo::where('uid', $data['detail']->uid)->first();
+            $data['serviceinfo'] = Serviceinfo::where('id', $data['detail']->id)->first();
         }
-//        return $data;
+        //return $data;
         return view('service.detail', ['data' => $data]);
     }
     //获取服务用户发布所有需求及服务列表

@@ -226,7 +226,7 @@
                                 @foreach($data["result"]["services"] as $s)
                                     <li>
                                         <div class="am-gallery-item">
-                                            <a href="/service/detail?id={{$s->id}}" class="">
+                                            <a href="/service/detail?id={{$s->id}}&type=0" class="">
                                                 <img src="{{asset("images/f1.jpg")}}"/>
                                                 <h3 class="am-gallery-title">{{$s->title}}</h3>
                                                 <div class="am-gallery-desc">{!! $s->describe !!}</div>
@@ -254,65 +254,20 @@
                         </div>
                     </div>
                     <div class="am-g am-g-fixed">
+                        @foreach($data["result"]["services"] as $s)
                         <div class="am-u-lg-3 am-u-md-4" style="padding:10px;">
-                            <a href="#">
-                                <img src="images/img_06.jpg">
+                            <a href="/service/detail?id={{$s->id}}&type=1">
+                                <img src="{{asset("images/img_06.jpg")}}">
                             </a>
                             <div class="left_bottom"
                                  style="background-color: gray;text-align: center;padding: 3px;color:#fff;">
                                 <a href="#" style="color: #fff">
-                                    发布类似项目
+                                    {{$s->title}}
                                 </a>
-                                <p>获得众多设计创意，体验一呼百应</p>
+                                <p>{!! $s->describe !!}</p>
                             </div>
                         </div>
-                        <div class="am-u-lg-5 am-u-md-4" style="padding: 10px;float: left;">
-                            <ul>
-                                <li>
-                                    <div class="box1"></div>
-                                    <div class="outer-con " style="padding: 10px;">
-                                        <a href="# "><img src="images/f2.jpg" style="width: auto;"/>
-                                            <div class="title ">
-                                                专业1
-                                            </div>
-                                            <div class="sub-title ">
-                                                好评率 100%
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">
-                            <ul>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;宝贝起名</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1500</font>&nbsp;&nbsp;&nbsp;&nbsp;昆利达logo及名片设计</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥2000</font>&nbsp;&nbsp;&nbsp;&nbsp;业态装修布局图</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥300</font>&nbsp;&nbsp;&nbsp;&nbsp;java程序bug调试</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥70</font>&nbsp;&nbsp;&nbsp;&nbsp;帮助排队取号</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥30</font>&nbsp;&nbsp;&nbsp;&nbsp;测星座，测运势，塔罗牌占卜</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                            </ul>
-                            <ul>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1000</font>&nbsp;&nbsp;&nbsp;&nbsp;室内装修设计</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥10000</font>&nbsp;&nbsp;&nbsp;&nbsp;web网页设计</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥4000</font>&nbsp;&nbsp;&nbsp;&nbsp;本科毕业论文编写</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;电脑装系统</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥90</font>&nbsp;&nbsp;&nbsp;&nbsp;照片转漫画</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥150</font>&nbsp;&nbsp;&nbsp;&nbsp;专业心理咨询</a><span
-                                            style="color: gray;float: right;">查看详情</span></li>
-                            </ul>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             @endif
@@ -334,165 +289,18 @@
                         <div class="am-u-lg-12 am-u-md-12" style="padding:10px;height: 80%;">
                             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
   							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }">
+                                @foreach($data["result"]["services"] as $s)
                                 <li>
                                     <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="远方 有一个地方 那里种有我们的梦想"/>
-                                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
+                                        <a href="/service/detail?id={{$s->id}}&type=2" class="">
+                                            <img src="{{asset("images/f1.jpg")}}" alt=""/>
+                                            <h3 class="am-gallery-title">{{$s->title}}</h3>
+                                            <div class="am-gallery-desc">{!! $s->describe !!}</div>
                                         </a>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="某天 也许会相遇 相遇在这个好地方"/>
-                                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="不要太担心 只因为我相信"/>
-                                            <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="终会走过这条遥远的道路"/>
-                                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="终会走过这条遥远的道路"/>
-                                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="终会走过这条遥远的道路"/>
-                                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
+                                @endforeach
                             </ul>
-                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
-  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }">
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="远方 有一个地方 那里种有我们的梦想"/>
-                                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="某天 也许会相遇 相遇在这个好地方"/>
-                                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="不要太担心 只因为我相信"/>
-                                            <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="终会走过这条遥远的道路"/>
-                                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="终会走过这条遥远的道路"/>
-                                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="images/f1.jpg" class="">
-                                            <img src="images/f1.jpg" alt="终会走过这条遥远的道路"/>
-                                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                            <div class="am-gallery-desc">2375-09-26</div>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!--
-                                <a href="#">
-                                    <img src="../images/img_06.jpg">
-                                </a>
-                                <div class="left_bottom" style="background-color: gray;text-align: center;padding: 3px;color:#fff;">
-                                    <a href="#" style="color: #fff">
-                                        发布类似项目
-                                    </a>
-                                    <p>获得众多设计创意，体验一呼百应</p>
-                                </div>
-                            </div>
-                            <div class="am-u-lg-5 am-u-md-4" style="padding: 10px;float: left;">
-                                <ul>
-                                    <li>
-                                        <div class="box1"></div>
-                                        <div class="outer-con " style="padding: 10px;">
-                                        <a href="# "><img src="../images/f2.jpg" style="width: auto;" />
-                                            <div class="title ">
-                                                专业1
-                                            </div>
-                                            <div class="sub-title ">
-                                                好评率 100%
-                                            </div>
-                                        </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">
-                                        <ul>
-                                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;宝贝起名</a><span style="color: gray;float: right;">查看详情</span></li>
-                                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1500</font>&nbsp;&nbsp;&nbsp;&nbsp;昆利达logo及名片设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥2000</font>&nbsp;&nbsp;&nbsp;&nbsp;业态装修布局图</a><span style="color: gray;float: right;">查看详情</span></li>
-                                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥300</font>&nbsp;&nbsp;&nbsp;&nbsp;java程序bug调试</a><span style="color: gray;float: right;">查看详情</span></li>
-                                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥70</font>&nbsp;&nbsp;&nbsp;&nbsp;帮助排队取号</a><span style="color: gray;float: right;">查看详情</span></li>
-                                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥30</font>&nbsp;&nbsp;&nbsp;&nbsp;测星座，测运势，塔罗牌占卜</a><span style="color: gray;float: right;">查看详情</span></li>
-                                        </ul>
-                                        <ul>
-                                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1000</font>&nbsp;&nbsp;&nbsp;&nbsp;室内装修设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥10000</font>&nbsp;&nbsp;&nbsp;&nbsp;web网页设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥4000</font>&nbsp;&nbsp;&nbsp;&nbsp;本科毕业论文编写</a><span style="color: gray;float: right;">查看详情</span></li>
-                                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;电脑装系统</a><span style="color: gray;float: right;">查看详情</span></li>
-                                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥90</font>&nbsp;&nbsp;&nbsp;&nbsp;照片转漫画</a><span style="color: gray;float: right;">查看详情</span></li>
-                                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥150</font>&nbsp;&nbsp;&nbsp;&nbsp;专业心理咨询</a><span style="color: gray;float: right;">查看详情</span></li>
-                                        </ul>
-                            </div>
-                        -->
                         </div>
                     </div>
                 </div>
