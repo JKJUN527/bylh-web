@@ -353,8 +353,8 @@ class DemandsController extends Controller {
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
 
-        if($request->has('did')){
-            $data['detail'] = Demands::find($request->input('did'));
+        if($request->has('id')){
+            $data['detail'] = Demands::find($request->input('id'));
             if($data['detail']){
                 $uid = $data['detail']->uid;
                 //查找对应用户的基本信息
@@ -381,7 +381,7 @@ class DemandsController extends Controller {
             }
 
         }
-//        return $data;
+        //return $data;
         return view('demands/detail',['data'=>$data]);
     }
     //保存编辑服务内容
