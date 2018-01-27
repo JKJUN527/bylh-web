@@ -84,12 +84,24 @@
                                         @foreach($data["listMessages"] as $m)
                                             <div class="am-message am-u-lg-12 am-u-md-12 am-u-sm-12">
                                                 <div class="message-title am-u-lg-3 am-u-md-3 am-u-sm-3">
-                                                    <img src="{{asset("images/f1.jpg")}}" class="am-img">
+                                                    <img src="
+                                                        @if($data["user"][$m["from_id"]]->type == 0)
+                                                            {{asset("images/f1.jpg")}}
+                                                        @elseif($data["user"][$m["from_id"]]->type == 1)
+                                                            {{$data["user"][$m["from_id"]]->photo}}
+                                                        @else
+                                                            {{$data["user"][$m["from_id"]]->elogo}}
+                                                        @endif
+                                                            " class="am-img">
                                                 </div>
                                                 <div class="message-id am-u-lg-5 am-u-md-5 am-u-sm-5">
                                                     <div class="p-title">
                                                         <h2>
-                                                            {{$data["user"][$m["from_id"]][0]["username"]}}
+                                                            @if($data["user"][$m["from_id"]]->type == 0)
+                                                                系统消息
+                                                            @else
+                                                                {{$data["user"][$m["from_id"]]->username}}
+                                                            @endif
                                                         </h2>
                                                     </div>
                                                     <div class="p-content"
@@ -119,7 +131,9 @@
 
     </div>
 @endsection
-
+@section('aside')
+    @include('demo.aside',['type'=>$data['type']])
+@endsection
 
 @section('custom-script')
     <script type="text/javascript">

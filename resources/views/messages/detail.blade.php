@@ -93,7 +93,13 @@
                                                     @if($item["from_id"] == $data["uid"])
                                                         <li class="am-comment am-comment-flip am-comment-danger">
                                                             <a>
-                                                                <img src="{{asset("images/touxiang.jpg")}}" alt=""
+                                                                <img src="
+                                                                     @if($data['userinfo']['self']->type == 1)
+                                                                        {{$data['userinfo']['self']->photo}}
+                                                                     @else
+                                                                        {{$data['userinfo']['self']->elogo}}
+                                                                     @endif
+                                                                        " alt=""
                                                                      class="am-comment-avatar" width="48" height="48"/>
                                                             </a>
 
@@ -116,7 +122,14 @@
                                                     @else
                                                         <li class="am-comment am-comment-highlight">
                                                             <a>
-                                                                <img src="{{asset("images/touxiang.jpg")}}" alt=""
+                                                                <img src="
+                                                                 @if($data['userinfo']['guest']->type == 0)
+                                                                    {{asset("images/touxiang.jpg")}}
+                                                                 @elseif($data['userinfo']['guest']->type == 1)
+                                                                    {{$data['userinfo']['guest']->photo}}
+                                                                 @else
+                                                                    {{$data['userinfo']['guest']->elogo}}
+                                                                 @endif " alt=""
                                                                      class="am-comment-avatar" width="48" height="48"/>
                                                             </a>
 
@@ -125,12 +138,12 @@
                                                                     <!--<h3 class="am-comment-title">评论标题</h3>-->
                                                                     <div class="am-comment-meta">
                                                                         <a class="am-comment-author">
-                                                                            @if(is_array($data["userinfo"]) && ($data['userinfo'] == null || $data['userinfo'] == ""))
+                                                                            @if(is_array($data['userinfo']['guest']) && ($data['userinfo']['guest']->username == null || $data['userinfo']['guest']->username == ""))
                                                                                 "未命名"
-                                                                            @elseif(isset($data["userinfo"]["real_name"]))
-                                                                                {{$data["userinfo"]["real_name"]}}
-                                                                            @elseif(!is_array($data["userinfo"]))
-                                                                                {{$data["userinfo"]}}
+                                                                            @elseif(isset($data["userinfo"]['guest']->ename))
+                                                                                {{$data["userinfo"]['guest']->ename}}
+                                                                            @else
+                                                                                {{$data["userinfo"]['guest']->username}}
                                                                             @endif
                                                                         </a>
                                                                         回复于
@@ -201,7 +214,9 @@
 
     </div>
 @endsection
-
+@section('aside')
+    @include('demo.aside',['type'=>$data['type']])
+@endsection
 @section('custom-script')
     <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
     <script type="text/javascript">

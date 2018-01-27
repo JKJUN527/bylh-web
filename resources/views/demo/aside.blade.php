@@ -55,7 +55,7 @@
             <p><i class="am-icon-qq"></i>信息中心</p>
             <ul>
                 <li><a href="{{asset('message')}}">站内信</a></li>
-                <li><a href="/news">我的消息</a></li>
+                {{--<li><a href="/message">我的消息</a></li>--}}
             </ul>
         </li>
     </ul>

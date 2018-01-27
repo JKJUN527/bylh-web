@@ -14,6 +14,7 @@ use App\Personinfo;
 use App\User;
 use App\Userinfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller {
@@ -64,36 +65,48 @@ class MessageController extends Controller {
         }
         foreach ($temp as $item) {
             $type = User::find($item);
+            $data['user'][$item][0]['type'] = $type['type'];
             if($type['type']!=0) {
-                $data['user'][$item] = User::select('username')
-                    ->where('uid', '=', $item)
-                    ->get();
+                if($type['type'] == 1){
+                    $data['user'][$item] = DB::table('bylh_users')
+                        ->leftjoin('bylh_userinfo','bylh_userinfo.uid','bylh_users.uid')
+                        ->select('bylh_users.type','username','photo')
+                        ->where('bylh_users.uid', '=', $item)
+                        ->first();
+                }else{
+                    $data['user'][$item] = DB::table('bylh_users')
+                        ->leftjoin('bylh_serviceinfo','bylh_serviceinfo.uid','bylh_users.uid')
+                        ->select('bylh_users.type','username','elogo')
+                        ->where('bylh_users.uid', '=', $item)
+                        ->first();
+                }
+
             }elseif ($type['type']==0){
-                $data['user'][$item][0]['username']="系统消息";
+//                $data['user'][$item][0]['username']="系统消息";
+                $data['user'][$item] = DB::table('bylh_users')
+                    ->select('type','username')
+                    ->where('uid', '=', $item)
+                    ->first();
             }
         }
 
-        //return $data;
+//        return $data;
         return view('messages.index', ['data' => $data]);
     }
 
     //根据用户id，判断用户类型，并返回用户基本信息
     public function getUserInfo($uid = 0) {
-        if($uid){
-            $type = User::where('uid', '=', $uid)
-                ->get();
+            $type = User::find($uid);
             //var_dump($type);
             //var_dump($type[0]['attributes']['type']);
             //var_dump($type['attributes']['type']);
             $data = null;
-            if ($type[0]['attributes']['type'] == 0) {//管理员
+            if ($type['type'] == 0) {//管理员
                 $data = 'admin';//管理员头像可以用一个固定图片替代
-
             } else{//普通用户
                 $data = Userinfo::where('uid', '=', $uid)
                     ->first();
             }
-        }
         return $data;
     }
 
@@ -209,12 +222,12 @@ class MessageController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
-        $to_id = AuthController::getUid();
+        $to_id = $data['uid'];
 
         if ($to_id == 0) {
             $data['status'] = 400;
             $data['msg'] = "用户未登陆";
-//            return view('account.register');
+            return view('account.login');
         }
 
         if (!$request->has('id')) {
@@ -228,8 +241,10 @@ class MessageController extends Controller {
         if ($id != "" && $to_id != "") {
             $data['message'] = Message::where('is_delete', 0)
                 ->where(function ($query) use ($id, $to_id) {
-                    $query->where('from_id', $to_id)->where('to_id', $id)
-                        ->orWhere('from_id', $id)->where('to_id', $to_id);
+                    $query->where('from_id', $to_id)->where('to_id', $id);
+                })
+                ->orWhere(function ($query2) use ($id, $to_id) {
+                    $query2->where('from_id', $id)->where('to_id', $to_id);
                 })
                 ->orderBy('created_at', 'asc')
                 ->get();
@@ -238,14 +253,39 @@ class MessageController extends Controller {
                 $num = Message::where('mid',$item['mid'])
                     ->update(['is_read' => 1]);
             }
-            $data['userinfo'] = MessageController::getUserInfo($id);
+            $type = User::find($id);
+            $data['userinfo']['guest'] = MessageController::getmessageUserinfo($id,$type['type']);
+            $data['userinfo']['self'] = MessageController::getmessageUserinfo($to_id,$data['type']);
         }
 
-        //return $data;
-
+//        return $data;
         return view('messages.detail', ['data' => $data]);
     }
 
+    public function getmessageUserinfo($uid,$type){
+        //回传用户名、头像、type类型
+        if($type != 0) {
+            if($type == 1){
+                $data = DB::table('bylh_users')
+                    ->leftjoin('bylh_userinfo','bylh_userinfo.uid','bylh_users.uid')
+                    ->select('bylh_users.type','username','photo')
+                    ->where('bylh_users.uid', '=', $uid)
+                    ->first();
+            }else{
+                $data = DB::table('bylh_users')
+                    ->leftjoin('bylh_serviceinfo','bylh_serviceinfo.uid','bylh_users.uid')
+                    ->select('bylh_users.type','username','ename','elogo')
+                    ->where('bylh_users.uid', '=', $uid)
+                    ->first();
+            }
+        }elseif ($type ==0){
+            $data = DB::table('bylh_users')
+                ->select('type','username')
+                ->where('uid', '=', $uid)
+                ->first();
+        }
+        return $data;
+    }
     public function test(Request $request) {
         echo "test";
         $request->session()->put('uid', 1);
