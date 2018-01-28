@@ -60,7 +60,7 @@ class ValidationController extends Controller
     public static function sendSMS ($phone)
     {
             $bmobSms = new \BmobSms();
-            $res = $bmobSms->sendSmsVerifyCode($phone, "电竞猎人");
+            $res = $bmobSms->sendSmsVerifyCode($phone, "不亦乐乎");
             //var_dump($res);
             if($res){
                 return 1;
