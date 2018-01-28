@@ -18,7 +18,7 @@
                 <div class="m-progress-list">
 								<span class="step-1 step">
                                    <em class="u-progress-stage-bg"></em>
-                                   <i class="u-stage-icon-inner">1<em class="bg"></em></i>
+                                   <i class="u-stage-icon-inner">1<em class="bg" style="background-image: url(../images/sprite.png);background-position: -79px -135px;width: 19px;height: 19px;"></em></i>
                                    <p class="stage-name">需求方支付</p>
                                 </span>
                     <span class="step-2 step">
