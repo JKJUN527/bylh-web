@@ -53,7 +53,6 @@
             width: 20%;
         }
     </style>
-    <script src="../js/amazeui.dialog.min.js" type="text/javascript"></script>
 @endsection
 @section('content')
     <!--发布需求-->
@@ -220,8 +219,9 @@
                     <ul style="line-height: 28px;">
 
                         @foreach($data["otherDemands"] as $od)
-                        <li><a href="/demands/detail?id={{$od->id}}"><span style="color: #ff0000;font-weight: 700;">￥{{$od->price}}</span>&nbsp;{{$od->title}}</a>
-                        </li>
+                            <li><a href="/demands/detail?id={{$od->id}}"><span style="color: #ff0000;font-weight: 700;">￥{{$od->price}}</span>&nbsp;{{$od->title}}
+                                </a>
+                            </li>
                         @endforeach
 
                         {{--<li><a href="/" target="_blank" title="营销推广"><span style="color: #ff0000;font-weight: 700;">￥1000元</span>&nbsp;营销推广</a>--}}
@@ -243,35 +243,35 @@
                         {{--</li>--}}
 
                         {{--<li><a href="/" target="_blank" title="APP下载手机注册2元一单，进微信群每天签到0.5元"><span--}}
-                                        {{--style="color: #ff0000;font-weight: 700;">￥200元</span>&nbsp;APP下载手机注册2元一单，进微信群每天签到0.5元</a>--}}
+                        {{--style="color: #ff0000;font-weight: 700;">￥200元</span>&nbsp;APP下载手机注册2元一单，进微信群每天签到0.5元</a>--}}
                         {{--</li>--}}
 
                         {{--<li><a href="/" target="_blank" title="TB社区评价，2元一条，不需付钱，只要有TB号都可以做"><span--}}
-                                        {{--style="color: #ff0000;font-weight: 700;">￥50元</span>&nbsp;TB社区评价，2元一条，不需付钱，只要有TB号都可以做</a>--}}
+                        {{--style="color: #ff0000;font-weight: 700;">￥50元</span>&nbsp;TB社区评价，2元一条，不需付钱，只要有TB号都可以做</a>--}}
                         {{--</li>--}}
 
                         {{--<li><a href="/" target="_blank" title="手机秒变POS机，带你日赚3000，500元购物卡限量送"><span--}}
-                                        {{--style="color: #ff0000;font-weight: 700;">￥50元</span>&nbsp;手机秒变POS机，带你日赚3000，500元购物卡限量送</a>--}}
+                        {{--style="color: #ff0000;font-weight: 700;">￥50元</span>&nbsp;手机秒变POS机，带你日赚3000，500元购物卡限量送</a>--}}
                         {{--</li>--}}
 
                         {{--<li><a href="/" target="_blank" title="全民营销 扫码激活手机银行，充1元送10元话费"><span--}}
-                                        {{--style="color: #ff0000;font-weight: 700;">￥60元</span>&nbsp;全民营销--}}
-                                {{--扫码激活手机银行，充1元送10元话费</a></li>--}}
+                        {{--style="color: #ff0000;font-weight: 700;">￥60元</span>&nbsp;全民营销--}}
+                        {{--扫码激活手机银行，充1元送10元话费</a></li>--}}
 
                         {{--<li><a href="/" target="_blank" title="每日任务，可重复提交。最高每日99元。1分钟即可完成"><span--}}
-                                        {{--style="color: #ff0000;font-weight: 700;">￥50元</span>&nbsp;每日任务，可重复提交。最高每日99元。1分钟即可完成</a>--}}
+                        {{--style="color: #ff0000;font-weight: 700;">￥50元</span>&nbsp;每日任务，可重复提交。最高每日99元。1分钟即可完成</a>--}}
                         {{--</li>--}}
 
                         {{--<li><a href="/" target="_blank" title="回收支付宝红包/每天可做"><span--}}
-                                        {{--style="color: #ff0000;font-weight: 700;">￥100元</span>&nbsp;回收支付宝红包/每天可做</a></li>--}}
+                        {{--style="color: #ff0000;font-weight: 700;">￥100元</span>&nbsp;回收支付宝红包/每天可做</a></li>--}}
 
                         {{--<li><a href="/" target="_blank" title="手机app刷信用卡不求人，99钱管家来帮你的忙"><span--}}
-                                        {{--style="color: #ff0000;font-weight: 700;">￥50元</span>&nbsp;手机app刷信用卡不求人，99钱管家来帮你的忙</a>--}}
+                        {{--style="color: #ff0000;font-weight: 700;">￥50元</span>&nbsp;手机app刷信用卡不求人，99钱管家来帮你的忙</a>--}}
                         {{--</li>--}}
 
                         {{--<li><a href="/" target="_blank" title="广东地区微信填资料jiefeng，60元一单   QQ  1853261468"><span--}}
-                                        {{--style="color: #ff0000;font-weight: 700;">￥60元</span>&nbsp;广东地区微信填资料jiefeng，60元一单--}}
-                                {{--QQ 1853261468</a></li>--}}
+                        {{--style="color: #ff0000;font-weight: 700;">￥60元</span>&nbsp;广东地区微信填资料jiefeng，60元一单--}}
+                        {{--QQ 1853261468</a></li>--}}
 
                         {{--<li><a href="/" target="_blank" title="转发一条朋友圈"><span style="color: #ff0000;font-weight: 700;">￥120元</span>&nbsp;转发一条朋友圈</a>--}}
                         {{--</li>--}}
@@ -282,4 +282,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section("custom-script")
+    <script src="{{asset("js/amazeui.dialog.min.js")}}" type="text/javascript"></script>
 @endsection
