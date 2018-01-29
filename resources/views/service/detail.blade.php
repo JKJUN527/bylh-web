@@ -89,24 +89,37 @@
 
                     <div class="clear"></div>
                     <div class="main-bc-btn" style="padding-left:105px; padding-top:39px;padding-bottom: 42px;">
-                        <a class="btn-a buyfuwubtn" href="#"><button class="am-btn am-btn-danger am-btn-lg js-alert" type="button" style="width: 50%;"  data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">立即购买</button></a>
+                        <a class="btn-a buyfuwubtn" href="#"><button class="am-btn am-btn-danger am-btn-lg js-alert" type="button" style="width: 50%;" onclick="buy()">立即购买</button></a>
                         <div class="clear"></div>
+                        <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+                            <div class="am-modal-dialog">
+                                <div class="am-modal-bd" style="margin-top: 40%;">
+                                    <div>
+                                        <div class="service-title" style="font-size: 20px;font-weight: bold;padding: 20px;">
+                                            <a href="#">服务商信息：<span style="font-size: 18px;">米旭品牌设计</span></a>
+                                        </div>
+                                        <a href="#" ><img src="../images/wechat.png" style="width:300px;height:300px;"></a>
+                                        <div class="wechat" type="1" style="display: none;">请使用微信支付</div>
+                                        <div class="alibaba" type="2" style="font-size: 18px;background: #fff;font-weight: bold;padding: 20px;">请使用支付宝支付</div>
+                                    </div>
+                                    <div class="am-modal-footer">
+                                        <span class="am-modal-btn am-btn-lg" data-am-modal-confirm>确认支付</span>
+                                        <span class="am-modal-btn am-btn-lg" data-am-modal-cancel>取消支付</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <script>
-                        $('.js-alert').on('click', function() {
-                            var $actions = AMUI.dialog.actions({
-                                title: '扫一扫微信，完成支付',
-                                items: [
-                                    {content: '<a href="#" ><img src="images/wechat.png" style="width:40%;height:40%;text-align:center;"></a>'},
-                                ],
-                                onConfirm: function(index, target) {
-                                    console.log(index);
-                                    $actions.close();
+                        function buy(){
+                            // 浏览器窗口大小改变事件
+                            $('#my-alert').modal({
+                                onConfirm: function(){
+                                    alert("您已完成支付");
                                 }
                             });
-                            $actions.show();
-                        });
+                         }
                     </script>
                     <!--
                     <script type="text/javascript">
