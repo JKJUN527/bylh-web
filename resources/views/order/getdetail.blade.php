@@ -103,7 +103,7 @@
                                             <div class="item-info">
                                                 <div class="item-basic-info">
                                                     <a href="#">
-                                                        <p>{{$data["order"]->service_id}} <span class="require-data">这里应该显示名称</span>
+                                                        <p>{{$data["order"]->service_id or $data["order"]->demand_id}} <span class="require-data">这里应该显示名称</span>
                                                         </p>
                                                     </a>
                                                 </div>
