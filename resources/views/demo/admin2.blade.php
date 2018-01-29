@@ -14,6 +14,15 @@
     <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{asset('js/jquery-1.7.2.min.js')}}"></script>
     <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.js')}}"></script>
+
+    <style>
+        .require-data{
+            background: yellow;
+            color: #000;
+            font-style: italic;
+        }
+    </style>
+
     @section("custom-style")
     @show
 </head>
@@ -110,7 +119,7 @@
         </div>
     </div>
     @section('aside')
-        @show
+    @show
 </div>
 
 <script type="text/javascript" src="{{asset("js/jquery-1.7.2.min.js")}}"></script>

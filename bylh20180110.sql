@@ -50,7 +50,7 @@ CREATE TABLE `bylh_adverts` (
   `type` varchar(10) NOT NULL DEFAULT '0' COMMENT '0：大图广告1：小图广告2：文字广告',
   `location` varchar(5) NOT NULL DEFAULT '0' COMMENT '广告位置序号',
   `homepage` varchar(100) DEFAULT NULL COMMENT '公司主页',
-  `validity` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '广告有效期截止时间',
+  `validity` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '广告有效期截止时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`adid`)
@@ -59,7 +59,6 @@ CREATE TABLE `bylh_adverts` (
 -- ----------------------------
 -- Records of bylh_adverts
 -- ----------------------------
-INSERT INTO `bylh_adverts` VALUES ('1', '1', '', '1111', 'fgsdfds', '0', '0', null, '0000-00-00 00:00:00', '2017-12-20 23:37:18', '2017-12-20 23:37:43');
 INSERT INTO `bylh_adverts` VALUES ('2', '1', 'uhugh', 'ujjhuhjh', 'http://localhost/storage/adpic/2017-12-26-23-47-18-5a426f0623be4adpic.png', '0', '1', 'www,baidu.com', '2017-12-26 00:00:00', '2017-12-26 23:47:18', '2017-12-26 23:47:18');
 INSERT INTO `bylh_adverts` VALUES ('3', '1', 'testad2', 'empty', 'http://localhost/storage/adpic/2017-12-26-23-52-19-5a4270336efeeadpic.png', '1', '3', 'www.baidu.com', '2017-12-27 00:00:00', '2017-12-26 23:52:19', '2017-12-26 23:52:19');
 
