@@ -215,7 +215,7 @@
                     <div class="demo">
                         <ul>
                             @foreach($data['news'] as $news)
-                            <li><a target="_blank" href="#">
+                            <li><a to="/news/detail?nid={{$news->nid}}">
                                     <span style="font-size: 16px;color: #b84554;padding-right: 3px;">[{{$news->tag}}]</span>{{$news->content}}
                                 </a></li>
                             @endforeach
@@ -249,7 +249,7 @@
                             <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
                             <ul class="comcategory">
                                 @foreach($data['demands'] as $demands)
-                                <li><a href="#"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a></li>
+                                <li><a to="/demands/detail?uid={{$demands->uid}}"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -266,7 +266,7 @@
                             <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
                             <ul class="comcategory">
                                 @foreach($data['demands'] as $demands)
-                                    <li><a href="#"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a></li>
+                                    <li><a to="/demands/detail?uid={{$demands->uid}}">{{$demands->title}}</span><i>{{$demands->created_at}}</i></a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -283,7 +283,7 @@
                             <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
                             <ul class="comcategory">
                                 @foreach($data['demands'] as $demands)
-                                    <li><a href="#"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a></li>
+                                    <li><a to="/demands/detail?uid={{$demands->uid}}"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -320,7 +320,7 @@
                             @foreach($data['hotest1'] as $hotest1)
                             <li>
                                 <div class="am-gallery-item">
-                                    <a href="{{$hotest1->picture}}" class="">
+                                    <a to="/service/detail?uid={{$hotest1->uid}}">
                                         <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
                                         <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
                         <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
@@ -329,20 +329,20 @@
                     </li>
                     @endforeach
                     </ul>
-                    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                        @foreach($data['hotest1'] as $hotest1)
-                            <li>
-                                <div class="am-gallery-item">
-                                    <a href="{{$hotest1->picture}}" class="">
-                                        <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
-                                        <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
-                                        <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
-                                    </a>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
+                    {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-3--}}
+  							{{--am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
+                        {{--@foreach($data['hotest1'] as $hotest1)--}}
+                            {{--<li>--}}
+                                {{--<div class="am-gallery-item">--}}
+                                    {{-- <a to="/resume/add?rid={{$resume->rid}}">--}}
+                                        {{--<img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>--}}
+                                        {{--<h3 class="am-gallery-title">{{$hotest1->title}}</h3>--}}
+                                        {{--<div class="am-gallery-desc">{{$hotest1->created_at}}</div>--}}
+                                    {{--</a>--}}
+                                {{--</div>--}}
+                            {{--</li>--}}
+                        {{--@endforeach--}}
+                    {{--</ul>--}}
                 </div>
             </div>
         </div>
@@ -361,37 +361,37 @@
                     <div class="am-u-lg-6 am-u-md-6" style="padding:10px;">
                         <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
   							am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                                @for($i=0;$i<2;$i++)
+                                @foreach($data['hotest2'] as $hotest2)
                                 <li>
                                     <div class="am-gallery-item">
-                                        <a href="{{$hotest1->picture}}" class="">
-                                            <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
-                                            <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
-                                            <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
+                                        <a to="/service/detail?uid={{$hotest2->uid}}">
+                                            <img src="{{$hotest2->picture}}"  alt="{{$hotest2->title}}"/>
+                                            <h3 class="am-gallery-title">{{$hotest2->title}}</h3>
+                                            <div class="am-gallery-desc">{{$hotest2->created_at}}</div>
                                         </a>
                                     </div>
                                 </li>
-                                @endfor
+                                @endforeach
                         </ul>
-                        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  							am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                            @for($i=0;$i<2;$i++)
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="{{$hotest1->picture}}" class="">
-                                            <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
-                                            <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
-                                            <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
-                                        </a>
-                                    </div>
-                                </li>
-                            @endfor
-                        </ul>
+                        {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-2--}}
+  							{{--am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
+                            {{--@for($i=0;$i<2;$i++)--}}
+                                {{--<li>--}}
+                                    {{--<div class="am-gallery-item">--}}
+                                        {{--<a href="{{$hotest1->picture}}" class="">--}}
+                                            {{--<img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>--}}
+                                            {{--<h3 class="am-gallery-title">{{$hotest1->title}}</h3>--}}
+                                            {{--<div class="am-gallery-desc">{{$hotest1->created_at}}</div>--}}
+                                        {{--</a>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                            {{--@endfor--}}
+                        {{--</ul>--}}
                     </div>
                     <div class="am-u-lg-6 am-u-md-6" style="padding: 10px;">
                         <ul>
                             @foreach($data['hotest2'] as $hotest2)
-                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥{{$hotest2->price}}</font>&nbsp;&nbsp;&nbsp;&nbsp;{{$hotest2->title}}</a><span style="color: gray;float: right;">查看详情</span></li>
+                            <li><a to="/service/detail?uid={{$hotest2->uid}}"><font color="#b84554" style="font-size: 18px;">￥{{$hotest2->price}}</font>&nbsp;&nbsp;&nbsp;&nbsp;{{$hotest2->title}}</a><span style="color: gray;float: right;">查看详情</span></li>
                             @endforeach
                         </ul>
                     </div>
@@ -401,18 +401,18 @@
         <!--服务商推荐-->
         <div class="am-u-lg-4 am-u-md-4" style="padding-top: 20px;">
             <div class="request_rank">
-                <div class="rank_title" style="background:url(../images/tit_bg.jpg)no-repeat center;height: 114px;">
+                <div class="rank_title" style="background:url({{asset('images/tit_bg.jpg')}})no-repeat center;height: 114px;">
                     <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 20px;">服务商排行榜</p>
                 </div>
                 <div class="rank_content" style="margin: 0 60px;border-bottom: 2px solid #df3536;border-left: 2px solid #df3536;border-right: 2px solid #df3536;">
                     <ul>
-                        @foreach($data['hotest1'] as $hotest1)
+                        @foreach($data['serviceuser'] as $serviceuser)
                         <li style="text-align: center;">
                             <div class="box1"></div>
                             <div class="outer-con" style="padding: 10px;position: inherit;">
-                                <a href="# "><img src="{{$hotest1->picture}}" style="width: 50%;" />
+                                <a to="/service/detail?uid={{$serviceuser->uid}}"><img src="{{$serviceuser->elogo}}" style="width: 50%;" />
                                     <div class="title ">
-                                        {{$hotest1->title}}
+                                        {{$serviceuser->uid}}
                                     </div>
                                     <div class="right-panel">
                                         <button type="button" class="am-btn am-btn-danger">查看详情</button>
@@ -444,32 +444,32 @@
                     <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
                         <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
   							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                            @foreach($data['hotest1'] as $hotest1)
+                            @foreach($data['hotest3'] as $hotest3)
                                 <li>
                                     <div class="am-gallery-item">
-                                        <a href="{{$hotest1->picture}}" class="">
-                                            <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
-                                            <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
-                                            <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
+                                        <a to="/service/detail?uid={{$hotest3->uid}}">
+                                            <img src="{{$hotest3->picture}}"  alt="{{$hotest3->title}}"/>
+                                            <h3 class="am-gallery-title">{{$hotest3->title}}</h3>
+                                            <div class="am-gallery-desc">{{$hotest3->created_at}}</div>
                                         </a>
                                     </div>
                                 </li>
                             @endforeach
                         </ul>
-                        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
-  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                            @foreach($data['hotest1'] as $hotest1)
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="{{$hotest1->picture}}" class="">
-                                            <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
-                                            <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
-                                            <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
-                                        </a>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
+                        {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-6--}}
+  							{{--am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
+                            {{--@foreach($data['hotest1'] as $hotest1)--}}
+                                {{--<li>--}}
+                                    {{--<div class="am-gallery-item">--}}
+                                        {{--<a href="{{$hotest1->picture}}" class="">--}}
+                                            {{--<img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>--}}
+                                            {{--<h3 class="am-gallery-title">{{$hotest1->title}}</h3>--}}
+                                            {{--<div class="am-gallery-desc">{{$hotest1->created_at}}</div>--}}
+                                        {{--</a>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                            {{--@endforeach--}}
+                        {{--</ul>--}}
                     </div>
                 </div>
             </div>
