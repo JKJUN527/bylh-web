@@ -90,8 +90,9 @@
     }
     .demo_btn{
         width: 10rem;
-        height: 3rem;
+        height: 6rem;
         margin-top: 5rem;
+        font-size: large;
     }
 </style>
 @endsection
@@ -102,12 +103,12 @@
                 <div class="area clearfix">
                     <div class="category-content" id="guide_2">
 
-                        <div class="category" style="box-shadow:none ;margin-top: 2px;">
+                        <div class="category" style="box-shadow:none ;margin-top: 2px;background: white">
                             <ul class="category-list navTwo" id="js_climit_li">
                                 @foreach($data['serviceclass1'] as $serviceclass1)
                                     <li>
                                         <div class="category-info">
-                                            <h3 class="category-name b-category-name"><a class="ml-22" title="{{$serviceclass1->name}}">{{$serviceclass1->name}}</a></h3>
+                                            <h3 class="category-name b-category-name"><a class="ml-22" style="color: black;" title="{{$serviceclass1->name}} ">{{$serviceclass1->name}}</a></h3>
                                             <em>&gt;</em></div>
                                         <div class="menu-item menu-in top">
                                             <div class="area-in">
@@ -141,18 +142,18 @@
                 </div>
             </div>
         </div>
-        <div class="am-u-lg-7 am-u-sm-4 am-u-md-4">
+        <div class="am-u-lg-7 am-u-sm-4 am-u-md-4" style="margin-left: 180px;">
             <div class="pictureshow">
                 <ul class="">
-                    <li class=""><a href="introduction.html"><img src="{{asset('images/3.jpg')}}" style="width: 1200px;margin-left:-200px;height: 350px;"/></a>
+                    <li class=""><a href="introduction.html"><img src="{{asset('images/3.jpg')}}" style="width: 850px;margin-left:-200px;height: 377px;"/></a>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="am-u-lg-3">
+        <div class="am-u-lg-3" style="margin-left: -180px;">
             <div class="marqueenTwo" style="background:transparent;border:0px;">
-                <div class="demo">
+                <div class="demo" style="margin-left: 10rem;">
                     <button type="button" class="am-btn am-btn-warning am-round demo_btn">发布需求</button>
                     <button type="button" class="am-btn am-btn-primary am-round demo_btn">发布服务</button>
                 </div>

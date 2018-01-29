@@ -411,10 +411,10 @@
         var previewHolder = $("#preview-holder");
         var appendFileInput = true;
         $('#insert_img').click(function (event) {
-            var pictureIndex = $("input[id='pic_info']");
+//            var pictureIndex = $("input[id='pic_info']");
             var pictureIndex = $("input[id='pic_info']");
             num = pictureIndex.val().split("@");
-//            alert(num.length);
+            alert(num.length);
             if (appendFileInput && num.length <= 3) {
                 previewHolder.append("<input type='file' name='pic" + index + "' style='display: none' onchange='showPreview(this, index)'/>");
                 appendFileInput = false;
@@ -580,7 +580,6 @@
             console.log(pictureIndexArray);
             if (pictureIndexArray[0] !== "") {
                 for (var i in pictureIndexArray) {
-                    console.log(i);
                     if(pictureIndexArray[i + ''] === "")
                         break;
                     var index = 'pic' + pictureIndexArray[i + ''];
