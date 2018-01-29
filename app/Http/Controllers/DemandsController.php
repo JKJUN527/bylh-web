@@ -354,7 +354,8 @@ class DemandsController extends Controller {
         $data['type'] = AuthController::getType();
 
         if($request->has('id')){
-            $data['detail'] = Demands::find($request->input('id'));
+            $demand_id = $request->input('id');
+            $data['detail'] = Demands::find($demand_id);
             if($data['detail']){
                 $uid = $data['detail']->uid;
                 //查找对应用户的基本信息
@@ -362,14 +363,14 @@ class DemandsController extends Controller {
                 //用户其他需求信息
                 $data['otherDemands'] = Demands::where('uid',$uid)
                     ->where('state',0)
-                    ->where('state',0)
+                    ->where('id',"!=",$demand_id)
                     ->paginate(20);//默认显示20条
                 //需求对应回答、评论
                 $data['review'] = DB::table('bylh_demandreviews')
                     ->select('bylh_demandreviews.uid', 'username','photo','comments', 'bylh_demandreviews.created_at')
                     ->leftjoin('bylh_users', 'bylh_users.uid', '=', 'bylh_demandreviews.uid')
                     ->leftjoin('bylh_userinfo', 'bylh_userinfo.uid', '=', 'bylh_demandreviews.uid')
-                    ->where('did', '=', $request->input('did'))
+                    ->where('did', '=', $demand_id)
                     ->where('state',0)
                     ->orderby('bylh_demandreviews.created_at','desc')
                     ->paginate(10);//默认一页显示10条评价
@@ -381,7 +382,7 @@ class DemandsController extends Controller {
             }
 
         }
-        //return $data;
+//        return $data;
         return view('demands/detail',['data'=>$data]);
     }
     //保存编辑服务内容

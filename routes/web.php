@@ -114,7 +114,7 @@ Route::post('demands/deletedemand',['uses' => 'DemandsController@deletedemand'])
 //获取需求详情页
 Route::get('demands/detail',['uses' => 'DemandsController@detail']);
 //回答需求
-Route::get('demands/reviewDemand',['uses' => 'OrderController@reviewDemand']);
+Route::post('demands/reviewDemand',['uses' => 'OrderController@reviewDemand']);
 //需求高级搜索
 Route::any('demands/advanceSearch',['uses' => 'DemandsController@advanceIndex']);
 //获取发布需求列表

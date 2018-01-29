@@ -9,7 +9,7 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
 .screenBox dl.goodstype{border-bottom:#e6e6e6 1px dashed}
 .screenBox dl dt{float:left;height:30px}
 .screenBox dl dt{width:100px;height:22px;font-weight:600;padding-top:8px}
-.screenBox dl dd{position:relative;padding-bottom:5px;padding-left:0px;width:1000px;padding-right:48px;float:left;height:25px;overflow:hidden;padding-top:0px}
+.screenBox dl dd{position:relative;padding-bottom:5px;padding-left:0px;width:900px;padding-right:48px;float:left;height:25px;overflow:hidden;padding-top:0px}
 .screenBox dl dd a{line-height:14px;margin:9px 25px 0px 0px;display:inline-block;color:#333333;overflow:hidden;text-decoration:none}
 .screenBox dl dd a:hover{font-size:15px;color:#dd514c}
 .screenBox dl dd a.selected{font-size:15px;color:#dd514c}

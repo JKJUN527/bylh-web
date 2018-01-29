@@ -206,9 +206,20 @@
                         <li>
                             <div class="am-gallery-item">
                                 <a href="/demands/detail?id={{$demand->id}}">
-                                    <img src="{{asset("images/f1.jpg")}}" alt="img"/>
+                                    <img src="
+                                    @if($demand->picture != null)
+                                        <?php
+                                            $pics = explode(';', $demand->picture);
+                                            $baseurl = explode('@', $pics[0])[0];
+                                            $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                            $imagepath = explode('@', $pics[0])[1];
+                                        ?>
+                                        {{$baseurl}}{{$imagepath}}
+                                    @else
+                                        {{asset("images/f3.jpg")}}
+                                    @endif" alt="img" style="width: 175px;height: 175px;"/>
                                     <h3 class="am-gallery-title">{{$demand->title}}</h3>
-                                    <div class="am-gallery-desc">{{mb_substr($demand->describe, 0, 20, 'utf-8')}}</div>
+                                    <div class="am-gallery-desc">{{str_replace(array("</br>","</br","</b"),"",mb_substr($demand->describe, 0, 20, 'utf-8'))}}</div>
                                 </a>
                             </div>
                         </li>

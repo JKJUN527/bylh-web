@@ -65,7 +65,7 @@ class MessageController extends Controller {
         }
         foreach ($temp as $item) {
             $type = User::find($item);
-            $data['user'][$item][0]['type'] = $type['type'];
+//            $data['user'][$item][0]['type'] = $type['type'];
             if($type['type']!=0) {
                 if($type['type'] == 1){
                     $data['user'][$item] = DB::table('bylh_users')

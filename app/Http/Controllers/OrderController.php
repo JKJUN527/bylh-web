@@ -188,6 +188,11 @@ class OrderController extends Controller {
         $data['status']=400;
         $data['msg']="参数错误";
 
+        if ($uid == 0) {//用户未登陆
+            $data['msg']="登录后才能评论";
+            return $data;
+        }
+
         if($request->has('did') && $request->has('review')){
             $did = $request->input('did');
             $review = $request->input('review');
