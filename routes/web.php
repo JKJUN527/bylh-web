@@ -103,6 +103,9 @@ Route::post('order/reservationDemand',['uses' => 'OrderController@reservationDem
 Route::get('order/selectServiceIndex',['uses' => 'OrderController@selectServiceIndex']);
 Route::post('order/selectServicer',['uses' => 'OrderController@selectServicer']);
 
+//评论订单(包括服务，需求)
+Route::any("order/review", ['uses' => 'OrderController@reviewOrder']);
+
 //需求模块
 //发布需求页面及post方法
 Route::get('demands/demandPublishIndex',['uses' => 'DemandsController@demandPublishIndex']);

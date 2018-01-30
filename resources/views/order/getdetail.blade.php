@@ -222,17 +222,18 @@
                             </div>
 
                             {{--评论dialog--}}
-                            <div class="am-modal am-modal-alert" tabindex="-1" id="my-content">
+                            <div class="am-modal am-modal-alert" tabindex="-1" id="review-dialog">
                                 <div class="am-modal-dialog">
                                     <div class="am-modal-hd">发表评价</div>
                                     <div class="am-modal-bd">
                                         <label for="doc-ta-1"></label><br>
                                         {{--<p><input type="textarea" class="am-form-field am-radius" placeholder="椭圆表单域" style="height: 300px;"/></p>--}}
-                                        <textarea placeholder="请对这次服务进行评价~（不少于30个字哟）" class="am-form-field am-radius"
-                                                  style="height: 250px;"></textarea>
+                                        <input type="hidden" name="review_order_id" value="{{$data["order"]->id}}"/>
+                                        <textarea placeholder="请对这次服务进行评价~（不少于10个字哟）" id="review-content" class="am-form-field am-radius"
+                                                  style="height: 150px;"></textarea>
                                     </div>
                                     <div class="am-modal-footer">
-                                        <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                                        <span class="am-modal-btn" id="do-review-btn">提交</span>
                                         <span class="am-modal-btn" data-am-modal-cancel>取消</span>
                                     </div>
                                 </div>
@@ -313,11 +314,37 @@
         }
 
         function serviceReview() {
-            $('#my-content').modal({
-                onConfirm: function () {
-                    alert("感谢您的评价！");
+            $('#review-dialog').modal();
+        }
+
+        // 提交评论
+        $("#do-review-btn").click(function () {
+            var orderId = $("input[name='review_order_id']").val();
+            var content = $("#review-content").val();
+
+            if (content.length < 10) {
+                alert("评价内容不得少于10个字");
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append("order_id", orderId);
+            formData.append("review", content);
+
+            $.ajax({
+                url: "/order/review",
+                type: "post",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    $("#review-dialog").modal('toggle');
+                    var result = JSON.parse(data);
+                    alert(result.msg);
                 }
             });
-        }
+        })
     </script>
 @endsection
