@@ -197,15 +197,17 @@
                      style="font-family: 'Microsoft YaHei';color: #333;font-size: 24px;font-weight: 400;line-height: 24px;">
                     <span class="sign" style="padding: 0px 3px;background-color: #ff8a00;margin-right: 15px;"></span>需求回答列表
                 </div>
-                <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+            </div>
+            <div class="clear"></div>
+	        <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+            <div class="moreItems">
                 <ul class="am-comments-list am-comments-list-flip">
-                    @foreach($data['review'] as $review)
-                    <li class="am-comment">
-                        <article class="am-comment">
-                            <a href="#link-to-user-home">
-                                <img src="{{$review->photo}}" alt="" class="am-comment-avatar" width="48" height="48"/>
-                            </a>
-
+                   @foreach($data['review'] as $review)
+	              <li class="am-comment">
+		         <article class="am-comment">
+		         <a href="#link-to-user-home">
+		         <img src="{{$review->photo}}" alt="" class="am-comment-avatar" width="48" height="48"/>
+		         </a>
                             <div class="am-comment-main">
                                 <header class="am-comment-hd">
                                     <!--<h3 class="am-comment-title">评论标题</h3>-->
@@ -270,13 +272,48 @@
                 </div>
                 <div class="clear"></div>
                 <div class="company_button" style="padding-top:10px;">
-                    <button class="am-btn am-btn-danger js-alert" type="button"
-                            data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">立即购买
+                    <button class="am-btn am-btn-danger js-alert" type="button" onclick="date()">立即预约
                     </button>
-                    <button class="am-btn am-btn-success" type="button" style="float: right;">给我留言</button>
+                    <button class="am-btn am-btn-success" type="button" onclick="leaveMsg()" style="float: right;">给我留言</button>
                 </div>
 
             </div>
+            <!--预约弹窗-->
+            <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt" >
+                <div class="am-modal-dialog" style="margin-top:20%;">
+                    <div class="am-modal-hd">预约需求</div>
+                    <div class="am-modal-bd">
+                        我的报价：
+                        <input type="text" class="am-modal-prompt-input" placeholder="请输入您的报价">
+                    </div>
+                    <div class="am-modal-footer">
+                        <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                        <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                    </div>
+                </div>
+            </div>
+            <!--留言弹窗-->
+            <div class="am-modal am-modal-alert" tabindex="-1" id="my-content">
+                <div class="am-modal-dialog" style="margin-top: 40%;">
+                    <div class="am-modal-hd">给我留言</div>
+                    <a href="#" >
+                        <div class="serviceMsg">
+                            <img src="{{asset('images/head1.gif')}}" style="width:150px;height:150px;">
+                            <p>雇主信息：<span>liyuxiao88</span></p>
+                        </div>
+                    </a>
+                    <div class="am-modal-bd">
+                        <label for="doc-ta-1"></label><br>
+                        {{--<p><input type="textarea" class="am-form-field am-radius" placeholder="椭圆表单域" style="height: 300px;"/></p>--}}
+                        <textarea placeholder="请写上你想说的话" class="am-form-field am-radius" style="height:150px;" ></textarea>
+                    </div>
+                    <div class="am-modal-footer">
+                        <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                        <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="need-siminar"
                  style="padding-left: 24px;padding-top: 35px;padding-bottom: 20px;border-width: 2px;border-color: #e9e5e5;border-style: solid;background-color: #ffffff;margin-top: 25px;margin-left:20px;padding-right: 10px;">
                 <div class="title"
@@ -367,5 +404,20 @@
                 }
             });
         });
+        function date(){
+            $('#my-prompt').modal({
+                relatedTarget: this,
+                onConfirm: function(e) {
+                    alert('您的报价是：' + e.data ||'')
+                }
+            });
+        }
+        function leaveMsg(){
+            $('#my-content').modal({
+                onConfirm: function(){
+                    alert("成功留言！");
+                }
+            });
+        }
     </script>
 @endsection
