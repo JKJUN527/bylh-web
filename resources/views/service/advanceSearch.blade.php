@@ -229,7 +229,7 @@
                                             <a href="/service/detail?id={{$s->id}}&type=0" class="">
                                                 <img src="{{asset("images/f1.jpg")}}"/>
                                                 <h3 class="am-gallery-title">{{$s->title}}</h3>
-                                                <div class="am-gallery-desc">{!! $s->describe !!}</div>
+                                                <div class="am-gallery-desc">{{$s->price}}|{{$s->city}}</div>
                                             </a>
                                         </div>
                                     </li>
@@ -261,10 +261,10 @@
                             </a>
                             <div class="left_bottom"
                                  style="background-color: gray;text-align: center;padding: 3px;color:#fff;">
-                                <a href="#" style="color: #fff">
+                                <a href="/service/detail?id={{$s->id}}&type=1" style="color: #fff">
                                     {{$s->title}}
                                 </a>
-                                <p>{!! $s->describe !!}</p>
+                                <p>{{$s->price}}|{{$s->city}}</p>
                             </div>
                         </div>
                         @endforeach
@@ -295,7 +295,7 @@
                                         <a href="/service/detail?id={{$s->id}}&type=2" class="">
                                             <img src="{{asset("images/f1.jpg")}}" alt=""/>
                                             <h3 class="am-gallery-title">{{$s->title}}</h3>
-                                            <div class="am-gallery-desc">{!! $s->describe !!}</div>
+                                            <div class="am-gallery-desc">{{$s->price}}|{{$s->city}}</div>
                                         </a>
                                     </div>
                                 </li>

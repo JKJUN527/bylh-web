@@ -1,4 +1,4 @@
-@extends('demo.admin',['title'=>3])
+@extends('demo.admin',['title'=>0])
 @section('title','发布服务')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
@@ -285,7 +285,7 @@
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
 						0px;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">描述需求</label>
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">描述服务详情</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
                                 <textarea class="" rows="8" name="description" id="doc-ta-1" style="width: 100%;"></textarea>
                             </div>
@@ -594,8 +594,14 @@
             formdata.append('class2',btn2.attr('data-content'));
             formdata.append('type',type);
             formdata.append('home_page',home_page.val());
+            //设置上传接口url
+            var url = "/service/genlpublish";
+            if(type == 1)
+                url = "/service/finlpublish";
+            if(type == 2)
+                url = "/service/qapublish";
             $.ajax({
-                url: "/service/genlpublish",
+                url: url,
                 type: "post",
                 dataType: 'text',
                 cache: false,

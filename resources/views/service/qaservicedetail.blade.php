@@ -95,7 +95,7 @@
             padding-left: 1rem !important;
         }
         .am-comments-list .am-comment {
-            margin: 0;
+            margin: 1rem;
         }
         .service_info{
             color: #666;
@@ -111,6 +111,46 @@
             padding-bottom: 20px;
             text-align: center;
             margin-top: 1rem;
+        }
+        .answerdemand{
+            margin-top: 20px;
+            border-width: 2px;
+            border-color: #e9e5e5;
+            border-style: solid;
+            background-color: #ffffff;
+            box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);
+            padding-left:24px;
+            padding-top: 35px;
+            padding-bottom: 20px;
+            padding-right: 20px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+            width: 100%;
+        }
+        .form-control {
+            width: 100%;
+            border-top-style: outset;
+            border-block-end-color: tomato;
+        }
+        .help-info {
+            float: right;
+            color: red;
+        }
+        .buyfuwubtn{
+            width: 50%;
+        }
+        .guessrequest{
+            margin-top: 20px;
+            border-width: 2px;
+            border-color: #e9e5e5;
+            border-style: solid;
+            background-color: #ffffff;
+            box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);
+            padding-left:24px;
+            padding-top: 35px;
+            padding-bottom: 20px;
+            padding-right: 20px;
         }
     </style>
 @endsection
@@ -367,7 +407,82 @@
                             </div>
                         </div>
                     </div>
+                    <div class="guessrequest">
+                        <div class="title"
+                             style="font-family: 'Microsoft YaHei';color: #333;font-size: 24px;font-weight: 400;line-height: 24px;">
+                            <span class="sign" style="padding: 0px 3px;background-color: #ff8a00;margin-right: 15px;"></span>提问列表
+                        </div>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+                        <div class="moreItems">
+                            <ul class="am-comments-list am-comments-list-flip">
+                                {{--@foreach($data['review'] as $review)--}}
+                                <li class="am-comment">
+                                    <article class="am-comment">
+                                        <a href="#link-to-user-home">
+                                            <img src="
+{{--{{$review->photo}}--}}
+                                                    " alt="" class="am-comment-avatar" width="48" height="48"/>
+                                        </a>
+                                        <div class="am-comment-main">
+                                            <header class="am-comment-hd">
+                                                <!--<h3 class="am-comment-title">评论标题</h3>-->
+                                                <div class="am-comment-meta">
+                                                    <a href="#link-to-user" class="am-comment-author">admin</a>
+                                                    提问时间 <time>。。。。。</time>
+                                                </div>
+                                            </header>
 
+                                            <div class="am-comment-bd">
+                                                {{--{{$review->comments}}--}}
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                                {{--@endforeach--}}
+                                <li class="am-comment am-comment-flip am-comment-highlight">
+                                    <article class="am-comment">
+                                        <a href="#link-to-user-home">
+                                            <img src="
+{{--{{$review->photo}}--}}
+                                                    " alt="" class="am-comment-avatar" width="48" height="48"/>
+                                        </a>
+                                        <div class="am-comment-main">
+                                            <header class="am-comment-hd">
+                                                <!--<h3 class="am-comment-title">评论标题</h3>-->
+                                                <div class="am-comment-meta">
+                                                    <a href="#link-to-user" class="am-comment-author">admin</a>
+                                                    提问时间 <time>。。。。。</time>
+                                                </div>
+                                            </header>
+
+                                            <div class="am-comment-bd">
+                                                {{--{{$review->comments}}--}}
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="answerdemand">
+                        <form id="comment-form" method="post" >
+                            <input type="hidden" name="did" value="{{$data["detail"]->id}}"/>
+                            <div class="form-group">
+                                <div class="form-line">
+                            <textarea rows="2" class="form-control" name="content"
+                                      id="additional-content"
+                                      placeholder="写点什么..."></textarea>
+                                </div>
+                                <div class="help-info" id="comment-help">还可输入114字</div>
+                                <label class="error" for="additional-content"></label>
+                            </div>
+
+                            <button id="btn-comment" type="button" class="am-btn am-btn-warning">
+                                评论
+                            </button>
+                        </form>
+                    </div>
                 </div>
                 <div class="am-u-lg-3 am-u-md-3 am-u-sm-3">
                     <div class="container1"
@@ -386,21 +501,21 @@
                                 <div class="clear"></div>
                             </div>
                             @if($data['serviceinfo']['current_edu'] !="")
-                            <div class="service_info">
-                                <div class="fl" style="float: left;">就读院校：</div>
-                                <div style="float:left;overflow:hidden;height:30px;">{{explode('@',$data['serviceinfo']['current_edu'])[0]}} |
-                                    @if(explode('@',$data['serviceinfo']['current_edu'])[1] == 0)
-                                        博士及已上
-                                    @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
-                                        硕士
-                                    @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 2)
-                                        学士
-                                    @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
-                                        高中及以下
-                                    @endif
+                                <div class="service_info">
+                                    <div class="fl" style="float: left;">就读院校：</div>
+                                    <div style="float:left;overflow:hidden;height:30px;">{{explode('@',$data['serviceinfo']['current_edu'])[0]}} |
+                                        @if(explode('@',$data['serviceinfo']['current_edu'])[1] == 0)
+                                            博士及已上
+                                        @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
+                                            硕士
+                                        @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 2)
+                                            学士
+                                        @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
+                                            高中及以下
+                                        @endif
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
-                                <div class="clear"></div>
-                            </div>
                             @endif
                             <div class="service_info">
                                 <div class="fl" style="float: left;">毕业院校：</div>
@@ -421,21 +536,21 @@
                                 <div class="fl" style="float: left;margin-bottom: 1rem">
                                     <span class="am-badge am-badge-warning">
                                     @if($data['serviceinfo']['is_offline'] ==0)
-                                        仅支持线下交易
-                                    @elseif($data['serviceinfo']['is_offline'] ==1)
-                                        仅支持线上交易
-                                    @else
-                                        支持线上或线下交易
-                                    @endif
+                                            仅支持线下交易
+                                        @elseif($data['serviceinfo']['is_offline'] ==1)
+                                            仅支持线上交易
+                                        @else
+                                            支持线上或线下交易
+                                        @endif
                                     </span>
                                 </div>
                                 <div style="float:left;overflow:hidden;height:30px;">
                                     <span class="am-badge am-badge-warning">
                                     @if($data['serviceinfo']['has_video'] ==0)
-                                        不提供视频教程
-                                    @else
-                                        提供视频教程
-                                    @endif
+                                            不提供视频教程
+                                        @else
+                                            提供视频教程
+                                        @endif
                                     </span>
                                 </div>
                                 <div class="clear"></div>
@@ -452,29 +567,29 @@
                         </div>
                     </div>
                     {{--<div class="container2" style="border: 2px solid #eee;padding: 20px;background: #fff;margin-left: 20px;margin-top: 20px;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">--}}
-                        {{--<div class="other_fw_r" style="padding-top: 5px;padding-bottom: 40px;">--}}
-                            {{--<div class="twof-t" style="line-height: 30px;">--}}
-                                {{--<span class="csfw"--}}
-                                      {{--style="padding-left: 0;float: left;font-size: 16px;padding-bottom: 10px;">本店其他热门服务</span>--}}
-                                {{--<div class="clear"></div>--}}
-                            {{--</div>--}}
+                    {{--<div class="other_fw_r" style="padding-top: 5px;padding-bottom: 40px;">--}}
+                    {{--<div class="twof-t" style="line-height: 30px;">--}}
+                    {{--<span class="csfw"--}}
+                    {{--style="padding-left: 0;float: left;font-size: 16px;padding-bottom: 10px;">本店其他热门服务</span>--}}
+                    {{--<div class="clear"></div>--}}
+                    {{--</div>--}}
 
-                            {{--<div class="anli-b">--}}
-                                {{--<div style="float:left;"><a href="fid-55380.html" target="_blank"><img--}}
-                                                {{--src="http://p1.shopimg.680.com/2017-7/6/32017070614584559264_10442660.jpg"--}}
-                                                {{--width="80" style="width: 80px;height: 80px;"></a></div>--}}
-                                {{--<div class="xxys"--}}
-                                     {{--style="float: left;line-height: 25px;padding-left: 10px;font-weight: bold;padding-top: 0;width: 132px;">--}}
-                                    {{--<a href="fid-55380.html" target="_blank"--}}
-                                       {{--style="display: block;font-weight: 100;height: auto;padding-bottom: 5px;overflow: visible;color: #666;font-size: 14px;line-height: 20px;height: 25px;overflow: hidden;line-height: 25px;overflow: hidden;width: 130px;text-overflow: ellipsis;padding-left:5px;white-space: nowrap;">田园风格装修/复式楼/别墅/商品房</a><font--}}
-                                            {{--style="font-weight: 100;color: #DF231B;font-size: 14px;">￥30</font>--}}
-                                    {{--<div class="fw_r_i_cj">成交4次</div>--}}
-                                {{--</div>--}}
+                    {{--<div class="anli-b">--}}
+                    {{--<div style="float:left;"><a href="fid-55380.html" target="_blank"><img--}}
+                    {{--src="http://p1.shopimg.680.com/2017-7/6/32017070614584559264_10442660.jpg"--}}
+                    {{--width="80" style="width: 80px;height: 80px;"></a></div>--}}
+                    {{--<div class="xxys"--}}
+                    {{--style="float: left;line-height: 25px;padding-left: 10px;font-weight: bold;padding-top: 0;width: 132px;">--}}
+                    {{--<a href="fid-55380.html" target="_blank"--}}
+                    {{--style="display: block;font-weight: 100;height: auto;padding-bottom: 5px;overflow: visible;color: #666;font-size: 14px;line-height: 20px;height: 25px;overflow: hidden;line-height: 25px;overflow: hidden;width: 130px;text-overflow: ellipsis;padding-left:5px;white-space: nowrap;">田园风格装修/复式楼/别墅/商品房</a><font--}}
+                    {{--style="font-weight: 100;color: #DF231B;font-size: 14px;">￥30</font>--}}
+                    {{--<div class="fw_r_i_cj">成交4次</div>--}}
+                    {{--</div>--}}
 
-                                {{--<div class="clear"></div>--}}
-                            {{--</div>--}}
+                    {{--<div class="clear"></div>--}}
+                    {{--</div>--}}
 
-                        {{--</div>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
 
                 </div>
@@ -499,6 +614,64 @@
                 content: '<a href="#" style="width:220px;height:220px;"><img src="../images/wechat.png"></a>',
                 onConfirm: function() {
                     console.log('close');
+                }
+            });
+        });
+        var maxSize = 114;
+
+        $(".form-control").focus(function () {
+            $(this.parentNode).addClass("focused");
+        }).blur(function () {
+            $(this.parentNode).removeClass("focused");
+        });
+
+        $('textarea').keyup(function () {
+
+            var length = $(this).val().length;
+            if (length > maxSize) {
+                $(".error[for='additional-content']").html("内容超过114字");
+                $("#btn-comment").prop("disabled", true);
+            } else {
+                $(".error[for='additional-content']").html("");
+                $("#btn-comment").prop("disabled", false);
+            }
+
+            $("#comment-help").html("还可输入" + (maxSize - length < 0 ? 0 : maxSize - length) + "字");
+
+        });
+        $('#btn-comment').click(function () {
+            var did = $('input[name=did]').val();
+            var demandview = $('#additional-content');
+            if(demandview.val().length <=0){
+                swal("","评论为空","error");
+                return;
+            }
+            if(demandview.val().length > maxSize){
+                swal("字数超过最大值"+maxSize);
+                return;
+            }
+            var formData = new FormData();
+            formData.append("did", did);
+            formData.append("review", demandview.val());
+
+            $.ajax({
+                url: "/demands/reviewDemand",
+                type: "post",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if(result.status == 400){
+                        swal("",result.msg,"error");
+                    }else{
+                        swal("","评论成功","success");
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
+                    }
                 }
             });
         });

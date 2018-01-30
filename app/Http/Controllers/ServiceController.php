@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
+use App\Orders;
 use App\Qaservices;
 use App\Region;
 use App\Serviceclass1;
@@ -80,17 +81,31 @@ class ServiceController extends Controller {
         }
         $is_vertify = User::where('uid', $data['uid'])->first();
         if (!$is_vertify->finance_verify || !$is_vertify->realname_verify) {//未通过实名认证、跳转到实名认证页面
-            return redirect('account/authentication/2');
+            return redirect('account/authentication/1');
         } else {
-            //返回一般服务页面所需数据
             $data['serviceclass1'] = Serviceclass1::where('type', 1)->orderBy('updated_at', 'asc')->get();
             $data['serviceclass2'] = Serviceclass2::where('type', 1)->orderBy('updated_at', 'asc')->get();
-            $data['serviceclass3'] = Serviceclass3::where('type', 1)->orderBy('updated_at', 'asc')->get();
+//            $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
+            $data['province'] = Region::where('parent_id', 0)->get();
+            $data['city'] = Region::where('parent_id', '!=', 0)->get();
+            //确认联系方式
+            $data['userinfo'] = User::where('uid', $data['uid'])
+                ->select('tel', 'mail')
+                ->first();
+            //验证服务用户是否填写了服务基本信息，如未填写，则不能发布一般服务
+            $serviceinfo = Serviceinfo::where('uid', $data['uid'])
+                ->first();
+            if ($serviceinfo->pay_code != "") {
+                $data['verification'] = 1;
+            } else
+                $data['verification'] = 0;
+
+            $data['type'] = "1";
         }
 
 
-        return $data;
-        return view('service.finlindex', ["data" => $data]);
+//        return $data;
+        return view('service.genlpublish', ["data" => $data]);
     }
 
     //专业问答服务发布主页
@@ -105,16 +120,31 @@ class ServiceController extends Controller {
         }
         $is_vertify = User::where('uid', $data['uid'])->first();
         if (!$is_vertify->majors_verify || !$is_vertify->realname_verify) {//未通过实名认证、跳转到实名认证页面
-            return redirect('account/authentication/3');
+            return redirect('account/authentication/2');
         } else {
             //返回一般服务页面所需数据
             $data['serviceclass1'] = Serviceclass1::where('type', 2)->orderBy('updated_at', 'asc')->get();
             $data['serviceclass2'] = Serviceclass2::where('type', 2)->orderBy('updated_at', 'asc')->get();
-            $data['serviceclass3'] = Serviceclass3::where('type', 2)->orderBy('updated_at', 'asc')->get();
+//            $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
+            $data['province'] = Region::where('parent_id', 0)->get();
+            $data['city'] = Region::where('parent_id', '!=', 0)->get();
+            //确认联系方式
+            $data['userinfo'] = User::where('uid', $data['uid'])
+                ->select('tel', 'mail')
+                ->first();
+            //验证服务用户是否填写了服务基本信息，如未填写，则不能发布一般服务
+            $serviceinfo = Serviceinfo::where('uid', $data['uid'])
+                ->first();
+            if ($serviceinfo->pay_code != "") {
+                $data['verification'] = 1;
+            } else
+                $data['verification'] = 0;
+
+            $data['type'] = "2";
         }
 
-        return $data;
-        return view('service.qaindex', ["data" => $data]);
+//        return $data;
+        return view('service.genlpublish', ["data" => $data]);
     }
 
     //一般服务发布方法
@@ -205,7 +235,7 @@ class ServiceController extends Controller {
         $data['msg'] = "未知错误";
         $data['uid'] = AuthController::getUid();
         $data['type'] = AuthController::getType();
-        if ($data['uid'] == 0 || $data['type'] != 1) {
+        if ($data['uid'] == 0 || $data['type'] != 2) {
             $data['msg'] = "未登陆用户或非服务用户";
             return $data;
         }
@@ -224,14 +254,15 @@ class ServiceController extends Controller {
                 return $data;
             } else {//通过敏感词检测
                 //接收数据
-                $genlser = new Genlservices();
+                $finlser = new Finlservices();
                 if ($request->has('pictures')) {//pictures 为字符串，标记上传图片个数及对应input域 name值。
                     //接收图片--注意图片可上传多张。
                     $picture = $request->input('pictures');
                     $pictures = explode('@', $picture);
                     $picfilepath = "";
                     foreach ($pictures as $Item) {//对每一个照片进行操作。
-
+                        if ($Item === "")
+                            continue;
                         $pic = $request->file('pic' . $Item);//取得上传文件信息
                         if ($pic->isValid()) {//判断文件是否上传成功
                             //扩展名
@@ -245,20 +276,24 @@ class ServiceController extends Controller {
                             $bool = Storage::disk('finlservicespic')->put($picname, file_get_contents($realPath));
                         }
                     }
-                    $genlser->picture = asset('storage/finlservicespic/' . $picfilepath);
+                    $finlser->picture = asset('storage/finlservicespic/' . $picfilepath);
                 }
                 //保存都数据库
-                $genlser->type = 1;
-                $genlser->uid = $data['uid'];
-                $genlser->title = $request->input('title');
-                $genlser->city = $request->input('city');
-                $genlser->class1_id = $request->input('class1_id');
-                $genlser->class2_id = $request->input('class2_id');
-                $genlser->class3_id = $request->input('class3_id');
-                $genlser->describe = $request->input('describe');
-                $genlser->home_page = $request->input('home_page');
-                $genlser->experience = $request->input('experience');
-                if ($genlser->save()) {
+                $finlser->type = 1;
+                $finlser->uid = $data['uid'];
+                $finlser->title = $request->input('title');
+                $finlser->city = $request->input('city');
+                $finlser->class1_id = $request->input('class1_id');
+                $finlser->class2_id = $request->input('class2_id');
+//                $finlser->class3_id = $request->input('class3_id');
+                $finlser->describe = $request->input('describe');
+                $finlser->home_page = $request->input('home_page');
+                $finlser->experience = $request->input('experience');
+                if ($finlser->save()) {
+                    $tel = $request->input('tel');
+                    $email = $request->input('email');
+                    $userinfo = Userinfo::where('uid', $data['uid'])
+                        ->update(['tel' => $tel, 'mail' => $email]);
                     $data['status'] = 200;
                     $data['msg'] = "操作成功";
                     $data['demands'] = $this->recommendDemands($request);
@@ -269,7 +304,6 @@ class ServiceController extends Controller {
                     return $data;
                 }
             }
-            return $data;
         }
         return $data;
     }
@@ -281,7 +315,7 @@ class ServiceController extends Controller {
         $data['msg'] = "未知错误";
         $data['uid'] = AuthController::getUid();
         $data['type'] = AuthController::getType();
-        if ($data['uid'] == 0 || $data['type'] != 1) {
+        if ($data['uid'] == 0 || $data['type'] != 2) {
             $data['msg'] = "未登陆用户或非服务用户";
             return $data;
         }
@@ -300,14 +334,15 @@ class ServiceController extends Controller {
                 return $data;
             } else {//通过敏感词检测
                 //接收数据
-                $genlser = new Genlservices();
+                $qaser = new Qaservices();
                 if ($request->has('pictures')) {//pictures 为字符串，标记上传图片个数及对应input域 name值。
                     //接收图片--注意图片可上传多张。
                     $picture = $request->input('pictures');
                     $pictures = explode('@', $picture);
                     $picfilepath = "";
                     foreach ($pictures as $Item) {//对每一个照片进行操作。
-
+                        if ($Item === "")
+                            continue;
                         $pic = $request->file('pic' . $Item);//取得上传文件信息
                         if ($pic->isValid()) {//判断文件是否上传成功
                             //扩展名
@@ -321,20 +356,25 @@ class ServiceController extends Controller {
                             $bool = Storage::disk('qaservicespic')->put($picname, file_get_contents($realPath));
                         }
                     }
-                    $genlser->picture = asset('storage/qaservicespic/' . $picfilepath);
+                    $qaser->picture = asset('storage/qaservicespic/' . $picfilepath);
                 }
                 //保存都数据库
-                $genlser->type = 2;
-                $genlser->uid = $data['uid'];
-                $genlser->title = $request->input('title');
-                $genlser->city = $request->input('city');
-                $genlser->class1_id = $request->input('class1_id');
-                $genlser->class2_id = $request->input('class2_id');
-                $genlser->class3_id = $request->input('class3_id');
-                $genlser->describe = $request->input('describe');
-                $genlser->home_page = $request->input('home_page');
-                $genlser->experience = $request->input('experience');
-                if ($genlser->save()) {
+                $qaser->type = 2;
+                $qaser->uid = $data['uid'];
+                $qaser->title = $request->input('title');
+                $qaser->city = $request->input('city');
+                $qaser->class1_id = $request->input('class1_id');
+                $qaser->class2_id = $request->input('class2_id');
+//                $qaser->class3_id = $request->input('class3_id');
+                $qaser->describe = $request->input('describe');
+                $qaser->home_page = $request->input('home_page');
+                $qaser->experience = $request->input('experience');
+                if ($qaser->save()) {
+                    //设置服务商电话及邮箱
+                    $tel = $request->input('tel');
+                    $email = $request->input('email');
+                    $userinfo = Userinfo::where('uid', $data['uid'])
+                        ->update(['tel' => $tel, 'mail' => $email]);
                     $data['status'] = 200;
                     $data['msg'] = "发布服务成功";
 //                    $data['demands'] = $this->recommendDemands($request);
@@ -345,7 +385,6 @@ class ServiceController extends Controller {
                     return $data;
                 }
             }
-            return $data;
         }
         return $data;
     }
@@ -649,16 +688,42 @@ class ServiceController extends Controller {
                     break;
             }
             //服务对应评价
-            $data['review'] = Servicereviews::where('sid', $sid)
-                ->where('type', 0)
+            $data['review'] = DB::table('bylh_servicereviews')
+                ->select('bylh_servicereviews.uid','photo','username','comments','bylh_servicereviews.created_at')
+                ->leftjoin('bylh_userinfo','bylh_userinfo.uid','bylh_servicereviews.uid')
+                ->leftjoin('bylh_users','bylh_users.uid','bylh_servicereviews.uid')
+                ->where('sid', $sid)
+                ->where('bylh_servicereviews.type', 0)
                 ->where('state', 0)
                 ->orderby('created_at', 'desc')
-                ->paginate(10);//默认一页显示10条评价
+                ->paginate(15);//默认一页显示15条评价
+            //查看该服务成交次数
+            $data['ordernum'] = Orders::where('service_id',$sid)
+                ->where('type',$request->input('type'))
+                ->where(function ($query){
+                    $query->where('state',2)
+                        ->orWhere('state',3);
+                })
+                ->count();
+            //查询成交记录
+            $data['orderinfo'] = DB::table('bylh_orders')
+                ->select('username','price','bylh_orders.created_at')
+                ->leftjoin('bylh_users','bylh_users.uid','bylh_orders.create_uid')
+                ->where('service_id',$sid)
+                ->where('bylh_orders.type',$request->input('type'))
+                ->where(function ($query){
+                    $query->where('state',2)
+                        ->orWhere('state',3);
+                })
+                ->paginate(15);//默认一页显示15条
             //服务商服务相关信息
-            $data['serviceinfo'] = Serviceinfo::where('id', $data['detail']->id)->first();
+            $data['serviceinfo'] = Serviceinfo::where('uid', $data['detail']->uid)->first();
         }
         //return $data;
-        return view('service.detail', ['data' => $data]);
+        if($request->input('type') == 2){
+            return view('service.qaservicedetail', ['data' => $data]);
+        }else
+            return view('service.detail', ['data' => $data]);
     }
     //获取服务用户发布所有需求及服务列表
     //传入用户id
