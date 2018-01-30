@@ -25,6 +25,11 @@
             color: #b84554;
         }
 
+        .sort-item {
+            padding: 4px;
+            margin-right: 4px;
+        }
+
     </style>
 @endsection
 @section('content')
@@ -59,21 +64,103 @@
             <input type="hidden" name="price">
             <input type="hidden" name="region">
             <input type="hidden" name="keyword">
+            <input type="hidden" name="orderBy">
+            <input type="hidden" name="desc">
         </form>
 
         <div class="am-g am-g-fixed form-group search-position">
             <div class="am-u-lg-6 am-u-md-6 form-line" style="padding-left: 100px;">
                 <input type="text" id="name" name="name" class="form-control"
-                       value="@if(isset($data['condition']['keyword'])){{$data['condition']['keyword']}}@endif" placeholder="输入需求类别／描述进行搜索"
+                       value="@if(isset($data['condition']['keyword'])){{$data['condition']['keyword']}}@endif"
+                       placeholder="输入需求类别／描述进行搜索"
                        style="width: 250px;padding: 6px;border: 2px solid #b84554;">
                 <a href="#" onclick="goSearch()"><i class="am-icon-search am-icon-fw"></i></a>
             </div>
             <p class="am-u-lg-6 am-u-md-6 sort-position">
                 <span style="padding: 6px;font-weight: bold;font-size: 15px;"><b>排序</b>：</span>
-                <a href="#"><span class="sort-item" style="padding: 6px;">热度</span></a>
-                <a href="#"><span class="sort-item" style="padding: 6px;">价格</span></a>
-                <a href="#"><span class="sort-item" style="padding: 6px;">发布时间</span></a>
 
+                @if(!isset($data['condition']['orderBy']))
+                    <a class="sort-item selected" id="sort-hotness" data-content="1">
+                        <span>热度</span>
+                        <i class="am-icon-angle-down"></i>
+                    </a>
+
+                    <a class="sort-item" id="sort-price" data-content="0">
+                        <span>价格</span>
+                        <i class=""></i>
+                    </a>
+
+                    <a class="sort-item" id="sort-created_time" data-content="0">
+                        <span>发布时间</span>
+                        <i class=""></i>
+                    </a>
+                @elseif($data['condition']['orderBy'] == 0)
+                    @if($data['condition']['desc'] == 1)
+                        <a class="sort-item selected" id="sort-hotness" data-content="1">
+                            <span>热度</span>
+                            <i class="am-icon-angle-down"></i>
+                        </a>
+                    @else
+                        <a class="sort-item selected" id="sort-hotness" data-content="2">
+                            <span>热度</span>
+                            <i class="am-icon-angle-up"></i>
+                        </a>
+                    @endif
+
+                    <a class="sort-item" id="sort-price" data-content="0">
+                        <span>价格</span>
+                        <i class=""></i>
+                    </a>
+
+                    <a class="sort-item" id="sort-created_time" data-content="0">
+                        <span>发布时间</span>
+                        <i class=""></i>
+                    </a>
+                @elseif($data['condition']['orderBy'] == 1)
+                    <a class="sort-item" id="sort-hotness" data-content="0">
+                        <span>热度</span>
+                        <i class=""></i>
+                    </a>
+
+                    @if($data['condition']['desc'] == 1)
+                        <a class="sort-item selected" id="sort-price" data-content="1">
+                            <span>价格</span>
+                            <i class="am-icon-angle-down"></i>
+                        </a>
+                    @else
+                        <a class="sort-item selected" id="sort-price" data-content="2">
+                            <span>价格</span>
+                            <i class="am-icon-angle-up"></i>
+                        </a>
+                    @endif
+
+                    <a class="sort-item" id="sort-created_time" data-content="0">
+                        <span>发布时间</span>
+                        <i class=""></i>
+                    </a>
+                @elseif($data['condition']['orderBy'] == 2)
+                    <a class="sort-item" id="sort-hotness" data-content="0">
+                        <span>热度</span>
+                        <i class=""></i>
+                    </a>
+
+                    <a class="sort-item" id="sort-price" data-content="0">
+                        <span>价格</span>
+                        <i class=""></i>
+                    </a>
+
+                    @if($data['condition']['desc'] == 1)
+                        <a class="sort-item selected" id="sort-created_time" data-content="1">
+                            <span>发布时间</span>
+                            <i class="am-icon-angle-down"></i>
+                        </a>
+                    @else
+                        <a class="sort-item selected" id="sort-created_time" data-content="2">
+                            <span>发布时间</span>
+                            <i class="am-icon-angle-up"></i>
+                        </a>
+                    @endif
+                @endif
             </p>
         </div>
 
@@ -208,15 +295,15 @@
                                 <a href="/demands/detail?id={{$demand->id}}">
                                     <img src="
                                     @if($demand->picture != null)
-                                        <?php
-                                            $pics = explode(';', $demand->picture);
-                                            $baseurl = explode('@', $pics[0])[0];
-                                            $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
-                                            $imagepath = explode('@', $pics[0])[1];
-                                        ?>
-                                        {{$baseurl}}{{$imagepath}}
+                                    <?php
+                                    $pics = explode(';', $demand->picture);
+                                    $baseurl = explode('@', $pics[0])[0];
+                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                    $imagepath = explode('@', $pics[0])[1];
+                                    ?>
+                                    {{$baseurl}}{{$imagepath}}
                                     @else
-                                        {{asset("images/f3.jpg")}}
+                                    {{asset("images/f3.jpg")}}
                                     @endif" alt="img" style="width: 175px;height: 175px;"/>
                                     <h3 class="am-gallery-title">{{$demand->title}}</h3>
                                     <div class="am-gallery-desc">{{str_replace(array("</br>","</br","</b"),"",mb_substr($demand->describe, 0, 20, 'utf-8'))}}</div>
@@ -232,7 +319,9 @@
                     <?php $count = 0; ?>
                     @foreach($data["result"]["demands"] as $demand)
                         @if(++$count > 8)
-                            <li><a href="/demands/detail?id={{$demand->id}}"><span class="price-span">￥{{$demand->price}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{$demand->title}}</a><span
+                            <li><a href="/demands/detail?id={{$demand->id}}"><span
+                                            class="price-span">￥{{$demand->price}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{$demand->title}}
+                                </a><span
                                         style="color: gray;float: right;">查看详情</span></li>
                         @endif
                     @endforeach
@@ -258,6 +347,49 @@
 @section("custom-script")
     <script type="text/javascript " src="{{asset('basic/js/quick_links.js')}} "></script>
     <script type="text/javascript">
+
+        var sortHotness = $("#sort-hotness");
+        var sortPrice = $("#sort-price");
+        var sortTime = $("#sort-created_time");
+
+        function resetSort() {
+            sortHotness.attr('data-content', 0);
+            sortPrice.attr('data-content', 0);
+            sortTime.attr('data-content', 0);
+
+            sortHotness.find("i").removeClass("am-icon-angle-down").removeClass("am-icon-angle-up");
+            sortPrice.find("i").removeClass("am-icon-angle-down").removeClass("am-icon-angle-up");
+            sortTime.find("i").removeClass("am-icon-angle-down").removeClass("am-icon-angle-up");
+
+            sortHotness.removeClass("selected");
+            sortPrice.removeClass("selected");
+            sortTime.removeClass("selected");
+        }
+
+        $(".sort-item").click(function () {
+
+            if ($(this).attr('data-content') === '0') {
+                resetSort();
+                $(this).attr('data-content', 1);
+                $(this).find('i').addClass("am-icon-angle-down");
+                if (!$(this).hasClass('selected'))
+                    $(this).addClass('selected');
+            } else if ($(this).attr('data-content') === '1') {
+                resetSort();
+                $(this).attr('data-content', 2);
+                $(this).find('i').addClass("am-icon-angle-up");
+                if (!$(this).hasClass('selected'))
+                    $(this).addClass('selected');
+            } else if ($(this).attr('data-content') === '2') {
+                resetSort();
+                $(this).attr('data-content', 1);
+                $(this).find('i').addClass("am-icon-angle-down");
+                if (!$(this).hasClass('selected'))
+                    $(this).addClass('selected');
+            }
+            goSearch();
+        });
+
         $(".span-holder").find("a").click(function () {
             var clickedElement = $(this);
             clickedElement.addClass("selected");
@@ -286,6 +418,21 @@
                 $("input[name='region']").val(region);
             if (search !== "")
                 $("input[name='keyword']").val(search);
+
+            if (sortHotness.attr('data-content') !== '0') {
+                $("input[name='orderBy']").val(0);
+                $("input[name='desc']").val(sortHotness.attr("data-content"));
+            }
+
+            if (sortPrice.attr('data-content') !== '0') {
+                $("input[name='orderBy']").val(1);
+                $("input[name='desc']").val(sortPrice.attr("data-content"));
+            }
+
+            if (sortTime.attr('data-content') !== '0') {
+                $("input[name='orderBy']").val(2);
+                $("input[name='desc']").val(sortTime.attr("data-content"));
+            }
 
             var $searchForm = $("#search-form");
             $searchForm.action = '/demands/advanceSearch';
