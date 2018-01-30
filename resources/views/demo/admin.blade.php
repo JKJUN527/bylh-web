@@ -10,30 +10,35 @@
     <link href="{{asset('css/personal.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/orstyle.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
+    <style>
+     .nav_active{
+         background-color: #03A9F4;
+     }
+    </style>
     @section("custom-style")
     @show
 </head>
 <body>
-<div class="hmtop" style="background-image:url({{asset('images/background4.png')}});">
+<div class="hmtop">
     <!--顶部导航条 -->
     <div class="am-container header">
-        <ul class="message-l">
-            <div class="topMessage">
-                <div class="menu-hd">
-                    @if($data['uid'] == 0)
-                        <a href="{{asset('/account/login')}}" target="_top" class="h">亲，请登录</a>
-                        <a href="{{asset('/account/register')}}" target="_top">免费注册</a>
-                    @endif
-                </div>
-            </div>
-        </ul>
+        {{--<ul class="message-l">--}}
+            {{--<div class="topMessage">--}}
+                {{--<div class="menu-hd">--}}
+                    {{--@if($data['uid'] == 0)--}}
+                        {{--<a href="{{asset('/account/login')}}" target="_top" class="h">亲，请登录</a>--}}
+                        {{--<a href="{{asset('/account/register')}}" target="_top">免费注册</a>--}}
+                    {{--@endif--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</ul>--}}
         <ul class="message-r">
             @if($data['uid'] ==0)
                 <div class="topMessage my-shangcheng">
                     <div class="menu-hd MyShangcheng"><a href="{{asset('/account/login')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>登录</a></div>
                 </div>
                 <div class="topMessage my-shangcheng">
-                    <div class="menu-hd MyShangcheng"><a  href="{{asset('/account/register')}}" target="_top"><i class="am-icon-user-plus am-icon-fw"></i>注册</a></div>
+                    <div class="menu-hd MyShangcheng"><a  href="{{asset('/account/register')}}" target="_top"><i class="am-icon-user-plus am-icon-fw"></i>免费注册</a></div>
                 </div>
             @else
                 <div class="topMessage my-shangcheng">
@@ -69,15 +74,32 @@
 <div class="shopNav">
     <div class="slideall" style="height: auto;">
 
-        <!--<div class="long-title"><span class="all-goods">全部分类</span></div>-->
+        <div class="long-title"><span class="all-goods">全部分类</span></div>
         <div class="nav-cont" style="background: #ff9933bd;">
             <ul>
-                <li class="index"><a href="{{asset('index')}}">首页</a></li>
-                <li class="qc"><a href="{{asset('demands/advanceSearch')}}">需求大厅</a></li>
-                <li class="qc"><a href="{{asset('service/advanceSearch?type=0')}}">大学生服务</a></li>
-                <li class="qc"><a href="{{asset('service/advanceSearch?type=1')}}">实习中介</a></li>
-                <li class="qc last"><a href="{{asset('service/advanceSearch?type=2')}}">专业问答</a></li>
-                <li class="qc last"><a href="{{asset('news/index')}}">新闻动态</a></li>
+                <li class="index @if($title==1) nav_active @endif"><a href="{{asset('index')}}">首页</a></li>
+                <li class="qc @if($title==2) nav_active @endif"><a href="{{asset('demands/advanceSearch')}}">需求大厅</a></li>
+                <li class="qc
+                    @if($title==3)
+                        @if($subtitle==0)
+                            nav_active
+                        @endif
+                    @endif"><a href="{{asset('service/advanceSearch?type=0')}}">大学生服务</a></li>
+                <li class="qc
+                @if($title==3)
+                    @if($subtitle==1)
+                        nav_active
+                    @endif
+                @endif"><a href="{{asset('service/advanceSearch?type=1')}}">实习中介</a></li>
+                <li class="qc
+                @if($title==3)
+                    @if($subtitle==2)
+                        nav_active
+                    @endif
+                @endif"><a href="{{asset('service/advanceSearch?type=2')}}">专业问答</a></li>
+                <li class="qc @if($title==6) nav_active @endif"><a href="{{asset('news/index')}}">新闻动态</a></li>
+                <li class="qc @if($title==7) nav_active @endif"><a href="{{asset('news/index')}}">关于我们</a></li>
+                <li class="qc @if($title==8) nav_active @endif"><a href="{{asset('news/index')}}">常见问题</a></li>
             </ul>
         </div>
 @section('content')

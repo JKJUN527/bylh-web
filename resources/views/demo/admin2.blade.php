@@ -33,16 +33,16 @@
         <div class="mt-logo">
             <!--顶部导航条 -->
             <div class="am-container header">
-                <ul class="message-l">
-                    <div class="topMessage">
-                        <div class="menu-hd">
-                            @if($data['uid'] == 0)
-                                <a href="{{asset('/account/login')}}" target="_top" class="h">亲，请登录</a>
-                                <a href="{{asset('/account/register')}}" target="_top">免费注册</a>
-                            @endif
-                        </div>
-                    </div>
-                </ul>
+                {{--<ul class="message-l">--}}
+                    {{--<div class="topMessage">--}}
+                        {{--<div class="menu-hd">--}}
+                            {{--@if($data['uid'] == 0)--}}
+                                {{--<a href="{{asset('/account/login')}}" target="_top" class="h">亲，请登录</a>--}}
+                                {{--<a href="{{asset('/account/register')}}" target="_top">免费注册</a>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</ul>--}}
                 <ul class="message-r">
                     @if($data['uid'] ==0)
                         <div class="topMessage my-shangcheng">

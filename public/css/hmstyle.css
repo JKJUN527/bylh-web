@@ -228,7 +228,7 @@ dt + dd {margin-top: 0;}
 
 	/*改写的公告*/
 	.marqueen-title{font-size: 14px;position: static;border-right:none ;color:#e60012 ;font-size: 16px;font-weight: 600;}
-	.demo,.marqueenTwo .demo{ margin-left: 20px;height: auto;width: 100%;padding-top:15px; }
+	.demo,.marqueenTwo .demo{ margin-left: 1px;height: auto;width: 100%;padding-top:15px; }
 	.demo li{ font-size:12px; padding:0px 0px;height: 30px;float: right;width:30% ;}
 	.demo li.title-first{float: left;width:33%;height: auto;padding:0px 10px;border-right:1px solid #eee ;}
 	.demo li.title-first img,.demo li.title-first p{display: block;}

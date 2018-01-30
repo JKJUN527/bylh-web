@@ -1,4 +1,4 @@
-@extends('demo.admin')
+@extends('demo.admin',['title'=>3,'subtitle'=>$data["detail"]->type])
 @section('title','服务详情')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>

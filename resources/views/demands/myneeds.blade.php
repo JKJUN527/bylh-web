@@ -51,7 +51,7 @@
 												</p>
 											</div>
 											<div class="am-u-lg-4 am-u-md-4 am-u-sm-4" style="text-align: center;padding: 20px;">
-										<a href="/demands/detail?did={{$demand->id}}" ><button type="button" class="am-btn am-btn-success">查看详情</button></a>
+										<a href="/demands/detail?id={{$demand->id}}" ><button type="button" class="am-btn am-btn-success">查看详情</button></a>
 												<button type="button" class="am-btn am-btn-danger" onclick="deleteDemand({{$demand->id}},'{{$demand->title}}');">删除需求</button>
 											</div>
 									</div>

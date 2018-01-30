@@ -1,4 +1,4 @@
-@extends('demo.admin')
+@extends('demo.admin',['title'=>1])
 @section('title', '不亦乐乎|首页')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
@@ -161,23 +161,6 @@
         </div>
     </div>
         <!--侧边导航 -->
-        <!--导航 -->
-        <script type="text/javascript">
-            (function() {
-                $('.am-slider').flexslider();
-            });
-            $(document).ready(function() {
-                $("li").hover(function() {
-                    $(".category-content .category-list li.first .menu-in").css("display", "none");
-                    $(".category-content .category-list li.first").removeClass("hover");
-                    $(this).addClass("hover");
-                    $(this).children("div.menu-in").css("display", "block")
-                }, function() {
-                    $(this).removeClass("hover")
-                    $(this).children("div.menu-in").css("display", "none")
-                });
-            })
-        </script>
         <!--小导航 -->
         <div class="am-g am-g-fixed smallnav">
             <div class="am-u-sm-3">
@@ -203,7 +186,7 @@
         </div>
 <div class="shopMainbg">
     <!--广告1-->
-    <div class="advertisement" style="padding: 10px;">
+    <div class="advertisement" style="padding: 10px 0 10px 0;">
         <img src="{{asset('images/ad3.jpg')}}" style="width: 100%;">
     </div>
     <!--需求大厅-->
@@ -211,13 +194,13 @@
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4 leftpanel" style="padding-bottom: 10px;">
             <div class="index-category-left showNews">
                 <div class="marqueenOne">
-                    <span class="marqueen-title" style="height:100px;background-image: url({{asset('images/float_box2.png')}});background-repeat: no-repeat;font-size: 18px;color: #fff;"><i class="am-icon-volume-up am-icon-fw" style="padding-top: 30px;
-    padding-left: 110px;"></i><i style=";padding-left: 20px;font-size: 18px;color: #fff;">新闻栏</i></span>
+                    <span class="marqueen-title" style="text-align: center;padding-top: 2rem;height:100px;background-image: url({{asset('images/float_box2.png')}});background-repeat: no-repeat;">
+                        <i style="font-size: 1.5rem;color: #fff;">本站公告</i></span>
                     <div class="demo">
                         <ul>
                             @foreach($data['news'] as $news)
                             <li><a to="/news/detail?nid={{$news->nid}}">
-                                    <span style="font-size: 16px;color: #b84554;padding-right: 3px;">[{{$news->tag}}]</span>{{$news->content}}
+                                    <span style="font-size: 16px;color: #b84554;padding-right: 3px;"><i class="am-icon-volume-up am-icon-fw"></i></span>{{$news->content}}
                                 </a></li>
                             @endforeach
                         </ul>
@@ -483,6 +466,24 @@
     <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
         <img src="{{asset('images/ad5.jpg')}}">
     </div>
+@endsection
+@section("custom-script")
+  <script>
+      (function() {
+          $('.am-slider').flexslider();
+      });
+      $(document).ready(function() {
+          $("li").hover(function() {
+              $(".category-content .category-list li.first .menu-in").css("display", "none");
+              $(".category-content .category-list li.first").removeClass("hover");
+              $(this).addClass("hover");
+              $(this).children("div.menu-in").css("display", "block")
+          }, function() {
+              $(this).removeClass("hover")
+              $(this).children("div.menu-in").css("display", "none")
+          });
+      })
+  </script>
 @endsection
 
 

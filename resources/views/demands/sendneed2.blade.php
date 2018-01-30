@@ -1,4 +1,4 @@
-@extends('demo.admin')
+@extends('demo.admin',['title'=>0])
 @section('title', '发布需求第二部')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />

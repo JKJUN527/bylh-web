@@ -1,4 +1,4 @@
-@extends('demo.admin')
+@extends('demo.admin',['title'=>6])
 @section('title','新闻详情')
 @section('custom-style')
     <style type="text/css">

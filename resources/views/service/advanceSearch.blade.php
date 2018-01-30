@@ -1,4 +1,4 @@
-@extends('demo.admin')
+@extends('demo.admin',['title'=>3,'subtitle'=>$data["condition"]["type"]])
 @section('title','服务大厅')
 
 @section('custom-style')
