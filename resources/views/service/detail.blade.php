@@ -3,7 +3,7 @@
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>
-    <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
+    {{--<link href="{{asset('dist/amazeui.min.css')}}" rel="stylesheet" type="text/css"/>--}}
     <style type="text/css">
         .comcategory li {
             font-size: 14px;
@@ -86,10 +86,10 @@
                                         style="color:#666;font-size:14px;font-weight:100">/个</span>
                             </div>
                         </div>
-                        {{--<div class="fr cj_rr"--}}
-                        {{--style="height: 30px;line-height: 30px;padding-top: 40px;color: #777;padding-right: 80px;float: right;">--}}
-                        {{--成交：<b>347 </b>笔--}}
-                        {{--</div>--}}
+                        <div class="fr cj_rr"
+                                    style="height: 30px;line-height: 30px;padding-top: 40px;color: #777;padding-right: 80px;float: right;">
+                            成交：<b>347 </b>笔
+                        </div>
                         <div class="clear"></div>
                     </div>
                     {{--<div class="main-bc">--}}
@@ -126,20 +126,6 @@
                         </a>
                         <div class="clear"></div>
                     </div>
-                    <!--
-                    <script type="text/javascript">
-                    $('.js-alert').on('click',function(){
-                        AMUI.dialog.alert({
-                          title: '扫一扫微信，完成支付',
-                          content: '<a href="#" style="width:220px;height:220px;"><img src="../images/wechat.png"></a>',
-                          onConfirm: function() {
-                              console.log('close');
-                        }
-
-                        });
-                    });
-                    </script>
-                -->
                 </div>
             </div>
         </div>
@@ -164,27 +150,8 @@
                         <div class="am-tabs-bd">
                             <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                                 <p style="font-size:15px;line-height: 24px;">
+                                    <span style="color: #b84554;">温馨提示：购买服务，不亦乐乎不收取任何费用，请勿相信服务商任何理由的加价交易行为。</span><br>
                                     {!! $data["detail"]->describe !!}
-                                    {{--<span style="color: #b84554;">温馨提示：雇佣任务，时间财富网不收取费用，请勿相信服务商任何理由的线下交易行为。</span><br>--}}
-                                    {{--（1）.简装修设计事务所首席设计师会为你提供得一个符合客户需求得完美得设计方案。<br>--}}
-                                    {{--（2）.设计造型部分效果图（具体张数协商）。<br>--}}
-                                    {{--（3）.一整套施工图纸<br>--}}
-                                    {{--1.原始平面图(以现场测量为准) <br>--}}
-                                    {{--2.墙体改建图(小公司大多不画这张) <br>--}}
-                                    {{--3.平面布置图(含量最高的一张,往往外行客户只看这一张) <br>--}}
-                                    {{--4.顶面布置图(吊顶造型,层高,灯具,空调,浴霸等详细尺寸图) <br>--}}
-                                    {{--5.地面铺装图(地面材料及铺设规范) <br>--}}
-                                    {{--6.强电布置图(冰箱,空调等强电流线路走向布置) <br>--}}
-                                    {{--7.弱电布置图(灯具,电话,网络灯线路走向布置) <br>--}}
-                                    {{--8.开关插座图(开关及插座的详细布置图) <br>--}}
-                                    {{--9立面图 (若干张, 其中必画的有, ,餐厅背景立面,电视背景立面，现在制作柜体部分) <br>--}}
-                                    {{--10.节点图(是指一些详细的施工图,复杂的造型及规范的施工都需要此图<br>--}}
-                                    {{--（4）.后期施工过程中得疑问解答。<br>--}}
-                                    {{--简装修设计事务所是2015年成立的专业室内环境设计表现工作室，专业服务涉及：外建表现、办公空间、商业空间、居停空间的室内外装饰设计全面服务。以构筑实用、完美的空间，并致力于研究室内设计的原创和独立为发展方向。--}}
-                                    {{--TOUCH坚持一贯高品质的室内设计，经过多年的大型知名公司工作经验，过往项目涉及社会各领域，包括酒店、购物中心、医院、餐厅、咖啡馆、售楼样板、会所、SPA、专卖店铺及写字楼的设计<br><br>--}}
-                                    {{--业务QQ:346870782<br>--}}
-                                    {{--工作室15074633257<br>--}}
-                                    {{--邮箱E-mail：346870782 @qq.com<br>--}}
                                 </p>
                             </div>
                             <div class="am-tab-panel am-fade" id="tab2">
@@ -453,4 +420,19 @@
     <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
         <img src="{{asset('images/ad5.jpg')}}">
     </div>
+@endsection
+@section('custom-script')
+    <script src="{{asset("dist/amazeui.min.js")}}"></script>
+    <script src="{{asset("js/amazeui.dialog.min.js")}}"></script>
+    <script type="text/javascript">
+        $('.js-alert').on('click',function(){
+            AMUI.dialog.alert({
+                title: '扫一扫微信，完成支付',
+                content: '<a href="#" style="width:220px;height:220px;"><img src="../images/wechat.png"></a>',
+                onConfirm: function() {
+                    console.log('close');
+                }
+            });
+        });
+    </script>
 @endsection

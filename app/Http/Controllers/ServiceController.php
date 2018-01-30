@@ -571,7 +571,7 @@ class ServiceController extends Controller {
                 }
             })
             ->orderBy($orderBy, $desc)
-            ->paginate(1);
+            ->paginate(20);
         return $data;
     }
 
