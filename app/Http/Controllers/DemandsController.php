@@ -229,10 +229,10 @@ class DemandsController extends Controller {
                     $orderBy = "view_count";
                     break;
                 case 1:
-                    $orderBy = "created_at";
+                    $orderBy = "price";
                     break;
                 case 2:
-                    $orderBy = "price";
+                    $orderBy = "created_at";
                     break;
             }
         }
@@ -335,14 +335,8 @@ class DemandsController extends Controller {
         $data['result'] = $this->advanceSearch($request);
 
         //返回上次查询条件
-        $data['condition']['class1'] = $request->input('class1');
-        $data['condition']['class2'] = $request->input('class2');
-        $data['condition']['class3'] = $request->input('class3');
-        $data['condition']['price'] = $request->input("price");
-        $data['condition']['region'] = $request->input('region');
-        $data['condition']['servicetype'] = $request->input('servicetype');
-        $data['condition']['keyword'] = $request->input('keyword');
-//        return $data;
+        $data['condition'] = $request->all();
+        //return $data;
         return view('demands.advanceSearch', ['data' => $data]);
     }
     //传入需求id返回具体的需求详情
