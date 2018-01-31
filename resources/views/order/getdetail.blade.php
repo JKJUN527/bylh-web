@@ -9,6 +9,12 @@
             height: 19px !important;
             opacity: 1 !important;
         }
+        .payway{
+            font-size: 18px;
+            background: #fff;
+            font-weight: bold;
+            padding: 20px;
+        }
     </style>
 
 @endsection
@@ -95,15 +101,29 @@
                             <div class="order-content">
                                 <div class="order-left">
                                     <ul class="item-list">
-                                        <li class="td td-item">
+                                        <li class="td td-item" id="order_base" data-content="{{$data["order"]->id}}">
                                             <div class="item-pic">
-                                                <a href="#" class="J_MakePoint">
-                                                    <img src="../images/f1.jpg" class="itempic J_ItemImg">
+                                                <a href="/service/detail?type={{$data["order"]->type}}&id={{$data["order"]->id}}" class="J_MakePoint">
+                                                    @if($data["order"]->picture != null)
+                                                        <?php
+                                                        $pics = explode(';', $data["order"]->picture);
+                                                        $baseurl = explode('@', $pics[0])[0];
+                                                        $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                        $imagepath = explode('@', $pics[0])[1];
+                                                        ?>
+                                                    @endif
+                                                        <img src="
+                                                        @if($data["order"]->picture == "" || $data["order"]->picture == null)
+                                                            {{asset('images/f1.jpg')}}
+                                                        @else
+                                                            {{$baseurl}}{{$imagepath}}
+                                                        @endif
+                                                    " class="itempic J_ItemImg">
                                                 </a>
                                             </div>
                                             <div class="item-info">
                                                 <div class="item-basic-info">
-                                                    <a href="#">
+                                                    <a href="/service/detail?type={{$data["order"]->type}}&id={{$data["order"]->id}}">
                                                         <p>{{$data["order"]->title}}</p>
                                                     </a>
                                                 </div>
@@ -111,7 +131,7 @@
                                         </li>
                                         <li class="td td-price">
                                             <div class="item-price">
-                                                {{$data["order"]->price}} &yen;
+                                                &yen; {{$data["order"]->price}}
                                             </div>
                                         </li>
                                         @if($data["order"]->state == 0)
@@ -253,24 +273,29 @@
                             </div>
 
                             {{--支付dialog--}}
-                            <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+                            <div class="am-modal am-modal-alert" tabindex="-1" id="pay_for">
                                 <div class="am-modal-dialog">
                                     <div class="am-modal-bd">
                                         <div>
                                             <div class="service-title"
                                                  style="font-size: 20px;font-weight: bold;padding: 20px;">
-                                                <a href="#">服务商信息：<span style="font-size: 18px;">米旭品牌设计</span></a>
+                                                <a href="#">服务商名称：<span style="font-size: 18px;">{{$data['serviceinfo']['ename']}}</span></a>
                                             </div>
-                                            <a href="#"><img src="../images/wechat.png"
-                                                             style="width:300px;height:300px;"></a>
-                                            <div class="wechat" type="1" style="display: none;">请使用微信支付</div>
-                                            <div class="alibaba" type="2"
-                                                 style="font-size: 18px;background: #fff;font-weight: bold;padding: 20px;">
+                                            <a href="#">
+                                                <img src="{{$data['serviceinfo']['pay_code']}}" tyle="width:300px;height:300px;">
+                                            </a>
+                                            @if($data['serviceinfo']['pay_way'] == 0)
+                                            <div class="payway" type="1">
+                                                请使用微信扫码支付
+                                            </div>
+                                            @elseif($data['serviceinfo']['pay_way'] == 1)
+                                            <div class="payway" type="2">
                                                 请使用支付宝支付
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="am-modal-footer">
-                                            <span class="am-modal-btn am-btn-lg" data-am-modal-confirm>确认支付</span>
+                                            <span class="am-modal-btn am-btn-lg" data-am-modal-confirm>支付成功</span>
                                             <span class="am-modal-btn am-btn-lg" data-am-modal-cancel>取消支付</span>
                                         </div>
                                     </div>
@@ -299,7 +324,7 @@
                                     <div class="am-modal-bd">
                                         <label for="doc-ta-1"></label><br>
                                         {{--<p><input type="textarea" class="am-form-field am-radius" placeholder="椭圆表单域" style="height: 300px;"/></p>--}}
-                                        <textarea placeholder="请对这次服务进行评价~（不少于30个字哟）" class="am-form-field am-radius"
+                                        <textarea  id="service_review" placeholder="请对这次服务进行评价~（不少于10个字哟）" class="am-form-field am-radius"
                                                   style="height: 250px;"></textarea>
                                     </div>
                                     <div class="am-modal-footer">
@@ -323,18 +348,130 @@
 @section('custom-script')
     <script type="text/javascript">
         function payFor() {
-            $('#my-alert').modal({
+            $('#pay_for').modal({
                 onConfirm: function () {
-                    alert("您已完成支付");
+                    var order_base = $('#order_base');
+                    var order_id = order_base.attr('data-content');
+                    var formData = new FormData();
+                    formData.append("order_id", order_id);
+                    $.ajax({
+                        url: "/order/ConfirmPayment",
+                        type: 'post',
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            console.log(data);
+                            var result = JSON.parse(data);
+                            if (result.status === 200) {
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            } else {
+                                swal({
+                                    title: "错误",
+                                    type: "error",
+                                    text: result.msg,
+                                    cancelButtonText: "关闭",
+                                    showCancelButton: true,
+                                    showConfirmButton: false
+                                });
+                            }
+                        }
+                    });
                 }
             });
         }
-
         function makeSure() {
             $('#my-prompt').modal({
                 relatedTarget: this,
                 onConfirm: function (e) {
-                    alert('你输入的是：' + e.data || '')
+                    var order_base = $('#order_base');
+                    var order_id = order_base.attr('data-content');
+                    if(!/^[1-9][0-9]*\.?[0-9]*$/.test(e.data)){
+                        swal({
+                            title: "错误",
+                            type: "error",
+                            text: "请输入正确的金额",
+                            cancelButtonText: "关闭",
+                            showCancelButton: true,
+                            showConfirmButton: false
+                        });
+                        return;
+                    }
+                    var formData = new FormData();
+                    formData.append("order_id", order_id);
+                    formData.append("money", e.data);
+                    formData.append("getmoney", 1);
+                    $.ajax({
+                        url: "/order/ConfirmGetPayment",
+                        type: 'post',
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            var result = JSON.parse(data);
+                            if (result.status === 200) {
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            } else {
+                                swal({
+                                    title: "错误",
+                                    type: "error",
+                                    text: result.msg,
+                                    cancelButtonText: "关闭",
+                                    showCancelButton: true,
+                                    showConfirmButton: false
+                                });
+                            }
+                        }
+                    });
+                },
+                onCancel: function() {//未收到款项
+                    var order_base = $('#order_base');
+                    var order_id = order_base.attr('data-content');
+                    swal({
+                        title: "确认未收到款项",
+                        text: "如果确定未收到转款，我们将尝试通知购买方重新付款",
+                        type: "info",
+                        confirmButtonText: "确定",
+                        closeOnConfirm: false
+                    }, function () {
+                        var formData = new FormData();
+                        formData.append("order_id", order_id);
+                        formData.append("getmoney", 0);
+                        $.ajax({
+                            url: "/order/ConfirmGetPayment",
+                            type: 'post',
+                            dataType: 'text',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: formData,
+                            success: function (data) {
+                                var result = JSON.parse(data);
+                                if (result.status === 200) {
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 1000);
+                                } else {
+                                    swal({
+                                        title: "错误",
+                                        type: "error",
+                                        text: result.msg,
+                                        cancelButtonText: "关闭",
+                                        showCancelButton: true,
+                                        showConfirmButton: false
+                                    });
+                                }
+                            }
+                        });
+                    });
                 }
             });
         }
@@ -342,7 +479,49 @@
         function serviceReview() {
             $('#my-content').modal({
                 onConfirm: function () {
-                    alert("感谢您的评价！");
+                    var service_review = $("#service_review").val();
+                    var order_base = $('#order_base');
+                    var order_id = order_base.attr('data-content');
+                    if(service_review.length <10){
+                        swal({
+                            title: "错误",
+                            type: "error",
+                            text: "评价字数不少于10个字",
+                            cancelButtonText: "关闭",
+                            showCancelButton: true,
+                            showConfirmButton: false
+                        });
+                        return;
+                    }
+                    var formData = new FormData();
+                    formData.append("order_id", order_id);
+                    formData.append("review", service_review);
+                    $.ajax({
+                        url: "/service/reviewser",
+                        type: 'post',
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            var result = JSON.parse(data);
+                            if (result.status === 200) {
+//                                setTimeout(function () {
+//                                    window.location.reload();
+//                                }, 1000);
+                            } else {
+                                swal({
+                                    title: "错误",
+                                    type: "error",
+                                    text: result.msg,
+                                    cancelButtonText: "关闭",
+                                    showCancelButton: true,
+                                    showConfirmButton: false
+                                });
+                            }
+                        }
+                    });
                 }
             });
         }

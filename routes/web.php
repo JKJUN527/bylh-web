@@ -79,7 +79,7 @@ Route::any('service/advanceSearch',['uses' => 'ServiceController@advanceIndex'])
 //服务详情页
 Route::any('service/detail',['uses' => 'ServiceController@detail']);
 //评论服务
-Route::any('service/reviewService',['uses' => 'serviceController@reviewService']);
+Route::post('service/reviewser',['uses' => 'OrderController@reviewService']);
 //获取用户发布所有需求、服务列表
 Route::get('service/getAllservices',['uses' => 'serviceController@getAllservices']);
 //专业问答--问答
@@ -93,7 +93,7 @@ Route::get('order/',['uses' => 'OrderController@orderlist']);
 //点击购买服务
 Route::any('order/createOrder',['uses' => 'OrderController@createOrder']);
 //点击确认付款
-Route::any('order/ConfirmPayment',['uses' => 'OrderController@ConfirmPayment']);
+Route::post('order/ConfirmPayment',['uses' => 'OrderController@ConfirmPayment']);
 //点击确认收款
 Route::post('order/ConfirmGetPayment',['uses' => 'OrderController@ConfirmGetPayment']);
 //获取订单详情
@@ -128,10 +128,6 @@ Route::any('demands/myneeds',['uses' => 'DemandsController@myneeds']);
 //预约需求
 Route::any('demands/needappointment',function(){
     return view('demands.needappointment');
-});
-//发布需求2
-Route::any('demands/sendneed2',function(){
-    return view('demands.sendneed2');
 });
 //站内信模块
 //发送站内信

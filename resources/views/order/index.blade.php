@@ -52,8 +52,22 @@
                                                 <ul class="item-list">
                                                     <li class="td td-item">
                                                         <div class="item-pic">
-                                                            <a href="#" class="J_MakePoint">
-                                                                <img src="images/f2.jpg" class="itempic J_ItemImg">
+                                                            <a href="/order/detail?order_id={{$order->id}}" class="J_MakePoint">
+                                                                @if($data["orderinfo"][$order->id]->picture != null)
+                                                                    <?php
+                                                                    $pics = explode(';', $data["orderinfo"][$order->id]->picture);
+                                                                    $baseurl = explode('@', $pics[0])[0];
+                                                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                                    $imagepath = explode('@', $pics[0])[1];
+                                                                    ?>
+                                                                @endif
+                                                                <img src="
+                                                                    @if($data["orderinfo"][$order->id]->picture == "" || $data["orderinfo"][$order->id]->picture == null)
+                                                                        {{asset('images/f2.jpg')}}
+                                                                    @else
+                                                                        {{$baseurl}}{{$imagepath}}
+                                                                    @endif
+                                                                " class="itempic J_ItemImg">
                                                             </a>
                                                         </div>
                                                         <div class="item-info">

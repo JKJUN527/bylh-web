@@ -142,11 +142,26 @@ class OrderController extends Controller {
                 return $data;
             }
 
+        }elseif ($request->has('order_id')&&$request->has('getmoney') &&$request->input('getmoney') == 0){
+            $order = Orders::find($request->input('order_id'));
+            if($order){
+                $order->state =0;
+                if($order->save()){
+                    $data['status']=200;
+                    $data['msg'] = "设置成功";
+                    $content = "对不起！我暂时未收到你的转款！请再次确认或尝试！";
+                    //发送站内信到服务用户，通知确认收款
+                    MessageController::sendMessage($request,$order->d_uid,$content);
+                }
+            }else{
+                $data['status'] = 400;
+                $data['msg'] = "未查询到相关订单";
+                return $data;
+            }
         }else{
             $data['msg'] = "传入参数错误";
         }
         return $data;
-
     }
     //评价服务
     //传入订单id,及评价内容
@@ -155,7 +170,6 @@ class OrderController extends Controller {
         $uid = AuthController::getUid();
         $data['status']=400;
         $data['msg']="参数错误";
-
         if($request->has('order_id') && $request->has('review')){
             $order_id = $request->input('order_id');
             $review = $request->input('review');
@@ -167,6 +181,8 @@ class OrderController extends Controller {
                 $servicereview->type = $order->type;
                 $servicereview->comments = $review;
                 if($servicereview->save()){
+                    $order->state = 3;
+                    $order->save();
                     $data['status'] = 200;
                     $data['msg'] = "评论成功";
                     return $data;
@@ -176,7 +192,6 @@ class OrderController extends Controller {
             }else{
                 $data['msg']="未找到对应订单信息";
             }
-
         }
         return $data;
     }
@@ -288,19 +303,19 @@ class OrderController extends Controller {
                 }
                 $data['order'] = DB::table('bylh_orders')
                     ->leftjoin($table,$table.".id","bylh_orders.service_id")
-                    ->select('bylh_orders.type','bylh_orders.state','bylh_orders.price','title','bylh_orders.s_uid','bylh_orders.d_uid','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')
+                    ->select('bylh_orders.id','bylh_orders.type','bylh_orders.state','bylh_orders.price','title','picture','bylh_orders.s_uid','bylh_orders.d_uid','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')
                     ->where('bylh_orders.id',$order_id)
                     ->first();
             }else{
                 $data['type'] = "demands";
                 $data['order'] = DB::table('bylh_orders')
                     ->leftjoin("bylh_demands","bylh_demands.id","bylh_orders.demand_id")
-                    ->select('bylh_orders.type','bylh_orders.state','bylh_orders.price','title','bylh_orders.s_uid','bylh_orders.d_uid','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')
+                    ->select('bylh_orders.id','bylh_orders.type','bylh_orders.state','bylh_orders.price','title','picture','bylh_orders.s_uid','bylh_orders.d_uid','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')
                     ->where('bylh_orders.id',$order_id)
                     ->first();
             }
             $data['serviceinfo'] = Serviceinfo::where('uid',$data['order']->s_uid)
-                ->select('pay_way','pay_code')
+                ->select('ename','pay_way','pay_code')
                 ->first();
         }
 
@@ -417,7 +432,7 @@ class OrderController extends Controller {
             }
         }
 
-        //return $data;
+//        return $data;
         return view('order/index',['data'=>$data]);
 
     }
