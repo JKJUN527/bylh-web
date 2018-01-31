@@ -4,9 +4,10 @@
     <link href="{{asset('css/infstyle.css')}}" rel="stylesheet" type="text/css">
     <style>
         .progress-active {
-            background: url({{asset('images/sprite.png')}}) -79px -135px;
-            width: 19px;
-            height: 19px;
+            background: url({{asset('images/sprite.png')}}) -79px -135px !important;
+            width: 19px !important;
+            height: 19px !important;
+            opacity: 1 !important;
         }
     </style>
 
@@ -113,9 +114,15 @@
                                                 {{$data["order"]->price}} &yen;
                                             </div>
                                         </li>
-
-                                        @if($data["type"] == 1)
-                                            @if($data["order"]->state == 0)
+                                        @if($data["order"]->state == 0)
+                                            @if($data['uid'] == $data["order"]->s_uid)
+                                                <li class="td td-status">
+                                                    <div class="itemStatus">
+                                                        <p class="am-btn am-btn-default Status" type="button" disabled>
+                                                            待支付</p>
+                                                    </div>
+                                                </li>
+                                            @elseif($data['uid'] == $data["order"]->d_uid)
                                                 <li class="td td-status">
                                                     <div class="itemStatus">
                                                         <button class="am-btn am-btn-primary Status" onclick="payFor()"
@@ -123,50 +130,115 @@
                                                         </button>
                                                     </div>
                                                 </li>
-                                            @elseif($data["order"]->state == 1)
+                                            @else
                                                 <li class="td td-status">
                                                     <div class="itemStatus">
                                                         <p class="am-btn am-btn-default Status" type="button" disabled>
-                                                            待确认</p>
-                                                    </div>
-                                                </li>
-                                            @elseif($data["order"]->state == 2)
-                                                <li class="td td-status">
-                                                    <div class="itemStatus">
-                                                        <p class="am-btn am-btn-warning Status" type="button"
-                                                           onclick="serviceReview()">请评价</p>
+                                                            无权操作</p>
                                                     </div>
                                                 </li>
                                             @endif
-                                        @elseif($data["type"] == 2)
-                                            @if($data["order"]->state == 0)
-                                                <li class="td td-status">
-                                                    <div class="itemStatus">
-                                                        <p class="am-btn am-btn-default Status" type="button" disabled>
-                                                            待支付</p>
-                                                    </div>
-                                                </li>
-                                            @elseif($data["order"]->state == 1)
+                                        @elseif($data["order"]->state == 1)
+                                            @if($data['uid'] == $data["order"]->s_uid)
                                                 <li class="td td-status">
                                                     <div class="itemStatus">
                                                         <p class="am-btn am-btn-secondary Status" type="button"
                                                            onclick="makeSure()">请确认</p>
                                                     </div>
                                                 </li>
-                                            @elseif($data["order"]->state == 2)
+                                            @elseif($data['uid'] == $data["order"]->d_uid)
+                                                <li class="td td-status">
+                                                    <div class="itemStatus">
+                                                        <p class="am-btn am-btn-default Status" type="button" disabled>
+                                                            待确认</p>
+                                                    </div>
+                                                </li>
+                                            @else
+                                                <li class="td td-status">
+                                                    <div class="itemStatus">
+                                                        <p class="am-btn am-btn-default Status" type="button" disabled>
+                                                            无权操作</p>
+                                                    </div>
+                                                </li>
+                                            @endif
+                                        @elseif($data["order"]->state == 2)
+                                            @if($data['uid'] == $data["order"]->s_uid)
                                                 <li class="td td-status">
                                                     <div class="itemStatus">
                                                         <p class="am-btn am-btn-default Status" type="button" disabled>
                                                             待评价</p>
                                                     </div>
                                                 </li>
+                                            @elseif($data['uid'] == $data["order"]->d_uid)
+                                                <li class="td td-status">
+                                                    <div class="itemStatus">
+                                                        <p class="am-btn am-btn-warning Status" type="button"
+                                                           onclick="serviceReview()">请评价</p>
+                                                    </div>
+                                                </li>
+                                            @else
+                                                <li class="td td-status">
+                                                    <div class="itemStatus">
+                                                        <p class="am-btn am-btn-default Status" type="button" disabled>
+                                                            无权操作</p>
+                                                    </div>
+                                                </li>
                                             @endif
                                         @endif
+
+                                        {{--@if($data["type"] == 1)--}}
+                                            {{--@if($data["order"]->state == 0)--}}
+                                                {{--<li class="td td-status">--}}
+                                                    {{--<div class="itemStatus">--}}
+                                                        {{--<button class="am-btn am-btn-primary Status" onclick="payFor()"--}}
+                                                                {{--type="button">请支付--}}
+                                                        {{--</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                            {{--@elseif($data["order"]->state == 1)--}}
+                                                {{--<li class="td td-status">--}}
+                                                    {{--<div class="itemStatus">--}}
+                                                        {{--<p class="am-btn am-btn-default Status" type="button" disabled>--}}
+                                                            {{--待确认</p>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                            {{--@elseif($data["order"]->state == 2)--}}
+                                                {{--<li class="td td-status">--}}
+                                                    {{--<div class="itemStatus">--}}
+                                                        {{--<p class="am-btn am-btn-warning Status" type="button"--}}
+                                                           {{--onclick="serviceReview()">请评价</p>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                            {{--@endif--}}
+                                        {{--@elseif($data["type"] == 2)--}}
+                                            {{--@if($data["order"]->state == 0)--}}
+                                                {{--<li class="td td-status">--}}
+                                                    {{--<div class="itemStatus">--}}
+                                                        {{--<p class="am-btn am-btn-default Status" type="button" disabled>--}}
+                                                            {{--待支付</p>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                            {{--@elseif($data["order"]->state == 1)--}}
+                                                {{--<li class="td td-status">--}}
+                                                    {{--<div class="itemStatus">--}}
+                                                        {{--<p class="am-btn am-btn-secondary Status" type="button"--}}
+                                                           {{--onclick="makeSure()">请确认</p>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                            {{--@elseif($data["order"]->state == 2)--}}
+                                                {{--<li class="td td-status">--}}
+                                                    {{--<div class="itemStatus">--}}
+                                                        {{--<p class="am-btn am-btn-default Status" type="button" disabled>--}}
+                                                            {{--待评价</p>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                            {{--@endif--}}
+                                        {{--@endif--}}
 
                                         @if($data["order"]->state == 3)
                                             <li class="td td-status">
                                                 <div class="itemStatus">
-                                                    <p class="am-btn am-btn-success Status" type="button" disabled>已完成</p>
+                                                    <p class="am-btn am-btn-success Status" type="button" disabled>交易成功</p>
                                                 </div>
                                             </li>
                                         @elseif($data["order"]->state == -1)

@@ -288,22 +288,23 @@ class OrderController extends Controller {
                 }
                 $data['order'] = DB::table('bylh_orders')
                     ->leftjoin($table,$table.".id","bylh_orders.service_id")
-                    ->select('bylh_orders.type','bylh_orders.state','bylh_orders.price','title','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')
+                    ->select('bylh_orders.type','bylh_orders.state','bylh_orders.price','title','bylh_orders.s_uid','bylh_orders.d_uid','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')
                     ->where('bylh_orders.id',$order_id)
                     ->first();
             }else{
                 $data['type'] = "demands";
                 $data['order'] = DB::table('bylh_orders')
                     ->leftjoin("bylh_demands","bylh_demands.id","bylh_orders.demand_id")
-                    ->select('bylh_orders.type','bylh_orders.state','bylh_orders.price','title','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')
+                    ->select('bylh_orders.type','bylh_orders.state','bylh_orders.price','title','bylh_orders.s_uid','bylh_orders.d_uid','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')
                     ->where('bylh_orders.id',$order_id)
                     ->first();
             }
-
-
+            $data['serviceinfo'] = Serviceinfo::where('uid',$data['order']->s_uid)
+                ->select('pay_way','pay_code')
+                ->first();
         }
 
-        return $data;
+//        return $data;
         return view('order/getdetail',['data'=>$data]);
     }
 
