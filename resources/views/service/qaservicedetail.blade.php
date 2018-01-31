@@ -245,7 +245,7 @@
                                 <a class="service_tab" href="#tab1">服务详情</a>
                             </li>
                             <li>
-                                <a class="service_tab" href="#tab2">雇主评论</a>
+                                <a class="service_tab" href="#tab2">历史问答</a>
                             </li>
                             <li>
                                 <a class="service_tab" href="#tab3">成交记录</a>
@@ -263,100 +263,54 @@
                                 <div class="buyer_pj" style="display: block;">
 
                                     <div class="pl-cont">
-                                        {{--<div class="pl-bg"--}}
-                                        {{--style="background: #fff;width: auto;border: none;border-bottom: solid 2px #ddd;height: auto;">--}}
-                                        {{--<div class="pj-a"--}}
-                                        {{--style="height: 100px;padding-left: 70px;border-right: none; padding-top: 33px; float: left;text-align: center;">--}}
-                                        {{--<div style="font-size:14px;color:#999">综合评分</div>--}}
-                                        {{--<div style="font-size:24px; font-weight:bold; color:#DF231B; font-family:微软雅黑">--}}
-                                        {{--5--}}
-                                        {{--</div>--}}
-
-                                        {{--<div title="服务评价：1人评价" class="pf_5 mt5"--}}
-                                        {{--style="background:url(../images/pingfen2.png) no-repeat;background-position: 0 0px; width: 60px;height: 12px;display: block;float: left;"></div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="pj-b"--}}
-                                        {{--style="float: right;padding-left: 0;height: 80px;padding-top: 33px;">--}}
-                                        {{--<div class="fl pj_i_im"--}}
-                                        {{--style="height: 30px;line-height: 30px;width: 264px;font-size: 14px;color: #555;">--}}
-                                        {{--作品创意：5分<span class="pj_ii_t" data="5" style="padding-left: 20px;">比同行平均水平<b--}}
-                                        {{--style="background: #DF231B;color: #fff;font-weight: 100;padding: 0 3px;margin-left: 6px;">高</b></span>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="fl pj_i_im"--}}
-                                        {{--style="height: 30px;line-height: 30px;width: 264px;font-size: 14px;color: #555;">--}}
-                                        {{--完成质量：5分<span class="pj_ii_t" data="5" style="padding-left: 20px;">比同行平均水平<b--}}
-                                        {{--style="background: #DF231B;color: #fff;font-weight: 100;padding: 0 3px;margin-left: 6px;">高</b></span>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="fl pj_i_im"--}}
-                                        {{--style="height: 30px;line-height: 30px;width: 264px;font-size: 14px;color: #555;">--}}
-                                        {{--服务态度：5分<span class="pj_ii_t" data="5" style="padding-left: 20px;">比同行平均水平<b--}}
-                                        {{--style="background: #DF231B;color: #fff;font-weight: 100;padding: 0 3px;margin-left: 6px;">高</b></span>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="fl pj_i_im"--}}
-                                        {{--style="height: 30px;line-height: 30px;width: 264px;font-size: 14px;color: #555;">--}}
-                                        {{--工作速度：5分 <span class="pj_ii_t" data="5" style="padding-left: 20px;">比同行平均水平<b--}}
-                                        {{--style="background: #DF231B;color: #fff;font-weight: 100;padding: 0 3px;margin-left: 6px;">高</b></span>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="clear"></div>--}}
-
-
-                                        {{--<div>--}}
-                                        {{--<div class="clear"></div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="clear"></div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="clear"></div>--}}
-
-                                        {{--<div class="fw_gz_jj">--}}
-                                        {{--<div class="fw_gz_jj_t"--}}
-                                        {{--style="height: 30px;line-height: 30px;font-size: 16px;color: #555;padding-bottom: 9px;">--}}
-                                        {{--雇主对TA的印象--}}
-                                        {{--</div>--}}
-                                        {{--<div class="fw_gz_jj_li">--}}
-                                        {{--<span class="gzyx_1"--}}
-                                        {{--style="float: left;margin-left: 3px;color: #fff;padding: 2px 9px;font-size: 14px;">专业</span>--}}
-                                        {{--<span class="gzyx_2"--}}
-                                        {{--style="float: left;margin-left: 3px;color: #fff;padding: 2px 9px;font-size: 14px;">质量很高</span>--}}
-                                        {{--<span class="gzyx_3"--}}
-                                        {{--style="float: left;margin-left: 3px;color: #fff;padding: 2px 9px;font-size: 14px;">性价比高</span>--}}
-                                        {{--<span class="gzyx_4"--}}
-                                        {{--style="float: left;margin-left: 3px;color: #fff;padding: 2px 9px;font-size: 14px;">服务周到</span>--}}
-                                        {{--<div class="clear"></div>--}}
-                                        {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--</div>--}}
                                         <div class="clear"></div>
-
-
                                         <div class="info_pj_datalist" style="padding-left: 10px;">
+                                            @foreach($data['qarecord'] as $record)
+                                                @if($record->question != "" && $record->answer != "")
+                                                    <li class="am-comment" style="margin-bottom: 1rem;width: 90%;">
+                                                        <article class="am-comment">
+                                                            <a href="/service/getAllservices?uid={{$record->questioner}}">
+                                                                <img src="{{$record->photo}}
+                                                                        " alt="" class="am-comment-avatar" width="48" height="48"/>
+                                                            </a>
+                                                            <div class="am-comment-main">
+                                                                <header class="am-comment-hd">
+                                                                    <!--<h3 class="am-comment-title">评论标题</h3>-->
+                                                                    <div class="am-comment-meta">
+                                                                        <a href="#link-to-user" class="am-comment-author">{{$record->username}}</a>
+                                                                        提问时间 <time>{{$record->created_at}}</time>
+                                                                    </div>
+                                                                </header>
 
-                                            @foreach($data["review"] as $re)
-                                                <div class="pl-cont-two" style="padding-top: 20px;">
-                                                    <ul class="am-comments-list am-comments-list-flip">
-                                                        <li class="am-comment am-comment-highlight">
-                                                            <article class="am-comment"> <!-- 评论容器 -->
-                                                                <a href="/service/getAllservices?uid{{$re->uid}}">
-                                                                    <img class="am-comment-avatar" alt="" src="{{$re->photo}}"/> <!-- 评论者头像 -->
-                                                                </a>
-
-                                                                <div class="am-comment-main"> <!-- 评论内容容器 -->
-                                                                    <header class="am-comment-hd">
-                                                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                                                        <div class="am-comment-meta"> <!-- 评论元数据 -->
-                                                                            <a href="#link-to-user" class="am-comment-author">{{$re->username}}</a> <!-- 评论者 -->
-                                                                            评论于 <time datetime="">{{$re->created_at}}</time>
-                                                                        </div>
-                                                                    </header>
-
-                                                                    <div class="am-comment-bd">
-                                                                        {{$re->comments}}
-                                                                    </div> <!-- 评论内容 -->
+                                                                <div class="am-comment-bd">
+                                                                    {{$record->question}}
                                                                 </div>
-                                                            </article>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="clear"></div>
-                                                </div>
+                                                            </div>
+                                                        </article>
+                                                    </li>
+                                                    <li class="am-comment am-comment-flip am-comment-highlight" style="margin-bottom: 1rem;width: 90%;float: right;">
+                                                        <article class="am-comment">
+                                                            <a href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}">
+                                                                <img src="{{$data['serviceinfo']['elogo']}}
+                                                                        " alt="" class="am-comment-avatar" width="48" height="48"/>
+                                                            </a>
+                                                            <div class="am-comment-main">
+                                                                <header class="am-comment-hd">
+                                                                    <!--<h3 class="am-comment-title">评论标题</h3>-->
+                                                                    <div class="am-comment-meta">
+                                                                        <a href="#link-to-user" class="am-comment-author">{{$data['serviceinfo']['ename']}}</a>
+                                                                        回答时间 <time>{{$record->updated_at}}</time>
+                                                                    </div>
+                                                                </header>
+
+                                                                <div class="am-comment-bd">
+                                                                        *****
+                                                                </div>
+                                                            </div>
+                                                        </article>
+                                                    </li>
+                                                @endif
+
                                             @endforeach
                                             <div class="clear"></div>
                                         </div>
@@ -415,52 +369,59 @@
                         <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
                         <div class="moreItems">
                             <ul class="am-comments-list am-comments-list-flip">
-                                {{--@foreach($data['review'] as $review)--}}
-                                <li class="am-comment">
-                                    <article class="am-comment">
-                                        <a href="#link-to-user-home">
-                                            <img src="
-{{--{{$review->photo}}--}}
-                                                    " alt="" class="am-comment-avatar" width="48" height="48"/>
-                                        </a>
-                                        <div class="am-comment-main">
-                                            <header class="am-comment-hd">
-                                                <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                                <div class="am-comment-meta">
-                                                    <a href="#link-to-user" class="am-comment-author">admin</a>
-                                                    提问时间 <time>。。。。。</time>
-                                                </div>
-                                            </header>
+                                @foreach($data['qarecord'] as $record)
+                                    @if($record->question != "" &&$record->questioner == $data['uid'])
+                                    <li class="am-comment">
+                                        <article class="am-comment">
+                                            <a href="/service/getAllservices?uid={{$record->questioner}}">
+                                                <img src="{{$record->photo}}
+                                                        " alt="" class="am-comment-avatar" width="48" height="48"/>
+                                            </a>
+                                            <div class="am-comment-main">
+                                                <header class="am-comment-hd">
+                                                    <!--<h3 class="am-comment-title">评论标题</h3>-->
+                                                    <div class="am-comment-meta">
+                                                        <a href="#link-to-user" class="am-comment-author">{{$record->username}}</a>
+                                                        提问时间 <time>{{$record->created_at}}</time>
+                                                    </div>
+                                                </header>
 
-                                            <div class="am-comment-bd">
-                                                {{--{{$review->comments}}--}}
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                {{--@endforeach--}}
-                                <li class="am-comment am-comment-flip am-comment-highlight">
-                                    <article class="am-comment">
-                                        <a href="#link-to-user-home">
-                                            <img src="
-{{--{{$review->photo}}--}}
-                                                    " alt="" class="am-comment-avatar" width="48" height="48"/>
-                                        </a>
-                                        <div class="am-comment-main">
-                                            <header class="am-comment-hd">
-                                                <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                                <div class="am-comment-meta">
-                                                    <a href="#link-to-user" class="am-comment-author">admin</a>
-                                                    提问时间 <time>。。。。。</time>
+                                                <div class="am-comment-bd">
+                                                    {{$record->question}}
                                                 </div>
-                                            </header>
-
-                                            <div class="am-comment-bd">
-                                                {{--{{$review->comments}}--}}
                                             </div>
-                                        </div>
-                                    </article>
-                                </li>
+                                        </article>
+                                    </li>
+                                    @endif
+                                    @if($record->answer != "" && $record->questioner == $data['uid'])
+                                    <li class="am-comment am-comment-flip am-comment-highlight">
+                                         <article class="am-comment">
+                                             <a href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}">
+                                                 <img src="{{$data['serviceinfo']['elogo']}}
+                                                                " alt="" class="am-comment-avatar" width="48" height="48"/>
+                                             </a>
+                                             <div class="am-comment-main">
+                                                        <header class="am-comment-hd">
+                                                            <!--<h3 class="am-comment-title">评论标题</h3>-->
+                                                            <div class="am-comment-meta">
+                                                                <a href="#link-to-user" class="am-comment-author">{{$data['serviceinfo']['ename']}}</a>
+                                                                回答时间 <time>{{$record->updated_at}}</time>
+                                                            </div>
+                                                        </header>
+
+                                                        <div class="am-comment-bd">
+                                                            @if($record->status == 1)
+                                                                {{$record->answer}}
+                                                            @else
+                                                                *****
+                                                            @endif
+                                                        </div>
+                                             </div>
+                                         </article>
+                                    </li>
+                                    @endif
+
+                                @endforeach
                             </ul>
                         </div>
                     </div>

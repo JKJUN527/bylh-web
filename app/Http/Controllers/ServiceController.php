@@ -12,6 +12,7 @@ use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
 use App\Orders;
+use App\Qarecord;
 use App\Qaservices;
 use App\Region;
 use App\Serviceclass1;
@@ -678,6 +679,18 @@ class ServiceController extends Controller {
                     $data['detail'] = Qaservices::where('id', $sid)
                         ->where('state', 0)
                         ->first();
+                    //查询对应该用户的提问--回答列表
+                    $data['qarecord'] = DB::table('bylh_qarecord')
+                        ->select('username','photo','questioner','question','answer','bylh_qarecord.created_at','bylh_qarecord.updated_at','bylh_qarecord.status')
+                        ->leftjoin('bylh_userinfo','bylh_userinfo.uid','bylh_qarecord.questioner')
+                        ->leftjoin('bylh_users','bylh_users.uid','bylh_qarecord.questioner')
+//                        ->where('questioner',$data['uid'])
+                        ->where('service_id',$sid)
+                        ->get();
+                    //对应回答只能查看一次
+                    $updaterecord = Qarecord::where('questioner',$data['uid'])
+                        ->where('status',1)//回答待查看
+                        ->update(['status'=>2]);
                     //对应服务浏览次数加1
                     if ($data['detail']->uid == $data['uid']) {
                         break;
@@ -719,7 +732,7 @@ class ServiceController extends Controller {
             //服务商服务相关信息
             $data['serviceinfo'] = Serviceinfo::where('uid', $data['detail']->uid)->first();
         }
-        //return $data;
+//        return $data;
         if($request->input('type') == 2){
             return view('service.qaservicedetail', ['data' => $data]);
         }else
