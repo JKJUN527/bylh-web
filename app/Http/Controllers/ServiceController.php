@@ -631,13 +631,7 @@ class ServiceController extends Controller {
         $data['result'] = $this->advanceSearch($request);
 
         //返回上次查询条件
-        $data['condition']['class1'] = $request->input('class1');
-        $data['condition']['class2'] = $request->input('class2');
-        $data['condition']['class3'] = $request->input('class3');
-        $data['condition']['price'] = $request->input("price");
-        $data['condition']['region'] = $request->input('region');
-        $data['condition']['type'] = $request->input('type');
-        $data['condition']['keyword'] = $request->input('keyword');
+        $data['condition'] = $request->all();
 
         //return $data;
         return view('service.advanceSearch', ['data' => $data]);
