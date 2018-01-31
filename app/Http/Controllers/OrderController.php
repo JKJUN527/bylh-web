@@ -271,10 +271,39 @@ class OrderController extends Controller {
         $data['type'] = AuthController::getType();
 
         if($request->has('order_id')){
-            $data['order'] = Orders::find($request->input('order_id'));
+            $order_id = $request->input('order_id');
+            $orderinfo = Orders::find($order_id);
+            if($orderinfo->service_id != null){
+                $data['type'] = "service";
+                switch ($orderinfo->type){
+                    case 0:
+                        $table = "bylh_genlservices";
+                        break;
+                    case 1:
+                        $table = "bylh_finlservices";
+                        break;
+                    case 2:
+                        $table = "bylh_qaservices";
+                        break;
+                }
+                $data['order'] = DB::table('bylh_orders')
+                    ->leftjoin($table,$table.".id","bylh_orders.service_id")
+                    ->select('bylh_orders.type','bylh_orders.state','bylh_orders.price','title','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')
+                    ->where('bylh_orders.id',$order_id)
+                    ->first();
+            }else{
+                $data['type'] = "demands";
+                $data['order'] = DB::table('bylh_orders')
+                    ->leftjoin("bylh_demands","bylh_demands.id","bylh_orders.demand_id")
+                    ->select('bylh_orders.type','bylh_orders.state','bylh_orders.price','title','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')
+                    ->where('bylh_orders.id',$order_id)
+                    ->first();
+            }
+
+
         }
 
-        //return $data;
+        return $data;
         return view('order/getdetail',['data'=>$data]);
     }
 

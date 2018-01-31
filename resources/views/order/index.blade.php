@@ -73,8 +73,9 @@
                                             </div>
                                             <div class="order-right">
                                                 <div class="move-right">
-                                                    <li class="td td-status">
+                                                    <li class="td td-status" style="float: right">
                                                         <div class="item-status">
+                                                            <span class="am-badge am-badge-primary am-radius" style="margin-bottom: 1rem;">
                                                             @if($order->state == -1)
                                                                 <p class="Mystatus">交易失败</p>
                                                             @elseif($order->state == 0)
@@ -86,8 +87,10 @@
                                                             @elseif($order->state == 3)
                                                                 <p class="Mystatus">交易成功</p>
                                                             @endif
-
-                                                            <p class="order-info"><a href="/order/detail?order_id={{$order->id}}">订单详情</a></p>
+                                                            </span>
+                                                            <span class="am-badge am-badge-warning am-radius">
+                                                                <p class="order-info"><a href="/order/detail?order_id={{$order->id}}">订单详情</a></p>
+                                                            </span>
                                                         </div>
                                                     </li>
                                                 </div>

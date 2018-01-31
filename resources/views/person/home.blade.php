@@ -173,7 +173,7 @@
                                         <div class="orderContent">
                                             <div class="orderContentpic">
                                                 <div class="imgBox">
-                                                    <a href="/order/getdetail?order_id={{$order->id}}">
+                                                    <a href="/order/detail?order_id={{$order->id}}">
                                                         <img src="
                                                             @if($data['order']['orderinfo'][$order->id]->picture =="" ||$data['order']['orderinfo'][$order->id]->picture ==null)
                                                                 {{asset('images/f1.jpg')}}
@@ -185,7 +185,7 @@
                                                 </div>
                                             </div>
                                             <div class="detailContent">
-                                                <a href="/order/getdetail?order_id={{$order->id}}" class="delivery">
+                                                <a href="/order/detail?order_id={{$order->id}}" class="delivery">
                                                     @if($order->state == -1)
                                                         交易失败
                                                     @elseif($order->state == 0)
@@ -220,7 +220,7 @@
                                             <div class="price"><span class="sym">¥</span>{{$price[0]}}.<span class="sym"><?php if(count($price) >1) echo $price[1]; else print 00;?></span></div>
 
                                         </div>
-                                        <a href="/order/getdetail?order_id={{$order->id}}" class="btnPay">立即处理</a>
+                                        <a href="/order/detail?order_id={{$order->id}}" class="btnPay">立即处理</a>
                                     </div>
                                     @endforeach
                                 </div>
