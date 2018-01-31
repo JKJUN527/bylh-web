@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
+use App\Message;
+use App\News;
 use App\Orders;
 use App\Qarecord;
 use App\Qaservices;
@@ -681,11 +683,12 @@ class ServiceController extends Controller {
                         ->first();
                     //查询对应该用户的提问--回答列表
                     $data['qarecord'] = DB::table('bylh_qarecord')
-                        ->select('username','photo','questioner','question','answer','bylh_qarecord.created_at','bylh_qarecord.updated_at','bylh_qarecord.status')
+                        ->select('username','photo','bylh_qarecord.id','questioner','respondent','question','answer','bylh_qarecord.created_at','bylh_qarecord.updated_at','bylh_qarecord.status')
                         ->leftjoin('bylh_userinfo','bylh_userinfo.uid','bylh_qarecord.questioner')
                         ->leftjoin('bylh_users','bylh_users.uid','bylh_qarecord.questioner')
 //                        ->where('questioner',$data['uid'])
                         ->where('service_id',$sid)
+                        ->orderBy('created_at', 'desc')
                         ->get();
                     //对应回答只能查看一次
                     $updaterecord = Qarecord::where('questioner',$data['uid'])
@@ -787,5 +790,77 @@ class ServiceController extends Controller {
 
 
         return view('service.reviewService', ['data' => $data]);
+    }
+    //专业问答
+    public function recordQa(Request $request){
+        $data = array();
+        $uid = AuthController::getUid();
+        $type = AuthController::getType();
+        $data['status'] = 400;
+        $data['msg'] = "未知错误";
+        if($uid == 0){
+            $data['msg'] = "登录后才能提问";
+            return $data;
+        }
+        //提问操作
+        if($request->has('qaserviceid') && $request->has('content')){
+            $sid = $request->input('qaserviceid');
+            $content = $request->input('content');
+            $isexit_notanswer = Qarecord::where('service_id',$sid)
+                ->where('questioner',$uid)
+                ->where('status',0)
+                ->count();
+            if($isexit_notanswer >0){
+                $data['msg'] = "请等待服务商回答";
+                return $data;
+            }else{
+                $service = Qaservices::find($sid);
+
+                $record = new Qarecord();
+                $record->service_id = $sid;
+                $record->questioner = $uid;
+                $record->respondent = $service->uid;
+                $record->question = $content;
+                if($record->save()){
+                    //发送站内信
+                    $msg = "您好！我向你的问答服务".$service->title."提了一个问题，希望得到你的解答。";
+                    $mesage = new Message();
+                    $mesage->from_id = $uid;
+                    $mesage->to_id = $service->uid;
+                    $mesage->content = $msg;
+                    $mesage->save();
+                    $data['status'] = 200;
+                    $data['msg'] = "提问成功";
+                    return $data;
+                }
+            }
+        }
+        //回答操作
+        if ($request->has('recordid') && $request->has('content')){
+            $recordid = $request->input('recordid');
+            $content = $request->input('content');
+
+            $answer_record = Qarecord::find($recordid);
+            if($uid == $answer_record->respondent){//登录用户具有回答权限
+                $answer_record->answer = $content;
+                $answer_record->status = 1;
+                if($answer_record->save()){
+                    //发送站内信
+                    $msg = "您好！我已问答你的问题".$answer_record->question."，请到服务详情页面查看。";
+                    $mesage = new Message();
+                    $mesage->from_id = $uid;
+                    $mesage->to_id = $answer_record->questioner;
+                    $mesage->content = $msg;
+                    $mesage->save();
+                    $data['status'] = 200;
+                    $data['msg'] = "回答成功";
+                    return $data;
+                }
+            }else{
+                $data['msg'] = "无权回答此问题";
+                return $data;
+            }
+        }
+        return $data;
     }
 }

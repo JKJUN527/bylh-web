@@ -258,16 +258,17 @@
                                     <span style="color: #b84554;">温馨提示：购买服务，不亦乐乎不收取任何费用，请勿相信服务商任何理由的加价交易行为。</span><br>
                                     {!! $data["detail"]->describe !!}
                                 </p>
-                            </div>
-                            <div class="am-tab-panel am-fade" id="tab2">
-                                <div class="buyer_pj" style="display: block;">
-
-                                    <div class="pl-cont">
-                                        <div class="clear"></div>
-                                        <div class="info_pj_datalist" style="padding-left: 10px;">
+                                <div class="guessrequest">
+                                    <div class="title"
+                                         style="font-family: 'Microsoft YaHei';color: #333;font-size: 24px;font-weight: 400;line-height: 24px;">
+                                        <span class="sign" style="padding: 0px 3px;background-color: #ff8a00;margin-right: 15px;"></span>提问列表
+                                    </div>
+                                    <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+                                    <div class="moreItems">
+                                        <ul class="am-comments-list am-comments-list-flip">
                                             @foreach($data['qarecord'] as $record)
-                                                @if($record->question != "" && $record->answer != "")
-                                                    <li class="am-comment" style="margin-bottom: 1rem;width: 90%;">
+                                                @if($record->question != "" &&($record->questioner == $data['uid']||$record->respondent == $data['uid']))
+                                                    <li class="am-comment">
                                                         <article class="am-comment">
                                                             <a href="/service/getAllservices?uid={{$record->questioner}}">
                                                                 <img src="{{$record->photo}}
@@ -285,10 +286,15 @@
                                                                 <div class="am-comment-bd">
                                                                     {{$record->question}}
                                                                 </div>
+                                                                @if($record->answer == "" && ($record->questioner == $data['uid']||$record->respondent == $data['uid']))
+                                                                    <button type="button" class="am-btn am-btn-warning" style="float: right" onclick="answer({{$record->id}});">回答问题</button>
+                                                                @endif
                                                             </div>
                                                         </article>
                                                     </li>
-                                                    <li class="am-comment am-comment-flip am-comment-highlight" style="margin-bottom: 1rem;width: 90%;float: right;">
+                                                @endif
+                                                @if($record->answer != "" && ($record->questioner == $data['uid']||$record->respondent == $data['uid']))
+                                                    <li class="am-comment am-comment-flip am-comment-highlight">
                                                         <article class="am-comment">
                                                             <a href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}">
                                                                 <img src="{{$data['serviceinfo']['elogo']}}
@@ -304,7 +310,11 @@
                                                                 </header>
 
                                                                 <div class="am-comment-bd">
+                                                                    @if($record->status == 1 || $record->respondent == $data['uid'])
+                                                                        {{$record->answer}}
+                                                                    @else
                                                                         *****
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </article>
@@ -312,7 +322,95 @@
                                                 @endif
 
                                             @endforeach
-                                            <div class="clear"></div>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="answerdemand" id="answer_panl" style="display: @if($data['uid'] == $data['detail']->uid) none @else block @endif">
+                                    <form id="comment-form" method="post" >
+                                        <input type="hidden" name="type" data-content="{{$data['detail']->id}}" value=
+                                        @if($data['uid'] == $data['detail']->uid)
+                                                "answer"
+                                        @else
+                                            "question"
+                                        @endif/>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                            <textarea rows="2" class="form-control" name="content"
+                                      id="additional-content"
+                                      placeholder="写点什么..."></textarea>
+                                            </div>
+                                            <div class="help-info" id="comment-help">还可输入114字</div>
+                                            <label class="error" for="additional-content"></label>
+                                        </div>
+
+                                        <button id="btn-comment" type="button" class="am-btn am-btn-warning">
+                                            确认
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab2">
+                                <div class="buyer_pj" style="display: block;">
+
+                                    <div class="pl-cont">
+                                        <div class="clear"></div>
+                                        <div class="moreItems">
+                                            <ul class="am-comments-list am-comments-list-flip">
+                                                @foreach($data['qarecord'] as $record)
+                                                    @if($record->question != "" && $record->answer != "")
+                                                        <li class="am-comment">
+                                                            <article class="am-comment">
+                                                                <a href="/service/getAllservices?uid={{$record->questioner}}">
+                                                                    <img src="{{$record->photo}}
+                                                                            " alt="" class="am-comment-avatar" width="48" height="48"/>
+                                                                </a>
+                                                                <div class="am-comment-main">
+                                                                    <header class="am-comment-hd">
+                                                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
+                                                                        <div class="am-comment-meta">
+                                                                            <a href="#link-to-user" class="am-comment-author">{{$record->username}}</a>
+                                                                            提问时间 <time>{{$record->created_at}}</time>
+                                                                        </div>
+                                                                    </header>
+
+                                                                    <div class="am-comment-bd">
+                                                                        {{$record->question}}
+                                                                    </div>
+                                                                    @if($record->answer == "" && ($record->questioner == $data['uid']||$record->respondent == $data['uid']))
+                                                                        <button type="button" class="am-btn am-btn-warning" style="float: right" onclick="answer({{$record->id}});">回答问题</button>
+                                                                    @endif
+                                                                </div>
+                                                            </article>
+                                                        </li>
+                                                        <li class="am-comment am-comment-flip am-comment-highlight">
+                                                            <article class="am-comment">
+                                                                <a href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}">
+                                                                    <img src="{{$data['serviceinfo']['elogo']}}
+                                                                            " alt="" class="am-comment-avatar" width="48" height="48"/>
+                                                                </a>
+                                                                <div class="am-comment-main">
+                                                                    <header class="am-comment-hd">
+                                                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
+                                                                        <div class="am-comment-meta">
+                                                                            <a href="#link-to-user" class="am-comment-author">{{$data['serviceinfo']['ename']}}</a>
+                                                                            回答时间 <time>{{$record->updated_at}}</time>
+                                                                        </div>
+                                                                    </header>
+
+                                                                    <div class="am-comment-bd">
+                                                                        @if($record->respondent == $data['uid'])
+                                                                            {{$record->answer}}
+                                                                        @else
+                                                                            *****
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </article>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
                                         </div>
                                         <div style="height:30px"></div>
                                         <div class="clear"></div>
@@ -361,89 +459,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="guessrequest">
-                        <div class="title"
-                             style="font-family: 'Microsoft YaHei';color: #333;font-size: 24px;font-weight: 400;line-height: 24px;">
-                            <span class="sign" style="padding: 0px 3px;background-color: #ff8a00;margin-right: 15px;"></span>提问列表
-                        </div>
-                        <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
-                        <div class="moreItems">
-                            <ul class="am-comments-list am-comments-list-flip">
-                                @foreach($data['qarecord'] as $record)
-                                    @if($record->question != "" &&$record->questioner == $data['uid'])
-                                    <li class="am-comment">
-                                        <article class="am-comment">
-                                            <a href="/service/getAllservices?uid={{$record->questioner}}">
-                                                <img src="{{$record->photo}}
-                                                        " alt="" class="am-comment-avatar" width="48" height="48"/>
-                                            </a>
-                                            <div class="am-comment-main">
-                                                <header class="am-comment-hd">
-                                                    <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                                    <div class="am-comment-meta">
-                                                        <a href="#link-to-user" class="am-comment-author">{{$record->username}}</a>
-                                                        提问时间 <time>{{$record->created_at}}</time>
-                                                    </div>
-                                                </header>
 
-                                                <div class="am-comment-bd">
-                                                    {{$record->question}}
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </li>
-                                    @endif
-                                    @if($record->answer != "" && $record->questioner == $data['uid'])
-                                    <li class="am-comment am-comment-flip am-comment-highlight">
-                                         <article class="am-comment">
-                                             <a href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}">
-                                                 <img src="{{$data['serviceinfo']['elogo']}}
-                                                                " alt="" class="am-comment-avatar" width="48" height="48"/>
-                                             </a>
-                                             <div class="am-comment-main">
-                                                        <header class="am-comment-hd">
-                                                            <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                                            <div class="am-comment-meta">
-                                                                <a href="#link-to-user" class="am-comment-author">{{$data['serviceinfo']['ename']}}</a>
-                                                                回答时间 <time>{{$record->updated_at}}</time>
-                                                            </div>
-                                                        </header>
-
-                                                        <div class="am-comment-bd">
-                                                            @if($record->status == 1)
-                                                                {{$record->answer}}
-                                                            @else
-                                                                *****
-                                                            @endif
-                                                        </div>
-                                             </div>
-                                         </article>
-                                    </li>
-                                    @endif
-
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="answerdemand">
-                        <form id="comment-form" method="post" >
-                            <input type="hidden" name="did" value="{{$data["detail"]->id}}"/>
-                            <div class="form-group">
-                                <div class="form-line">
-                            <textarea rows="2" class="form-control" name="content"
-                                      id="additional-content"
-                                      placeholder="写点什么..."></textarea>
-                                </div>
-                                <div class="help-info" id="comment-help">还可输入114字</div>
-                                <label class="error" for="additional-content"></label>
-                            </div>
-
-                            <button id="btn-comment" type="button" class="am-btn am-btn-warning">
-                                评论
-                            </button>
-                        </form>
-                    </div>
                 </div>
                 <div class="am-u-lg-3 am-u-md-3 am-u-sm-3">
                     <div class="container1"
@@ -527,31 +543,6 @@
                             {{--<div class="clear"></div>--}}
                         </div>
                     </div>
-                    {{--<div class="container2" style="border: 2px solid #eee;padding: 20px;background: #fff;margin-left: 20px;margin-top: 20px;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">--}}
-                    {{--<div class="other_fw_r" style="padding-top: 5px;padding-bottom: 40px;">--}}
-                    {{--<div class="twof-t" style="line-height: 30px;">--}}
-                    {{--<span class="csfw"--}}
-                    {{--style="padding-left: 0;float: left;font-size: 16px;padding-bottom: 10px;">本店其他热门服务</span>--}}
-                    {{--<div class="clear"></div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="anli-b">--}}
-                    {{--<div style="float:left;"><a href="fid-55380.html" target="_blank"><img--}}
-                    {{--src="http://p1.shopimg.680.com/2017-7/6/32017070614584559264_10442660.jpg"--}}
-                    {{--width="80" style="width: 80px;height: 80px;"></a></div>--}}
-                    {{--<div class="xxys"--}}
-                    {{--style="float: left;line-height: 25px;padding-left: 10px;font-weight: bold;padding-top: 0;width: 132px;">--}}
-                    {{--<a href="fid-55380.html" target="_blank"--}}
-                    {{--style="display: block;font-weight: 100;height: auto;padding-bottom: 5px;overflow: visible;color: #666;font-size: 14px;line-height: 20px;height: 25px;overflow: hidden;line-height: 25px;overflow: hidden;width: 130px;text-overflow: ellipsis;padding-left:5px;white-space: nowrap;">田园风格装修/复式楼/别墅/商品房</a><font--}}
-                    {{--style="font-weight: 100;color: #DF231B;font-size: 14px;">￥30</font>--}}
-                    {{--<div class="fw_r_i_cj">成交4次</div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="clear"></div>--}}
-                    {{--</div>--}}
-
-                    {{--</div>--}}
-                    {{--</div>--}}
 
                 </div>
             </div>
@@ -600,9 +591,13 @@
             $("#comment-help").html("还可输入" + (maxSize - length < 0 ? 0 : maxSize - length) + "字");
 
         });
+
+        var answerpanl = $('#answer_panl');
+
         $('#btn-comment').click(function () {
-            var did = $('input[name=did]').val();
+            var type = $('input[name=type]');
             var demandview = $('#additional-content');
+            var id = type.attr('data-content');
             if(demandview.val().length <=0){
                 swal("","评论为空","error");
                 return;
@@ -612,29 +607,60 @@
                 return;
             }
             var formData = new FormData();
-            formData.append("did", did);
-            formData.append("review", demandview.val());
-
-            $.ajax({
-                url: "/demands/reviewDemand",
-                type: "post",
-                dataType: 'text',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: formData,
-                success: function (data) {
-                    var result = JSON.parse(data);
-                    if(result.status == 400){
-                        swal("",result.msg,"error");
-                    }else{
-                        swal("","评论成功","success");
-                        setTimeout(function () {
-                            window.location.reload();
-                        }, 1000);
+            if(type.val() ==="question"){//提问
+                formData.append("qaserviceid", id);
+                formData.append("content", demandview.val());
+                $.ajax({
+                    url: "/service/recordQa",
+                    type: "post",
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (data) {
+                        var result = JSON.parse(data);
+                        if(result.status == 400){
+                            swal("",result.msg,"error");
+                        }else{
+                            swal("","提问成功","success");
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
                     }
-                }
-            });
+                });
+            }
+            if(type.val() ==="answer"){//回答
+                formData.append("recordid", id);
+                formData.append("content", demandview.val());
+                $.ajax({
+                    url: "/service/recordQa",
+                    type: "post",
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (data) {
+                        var result = JSON.parse(data);
+                        if(result.status == 400){
+                            swal("",result.msg,"error");
+                        }else{
+                            swal("","回答成功","success");
+                            answerpanl.css('display','none');
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
+                    }
+                });
+            }
         });
+        function answer(recordid) {
+            answerpanl.css('display','block');
+            var type = $('input[name=type]');
+            type.attr('data-content',recordid);
+        }
     </script>
 @endsection

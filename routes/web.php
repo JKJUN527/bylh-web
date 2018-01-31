@@ -82,6 +82,8 @@ Route::any('service/detail',['uses' => 'ServiceController@detail']);
 Route::any('service/reviewService',['uses' => 'serviceController@reviewService']);
 //获取用户发布所有需求、服务列表
 Route::get('service/getAllservices',['uses' => 'serviceController@getAllservices']);
+//专业问答--问答
+Route::post('service/recordQa',['uses' => 'serviceController@recordQa']);
 
 //订单模块
 
