@@ -297,10 +297,6 @@
                         <div class="shopTitle ">
                             <h4 class="floor-title"><span class="am-badge am-badge-warning am-round">1</span>&nbsp;&nbsp;一般服务
                             </h4>
-                            <div class="today-brands " style="right:0px ;top:13px;">
-                                <span class="am-badge am-badge-warning am-round">More</span>
-                            </div>
-
                         </div>
                     </div>
                     <div class="am-g am-g-fixed">
@@ -311,7 +307,17 @@
                                     <li>
                                         <div class="am-gallery-item">
                                             <a href="/service/detail?id={{$s->id}}&type=0" class="">
-                                                <img src="{{asset("images/f1.jpg")}}"/>
+                                                @if($s->picture != null)
+                                                    <?php
+                                                    $pics = explode(';', $s->picture);
+                                                    $baseurl = explode('@', $pics[0])[0];
+                                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                    $imagepath = explode('@', $pics[0])[1];
+                                                    ?>
+                                                    <img src="{{$baseurl}}{{$imagepath}}"/>
+                                                @else
+                                                    <img src="{{asset("images/f1.jpg")}}"/>
+                                                @endif
                                                 <h3 class="am-gallery-title">{{$s->title}}</h3>
                                                 <div class="am-gallery-desc">{{$s->price}}|{{$s->city}}</div>
                                             </a>
@@ -331,17 +337,23 @@
                         <div class="shopTitle ">
                             <h4 class="floor-title"><span class="am-badge am-badge-primary am-round">2</span>&nbsp;&nbsp;实习中介
                             </h4>
-                            <div class="today-brands " style="right:0px ;top:13px;">
-                                <span class="am-badge am-badge-primary am-round">More</span>
-                            </div>
-
                         </div>
                     </div>
                     <div class="am-g am-g-fixed">
                         @foreach($data["result"]["services"] as $s)
                         <div class="am-u-lg-3 am-u-md-4" style="padding:10px;">
                             <a href="/service/detail?id={{$s->id}}&type=1">
-                                <img src="{{asset("images/img_06.jpg")}}">
+                                @if($s->picture != null)
+                                    <?php
+                                    $pics = explode(';', $s->picture);
+                                    $baseurl = explode('@', $pics[0])[0];
+                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                    $imagepath = explode('@', $pics[0])[1];
+                                    ?>
+                                    <img src="{{$baseurl}}{{$imagepath}}"/>
+                                @else
+                                    <img src="{{asset("images/f1.jpg")}}"/>
+                                @endif
                             </a>
                             <div class="left_bottom"
                                  style="background-color: gray;text-align: center;padding: 3px;color:#fff;">
@@ -363,10 +375,6 @@
                         <div class="shopTitle ">
                             <h4 class="floor-title"><span class="am-badge am-badge-success am-round">3</span>&nbsp;&nbsp;专业问答
                             </h4>
-                            <div class="today-brands " style="right:0px ;top:13px;">
-                                <span class="am-badge am-badge-success am-round">More</span>
-                            </div>
-
                         </div>
                     </div>
                     <div class="am-g am-g-fixed">
@@ -377,7 +385,17 @@
                                 <li>
                                     <div class="am-gallery-item">
                                         <a href="/service/detail?id={{$s->id}}&type=2" class="">
-                                            <img src="{{asset("images/f1.jpg")}}" alt=""/>
+                                            @if($s->picture != null)
+                                                <?php
+                                                $pics = explode(';', $s->picture);
+                                                $baseurl = explode('@', $pics[0])[0];
+                                                $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                $imagepath = explode('@', $pics[0])[1];
+                                                ?>
+                                                <img src="{{$baseurl}}{{$imagepath}}"/>
+                                            @else
+                                                <img src="{{asset("images/f1.jpg")}}"/>
+                                            @endif
                                             <h3 class="am-gallery-title">{{$s->title}}</h3>
                                             <div class="am-gallery-desc">{{$s->price}}|{{$s->city}}</div>
                                         </a>

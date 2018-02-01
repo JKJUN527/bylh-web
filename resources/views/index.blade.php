@@ -194,7 +194,7 @@
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4 leftpanel" style="padding-bottom: 10px;">
             <div class="index-category-left showNews">
                 <div class="marqueenOne">
-                    <span class="marqueen-title" style="text-align: center;padding-top: 2rem;height:100px;background-image: url({{asset('images/float_box2.png')}});background-repeat: no-repeat;">
+                    <span class="marqueen-title" style="text-align: center;padding-top: 1rem;height:54px;background-image: url({{asset('images/float_box2.png')}});background-repeat: no-repeat;">
                         <i style="font-size: 1.5rem;color: #fff;">本站公告</i></span>
                     <div class="demo">
                         <ul>

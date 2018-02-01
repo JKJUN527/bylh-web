@@ -28,7 +28,6 @@
             <p><i class="am-icon-balance-scale"></i>我的交易</p>
             <ul>
                 <li><a href="{{asset('order')}}">订单管理</a></li>
-                <li><a href="{{asset('comment')}}">评价服务</a></li>
             </ul>
         </li>
         @if($type == 2)

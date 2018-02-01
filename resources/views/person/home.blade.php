@@ -315,14 +315,14 @@
                 <!-- 日历-->
                 <div class="day-list">
                     <div class="s-title">
-                        网站新闻
+                        本站公告
                     </div>
                     <div class="s-box">
                         <ul>
                             @foreach($data['news'] as $new)
                             <li>
                                 <a target="_blank" href="/news/detail?nid={{$new->nid}}">
-                                    <span style="color: #b84554;">[{{$new->quote}}]</span>{{mb_substr($new->title,0,10,'utf-8')}}
+                                    <span style="font-size: 16px;color: #b84554;padding-right: 3px;"><i class="am-icon-volume-up am-icon-fw"></i></span>{{mb_substr($new->title,0,10,'utf-8')}}
                                 </a>
                             </li>
                             @endforeach
