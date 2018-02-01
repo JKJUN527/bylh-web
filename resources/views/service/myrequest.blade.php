@@ -52,6 +52,15 @@
                                                 价格面议
                                             @else
                                             ￥{{$genlservice->price}}
+                                                @if($genlservice->price_type == 0)
+                                                    /8小时
+                                                @elseif($genlservice->price_type == 1)
+                                                    /天
+                                                @elseif($genlservice->price_type == 2)
+                                                    /次
+                                                @elseif($genlservice->price_type == 3)
+                                                    /套
+                                                @endif
                                             @endif</span><br>
                                         浏览次数：<span class="people">{{$genlservice->view_count}}</span>次<br>
                                         成交量：<span class="total_order">{{$data['total_order']['genl'][$genlservice->id]}}</span>次
@@ -118,6 +127,15 @@
                                                     价格面议
                                                 @else
                                                     ￥{{$finlservice->price}}
+                                                    @if($finlservice->price_type == 0)
+                                                        /8小时
+                                                    @elseif($finlservice->price_type == 1)
+                                                        /天
+                                                    @elseif($finlservice->price_type == 2)
+                                                        /次
+                                                    @elseif($finlservice->price_type == 3)
+                                                        /套
+                                                    @endif
                                                 @endif</span><br>
                                             浏览次数：<span class="people">{{$finlservice->view_count}}</span>次<br>
                                             成交量：<span class="total_order">{{$data['total_order']['finl'][$finlservice->id]}}</span>次
@@ -183,6 +201,15 @@
                                                 价格面议
                                             @else
                                                 ￥{{$qaservices->price}}
+                                                @if($qaservices->price_type == 0)
+                                                    /8小时
+                                                @elseif($qaservices->price_type == 1)
+                                                    /天
+                                                @elseif($qaservices->price_type == 2)
+                                                    /次
+                                                @elseif($qaservices->price_type == 3)
+                                                    /套
+                                                @endif
                                             @endif</span><br>
                                         浏览次数：<span class="people">{{$qaservices->view_count}}</span>次<br>
                                         成交量：<span class="total_order">{{$data['total_order']['qa'][$qaservices->id]}}</span>次

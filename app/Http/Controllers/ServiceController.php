@@ -48,7 +48,7 @@ class ServiceController extends Controller {
             //返回一般服务页面所需数据
             $data['serviceclass1'] = Serviceclass1::where('type', 0)->orderBy('updated_at', 'asc')->get();
             $data['serviceclass2'] = Serviceclass2::where('type', 0)->orderBy('updated_at', 'asc')->get();
-//            $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
+            $data['serviceclass3'] = Serviceclass3::where('type', 0)->orderBy('updated_at','asc')->get();
             $data['province'] = Region::where('parent_id', 0)->get();
             $data['city'] = Region::where('parent_id', '!=', 0)->get();
             //确认联系方式
@@ -88,7 +88,7 @@ class ServiceController extends Controller {
         } else {
             $data['serviceclass1'] = Serviceclass1::where('type', 1)->orderBy('updated_at', 'asc')->get();
             $data['serviceclass2'] = Serviceclass2::where('type', 1)->orderBy('updated_at', 'asc')->get();
-//            $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
+            $data['serviceclass3'] = Serviceclass3::where('type', 1)->orderBy('updated_at','asc')->get();
             $data['province'] = Region::where('parent_id', 0)->get();
             $data['city'] = Region::where('parent_id', '!=', 0)->get();
             //确认联系方式
@@ -128,7 +128,7 @@ class ServiceController extends Controller {
             //返回一般服务页面所需数据
             $data['serviceclass1'] = Serviceclass1::where('type', 2)->orderBy('updated_at', 'asc')->get();
             $data['serviceclass2'] = Serviceclass2::where('type', 2)->orderBy('updated_at', 'asc')->get();
-//            $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
+            $data['serviceclass3'] = Serviceclass3::where('type', 2)->orderBy('updated_at','asc')->get();
             $data['province'] = Region::where('parent_id', 0)->get();
             $data['city'] = Region::where('parent_id', '!=', 0)->get();
             //确认联系方式
@@ -205,12 +205,14 @@ class ServiceController extends Controller {
                 $genlser->uid = $data['uid'];
                 $genlser->title = $request->input('title');
                 $genlser->city = $request->input('city');
-                $genlser->class1_id = $request->input('class1_id');
-                $genlser->class2_id = $request->input('class2_id');
-//                    $genlser->class3_id = $request->input('class3_id');
+                $genlser->class1_id = $request->input('class1');
+                $genlser->class2_id = $request->input('class2');
+                $genlser->class3_id = $request->input('class3');
                 $genlser->describe = $request->input('describe');
                 $genlser->home_page = $request->input('home_page');
-                $genlser->experience = $request->input('experience');
+                $genlser->price = $request->input('price');
+                $genlser->price_type = $request->input('price_type');
+//                $genlser->experience = $request->input('experience');
                 if ($genlser->save()) {
                     //设置服务商电话及邮箱
                     $tel = $request->input('tel');
@@ -286,12 +288,14 @@ class ServiceController extends Controller {
                 $finlser->uid = $data['uid'];
                 $finlser->title = $request->input('title');
                 $finlser->city = $request->input('city');
-                $finlser->class1_id = $request->input('class1_id');
-                $finlser->class2_id = $request->input('class2_id');
-//                $finlser->class3_id = $request->input('class3_id');
+                $finlser->class1_id = $request->input('class1');
+                $finlser->class2_id = $request->input('class2');
+                $finlser->class3_id = $request->input('class3');
                 $finlser->describe = $request->input('describe');
                 $finlser->home_page = $request->input('home_page');
-                $finlser->experience = $request->input('experience');
+                $finlser->price = $request->input('price');
+                $finlser->price_type = $request->input('price_type');
+//                $finlser->experience = $request->input('experience');
                 if ($finlser->save()) {
                     $tel = $request->input('tel');
                     $email = $request->input('email');
@@ -366,12 +370,14 @@ class ServiceController extends Controller {
                 $qaser->uid = $data['uid'];
                 $qaser->title = $request->input('title');
                 $qaser->city = $request->input('city');
-                $qaser->class1_id = $request->input('class1_id');
-                $qaser->class2_id = $request->input('class2_id');
-//                $qaser->class3_id = $request->input('class3_id');
+                $qaser->class1_id = $request->input('class1');
+                $qaser->class2_id = $request->input('class2');
+                $qaser->class3_id = $request->input('class3');
                 $qaser->describe = $request->input('describe');
                 $qaser->home_page = $request->input('home_page');
-                $qaser->experience = $request->input('experience');
+                $qaser->price = $request->input('price');
+                $qaser->price_type = $request->input('price_type');
+//                $qaser->experience = $request->input('experience');
                 if ($qaser->save()) {
                     //设置服务商电话及邮箱
                     $tel = $request->input('tel');

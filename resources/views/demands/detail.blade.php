@@ -99,51 +99,51 @@
                         </div>
                     </div>
                 </div>
-                <div class="item_process"
-                     style="margin-top:20px;background: #F2F2F2;padding: 25px 20px 30px 20px;border: solid 1px #E9E9E9;overflow: hidden;">
-                    <div class="jinduline">
-                        <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                            <div class="jindu_y_line jindu_out"
-                                 style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">
-                                <div class="jindu_y_q_blue_s"
-                                     style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>
-                            </div>
-                            <div class="jindu_y_text">发布需求<br><span class="jd_date"></span></div>
-                        </div>
+                {{--<div class="item_process"--}}
+                     {{--style="margin-top:20px;background: #F2F2F2;padding: 25px 20px 30px 20px;border: solid 1px #E9E9E9;overflow: hidden;">--}}
+                    {{--<div class="jinduline">--}}
+                        {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                            {{--<div class="jindu_y_line jindu_out"--}}
+                                 {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
+                                {{--<div class="jindu_y_q_blue_s"--}}
+                                     {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
+                            {{--</div>--}}
+                            {{--<div class="jindu_y_text">发布需求<br><span class="jd_date"></span></div>--}}
+                        {{--</div>--}}
 
-                        <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                            <div class="jindu_y_line jindu_out"
-                                 style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">
-                                <div class="jindu_y_q_blue_s"
-                                     style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>
-                            </div>
-                            <div class="jindu_y_text">进行中<br><span class="jd_date"></span></div>
-                        </div>
+                        {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                            {{--<div class="jindu_y_line jindu_out"--}}
+                                 {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
+                                {{--<div class="jindu_y_q_blue_s"--}}
+                                     {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
+                            {{--</div>--}}
+                            {{--<div class="jindu_y_text">进行中<br><span class="jd_date"></span></div>--}}
+                        {{--</div>--}}
 
-                        <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                            <div class="jindu_y_line jindu_out"
-                                 style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">
-                                <div class="jindu_y_q_blue_s"
-                                     style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>
-                            </div>
-                            <div class="jindu_y_text ">验收付款
-                                <br><span class="jd_date">  </span>
-                            </div>
-                        </div>
+                        {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                            {{--<div class="jindu_y_line jindu_out"--}}
+                                 {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
+                                {{--<div class="jindu_y_q_blue_s"--}}
+                                     {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
+                            {{--</div>--}}
+                            {{--<div class="jindu_y_text ">验收付款--}}
+                                {{--<br><span class="jd_date">  </span>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
-                        <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                            <div class="jindu_y_line jindu_out"
-                                 style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">
-                                <div class="jindu_y_q_blue_s"
-                                     style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>
-                            </div>
-                            <div class="jindu_y_text">评价<br><span class="jd_date"></span></div>
-                        </div>
+                        {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                            {{--<div class="jindu_y_line jindu_out"--}}
+                                 {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
+                                {{--<div class="jindu_y_q_blue_s"--}}
+                                     {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
+                            {{--</div>--}}
+                            {{--<div class="jindu_y_text">评价<br><span class="jd_date"></span></div>--}}
+                        {{--</div>--}}
 
-                        <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
+                        {{--<div class="clear"></div>--}}
+                    {{--</div>--}}
+                    {{--<div class="clear"></div>--}}
+                {{--</div>--}}
                 <div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
                     <ul class="am-slides">
                         @if($data["detail"]->picture != null)
@@ -170,7 +170,7 @@
                 <hr style="">
                 <div class="desct-container" style="margin-top: 10px;">
                     <div class="desct-title"
-                         style="height: 25px;line-height: 25px;font-size: 18px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">
+                         style="line-height: 25px;font-size: 18px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">
                         任务详情:
                         <div class="desct-content">
                             <p>

@@ -142,25 +142,58 @@
     <div class="am-container" style="padding: 60px;" id="publish_step1">
         <div class="fabu_step1 am-g am-g-fixed">
             <div class="am-u-lg-12 am-g-u-md-12 am-u-sm-12">
-                <div class="fabu1" style="background:#eee;">
+                <div class="fabu1" style="background:#eee; margin-bottom: 10px;padding-bottom: 10px;">
                     <div class="fabu_showtitle title_tip_first">请选择你的需求范围:</div>
                     <button id='select_class1' data-content="" class="am-btn am-btn-warning am-radius " style="display:none;margin-bottom: 0.5rem">btn1</button>
                     <button id='select_class2' data-content="" class="am-btn am-btn-warning am-radius " style="display:none;margin-bottom: 0.5rem">btn2</button>
+                    <button id='select_class3' data-content="" class="am-btn am-btn-warning am-radius " style="display:none;margin-bottom: 0.5rem">btn3</button>
                     <div class="fb_container sub_title_tip">
-                    <div class="am-g am-g-fixed">
-                        @foreach($data['serviceclass1'] as $class1)
-                        <div class="am-u-lg-2 am-u-md-2 am-u-sm-2 am-dropdown" data-am-dropdown>
-                            <button class="am-btn am-btn-danger am-dropdown-toggle" data-am-dropdown-toggle>{{$class1->name}}</button>
-                            <ul class="am-dropdown-content" data-content="{{$class1->id}}" data-name="{{$class1->name}}">
-                                @foreach($data['serviceclass2'] as $class2)
-                                    @if($class2->class1_id == $class1->id)
-                                        <li class="am-danger"><a onclick="select_class(this);" name="service_class2" data-content="{{$class2->id}}">{{$class2->name}}</a></li>
-                                    @endif
-                                @endforeach
-                            </ul>
+                        <div class="am-g am-g-fixed">
+                            @foreach($data['serviceclass1'] as $class1)
+                            <div class="am-u-lg-1 am-u-md-1 am-u-sm-1 am-dropdown" data-am-dropdown>
+                                <button class="am-btn am-btn-danger am-dropdown-toggle" data-am-dropdown-toggle>{{$class1->name}}</button>
+                                <ul class="am-dropdown-content" data-content="{{$class1->id}}" data-name="{{$class1->name}}">
+                                    @foreach($data['serviceclass2'] as $class2)
+                                        @if($class2->class1_id == $class1->id)
+                                            <li class="am-danger"><a onclick="select_class(this);" name="service_class2" data-content="{{$class2->id}}">{{$class2->name}}</a></li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
+                    {{--<div class="am-u-lg-12 am-g-u-md-12 am-u-sm-12" style="">--}}
+                        {{--<div class="fabu_showtitle title_tip_first">请选择你的需求范围:</div>--}}
+                        {{--<select data-am-selected="{btnWidth: '10%', btnSize: 'sm', btnStyle: 'secondary'}">--}}
+                            {{--<option value="a">Apple</option>--}}
+                            {{--<option value="b">Banana</option>--}}
+                            {{--<option value="o">Orange</option>--}}
+                            {{--<option value="m">Mango</option>--}}
+                        {{--</select>--}}
+                    {{--<br>--}}
+                    {{--</div>--}}
+                    <div class="fabu_showtitle title_tip_first" id="project_label" style="display: none;">请选择你的需求项目:</div>
+                    @foreach($data['serviceclass2'] as $class2)
+                        <div style="display: none;" id="project_{{$class2->id}}" name="project_id">
+                        <select data-am-selected="{btnWidth: '10%', btnSize: 'sm', btnStyle: 'secondary'}" name="project">
+                            <option value="-1">任意</option>
+                            @foreach($data['serviceclass3'] as $class3)
+                                @if($class3->class2_id == $class2->id)
+                                    <option value="{{$class3->id}}">{{$class3->name}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        </div>
+                    @endforeach
+                    {{--<br>--}}
+                    {{--<div class="fabu_showtitle title_tip_first">请选择你的需求项目:</div>--}}
+                    {{--<select data-am-selected="{btnWidth: '10%', btnSize: 'sm', btnStyle: 'secondary'}">--}}
+                        {{--<option value="a">Apple</option>--}}
+                        {{--<option value="b">Banana</option>--}}
+                        {{--<option value="o">Orange</option>--}}
+                        {{--<option value="m">Mango</option>--}}
+                    {{--</select>--}}
                 </div>
                 <div class="fabu1" style="background:#eee;margin-bottom:10px;">
                     <div class="fabu_showtitle title_tip">请确认你的联系方式</div>
@@ -329,22 +362,44 @@
 
         }
         function select_class(element) {
-            var btn1 = $('#select_class1')
-            var btn2 = $('#select_class2')
+            var btn1 = $('#select_class1');
+            var btn2 = $('#select_class2');
+            var btn3 = $('#select_class3');
+            var project_label = $('#project_label');
+            var project_id = $('div[name=project_id]');
+
 //            alert($(element).parent().parent().attr('data-content'));
             //show select data
-            btn2.html($(element).html());
-            btn2.attr('data-content',$(element).attr('data-content'));
-            btn1.attr('data-content',$(element).parent().parent().attr('data-content'));
-            btn1.html($(element).parent().parent().attr('data-name'));
+            var class1_id = $(element).parent().parent().attr('data-content');
+            var class1_name = $(element).parent().parent().attr('data-name');
+            var class2_id = $(element).attr('data-content');
+            var class2_name = $(element).html();
+            btn3.html("任意");
+            btn3.attr("data-content",-1);
+            btn2.html(class2_name);
+            btn2.attr('data-content',class2_id);
+            btn1.attr('data-content',class1_id);
+            btn1.html(class1_name);
+
+            project_id.hide();
+            $('#project_'+class2_id).css('display','inline');
+            project_label.show();
             btn1.show();
             btn2.show();
+            btn3.show();
         }
+        $('select[name=project]').change(function () {
+            var btn3 = $('#select_class3');
+//            alert($(this).val());
+            btn3.html();
+            btn3.attr('data-content',$(this).val());
+        });
         function goto_next() {
             var tel = $('#phone');
             var email = $('#email');
             var btn1 = $('#select_class1');
             var btn2 = $('#select_class2');
+            var btn3 = $('#select_class3');
             var type = $('input:radio[name="service_type"]:checked').val();
             var step1 = $('#publish_step1');
             var step2 = $('#publish_step2');
@@ -381,7 +436,7 @@
             baseinfo_tel.find("span").html(tel.val());
             baseinfo_email.find("span").html(email.val());
             baseinfo_type.find("span").html(base_type);
-            baseinfo_class.find("span").html(btn1.html()+"-"+btn2.html());
+            baseinfo_class.find("span").html(btn1.html()+"-"+btn2.html()+"-"+btn3.html());
 
             //
             guide_color.attr('style','');
@@ -393,10 +448,10 @@
         var previewHolder = $("#preview-holder");
         var appendFileInput = true;
         $('#insert_img').click(function (event) {
-            var pictureIndex = $("input[id='pic_info']");
+//            var pictureIndex = $("input[id='pic_info']");
             var pictureIndex = $("input[id='pic_info']");
             num = pictureIndex.val().split("@");
-//            alert(num.length);
+//            alert(pictureIndex.val());
             if (appendFileInput && num.length <= 3) {
                 previewHolder.append("<input type='file' name='pic" + index + "' style='display: none' onchange='showPreview(this, index)'/>");
                 appendFileInput = false;
@@ -429,17 +484,21 @@
                     showCancelButton: true,
                     showConfirmButton: false
                 });
-            } else if (file.size > 2 * 1024 * 1024) {
+                appendFileInput = true;
+                picture.remove();
+            } else if (file.size > 5 * 1024 * 1024) {
                 isCorrect = false;
                 picture.val("");
                 swal({
                     title: "错误",
                     type: "error",
-                    text: "图片文件最大支持：2MB",
+                    text: "图片文件最大支持：5MB",
                     cancelButtonText: "关闭",
                     showCancelButton: true,
                     showConfirmButton: false
                 });
+                appendFileInput = true;
+                picture.remove();
             } else {
                 var reader = new FileReader();
                 reader.onload = function (e) {
@@ -451,17 +510,19 @@
                         var height = image.height;
                         console.log(width + "//" + height);
 
-                        if (width > 1000 || height > 1000) {
+                        if (width > 1500 || height > 1500) {
                             isCorrect = false;
                             picture.val("");
                             swal({
                                 title: "错误",
                                 type: "error",
-                                text: "当前选择图片分辨率为: " + width + "px * " + height + "px \n图片分辨率应小于 1000像素 * 1000像素",
+                                text: "当前选择图片分辨率为: " + width + "px * " + height + "px \n图片分辨率应小于 1500像素 * 1500像素",
                                 cancelButtonText: "关闭",
                                 showCancelButton: true,
                                 showConfirmButton: false
                             });
+                            appendFileInput = true;
+                            picture.remove();
                         } else if (isCorrect) {
                             previewHolder.append("<img src='" + objectUrl + "' class='preview_img' name='pic"+ i + "'>" +
                                     "<span class='delete' onclick='deleteImage(this, " + i + ")'>删除</span>");
@@ -518,6 +579,7 @@
             var email = $('#email');//邮箱
             var btn1 = $('#select_class1');//class1  btn1.attr('data-content')
             var btn2 = $('#select_class2');//class2  btn2.attr('data-content')
+            var btn3 = $('#select_class3');//class2  btn2.attr('data-content')
             var type = $('input:radio[name="service_type"]:checked').val(); //服务类型
             var price = $('#service_price');
             var title = $('#doc-ipt-3-a');
@@ -574,6 +636,7 @@
             formdata.append('email',email.val());
             formdata.append('class1',btn1.attr('data-content'));
             formdata.append('class2',btn2.attr('data-content'));
+            formdata.append('class3',btn3.attr('data-content'));
             formdata.append('type',type);
             $.ajax({
                 url: "/demands/PublishPost",

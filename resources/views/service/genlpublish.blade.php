@@ -108,7 +108,7 @@
             color: #4CAF50;
         }
         .preview_img{
-            width: 100px;
+            width: 150px;
             height: 100px;
         }
         .am-selected-status{
@@ -153,10 +153,11 @@
                     <div class="fabu_showtitle title_tip_first">请选择你的服务领域:</div>
                     <button id='select_class1' data-content="" class="am-btn am-btn-warning am-radius " style="display:none;margin-bottom: 0.5rem">btn1</button>
                     <button id='select_class2' data-content="" class="am-btn am-btn-warning am-radius " style="display:none;margin-bottom: 0.5rem">btn2</button>
+                    <button id='select_class3' data-content="" class="am-btn am-btn-warning am-radius " style="display:none;margin-bottom: 0.5rem">btn3</button>
                     <div class="fb_container sub_title_tip">
                     <div class="am-g am-g-fixed">
                         @foreach($data['serviceclass1'] as $class1)
-                        <div class="am-u-lg-2 am-u-md-2 am-u-sm-2 am-dropdown" data-am-dropdown>
+                        <div class="am-u-lg-1 am-u-md-1 am-u-sm-1 am-dropdown" data-am-dropdown>
                             <button class="am-btn am-btn-danger am-dropdown-toggle" data-am-dropdown-toggle>{{$class1->name}}</button>
                             <ul class="am-dropdown-content" data-content="{{$class1->id}}" data-name="{{$class1->name}}">
                                 @foreach($data['serviceclass2'] as $class2)
@@ -169,6 +170,19 @@
                         @endforeach
                     </div>
                 </div>
+                    <div class="fabu_showtitle title_tip_first" id="project_label" style="display: none;">请选择你的服务项目:</div>
+                    @foreach($data['serviceclass2'] as $class2)
+                        <div style="display: none;" id="project_{{$class2->id}}" name="project_id">
+                            <select data-am-selected="{btnWidth: '10%', btnSize: 'sm', btnStyle: 'secondary'}" name="project">
+                                <option value="-1">任意</option>
+                                @foreach($data['serviceclass3'] as $class3)
+                                    @if($class3->class2_id == $class2->id)
+                                        <option value="{{$class3->id}}">{{$class3->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    @endforeach
                 <div class="fabu1" style="background:#eee;margin-bottom:10px;">
                     <div class="fabu_showtitle title_tip">请确认你的联系方式</div>
                     <div class="fb_container sub_title_tip">
@@ -227,26 +241,25 @@
                         <p id="baseinfo_class" class="am-form-label base_info">服务类别:<span>rwerwe</span></p>
                     </div>
                 </div>
-                <div class="fabu1" style="background:#eee;margin-bottom:10px;">
+                <div class="fabu1" style="background:#eee;">
                     <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">设置服务金额</div>
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
 						0px;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">赏金预算：</label>
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">赏金预算</label>
                             <div class="am-u-sm-4" style="float: left;margin-left: 30px;">
                                 <label class="am-checkbox-inline">
                                     <input type="checkbox" id="is_NoPrice" onclick="setNonePrice(this);" value="价格面议" data-am-ucheck> 价格面议
                                 </label>
                                 <input type="text" id="service_price" class="am-form-field" placeholder="单次服务价格" style="float: left;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
-						0px;margin-top:20px;">
-                        <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">展示网站</label>
-                            <div class="am-u-sm-4" style="float: left;margin-left: 30px;">
-                                <input type="text" id="home_page" class="am-form-field" placeholder="(选填)展示网站eg:www.xxxx.com">
+                                <div style="display: grid;" id="price_type">
+                                    <select data-am-selected="{btnWidth: '130%',btnStyle: 'warning'}" name="price_type">
+                                        <option value="0">/8小时</option>
+                                        <option value="1">/天</option>
+                                        <option value="2" selected>/次</option>
+                                        <option value="3">/套</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -256,7 +269,7 @@
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
 						0px;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">服务标题</label>
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">服务特色</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
                                 <input type="service_title" id="doc-ipt-3-a" class="am-form-field" placeholder="好的标题更能吸引眼球哟">
                             </div>
@@ -281,6 +294,15 @@
                             </select>
                         </form>
                     </div>
+                    <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
+						0px;margin-top:20px;">
+                        <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">展示网站</label>
+                            <div class="am-u-sm-4" style="float: left;margin-left: 30px;">
+                                <input type="text" id="home_page" class="am-form-field" placeholder="(选填)展示网站eg:www.xxxx.com">
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
 						0px;">
@@ -292,8 +314,7 @@
                         </div>
                     </div>
 
-                    <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
-						0px;margin-top: 100px;">
+                    <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 20px;margin-top: 9rem;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
                             <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">上传服务照片</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
@@ -315,8 +336,8 @@
                     <label class="am-checkbox am-default" style="font-size: 16px;margin-left:20px;">
                         <input type="checkbox"  id="protocol" value="" data-am-ucheck><h2 data-am-modal="{target: '#my-popup'}">同意《不亦乐乎》协议</h2>
                     </label>
-                    <button id="back_step1" class="am-btn am-btn-danger am-round am-btn-lg" style="margin:20px;width: 15%;">上一步</button>
-                    <button id="submit_info" class="am-btn am-btn-success am-round am-btn-lg" style="margin:20px;width: 15%;float: right;">已确认，下一步</button>
+                    <button id="back_step1" class="am-btn am-btn-danger am-round am-btn-lg" style="margin:0 20px 0 20px;width: 15%;">上一步</button>
+                    <button id="submit_info" class="am-btn am-btn-success am-round am-btn-lg" style="margin:0 20px 0 20px;width: 15%;float: right;">已确认，下一步</button>
                 </div>
 
             </div>
@@ -341,28 +362,52 @@
         function setNonePrice() {
             if($("#is_NoPrice").is(':checked')){
                 $('#service_price').hide();
+                $('#price_type').hide();
             }else{
                 $('#service_price').show();
+                $('#price_type').show();
+
             }
 
         }
         function select_class(element) {
-            var btn1 = $('#select_class1')
-            var btn2 = $('#select_class2')
+            var btn1 = $('#select_class1');
+            var btn2 = $('#select_class2');
+            var btn3 = $('#select_class3');
+            var project_label = $('#project_label');
+            var project_id = $('div[name=project_id]');
 //            alert($(element).parent().parent().attr('data-content'));
             //show select data
-            btn2.html($(element).html());
-            btn2.attr('data-content',$(element).attr('data-content'));
-            btn1.attr('data-content',$(element).parent().parent().attr('data-content'));
-            btn1.html($(element).parent().parent().attr('data-name'));
+            var class1_id = $(element).parent().parent().attr('data-content');
+            var class1_name = $(element).parent().parent().attr('data-name');
+            var class2_id = $(element).attr('data-content');
+            var class2_name = $(element).html();
+            btn3.html("任意");
+            btn3.attr("data-content",-1);
+            btn2.html(class2_name);
+            btn2.attr('data-content',class2_id);
+            btn1.attr('data-content',class1_id);
+            btn1.html(class1_name);
+
+            project_id.hide();
+            $('#project_'+class2_id).css('display','inline');
+            project_label.show();
             btn1.show();
             btn2.show();
+            btn3.show();
         }
+        $('select[name=project]').change(function () {
+            var btn3 = $('#select_class3');
+        //            alert($(this).val());
+            btn3.html();
+            btn3.attr('data-content',$(this).val());
+        });
         function goto_next() {
             var tel = $('#phone');
             var email = $('#email');
             var btn1 = $('#select_class1');
             var btn2 = $('#select_class2');
+            var btn3 = $('#select_class3');
             var type = $('input:radio[name="service_type"]:checked').val();
             var step1 = $('#publish_step1');
             var step2 = $('#publish_step2');
@@ -399,7 +444,7 @@
             baseinfo_tel.find("span").html(tel.val());
             baseinfo_email.find("span").html(email.val());
             baseinfo_type.find("span").html(base_type);
-            baseinfo_class.find("span").html(btn1.html()+"-"+btn2.html());
+            baseinfo_class.find("span").html(btn1.html()+"-"+btn2.html()+"-"+btn3.html());
 
             //
             guide_color.attr('style','');
@@ -414,7 +459,7 @@
 //            var pictureIndex = $("input[id='pic_info']");
             var pictureIndex = $("input[id='pic_info']");
             num = pictureIndex.val().split("@");
-            alert(num.length);
+//            alert(num.length);
             if (appendFileInput && num.length <= 3) {
                 previewHolder.append("<input type='file' name='pic" + index + "' style='display: none' onchange='showPreview(this, index)'/>");
                 appendFileInput = false;
@@ -447,17 +492,21 @@
                     showCancelButton: true,
                     showConfirmButton: false
                 });
-            } else if (file.size > 2 * 1024 * 1024) {
+                appendFileInput = true;
+                picture.remove();
+            } else if (file.size > 5 * 1024 * 1024) {
                 isCorrect = false;
                 picture.val("");
                 swal({
                     title: "错误",
                     type: "error",
-                    text: "图片文件最大支持：2MB",
+                    text: "图片文件最大支持：5MB",
                     cancelButtonText: "关闭",
                     showCancelButton: true,
                     showConfirmButton: false
                 });
+                appendFileInput = true;
+                picture.remove();
             } else {
                 var reader = new FileReader();
                 reader.onload = function (e) {
@@ -469,17 +518,19 @@
                         var height = image.height;
                         console.log(width + "//" + height);
 
-                        if (width > 1000 || height > 1000) {
+                        if (width > 1500 || height > 1500) {
                             isCorrect = false;
                             picture.val("");
                             swal({
                                 title: "错误",
                                 type: "error",
-                                text: "当前选择图片分辨率为: " + width + "px * " + height + "px \n图片分辨率应小于 1000像素 * 1000像素",
+                                text: "当前选择图片分辨率为: " + width + "px * " + height + "px \n图片分辨率应小于 1500像素 * 1500像素",
                                 cancelButtonText: "关闭",
                                 showCancelButton: true,
                                 showConfirmButton: false
                             });
+                            appendFileInput = true;
+                            picture.remove();
                         } else if (isCorrect) {
                             previewHolder.append("<img src='" + objectUrl + "' class='preview_img' name='pic"+ i + "'>" +
                                     "<span class='delete' onclick='deleteImage(this, " + i + ")'>删除</span>");
@@ -536,8 +587,10 @@
             var email = $('#email');//邮箱
             var btn1 = $('#select_class1');//class1  btn1.attr('data-content')
             var btn2 = $('#select_class2');//class2  btn2.attr('data-content')
+            var btn3 = $('#select_class3');//class2  btn2.attr('data-content')
             var type = $('input:radio[name="service_type"]:checked').val(); //服务类型
             var price = $('#service_price');
+            var price_type = $('select[name=price_type]');
             var home_page = $('#home_page');
             var title = $('#doc-ipt-3-a');
             var pictureIndex = $("input[id='pic_info']");//图片index
@@ -560,6 +613,7 @@
                     return;
                 }else{
                     formdata.append('price',price.val());
+                    formdata.append('price_type',price_type.val());
                 }
             }
             if(title.val() ==="" ||title.val() ===null){
@@ -592,6 +646,7 @@
             formdata.append('email',email.val());
             formdata.append('class1',btn1.attr('data-content'));
             formdata.append('class2',btn2.attr('data-content'));
+            formdata.append('class3',btn3.attr('data-content'));
             formdata.append('type',type);
             formdata.append('home_page',home_page.val());
             //设置上传接口url

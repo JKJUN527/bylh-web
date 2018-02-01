@@ -42,7 +42,7 @@ class DemandsController extends Controller {
         //返回一般服务页面所需数据
         $data['serviceclass1']=Serviceclass1::orderBy('updated_at','asc')->get();
         $data['serviceclass2']=Serviceclass2::orderBy('updated_at','asc')->get();
-//        $data['serviceclass3']=Serviceclass3::where('type',0)->orderBy('updated_at','asc')->get();
+        $data['serviceclass3']=Serviceclass3::orderBy('updated_at','asc')->get();
         $data['province'] = Region::where('parent_id',0)->get();
         $data['city'] = Region::where('parent_id','!=',0)->get();
         //确认联系方式
@@ -104,8 +104,9 @@ class DemandsController extends Controller {
                 $demands->uid = $data['uid'];
                 $demands->title = $request->input('title');
                 $demands->city = $request->input('city');
-                $demands->class1_id = $request->input('class1_id');
-                $demands->class2_id = $request->input('class2_id');
+                $demands->class1_id = $request->input('class1');
+                $demands->class2_id = $request->input('class2');
+                $demands->class3_id = $request->input('class3');
                 $demands->describe = $request->input('describe');
                 $demands->price = $request->input('price');
                     if ($demands->save()) {

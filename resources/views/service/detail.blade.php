@@ -157,7 +157,17 @@
                                     价格面议
                                 @else
                                     ￥{{$data["detail"]->price}}
-                                    <span style="color:#666;font-size:14px;font-weight:100">/次</span>
+                                    <span style="color:#666;font-size:14px;font-weight:100">
+                                        @if($data["detail"]->price_type == 0)
+                                            /8小时
+                                        @elseif($data["detail"]->price_type == 1)
+                                            /天
+                                        @elseif($data["detail"]->price_type == 2)
+                                            /次
+                                        @elseif($data["detail"]->price_type == 3)
+                                            /套
+                                        @endif
+                                    </span>
                                 @endif
                             </div>
                         </div>
