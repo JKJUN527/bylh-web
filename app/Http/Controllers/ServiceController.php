@@ -460,6 +460,7 @@ class ServiceController extends Controller {
     //传入服务id，及服务type
     public function deleteservice(Request $request) {
         $data = array();
+        $data['uid'] = AuthController::getUid();
         $data['status'] = 400;
         $data['msg'] = "参数错误";
         if ($request->has('sid') && $request->has('type')) {
@@ -468,7 +469,14 @@ class ServiceController extends Controller {
             switch ($type) {
                 case 0://一般服务
                     $service = Genlservices::find($sid);
-                    $service->state = 1;
+                    if($service->uid != $data['uid']){
+                        $data['msg'] = "无权操作";
+                        return $data;
+                    }
+                    if($service->state == 1)
+                        $service->state = 0;
+                    elseif($service->state == 0)
+                        $service->state = 1;
                     if ($service->save()) {
                         $data['status'] = 200;
                         $data['msg'] = "一般服务下架成功";
@@ -476,7 +484,14 @@ class ServiceController extends Controller {
                     break;
                 case 1://金融服务
                     $service = Finlservices::find($sid);
-                    $service->state = 1;
+                    if($service->uid != $data['uid']){
+                        $data['msg'] = "无权操作";
+                        return $data;
+                    }
+                    if($service->state == 1)
+                        $service->state = 0;
+                    elseif($service->state == 0)
+                        $service->state = 1;
                     if ($service->save()) {
                         $data['status'] = 200;
                         $data['msg'] = "金融服务下架成功";
@@ -484,7 +499,14 @@ class ServiceController extends Controller {
                     break;
                 case 2://问答服务
                     $service = Qaservices::find($sid);
-                    $service->state = 1;
+                    if($service->uid != $data['uid']){
+                        $data['msg'] = "无权操作";
+                        return $data;
+                    }
+                    if($service->state == 1)
+                        $service->state = 0;
+                    elseif($service->state == 0)
+                        $service->state = 1;
                     if ($service->save()) {
                         $data['status'] = 200;
                         $data['msg'] = "问答服务下架成功";
@@ -734,6 +756,60 @@ class ServiceController extends Controller {
             return view('service.qaservicedetail', ['data' => $data]);
         }else
             return view('service.detail', ['data' => $data]);
+    }
+    public function getservicesList(Request $request) {
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+        if ($data['uid'] == 0 || $data['type'] != 2) {//先登录|登录用户非服务用户
+            return view('account.login', ['data' => $data]);
+        }
+        if($request->has('type_tab')){
+            $data['type_tab'] = $request->input('type_tab');
+        }else{
+            $data['type_tab'] = 1;
+        }
+        $data['genlservices'] = Genlservices::where('uid',$data['uid'])
+            ->orderBy('updated_at','desc')
+            ->paginate(10);
+        //查询成交量
+        foreach ($data['genlservices'] as $genlservice){
+            $data['total_order']['genl'][$genlservice->id] = Orders::where('service_id',$genlservice->id)
+                ->where('type',$genlservice->type)
+                ->where(function ($query){
+                    $query->where('state',2)
+                        ->orWhere('state',3);
+                })
+                ->count();
+        }
+        $data['finlservices'] = Finlservices::where('uid',$data['uid'])
+            ->orderBy('updated_at','desc')
+            ->paginate(10);
+        //查询成交量
+        foreach ($data['finlservices'] as $finlservice){
+            $data['total_order']['finl'][$finlservice->id] = Orders::where('service_id',$finlservice->id)
+                ->where('type',$finlservice->type)
+                ->where(function ($query){
+                    $query->where('state',2)
+                        ->orWhere('state',3);
+                })
+                ->count();
+        }
+        $data['qaservices'] = Qaservices::where('uid',$data['uid'])
+            ->orderBy('updated_at','desc')
+            ->paginate(10);
+        //查询成交量
+        foreach ($data['qaservices'] as $qaservice){
+            $data['total_order']['qa'][$qaservice->id] = Orders::where('service_id',$qaservice->id)
+                ->where('type',$qaservice->type)
+                ->where(function ($query){
+                    $query->where('state',2)
+                        ->orWhere('state',3);
+                })
+                ->count();
+        }
+//        return $data;
+        return view('service.myrequest',['data'=>$data]);
     }
     //获取服务用户发布所有需求及服务列表
     //传入用户id

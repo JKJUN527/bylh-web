@@ -507,9 +507,9 @@
                         success: function (data) {
                             var result = JSON.parse(data);
                             if (result.status === 200) {
-//                                setTimeout(function () {
-//                                    window.location.reload();
-//                                }, 1000);
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
                             } else {
                                 swal({
                                     title: "错误",

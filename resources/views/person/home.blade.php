@@ -85,18 +85,19 @@
                                         $imagepath = explode('@', $pics[0])[1];
                                         ?>
                                     @endif
-                                    <p class="m-big">
-                                        <a href="#">
-                                            <i><img src="
+                                        <div class="am-u-sm-4">
+                                            <div class="am-thumbnail">
+                                                <a href="/demands/detail?id={{$demand->id}}">
+                                                <img src="
                                                 @if($demand->picture == "" || $demand->picture == null)
-                                                    {{asset('images/f3.png')}}
+                                                {{asset('images/f3.png')}}
                                                 @else
-                                                    {{$baseurl}}{{$imagepath}}
-                                                @endif
-                                                        "/></i>
-                                            <span class="m-title">{{$demand->title}}</span>
-                                        </a>
-                                    </p>
+                                                {{$baseurl}}{{$imagepath}}
+                                                @endif" style="width: 100px;height: 80px;"/>
+                                                <h3 class="am-thumbnail-caption">{{mb_substr($demand->title,0,23,"utf-8")}}</h3>
+                                                </a>
+                                            </div>
+                                        </div>
                                 @endif
                             @endforeach
                             {{--<p class="m-big">--}}
@@ -116,14 +117,15 @@
                         <!--我的服务-->
                         <div class="wallet">
                             <div class="s-bar">
-                                <a href="{{asset('demands/getDemandsList"')}}">
+                                <a href="/service/getservicesList">
                                     <i class="s-icon"></i>我的服务
                                     <label style="float: right;">更多>>></label></a>
                             </div>
+                            <div class="am-g">
                             <?php $i=0 ?>
                             @foreach($data['servicesList'] as $services)
                                 @foreach($services as $service)
-                                @if($i++ <=3)
+                                @if($i++ <3)
                                         @if($service->picture != null)
                                             <?php
                                             $pics = explode(';', $service->picture);
@@ -132,21 +134,23 @@
                                             $imagepath = explode('@', $pics[0])[1];
                                             ?>
                                         @endif
-                                    <p class="m-big">
-                                        <a href="#">
-                                            <i><img src="
-                                                @if($service->picture == "" || $service->picture == null)
-                                                {{asset('images/f3.png')}}
-                                                @else
-                                                {{$baseurl}}{{$imagepath}}
-                                                @endif
-                                                        "/></i>
-                                            <span class="m-title">{{$service->title}}</span>
-                                        </a>
-                                    </p>
+                                                <div class="am-u-sm-4">
+                                                    <div class="am-thumbnail">
+                                                        <a href="/service/detail?id={{$service->id}}&type={{$service->type}}">
+                                                        <img src="
+                                                         @if($service->picture == "" || $service->picture == null)
+                                                            {{asset('images/f3.png')}}
+                                                         @else
+                                                            {{$baseurl}}{{$imagepath}}
+                                                         @endif" style="width: 100px;height: 80px;"/>
+                                                        <h3 class="am-thumbnail-caption">{{mb_substr($service->title,0,23,"utf-8")}}</h3>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                 @endif
                                 @endforeach
                             @endforeach
+                            </div>
                         </div>
                         @endif
 

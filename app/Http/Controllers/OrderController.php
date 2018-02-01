@@ -289,7 +289,7 @@ class OrderController extends Controller {
             $order_id = $request->input('order_id');
             $orderinfo = Orders::find($order_id);
             if($orderinfo->service_id != null){
-                $data['type'] = "service";
+//                $data['type'] = "service";
                 switch ($orderinfo->type){
                     case 0:
                         $table = "bylh_genlservices";
@@ -307,7 +307,7 @@ class OrderController extends Controller {
                     ->where('bylh_orders.id',$order_id)
                     ->first();
             }else{
-                $data['type'] = "demands";
+//                $data['type'] = "demands";
                 $data['order'] = DB::table('bylh_orders')
                     ->leftjoin("bylh_demands","bylh_demands.id","bylh_orders.demand_id")
                     ->select('bylh_orders.id','bylh_orders.type','bylh_orders.state','bylh_orders.price','title','picture','bylh_orders.s_uid','bylh_orders.d_uid','bylh_orders.service_id','bylh_orders.demand_id','bylh_orders.created_at')

@@ -309,7 +309,7 @@ a.i-trigger { cursor: pointer;position: relative; z-index: 2;display: block;colo
 @media only screen and (min-width:769px) 
 {
 .m-userproperty {position: absolute; width:180px;right:auto ;bottom:5px ;border: 1px solid #e7e7e7;} 
-.m-userproperty .s-bar ,.wallet .s-bar {margin:15px 0px 25px;}
+/*.m-userproperty .s-bar ,.wallet .s-bar {margin:15px 0px 25px;}*/
 .m-userproperty p{line-height: 40px;}
 .m-userproperty p em{top:9px}
 .wallet {position: absolute;left:450px;top: 5px;}  	
