@@ -13,6 +13,7 @@ use App\Finlservices;
 use App\Genlservices;
 use APP\Models\E3Email;
 use App\News;
+use App\Notices;
 use App\Orders;
 use App\Qaservices;
 use App\Region;
@@ -68,7 +69,10 @@ class AccountController extends Controller {
         $data['order'] = $this->getOrder($data['uid']);
         $data['orderNum'] = $this->getOrderNum();
         //网站公告
-        $data['news'] = News::orderBy('created_at', 'desc')->take(5)->get();
+//        $data['news'] = News::orderBy('created_at', 'desc')->take(5)->get();
+        $data['notes'] = Notices::orderBy('created_at','desc')
+            ->take(12)
+            ->get();
         //推荐服务商
         $data['adservers'] = Serviceinfo::where('is_urgency', 1)->orderBy('created_at', 'desc')
             ->take(6)

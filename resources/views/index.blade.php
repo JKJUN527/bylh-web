@@ -190,6 +190,18 @@
         <img src="{{asset('images/ad3.jpg')}}" style="width: 100%;">
     </div>
     <!--需求大厅-->
+    <!--公告详情页显示-->
+    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">Amaze UI</div>
+            <div class="am-modal-bd">
+                Hello world！
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn">确定</span>
+            </div>
+        </div>
+    </div>
     <div class="am-g am-g-fixed">
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4 leftpanel" style="padding-bottom: 10px;">
             <div class="index-category-left showNews">
@@ -198,9 +210,10 @@
                         <i style="font-size: 1.5rem;color: #fff;">本站公告</i></span>
                     <div class="demo">
                         <ul>
-                            @foreach($data['news'] as $news)
-                            <li><a to="/news/detail?nid={{$news->nid}}">
-                                    <span style="font-size: 16px;color: #b84554;padding-right: 3px;"><i class="am-icon-volume-up am-icon-fw"></i></span>{{$news->content}}
+                            @foreach($data['notes'] as $note)
+                            <li><a   class="am-btn"
+                                          data-am-popover="{theme: 'primary', content: '{{$note->content}}'}">
+                                    <span style="font-size: 16px;color: #b84554;padding-right: 3px;"><i class="am-icon-volume-up am-icon-fw"></i></span>{{mb_substr($note->content,0,20,'utf-8')}}
                                 </a></li>
                             @endforeach
                         </ul>
@@ -208,6 +221,7 @@
                 </div>
             </div>
         </div>
+
         <div class="am-u-lg-8  am-u-md-8 am-u-sm-12">
             <div class="shopMain" id="shopmain">
                 <div class="am-container " >

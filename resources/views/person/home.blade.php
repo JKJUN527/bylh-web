@@ -3,6 +3,14 @@
 @section('custom-style')
     <link href="{{asset('css/vipstyle.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/infstyle.css')}}" rel="stylesheet" type="text/css">
+    <style>
+        .s-box li{
+            padding: 0;
+        }
+        .am-btn{
+            display: inline;
+        }
+    </style>
 @endsection
 @section('content')
         <div class="main-wrap">
@@ -319,12 +327,11 @@
                     </div>
                     <div class="s-box">
                         <ul>
-                            @foreach($data['news'] as $new)
-                            <li>
-                                <a target="_blank" href="/news/detail?nid={{$new->nid}}">
-                                    <span style="font-size: 16px;color: #b84554;padding-right: 3px;"><i class="am-icon-volume-up am-icon-fw"></i></span>{{mb_substr($new->title,0,10,'utf-8')}}
-                                </a>
-                            </li>
+                            @foreach($data['notes'] as $note)
+                                <li><a   class="am-btn"
+                                         data-am-popover="{theme: 'primary', content: '{{$note->content}}'}">
+                                        <span style="font-size: 16px;color: #b84554;padding-right: 3px;"><i class="am-icon-volume-up am-icon-fw"></i></span>{{mb_substr($note->content,0,11,'utf-8')}}
+                                    </a></li>
                             @endforeach
                         </ul>
                     </div>

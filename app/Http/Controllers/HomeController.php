@@ -14,6 +14,7 @@ use App\Demands;
 use App\Finlservices;
 use App\Genlservices;
 use App\News;
+use App\Notices;
 use App\Qaservices;
 use App\Serviceclass1;
 use App\Serviceclass2;
@@ -70,8 +71,11 @@ class HomeController extends Controller {
         $data['ad'] = HomeController::searchAd();
         //返回热门服务商
         $data['serviceuser'] = HomeController::searchServiceUser();
-        //返回企业资讯
-        $data['news'] = HomeController::searchNews();
+        //返回网站公告
+//        $data['news'] = HomeController::searchNews();
+        $data['notes'] = Notices::orderBy('created_at','desc')
+            ->take(12)
+            ->get();
 
 //        return $data;
         return view('index', ["data" => $data]);
