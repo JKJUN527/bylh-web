@@ -241,19 +241,19 @@
                      style="border: 2px solid #eee;padding: 20px;background: #fff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
                     <div class="am-tabs" data-am-tabs style="margin:10px;">
                         <ul class="am-tabs-nav am-nav am-nav-tabs" style="margin:10px;">
-                            <li class="am-active">
+                            <li class="@if($data['tab_detail'] == 0) am-active @endif">
                                 <a class="service_tab" href="#tab1">服务详情</a>
                             </li>
-                            <li>
+                            <li class="@if($data['tab_detail'] == 1) am-active @endif">
                                 <a class="service_tab" href="#tab2">历史问答</a>
                             </li>
-                            <li>
+                            <li class="@if($data['tab_detail'] == 2) am-active @endif">
                                 <a class="service_tab" href="#tab3">成交记录</a>
                             </li>
                         </ul>
 
                         <div class="am-tabs-bd">
-                            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                            <div class="am-tab-panel am-fade @if($data['tab_detail'] == 0) am-in am-active @endif" id="tab1">
                                 <p style="font-size:15px;line-height: 24px;">
                                     <span style="color: #b84554;">温馨提示：购买服务，不亦乐乎不收取任何费用，请勿相信服务商任何理由的加价交易行为。</span><br>
                                     {!! $data["detail"]->describe !!}
@@ -286,7 +286,7 @@
                                                                 <div class="am-comment-bd">
                                                                     {{$record->question}}
                                                                 </div>
-                                                                @if($record->answer == "" && ($record->questioner == $data['uid']||$record->respondent == $data['uid']))
+                                                                @if($record->answer == "" && $record->respondent == $data['uid'])
                                                                     <button type="button" class="am-btn am-btn-warning" style="float: right" onclick="answer({{$record->id}});">回答问题</button>
                                                                 @endif
                                                             </div>
@@ -310,7 +310,7 @@
                                                                 </header>
 
                                                                 <div class="am-comment-bd">
-                                                                    @if($record->status == 1 || $record->respondent == $data['uid'])
+                                                                    @if($record->status == 1 || $record->respondent == $data['uid'] || $data['is_vipuser'] ==1)
                                                                         {{$record->answer}}
                                                                     @else
                                                                         *****
@@ -320,9 +320,14 @@
                                                         </article>
                                                     </li>
                                                 @endif
-
                                             @endforeach
                                         </ul>
+                                    </div>
+                                    <!--分页-->
+                                    <div class="pager_container" style="margin-left: 50px;">
+                                        <nav>
+                                            {!! $data['qarecord']->appends(['id'=>$data['detail']->id,'type'=>$data['detail']->type,'tab_detail'=>0])->render() !!}
+                                        </nav>
                                     </div>
                                 </div>
                                 <div class="clear"></div>
@@ -350,14 +355,16 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="am-tab-panel am-fade" id="tab2">
+                            <div class="am-tab-panel am-fade @if($data['tab_detail'] == 1) am-in am-active @endif" id="tab2">
                                 <div class="buyer_pj" style="display: block;">
-
+                                    <p style="font-size:15px;line-height: 24px;">
+                                        <span style="color: #b84554;">温馨提示：购买该用户的服务超过五次，你将可以免费查看该服务用户的所有专业回答。</span><br>
+                                    </p>
                                     <div class="pl-cont">
                                         <div class="clear"></div>
                                         <div class="moreItems">
                                             <ul class="am-comments-list am-comments-list-flip">
-                                                @foreach($data['qarecord'] as $record)
+                                                @foreach($data['qahistory'] as $record)
                                                     @if($record->question != "" && $record->answer != "")
                                                         <li class="am-comment">
                                                             <article class="am-comment">
@@ -377,9 +384,6 @@
                                                                     <div class="am-comment-bd">
                                                                         {{$record->question}}
                                                                     </div>
-                                                                    @if($record->answer == "" && ($record->questioner == $data['uid']||$record->respondent == $data['uid']))
-                                                                        <button type="button" class="am-btn am-btn-warning" style="float: right" onclick="answer({{$record->id}});">回答问题</button>
-                                                                    @endif
                                                                 </div>
                                                             </article>
                                                         </li>
@@ -399,7 +403,7 @@
                                                                     </header>
 
                                                                     <div class="am-comment-bd">
-                                                                        @if($record->respondent == $data['uid'])
+                                                                        @if($record->respondent == $data['uid'] ||$data['is_vipuser'] ==1)
                                                                             {{$record->answer}}
                                                                         @else
                                                                             *****
@@ -412,12 +416,18 @@
                                                 @endforeach
                                             </ul>
                                         </div>
+                                        <!--分页-->
+                                        <div class="pager_container" style="margin-left: 50px;">
+                                            <nav>
+                                                {!! $data['qahistory']->appends(['id'=>$data['detail']->id,'type'=>$data['detail']->type,'tab_detail'=>1])->render() !!}
+                                            </nav>
+                                        </div>
                                         <div style="height:30px"></div>
                                         <div class="clear"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="am-tab-panel am-fade" id="tab3">
+                            <div class="am-tab-panel am-fade @if($data['tab_detail'] == 2) am-in am-active @endif" id="tab3">
                                 <div class="trade_datalist" style="display: block;">
                                     <div class="gettradeorder_datalist" style="padding: 20px 15px">
 

@@ -191,17 +191,6 @@
     </div>
     <!--需求大厅-->
     <!--公告详情页显示-->
-    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
-        <div class="am-modal-dialog">
-            <div class="am-modal-hd">Amaze UI</div>
-            <div class="am-modal-bd">
-                Hello world！
-            </div>
-            <div class="am-modal-footer">
-                <span class="am-modal-btn">确定</span>
-            </div>
-        </div>
-    </div>
     <div class="am-g am-g-fixed">
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4 leftpanel" style="padding-bottom: 10px;">
             <div class="index-category-left showNews">

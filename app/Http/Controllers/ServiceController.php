@@ -671,6 +671,11 @@ class ServiceController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
+        $uid = $data['uid'];
+        if($request->has('tab_detail'))
+            $data['tab_detail'] = $request->input('tab_detail');
+        else
+            $data['tab_detail'] = 0;
 
         if ($request->has('id') && $request->has('type')) {
             $sid = $request->input('id');
@@ -709,13 +714,37 @@ class ServiceController extends Controller {
                         ->leftjoin('bylh_userinfo','bylh_userinfo.uid','bylh_qarecord.questioner')
                         ->leftjoin('bylh_users','bylh_users.uid','bylh_qarecord.questioner')
 //                        ->where('questioner',$data['uid'])
+                        ->where(function ($query) use ($uid) {
+                            $query->where('questioner',$uid)
+                                ->orWhere('respondent',$uid);
+                        })
                         ->where('service_id',$sid)
                         ->orderBy('created_at', 'desc')
-                        ->get();
+                        ->paginate(5,['*'],"fpage");
+                    //查询所有该用户的回答历史记录
+                    $data['qahistory'] = DB::table('bylh_qarecord')
+                        ->select('username','photo','bylh_qarecord.id','questioner','respondent','question','answer','bylh_qarecord.created_at','bylh_qarecord.updated_at','bylh_qarecord.status')
+                        ->leftjoin('bylh_userinfo','bylh_userinfo.uid','bylh_qarecord.questioner')
+                        ->leftjoin('bylh_users','bylh_users.uid','bylh_qarecord.questioner')
+//                        ->where('questioner',$data['uid'])
+                        ->where('service_id',$sid)
+                        ->where('bylh_qarecord.status','!=',0)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(5,['*'],'spage');
                     //对应回答只能查看一次
                     $updaterecord = Qarecord::where('questioner',$data['uid'])
                         ->where('status',1)//回答待查看
                         ->update(['status'=>2]);
+                    //查询当前用户是否已经购买过五次以上的服务用户的专业问答服务，如果是，则前端显示所有专业问答的答案
+                    $order_count = Qarecord::where('questioner',$data['uid'])
+                        ->where('respondent',$data['detail']->uid)
+                        ->where('status','!=',0)
+                        ->count();
+                    if($order_count >=5)
+                        $data['is_vipuser'] =1;
+                    else
+                        $data['is_vipuser'] =0;
+
                     //对应服务浏览次数加1
                     if ($data['detail']->uid == $data['uid']) {
                         break;
