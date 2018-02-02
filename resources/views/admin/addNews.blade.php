@@ -368,8 +368,6 @@
                 success: function (data) {
                     var result = JSON.parse(data);
 
-                    checkResult(result.status, "添加成功", result.msg, null);
-
                     if (result.status === 200) {
                         setTimeout(function () {
                             self.location = '/admin/news';

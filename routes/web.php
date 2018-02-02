@@ -213,6 +213,12 @@ Route::any('admin/news/detail', ['uses' => 'Admin\EditnewsController@detail']);/
 Route::get('admin/addNews', ['uses' => 'Admin\EditnewsController@addNewsView']);//新增或修改新闻信息
 Route::any('admin/news/add', ['uses' => 'Admin\EditnewsController@addNews']);//新增或修改新闻信息
 Route::any('admin/news/del', ['uses' => 'Admin\EditnewsController@delNews']);
+//发布网站公告
+Route::any('admin/notes', ['uses' => 'Admin\EditnewsController@notesindex']);//显示已发布公告信息
+Route::any('admin/notes/detail', ['uses' => 'Admin\EditnewsController@notesdetail']);//显示已发布公告信息
+Route::get('admin/addNotes', ['uses' => 'Admin\EditnewsController@addNotesView']);//新增公告页面
+Route::any('admin/notes/add', ['uses' => 'Admin\EditnewsController@addNotes']);//新增或修改公告信息
+Route::any('admin/notes/del', ['uses' => 'Admin\EditnewsController@delNotes']);
 //下架服务或设置服务加急
 Route::any('admin/genlservices', ['uses' => 'Admin\ServicesController@genlservicesIndex']);
 Route::any('admin/finlservices', ['uses' => 'Admin\ServicesController@finlservicesIndex']);

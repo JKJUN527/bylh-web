@@ -710,7 +710,11 @@
                             data: formData,
                             success: function (data) {
                                 var result = JSON.parse(data);
-                                checkResult(result.status, "添加成功", result.msg, null);
+                                if (result.status === 200) {
+                                    setTimeout(function () {
+                                        self.location = '/admin/ads';
+                                    }, 1200);
+                                }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
                                 swal(xhr.status + "：" + thrownError);
@@ -823,7 +827,11 @@
                                             data: formData,
                                             success: function (data) {
                                                 var result = JSON.parse(data);
-                                                checkResult(result.status, "添加成功", result.msg, null);
+                                                if (result.status === 200) {
+                                                    setTimeout(function () {
+                                                        self.location = '/admin/ads';
+                                                    }, 1200);
+                                                }
                                             },
                                             error: function (xhr, ajaxOptions, thrownError) {
                                                 swal(xhr.status + "：" + thrownError);
@@ -844,7 +852,11 @@
                             data: formData,
                             success: function (data) {
                                 var result = JSON.parse(data);
-                                checkResult(result.status, "添加成功", result.msg, null);
+                                if (result.status === 200) {
+                                    setTimeout(function () {
+                                        self.location = '/admin/ads';
+                                    }, 1200);
+                                }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
                                 swal(xhr.status + "：" + thrownError);
@@ -947,7 +959,11 @@
                                             data: formData,
                                             success: function (data) {
                                                 var result = JSON.parse(data);
-                                                checkResult(result.status, "添加成功", result.msg, null);
+                                                if (result.status === 200) {
+                                                    setTimeout(function () {
+                                                        self.location = '/admin/ads';
+                                                    }, 1200);
+                                                }
                                             },
                                             error: function (xhr, ajaxOptions, thrownError) {
                                                 swal(xhr.status + "：" + thrownError);
@@ -968,7 +984,11 @@
                             data: formData,
                             success: function (data) {
                                 var result = JSON.parse(data);
-                                checkResult(result.status, "添加成功", result.msg, null);
+                                if (result.status === 200) {
+                                    setTimeout(function () {
+                                        self.location = '/admin/ads';
+                                    }, 1200);
+                                }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
                                 swal(xhr.status + "：" + thrownError);

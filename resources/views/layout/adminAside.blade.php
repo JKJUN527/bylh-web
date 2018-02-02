@@ -153,6 +153,32 @@
                         </li>
                     </ul>
                 </li>
+                <li
+                        @if($title === 'notes')
+                        class="active"
+                        @endif
+                >
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">dvr</i>
+                        <span>网站公告</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li
+                                @if($subtitle === 'notesList')
+                                class="active"
+                                @endif
+                        >
+                            <a href="/admin/notes">公告列表</a>
+                        </li>
+                        <li
+                                @if($subtitle === 'addNotes')
+                                class="active"
+                                @endif
+                        >
+                            <a href="/admin/addNotes">发布公告</a>
+                        </li>
+                    </ul>
+                </li>
 
                 <li
                         @if($title === 'ad')
