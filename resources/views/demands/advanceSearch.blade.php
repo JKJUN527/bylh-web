@@ -168,7 +168,7 @@
 
             <dl class="listIndex" attr="terminal_brand_s">
                 <dt>分类1：</dt>
-                <dd class="span-holder class1-holder">
+                <dd class="class1-holder">
                     <a href="javascript:void(0)" @if(!isset($data["condition"]["class1"])) class="selected" @endif
                     data-content="-1">全部</a>
                     @foreach($data["class1"] as $c1)
@@ -181,35 +181,43 @@
                 </dd>
             </dl>
 
-            <dl class="listIndex" attr="terminal_brand_s">
-                <dt>分类2：</dt>
-                <dd class="span-holder class2-holder">
-                    <a href="javascript:void(0)" data-content="-1"
-                       @if(!isset($data["condition"]["class2"])) class="selected" @endif>全部</a>
-                    @foreach($data["class2"] as $c2)
-                        <a href="javascript:void(0)"
-                           @if(isset($data["condition"]["class2"]) && $data["condition"]["class2"] == $c2->id)
-                           class="selected"
-                           @endif
-                           data-content="{{$c2->id}}" parent="{{$c2->class1_id}}">{{$c2->name}}</a>
-                    @endforeach
-                </dd>
-            </dl>
+            @if(isset($data['condition']['class1']))
+                <dl class="listIndex" attr="terminal_brand_s">
+                    <dt>分类2：</dt>
+                    <dd class="class2-holder">
+                        <a href="javascript:void(0)" data-content="-1"
+                           @if(!isset($data["condition"]["class2"])) class="selected" @endif>全部</a>
+                        @foreach($data["class2"] as $c2)
+                            @if($c2->class1_id == $data['condition']['class1'])
+                                <a href="javascript:void(0)"
+                                   @if(isset($data["condition"]["class2"]) && $data["condition"]["class2"] == $c2->id)
+                                   class="selected"
+                                   @endif
+                                   data-content="{{$c2->id}}" parent="{{$c2->class1_id}}">{{$c2->name}}</a>
+                            @endif
+                        @endforeach
+                    </dd>
+                </dl>
+            @endif
 
-            <dl class="listIndex" attr="terminal_brand_s">
-                <dt>分类3：</dt>
-                <dd class="span-holder class3-holder">
-                    <a href="javascript:void(0)" data-content="-1"
-                       @if(!isset($data["condition"]["class3"])) class="selected" @endif>全部</a>
-                    @foreach($data["class3"] as $c3)
-                        <a href="javascript:void(0)"
-                           @if(isset($data["condition"]["class3"]) && $data["condition"]["class3"] == $c3->id)
-                           class="selected"
-                           @endif
-                           data-content="{{$c3->id}}" parent="{{$c2->class2_id}}">{{$c3->name}}</a>
-                    @endforeach
-                </dd>
-            </dl>
+            @if(isset($data['condition']['class2']))
+                <dl class="listIndex" attr="terminal_brand_s">
+                    <dt>分类3：</dt>
+                    <dd class="span-holder class3-holder">
+                        <a href="javascript:void(0)" data-content="-1"
+                           @if(!isset($data["condition"]["class3"])) class="selected" @endif>全部</a>
+                        @foreach($data["class3"] as $c3)
+                            @if($c3->class2_id == $data['condition']['class2'])
+                                <a href="javascript:void(0)"
+                                   @if(isset($data["condition"]["class3"]) && $data["condition"]["class3"] == $c3->id)
+                                   class="selected"
+                                   @endif
+                                   data-content="{{$c3->id}}" parent="{{$c2->class2_id}}">{{$c3->name}}</a>
+                            @endif
+                        @endforeach
+                    </dd>
+                </dl>
+            @endif
 
             <dl class="listIndex" attr="价格范围">
                 <dt>价格范围：</dt>
@@ -387,6 +395,28 @@
                 if (!$(this).hasClass('selected'))
                     $(this).addClass('selected');
             }
+            goSearch();
+        });
+
+        $(".class1-holder").find("a").click(function () {
+            var clickedElement = $(this);
+            clickedElement.addClass("selected");
+            clickedElement.siblings().removeClass("selected");
+            var class2Holder = $(".class2-holder");
+            class2Holder.find("a").removeClass("selected");
+            class2Holder.find("a[data-content='-1']").addClass("selected");
+
+            goSearch();
+        });
+
+        $(".class2-holder").find("a").click(function () {
+            var clickedElement = $(this);
+            clickedElement.addClass("selected");
+            clickedElement.siblings().removeClass("selected");
+            var class3Holder = $(".class3-holder");
+            class3Holder.find("a").removeClass("selected");
+            class3Holder.find("a[data-content='-1']").addClass("selected");
+
             goSearch();
         });
 
