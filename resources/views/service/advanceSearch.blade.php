@@ -99,7 +99,8 @@
         <div class="am-g am-g-fixed form-group search-position">
             <div class="am-u-lg-6 am-u-md-6 form-line" style="padding-left: 100px;">
                 <input type="text" id="name" name="name" class="form-control"
-                       value="@if(isset($data['condition']['keyword'])){{$data['condition']['keyword']}}@endif" placeholder="输入服务类别／描述进行搜索"
+                       value="@if(isset($data['condition']['keyword'])){{$data['condition']['keyword']}}@endif"
+                       placeholder="输入服务类别／描述进行搜索"
                        style="width: 250px;padding: 6px;border: 2px solid #b84554;">
                 <a href="#" onclick="goSearch()"><i class="am-icon-search am-icon-fw"></i></a>
             </div>
@@ -199,44 +200,54 @@
                     <a href="javascript:void(0)" @if(!isset($data["condition"]["class1"])) class="selected" @endif
                     data-content="-1">全部</a>
                     @foreach($data["class1"] as $c1)
-                        <a href="javascript:void(0)"
-                           @if(isset($data['condition']['class1']) && $data['condition']['class1'] == $c1->id)
-                           class="selected"
-                           @endif
-                           data-content="{{$c1->id}}">{{$c1->name}}</a>
+                        @if($c1->type == $data["condition"]["type"])
+                            <a href="javascript:void(0)"
+                               @if(isset($data['condition']['class1']) && $data['condition']['class1'] == $c1->id)
+                               class="selected"
+                               @endif
+                               data-content="{{$c1->id}}">{{$c1->name}}</a>
+                        @endif
                     @endforeach
                 </dd>
             </dl>
 
-            <dl class="listIndex" attr="terminal_brand_s">
-                <dt>分类2：</dt>
-                <dd class="span-holder class2-holder">
-                    <a href="javascript:void(0)" data-content="-1"
-                       @if(!isset($data["condition"]["class2"])) class="selected" @endif>全部</a>
-                    @foreach($data["class2"] as $c2)
-                        <a href="javascript:void(0)"
-                           @if(isset($data["condition"]["class2"]) && $data["condition"]["class2"] == $c2->id)
-                           class="selected"
-                           @endif
-                           data-content="{{$c2->id}}" parent="{{$c2->class1_id}}">{{$c2->name}}</a>
-                    @endforeach
-                </dd>
-            </dl>
+            @if(isset($data['condition']['class1']))
+                <dl class="listIndex" attr="terminal_brand_s">
+                    <dt>分类2：</dt>
+                    <dd class="class2-holder">
+                        <a href="javascript:void(0)" data-content="-1"
+                           @if(!isset($data["condition"]["class2"])) class="selected" @endif>全部</a>
+                        @foreach($data["class2"] as $c2)
+                            @if($c2->class1_id == $data['condition']['class1'])
+                                <a href="javascript:void(0)"
+                                   @if(isset($data["condition"]["class2"]) && $data["condition"]["class2"] == $c2->id)
+                                   class="selected"
+                                   @endif
+                                   data-content="{{$c2->id}}" parent="{{$c2->class1_id}}">{{$c2->name}}</a>
+                            @endif
+                        @endforeach
+                    </dd>
+                </dl>
+            @endif
 
-            <dl class="listIndex" attr="terminal_brand_s">
-                <dt>分类3：</dt>
-                <dd class="span-holder class3-holder">
-                    <a href="javascript:void(0)" data-content="-1"
-                       @if(!isset($data["condition"]["class3"])) class="selected" @endif>全部</a>
-                    @foreach($data["class3"] as $c3)
-                        <a href="javascript:void(0)"
-                           @if(isset($data["condition"]["class3"]) && $data["condition"]["class3"] == $c3->id)
-                           class="selected"
-                           @endif
-                           data-content="{{$c3->id}}" parent="{{$c2->class2_id}}">{{$c3->name}}</a>
-                    @endforeach
-                </dd>
-            </dl>
+            @if(isset($data['condition']['class2']))
+                <dl class="listIndex" attr="terminal_brand_s">
+                    <dt>分类3：</dt>
+                    <dd class="span-holder class3-holder">
+                        <a href="javascript:void(0)" data-content="-1"
+                           @if(!isset($data["condition"]["class3"])) class="selected" @endif>全部</a>
+                        @foreach($data["class3"] as $c3)
+                            @if($c3->class2_id == $data['condition']['class2'])
+                                <a href="javascript:void(0)"
+                                   @if(isset($data["condition"]["class3"]) && $data["condition"]["class3"] == $c3->id)
+                                   class="selected"
+                                   @endif
+                                   data-content="{{$c3->id}}" parent="{{$c2->class2_id}}">{{$c3->name}}</a>
+                            @endif
+                        @endforeach
+                    </dd>
+                </dl>
+            @endif
 
             <dl class="listIndex" attr="价格范围">
                 <dt>价格范围：</dt>
@@ -341,28 +352,28 @@
                     </div>
                     <div class="am-g am-g-fixed">
                         @foreach($data["result"]["services"] as $s)
-                        <div class="am-u-lg-3 am-u-md-4" style="padding:10px;">
-                            <a href="/service/detail?id={{$s->id}}&type=1">
-                                @if($s->picture != null)
-                                    <?php
-                                    $pics = explode(';', $s->picture);
-                                    $baseurl = explode('@', $pics[0])[0];
-                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
-                                    $imagepath = explode('@', $pics[0])[1];
-                                    ?>
-                                    <img src="{{$baseurl}}{{$imagepath}}"/>
-                                @else
-                                    <img src="{{asset("images/f1.jpg")}}"/>
-                                @endif
-                            </a>
-                            <div class="left_bottom"
-                                 style="background-color: gray;text-align: center;padding: 3px;color:#fff;">
-                                <a href="/service/detail?id={{$s->id}}&type=1" style="color: #fff">
-                                    {{$s->title}}
+                            <div class="am-u-lg-3 am-u-md-4" style="padding:10px;">
+                                <a href="/service/detail?id={{$s->id}}&type=1">
+                                    @if($s->picture != null)
+                                        <?php
+                                        $pics = explode(';', $s->picture);
+                                        $baseurl = explode('@', $pics[0])[0];
+                                        $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                        $imagepath = explode('@', $pics[0])[1];
+                                        ?>
+                                        <img src="{{$baseurl}}{{$imagepath}}"/>
+                                    @else
+                                        <img src="{{asset("images/f1.jpg")}}"/>
+                                    @endif
                                 </a>
-                                <p>{{$s->price}}|{{$s->city}}</p>
+                                <div class="left_bottom"
+                                     style="background-color: gray;text-align: center;padding: 3px;color:#fff;">
+                                    <a href="/service/detail?id={{$s->id}}&type=1" style="color: #fff">
+                                        {{$s->title}}
+                                    </a>
+                                    <p>{{$s->price}}|{{$s->city}}</p>
+                                </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -382,25 +393,25 @@
                             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
   							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }">
                                 @foreach($data["result"]["services"] as $s)
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a href="/service/detail?id={{$s->id}}&type=2" class="">
-                                            @if($s->picture != null)
-                                                <?php
-                                                $pics = explode(';', $s->picture);
-                                                $baseurl = explode('@', $pics[0])[0];
-                                                $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
-                                                $imagepath = explode('@', $pics[0])[1];
-                                                ?>
-                                                <img src="{{$baseurl}}{{$imagepath}}"/>
-                                            @else
-                                                <img src="{{asset("images/f1.jpg")}}"/>
-                                            @endif
-                                            <h3 class="am-gallery-title">{{$s->title}}</h3>
-                                            <div class="am-gallery-desc">{{$s->price}}|{{$s->city}}</div>
-                                        </a>
-                                    </div>
-                                </li>
+                                    <li>
+                                        <div class="am-gallery-item">
+                                            <a href="/service/detail?id={{$s->id}}&type=2" class="">
+                                                @if($s->picture != null)
+                                                    <?php
+                                                    $pics = explode(';', $s->picture);
+                                                    $baseurl = explode('@', $pics[0])[0];
+                                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                    $imagepath = explode('@', $pics[0])[1];
+                                                    ?>
+                                                    <img src="{{$baseurl}}{{$imagepath}}"/>
+                                                @else
+                                                    <img src="{{asset("images/f1.jpg")}}"/>
+                                                @endif
+                                                <h3 class="am-gallery-title">{{$s->title}}</h3>
+                                                <div class="am-gallery-desc">{{$s->price}}|{{$s->city}}</div>
+                                            </a>
+                                        </div>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -513,6 +524,28 @@
                 if (!$(this).hasClass('selected'))
                     $(this).addClass('selected');
             }
+            goSearch();
+        });
+
+        $(".class1-holder").find("a").click(function () {
+            var clickedElement = $(this);
+            clickedElement.addClass("selected");
+            clickedElement.siblings().removeClass("selected");
+            var class2Holder = $(".class2-holder");
+            class2Holder.find("a").removeClass("selected");
+            class2Holder.find("a[data-content='-1']").addClass("selected");
+
+            goSearch();
+        });
+
+        $(".class2-holder").find("a").click(function () {
+            var clickedElement = $(this);
+            clickedElement.addClass("selected");
+            clickedElement.siblings().removeClass("selected");
+            var class3Holder = $(".class3-holder");
+            class3Holder.find("a").removeClass("selected");
+            class3Holder.find("a[data-content='-1']").addClass("selected");
+
             goSearch();
         });
 
