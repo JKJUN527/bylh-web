@@ -139,6 +139,18 @@
                             </div>
                             <label id="quote-error" class="error" for="quote"></label>
                         </div>
+                        <div class="form-group">
+                            {{--如果想要添加动态查找，向select中添加属性：data-live-search="true"--}}
+                            <select class="form-control show-tick selectpicker"
+                                    id="newtype" name="newtype">
+                                <option value="0">请选择新闻类别</option>
+                                <option value="1">type1</option>
+                                <option value="2">type2</option>
+                                <option value="3">type3</option>
+                                <option value="4">type4</option>
+                            </select>
+                            <label class="error" for="newtype"></label>
+                        </div>
 
                         <div class="news-content--title">
                             <h6>新闻内容</h6>
@@ -311,6 +323,7 @@
             var title = $("#title");
             var quote = $("#quote");
             var content = $("#content");
+            var newtype = $("select[name=newtype]");
             var pictureIndex = $("input[name='picture-index']").val();
 
             if (title.val() === '') {
@@ -318,6 +331,12 @@
                 return;
             } else {
                 removeError(title, 'title');
+            }
+            if (newtype.val() == 0) {
+                setError(newtype, 'newtype', '请选择新闻类别');
+                return;
+            } else {
+                removeError(newtype, 'newtype');
             }
 
             var testContent = content.val().replace(/\r\n/g, '');
@@ -342,6 +361,7 @@
             formData.append("ename", '');
             formData.append("title", title.val());
 //            formData.append("subtitle", '');
+            formData.append("newtype", newtype.val());
             formData.append("quote", quote.val());
             formData.append("tag", '');
             formData.append("content", newsContent);

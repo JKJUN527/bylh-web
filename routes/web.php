@@ -152,6 +152,7 @@ Route::post('message/delmessage',['uses' => 'MessageController@delMessage']);
 //新闻详情
 Route::get('news/detail',['uses' => 'NewsController@detail']);
 //新闻主页
+Route::get('news/',['uses' => 'NewsController@SearchNews']);
 Route::get('news/index',['uses' => 'NewsController@SearchNews']);
 Route::get('news/content', ['uses' => 'NewsController@requestNewsContent']);
 

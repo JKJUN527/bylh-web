@@ -95,7 +95,8 @@ class EditnewsController extends Controller {
         $pictures = explode('@', $picture);
         $picfilepath = "";
         foreach ($pictures as $Item) {//对每一个照片进行操作。
-
+            if($Item == "")
+                continue;
             $pic = $request->file('pic' . $Item);//取得上传文件信息
             if ($pic->isValid()) {//判断文件是否上传成功
                 //取得原文件名
@@ -119,6 +120,7 @@ class EditnewsController extends Controller {
         $new->uid = $uid;//uid 后期通过登录注册方法获取
         $new->quote = $request->input('quote');
         $new->content = $request->input('content');
+        $new->type = $request->input('newtype');
         $new->tag = $request->input('tag');
         if ($new->save()) {
             $data['status'] = 200;

@@ -87,7 +87,28 @@
 @endsection
 @section('content')
 <!--新闻界面-->
-<div class="am-g am-g-fixed" style="padding-top: 45px;">
+<div class="am-g am-g-fixed" style="padding-top: 15px;">
+    <div class="bs-docs-sidebar">
+        <ul class="am-nav am-nav-pills am-nav-justify">
+            <li @if(isset($data['newtype']) &&$data['newtype'] == 1)
+                    class="am-active"
+                @endif
+                data-content="1"><a href="#">type1</a></li>
+            <li @if(isset($data['newtype']) &&$data['newtype'] == 2)
+                    class="am-active"
+                @endif
+                data-content="2"><a href="#">type2</a></li>
+            <li @if(isset($data['newtype']) &&$data['newtype'] == 3)
+                    class="am-active"
+                @endif
+                data-content="3"><a href="#">type3</a></li>
+            <li @if(isset($data['newtype']) &&$data['newtype'] == 4)
+                    class="am-active"
+                @endif
+                data-content="4"><a href="#">type4</a></li>
+        </ul>
+    </div>
+
     <div class="am-u-lg-8 am-u-md-8 am-u-sm-8">
         <div class="am-container" style="border-bottom: 2px solid #eee;padding: 20px;background: #fff;margin-top: 20px;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
             <div class="newsHead">
@@ -132,7 +153,7 @@
             <!--分页-->
             <div class="pager_container" style="margin-left: 50px;">
                 <nav>
-                    {!! $data['newest']->render() !!}
+                    {!! $data['newest']->appends(['newtype' => $data['newtype']])->render() !!}
                 </nav>
             </div>
         </div>
@@ -199,6 +220,11 @@
         });
         $('.news-body').click(function () {
             self.location = "/news/detail?nid=" + $(this).attr('data-content');
+        });
+        $('.bs-docs-sidebar ul').on('click', 'li', function(event) {
+            event.preventDefault();
+            $(this).addClass('am-active').siblings('li').removeClass('am-active');
+            self.location = "/news?newtype=" + $(this).attr('data-content');
         });
     </script>
 @endsection
