@@ -160,6 +160,9 @@ Route::get('news/content', ['uses' => 'NewsController@requestNewsContent']);
 //获取订单列表
 Route::get('order/orderlist',['uses' => 'OrderController@orderlist']);
 
+//关于我们
+Route::get('about',['uses' => 'HomeController@aboutindex']);
+
 //测试方法
 Route::get('sensitive', ['uses' => 'SensitiveController@test']);
 

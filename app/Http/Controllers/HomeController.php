@@ -218,5 +218,10 @@ class HomeController extends Controller {
             "data" => $data,
         ]);
     }
+    public function aboutindex(){
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
 
+        return view('about.about',['data'=>$data]);
+    }
 }

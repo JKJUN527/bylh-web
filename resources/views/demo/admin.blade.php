@@ -71,10 +71,21 @@
     <div class="clear"></div>
 </div>
 <b class="line"></b>
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">Modal 标题
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            Modal 内容。本 Modal 无法通过遮罩层关闭。
+        </div>
+    </div>
+</div>
 <div class="shopNav">
     <div class="slideall" style="height: auto;">
 
-        <div class="long-title"><span class="all-goods">全部分类</span></div>
+        <div class="long-title"><span class="all-goods" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">全部分类</span></div>
+
         <div class="nav-cont" style="background: #ff9933bd;">
             <ul>
                 <li class="index @if($title==1) nav_active @endif"><a href="{{asset('index')}}">首页</a></li>
@@ -98,7 +109,7 @@
                     @endif
                 @endif"><a href="{{asset('service/advanceSearch?type=2')}}">专业问答</a></li>
                 <li class="qc @if($title==6) nav_active @endif"><a href="{{asset('news/index')}}">实习课堂</a></li>
-                <li class="qc @if($title==7) nav_active @endif"><a href="{{asset('news/index')}}">关于我们</a></li>
+                <li class="qc @if($title==7) nav_active @endif"><a href="{{asset('about')}}">关于我们</a></li>
                 <li class="qc @if($title==8) nav_active @endif"><a href="{{asset('news/index')}}">常见问题</a></li>
             </ul>
         </div>
