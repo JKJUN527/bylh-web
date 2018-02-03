@@ -4,7 +4,17 @@
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/navstyle.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <style>
+        .card{
+            padding:10px;
+        }
+        .card-deck{
+            padding:10px;
+        }
+        .card-block{
+            padding: 5px;
+        }
         .listIndex dd {
             height: 35px !important;
         }
@@ -29,44 +39,43 @@
             margin-right: 4px;
         }
     </style>
-@endsection
-
+    @endsection
 @section('content')
-    <!--小导航 -->
-    <div class="am-g am-g-fixed smallnav">
-        <div class="am-u-sm-3">
-            <a href="{{asset('demands.demandPublishIndex')}}"><img src="images/navsmall.jpg"/>
-                <div class="title">发布需求</div>
-            </a>
-        </div>
-        <div class="am-u-sm-3">
-            <a href="{{asset('service.genlpublish')}}"><img src="images/huismall.jpg"/>
-                <div class="title">发布服务</div>
-            </a>
-        </div>
-        <div class="am-u-sm-3">
-            <a href="{{asset('person.home')}}"><img src="images/mansmall.jpg"/>
-                <div class="title">个人中心</div>
-            </a>
-        </div>
-        <div class="am-u-sm-3">
-            <a href="#"><img src="images/moneysmall.jpg"/>
-                <div class="title">关于我们</div>
-            </a>
-        </div>
+<!--小导航 -->
+<div class="am-g am-g-fixed smallnav">
+    <div class="am-u-sm-3">
+        <a href="{{asset('demands.demandPublishIndex')}}"><img src="images/navsmall.jpg" />
+            <div class="title">发布需求</div>
+        </a>
     </div>
-    <!--主要内容-->
-    <!--1
-    <div class="am-container am-g am-g-fixed" style="width: 100%;">
-        <div class="leftpanel col-md-3 am-u-md-3">
-                <div class="am-sticky-placeholder" style="margin:0px;height: 403px;">
-                <ul>
-                    <li>专业 提供专业的方案</li>
-                    <li>便捷 体验便捷的操作</li>
-                    <li>高效 享受高效的服务</li>
-                    <li>全面 涵盖全面的类别</li>
-                </ul>
-            </div>
+    <div class="am-u-sm-3">
+        <a href="{{asset('service.genlpublish')}}"><img src="images/huismall.jpg" />
+            <div class="title">发布服务</div>
+        </a>
+    </div>
+    <div class="am-u-sm-3">
+        <a href="{{asset('person.home')}}"><img src="images/mansmall.jpg" />
+            <div class="title">个人中心</div>
+        </a>
+    </div>
+    <div class="am-u-sm-3">
+        <a href="#"><img src="images/moneysmall.jpg" />
+            <div class="title">关于我们</div>
+        </a>
+    </div>
+</div>
+<!--主要内容-->
+<!--1
+<div class="am-container am-g am-g-fixed" style="width: 100%;">
+    <div class="leftpanel col-md-3 am-u-md-3">
+            <div class="am-sticky-placeholder" style="margin:0px;height: 403px;">
+            <ul>
+                <li>专业 提供专业的方案</li>
+                <li>便捷 体验便捷的操作</li>
+                <li>高效 享受高效的服务</li>
+                <li>全面 涵盖全面的类别</li>
+            </ul>
+        </div>
 
         </div>
             <div class="advertisement col-md-9 am-u-md-9" style="padding: 10px;">
@@ -312,11 +321,10 @@
                     </div>
                     <div class="am-g am-g-fixed">
                         <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
-                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }">
+                            <div class="card-deck-wrapper">
+                                <div class="card-deck">
                                 @foreach($data["result"]["services"] as $s)
-                                    <li>
-                                        <div class="am-gallery-item">
+                                        <div class="card">
                                             <a href="/service/detail?id={{$s->id}}&type=0" class="">
                                                 @if($s->picture != null)
                                                     <?php
@@ -325,19 +333,21 @@
                                                     $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
                                                     $imagepath = explode('@', $pics[0])[1];
                                                     ?>
-                                                    <img src="{{$baseurl}}{{$imagepath}}"/>
+                                                    <img class="card-img-top" src="{{$baseurl}}{{$imagepath}}"/>
                                                 @else
-                                                    <img src="{{asset("images/f1.jpg")}}"/>
+                                                    <img class="card-img-top" src="{{asset("images/f1.jpg")}}"/>
                                                 @endif
-                                                <h3 class="am-gallery-title">{{$s->title}}</h3>
-                                                <div class="am-gallery-desc">{{$s->price}}|{{$s->city}}</div>
+                                            <div class="card-block">
+                                                <h4 class="card-title">{{$s->title}}</h4>
+                                                <p class="card-text"><small class="text-muted">{{$s->price}}|{{$s->city}}</small></p>
+                                            </div>
                                             </a>
                                         </div>
-                                    </li>
                                 @endforeach
-                            </ul>
-                        </div>
-                    </div>
+                                </div>
+                           </div>
+                       </div>
+                   </div>
                 </div>
             @endif
 
@@ -390,11 +400,10 @@
                     </div>
                     <div class="am-g am-g-fixed">
                         <div class="am-u-lg-12 am-u-md-12" style="padding:10px;height: 80%;">
-                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
-  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }">
+                            <div class="card-deck-wrapper">
+                                <div class="card-deck">
                                 @foreach($data["result"]["services"] as $s)
-                                    <li>
-                                        <div class="am-gallery-item">
+                                        <div class="card">
                                             <a href="/service/detail?id={{$s->id}}&type=2" class="">
                                                 @if($s->picture != null)
                                                     <?php
@@ -403,18 +412,20 @@
                                                     $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
                                                     $imagepath = explode('@', $pics[0])[1];
                                                     ?>
-                                                    <img src="{{$baseurl}}{{$imagepath}}"/>
+                                                    <img class="card-img-top" src="{{$baseurl}}{{$imagepath}}"/>
                                                 @else
-                                                    <img src="{{asset("images/f1.jpg")}}"/>
+                                                    <img class="card-img-top" src="{{asset("images/f1.jpg")}}"/>
                                                 @endif
-                                                <h3 class="am-gallery-title">{{$s->title}}</h3>
-                                                <div class="am-gallery-desc">{{$s->price}}|{{$s->city}}</div>
-                                            </a>
-                                        </div>
-                                    </li>
+                                                    <div class="card-block">
+                                                        <h4 class="card-title">{{$s->title}}</h4>
+                                                        <p class="card-text"><small class="text-muted">{{$s->price}}|{{$s->city}}</small></p>
+                                                    </div>
+                                                </a>
+                                          </div>
                                 @endforeach
-                            </ul>
-                        </div>
+                                </div>
+                           </div>
+                       </div>
                     </div>
                 </div>
             @endif
@@ -470,20 +481,21 @@
 
 
 
-    <!--引导 -->
-    <div class="navCir">
-        <li class="active"><a href="/index"><i class="am-icon-home "></i>首页</a></li>
-        <li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
-        <li><a href="/orderinfo"><i class="am-icon-shopping-basket"></i>订单详情</a></li>
-        <li><a href="/home"><i class="am-icon-user"></i>我的</a></li>
-    </div>
-    <!--菜单 -->
-    <div class=tip>
-    </div>
+<!--引导 -->
+<div class="navCir">
+    <li class="active"><a href="/index"><i class="am-icon-home "></i>首页</a></li>
+    <li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
+    <li><a href="/orderinfo"><i class="am-icon-shopping-basket"></i>订单详情</a></li>
+    <li><a href="/home"><i class="am-icon-user"></i>我的</a></li>
+</div>
+<!--菜单 -->
+<div class=tip>
+</div>
 @endsection
-
 @section("custom-script")
     <script type="text/javascript " src="{{asset('basic/js/quick_links.js')}} "></script>
+    <script src="{{asset('js/jquery-1.4.3.min.js')}}" rel="stylesheet" type="text/css"></script>
+    <script src="{{asset('bootstrap-4.0.0-dist/js/bootstrap.min.js')}}" rel="stylesheet" type="text/css"></script>
     <script type="text/javascript">
         var sortHotness = $("#sort-hotness");
         var sortPrice = $("#sort-price");

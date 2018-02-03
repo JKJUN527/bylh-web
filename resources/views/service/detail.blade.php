@@ -1,38 +1,33 @@
-@extends('demo.admin',['title'=>3,'subtitle'=>$data["detail"]->type])
+@extends('demo.admin3',['title'=>3,'subtitle'=>$data["detail"]->type])
 @section('title','服务详情')
 @section('custom-style')
-    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>
-    {{--<link href="{{asset('dist/amazeui.min.css')}}" rel="stylesheet" type="text/css"/>--}}
+    <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    {{--<link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />--}}
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <style type="text/css">
-        .comcategory li {
-            font-size: 14px;
+        .comcategory li{
+            font-size:14px;
             padding: 3px;
         }
-
-        .comcategory li a:hover {
+        .comcategory li a:hover{
             color: #b84554;
         }
-
-        .comcategory li i {
+        .comcategory li i{
             color: gray;
             margin-left: 10px;
         }
-
-        .title-first a {
+        .title-first a{
             text-align: center;
             padding: 60px;
             font-size: 18px;
             color: #000;
             font-weight: bold;
         }
-
-        .title-first a:hover {
+        .title-first a:hover{
             color: #b84554;
             font-weight: bold;
         }
-
-        .demo li {
+        .demo li{
             float: none;
             width: 100%;
             padding: 0px 5px;
@@ -40,21 +35,20 @@
             height: 30px;
             line-height: 30px;
         }
-
         .gzyx_1 {
             background: #F7CCA2;
         }
-
-        .gzyx_2 {
+        .gzyx_2{
             background: #97DC8E;
         }
-
-        .gzyx_3 {
+        .gzyx_3{
             background: #C7B5F3;
         }
-
-        .gzyx_4 {
+        .gzyx_4{
             background: #88DEE8;
+        }
+        .am-g-fixed{
+            min-width: 1100px;
         }
         .service_title{
             padding-left: 2rem;
@@ -203,24 +197,17 @@
             </div>
         </div>
     </div>
-    </div>
-    <div class="am-g am-fixed" style="margin-top: 20px;">
-        <div class="am-container">
-            <div class="am-u-1g-12 am-u-md-12 am-u-sm-12">
-                <div class="am-u-lg-9 am-u-md-9 am-u-sm-9"
-                     style="border: 2px solid #eee;padding: 20px;background: #fff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
-                    <div class="am-tabs" data-am-tabs style="margin:10px;">
-                        <ul class="am-tabs-nav am-nav am-nav-tabs" style="margin:10px;">
-                            <li class="am-active">
-                                <a class="service_tab" href="#tab1">服务详情</a>
-                            </li>
-                            <li>
-                                <a class="service_tab" href="#tab2">雇主评论</a>
-                            </li>
-                            <li>
-                                <a class="service_tab" href="#tab3">成交记录</a>
-                            </li>
-                        </ul>
+</div>
+<div class="am-g am-fixed" style="margin-top: 20px;">
+    <div class="am-container">
+        <div class="am-u-1g-12 am-u-md-12 am-u-sm-12">
+            <div class="am-u-lg-9 am-u-md-9 am-u-sm-9" style="border: 2px solid #eee;padding: 20px;background: #fff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
+                <div class="am-tabs" data-am-tabs style="margin:10px;">
+                    <ul class="am-tabs-nav am-nav am-nav-tabs" style="margin:10px;">
+                        <li class="am-active"><a href="#tab1" style="font-weight: bold;font-size: 18px;margin-right: 50px;">服务详情</a></li>
+                        <li><a href="#tab2" style="font-weight: bold; font-size: 18px;margin-right: 50px;">雇主评论</a></li>
+                        <li><a href="#tab3" style="font-weight: bold;font-size: 18px;margin-right: 50px;">成交记录</a></li>
+                    </ul>
 
                         <div class="am-tabs-bd">
                             <div class="am-tab-panel am-fade am-in am-active" id="tab1">

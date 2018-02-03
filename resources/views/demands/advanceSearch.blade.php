@@ -4,8 +4,17 @@
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/navstyle.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>
-
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <style>
+        .card{
+            padding:10px;
+        }
+        .card-deck{
+            padding:10px;
+        }
+        .card-block{
+            padding: 5px;
+        }
         .listIndex dd {
             height: 35px !important;
         }
@@ -287,21 +296,19 @@
         </div>
         <div class="am-g am-g-fixed">
             <div class="am-u-lg-8 am-u-md-8" style="padding: 10px;float: left;">
-                <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }">
-                    <?php
-                    $num = 30;
-                    $count = 0;
-                    ?>
-                    @foreach($data["result"]["demands"] as $demand)
-                        @if(++$count > 8)
-                            @break
-                        @endif
-
-                        <li>
-                            <div class="am-gallery-item">
+                <div class="card-deck-wrapper">
+                    <div class="card-deck">
+                        <?php
+                        $num = 30;
+                        $count = 0;
+                        ?>
+                        @foreach($data["result"]["demands"] as $demand)
+                            @if(++$count > 8)
+                                @break
+                            @endif
+                            <div class="card">
                                 <a href="/demands/detail?id={{$demand->id}}">
-                                    <img src="
+                                    <img class="card-img-top" src="
                                     @if($demand->picture != null)
                                     <?php
                                     $pics = explode(';', $demand->picture);
@@ -313,14 +320,14 @@
                                     @else
                                     {{asset("images/f3.jpg")}}
                                     @endif" alt="img" style="width: 175px;height: 175px;"/>
-                                    <h3 class="am-gallery-title">{{$demand->title}}</h3>
-                                    <div class="am-gallery-desc">{{str_replace(array("</br>","</br","</b"),"",mb_substr($demand->describe, 0, 20, 'utf-8'))}}</div>
-                                </a>
+                                <div class="card-block">
+                                    <h4 class="card-title">{{$demand->title}}</h4>
+                                    <p class="card-text"><small class="text-muted">{{str_replace(array("</br>","</br","</b"),"",mb_substr($demand->describe, 0, 20, 'utf-8'))}}</small></p>
+                                </div>
                             </div>
-                        </li>
-                    @endforeach
-
-                </ul>
+                            @endforeach
+                     </div>
+                </div>
             </div>
             <div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">
                 <ul>
@@ -354,6 +361,8 @@
 
 @section("custom-script")
     <script type="text/javascript " src="{{asset('basic/js/quick_links.js')}} "></script>
+    <script src="{{asset('js/jquery-1.4.3.min.js')}}" rel="stylesheet" type="text/css"></script>
+    <script src="{{asset('bootstrap-4.0.0-dist/js/bootstrap.min.js')}}" rel="stylesheet" type="text/css"></script>
     <script type="text/javascript">
 
         var sortHotness = $("#sort-hotness");
@@ -470,4 +479,3 @@
         }
     </script>
 @endsection
-

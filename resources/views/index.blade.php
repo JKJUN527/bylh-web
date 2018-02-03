@@ -4,135 +4,110 @@
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
-    <style type="text/css">
-        .floor-title {
-            color: #003366;
-        }
+<style type="text/css">
+    .floor-title{
+        color: #003366;
+    }
+    .needtype1,.needtype2,.needtype3{
+        padding-top: 20px;
+    }
+    .more2more{
+        margin-top:-8px;
+    }
+    .comcategory{
+        padding-top: 10px;
 
-        .needtype1, .needtype2, .needtype3 {
-            padding-top: 20px;
-        }
-
-        .more2more {
-            margin-top: -8px;
-        }
-
-        .comcategory {
-            padding-top: 10px;
-
-        }
-
-        .comcategory li {
-            font-size: 14px;
-            padding: 3px;
-            line-height: 1.5;
-        }
-
-        .comcategory li a:hover {
-            color: #b84554;
-        }
-
-        .comcategory li i {
-            color: gray;
-            margin-left: 10px;
-        }
-
-        .title-first a {
-            text-align: center;
-            padding: 60px;
-            font-size: 18px;
-            color: #000;
-            font-weight: bold;
-        }
-
-        .title-first a:hover {
-            color: #b84554;
-            font-weight: bold;
-        }
-
-        .comh1 {
-            font-size: 18px;
-            padding: 3px;
-            font-weight: bold;
-        }
-
-        .demo li {
-            float: none;
-            width: 100%;
-            padding: 0px 5px;
-            border: none;
-            height: 30px;
-            line-height: 30px;
-        }
-
-        .title-first {
-            float: none;
-            width: 100%;
-            padding: 0px 5px;
-            border: none;
-            height: 30px;
-            line-height: 30px;
-        }
-
-        .am-nav-tabs > li.am-active > a, .am-nav-tabs > li.am-active > a:hover, .am-nav-tabs > li.am-active > a:focus, .am-nav-tabs > li > a:hover {
-            background: #ee6363;
-            color: #fff;
-        }
-
-        .showNews {
-            width: 300px;
-            right: 0;
-            border: 2px solid #e64d2e;
-        }
-
-        .marqueenOne {
-            margin-top: -10px;
-            margin-left: -5px;
-        }
-
-        {{--.category-content .menu-item {--}}
-            {{--background-image: url({{asset('images/bear.png')}});--}}
-        {{--}--}}
-@media screen and (max-width: 1000px) {
-            .marqueenTwo {
-                display: none;
-            }
-
-            .leftpanel {
-                display: none;
-            }
-
-            .shopMain {
-                width: 100%;
-            }
-
-            .index-category-left {
-                width: 100%;
-                text-align: center;
-            }
-
-            .index-category-right {
-                width: 100%;
-                text-align: center;
-            }
-
-            .request_rank {
-                display: none;
-            }
-
-            .pictureshow {
-                width: 500px;
-            }
-        }
-
-        .demo_btn {
-            width: 10rem;
-            height: 6rem;
-            margin-top: 5rem;
-            font-size: large;
-        }
-    </style>
+    }
+    .navTwo{
+        color: #fff;
+    }
+    .comcategory li{
+        font-size:14px;
+        padding: 3px;
+        line-height: 1.5;
+    }
+    .ml-22 a{
+        color: #fff;
+    }
+    .comcategory li a:hover{
+        color: #b84554;
+    }
+    .comcategory li i{
+        color: gray;
+        margin-left: 10px;
+    }
+    .title-first a{
+        text-align: center;
+        padding: 60px;
+        font-size: 18px;
+        color: #000;
+        font-weight: bold;
+    }
+    .title-first a:hover{
+        color: #b84554;
+        font-weight: bold;
+    }
+    .comh1{
+        font-size: 18px;
+        padding: 3px;
+        font-weight: bold;
+    }
+    .demo li{
+        float: none;
+        width: 100%;
+        padding: 0px 5px;
+        border: none;
+        height: 30px;
+        line-height: 30px;
+    }
+    .title-first{
+        float: none;
+        width: 100%;
+        padding: 0px 5px;
+        border: none;
+        height: 30px;
+        line-height: 30px;
+    }
+    .am-nav-tabs > li.am-active > a, .am-nav-tabs > li.am-active > a:hover, .am-nav-tabs > li.am-active > a:focus, .am-nav-tabs > li > a:hover{
+        background:#ee6363;
+        color: #fff;
+    }
+    .showNews{
+        width: 300px;
+        right: 0;
+        border: 2px solid #e64d2e;
+    }
+    .marqueenOne{
+        margin-top: -10px;
+        margin-left: -5px;
+    }
+    .card{
+        padding:10px;
+    }
+    .card-deck{
+        padding:10px;
+    }
+    .card-block{
+        padding: 5px;
+    }
+    @media screen and (max-width:1000px){
+        .marqueenTwo{display:none;}
+        .leftpanel{display:none;}
+        .shopMain{width:100%;}
+        .index-category-left{width:100%;text-align:center;}
+        .index-category-right{width:100%;text-align:center;}
+        .request_rank{display:none;}
+        .pictureshow{width:500px;}
+    }
+    .demo_btn {
+        width: 10rem;
+        height: 6rem;
+        margin-top: 5rem;
+        font-size: large;
+    }
+</style>
 @endsection
 @section('content')
     <div class="am-g am-g-fixed">
@@ -495,20 +470,21 @@
                     </div>
                     <div class="am-g am-g-fixed">
                         <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
-                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
-  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }">
+                            <div class="card-deck-wrapper">
+                                <div class="card-deck">
                                 @foreach($data['hotest3'] as $hotest3)
-                                    <li>
-                                        <div class="am-gallery-item">
+                                        <div class="card">
                                             <a to="/service/detail?uid={{$hotest3->uid}}">
-                                                <img src="{{$hotest3->picture}}" alt="{{$hotest3->title}}"/>
-                                                <h3 class="am-gallery-title">{{$hotest3->title}}</h3>
-                                                <div class="am-gallery-desc">{{$hotest3->created_at}}</div>
+                                                <img class="card-img-top" src="{{$hotest3->picture}}" alt="{{$hotest3->title}}"/>
+                                                <div class="card-block">
+                                                    <h4 class="card-title">{{$hotest3->title}}</h4>
+                                                    <p class="card-text"><small class="text-muted">{{$hotest3->created_at}}</small></p>
+                                                </div>
                                             </a>
                                         </div>
-                                    </li>
                                 @endforeach
-                            </ul>
+                                </div>
+                            </div>
                             {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-6--}}
                             {{--am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
                             {{--@foreach($data['hotest1'] as $hotest1)--}}
@@ -537,6 +513,7 @@
         </div>
         @endsection
         @section("custom-script")
+            <script src="{{asset('bootstrap-4.0.0-dist/js/bootstrap.min.js')}}" rel="stylesheet" type="text/css"></script>
             <script>
                 (function () {
                     $('.am-slider').flexslider();

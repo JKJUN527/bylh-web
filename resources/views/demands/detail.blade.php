@@ -2,36 +2,35 @@
 @section('title', '需求详情')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+    {{--<link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />--}}
     <style type="text/css">
-        .comcategory li {
-            font-size: 14px;
+        .comcategory li{
+            font-size:14px;
             padding: 3px;
         }
-
-        .comcategory li a:hover {
+        .comcategory li a:hover{
             color: #b84554;
         }
-
-        .comcategory li i {
+        .comcategory li i{
             color: gray;
             margin-left: 10px;
         }
-
-        .title-first a {
+        .am-g-fixed{
+            min-width:1100px;
+        }
+        .title-first a{
             text-align: center;
             padding: 60px;
             font-size: 18px;
             color: #000;
             font-weight: bold;
         }
-
-        .title-first a:hover {
+        .title-first a:hover{
             color: #b84554;
             font-weight: bold;
         }
-
-        .demo li {
+        .demo li{
             float: none;
             width: 100%;
             padding: 0px 5px;
@@ -39,8 +38,7 @@
             height: 30px;
             line-height: 30px;
         }
-
-        .title-first {
+        .title-first{
             float: none;
             width: 100%;
             padding: 0px 5px;
@@ -48,8 +46,7 @@
             height: 30px;
             line-height: 30px;
         }
-
-        .am-dropdown {
+        .am-dropdown{
             width: 20%;
         }
         .form-group {
@@ -65,38 +62,23 @@
             float: right;
             color: red;
         }
-
     </style>
+
 @endsection
 @section('content')
-    <!--发布需求-->
-    <div class="am-g am-g-fixed" style="padding-top: 45px;">
-        <div class="am-u-lg-8 am-u-md-8 am-u-sm-8">
-            <div class="container1" style="border: 2px solid #eee;padding: 20px;background: #fff;">
-                <div class="title"
-                     style="height: 37px;font-family: 'Microsoft YaHei';color: #666666;font-size: 18px;font-weight: 700;line-height: 37px;width:  850px;overflow: hidden;">{{$data["detail"]->title}}
+<!--发布需求-->
+<div class="am-g am-g-fixed" style="padding-top: 45px;">
+    <div class="am-u-lg-8 am-u-md-8 am-u-sm-8" >
+        <div class="container1" style="border: 2px solid #eee;padding: 20px;background: #fff;">
+            <div class="title" style="height: 37px;font-family: 'Microsoft YaHei';color: #666666;font-size: 18px;font-weight: 700;line-height: 37px;width:  850px;overflow: hidden;">简单小问卷，人人可做<span style="font-size: 20px;color: #b84554;padding-left: 20px;">￥50</span>
+            </div>
+            <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+            <div class="item-mode">
+                <div class="item-lesstime">
+                    <div class="fl " id="djsTime" style="font-family: 'Microsoft YaHei';color: #666666;font-size: 16px;font-weight: bold;">剩余时间：
+                        <strong id="RemainD" style="color: #FF6600">21</strong>天<strong id="RemainH" style="color: #FF6600">9</strong>时<strong id="RemainM" style="color: #FF6600">23</strong>分<strong id="RemainS" style="color: #FF6600">40</strong>秒</div>
                 </div>
-                <hr/>
-                <div class="item-mode">
-                    {{--<div class="item-lesstime">--}}
-                        {{--<div class="fl " id="djsTime"--}}
-                             {{--style="font-family: 'Microsoft YaHei';color: #666666;font-size: 16px;font-weight: bold;">--}}
-                            {{--剩余时间：--}}
-                            {{--<strong id="RemainD" style="color: #FF6600">21</strong>天<strong id="RemainH" style="color: #FF6600">9</strong>时<strong id="RemainM" style="color: #FF6600">23</strong>分<strong id="RemainS" style="color: #FF6600">40</strong>秒--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    <div class="fl item_xs" style="margin-top: 10px;">
-                        <div class="xs_morearr xs_morearr_nobg">赏金：
-                        <span style="font-size: 20px;color: #b84554;padding-left: 20px;">
-                            @if($data["detail"]->price == -1)
-                                价格面议
-                            @else
-                                ￥{{$data["detail"]->price}}
-                            @endif
-                            </span>
-                        <span style="float: right;">浏览量:{{$data["detail"]->view_count}}</span>&nbsp
-                        <span style="float: right;margin-right: 1.5rem;">发布时间:{{substr($data["detail"]->created_at,0,10)}}</span>
-                        </div>
+                <div class="fl item_xs" style="margin-top: 10px;"><div class="xs_morearr xs_morearr_nobg">赏金分配：计件工资，雇主需要 <b>25</b> 个稿件，每个 <b>2</b> 元。<br>目前已选定<font color="green"> 0</font> 个合格，还需要 <font color="red">25</font> 个稿件。
                     </div>
                 </div>
                 {{--<div class="item_process"--}}
@@ -187,16 +169,14 @@
                                 @endif
                             </h3>
 
-                            </p>
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="guessrequest" style="margin-top: 20px;border-width: 2px;border-color: #e9e5e5;border-style: solid;background-color: #ffffff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);padding-left:24px;padding-top: 35px;padding-bottom: 20px;padding-right: 20px;">
-                <div class="title"
-                     style="font-family: 'Microsoft YaHei';color: #333;font-size: 24px;font-weight: 400;line-height: 24px;">
-                    <span class="sign" style="padding: 0px 3px;background-color: #ff8a00;margin-right: 15px;"></span>需求回答列表
-                </div>
+        </div>
+        <div class="guessrequest" style="margin-top: 20px;border-width: 2px;border-color: #e9e5e5;border-style: solid;background-color: #ffffff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);padding-left:24px;padding-top: 35px;padding-bottom: 20px;padding-right: 20px;">
+            <div class="title" style="font-family: 'Microsoft YaHei';color: #333;font-size: 24px;font-weight: 400;line-height: 24px;">
+                <span class="sign" style="padding: 0px 3px;background-color: #ff8a00;margin-right: 15px;"></span>推荐服务商
             </div>
             <div class="clear"></div>
 	        <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
@@ -342,7 +322,6 @@
         </div>
     </div>
 @endsection
-
 @section("custom-script")
     <script src="{{asset("js/amazeui.dialog.min.js")}}" type="text/javascript"></script>
     <script>

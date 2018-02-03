@@ -2,6 +2,7 @@
 @section('title', '发布需求第二部')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .comcategory li{

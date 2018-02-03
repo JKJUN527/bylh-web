@@ -34,7 +34,7 @@ dt + dd {margin-top: 0;}
 /*走马灯*/
 .marqueen-title{position: absolute;top:8px;left:10px;padding-right:10px;border-right:1px solid #F5F5F5 ;}
 .demo li,#demo li a{height: 30px;line-height:30px; font-size: 12px; overflow: hidden;}
-.demo{max-width:1200px; margin:0px auto;margin-left:60px;overflow:hidden;height:30px;width:100%; text-align:left;color:#ffffff;}
+.demo{max-width:1200px; margin:0px auto;margin-left:60px;overflow:hidden;height:30px;width:100%; text-align:left;}
 .demo li {padding:0px 20px;}
 .demo li.title-first img,.demo li.title-first p{display: none;}
 .marqueenTwo{position: relative;overflow: hidden;}
@@ -784,7 +784,7 @@ dt + dd {margin-top: 0;}
 
 
 
-}   
+}
 	   
 	   
 	   
