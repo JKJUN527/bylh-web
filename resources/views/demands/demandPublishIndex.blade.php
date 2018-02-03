@@ -3,6 +3,7 @@
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <style type="text/css">
         .comcategory li{
             font-size:14px;
@@ -41,17 +42,17 @@
 <div class="am-g am-g-fixed" style="padding-top: 45px;">
     <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
         <div class="fabu_guide_y" style="height: 3px;background: #df231b;position: absolute;top: 17px;left: 0;z-index: 9;width: 100%"></div>
-        <div class="fabu_guide_sign" style="background: url(images/fabu_y.jpg) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
+        <div class="fabu_guide_sign" style="background: url({{asset('images/fabu_y.jpg')}}) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
         <div class="fabu_guide_text" style="font-size: 16px;color: #555;padding-top: 40px;text-align: center;">选择类目，描述你的需求</div>
     </div>
     <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
         <div class="fabu_guide_y" style="height: 3px;background: #999;position: absolute;top: 17px;left: 0;z-index: 9;width: 100%"></div>
-        <div class="fabu_guide_sign" style="background: url(images/fabu_q.jpg) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
+        <div class="fabu_guide_sign" style="background: url({{asset('images/fabu_q.jpg')}}) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
         <div class="fabu_guide_text" style="font-size: 16px;color: #555;text-align:center;padding-top: 40px;">确认需求</div>
     </div>
     <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
         <div class="fabu_guide_y" style="height: 3px;background: #999;position: absolute;top: 17px;left: 0;z-index: 9;width: 100%"></div>
-        <div class="fabu_guide_sign" style="background: url(images/fabu_q.jpg) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
+        <div class="fabu_guide_sign" style="background: url({{asset('images/fabu_q.jpg')}}) center top no-repeat;height: 35px;width: 35px;position: absolute;left: 146px;top: 0;z-index: 999;"></div>
         <div class="fabu_guide_text" style="font-size: 16px;color: #555;text-align:center;padding-top: 40px;">发布需求</div>
     </div>
 </div>
@@ -208,7 +209,6 @@
                     <button class="am-btn am-btn-danger am-round am-btn-lg" style="margin:20px;width: 15%;">下一步</button>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

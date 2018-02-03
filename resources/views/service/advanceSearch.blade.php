@@ -4,7 +4,20 @@
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/navstyle.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <script src="{{asset('js/jquery-1.4.3.min.js')}}" rel="stylesheet" type="text/css"></script>
+    <script src="{{asset('bootstrap-4.0.0-dist/js/bootstrap.min.js')}}" rel="stylesheet" type="text/css"></script>
+    <style>
+        .card{
+            padding:10px;
+        }
+        .card-deck{
+            padding:10px;
+        }
+        .card-block{
+            padding: 5px;
+        }
+    </style>
     @endsection
 @section('content')
 <script type="text/javascript">
@@ -218,151 +231,213 @@
             </div>
             <div class="am-g am-g-fixed">
                 <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
-                    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                        <li>
-                            <div class="am-gallery-item">
-                                <a href="images/f1.jpg" class="">
-                                    <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                                    <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                    <div class="am-gallery-desc">2375-09-26</div>
-                                </a>
+                    {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-3--}}
+  							{{--am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
+                        {{--<li>--}}
+                            {{--<div class="am-gallery-item">--}}
+                                {{--<a href="images/f1.jpg" class="">--}}
+                                    {{--<img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>--}}
+                                    {{--<h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>--}}
+                                    {{--<div class="am-gallery-desc">2375-09-26</div>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<div class="am-gallery-item">--}}
+                                {{--<a href="images/f1.jpg" class="">--}}
+                                    {{--<img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>--}}
+                                    {{--<h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>--}}
+                                    {{--<div class="am-gallery-desc">2375-09-26</div>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<div class="am-gallery-item">--}}
+                                {{--<a href="images/f1.jpg" class="">--}}
+                                    {{--<img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>--}}
+                                    {{--<h3 class="am-gallery-title">不要太担心 只因为我相信</h3>--}}
+                                    {{--<div class="am-gallery-desc">2375-09-26</div>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<div class="am-gallery-item">--}}
+                                {{--<a href="images/f1.jpg" class="">--}}
+                                    {{--<img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>--}}
+                                    {{--<h3 class="am-gallery-title">终会走过这条遥远的道路</h3>--}}
+                                    {{--<div class="am-gallery-desc">2375-09-26</div>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                    {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-3--}}
+  							{{--am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
+                        {{--<li>--}}
+                            {{--<div class="am-gallery-item">--}}
+                                {{--<a href="images/f1.jpg" class="">--}}
+                                    {{--<img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>--}}
+                                    {{--<h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>--}}
+                                    {{--<div class="am-gallery-desc">2375-09-26</div>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<div class="am-gallery-item">--}}
+                                {{--<a href="images/f1.jpg" class="">--}}
+                                    {{--<img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>--}}
+                                    {{--<h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>--}}
+                                    {{--<div class="am-gallery-desc">2375-09-26</div>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<div class="am-gallery-item">--}}
+                                {{--<a href="images/f1.jpg" class="">--}}
+                                    {{--<img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>--}}
+                                    {{--<h3 class="am-gallery-title">不要太担心 只因为我相信</h3>--}}
+                                    {{--<div class="am-gallery-desc">2375-09-26</div>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<div class="am-gallery-item">--}}
+                                {{--<a href="images/f1.jpg" class="">--}}
+                                    {{--<img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>--}}
+                                    {{--<h3 class="am-gallery-title">终会走过这条遥远的道路</h3>--}}
+                                    {{--<div class="am-gallery-desc">2375-09-26</div>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                    <div class="card-deck-wrapper">
+                        <div class="card-deck">
+                            <div class="card">
+                                <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">龙博品牌设计</h4>
+                                    <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                                </div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="am-gallery-item">
-                                <a href="images/f1.jpg" class="">
-                                    <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                                    <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                    <div class="am-gallery-desc">2375-09-26</div>
-                                </a>
+                            <div class="card">
+                                <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">龙博品牌设计</h4>
+                                    <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                                </div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="am-gallery-item">
-                                <a href="images/f1.jpg" class="">
-                                    <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                                    <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                                    <div class="am-gallery-desc">2375-09-26</div>
-                                </a>
+                            <div class="card">
+                                <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">龙博品牌设计</h4>
+                                    <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                                </div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="am-gallery-item">
-                                <a href="images/f1.jpg" class="">
-                                    <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                                    <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                    <div class="am-gallery-desc">2375-09-26</div>
-                                </a>
+                            <div class="card">
+                                <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">龙博品牌设计</h4>
+                                    <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-                    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                        <li>
-                            <div class="am-gallery-item">
-                                <a href="images/f1.jpg" class="">
-                                    <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                                    <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                                    <div class="am-gallery-desc">2375-09-26</div>
-                                </a>
+                        </div>
+                        <div class="card-deck">
+                            <div class="card">
+                                <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">龙博品牌设计</h4>
+                                    <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                                </div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="am-gallery-item">
-                                <a href="images/f1.jpg" class="">
-                                    <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                                    <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                    <div class="am-gallery-desc">2375-09-26</div>
-                                </a>
+                            <div class="card">
+                                <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">龙博品牌设计</h4>
+                                    <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                                </div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="am-gallery-item">
-                                <a href="images/f1.jpg" class="">
-                                    <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                                    <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                                    <div class="am-gallery-desc">2375-09-26</div>
-                                </a>
+                            <div class="card">
+                                <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">龙博品牌设计</h4>
+                                    <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                                </div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="am-gallery-item">
-                                <a href="images/f1.jpg" class="">
-                                    <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                                    <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                                    <div class="am-gallery-desc">2375-09-26</div>
-                                </a>
+                            <div class="card">
+                                <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">龙博品牌设计</h4>
+                                    <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <!--需求2(短款)-->
-        <div class="shopMain" id="shopmain">
-            <div class="am-container " >
-                <div class="shopTitle ">
-                    <h4 class="floor-title"><span class="am-badge am-badge-primary am-round">2</span>&nbsp;&nbsp;实习中介</h4>
-                    <div class="today-brands " style="right:0px ;top:13px;">
-                        <span class="am-badge am-badge-primary am-round">More</span>
-                    </div>
+        {{--<div class="shopMain" id="shopmain">--}}
+            {{--<div class="am-container " >--}}
+                {{--<div class="shopTitle ">--}}
+                    {{--<h4 class="floor-title"><span class="am-badge am-badge-primary am-round">2</span>&nbsp;&nbsp;实习中介</h4>--}}
+                    {{--<div class="today-brands " style="right:0px ;top:13px;">--}}
+                        {{--<span class="am-badge am-badge-primary am-round">More</span>--}}
+                    {{--</div>--}}
 
-                </div>
-            </div>
-            <div class="am-g am-g-fixed">
-                <div class="am-u-lg-3 am-u-md-4" style="padding:10px;">
-                    <a href="#">
-                        <img src="images/img_06.jpg">
-                    </a>
-                    <div class="left_bottom" style="background-color: gray;text-align: center;padding: 3px;color:#fff;">
-                        <a href="#" style="color: #fff">
-                            发布类似项目
-                        </a>
-                        <p>获得众多设计创意，体验一呼百应</p>
-                    </div>
-                </div>
-                <div class="am-u-lg-5 am-u-md-4" style="padding: 10px;float: left;">
-                    <ul>
-                        <li>
-                            <div class="box1"></div>
-                            <div class="outer-con " style="padding: 10px;">
-                                <a href="# "><img src="images/f2.jpg" style="width: auto;" />
-                                    <div class="title ">
-                                        专业1
-                                    </div>
-                                    <div class="sub-title ">
-                                        好评率 100%
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">
-                    <ul>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;宝贝起名</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1500</font>&nbsp;&nbsp;&nbsp;&nbsp;昆利达logo及名片设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥2000</font>&nbsp;&nbsp;&nbsp;&nbsp;业态装修布局图</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥300</font>&nbsp;&nbsp;&nbsp;&nbsp;java程序bug调试</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥70</font>&nbsp;&nbsp;&nbsp;&nbsp;帮助排队取号</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥30</font>&nbsp;&nbsp;&nbsp;&nbsp;测星座，测运势，塔罗牌占卜</a><span style="color: gray;float: right;">查看详情</span></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1000</font>&nbsp;&nbsp;&nbsp;&nbsp;室内装修设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥10000</font>&nbsp;&nbsp;&nbsp;&nbsp;web网页设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥4000</font>&nbsp;&nbsp;&nbsp;&nbsp;本科毕业论文编写</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;电脑装系统</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥90</font>&nbsp;&nbsp;&nbsp;&nbsp;照片转漫画</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥150</font>&nbsp;&nbsp;&nbsp;&nbsp;专业心理咨询</a><span style="color: gray;float: right;">查看详情</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="am-g am-g-fixed">--}}
+                {{--<div class="am-u-lg-3 am-u-md-4" style="padding:10px;">--}}
+                    {{--<a href="#">--}}
+                        {{--<img src="images/img_06.jpg">--}}
+                    {{--</a>--}}
+                    {{--<div class="left_bottom" style="background-color: gray;text-align: center;padding: 3px;color:#fff;">--}}
+                        {{--<a href="#" style="color: #fff">--}}
+                            {{--发布类似项目--}}
+                        {{--</a>--}}
+                        {{--<p>获得众多设计创意，体验一呼百应</p>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="am-u-lg-5 am-u-md-4" style="padding: 10px;float: left;">--}}
+                    {{--<ul>--}}
+                        {{--<li>--}}
+                            {{--<div class="box1"></div>--}}
+                            {{--<div class="outer-con " style="padding: 10px;">--}}
+                                {{--<a href="# "><img src="images/f2.jpg" style="width: auto;" />--}}
+                                    {{--<div class="title ">--}}
+                                        {{--专业1--}}
+                                    {{--</div>--}}
+                                    {{--<div class="sub-title ">--}}
+                                        {{--好评率 100%--}}
+                                    {{--</div>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
+                {{--<div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">--}}
+                    {{--<ul>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;宝贝起名</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1500</font>&nbsp;&nbsp;&nbsp;&nbsp;昆利达logo及名片设计</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥2000</font>&nbsp;&nbsp;&nbsp;&nbsp;业态装修布局图</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥300</font>&nbsp;&nbsp;&nbsp;&nbsp;java程序bug调试</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥70</font>&nbsp;&nbsp;&nbsp;&nbsp;帮助排队取号</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥30</font>&nbsp;&nbsp;&nbsp;&nbsp;测星座，测运势，塔罗牌占卜</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                    {{--</ul>--}}
+                    {{--<ul>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1000</font>&nbsp;&nbsp;&nbsp;&nbsp;室内装修设计</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥10000</font>&nbsp;&nbsp;&nbsp;&nbsp;web网页设计</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥4000</font>&nbsp;&nbsp;&nbsp;&nbsp;本科毕业论文编写</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;电脑装系统</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥90</font>&nbsp;&nbsp;&nbsp;&nbsp;照片转漫画</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥150</font>&nbsp;&nbsp;&nbsp;&nbsp;专业心理咨询</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
     </div>
     <div class="am-u-lg-4 am-u-md-4">
         <div class="request_rank">
-            <div class="rank_title" style="background:url(../images/tit_bg.jpg)no-repeat center;height: 114px;">
+            <div class="rank_title" style="background:url({{asset('images/tit_bg.jpg')}})no-repeat center;height: 114px;">
                 <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 20px;">服务商排行榜</p>
             </div>
             <div class="rank_content" style="margin: 0 60px;border-bottom: 2px solid #df3536;border-left: 2px solid #df3536;border-right: 2px solid #df3536;">
@@ -370,7 +445,7 @@
                     <li style="text-align: center;">
                         <div class="box1"></div>
                         <div class="outer-con" style="padding: 10px;position: inherit;">
-                            <a href="# "><img src="images/f2.jpg" style="width: 50%;" />
+                            <a href="# "><img src="{{asset('images/f2.jpg')}}" style="width: 50%;" />
                                 <div class="title ">
                                     专业1
                                 </div>
@@ -386,7 +461,7 @@
                     <li style="text-align: center;">
                         <div class="box1"></div>
                         <div class="outer-con" style="padding: 10px;position: inherit;">
-                            <a href="# "><img src="images/f2.jpg" style="width: 50%;" />
+                            <a href="# "><img src="{{asset('images/f2.jpg')}}" style="width: 50%;" />
                                 <div class="title ">
                                     专业1
                                 </div>
@@ -402,7 +477,7 @@
                     <li style="text-align: center;">
                         <div class="box1"></div>
                         <div class="outer-con" style="padding: 10px;position: inherit;">
-                            <a href="# "><img src="images/f2.jpg" style="width: 50%;" />
+                            <a href="# "><img src="{{asset('images/f2.jpg')}}" style="width: 50%;" />
                                 <div class="title ">
                                     专业1
                                 </div>
@@ -413,22 +488,6 @@
                                     <button type="button" class="am-btn am-btn-danger">查看详情</button>
                                 </div>
                             </a>
-                        </div>
-                    </li>
-                    <li style="text-align: center;">
-                        <div class="box1"></div>
-                        <div class="outer-con" style="padding: 10px;position: inherit;">
-                            <a href="# "><img src="images/f2.jpg" style="width: 50%;" />
-                                <div class="title ">
-                                    专业1
-                                </div>
-                                <div class="sub-title ">
-                                    好评率 100%
-                                </div>
-                            </a>
-                        </div>
-                        <div class="right-panel">
-                            <button type="button" class="am-btn am-btn-danger">查看详情</button>
                         </div>
                     </li>
                 </ul>
@@ -447,182 +506,158 @@
 </div>
 -->
 <!--需求3-->
-<div class="shopMain" id="shopmain">
-    <div class="am-container " >
-        <div class="shopTitle ">
-            <h4 class="floor-title"><span class="am-badge am-badge-success am-round">3</span>&nbsp;&nbsp;专业问答</h4>
-            <div class="today-brands " style="right:0px ;top:13px;">
-                <span class="am-badge am-badge-success am-round">More</span>
-            </div>
+{{--<div class="shopMain" id="shopmain">--}}
+    {{--<div class="am-container " >--}}
+        {{--<div class="shopTitle ">--}}
+            {{--<h4 class="floor-title"><span class="am-badge am-badge-success am-round">3</span>&nbsp;&nbsp;专业问答</h4>--}}
+            {{--<div class="today-brands " style="right:0px ;top:13px;">--}}
+                {{--<span class="am-badge am-badge-success am-round">More</span>--}}
+            {{--</div>--}}
 
-        </div>
-    </div>
-    <div class="am-g am-g-fixed">
-        <div class="am-u-lg-12 am-u-md-12" style="padding:10px;height: 80%;">
-            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
-  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                            <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
-  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                            <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <!--
-                <a href="#">
-                    <img src="../images/img_06.jpg">
-                </a>
-                <div class="left_bottom" style="background-color: gray;text-align: center;padding: 3px;color:#fff;">
-                    <a href="#" style="color: #fff">
-                        发布类似项目
-                    </a>
-                    <p>获得众多设计创意，体验一呼百应</p>
-                </div>
-            </div>
-            <div class="am-u-lg-5 am-u-md-4" style="padding: 10px;float: left;">
-                <ul>
-                    <li>
-                        <div class="box1"></div>
-                        <div class="outer-con " style="padding: 10px;">
-                        <a href="# "><img src="../images/f2.jpg" style="width: auto;" />
-                            <div class="title ">
-                                专业1
-                            </div>
-                            <div class="sub-title ">
-                                好评率 100%
-                            </div>
-                        </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">
-                        <ul>
-                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;宝贝起名</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1500</font>&nbsp;&nbsp;&nbsp;&nbsp;昆利达logo及名片设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥2000</font>&nbsp;&nbsp;&nbsp;&nbsp;业态装修布局图</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥300</font>&nbsp;&nbsp;&nbsp;&nbsp;java程序bug调试</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥70</font>&nbsp;&nbsp;&nbsp;&nbsp;帮助排队取号</a><span style="color: gray;float: right;">查看详情</span></li>
-                            <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥30</font>&nbsp;&nbsp;&nbsp;&nbsp;测星座，测运势，塔罗牌占卜</a><span style="color: gray;float: right;">查看详情</span></li>
-                        </ul>
-                        <ul>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1000</font>&nbsp;&nbsp;&nbsp;&nbsp;室内装修设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥10000</font>&nbsp;&nbsp;&nbsp;&nbsp;web网页设计</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥4000</font>&nbsp;&nbsp;&nbsp;&nbsp;本科毕业论文编写</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;电脑装系统</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥90</font>&nbsp;&nbsp;&nbsp;&nbsp;照片转漫画</a><span style="color: gray;float: right;">查看详情</span></li>
-                        <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥150</font>&nbsp;&nbsp;&nbsp;&nbsp;专业心理咨询</a><span style="color: gray;float: right;">查看详情</span></li>
-                        </ul>
-            </div>
-        -->
-        </div>
-    </div>
-</div>
+        {{--</div>--}}
+    {{--</div>--}}
+    {{--<div class="am-g am-g-fixed">--}}
+        {{--<div class="am-u-lg-12 am-u-md-12" style="padding:10px;height: 80%;">--}}
+            {{--<div class="card-deck-wrapper">--}}
+                {{--<div class="card-deck">--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="card-deck">--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="card">--}}
+                        {{--<img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">--}}
+                        {{--<div class="card-block">--}}
+                            {{--<h4 class="card-title">龙博品牌设计</h4>--}}
+                            {{--<p class="card-text"><small class="text-muted">广州佛山</small></p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<!----}}
+                {{--<a href="#">--}}
+                    {{--<img src="../images/img_06.jpg">--}}
+                {{--</a>--}}
+                {{--<div class="left_bottom" style="background-color: gray;text-align: center;padding: 3px;color:#fff;">--}}
+                    {{--<a href="#" style="color: #fff">--}}
+                        {{--发布类似项目--}}
+                    {{--</a>--}}
+                    {{--<p>获得众多设计创意，体验一呼百应</p>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="am-u-lg-5 am-u-md-4" style="padding: 10px;float: left;">--}}
+                {{--<ul>--}}
+                    {{--<li>--}}
+                        {{--<div class="box1"></div>--}}
+                        {{--<div class="outer-con " style="padding: 10px;">--}}
+                        {{--<a href="# "><img src="../images/f2.jpg" style="width: auto;" />--}}
+                            {{--<div class="title ">--}}
+                                {{--专业1--}}
+                            {{--</div>--}}
+                            {{--<div class="sub-title ">--}}
+                                {{--好评率 100%--}}
+                            {{--</div>--}}
+                        {{--</a>--}}
+                        {{--</div>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
+            {{--</div>--}}
+            {{--<div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">--}}
+                        {{--<ul>--}}
+                            {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;宝贝起名</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                            {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1500</font>&nbsp;&nbsp;&nbsp;&nbsp;昆利达logo及名片设计</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                            {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥2000</font>&nbsp;&nbsp;&nbsp;&nbsp;业态装修布局图</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                            {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥300</font>&nbsp;&nbsp;&nbsp;&nbsp;java程序bug调试</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                            {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥70</font>&nbsp;&nbsp;&nbsp;&nbsp;帮助排队取号</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                            {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥30</font>&nbsp;&nbsp;&nbsp;&nbsp;测星座，测运势，塔罗牌占卜</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--</ul>--}}
+                        {{--<ul>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥1000</font>&nbsp;&nbsp;&nbsp;&nbsp;室内装修设计</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥10000</font>&nbsp;&nbsp;&nbsp;&nbsp;web网页设计</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥4000</font>&nbsp;&nbsp;&nbsp;&nbsp;本科毕业论文编写</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;电脑装系统</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥90</font>&nbsp;&nbsp;&nbsp;&nbsp;照片转漫画</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--<li><a href="#"><font color="#b84554" style="font-size: 18px;">￥150</font>&nbsp;&nbsp;&nbsp;&nbsp;专业心理咨询</a><span style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--</ul>--}}
+            {{--</div>--}}
+        {{---->--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</div>--}}
 <!--猜你喜欢-->
 <div class="guesslike">
     <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted">

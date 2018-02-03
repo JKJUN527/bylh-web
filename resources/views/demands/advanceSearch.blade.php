@@ -4,7 +4,20 @@
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/navstyle.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <script src="{{asset('js/jquery-1.4.3.min.js')}}" rel="stylesheet" type="text/css"></script>
+    <script src="{{asset('bootstrap-4.0.0-dist/js/bootstrap.min.js')}}" rel="stylesheet" type="text/css"></script>
+    <style>
+        .card{
+            padding:10px;
+        }
+        .card-deck{
+            padding:10px;
+        }
+        .card-block{
+            padding: 5px;
+        }
+    </style>
 @endsection
 @section('content')
 <div class="am-g am-g-fixed smallnav">
@@ -178,84 +191,68 @@
     </div>
     <div class="am-g am-g-fixed">
         <div class="am-u-lg-8 am-u-md-8" style="padding: 10px;float: left;">
-            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
+            <div class="card-deck-wrapper">
+                <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                        <div class="card-block">
+                            <h4 class="card-title">龙博品牌设计</h4>
+                            <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
+                    <div class="card">
+                        <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                        <div class="card-block">
+                            <h4 class="card-title">龙博品牌设计</h4>
+                            <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                            <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
+                    <div class="card">
+                        <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                        <div class="card-block">
+                            <h4 class="card-title">龙博品牌设计</h4>
+                            <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
+                    <div class="card">
+                        <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                        <div class="card-block">
+                            <h4 class="card-title">龙博品牌设计</h4>
+                            <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                        </div>
                     </div>
-                </li>
-            </ul>
-            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                            <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
+                </div>
+                <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                        <div class="card-block">
+                            <h4 class="card-title">龙博品牌设计</h4>
+                            <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                            <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
+                    <div class="card">
+                        <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                        <div class="card-block">
+                            <h4 class="card-title">龙博品牌设计</h4>
+                            <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="不要太担心 只因为我相信"/>
-                            <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
+                    <div class="card">
+                        <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                        <div class="card-block">
+                            <h4 class="card-title">龙博品牌设计</h4>
+                            <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="images/f1.jpg" class="">
-                            <img src="images/f1.jpg"  alt="终会走过这条遥远的道路"/>
-                            <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-                            <div class="am-gallery-desc">2375-09-26</div>
-                        </a>
+                    <div class="card">
+                        <img class="card-img-top" src="{{asset('images/f1.jpg')}}" alt="Card image cap">
+                        <div class="card-block">
+                            <h4 class="card-title">龙博品牌设计</h4>
+                            <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                        </div>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
         <div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">
             <ul>
@@ -280,10 +277,6 @@
                 <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥4000</font>&nbsp;&nbsp;&nbsp;&nbsp;本科毕业论文编写</a><span style="color: gray;float: right;">查看详情</span></li>
                 <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;电脑装系统</a><span style="color: gray;float: right;">查看详情</span></li>
                 <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥90</font>&nbsp;&nbsp;&nbsp;&nbsp;照片转漫画</a><span style="color: gray;float: right;">查看详情</span></li>
-                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥150</font>&nbsp;&nbsp;&nbsp;&nbsp;专业心理咨询</a><span style="color: gray;float: right;">查看详情</span></li>
-                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥50</font>&nbsp;&nbsp;&nbsp;&nbsp;电脑装系统</a><span style="color: gray;float: right;">查看详情</span></li>
-                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥90</font>&nbsp;&nbsp;&nbsp;&nbsp;照片转漫画</a><span style="color: gray;float: right;">查看详情</span></li>
-                <li><a href="#"><font color="#b84554" style="font-size: 18px;">￥150</font>&nbsp;&nbsp;&nbsp;&nbsp;专业心理咨询</a><span style="color: gray;float: right;">查看详情</span></li>
             </ul>
         </div>
     </div>
@@ -300,10 +293,10 @@
 </div>
 <!--广告-->
 <div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-    <img src="{{asset('images/ad4.png')}}">
+    <img src="{{asset('images/ad4.jpg')}}">
 </div>
 <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-    <img src="{{asset('images/ad5.png')}}">
+    <img src="{{asset('images/ad5.jpg')}}">
 </div>
 <script type="text/javascript">
     (function() {

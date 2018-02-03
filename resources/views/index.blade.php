@@ -4,7 +4,9 @@
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('bootstrap-4.0.0-dist/js/bootstrap.min.js')}}" rel="stylesheet" type="text/css"></script>
 <style type="text/css">
     .floor-title{
         color: #003366;
@@ -19,10 +21,16 @@
         padding-top: 10px;
 
     }
+    .navTwo{
+        color: #fff;
+    }
     .comcategory li{
         font-size:14px;
         padding: 3px;
         line-height: 1.5;
+    }
+    .ml-22 a{
+        color: #fff;
     }
     .comcategory li a:hover{
         color: #b84554;
@@ -76,9 +84,15 @@
         margin-top: -10px;
         margin-left: -5px;
     }
-    {{--.category-content .menu-item {--}}
-        {{--background-image: url({{asset('images/bear.png')}});--}}
-    {{--}--}}
+    .card{
+        padding:10px;
+    }
+    .card-deck{
+        padding:10px;
+    }
+    .card-block{
+        padding: 5px;
+    }
     @media screen and (max-width:1000px){
         .marqueenTwo{display:none;}
         .leftpanel{display:none;}
@@ -93,16 +107,17 @@
 @section('content')
     <div class="am-g am-g-fixed">
         <div class="am-u-lg-2">
+            <!--分类导航-->
             <div id="nav" class="navfull" style="position: static;">
                 <div class="area clearfix">
                     <div class="category-content" id="guide_2">
 
                         <div class="category" style="box-shadow:none ;margin-top: 2px;">
-                            <ul class="category-list navTwo" id="js_climit_li">
+                            <ul class="category-list navTwo" id="js_climit_li" >
                                 @foreach($data['serviceclass1'] as $serviceclass1)
                                     <li>
                                         <div class="category-info">
-                                            <h3 class="category-name b-category-name"><a class="ml-22" title="{{$serviceclass1->name}}">{{$serviceclass1->name}}</a></h3>
+                                            <h3 class="category-name b-category-name"><a class="ml-22"  title="{{$serviceclass1->name}}">{{$serviceclass1->name}}</a></h3>
                                             <em>&gt;</em></div>
                                         <div class="menu-item menu-in top">
                                             <div class="area-in">
@@ -252,6 +267,7 @@
                                 <li><a to="/demands/detail?uid={{$demands->uid}}"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a></li>
                                 @endforeach
                             </ul>
+
                         </div>
                     </div>
                     <div class="am-u-sm-12 am-u-md-12 am-u-lg-4 needtype2">
@@ -315,34 +331,35 @@
                 </div>
                 <div class="am-g am-g-fixed">
                     <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
-                        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                            @foreach($data['hotest1'] as $hotest1)
-                            <li>
-                                <div class="am-gallery-item">
-                                    <a to="/service/detail?uid={{$hotest1->uid}}">
-                                        <img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>
-                                        <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
-                        <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
-                        </a>
-                    </div>
-                    </li>
-                    @endforeach
-                    </ul>
-                    {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-3--}}
+                        {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-3--}}
   							{{--am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
-                        {{--@foreach($data['hotest1'] as $hotest1)--}}
+                            {{--@foreach($data['hotest1'] as $hotest1)--}}
                             {{--<li>--}}
                                 {{--<div class="am-gallery-item">--}}
-                                    {{-- <a to="/resume/add?rid={{$resume->rid}}">--}}
+                                    {{--<a to="/service/detail?uid={{$hotest1->uid}}">--}}
                                         {{--<img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>--}}
                                         {{--<h3 class="am-gallery-title">{{$hotest1->title}}</h3>--}}
-                                        {{--<div class="am-gallery-desc">{{$hotest1->created_at}}</div>--}}
-                                    {{--</a>--}}
-                                {{--</div>--}}
-                            {{--</li>--}}
-                        {{--@endforeach--}}
+                        {{--<div class="am-gallery-desc">{{$hotest1->created_at}}</div>--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
+                    {{--</li>--}}
+                    {{--@endforeach--}}
                     {{--</ul>--}}
+                        <div class="card-deck-wrapper">
+                            <div class="card-deck">
+                                @foreach($data['hotest1'] as $hotest1)
+                                <div class="card">
+                                    <a to="/service/detail?uid={{$hotest1->uid}}">
+                                    <img class="card-img-top" src="{{$hotest1->picture}}" alt="{{$hotest1->picture}}">
+                                    <div class="card-block">
+                                        <h4 class="card-title">{{$hotest1->title}}</h4>
+                                        <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                                    </div>
+                                    </a>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -359,20 +376,35 @@
                 </div>
                 <div class="am-g am-g-fixed">
                     <div class="am-u-lg-6 am-u-md-6" style="padding:10px;">
-                        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  							am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }" >
+                        {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-2--}}
+  							{{--am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
+                                {{--@foreach($data['hotest2'] as $hotest2)--}}
+                                {{--<li>--}}
+                                    {{--<div class="am-gallery-item">--}}
+                                        {{--<a to="/service/detail?uid={{$hotest2->uid}}">--}}
+                                            {{--<img src="{{$hotest2->picture}}"  alt="{{$hotest2->title}}"/>--}}
+                                            {{--<h3 class="am-gallery-title">{{$hotest2->title}}</h3>--}}
+                                            {{--<div class="am-gallery-desc">{{$hotest2->created_at}}</div>--}}
+                                        {{--</a>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                                {{--@endforeach--}}
+                        {{--</ul>--}}
+                        <div class="card-deck-wrapper">
+                            <div class="card-deck">
                                 @foreach($data['hotest2'] as $hotest2)
-                                <li>
-                                    <div class="am-gallery-item">
-                                        <a to="/service/detail?uid={{$hotest2->uid}}">
-                                            <img src="{{$hotest2->picture}}"  alt="{{$hotest2->title}}"/>
-                                            <h3 class="am-gallery-title">{{$hotest2->title}}</h3>
-                                            <div class="am-gallery-desc">{{$hotest2->created_at}}</div>
-                                        </a>
+                                <div class="card">
+                                    <a to="/service/detail?uid={{$hotest2->uid}}">
+                                    <img class="card-img-top" src="{{$hotest2->picture}}" alt="{{$hotest2->title}}">
+                                    <div class="card-block">
+                                        <h4 class="card-title">{{$hotest2->title}}</h4>
+                                        <p class="card-text"><small class="text-muted">广州佛山</small></p>
                                     </div>
-                                </li>
+                                    </a>
+                                </div>
                                 @endforeach
-                        </ul>
+                            </div>
+                        </div>
                         {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-2--}}
   							{{--am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
                             {{--@for($i=0;$i<2;$i++)--}}
@@ -442,20 +474,35 @@
                 </div>
                 <div class="am-g am-g-fixed">
                     <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
-                        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
-  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                            @foreach($data['hotest3'] as $hotest3)
-                                <li>
-                                    <div class="am-gallery-item">
+                        {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-6--}}
+  							{{--am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
+                            {{--@foreach($data['hotest3'] as $hotest3)--}}
+                                {{--<li>--}}
+                                    {{--<div class="am-gallery-item">--}}
+                                        {{--<a to="/service/detail?uid={{$hotest3->uid}}">--}}
+                                            {{--<img src="{{$hotest3->picture}}"  alt="{{$hotest3->title}}"/>--}}
+                                            {{--<h3 class="am-gallery-title">{{$hotest3->title}}</h3>--}}
+                                            {{--<div class="am-gallery-desc">{{$hotest3->created_at}}</div>--}}
+                                        {{--</a>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                            {{--@endforeach--}}
+                        {{--</ul>--}}
+                        <div class="card-deck-wrapper">
+                            <div class="card-deck">
+                                @foreach($data['hotest3'] as $hotest3)
+                                    <div class="card">
                                         <a to="/service/detail?uid={{$hotest3->uid}}">
-                                            <img src="{{$hotest3->picture}}"  alt="{{$hotest3->title}}"/>
-                                            <h3 class="am-gallery-title">{{$hotest3->title}}</h3>
-                                            <div class="am-gallery-desc">{{$hotest3->created_at}}</div>
+                                            <img class="card-img-top" src="{{$hotest3->picture}}" alt="{{$hotest3->title}}">
+                                            <div class="card-block">
+                                                <h4 class="card-title">{{$hotest3->title}}</h4>
+                                                <p class="card-text"><small class="text-muted">广州佛山</small></p>
+                                            </div>
                                         </a>
                                     </div>
-                                </li>
-                            @endforeach
-                        </ul>
+                                @endforeach
+                            </div>
+                        </div>
                         {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-6--}}
   							{{--am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
                             {{--@foreach($data['hotest1'] as $hotest1)--}}

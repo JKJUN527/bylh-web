@@ -1,8 +1,9 @@
-@extends('demo.admin')
+@extends('demo.admin3')
 @section('title', '需求详情')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+    {{--<link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />--}}
     <style type="text/css">
         .comcategory li{
             font-size:14px;
@@ -14,6 +15,9 @@
         .comcategory li i{
             color: gray;
             margin-left: 10px;
+        }
+        .am-g-fixed{
+            min-width:1100px;
         }
         .title-first a{
             text-align: center;
@@ -50,7 +54,7 @@
 @endsection
 @section('content')
 <!--发布需求-->
-<div class="am-g am-g-fixed" style="padding-top: 45px;">
+<div class="am-g am-g-fixed" style="padding-top: 45px;margin-top: 40px;">
     <div class="am-u-lg-8 am-u-md-8 am-u-sm-8" >
         <div class="container1" style="border: 2px solid #eee;padding: 20px;background: #fff;">
             <div class="title" style="height: 37px;font-family: 'Microsoft YaHei';color: #666666;font-size: 18px;font-weight: 700;line-height: 37px;width:  850px;overflow: hidden;">简单小问卷，人人可做<span style="font-size: 20px;color: #b84554;padding-left: 20px;">￥50</span>
@@ -65,34 +69,34 @@
                     </div>
                 </div>
             </div>
-            <div class="item_process" style="margin-top:20px;background: #F2F2F2;padding: 25px 20px 30px 20px;border: solid 1px #E9E9E9;overflow: hidden;">
-                <div class="jinduline">
-                    <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                        <div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
-                        <div class="jindu_y_text">发布需求<br><span class="jd_date"></span></div>
-                    </div>
+            {{--<div class="item_process" style="margin-top:20px;background: #F2F2F2;padding: 25px 20px 30px 20px;border: solid 1px #E9E9E9;overflow: hidden;">--}}
+                {{--<div class="jinduline">--}}
+                    {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                        {{--<div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>--}}
+                        {{--<div class="jindu_y_text">发布需求<br><span class="jd_date"></span></div>--}}
+                    {{--</div>--}}
 
-                    <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                        <div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
-                        <div class="jindu_y_text">进行中<br><span class="jd_date"></span></div>
-                    </div>
+                    {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                        {{--<div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>--}}
+                        {{--<div class="jindu_y_text">进行中<br><span class="jd_date"></span></div>--}}
+                    {{--</div>--}}
 
-                    <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                        <div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
-                        <div class="jindu_y_text ">验收付款
-                            <br><span class="jd_date">  </span>
-                        </div>
-                    </div>
+                    {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                        {{--<div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>--}}
+                        {{--<div class="jindu_y_text ">验收付款--}}
+                            {{--<br><span class="jd_date">  </span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
-                    <div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">
-                        <div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>
-                        <div class="jindu_y_text">评价<br><span class="jd_date"></span> </div>
-                    </div>
+                    {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                        {{--<div class="jindu_y_line jindu_out" style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;"><div class="jindu_y_q_blue_s" style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div></div>--}}
+                        {{--<div class="jindu_y_text">评价<br><span class="jd_date"></span> </div>--}}
+                    {{--</div>--}}
 
-                    <div class="clear"></div>
-                </div>
-                <div class="clear"></div>
-            </div>
+                    {{--<div class="clear"></div>--}}
+                {{--</div>--}}
+                {{--<div class="clear"></div>--}}
+            {{--</div>--}}
             <div class="desct-container" style="margin-top: 10px;height: 300px;">
                 <div class="desct-title" style="height: 25px;line-height: 25px;font-size: 18px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">任务详情
                     <div class="desct-content" >
@@ -193,7 +197,7 @@
             </div>
             <!--留言弹窗-->
             <div class="am-modal am-modal-alert" tabindex="-1" id="my-content">
-                <div class="am-modal-dialog" style="margin-top: 40%;">
+                <div class="am-modal-dialog" style="margin-top: 20%;">
                     <div class="am-modal-hd">给我留言</div>
                     <a href="#" >
                         <div class="serviceMsg">
@@ -265,11 +269,6 @@
 
                     <li><a href="/" target="_blank" title="回收支付宝红包/每天可做"><span style="color: #ff0000;font-weight: 700;">￥100元</span>&nbsp;回收支付宝红包/每天可做</a></li>
 
-                    <li><a href="/" target="_blank" title="手机app刷信用卡不求人，99钱管家来帮你的忙"><span style="color: #ff0000;font-weight: 700;">￥50元</span>&nbsp;手机app刷信用卡不求人，99钱管家来帮你的忙</a></li>
-
-                    <li><a href="/" target="_blank" title="广东地区微信填资料jiefeng，60元一单   QQ  1853261468"><span style="color: #ff0000;font-weight: 700;">￥60元</span>&nbsp;广东地区微信填资料jiefeng，60元一单   QQ  1853261468</a></li>
-
-                    <li><a href="/" target="_blank" title="转发一条朋友圈"><span style="color: #ff0000;font-weight: 700;">￥120元</span>&nbsp;转发一条朋友圈</a></li>
 
                 </ul>
 

@@ -1,8 +1,9 @@
-@extends('demo.admin')
+@extends('demo.admin3')
 @section('title','服务详情')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    {{--<link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />--}}
+    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
     <style type="text/css">
         .comcategory li{
@@ -47,12 +48,15 @@
         .gzyx_4{
             background: #88DEE8;
         }
+        .am-g-fixed{
+            min-width: 1100px;
+        }
     </style>
     @endsection
 @section('content')
 <!--发布服务-->
 <div class="am-g am-g-fixed" style="padding-top: 45px;">
-    <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="border: 2px solid #eee;padding: 20px;background: #fff;">
+    <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="margin-top:40px;border: 2px solid #eee;padding: 20px;background: #fff;">
         <div class="am-u-lg-6 am-u-md-6" style="padding-top: 20px;padding-left: 20px;">
             <img src="http://p1.shopimg.680.com/2017-3/11/32017031116262132546_10416580.jpg" alt="" style="width: 85%" >
             <img src="http://p1.shopimg.680.com/2017-3/11/32017031116262579071_10416580.jpg" alt="" style="width: 85%;">
@@ -71,7 +75,7 @@
                 <div class="main-bc">
                     <div class="tk_1_1_3_1 tk_1_1_3_2" style="height:145px; line-height:150%;border-bottom:dashed 1px #ddd;    padding-bottom: 7px;">
                         <table border="0" cellpadding="0" cellspacing="0">
-                            <tbody><tr><td style="  padding-top: 21px;font-size: 14px;padding-left: 22px;">
+                            <tbody><tr><td style=" padding-top: 21px;font-size: 14px;padding-left: 22px;">
                                     评分
                                 </td>
                                 <td style="padding:20px 70px; text-align:center"><b style="color:#f60">4.9</b>分<br>
@@ -86,15 +90,12 @@
                             </tr>
                             </tbody></table>
                     </div>
-
-                    <div class="clear"></div>
                     <div class="main-bc-btn" style="padding-left:105px; padding-top:39px;padding-bottom: 42px;">
                         <a class="btn-a buyfuwubtn" href="#"><button class="am-btn am-btn-danger am-btn-lg js-alert" type="button" style="width: 50%;" onclick="buy()">立即购买</button></a>
-                        <div class="clear"></div>
                     </div>
                     <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
                         <div class="am-modal-dialog">
-                            <div class="am-modal-bd" style="margin-top: 40%;">
+                            <div class="am-modal-bd" style="margin-top:10%;">
                                 <div>
                                     <div class="service-title" style="font-size: 20px;font-weight: bold;padding: 20px;">
                                         <a href="#">服务商信息：<span style="font-size: 18px;">米旭品牌设计</span></a>
@@ -139,7 +140,7 @@
         </div>
     </div>
 </div>
-<div class="am-g am-fixed" style="margin-top: 20px;">
+<div class="am-g am-fixed" style="margin-top: 20px;margin:10px;">
     <div class="am-container">
         <div class="am-u-1g-12 am-u-md-12 am-u-sm-12">
             <div class="am-u-lg-9 am-u-md-9 am-u-sm-9" style="border: 2px solid #eee;padding: 20px;background: #fff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
@@ -336,8 +337,6 @@
 
                             <div class="clear"></div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
