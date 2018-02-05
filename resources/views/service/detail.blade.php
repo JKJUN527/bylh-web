@@ -3,7 +3,7 @@
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     {{--<link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />--}}
-    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+    {{--<link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>--}}
     <style type="text/css">
         .comcategory li{
             font-size:14px;
@@ -110,7 +110,7 @@
 @endsection
 @section('content')
     <!--发布服务-->
-    <div class="am-g am-g-fixed" style="padding-top: 45px;">
+    <div class="am-g am-g-fixed" style="padding-top: 85px;">
         <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="border: 2px solid #eee;padding: 20px;background: #fff;">
             <div class="am-u-lg-6 am-u-md-6 am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
                 <ul class="am-slides">
@@ -175,14 +175,15 @@
                         <a class="btn-a buyfuwubtn" href="#"><button class="am-btn am-btn-danger am-btn-lg js-alert" type="button" style="width: 50%;" onclick="buy()">立即购买</button></a>
                         <div class="clear"></div>
                     </div>
-                    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+                    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert" style="margin-top: -150px;">
                         <div class="am-modal-dialog">
-                            <div class="am-modal-bd" style="margin-top: 40%;">
+                            <div class="am-modal-bd">
                                 <div>
                                     <div class="service-title" style="font-size: 20px;font-weight: bold;padding: 20px;">
                                         <a href="#">服务商信息：<span style="font-size: 18px;">米旭品牌设计</span></a>
                                     </div>
-                                    <a href="#" ><img src="../images/wechat.png" style="width:300px;height:300px;"></a>
+                                    <a href="#"><img src="{{asset('images/wechat.png')}}"
+                                                     style="width:300px;height:300px;"></a>
                                     <div class="wechat" type="1" style="display: none;">请使用微信支付</div>
                                     <div class="alibaba" type="2" style="font-size: 18px;background: #fff;font-weight: bold;padding: 20px;">请使用支付宝支付</div>
                                 </div>
@@ -490,14 +491,21 @@
     <script src="{{asset("dist/amazeui.min.js")}}"></script>
     <script src="{{asset("js/amazeui.dialog.min.js")}}"></script>
     <script type="text/javascript">
-        $('.js-alert').on('click',function(){
-            AMUI.dialog.alert({
-                title: '扫一扫微信，完成支付',
-                content: '<a href="#" style="width:220px;height:220px;"><img src="../images/wechat.png"></a>',
-                onConfirm: function() {
-                    console.log('close');
+        // $('.js-alert').on('click',function(){
+        //     AMUI.dialog.alert({
+        //         title: '扫一扫微信，完成支付',
+        //         content: '<a href="#" style="width:220px;height:220px;"><img src="../images/wechat.png"></a>',
+        //         onConfirm: function() {
+        //             console.log('close');
+        //         }
+        //     });
+        // });
+        function buy() {
+            $('#my-alert').modal({
+                onConfirm: function () {
+                    alert("您已完成购买！");
                 }
             });
-        });
+        }
     </script>
 @endsection

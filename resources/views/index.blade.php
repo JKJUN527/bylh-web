@@ -4,7 +4,7 @@
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+    {{--<link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>--}}
     <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
 <style type="text/css">
     .floor-title{
@@ -28,9 +28,6 @@
         padding: 3px;
         line-height: 1.5;
     }
-    .ml-22 a{
-        color: #fff;
-    }
     .comcategory li a:hover{
         color: #b84554;
     }
@@ -38,6 +35,10 @@
         color: gray;
         margin-left: 10px;
     }
+
+    /*.category-info{*/
+    /*border-left:4px solid #d2364c;*/
+    /*}*/
     .title-first a{
         text-align: center;
         padding: 60px;
@@ -116,14 +117,13 @@
                 <div class="area clearfix">
                     <div class="category-content" id="guide_2">
 
-                        <div class="category" style="box-shadow:none ;margin-top: 2px;background: white">
+                        <div class="category" style="box-shadow:none ;margin-top: 2px;">
                             <ul class="category-list navTwo" id="js_climit_li">
                                 @foreach($data['serviceclass1'] as $serviceclass1)
                                     <li>
                                         <div class="category-info">
                                             <h3 class="category-name b-category-name">
                                                 <a class="ml-22"
-                                                   style="color: black;"
                                                    href="/service/advanceSearch?type={{$serviceclass1->type}}&class1={{$serviceclass1->id}}"
                                                    title="{{$serviceclass1->name}} ">{{$serviceclass1->name}}</a>
                                             </h3>

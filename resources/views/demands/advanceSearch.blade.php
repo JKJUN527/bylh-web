@@ -1,4 +1,4 @@
-@extends('demo.admin',['title'=>2])
+@extends('demo.cardDemo',['title'=>2])
 @section('title', '需求大厅')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
@@ -18,27 +18,22 @@
         .listIndex dd {
             height: 35px !important;
         }
-
         .listIndex dd a {
             padding: 4px;
             margin: 4px;
         }
-
         .selected {
             background-color: #03A9F4;
             color: #ffffff !important;
         }
-
         .price-span {
             font-size: 18px;
             color: #b84554;
         }
-
         .sort-item {
             padding: 4px;
             margin-right: 4px;
         }
-
     </style>
 @endsection
 @section('content')
@@ -83,7 +78,8 @@
                        value="@if(isset($data['condition']['keyword'])){{$data['condition']['keyword']}}@endif"
                        placeholder="输入需求类别／描述进行搜索"
                        style="width: 250px;padding: 6px;border: 2px solid #b84554;">
-                <a href="#" onclick="goSearch()"><i class="am-icon-search am-icon-fw"></i></a>
+                <a href="#" onclick="goSearch()"><i class="am-icon-search am-icon-fw" style="margin-top: -26px;
+    margin-left: 260px;font-size: 20px;"></i></a>
             </div>
             <p class="am-u-lg-6 am-u-md-6 sort-position">
                 <span style="padding: 6px;font-weight: bold;font-size: 15px;"><b>排序</b>：</span>
