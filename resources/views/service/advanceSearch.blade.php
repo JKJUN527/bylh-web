@@ -1,4 +1,4 @@
-@extends('demo.admin',['title'=>3,'subtitle'=>$data["condition"]["type"]])
+@extends('demo.cardDemo',['title'=>3,'subtitle'=>$data["condition"]["type"]])
 @section('title','服务大厅')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
@@ -111,7 +111,8 @@
                        value="@if(isset($data['condition']['keyword'])){{$data['condition']['keyword']}}@endif"
                        placeholder="输入服务类别／描述进行搜索"
                        style="width: 250px;padding: 6px;border: 2px solid #b84554;">
-                <a href="#" onclick="goSearch()"><i class="am-icon-search am-icon-fw"></i></a>
+                <a href="#" onclick="goSearch()"><i class="am-icon-search am-icon-fw" style="margin-top: -26px;
+    margin-left: 260px;font-size: 20px;"></i></a>
             </div>
             <p class="am-u-lg-6 am-u-md-6 sort-position">
                 <span style="padding: 6px;font-weight: bold;font-size: 15px;"><b>排序</b>：</span>

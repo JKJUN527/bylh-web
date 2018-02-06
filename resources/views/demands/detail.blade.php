@@ -1,36 +1,37 @@
-@extends('demo.admin',['title'=>2])
+@extends('demo.admin3',['title'=>2])
 @section('title', '需求详情')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
-    {{--<link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />--}}
+    {{--<link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>--}}
     <style type="text/css">
-        .comcategory li{
-            font-size:14px;
+        .comcategory li {
+            font-size: 14px;
             padding: 3px;
         }
-        .comcategory li a:hover{
+
+        .comcategory li a:hover {
             color: #b84554;
         }
-        .comcategory li i{
+
+        .comcategory li i {
             color: gray;
             margin-left: 10px;
         }
-        .am-g-fixed{
-            min-width:1100px;
-        }
-        .title-first a{
+
+        .title-first a {
             text-align: center;
             padding: 60px;
             font-size: 18px;
             color: #000;
             font-weight: bold;
         }
-        .title-first a:hover{
+
+        .title-first a:hover {
             color: #b84554;
             font-weight: bold;
         }
-        .demo li{
+
+        .demo li {
             float: none;
             width: 100%;
             padding: 0px 5px;
@@ -38,7 +39,8 @@
             height: 30px;
             line-height: 30px;
         }
-        .title-first{
+
+        .title-first {
             float: none;
             width: 100%;
             padding: 0px 5px;
@@ -46,7 +48,8 @@
             height: 30px;
             line-height: 30px;
         }
-        .am-dropdown{
+
+        .am-dropdown {
             width: 20%;
         }
         .form-group {
@@ -63,82 +66,96 @@
             color: red;
         }
     </style>
-
 @endsection
 @section('content')
-<!--发布需求-->
-<div class="am-g am-g-fixed" style="padding-top: 45px;">
-    <div class="am-u-lg-8 am-u-md-8 am-u-sm-8" >
-        <div class="container1" style="border: 2px solid #eee;padding: 20px;background: #fff;">
-            <div class="title" style="height: 37px;font-family: 'Microsoft YaHei';color: #666666;font-size: 18px;font-weight: 700;line-height: 37px;width:  850px;overflow: hidden;">简单小问卷，人人可做<span style="font-size: 20px;color: #b84554;padding-left: 20px;">￥50</span>
-            </div>
-            <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
-            <div class="item-mode">
-                <div class="item-lesstime">
-                    <div class="fl " id="djsTime" style="font-family: 'Microsoft YaHei';color: #666666;font-size: 16px;font-weight: bold;">剩余时间：
-                        <strong id="RemainD" style="color: #FF6600">21</strong>天<strong id="RemainH" style="color: #FF6600">9</strong>时<strong id="RemainM" style="color: #FF6600">23</strong>分<strong id="RemainS" style="color: #FF6600">40</strong>秒</div>
+    <!--发布需求-->
+    <div class="am-g am-g-fixed" style="padding-top: 85px;">
+        <div class="am-u-lg-8 am-u-md-8 am-u-sm-8">
+            <div class="container1" style="border: 2px solid #eee;padding: 20px;background: #fff;">
+                <div class="title"
+                     style="height: 37px;font-family: 'Microsoft YaHei';color: #666666;font-size: 18px;font-weight: 700;line-height: 37px;width:  850px;overflow: hidden;">{{$data["detail"]->title}}
                 </div>
-                <div class="fl item_xs" style="margin-top: 10px;"><div class="xs_morearr xs_morearr_nobg">赏金分配：计件工资，雇主需要 <b>25</b> 个稿件，每个 <b>2</b> 元。<br>目前已选定<font color="green"> 0</font> 个合格，还需要 <font color="red">25</font> 个稿件。
+                <hr/>
+                <div class="item-mode">
+                    {{--<div class="item-lesstime">--}}
+                    {{--<div class="fl " id="djsTime"--}}
+                    {{--style="font-family: 'Microsoft YaHei';color: #666666;font-size: 16px;font-weight: bold;">--}}
+                    {{--剩余时间：--}}
+                    {{--<strong id="RemainD" style="color: #FF6600">21</strong>天<strong id="RemainH" style="color: #FF6600">9</strong>时<strong id="RemainM" style="color: #FF6600">23</strong>分<strong id="RemainS" style="color: #FF6600">40</strong>秒--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    <div class="fl item_xs" style="margin-top: 10px;">
+                        <div class="xs_morearr xs_morearr_nobg">赏金：
+                            <span style="font-size: 20px;color: #b84554;padding-left: 20px;">
+                            @if($data["detail"]->price == -1)
+                                    价格面议
+                                @else
+                                    ￥{{$data["detail"]->price}}
+                                @endif
+                            </span>
+                            <span style="float: right;">浏览量:{{$data["detail"]->view_count}}</span>&nbsp
+                            <span style="float: right;margin-right: 1.5rem;">发布时间:{{substr($data["detail"]->created_at,0,10)}}</span>
+                        </div>
                     </div>
                 </div>
                 {{--<div class="item_process"--}}
-                     {{--style="margin-top:20px;background: #F2F2F2;padding: 25px 20px 30px 20px;border: solid 1px #E9E9E9;overflow: hidden;">--}}
-                    {{--<div class="jinduline">--}}
-                        {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
-                            {{--<div class="jindu_y_line jindu_out"--}}
-                                 {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
-                                {{--<div class="jindu_y_q_blue_s"--}}
-                                     {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
-                            {{--</div>--}}
-                            {{--<div class="jindu_y_text">发布需求<br><span class="jd_date"></span></div>--}}
-                        {{--</div>--}}
+                {{--style="margin-top:20px;background: #F2F2F2;padding: 25px 20px 30px 20px;border: solid 1px #E9E9E9;overflow: hidden;">--}}
+                {{--<div class="jinduline">--}}
+                {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                {{--<div class="jindu_y_line jindu_out"--}}
+                {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
+                {{--<div class="jindu_y_q_blue_s"--}}
+                {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
+                {{--</div>--}}
+                {{--<div class="jindu_y_text">发布需求<br><span class="jd_date"></span></div>--}}
+                {{--</div>--}}
 
-                        {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
-                            {{--<div class="jindu_y_line jindu_out"--}}
-                                 {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
-                                {{--<div class="jindu_y_q_blue_s"--}}
-                                     {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
-                            {{--</div>--}}
-                            {{--<div class="jindu_y_text">进行中<br><span class="jd_date"></span></div>--}}
-                        {{--</div>--}}
+                {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                {{--<div class="jindu_y_line jindu_out"--}}
+                {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
+                {{--<div class="jindu_y_q_blue_s"--}}
+                {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
+                {{--</div>--}}
+                {{--<div class="jindu_y_text">进行中<br><span class="jd_date"></span></div>--}}
+                {{--</div>--}}
 
-                        {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
-                            {{--<div class="jindu_y_line jindu_out"--}}
-                                 {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
-                                {{--<div class="jindu_y_q_blue_s"--}}
-                                     {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
-                            {{--</div>--}}
-                            {{--<div class="jindu_y_text ">验收付款--}}
-                                {{--<br><span class="jd_date">  </span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                {{--<div class="jindu_y_line jindu_out"--}}
+                {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
+                {{--<div class="jindu_y_q_blue_s"--}}
+                {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
+                {{--</div>--}}
+                {{--<div class="jindu_y_text ">验收付款--}}
+                {{--<br><span class="jd_date">  </span>--}}
+                {{--</div>--}}
+                {{--</div>--}}
 
-                        {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
-                            {{--<div class="jindu_y_line jindu_out"--}}
-                                 {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
-                                {{--<div class="jindu_y_q_blue_s"--}}
-                                     {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
-                            {{--</div>--}}
-                            {{--<div class="jindu_y_text">评价<br><span class="jd_date"></span></div>--}}
-                        {{--</div>--}}
+                {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
+                {{--<div class="jindu_y_line jindu_out"--}}
+                {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
+                {{--<div class="jindu_y_q_blue_s"--}}
+                {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
+                {{--</div>--}}
+                {{--<div class="jindu_y_text">评价<br><span class="jd_date"></span></div>--}}
+                {{--</div>--}}
 
-                        {{--<div class="clear"></div>--}}
-                    {{--</div>--}}
-                    {{--<div class="clear"></div>--}}
+                {{--<div class="clear"></div>--}}
+                {{--</div>--}}
+                {{--<div class="clear"></div>--}}
                 {{--</div>--}}
                 <div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
                     <ul class="am-slides">
                         @if($data["detail"]->picture != null)
                             <?php
-                                $pics = explode(';', $data["detail"]->picture);
-                                $baseurl = explode('@', $pics[0])[0];
-                                $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
-                                $temps = explode('@', $data["detail"]->picture);
+                            $pics = explode(';', $data["detail"]->picture);
+                            $baseurl = explode('@', $pics[0])[0];
+                            $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                            $temps = explode('@', $data["detail"]->picture);
                             ?>
                             @foreach($temps as $item)
                                 @if(strstr($item,";"))
-                                     <?php $imagepath = explode(';', $item)[0];?>
-                                         <li><img src="{{$baseurl}}{{$imagepath}}" style="width:100%;height: 500px; "/></li>
+                                    <?php $imagepath = explode(';', $item)[0];?>
+                                    <li><img src="{{$baseurl}}{{$imagepath}}" style="width:100%;height: 500px; "/></li>
                                 @else
                                     @continue
                                 @endif
@@ -169,41 +186,46 @@
                                 @endif
                             </h3>
 
-                        </p>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="guessrequest" style="margin-top: 20px;border-width: 2px;border-color: #e9e5e5;border-style: solid;background-color: #ffffff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);padding-left:24px;padding-top: 35px;padding-bottom: 20px;padding-right: 20px;">
-            <div class="title" style="font-family: 'Microsoft YaHei';color: #333;font-size: 24px;font-weight: 400;line-height: 24px;">
-                <span class="sign" style="padding: 0px 3px;background-color: #ff8a00;margin-right: 15px;"></span>推荐服务商
+            <div class="guessrequest"
+                 style="margin-top: 20px;border-width: 2px;border-color: #e9e5e5;border-style: solid;background-color: #ffffff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);padding-left:24px;padding-top: 35px;padding-bottom: 20px;padding-right: 20px;">
+                <div class="title"
+                     style="font-family: 'Microsoft YaHei';color: #333;font-size: 24px;font-weight: 400;line-height: 24px;">
+                    <span class="sign" style="padding: 0px 3px;background-color: #ff8a00;margin-right: 15px;"></span>需求回答列表
+                </div>
             </div>
             <div class="clear"></div>
-	        <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+            <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
             <div class="moreItems">
                 <ul class="am-comments-list am-comments-list-flip">
-                   @foreach($data['review'] as $review)
-	              <li class="am-comment">
-		         <article class="am-comment">
-		         <a href="#link-to-user-home">
-		         <img src="{{$review->photo}}" alt="" class="am-comment-avatar" width="48" height="48"/>
-		         </a>
-                            <div class="am-comment-main">
-                                <header class="am-comment-hd">
-                                    <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                    <div class="am-comment-meta">
-                                        <a href="#link-to-user" class="am-comment-author">{{$review->username}}</a>
-                                        回答于 <time>{{$review->created_at}}</time>
-                                    </div>
-                                </header>
+                    @foreach($data['review'] as $review)
+                        <li class="am-comment">
+                            <article class="am-comment">
+                                <a href="#link-to-user-home">
+                                    <img src="{{$review->photo}}" alt="" class="am-comment-avatar" width="48"
+                                         height="48"/>
+                                </a>
+                                <div class="am-comment-main">
+                                    <header class="am-comment-hd">
+                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
+                                        <div class="am-comment-meta">
+                                            <a href="#link-to-user" class="am-comment-author">{{$review->username}}</a>
+                                            回答于
+                                            <time>{{$review->created_at}}</time>
+                                        </div>
+                                    </header>
 
-                                <div class="am-comment-bd">
-                                   {{$review->comments}}
+                                    <div class="am-comment-bd">
+                                        {{$review->comments}}
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                    </li>
-                   @endforeach
+                            </article>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="answerdemand" style="margin-top: 20px;border-width: 2px;border-color: #e9e5e5;border-style: solid;background-color: #ffffff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);padding-left:24px;padding-top: 35px;padding-bottom: 20px;padding-right: 20px;">
@@ -212,8 +234,8 @@
                     <div class="form-group">
                         <div class="form-line">
                             <textarea rows="2" class="form-control" name="content"
-                                              id="additional-content"
-                                              placeholder="写点什么..."></textarea>
+                                      id="additional-content"
+                                      placeholder="写点什么..."></textarea>
                         </div>
                         <div class="help-info" id="comment-help">还可输入114字</div>
                         <label class="error" for="additional-content"></label>
@@ -233,9 +255,9 @@
                     <a>
                         <img src="
                         @if($data["userinfo"]->photo == "")
-                                {{asset('images/head1.gif')}}
+                        {{asset('images/head1.gif')}}
                         @else
-                                {{$data["userinfo"]->photo}}
+                        {{$data["userinfo"]->photo}}
                         @endif
                                 " alt="" style="width: 84px; height: 84px;border: solid 1px #ddd;">
                     </a>
@@ -305,15 +327,15 @@
 
                     <ul style="line-height: 28px;">
                         <?php $i=0;?>
-                            @foreach($data["otherDemands"] as $od)
-                                <li><a href="/demands/detail?id={{$od->id}}"><span style="color: #ff0000;font-weight: 700;">￥{{$od->price}}</span>&nbsp;{{$od->title}}
-                                    </a>
-                                </li>
-                                <?php $i++;?>
-                            @endforeach
-                            @if($i==0)
-                                <li>暂无其他需求</li>
-                            @endif
+                        @foreach($data["otherDemands"] as $od)
+                            <li><a href="/demands/detail?id={{$od->id}}"><span style="color: #ff0000;font-weight: 700;">￥{{$od->price}}</span>&nbsp;{{$od->title}}
+                                </a>
+                            </li>
+                            <?php $i++;?>
+                        @endforeach
+                        @if($i==0)
+                            <li>暂无其他需求</li>
+                        @endif
 
                     </ul>
 
@@ -322,6 +344,7 @@
         </div>
     </div>
 @endsection
+
 @section("custom-script")
     <script src="{{asset("js/amazeui.dialog.min.js")}}" type="text/javascript"></script>
     <script>
