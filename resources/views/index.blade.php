@@ -182,8 +182,8 @@
         <div class="am-u-lg-3" style="margin-left: -180px;">
             <div class="marqueenTwo" style="background:transparent;border:0px;">
                 <div class="demo" style="margin-left: 10rem;">
-                    <button type="button" class="am-btn am-btn-warning am-round demo_btn">发布需求</button>
-                    <button type="button" class="am-btn am-btn-primary am-round demo_btn">发布服务</button>
+                    <button type="button" class="am-btn am-btn-warning am-round demo_btn" onclick="window.location.href='/demands/demandPublishIndex'">发布需求</button>
+                    <button type="button" class="am-btn am-btn-primary am-round demo_btn" onclick="window.location.href='/service/genlpublish'">发布服务</button>
                 </div>
             </div>
         </div>

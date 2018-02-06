@@ -316,7 +316,9 @@
                 <div class="shopMain" id="shopmain">
                     <div class="am-container ">
                         <div class="shopTitle ">
-                            <h4 class="floor-title"><span class="am-badge am-badge-warning am-round">1</span>&nbsp;&nbsp;一般服务
+                            <h4 class="floor-title">
+                                <span class="am-badge am-badge-warning am-round">1</span>&nbsp;&nbsp;
+                                一般服务
                             </h4>
                         </div>
                     </div>
@@ -349,6 +351,7 @@
                            </div>
                        </div>
                    </div>
+
                 </div>
             @endif
 

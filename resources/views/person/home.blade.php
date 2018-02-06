@@ -10,6 +10,11 @@
         .am-btn{
             display: inline;
         }
+        .meassage-num{
+            padding: 0.1rem;
+            font-size: 0.8rem;
+            display: block;
+        }
     </style>
 @endsection
 @section('content')
@@ -19,8 +24,13 @@
                     <div class="m-user">
                         <!--个人信息 -->
                         <div class="m-userinfo">
-                            <a href="news.html">
-                                <div class="tipsBox"><i class="am-icon-envelope"></i></div>
+                            <a href="/message">
+                                <div class="tipsBox">
+                                    <i class="am-icon-envelope" style="margin-top: 5.2rem;">
+                                        <span class="am-badge am-badge-warning meassage-num">{{$data['messageNum']}}</span>
+                                    </i>
+
+                                </div>
                             </a>
                             <div class="m-baseinfo">
                                 <a class="m-pic" href="/account/baseedit" style="width: 120px;height: 120px;">
@@ -288,7 +298,7 @@
                         </div>
                     </div>
 
-                    <!--优惠券积分-->
+                    <!--推荐服务商-->
                     <div class="twoTab">
                         <div class="twoTabModel Coupon">
                             <h5 class="squareTitle"><a href="#"><span class="splitBorder"></span>推荐服务商<i class="am-icon-angle-right"></i></a></h5>
@@ -306,8 +316,9 @@
                                                         {{$adserver->elogo}}
                                                 @endif
                                                         "  alt="{{$adserver->ename}}"/>
-                                                <h3 class="am-gallery-title" style="font-size: 0.8rem">{{$adserver->ename}}</h3>
-                                                <div class="am-gallery-desc" style="font-size: 1rem; margin-left: 2.5rem;">{{$adserver->city}}</div>
+                                                <h3 class="am-gallery-title" style="font-size: 1rem;text-align: center;">{{$adserver->ename}}</h3>
+                                                <h3 class="am-gallery-title" style="font-size: 0.8rem;text-align: center;">{{$adserver->city}}</h3>
+                                                {{--<div class="am-gallery-desc" style="font-size: 1rem; margin-left: 2.5rem;">{{$adserver->city}}</div>--}}
                                             </a>
                                         </div>
                                     </li>

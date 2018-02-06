@@ -71,7 +71,7 @@ class AccountController extends Controller {
         //网站公告
 //        $data['news'] = News::orderBy('created_at', 'desc')->take(5)->get();
         $data['notes'] = Notices::orderBy('created_at','desc')
-            ->take(12)
+            ->take(9)
             ->get();
         //推荐服务商
         $data['adservers'] = Serviceinfo::where('is_urgency', 1)->orderBy('created_at', 'desc')
@@ -428,31 +428,28 @@ class AccountController extends Controller {
             ->where('status', 0)
             ->first();
         if (count($state) > 0) {//用户合法、存在
-            $data['userinfo'] = Userinfo::where('uid', $data['uid'])->first();//取得用户基本信息（电话邮箱之类）
+//            $data['userinfo'] = Userinfo::where('uid', $data['uid'])->first();//取得用户基本信息（电话邮箱之类）
             switch ($option) {
                 case 0://实名认证
                     //查看用户审核情况(普通用户未验证)
                     //返回用户实名认证情况
                     $situation = Userinfo::where('uid', $data['uid'])->select('realname_statue')->first();
                     $data['is_vertify'] = $situation['realname_statue'];
-                    break;
+                    return view("person.idcard", ['data' => $data]);
                 case 1://实习中介认证
                     $situation = Userinfo::where('uid', $data['uid'])->select('finance_statue')->first();
                     $data['is_vertify'] = $situation['finance_statue'];
-                    break;
+                    return view("person.finance", ['data' => $data]);
                 case 2:
                     $situation = Userinfo::where('uid', $data['uid'])->select('majors_statue')->first();
                     $data['is_vertify'] = $situation['majors_statue'];
-                    break;
+                    return view("person.qaservice", ['data' => $data]);
                 default:
                     return "error";
             }
         } else {
             return view('account.login', ['data' => $data]);
         }
-
-        //return $data;
-        return view("person.idcard", ['data' => $data]);
     }
 
     //上传实名验证证件照片

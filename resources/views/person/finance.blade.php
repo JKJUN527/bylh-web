@@ -1,5 +1,5 @@
 @extends('demo.admin2')
-@section("title", "身份认证")
+@section("title", "实习中介认证")
 
 @section("custom-style")
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
@@ -22,14 +22,15 @@
 
     <div class="main-wrap">
         <div class="am-cf am-padding">
-            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">实名认证</strong> /
-                <small>Real&nbsp;authentication</small>
+            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">实习中介认证</strong> /
+                <small>Finance&nbsp;authentication</small>
             </div>
         </div>
         <hr/>
         <div class="authentication">
+            <p class="tip">请填写您身份证上的真实信息，以用于报关审核</p>
+
             @if($data["is_vertify"] == -1)
-                <p class="tip">请填写您身份证上的真实信息，以用于报关审核</p>
                 <div class="authenticationInfo">
                     <p class="title">填写个人信息</p>
 
@@ -60,10 +61,10 @@
                                 <div class="cardText" id="upload-front-btn"><i class="am-icon-plus"></i>
                                     <p>正面照片</p>
                                 </div>
-                                <p class="titleText">手持身份证正面</p>
+                                <p class="titleText">身份证正面</p>
                             </div>
                             <div class="cardExample">
-                                <img id="front-preview" src="{{asset("images/cardexample1.jpg")}}">
+                                <img id="front-preview" src="{{asset("images/cardbg.jpg")}}">
                                 <p class="titleText">示例</p>
                             </div>
 
@@ -77,7 +78,7 @@
                                 <p class="titleText">身份证背面</p>
                             </div>
                             <div class="cardExample">
-                                <img id="back-preview" src="{{asset("images/cardexample2.jpg")}}">
+                                <img id="back-preview" src="{{asset("images/cardbg.jpg")}}">
                                 <p class="titleText">示例</p>
                             </div>
 
@@ -88,7 +89,7 @@
                     <div id="submit-form" class="am-btn am-btn-danger">提交</div>
                 </div>
             @else
-                <span class="am-badge am-badge-warning am-round">您已提交实名认证，请等待审核</span>
+                <p>您已提交实习中介认证，请等待审核</p>
             @endif
         </div>
     </div>
