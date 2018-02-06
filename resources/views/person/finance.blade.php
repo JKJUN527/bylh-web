@@ -28,28 +28,34 @@
         </div>
         <hr/>
         <div class="authentication">
-            <p class="tip">请填写您身份证上的真实信息，以用于报关审核</p>
+            <p class="tip">请填写你的中介机构的认证凭据，以用于平台审核</p>
 
             @if($data["is_vertify"] == -1)
                 <div class="authenticationInfo">
-                    <p class="title">填写个人信息</p>
+                    <p class="title">填写机构信息</p>
 
                     <div class="am-form-group">
-                        <label for="user-name" class="am-form-label">真实姓名</label>
+                        <label for="user-name" class="am-form-label">实习中介机构名称：</label>
                         <div class="am-form-content">
-                            <input type="text" id="real-name" name="real_name" placeholder="请输入您的真实姓名">
+                            <input type="text" id="real-name" name="real_name" placeholder="请输入您的机构名称">
                         </div>
                     </div>
                     <div class="am-form-group">
-                        <label for="user-IDcard" class="am-form-label">身份证号</label>
+                        <label for="user-tel" class="am-form-label">负责人联系电话：</label>
                         <div class="am-form-content">
-                            <input type="tel" id="id-card" name="id_card" placeholder="请输入您的身份证信息">
+                            <input type="tel" id="tel" name="tel" placeholder="请输入负责人联系电话">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-mail" class="am-form-label">负责人联系邮箱：</label>
+                        <div class="am-form-content">
+                            <input type="email" id="email" name="email" placeholder="请输入负责人联系邮箱">
                         </div>
                     </div>
                 </div>
                 <div class="authenticationPic">
-                    <p class="title">上传身份证照片</p>
-                    <p class="tip">请按要求上传身份证</p>
+                    <p class="title">上传营业执照</p>
+                    <p class="tip">请按要求上传营业执照</p>
 
                     <input type="file" name="id-card-front" class="hide" onchange='showIdCardPreview(this, "front")'>
                     <input type="file" name="id-card-back" class="hide" onchange='showIdCardPreview(this, "back")'>
@@ -59,9 +65,9 @@
                             <div class="cardPic" id="id-card-front_holder">
                                 <img src="{{asset("images/cardbg.jpg")}}">
                                 <div class="cardText" id="upload-front-btn"><i class="am-icon-plus"></i>
-                                    <p>正面照片</p>
+                                    <p>营业执照</p>
                                 </div>
-                                <p class="titleText">身份证正面</p>
+                                <p class="titleText">营业执照</p>
                             </div>
                             <div class="cardExample">
                                 <img id="front-preview" src="{{asset("images/cardbg.jpg")}}">
@@ -73,9 +79,9 @@
                             <div class="cardPic" id="id-card-back_holder">
                                 <img src="{{asset("images/cardbg.jpg")}}">
                                 <div class="cardText" id="upload-back-btn"><i class="am-icon-plus"></i>
-                                    <p>背面照片</p>
+                                    <p>其他相关证件</p>
                                 </div>
-                                <p class="titleText">身份证背面</p>
+                                <p class="titleText">其他证件</p>
                             </div>
                             <div class="cardExample">
                                 <img id="back-preview" src="{{asset("images/cardbg.jpg")}}">
@@ -108,11 +114,10 @@
             swal({
                 title: "要求",
                 type: "info",
-                text: "身份证正面照片，要求身份证上字体清晰可辨",
+                text: "营业执照照片，要求证件照片上字体清晰可辨",
                 confirmButtonText: "知道了",
                 closeOnConfirm: true
             }, function () {
-
                 $("input[name='id-card-front']").click();
             });
         });
@@ -122,7 +127,7 @@
             swal({
                 title: "要求",
                 type: "info",
-                text: "身份证反面照片，要求身份证上字体清晰可辨",
+                text: "其他相关证件照片，可证明实习中介身份的照片",
                 confirmButtonText: "知道了",
                 closeOnConfirm: true
             }, function () {
@@ -132,17 +137,18 @@
 
         $("#submit-form").click(function () {
             var realName = $("input[name='real_name']").val();
-            var idCardNum = $("input[name='id_card']").val();
+            var tel = $("input[name='tel']").val();
+            var email = $("input[name='email']").val();
+
             var idCardFront = $("input[name='id-card-front']");
             var idCardBack = $("input[name='id-card-back']");
 
             realName = $.trim(realName);
-            idCardNum = $.trim(idCardNum);
 
             if (realName === "") {
                 swal({
                     title: "",
-                    text: "请输入您的真实姓名",
+                    text: "请输入您的实习中介机构名称",
                     type: "error",
                     confirmButtonText: "确定",
                     showCancelButton: false,
@@ -150,55 +156,47 @@
                 });
                 return;
             }
-
-            if (idCardNum === "") {
-                swal({
-                    title: "",
-                    text: "请输入您的身份证信息",
-                    type: "error",
-                    confirmButtonText: "确定",
-                    showCancelButton: false,
-                    closeOnConfirm: false
-                });
+            if(tel ===''){
+                swal("","联系电话不能为空", "error");
+                return;
+            }else if(!/^1[34578]\d{9}$/.test(tel)){
+                swal("","手机号格式不正确", "error");
+                return;
+            }
+            if(email === ''){
+                swal("","邮箱不能为空", "error");
+                return;
+            }else if(!/^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/.test(email)){
+                swal("", "邮箱格式不正确", "error");
                 return;
             }
 
             var formData = new FormData();
-            formData.append("real_name", realName);
-            formData.append("id_card", idCardNum);
-
+            formData.append("mediator_name", realName);
+            formData.append("tel", tel);
+            formData.append("email", email);
 
             if (!isUploadIdCardFront) {
                 swal({
                     title: "错误",
                     type: "error",
-                    text: "请上传身份证正面照片",
+                    text: "请上传营业执照证件照片",
                     cancelButtonText: "关闭",
                     showCancelButton: true,
                     showConfirmButton: false
                 });
                 return;
             } else {
-                formData.append("idcard1_photo", idCardFront.prop("files")[0]);
+                formData.append("license_photo", idCardFront.prop("files")[0]);
             }
 
-            if (!isUploadIdCardBack) {
-                swal({
-                    title: "错误",
-                    type: "error",
-                    text: "请上传身份证反面照片",
-                    cancelButtonText: "关闭",
-                    showCancelButton: true,
-                    showConfirmButton: false
-                });
-                return;
-            } else {
-                formData.append("idcard2_photo", idCardBack.prop("files")[0]);
+            if (isUploadIdCardBack) {
+                formData.append("other_photo", idCardBack.prop("files")[0]);
             }
 
 
             $.ajax({
-                url: "account/authentication/{0}",
+                url: "account/authentication/1",
                 type: 'post',
                 dataType: 'text',
                 cache: false,
@@ -238,7 +236,7 @@
             if (frontOrBack === "front") {
                 idCardFrontPath = $("input[name='id-card-front']").val();
             } else {
-                idCardFrontPath = $("input[name='id-card-front']").val();
+                idCardFrontPath = $("input[name='id-card-back']").val();
             }
 
             if (!/.(jpg|jpeg|png|JPG|JPEG|PNG)$/.test(idCardFrontPath)) {
