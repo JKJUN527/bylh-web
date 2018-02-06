@@ -1,19 +1,25 @@
-@extends('demo.cardDemo',['title'=>2])
+@extends('demo.admin',['title'=>2])
 @section('title', '需求大厅')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/navstyle.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+    {{--<link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>--}}
     <style>
         .card{
-            padding:10px;
+            width: 30%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px;
+            height: 150px;
         }
         .card-deck{
             padding:10px;
         }
         .card-block{
             padding: 5px;
+            width: 120px;
+            overflow: hidden;
         }
         .listIndex dd {
             height: 35px !important;
@@ -291,7 +297,7 @@
             </div>
         </div>
         <div class="am-g am-g-fixed">
-            <div class="am-u-lg-8 am-u-md-8" style="padding: 10px;float: left;">
+            <div class="am-u-lg-9 am-u-md-9" style="padding: 10px;float: left;">
                 <div class="card-deck-wrapper">
                     <div class="card-deck">
                         <?php
@@ -302,9 +308,9 @@
                             @if(++$count > 8)
                                 @break
                             @endif
-                            <div class="card">
+                            <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
                                 <a href="/demands/detail?id={{$demand->id}}">
-                                    <img class="card-img-top" src="
+                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1" src="
                                     @if($demand->picture != null)
                                     <?php
                                     $pics = explode(';', $demand->picture);
@@ -315,8 +321,8 @@
                                     {{$baseurl}}{{$imagepath}}
                                     @else
                                     {{asset("images/f3.jpg")}}
-                                    @endif" alt="img" style="width: 175px;height: 175px;"/>
-                                <div class="card-block">
+                                    @endif" alt="img" style="width: 80px;height:80px;"/>
+                                    <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
                                     <h4 class="card-title">{{$demand->title}}</h4>
                                     <p class="card-text"><small class="text-muted">{{str_replace(array("</br>","</br","</b"),"",mb_substr($demand->describe, 0, 20, 'utf-8'))}}</small></p>
                                 </div>
@@ -325,7 +331,7 @@
                      </div>
                 </div>
             </div>
-            <div class="am-u-lg-4 am-u-md-4" style="padding: 10px;">
+            <div class="am-u-lg-3 am-u-md-3" style="padding: 10px;">
                 <ul>
                     <?php $count = 0; ?>
                     @foreach($data["result"]["demands"] as $demand)

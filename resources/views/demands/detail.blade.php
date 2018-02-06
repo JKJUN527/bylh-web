@@ -39,19 +39,6 @@
             height: 30px;
             line-height: 30px;
         }
-
-        .title-first {
-            float: none;
-            width: 100%;
-            padding: 0px 5px;
-            border: none;
-            height: 30px;
-            line-height: 30px;
-        }
-
-        .am-dropdown {
-            width: 20%;
-        }
         .form-group {
             margin-bottom: 16px;
             width: 100%;
@@ -64,6 +51,20 @@
         .help-info {
             float: right;
             color: red;
+        }
+
+        .company_left {
+            margin-left: -20px;
+        }
+
+        .company_right {
+            margin-left: 30px;
+            font-family: SimSun;
+            font-weight: 400;
+            line-height: 28px;
+            color: #666666;
+            font-size: 12px;
+            width: 60%;
         }
     </style>
 @endsection
@@ -262,8 +263,7 @@
                                 " alt="" style="width: 84px; height: 84px;border: solid 1px #ddd;">
                     </a>
                 </div>
-                <div class="company_rigth am-u-lg-4 am-u-md-4 am-u-sm-4"
-                     style="font-family: SimSun;font-weight: 400;line-height: 28px;color: #666666;font-size: 12px;width: 50%;">
+                <div class="company_right am-u-lg-4 am-u-md-4 am-u-sm-4">
                     <a class="company_name"
                        style="font-family: SimSun; color: #333333; font-weight: 700;font-size: 16px;height: 30px;line-height: 30px;display: block;overflow: hidden;">
                         {{$data["userinfo"]->real_name}}</a>
@@ -276,7 +276,9 @@
                 <div class="company_button" style="padding-top:10px;">
                     <button class="am-btn am-btn-danger js-alert" type="button" onclick="date()">立即预约
                     </button>
-                    <button class="am-btn am-btn-success" type="button" onclick="leaveMsg()" style="float: right;">给我留言</button>
+                    <button class="am-btn am-btn-success" type="button" onclick="leaveMsg()" style="float: right;">
+                        和我联系
+                    </button>
                 </div>
 
             </div>
@@ -297,7 +299,7 @@
             <!--留言弹窗-->
             <div class="am-modal am-modal-alert" tabindex="-1" id="my-content">
                 <div class="am-modal-dialog" style="margin-top: 40%;">
-                    <div class="am-modal-hd">给我留言</div>
+                    <div class="am-modal-hd">和我联系</div>
                     <a href="#" >
                         <div class="serviceMsg">
                             <img src="{{asset('images/head1.gif')}}" style="width:150px;height:150px;">

@@ -6,108 +6,160 @@
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>
     {{--<link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>--}}
     <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
-<style type="text/css">
-    .floor-title{
-        color: #003366;
-    }
-    .needtype1,.needtype2,.needtype3{
-        padding-top: 20px;
-    }
-    .more2more{
-        margin-top:-8px;
-    }
-    .comcategory{
-        padding-top: 10px;
+    <style type="text/css">
+        .card {
+            width: 30%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px;
+            height: 150px;
+        }
 
-    }
-    .navTwo{
-        color: #fff;
-    }
-    .comcategory li{
-        font-size:14px;
-        padding: 3px;
-        line-height: 1.5;
-    }
-    .comcategory li a:hover{
-        color: #b84554;
-    }
-    .comcategory li i{
-        color: gray;
-        margin-left: 10px;
-    }
+        .card img {
+            width: 80px;
+            height: 80px;
+        }
 
-    /*.category-info{*/
-    /*border-left:4px solid #d2364c;*/
-    /*}*/
-    .title-first a{
-        text-align: center;
-        padding: 60px;
-        font-size: 18px;
-        color: #000;
-        font-weight: bold;
-    }
-    .title-first a:hover{
-        color: #b84554;
-        font-weight: bold;
-    }
-    .comh1{
-        font-size: 18px;
-        padding: 3px;
-        font-weight: bold;
-    }
-    .demo li{
-        float: none;
-        width: 100%;
-        padding: 0px 5px;
-        border: none;
-        height: 30px;
-        line-height: 30px;
-    }
-    .title-first{
-        float: none;
-        width: 100%;
-        padding: 0px 5px;
-        border: none;
-        height: 30px;
-        line-height: 30px;
-    }
-    .am-nav-tabs > li.am-active > a, .am-nav-tabs > li.am-active > a:hover, .am-nav-tabs > li.am-active > a:focus, .am-nav-tabs > li > a:hover{
-        background:#ee6363;
-        color: #fff;
-    }
-    .showNews{
-        width: 300px;
-        right: 0;
-        border: 2px solid #e64d2e;
-    }
-    .marqueenOne{
-        margin-top: -10px;
-        margin-left: -5px;
-    }
-    .card{
-        padding:10px;
-    }
-    .card-deck{
-        padding:10px;
-    }
-    .card-block{
-        padding: 5px;
-    }
-    @media screen and (max-width:1000px){
-        .marqueenTwo{display:none;}
-        .leftpanel{display:none;}
-        .shopMain{width:100%;}
-        .index-category-left{width:100%;text-align:center;}
-        .index-category-right{width:100%;text-align:center;}
-        .request_rank{display:none;}
-        .pictureshow{width:500px;}
-    }
-    .demo_btn {
-        width: 10rem;
-        height: 6rem;
-        margin-top: 5rem;
-        font-size: large;
-    }
+        .card-deck {
+            padding: 10px;
+        }
+
+        .card-block {
+            padding: 5px;
+            width: 120px;
+            overflow: hidden;
+        }
+
+        .floor-title {
+            color: #003366;
+        }
+
+        .needtype1, .needtype2, .needtype3 {
+            padding-top: 20px;
+        }
+
+        .more2more {
+            margin-top: -8px;
+        }
+
+        .comcategory {
+            padding-top: 10px;
+
+        }
+
+        .navTwo {
+            color: #fff;
+        }
+
+        .comcategory li {
+            font-size: 14px;
+            padding: 3px;
+            line-height: 1.5;
+        }
+
+        .comcategory li a:hover {
+            color: #b84554;
+        }
+
+        .comcategory li i {
+            color: gray;
+            margin-left: 10px;
+        }
+
+        /*.category-info{*/
+        /*border-left:4px solid #d2364c;*/
+        /*}*/
+        .title-first a {
+            text-align: center;
+            padding: 60px;
+            font-size: 18px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .title-first a:hover {
+            color: #b84554;
+            font-weight: bold;
+        }
+
+        .comh1 {
+            font-size: 18px;
+            padding: 3px;
+            font-weight: bold;
+        }
+
+        .demo li {
+            float: none;
+            width: 100%;
+            padding: 0px 5px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .title-first {
+            float: none;
+            width: 100%;
+            padding: 0px 5px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .am-nav-tabs > li.am-active > a, .am-nav-tabs > li.am-active > a:hover, .am-nav-tabs > li.am-active > a:focus, .am-nav-tabs > li > a:hover {
+            background: #ee6363;
+            color: #fff;
+        }
+
+        .showNews {
+            width: 300px;
+            right: 0;
+            border: 2px solid #e64d2e;
+        }
+
+        .marqueenOne {
+            margin-top: -10px;
+            margin-left: -5px;
+        }
+
+        @media screen and (max-width: 1000px) {
+            .marqueenTwo {
+                display: none;
+            }
+
+            .leftpanel {
+                display: none;
+            }
+
+            .shopMain {
+                width: 100%;
+            }
+
+            .index-category-left {
+                width: 100%;
+                text-align: center;
+            }
+
+            .index-category-right {
+                width: 100%;
+                text-align: center;
+            }
+
+            .request_rank {
+                display: none;
+            }
+
+            .pictureshow {
+                width: 500px;
+            }
+        }
+
+        .demo_btn {
+            width: 10rem;
+            height: 6rem;
+            margin-top: 5rem;
+            font-size: large;
+        }
 </style>
 @endsection
 @section('content')
@@ -336,21 +388,25 @@
                         </div>
                     </div>
                     <div class="am-g am-g-fixed">
-                        <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
-                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
-  							am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }">
+                        <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="padding: 10px;float: left;">
+                            <div class="card-deck-wrapper">
+                                <div class="card-deck">
                                 @foreach($data['hotest1'] as $hotest1)
-                                    <li>
-                                        <div class="am-gallery-item">
-                                            <a to="/service/detail?uid={{$hotest1->uid}}">
-                                                <img src="{{$hotest1->picture}}" alt="{{$hotest1->title}}"/>
-                                                <h3 class="am-gallery-title">{{$hotest1->title}}</h3>
-                                                <div class="am-gallery-desc">{{$hotest1->created_at}}</div>
+                                        <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
+                                            <a href="/service/detail?id={{$hotest1->id}}&type=1">
+                                                <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                     src="{{$hotest1->picture}}"/>
+                                                <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
+                                                    <h4 class="card-title">{{$hotest1->title}}</h4>
+                                                    <p class="card-text">
+                                                        <small class="text-muted">{{$hotest1->created_at}}</small>
+                                                    </p>
+                                                </div>
                                             </a>
                                         </div>
-                                    </li>
                                 @endforeach
-                            </ul>
+                                </div>
+                            </div>
                             {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-3--}}
                             {{--am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
                             {{--@foreach($data['hotest1'] as $hotest1)--}}
@@ -380,21 +436,26 @@
                         </div>
                     </div>
                     <div class="am-g am-g-fixed">
-                        <div class="am-u-lg-6 am-u-md-6" style="padding:10px;">
-                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  							am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }">
+                        <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="padding:10px;">
+                            <div class="card-deck-wrapper">
+                                <div class="card-deck">
                                 @foreach($data['hotest2'] as $hotest2)
-                                    <li>
-                                        <div class="am-gallery-item">
-                                            <a to="/service/detail?uid={{$hotest2->uid}}">
-                                                <img src="{{$hotest2->picture}}" alt="{{$hotest2->title}}"/>
-                                                <h3 class="am-gallery-title">{{$hotest2->title}}</h3>
-                                                <div class="am-gallery-desc">{{$hotest2->created_at}}</div>
+                                        <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
+                                            <a href="/service/detail?id={{$hotest2->id}}&type=1">
+                                                <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                     src="{{$hotest2->picture}}"/>
+                                                <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
+                                                    <h4 class="card-title">{{$hotest2->title}}</h4>
+                                                    <p class="card-text">
+                                                        <small class="text-muted">{{$hotest2->created_at}}</small>
+                                                    </p>
+                                                </div>
                                             </a>
                                         </div>
-                                    </li>
                                 @endforeach
-                            </ul>
+                                </div>
+                            </div>
+                        </div>
                             {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-2--}}
                             {{--am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
                             {{--@for($i=0;$i<2;$i++)--}}
@@ -409,16 +470,6 @@
                             {{--</li>--}}
                             {{--@endfor--}}
                             {{--</ul>--}}
-                        </div>
-                        <div class="am-u-lg-6 am-u-md-6" style="padding: 10px;">
-                            <ul>
-                                @foreach($data['hotest2'] as $hotest2)
-                                    <li><a to="/service/detail?uid={{$hotest2->uid}}"><font color="#b84554"
-                                                                                            style="font-size: 18px;">￥{{$hotest2->price}}</font>&nbsp;&nbsp;&nbsp;&nbsp;{{$hotest2->title}}
-                                        </a><span style="color: gray;float: right;">查看详情</span></li>
-                                @endforeach
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -458,7 +509,7 @@
 
         <!--专业问答-->
         <div class="am-g am-g-fixed">
-            <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
+            <div class="am-u-lg-12 am-u-md-12" style="float: left;">
                 <div class="shopMain" id="shopmain">
                     <div class="am-container">
                         <div class="shopTitle ">
@@ -469,14 +520,15 @@
                         </div>
                     </div>
                     <div class="am-g am-g-fixed">
-                        <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
+                        <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="padding: 10px;float: left;">
                             <div class="card-deck-wrapper">
                                 <div class="card-deck">
                                 @foreach($data['hotest3'] as $hotest3)
-                                        <div class="card">
+                                        <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3">
                                             <a to="/service/detail?uid={{$hotest3->uid}}">
-                                                <img class="card-img-top" src="{{$hotest3->picture}}" alt="{{$hotest3->title}}"/>
-                                                <div class="card-block">
+                                                <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                     src="{{$hotest3->picture}}" alt="{{$hotest3->title}}"/>
+                                                <div class="card-block am-u-lg-2 am-u-md-2 am-u-md-2">
                                                     <h4 class="card-title">{{$hotest3->title}}</h4>
                                                     <p class="card-text"><small class="text-muted">{{$hotest3->created_at}}</small></p>
                                                 </div>
