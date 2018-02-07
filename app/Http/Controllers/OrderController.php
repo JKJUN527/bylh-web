@@ -87,25 +87,71 @@ class OrderController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
-        if ($data['uid'] == 0) {//用户未登陆
-            return view('account.login', ['data' => $data]);
-        }
         $data["status"] = 400;
-        if($request->has('order_id')){
-            $order = Orders::find($request->input('order_id'));
+
+        if ($data['uid'] == 0) {//用户未登陆
+            $data['msg'] = "登录后才能购买";
+            return $data;
+        }
+        //查询服务发布者id
+        if($request->has('type') && $request->has('sid')) {
+            switch ($request->input('type')) {
+                case 0:
+                    $s_uid = Genlservices::find($request->input('sid'));
+                    break;
+                case 1:
+                    $s_uid = Finlservices::find($request->input('sid'));
+                    break;
+                case 2:
+                    $s_uid = Qaservices::find($request->input('sid'));
+                    break;
+                default:
+                    $data['status'] = 400;
+                    $data['msg'] = "调用参数type错误";
+                    return $data;
+            }
+            if($s_uid['uid'] == $data['uid']){
+                $data['msg'] = "不能购买自己的服务";
+                return $data;
+            }
+            //新建订单
+            $order = new Orders();
+            $order->s_uid = $s_uid['uid'];
+            $order->d_uid = $data['uid'];
+            $order->create_uid = $data['uid'];
+            $order->type = $request->input('type');
+            $order->service_id = $request->input('sid');
+            $order->price = $s_uid['price'];
             $order->state =1;
-            if($order->save()){
+            //订单未支付有效期暂定7天
+            $order->vaildity = date('Y-m-d H:i:s', strtotime('+7 day'));
+
+            if ($order->save()) {
                 $data['status']=200;
                 $data['msg'] = "确认付款成功";
                 $content = "有人购买了您的服务，请尽快收款并处理订单";
                 //发送站内信到服务用户，通知确认收款
                 MessageController::sendMessage($request,$order->s_uid,$content);
-            }
-        }else{
-            $data['msg'] = "传入参数错误";
-        }
-        return $data;
 
+                $data['msg'] = "购买成功";
+                return $data;
+            }
+
+//        if($request->has('order_id')){
+//            $order = Orders::find($request->input('order_id'));
+//            $order->state =1;
+//            if($order->save()){
+//                $data['status']=200;
+//                $data['msg'] = "确认付款成功";
+//                $content = "有人购买了您的服务，请尽快收款并处理订单";
+//                //发送站内信到服务用户，通知确认收款
+//                MessageController::sendMessage($request,$order->s_uid,$content);
+//            }
+//        }else{
+//            $data['msg'] = "传入参数错误";
+//        }
+//        return $data;
+        }
     }
     //服务用户点击确认收款后，修改订单状态
     //传入收款金额

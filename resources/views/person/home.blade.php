@@ -197,11 +197,17 @@
                                                 <div class="imgBox">
                                                     <a href="/order/detail?order_id={{$order->id}}">
                                                         <img src="
-                                                            @if($data['order']['orderinfo'][$order->id]->picture =="" ||$data['order']['orderinfo'][$order->id]->picture ==null)
-                                                                {{asset('images/f1.jpg')}}
-                                                            @else
-                                                                {{$data['order']['orderinfo'][$order->id]->picture}}
-                                                            @endif
+                                                         @if($data['order']['orderinfo'][$order->id]->picture != null)
+                                                            <?php
+                                                            $pics = explode(';', $data['order']['orderinfo'][$order->id]->picture);
+                                                            $baseurl = explode('@', $pics[0])[0];
+                                                            $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                            $imagepath = explode('@', $pics[0])[1];
+                                                            ?>
+                                                            {{$baseurl}}{{$imagepath}}
+                                                         @else
+                                                            {{asset('images/f1.jpg')}}
+                                                        @endif
                                                         ">
                                                     </a>
                                                 </div>

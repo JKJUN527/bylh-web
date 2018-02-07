@@ -415,7 +415,6 @@
                                                     <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
                                                          src="{{asset("images/f1.jpg")}}"/>
                                                 @endif
-                                            </a>
                                             <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
                                                 <h4 class="card-title">{{mb_substr($s->title,0,10,'utf-8')}}</h4>
                                                 <hr>
@@ -438,6 +437,7 @@
                                                     <small class="text-muted">{{$s->name}}</small>
                                                 </p>
                                             </div>
+                                            </a>
                                         </div>
                                     @endforeach
                                 </div>
