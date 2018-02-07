@@ -302,7 +302,7 @@
                     <a href="#" >
                         <div class="serviceMsg">
                             <img src="{{$data["userinfo"]->photo or asset('images/head1.gif')}}" style="width:150px;height:150px;">
-                            <p>雇主姓名：<span>{{$data["userinfo"]->real_name}}</span></p>
+                            <p id="userinfo" data-content="{{$data["userinfo"]->uid}}">雇主姓名：<span>{{$data["userinfo"]->real_name}}</span></p>
                         </div>
                     </a>
                     <div class="am-modal-bd">
@@ -419,9 +419,35 @@
             $('#my-content').modal({
                 onConfirm: function(){
                     var leave_mesg = $('#leave_mesg');
-
-                    alert(leave_mesg.val());
-
+                    var to_id = $('#userinfo').attr('data-content');
+                    if(leave_mesg.val().length >=250){
+                        swal("","字数不能超过250字","error");
+                        return;
+                    }
+                    var formData = new FormData();
+                    formData.append("content", leave_mesg.val());
+                    formData.append("to_id", to_id);
+                    $.ajax({
+                        url: "/message/sendMessage",
+                        type: "post",
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            //console.log(data);
+                            var result = JSON.parse(data);
+                            if (result.status == 200) {
+                                swal("","留言成功","success");
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            }else{
+                                swal('',result.msg,'error');
+                            }
+                        }
+                    });
                 }
             });
         }

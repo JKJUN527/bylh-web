@@ -444,15 +444,15 @@
                                         <div class="am-modal-hd">和我联系</div>
                                         <a href="#">
                                             <div class="serviceMsg">
-                                                <img src="{{asset('images/head1.gif')}}"
+                                                <img src="{{$data['serviceinfo']['elogo']}}"
                                                      style="width:150px;height:150px;">
-                                                <p>雇主信息：<span>liyuxiao88</span></p>
+                                                <p id="userinfo" data-content="{{$data['serviceinfo']['uid']}}">服务商名称：<span>{{$data['serviceinfo']['ename']}}</span></p>
                                             </div>
                                         </a>
                                         <div class="am-modal-bd">
                                             <label for="doc-ta-1"></label><br>
                                             {{--<p><input type="textarea" class="am-form-field am-radius" placeholder="椭圆表单域" style="height: 300px;"/></p>--}}
-                                            <textarea placeholder="请写上你想说的话" class="am-form-field am-radius"
+                                            <textarea id="leave_mesg" placeholder="请写上你想说的话" class="am-form-field am-radius"
                                                       style="height:150px;"></textarea>
                                         </div>
                                         <div class="am-modal-footer">
@@ -530,7 +530,36 @@
         function leaveMsg() {
             $('#my-content').modal({
                 onConfirm: function () {
-                    alert("成功留言！");
+                    var leave_mesg = $('#leave_mesg');
+                    var to_id = $('#userinfo').attr('data-content');
+                    if(leave_mesg.val().length >=250){
+                        swal("","字数不能超过250字","error");
+                        return;
+                    }
+                    var formData = new FormData();
+                    formData.append("content", leave_mesg.val());
+                    formData.append("to_id", to_id);
+                    $.ajax({
+                        url: "/message/sendMessage",
+                        type: "post",
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            //console.log(data);
+                            var result = JSON.parse(data);
+                            if (result.status == 200) {
+                                swal("","留言成功","success");
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            }else{
+                                swal('',result.msg,'error');
+                            }
+                        }
+                    });
                 }
             });
         }

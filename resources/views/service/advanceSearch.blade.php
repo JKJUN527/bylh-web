@@ -354,7 +354,7 @@
                                                          src="{{asset("images/f1.jpg")}}"/>
                                                 @endif
                                                 <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                                <h4 class="card-title">{{mb_substr($s->title,0,12,'utf-8')}}</h4>
+                                                <h4 class="card-title">{{mb_substr($s->title,0,10,'utf-8')}}</h4>
                                                 <hr>
                                                 <p class="card-text"><small class="text-muted" style="color: #885621">
                                                         @if($s->price ==-1)
@@ -417,7 +417,7 @@
                                                 @endif
                                             </a>
                                             <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                                <h4 class="card-title">{{mb_substr($s->title,0,12,'utf-8')}}</h4>
+                                                <h4 class="card-title">{{mb_substr($s->title,0,10,'utf-8')}}</h4>
                                                 <hr>
                                                 <p class="card-text"><small class="text-muted" style="color: #885621">
                                                         @if($s->price ==-1)
@@ -477,7 +477,7 @@
                                                          src="{{asset("images/f1.jpg")}}"/>
                                                 @endif
                                                     <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                                        <h4 class="card-title">{{mb_substr($s->title,0,12,'utf-8')}}</h4>
+                                                        <h4 class="card-title">{{mb_substr($s->title,0,10,'utf-8')}}</h4>
                                                         <hr>
                                                         <p class="card-text"><small class="text-muted" style="color: #885621">
                                                                 @if($s->price ==-1)

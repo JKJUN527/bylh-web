@@ -115,7 +115,9 @@ class MessageController extends Controller {
         $from_id = AuthController::getUid();
 
         if ($from_id == 0) {
-            return view('account.login');
+            $data['status'] = 400;
+            $data['msg'] = "请先登录后才能留言";
+            return $data;
         }
         if($request->has('to_id') && $request->has('content')){
             $to_id = $request->input('to_id');
