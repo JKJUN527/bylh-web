@@ -7,16 +7,17 @@
     {{--<link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>--}}
     <style>
         .card{
-            width: 30%;
-            padding: 10px;
+            width: 32%;
+            padding: 5px;
             border: 1px solid #ccc;
             margin: 5px;
             height: 150px;
         }
 
         .card img {
-            width: 80px;
-            height: 80px;
+            width: 110px;
+            height: 110px;
+            top:11%
         }
         .card-deck{
             padding:10px;
@@ -25,6 +26,8 @@
             padding: 5px;
             width: 120px;
             overflow: hidden;
+            text-align: left;
+            top:20%;
         }
 
         .card-title {
@@ -60,6 +63,10 @@
             padding: 4px;
             margin-right: 4px;
         }
+        .card-title{
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
     </style>
     @endsection
 @section('content')
@@ -86,32 +93,14 @@
         </a>
     </div>
 </div>
-<!--主要内容-->
-<!--1
-<div class="am-container am-g am-g-fixed" style="width: 100%;">
-    <div class="leftpanel col-md-3 am-u-md-3">
-            <div class="am-sticky-placeholder" style="margin:0px;height: 403px;">
-            <ul>
-                <li>专业 提供专业的方案</li>
-                <li>便捷 体验便捷的操作</li>
-                <li>高效 享受高效的服务</li>
-                <li>全面 涵盖全面的类别</li>
-            </ul>
-        </div>
-
-        </div>
-            <div class="advertisement col-md-9 am-u-md-9" style="padding: 10px;">
-                <img src="../images/pg1.jpg" style="width: 100%;">
-            </div>
-    </div>
-    -->
-    <div class="get"
-         style="background: url({{asset('images/00.jpg')}}) top center no-repeat; color: #fff;text-align: center;height: 278px;">
-        <div class="am-g" style="max-width: 1500px;margin: 0 auto;width: 100%;">
-            <div class="am-u-lg-12">
-            </div>
-        </div>
-    </div>
+<!--广告-->
+    {{--<div class="get"--}}
+         {{--style="background: url({{asset('images/00.jpg')}}) top center no-repeat; color: #fff;text-align: center;height: 278px;">--}}
+        {{--<div class="am-g" style="max-width: 1500px;margin: 0 auto;width: 100%;">--}}
+            {{--<div class="am-u-lg-12">--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <!--分类高级搜索-->
     <div class="selectNumberScreen">
 
@@ -365,8 +354,26 @@
                                                          src="{{asset("images/f1.jpg")}}"/>
                                                 @endif
                                                 <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                                <h4 class="card-title">{{$s->title}}</h4>
-                                                <p class="card-text"><small class="text-muted">{{$s->price}}|{{$s->city}}</small></p>
+                                                <h4 class="card-title">{{mb_substr($s->title,0,12,'utf-8')}}</h4>
+                                                <hr>
+                                                <p class="card-text"><small class="text-muted" style="color: #885621">
+                                                        @if($s->price ==-1)
+                                                            价格面议
+                                                        @else
+                                                            ￥{{$s->price}}
+                                                            @if($s->price_type ==0)
+                                                                /8h
+                                                            @elseif($s->price_type ==1)
+                                                                /day
+                                                            @elseif($s->price_type ==2)
+                                                                /次
+                                                            @elseif($s->price_type ==3)
+                                                                /套
+                                                            @endif
+                                                        @endif
+                                                    </small><br>
+                                                    <small class="text-muted">{{$s->name}}</small>
+                                                </p>
                                             </div>
                                             </a>
                                         </div>
@@ -410,12 +417,25 @@
                                                 @endif
                                             </a>
                                             <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                                <a href="/service/detail?id={{$s->id}}&type=1" style="color: #fff">
-                                                    <h4 class="card-title">
-                                                        {{$s->title}}</h4>
-                                                </a>
-                                                <p class="card-text">
-                                                    <small class="text-muted">{{$s->price}}|{{$s->city}}</small>
+                                                <h4 class="card-title">{{mb_substr($s->title,0,12,'utf-8')}}</h4>
+                                                <hr>
+                                                <p class="card-text"><small class="text-muted" style="color: #885621">
+                                                        @if($s->price ==-1)
+                                                            价格面议
+                                                        @else
+                                                            ￥{{$s->price}}
+                                                            @if($s->price_type ==0)
+                                                                /8h
+                                                            @elseif($s->price_type ==1)
+                                                                /day
+                                                            @elseif($s->price_type ==2)
+                                                                /次
+                                                            @elseif($s->price_type ==3)
+                                                                /套
+                                                            @endif
+                                                        @endif
+                                                    </small><br>
+                                                    <small class="text-muted">{{$s->name}}</small>
                                                 </p>
                                             </div>
                                         </div>
@@ -456,9 +476,27 @@
                                                     <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
                                                          src="{{asset("images/f1.jpg")}}"/>
                                                 @endif
-                                                <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                                        <h4 class="card-title">{{$s->title}}</h4>
-                                                        <p class="card-text"><small class="text-muted">{{$s->price}}|{{$s->city}}</small></p>
+                                                    <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
+                                                        <h4 class="card-title">{{mb_substr($s->title,0,12,'utf-8')}}</h4>
+                                                        <hr>
+                                                        <p class="card-text"><small class="text-muted" style="color: #885621">
+                                                                @if($s->price ==-1)
+                                                                    价格面议
+                                                                @else
+                                                                    ￥{{$s->price}}
+                                                                    @if($s->price_type ==0)
+                                                                        /8h
+                                                                    @elseif($s->price_type ==1)
+                                                                        /day
+                                                                    @elseif($s->price_type ==2)
+                                                                        /次
+                                                                    @elseif($s->price_type ==3)
+                                                                        /套
+                                                                    @endif
+                                                                @endif
+                                                            </small><br>
+                                                            <small class="text-muted">{{$s->name}}</small>
+                                                        </p>
                                                     </div>
                                                 </a>
                                           </div>

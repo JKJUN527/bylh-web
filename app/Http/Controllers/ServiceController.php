@@ -580,8 +580,8 @@ class ServiceController extends Controller {
         }
 
         $data['services'] = DB::table($table)
-//            ->select('pid', 'title', 'ename','byname' ,'salary','jobs_region.name','position_status')
-//            ->leftjoin('jobs_enprinfo', 'jobs_enprinfo.eid', '=', 'jobs_position.eid')
+            ->select($table.'.id', 'title', 'price','price_type','picture' ,'bylh_region.name')
+            ->leftjoin('bylh_region', 'bylh_region.id', '=', $table.'.city')
 //            ->leftjoin('jobs_region', 'jobs_region.id', '=', 'jobs_position.region')
             ->where('state', '=', 0)
 //        $data['position'] = Position::where('vaildity', '>=', date('Y-m-d H-i-s'))

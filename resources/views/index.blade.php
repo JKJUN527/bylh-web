@@ -8,8 +8,8 @@
     <script src="{{asset('js/amazeui.dialog.min.js')}}" type="text/javascript"></script>
     <style type="text/css">
         .card {
-            width: 30%;
-            padding: 10px;
+            width: 32%;
+            padding: 5px;
             border: 1px solid #ccc;
             margin: 5px;
             height: 150px;
@@ -26,8 +26,9 @@
             margin-left: 10px;
         }
         .card img {
-            width: 80px;
-            height: 80px;
+            width: 110px;
+            height: 110px;
+            top:11%
         }
 
         .card-deck {
@@ -38,6 +39,8 @@
             padding: 5px;
             width: 120px;
             overflow: hidden;
+            text-align: left;
+            top:20%;
         }
 
         .floor-title {
@@ -170,6 +173,10 @@
             margin-top: 5rem;
             font-size: large;
         }
+        .card-title{
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
 </style>
 @endsection
 @section('content')
@@ -234,8 +241,10 @@
         <div class="am-u-lg-7 am-u-sm-4 am-u-md-4" style="margin-left: 180px;">
             <div class="pictureshow">
                 <ul class="">
-                    <li class=""><a href="introduction.html"><img src="{{asset('images/3.jpg')}}"
-                                                                  style="width: 850px;margin-left:-200px;height: 377px;"/></a>
+                    <li class="">
+                        <a href="#">
+                            <img src="{{asset('images/3.jpg')}}" style="width: 850px;margin-left:-200px;height: 377px;"/>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -309,7 +318,7 @@
                         <div class="shopTitle" style="margin-left: -20px;">
                             <h4 class="floor-title">需求大厅</h4>
                             <div class="today-brands " style="right:0px;">
-                                <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
+                                <button class="am-btn am-btn-danger am-round more2more" onclick="window.location.href='/demands/advanceSearch'">查看更多</button>
                             </div>
 
                         </div>
@@ -318,56 +327,67 @@
                     <div class="am-g am-g-fixed floodSix ">
                         <div class="am-u-sm-12 am-u-md-12 am-u-lg-4 needtype1">
                             <div class="index-category-left">
-                                <a href="#">
+                                <a href="/demands/advanceSearch?type=0">
                                     <h1 class="comh1">
                                         一般需求
                                         <em style="color: #b84554;">
-                                            <b>MORE</b><i class="am-icon-angle-double-right"></i></a>
-                                </em>
-                                </h1>
+                                            <b>MORE</b>
+                                            <i class="am-icon-angle-double-right"></i>
+                                        </em>
+                                    </h1>
+                                </a>
                                 <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
                                 <ul class="comcategory">
                                     @foreach($data['demands'] as $demands)
+                                        @if($demands->type == 0)
                                         <li>
                                             <a to="/demands/detail?uid={{$demands->uid}}"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a>
                                         </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
                         <div class="am-u-sm-12 am-u-md-12 am-u-lg-4 needtype2">
                             <div class="index-category-right">
-                                <a href="#">
+                                <a href="/demands/advanceSearch?type=1">
                                     <h1 class="comh1">
                                         实习中介
                                         <em style="color: #b84554;">
-                                            <b>MORE</b><i class="am-icon-angle-double-right"></i></a>
-                                </em>
-                                </h1>
+                                            <b>MORE</b><i class="am-icon-angle-double-right"></i>
+                                        </em>
+                                    </h1>
+                                </a>
                                 <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
                                 <ul class="comcategory">
                                     @foreach($data['demands'] as $demands)
-                                        <li><a to="/demands/detail?uid={{$demands->uid}}">{{$demands->title}}</span>
-                                                <i>{{$demands->created_at}}</i></a></li>
+                                        @if($demands->type == 1)
+                                            <li>
+                                                <a to="/demands/detail?uid={{$demands->uid}}"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a>
+                                            </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
                         <div class="am-u-sm-12 am-u-md-12 am-u-lg-4 needtype3">
                             <div class="index-category-right">
-                                <a href="#">
+                                <a href="/demands/advanceSearch?type=2">
                                     <h1 class="comh1">
                                         专业问答
                                         <em style="color:#b84554;">
-                                            <b>MORE</b><i class="am-icon-angle-double-right"></i></a>
-                                </em>
-                                </h1>
+                                            <b>MORE</b><i class="am-icon-angle-double-right"></i>
+                                        </em>
+                                    </h1>
+                                </a>
                                 <!--<img src="../images/demo4.jpg" style="width: 350px;padding: 5px;" />-->
                                 <ul class="comcategory">
                                     @foreach($data['demands'] as $demands)
-                                        <li>
-                                            <a to="/demands/detail?uid={{$demands->uid}}"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a>
-                                        </li>
+                                        @if($demands->type == 2)
+                                            <li>
+                                                <a to="/demands/detail?uid={{$demands->uid}}"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a>
+                                            </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>
@@ -392,7 +412,7 @@
                         <div class="shopTitle " style="width:110%;">
                             <h4 class="floor-title">一般服务</h4>
                             <div class="today-brands " style="right:0px ;top:13px;">
-                                <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
+                                <button class="am-btn am-btn-danger am-round more2more" onclick="window.location.href='/service/advanceSearch?type=0'">查看更多</button>
                             </div>
 
                         </div>
@@ -403,13 +423,39 @@
                                 <div class="card-deck">
                                 @foreach($data['hotest1'] as $hotest1)
                                         <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
-                                            <a href="/service/detail?id={{$hotest1->id}}&type=1">
-                                                <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
-                                                     src="{{$hotest1->picture}}"/>
+                                            <a href="/service/detail?id={{$hotest1->id}}&type=0">
+                                                @if($hotest1->picture != null)
+                                                    <?php
+                                                    $pics = explode(';', $hotest1->picture);
+                                                    $baseurl = explode('@', $pics[0])[0];
+                                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                    $imagepath = explode('@', $pics[0])[1];
+                                                    ?>
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{$baseurl}}{{$imagepath}}"/>
+                                                @else
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{asset("images/f1.jpg")}}"/>
+                                                @endif
                                                 <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                                    <h4 class="card-title">{{$hotest1->title}}</h4>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">{{$hotest1->created_at}}</small>
+                                                    <h4 class="card-title">{{mb_substr($hotest1->title,0,10,'utf-8')}}</h4>
+                                                    <hr>
+                                                    <p class="card-text"><small class="text-muted" style="color: #885621">
+                                                            @if($hotest1->price ==-1)
+                                                                价格面议
+                                                            @else
+                                                                ￥{{$hotest1->price}}
+                                                                @if($hotest1->price_type ==0)
+                                                                    /8h
+                                                                @elseif($hotest1->price_type ==1)
+                                                                    /day
+                                                                @elseif($hotest1->price_type ==2)
+                                                                    /次
+                                                                @elseif($hotest1->price_type ==3)
+                                                                    /套
+                                                                @endif
+                                                            @endif
+                                                        </small>
                                                     </p>
                                                 </div>
                                             </a>
@@ -417,20 +463,6 @@
                                 @endforeach
                                 </div>
                             </div>
-                            {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-3--}}
-                            {{--am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
-                            {{--@foreach($data['hotest1'] as $hotest1)--}}
-                            {{--<li>--}}
-                            {{--<div class="am-gallery-item">--}}
-                            {{-- <a to="/resume/add?rid={{$resume->rid}}">--}}
-                            {{--<img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>--}}
-                            {{--<h3 class="am-gallery-title">{{$hotest1->title}}</h3>--}}
-                            {{--<div class="am-gallery-desc">{{$hotest1->created_at}}</div>--}}
-                            {{--</a>--}}
-                            {{--</div>--}}
-                            {{--</li>--}}
-                            {{--@endforeach--}}
-                            {{--</ul>--}}
                         </div>
                     </div>
                 </div>
@@ -440,7 +472,7 @@
                         <div class="shopTitle" style="width:110%;">
                             <h4 class="floor-title">实习中介</h4>
                             <div class="today-brands " style="right:0px ;top:13px;">
-                                <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
+                                <button class="am-btn am-btn-danger am-round more2more" onclick="window.location.href='/service/advanceSearch?type=1'">查看更多</button>
                             </div>
 
                         </div>
@@ -452,12 +484,38 @@
                                 @foreach($data['hotest2'] as $hotest2)
                                         <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
                                             <a href="/service/detail?id={{$hotest2->id}}&type=1">
-                                                <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
-                                                     src="{{$hotest2->picture}}"/>
+                                                @if($hotest2->picture != null)
+                                                    <?php
+                                                    $pics = explode(';', $hotest2->picture);
+                                                    $baseurl = explode('@', $pics[0])[0];
+                                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                    $imagepath = explode('@', $pics[0])[1];
+                                                    ?>
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{$baseurl}}{{$imagepath}}"/>
+                                                @else
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{asset("images/f1.jpg")}}"/>
+                                                @endif
                                                 <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                                    <h4 class="card-title">{{$hotest2->title}}</h4>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">{{$hotest2->created_at}}</small>
+                                                    <h4 class="card-title">{{mb_substr($hotest2->title,0,10,'utf-8')}}</h4>
+                                                    <hr>
+                                                    <p class="card-text"><small class="text-muted" style="color: #885621">
+                                                            @if($hotest2->price ==-1)
+                                                                价格面议
+                                                            @else
+                                                                ￥{{$hotest2->price}}
+                                                                @if($hotest2->price_type ==0)
+                                                                    /8h
+                                                                @elseif($hotest2->price_type ==1)
+                                                                    /day
+                                                                @elseif($hotest2->price_type ==2)
+                                                                    /次
+                                                                @elseif($hotest2->price_type ==3)
+                                                                    /套
+                                                                @endif
+                                                            @endif
+                                                        </small>
                                                     </p>
                                                 </div>
                                             </a>
@@ -466,20 +524,6 @@
                                 </div>
                             </div>
                         </div>
-                            {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-2--}}
-                            {{--am-avg-md-2 am-avg-lg-2 am-gallery-default" data-am-gallery="{ pureview: true }" >--}}
-                            {{--@for($i=0;$i<2;$i++)--}}
-                            {{--<li>--}}
-                            {{--<div class="am-gallery-item">--}}
-                            {{--<a href="{{$hotest1->picture}}" class="">--}}
-                            {{--<img src="{{$hotest1->picture}}"  alt="{{$hotest1->title}}"/>--}}
-                            {{--<h3 class="am-gallery-title">{{$hotest1->title}}</h3>--}}
-                            {{--<div class="am-gallery-desc">{{$hotest1->created_at}}</div>--}}
-                            {{--</a>--}}
-                            {{--</div>--}}
-                            {{--</li>--}}
-                            {{--@endfor--}}
-                            {{--</ul>--}}
                     </div>
                 </div>
             </div>
@@ -525,7 +569,7 @@
                         <div class="shopTitle ">
                             <h4 class="floor-title">专业问答</h4>
                             <div class="today-brands " style="right:0px ;top:13px">
-                                <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
+                                <button class="am-btn am-btn-danger am-round more2more" onclick="window.location.href='/service/advanceSearch?type=2'">查看更多</button>
                             </div>
                         </div>
                     </div>
@@ -534,13 +578,41 @@
                             <div class="card-deck-wrapper">
                                 <div class="card-deck">
                                 @foreach($data['hotest3'] as $hotest3)
-                                        <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3">
-                                            <a to="/service/detail?uid={{$hotest3->uid}}">
-                                                <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
-                                                     src="{{$hotest3->picture}}" alt="{{$hotest3->title}}"/>
-                                                <div class="card-block am-u-lg-2 am-u-md-2 am-u-md-2">
-                                                    <h4 class="card-title">{{$hotest3->title}}</h4>
-                                                    <p class="card-text"><small class="text-muted">{{$hotest3->created_at}}</small></p>
+                                        <div class="card am-u-lg-2 am-u-md-2 am-u-sm-2">
+                                            <a href="/service/detail?id={{$hotest3->id}}&type=2">
+                                                @if($hotest3->picture != null)
+                                                    <?php
+                                                    $pics = explode(';', $hotest3->picture);
+                                                    $baseurl = explode('@', $pics[0])[0];
+                                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                    $imagepath = explode('@', $pics[0])[1];
+                                                    ?>
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{$baseurl}}{{$imagepath}}"/>
+                                                @else
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{asset("images/f1.jpg")}}"/>
+                                                @endif
+                                                <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
+                                                    <h4 class="card-title">{{mb_substr($hotest3->title,0,10,'utf-8')}}</h4>
+                                                    <hr>
+                                                    <p class="card-text"><small class="text-muted" style="color: #885621">
+                                                            @if($hotest3->price ==-1)
+                                                                价格面议
+                                                            @else
+                                                                ￥{{$hotest3->price}}
+                                                                @if($hotest3->price_type ==0)
+                                                                    /8h
+                                                                @elseif($hotest3->price_type ==1)
+                                                                    /day
+                                                                @elseif($hotest3->price_type ==2)
+                                                                    /次
+                                                                @elseif($hotest3->price_type ==3)
+                                                                    /套
+                                                                @endif
+                                                            @endif
+                                                        </small>
+                                                    </p>
                                                 </div>
                                             </a>
                                         </div>

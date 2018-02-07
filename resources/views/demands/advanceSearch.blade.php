@@ -7,7 +7,7 @@
     {{--<link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>--}}
     <style>
         .card{
-            width: 30%;
+            width: 24%;
             padding: 10px;
             border: 1px solid #ccc;
             margin: 5px;
@@ -20,6 +20,7 @@
             padding: 5px;
             width: 120px;
             overflow: hidden;
+            text-align: left;
         }
 
         .card-title {
@@ -50,6 +51,9 @@
         .sort-item {
             padding: 4px;
             margin-right: 4px;
+        }
+        .card-title b{
+            font-size: 1.4rem;
         }
     </style>
 @endsection
@@ -84,6 +88,7 @@
             <input type="hidden" name="class3">
             <input type="hidden" name="price">
             <input type="hidden" name="region">
+            <input type="hidden" name="type">
             <input type="hidden" name="keyword">
             <input type="hidden" name="orderBy">
             <input type="hidden" name="desc">
@@ -286,29 +291,40 @@
                 </dd>
             </dl>
 
+            <dl class="listIndex" attr="terminal_brand_s">
+                <dt>分类1：</dt>
+                <dd class="span-holder type-holder">
+                    <a href="javascript:void(0)" @if(!isset($data["condition"]["type"])) class="selected" @endif
+                    data-content="-1">全部</a>
+                    <a href="javascript:void(0)"
+                       @if(isset($data['condition']['type']) && $data['condition']['type'] == 0)
+                       class="selected"
+                       @endif
+                       data-content="0">大学生服务需求
+                    </a>
+                    <a href="javascript:void(0)"
+                       @if(isset($data['condition']['type']) && $data['condition']['type'] == 1)
+                       class="selected"
+                       @endif
+                       data-content="1">实习中介服务需求
+                    </a>
+                    <a href="javascript:void(0)"
+                       @if(isset($data['condition']['type']) && $data['condition']['type'] == 2)
+                       class="selected"
+                       @endif
+                       data-content="2">专业问答服务需求
+                    </a>
+                </dd>
+            </dl>
+
 
         </div>
     </div>
 
     <!--需求展示-->
     <div class="shopMain" id="shopmain" style="background:white;">
-        <div class="am-container ">
-            <div class="shopTitle ">
-                {{--<h4 class="floor-title"><span class="am-badge am-badge-warning am-round">1</span>&nbsp;&nbsp;设计需求</h4>--}}
-                {{--<div class="today-brands " style="right:0px ;top:13px;">--}}
-                {{--<a href="# ">商标/VI设计</a>|--}}
-                {{--<a href="# ">包装设计</a>|--}}
-                {{--<a href="# ">封面设计</a>|--}}
-                {{--<a href="# ">海报设计</a>|--}}
-                {{--<a href="# ">宣传品设计</a>|--}}
-                {{--<a href="# ">服装设计</a>--}}
-                {{--<span class="am-badge am-badge-warning am-round">More</span>--}}
-                {{--</div>--}}
-
-            </div>
-        </div>
         <div class="am-g am-g-fixed">
-            <div class="am-u-lg-9 am-u-md-9" style="padding: 10px;float: left;">
+            <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
                 <div class="card-deck-wrapper">
                     <div class="card-deck">
                         <?php
@@ -316,9 +332,6 @@
                         $count = 0;
                         ?>
                         @foreach($data["result"]["demands"] as $demand)
-                            @if(++$count > 8)
-                                @break
-                            @endif
                             <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
                                 <a href="/demands/detail?id={{$demand->id}}">
                                     <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1" src="
@@ -332,32 +345,31 @@
                                     {{$baseurl}}{{$imagepath}}
                                     @else
                                     {{asset("images/f3.jpg")}}
-                                    @endif" alt="img" style="width: 80px;height:80px;"/>
-                                    <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                    <h4 class="card-title">{{$demand->title}}</h4>
-                                    <p class="card-text"><small class="text-muted">{{str_replace(array("</br>","</br","</b"),"",mb_substr($demand->describe, 0, 20, 'utf-8'))}}</small></p>
-                                </div>
+                                    @endif" alt="img" style="width: 120px;height:120px;"/>
+                                    <div class="card-block am-u-lg-3 am-u-md-3 am-u-sm-3">
+                                        <h4 class="card-title"><b>{{$demand->title}}</b></h4>
+                                        <hr>
+                                        <p class="card-text"><small class="text-muted">{{str_replace(array("</br>","</br","</b"),"",mb_substr($demand->describe, 0, 20, 'utf-8'))}}</small></p>
+                                    </div>
+                                </a>
                             </div>
-                            @endforeach
+                        @endforeach
                      </div>
                 </div>
             </div>
-            <div class="am-u-lg-3 am-u-md-3" style="padding: 10px;">
-                <ul>
-                    <?php $count = 0; ?>
-                    @foreach($data["result"]["demands"] as $demand)
-                        @if(++$count > 8)
-                            <li><a href="/demands/detail?id={{$demand->id}}"><span
-                                            class="price-span">￥{{$demand->price}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{$demand->title}}
-                                </a><span
-                                        style="color: gray;float: right;">查看详情</span></li>
-                        @endif
-                    @endforeach
-                </ul>
-            </div>
+            {{--<div class="am-u-lg-3 am-u-md-3" style="padding: 10px;">--}}
+                {{--<ul>--}}
+                    {{--@foreach($data["result"]["demands"] as $demand)--}}
+                        {{--@if(++$count > 8)--}}
+                            {{--<li><a href="/demands/detail?id={{$demand->id}}"><span--}}
+                                            {{--class="price-span">￥{{$demand->price}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{$demand->title}}--}}
+                                {{--</a><span--}}
+                                        {{--style="color: gray;float: right;">查看详情</span></li>--}}
+                        {{--@endif--}}
+                    {{--@endforeach--}}
+                {{--</ul>--}}
+            {{--</div>--}}
         </div>
-        <!--分页-->
-
         <nav>
             {!! $data['result']['demands']->appends($data["condition"])->render() !!}
         </nav>
@@ -456,6 +468,7 @@
             var class3 = $(".class3-holder").find("a.selected").attr("data-content");
             var price = $(".price-holder").find("a.selected").attr("data-content");
             var region = $(".region-holder").find("a.selected").attr("data-content");
+            var type = $(".type-holder").find("a.selected").attr("data-content");
             var search = $("input[name='name']").val();
 
             if (class1 !== "-1")
@@ -468,6 +481,8 @@
                 $("input[name='price']").val(price);
             if (region !== "-1")
                 $("input[name='region']").val(region);
+            if (type !== "-1")
+                $("input[name='type']").val(type);
             if (search !== "")
                 $("input[name='keyword']").val(search);
 

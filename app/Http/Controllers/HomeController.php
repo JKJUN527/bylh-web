@@ -37,22 +37,22 @@ class HomeController extends Controller {
         //返回最热门一般服务4个
         $data['hotest1']= Genlservices::where('state',0)
             ->where('type',0)
-            ->where('is_urgency',1)
-            ->orderBy('view_count','desc')
-            ->take(8)
+//            ->where('is_urgency',1)
+            ->orderBy('updated_at','desc')
+            ->take(6)
             ->get();
         //返回最热门实习中介服务4个
         $data['hotest2']= Finlservices::where('state',0)
             ->where('type',1)
-            ->where('is_urgency',1)
-            ->orderBy('view_count','desc')
-            ->take(8)
+//            ->where('is_urgency',1)
+            ->orderBy('updated_at','desc')
+            ->take(6)
             ->get();
         //返回最热门专业问答服务4个
         $data['hotest3']= Qaservices::where('state',0)
             ->where('type',2)
-            ->where('is_urgency',1)
-            ->orderBy('view_count','desc')
+//            ->where('is_urgency',1)
+            ->orderBy('updated_at','desc')
             ->take(8)
             ->get();
         //返回热门需求
@@ -74,7 +74,7 @@ class HomeController extends Controller {
         //返回网站公告
 //        $data['news'] = HomeController::searchNews();
         $data['notes'] = Notices::orderBy('created_at','desc')
-            ->take(12)
+            ->take(8)
             ->get();
 
 //        return $data;

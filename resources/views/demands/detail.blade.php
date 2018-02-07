@@ -197,38 +197,37 @@
                 <div class="title"
                      style="font-family: 'Microsoft YaHei';color: #333;font-size: 24px;font-weight: 400;line-height: 24px;">
                     <span class="sign" style="padding: 0px 3px;background-color: #ff8a00;margin-right: 15px;"></span>需求回答列表
+                    <div class="moreItems">
+                        <ul class="am-comments-list am-comments-list-flip">
+                            @foreach($data['review'] as $review)
+                                <li class="am-comment">
+                                    <article class="am-comment">
+                                        <a href="#link-to-user-home">
+                                            <img src="{{$review->photo}}" alt="" class="am-comment-avatar" width="48"
+                                                 height="48"/>
+                                        </a>
+                                        <div class="am-comment-main">
+                                            <header class="am-comment-hd">
+                                                <!--<h3 class="am-comment-title">评论标题</h3>-->
+                                                <div class="am-comment-meta">
+                                                    <a href="#link-to-user" class="am-comment-author">{{$review->username}}</a>
+                                                    回答于
+                                                    <time>{{$review->created_at}}</time>
+                                                </div>
+                                            </header>
+
+                                            <div class="am-comment-bd">
+                                                {{$review->comments}}
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="clear"></div>
-            <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
-            <div class="moreItems">
-                <ul class="am-comments-list am-comments-list-flip">
-                    @foreach($data['review'] as $review)
-                        <li class="am-comment">
-                            <article class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="{{$review->photo}}" alt="" class="am-comment-avatar" width="48"
-                                         height="48"/>
-                                </a>
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author">{{$review->username}}</a>
-                                            回答于
-                                            <time>{{$review->created_at}}</time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        {{$review->comments}}
-                                    </div>
-                                </div>
-                            </article>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
             <div class="answerdemand" style="margin-top: 20px;border-width: 2px;border-color: #e9e5e5;border-style: solid;background-color: #ffffff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);padding-left:24px;padding-top: 35px;padding-bottom: 20px;padding-right: 20px;">
                 <form id="comment-form" method="post" >
                     <input type="hidden" name="did" value="{{$data["detail"]->id}}"/>
@@ -302,14 +301,14 @@
                     <div class="am-modal-hd">和我联系</div>
                     <a href="#" >
                         <div class="serviceMsg">
-                            <img src="{{asset('images/head1.gif')}}" style="width:150px;height:150px;">
-                            <p>雇主信息：<span>liyuxiao88</span></p>
+                            <img src="{{$data["userinfo"]->photo or asset('images/head1.gif')}}" style="width:150px;height:150px;">
+                            <p>雇主姓名：<span>{{$data["userinfo"]->real_name}}</span></p>
                         </div>
                     </a>
                     <div class="am-modal-bd">
                         <label for="doc-ta-1"></label><br>
                         {{--<p><input type="textarea" class="am-form-field am-radius" placeholder="椭圆表单域" style="height: 300px;"/></p>--}}
-                        <textarea placeholder="请写上你想说的话" class="am-form-field am-radius" style="height:150px;" ></textarea>
+                        <textarea id="leave_mesg" placeholder="请写上你想说的话" class="am-form-field am-radius" style="height:150px;" ></textarea>
                     </div>
                     <div class="am-modal-footer">
                         <span class="am-modal-btn" data-am-modal-confirm>提交</span>
@@ -419,7 +418,10 @@
         function leaveMsg(){
             $('#my-content').modal({
                 onConfirm: function(){
-                    alert("成功留言！");
+                    var leave_mesg = $('#leave_mesg');
+
+                    alert(leave_mesg.val());
+
                 }
             });
         }

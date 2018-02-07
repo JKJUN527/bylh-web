@@ -253,6 +253,7 @@ class DemandsController extends Controller {
         if ($request->has('class3')) $data['class3'] = $request->input('class3');
         if ($request->has('price')) $data['price'] = $request->input('price');
         if ($request->has('city')) $data['city'] = $request->input('city ');
+        if ($request->has('type')) $data['type'] = $request->input('type ');
         if ($request->has('keyword')) $data['keyword'] = $request->input('keyword');
 
         $table = "bylh_demands";
@@ -308,6 +309,9 @@ class DemandsController extends Controller {
                 if ($request->has('region')) {
                     $query->where('city', '=', $request->input('region'));
                 }
+                if ($request->has('type')) {
+                    $query->where('type', '=', $request->input('type'));
+                }
                 //对关键字进行搜索
                 if ($request->has('keyword')) {
                     $keyword = $request->input('keyword');
@@ -318,7 +322,7 @@ class DemandsController extends Controller {
                 }
             })
             ->orderBy($orderBy, $desc)
-            ->paginate(30);
+            ->paginate(16);
         return $data;
     }
 
