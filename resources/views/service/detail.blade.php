@@ -190,7 +190,7 @@
         </div>
     </div>
 </div>
-<div class="am-g am-fixed" style="margin-top: 20px;">
+    <div class="am-g am-fixed" style="margin-left:10px;margin-top: 20px;">
     <div class="am-container">
         <div class="am-u-1g-12 am-u-md-12 am-u-sm-12">
             <div class="am-u-lg-9 am-u-md-9 am-u-sm-9" style="border: 2px solid #eee;padding: 20px;background: #fff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
@@ -359,7 +359,8 @@
 
                 </div>
                 <div class="am-u-lg-3 am-u-md-3 am-u-sm-3">
-                    <div class="container1" style="border: 2px solid #eee;padding: 20px;background: #fff;">
+                    <div class="container1"
+                         style="margin-right: -5px;border: 2px solid #eee;padding: 20px;background: #fff;">
                         <div class=" fr main-c">
                             <a class="fws-hd" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank">
                                 <img src="{{$data['serviceinfo']['elogo']}}" width="180" height="180"></a>
