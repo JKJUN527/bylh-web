@@ -58,13 +58,14 @@
         }
 
         .company_right {
-            margin-left: 30px;
+            margin-top: -90px;
+            margin-left: 80px;
             font-family: SimSun;
             font-weight: 400;
             line-height: 28px;
             color: #666666;
             font-size: 12px;
-            width: 60%;
+            width: 80%;
         }
     </style>
 @endsection
