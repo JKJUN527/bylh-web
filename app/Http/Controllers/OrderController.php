@@ -286,18 +286,46 @@ class OrderController extends Controller {
         $data['status'] = 400;
 
         if ($uid == 0) {//用户未登陆
-            return view('account.login', ['data' => $data]);
+            $data['msg'] = "请先登录！";
+            return $data;
         }
         if($type==0 ||$type==1){ //只能服务用户点击预约服务
             $data['msg'] = "非法用户";
             return $data;
         }
         //每一个服务用户预约一个需求，创建临时预约表。
-        //传入预约留言及报价、预约需求id、返回预约状态
-        if($request->has('msg') && $request->has('did') && $request->has('price')){
+        //传入预约报价、预约需求id、返回预约状态
+        if($request->has('did') && $request->has('price')){
             //查询当前需求的状态，
             $demand = Demands::find($request->input('did'));
             if($demand){
+                //查看当前用户是否有对应的服务商资格
+                $userinfo = User::find($uid);
+                switch ($demand->type){
+                    case 0:
+                        if($userinfo->realname_verify ==0){
+                            $data['msg'] = "当前用户非一般服务用户，请先提交认证！";
+                            return $data;
+                        }
+                        break;
+                    case 1:
+                        if($userinfo->finance_verify ==0){
+                            $data['msg'] = "当前用户非实习中介服务用户，请先提交认证！";
+                            return $data;
+                        }
+                        break;
+                    case 2:
+                        if($userinfo->majors_verify ==0){
+                            $data['msg'] = "当前用户非专业问答服务用户，请先提交认证！";
+                            return $data;
+                        }
+                        break;
+                }
+                //不能预约自己的需求
+                if($demand->uid == $uid){
+                    $data['msg'] = "不能预约自己的需求";
+                    return $data;
+                }
                 if($demand->state == 1)//需求下架
                 {
                     $data['msg'] = "该需求已下架，请查看后处理";

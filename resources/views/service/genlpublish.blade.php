@@ -611,6 +611,10 @@
                 if(price.val() ==="" || price.val() ===null){
                     swal("","请设置服务价格","error");
                     return;
+                }
+                if(!/^[0-9]*(\.[0-9]{1,2})?$/.test(price.val())){
+                    swal("","请输入正确的价格！","error");
+                    return;
                 }else{
                     formdata.append('price',price.val());
                     formdata.append('price_type',price_type.val());

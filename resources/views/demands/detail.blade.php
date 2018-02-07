@@ -73,7 +73,7 @@
     <div class="am-g am-g-fixed" style="padding-top: 85px;">
         <div class="am-u-lg-8 am-u-md-8 am-u-sm-8">
             <div class="container1" style="border: 2px solid #eee;padding: 20px;background: #fff;">
-                <div class="title"
+                <div id="demand_title" class="title" data-content="{{$data["detail"]->id}}"
                      style="height: 37px;font-family: 'Microsoft YaHei';color: #666666;font-size: 18px;font-weight: 700;line-height: 37px;width:  850px;overflow: hidden;">{{$data["detail"]->title}}
                 </div>
                 <hr/>
@@ -411,7 +411,36 @@
             $('#my-prompt').modal({
                 relatedTarget: this,
                 onConfirm: function(e) {
-                    alert('您的报价是：' + e.data ||'')
+                    var demand = $("#demand_title");
+
+                    if(!/^[0-9]*(\.[0-9]{1,2})?$/.test(e.data)){
+                        swal("","请输入正确的价格！","error");
+                        return;
+                    }
+                    var formData = new FormData();
+                    formData.append("did", demand.attr('data-content'));
+                    formData.append("price", e.data);
+
+                    $.ajax({
+                        url: "/order/reservationDemand",
+                        type: "post",
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            var result = JSON.parse(data);
+                            if (result.status == 200) {
+                                swal("","预约成功！","success");
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            }else{
+                                swal('',result.msg,'error');
+                            }
+                        }
+                    });
                 }
             });
         }
