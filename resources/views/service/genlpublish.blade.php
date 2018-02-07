@@ -158,7 +158,7 @@
                     <div class="fb_container sub_title_tip">
                     <div class="am-g am-g-fixed">
                         @foreach($data['serviceclass1'] as $class1)
-                        <div class="am-u-lg-1 am-u-md-1 am-u-sm-1 am-dropdown" data-am-dropdown>
+                            <div class="am-u-lg-1 am-u-md-1 am-u-sm-1 am-dropdown am-u-end" data-am-dropdown>
                             <button class="am-btn am-btn-danger am-dropdown-toggle" data-am-dropdown-toggle>{{$class1->name}}</button>
                             <ul class="am-dropdown-content" data-content="{{$class1->id}}" data-name="{{$class1->name}}">
                                 @foreach($data['serviceclass2'] as $class2)
