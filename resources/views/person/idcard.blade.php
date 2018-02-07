@@ -161,6 +161,17 @@
                 });
                 return;
             }
+            if(!/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(idCardNum)){
+                swal({
+                    title: "",
+                    text: "请输入正确的身份证号码",
+                    type: "error",
+                    confirmButtonText: "确定",
+                    showCancelButton: false,
+                    closeOnConfirm: false
+                });
+                return;
+            }
 
             var formData = new FormData();
             formData.append("real_name", realName);
@@ -197,7 +208,7 @@
 
 
             $.ajax({
-                url: "account/authentication/{0}",
+                url: "/account/authentication/0",
                 type: 'post',
                 dataType: 'text',
                 cache: false,

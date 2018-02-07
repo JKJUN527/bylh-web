@@ -162,6 +162,7 @@
                     if(userinfo['sex']==1){
                         sex = "女"
                     }
+                    var photo = userinfo['majors_photo'].split("+@+");
 
                     var html = "<tr class='hide'><td>item</td><td id='user_id'>" + userinfo['uid'] + "</td></tr>";
                     html += "<tr>" +
@@ -190,9 +191,13 @@
                         "<td>" + userinfo['city'] + "</td>" +
                         "</tr>";
                     html += "<tr>" +
-                        "<td colspan='2'>专业认证照片</td></tr>" +
-                        "<tr><td colspan='2'><img src=" + userinfo['majors_photo'] + " width='100%'/></td>" +
+                        "<td colspan='2'>专业认证证书1</td></tr>" +
+                        "<tr><td colspan='2'><img src=" + photo[0] + " width='100%'/></td>" +
                         "</tr>";
+                    html += "<tr>" +
+                            "<td colspan='2'>专业认证证书2</td></tr>" +
+                            "<tr><td colspan='2'><img src=" + photo[1] + " width='100%'/></td>" +
+                            "</tr>";
 
 
                     $("#cu-apply-detail-table").find("tbody").html(html);

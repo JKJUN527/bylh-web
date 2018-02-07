@@ -196,7 +196,7 @@
 
 
             $.ajax({
-                url: "account/authentication/1",
+                url: "/account/authentication/1",
                 type: 'post',
                 dataType: 'text',
                 cache: false,

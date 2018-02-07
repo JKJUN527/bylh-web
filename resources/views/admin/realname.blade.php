@@ -162,6 +162,7 @@
                     if(userinfo['sex']==1){
                         sex = "女"
                     }
+                    var photo = userinfo['idcard_photo'].split("+@+");
 
                     var html = "<tr class='hide'><td>item</td><td id='user_id'>" + userinfo['uid'] + "</td></tr>";
                     html += "<tr>" +
@@ -191,8 +192,12 @@
                         "</tr>";
                     html += "<tr>" +
                         "<td colspan='2'>手持身份证照片</td></tr>" +
-                        "<tr><td colspan='2'><img src=" + userinfo['idcard_photo'] + " width='100%'/></td>" +
+                        "<tr><td colspan='2'><img src=" + photo[0] + " width='100%'/></td>" +
                         "</tr>";
+                    html += "<tr>" +
+                            "<td colspan='2'>身份证背面照片</td></tr>" +
+                            "<tr><td colspan='2'><img src=" + photo[1] + " width='100%'/></td>" +
+                            "</tr>";
 
 
                     $("#cu-apply-detail-table").find("tbody").html(html);

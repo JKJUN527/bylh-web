@@ -84,7 +84,7 @@ class VerificationController extends Controller {
 
         if ($request->has('uid') && $request->has('status') && $request->has('type')) {
 
-            $isPass = Userinfo::find($request->input('uid'));
+            $isPass = Userinfo::where('uid',$request->input('uid'))->first();
             $user = User::find($request->input('uid'));
             if (empty($isPass)) {
                 $data['msg'] = "无此用户";

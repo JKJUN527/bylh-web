@@ -26,6 +26,7 @@ class FixPasswordController extends Controller
         }
 //        $data['userinfo'] = User::where('uid',$data['uid'])
         $data['userinfo'] = DB::table('bylh_users')
+            ->where('bylh_users.uid',$data['uid'])
             ->leftjoin('bylh_userinfo','bylh_userinfo.uid','bylh_users.uid')
             ->select('bylh_users.tel','bylh_users.mail','tel_verify','email_verify','realname_statue','finance_statue','majors_statue')
             ->first();
