@@ -542,10 +542,11 @@
                                 <li style="text-align: center;">
                                     <div class="box1"></div>
                                     <div class="outer-con" style="padding: 10px;position: inherit;">
-                                        <a to="/service/detail?uid={{$serviceuser->uid}}"><img
+                                        <a href="/service/getAllservices?uid={{$serviceuser->uid}}">
+                                        <img
                                                     src="{{$serviceuser->elogo}}" style="width: 50%;"/>
                                             <div class="title ">
-                                                {{$serviceuser->uid}}
+                                                {{$serviceuser->ename}}
                                             </div>
                                             <div class="right-panel">
                                                 <button type="button" class="am-btn am-btn-danger">查看详情</button>

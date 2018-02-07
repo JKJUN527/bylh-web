@@ -473,32 +473,6 @@
                             {{--<div class="clear"></div>--}}
                         </div>
                     </div>
-                    {{--<div class="container2" style="border: 2px solid #eee;padding: 20px;background: #fff;margin-left: 20px;margin-top: 20px;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">--}}
-                        {{--<div class="other_fw_r" style="padding-top: 5px;padding-bottom: 40px;">--}}
-                            {{--<div class="twof-t" style="line-height: 30px;">--}}
-                                {{--<span class="csfw"--}}
-                                      {{--style="padding-left: 0;float: left;font-size: 16px;padding-bottom: 10px;">本店其他热门服务</span>--}}
-                                {{--<div class="clear"></div>--}}
-                            {{--</div>--}}
-
-                            {{--<div class="anli-b">--}}
-                                {{--<div style="float:left;"><a href="fid-55380.html" target="_blank"><img--}}
-                                                {{--src="http://p1.shopimg.680.com/2017-7/6/32017070614584559264_10442660.jpg"--}}
-                                                {{--width="80" style="width: 80px;height: 80px;"></a></div>--}}
-                                {{--<div class="xxys"--}}
-                                     {{--style="float: left;line-height: 25px;padding-left: 10px;font-weight: bold;padding-top: 0;width: 132px;">--}}
-                                    {{--<a href="fid-55380.html" target="_blank"--}}
-                                       {{--style="display: block;font-weight: 100;height: auto;padding-bottom: 5px;overflow: visible;color: #666;font-size: 14px;line-height: 20px;height: 25px;overflow: hidden;line-height: 25px;overflow: hidden;width: 130px;text-overflow: ellipsis;padding-left:5px;white-space: nowrap;">田园风格装修/复式楼/别墅/商品房</a><font--}}
-                                            {{--style="font-weight: 100;color: #DF231B;font-size: 14px;">￥30</font>--}}
-                                    {{--<div class="fw_r_i_cj">成交4次</div>--}}
-                                {{--</div>--}}
-
-                                {{--<div class="clear"></div>--}}
-                            {{--</div>--}}
-
-                        {{--</div>--}}
-                    {{--</div>--}}
-
                 </div>
             </div>
         </div>

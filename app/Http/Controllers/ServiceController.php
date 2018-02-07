@@ -850,28 +850,43 @@ class ServiceController extends Controller {
     //传入用户id
     public function getAllservices(Request $request) {
         $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+
         if ($request->has('uid')) {
             $uid = $request->input('uid');
+            $data['condition']['uid'] = $uid;
             $is_exist = User::find($uid);
             if ($is_exist) {
                 $data['demands'] = Demands::where('uid', $uid)
                     ->where('state', 0)
                     ->take(12)
                     ->get();
-                $data['genlservices'] = Genlservices::where('uid', $uid)
+                $data['genlservices'] = DB::table('bylh_genlservices')
+                    ->select('bylh_genlservices.id','picture','title','describe','name')
+                    ->leftjoin('bylh_region','bylh_region.id','bylh_genlservices.city')
+                    ->where('uid', $uid)
                     ->where('state', 0)
-                    ->take(12)
-                    ->get();
-                $data['finlservices'] = Finlservices::where('uid', $uid)
+                    ->paginate(9,['*'],"genlpage");
+                $data['finlservices'] = DB::table('bylh_finlservices')
+                    ->select('bylh_finlservices.id','picture','title','describe','name')
+                    ->leftjoin('bylh_region','bylh_region.id','bylh_finlservices.city')
+                    ->where('uid', $uid)
                     ->where('state', 0)
-                    ->take(12)
-                    ->get();
-                $data['qaservices'] = Qaservices::where('uid', $uid)
+                    ->paginate(9,['*'],"finlpage");
+                $data['qaservices'] = DB::table('bylh_qaservices')
+                    ->select('bylh_qaservices.id','picture','title','describe','name')
+                    ->leftjoin('bylh_region','bylh_region.id','bylh_qaservices.city')
+                    ->where('uid', $uid)
                     ->where('state', 0)
-                    ->take(12)
-                    ->get();
-                $data['userinfo'] = Userinfo::where('uid', $uid)->first();
-                return view('service/getallservices', ['data' => $data]);
+                    ->paginate(9,['*'],"qapage");
+                if($is_exist->type == 1)
+                    $data['userinfo'] = Userinfo::where('uid', $uid)->first();
+                elseif ($is_exist->type == 2)
+                    $data['serviceinfo'] = Serviceinfo::where('uid',$uid)->first();
+//                return $data;
+                return view('service/serviceproviderInfo', ['data' => $data]);
             } else {
                 return redirect()->back();
             }

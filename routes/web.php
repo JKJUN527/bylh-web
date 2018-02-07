@@ -133,11 +133,6 @@ Route::any('demands/getDemandsList',['uses' => 'DemandsController@getDemandsList
 
 //需求列表页面
 Route::any('demands/myneeds',['uses' => 'DemandsController@myneeds']);
-
-//预约需求
-Route::any('demands/needappointment',function(){
-    return view('demands.needappointment');
-});
 //站内信模块
 //发送站内信
 Route::post('message/sendMessage',['uses' => 'MessageController@sendMessage']);

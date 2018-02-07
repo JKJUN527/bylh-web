@@ -326,6 +326,15 @@ class OrderController extends Controller {
                     $data['msg'] = "不能预约自己的需求";
                     return $data;
                 }
+                //不能重复预约
+                $is_exist = Datetemp::where('sid',$uid)
+                    ->where('demand_id',$request->input('did'))
+                    ->where('state',0)
+                    ->count();
+                if($is_exist >0){
+                    $data['msg'] = "您已预约！请等待需求用户选择。";
+                    return $data;
+                }
                 if($demand->state == 1)//需求下架
                 {
                     $data['msg'] = "该需求已下架，请查看后处理";
@@ -411,12 +420,17 @@ class OrderController extends Controller {
                 return redirect()->back();
             }
             $data['selectlist'] = DB::table('bylh_datetemp')
-                ->select('bylh_datetemp.sid','ename','elogo','price','brief','city','bylh_datetemp.created_at')
+                ->select('bylh_datetemp.sid','bylh_serviceinfo.uid','ename','elogo','price','brief','city','bylh_datetemp.created_at')
                 ->leftjoin('bylh_serviceinfo','bylh_serviceinfo.uid','bylh_datetemp.sid')
                 ->where('did',$data['uid'])
                 ->where('demand_id',$request->input('did'))
                 ->where('state',0)
                 ->paginate(10);//默认每页显示20条报价记录
+
+            foreach ($data['selectlist'] as $service){
+                $data['serviceinfo'][$service->sid] = Serviceinfo::where('uid',$service->uid)
+                    ->first();
+            }
         }
 //        return $data;
         return view('demands.needappointment', ["data" => $data]);
@@ -433,20 +447,39 @@ class OrderController extends Controller {
             $demand_id = $request->input('demand_id');
             $servicer = Datetemp::where('sid',$sid)
                 ->where('demand_id',$demand_id)
-                ->where('did',$uid)->where('state',0)
+                ->where('did',$uid)
+                ->where('state',0)
                 ->get();
             if($servicer->count()>=1){
+                $demand_info = Demands::find($demand_id);
+
                 $neworder = new Orders();
                 $neworder->s_uid = $sid;
                 $neworder->d_uid = $uid;
                 $neworder->create_uid = $sid;
-                $neworder->type = 0;
+                $neworder->type = $demand_info->type;
                 $neworder->demand_id = $demand_id;
-                $neworder->price = $servicer->price;
+                $neworder->price = $servicer[0]->price;
+                $neworder->state = 1;
                 $neworder->vaildity = date('Y-m-d H:i:s', strtotime('+7 day'));
 
                 if($neworder->save()){
-                    $deltemp = Datetemp::where('demand_id',$demand_id)->update(['state' => 1]);
+                    //发送站内信
+                    $servicer_id = Datetemp::where('demand_id',$demand_id)
+                        ->where('state',0)
+                        ->get();
+                    foreach ($servicer_id as $id){
+                        if($id->sid == $sid){//选中的服务商
+                            $content = "感谢您的预约！我已向您的账户支付了费用，请尽快查收，并开始服务，谢谢！";
+                            //发送站内信到服务用户，通知确认收款
+                            MessageController::sendMessage($request,$id->sid,$content);
+                        }else{
+                            $content = "感谢您的预约！非常抱歉，我已选择了其他服务商为我服务，再次感谢！";
+                            //发送站内信到服务用户，通知确认收款
+                            MessageController::sendMessage($request,$id->sid,$content);
+                        }
+                    }
+                    $deltemp = Datetemp::where('demand_id',$demand_id)->where('state',0)->update(['state' => 1]);
                     $data['status'] = 200;
                     $data['msg'] = "已成功选择服务用户！创建订单成功";
                     return $data;

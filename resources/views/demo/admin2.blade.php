@@ -94,10 +94,10 @@
             <li class="qc last"><a href="{{asset('service/advanceSearch?type=2')}}">专业问答</a></li>
             <li class="qc last"><a href="{{asset('news/index')}}">实习课堂</a></li>
         </ul>
-        <div class="nav-extra">
-            <a href="{{asset('/message')}}" style="color:#f03726;font-weight:bold;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息
-                <i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>
-        </div>
+        {{--<div class="nav-extra">--}}
+            {{--<a href="{{asset('/message')}}" style="color:#f03726;font-weight:bold;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息--}}
+                {{--<i class="am-icon-angle-right" style="padding-left: 10px;"></i></a>--}}
+        {{--</div>--}}
     </div>
 </div>
 <b class="line"></b>

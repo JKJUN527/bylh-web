@@ -1,5 +1,5 @@
-@extends('demo.admin2',["title"=>0])
-@section('title','服务详情')
+@extends('demo.admin2')
+@section('title','服务商主页')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">
@@ -13,7 +13,6 @@
             margin: 5px;
             height: 150px;
         }
-
         .card img {
             width: 80px;
             height: 80px;
@@ -46,7 +45,8 @@
         }
         .floor-title {
             color: #003366;
-            margin-bottom:-20px;
+            margin-bottom:-10px;
+            font-size: 1.3rem;
         }
         .more2more {
             margin-top: -8px;
@@ -185,11 +185,14 @@
         .am-container{
             padding:20px;
         }
+        .line{
+            top:175px !important;
+        }
     </style>
 @endsection
 @section('content')
     <!--发布服务-->
-    <div class="am-g am-g-fixed" style="padding-top: 85px;">
+    <div class="am-g am-g-fixed">
         <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="border: 2px solid #eee;padding: 20px;background: #fff;">
             <div class="am-u-lg-9 am-u-md-9 am-u-sm-9">
                 <!--大学生服务-->
@@ -197,46 +200,45 @@
                     <div class="am-container ">
                         <div class="shopTitle">
                             <h4 class="floor-title">发布的一般服务</h4>
-                            <div class="today-brands">
-                                <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
-                            </div>
                         </div>
                         <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
                         <div class="card-deck-wrapper">
                             <div class="card-deck">
+                                @foreach($data['genlservices'] as $genlservice)
                                 <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
-                                    <a href="#">
-                                        <img class="card-img-top"
-                                             src="{{asset('images/f2.jpg')}}"/>
+                                    <a href="/service/detail?id={{$genlservice->id}}&type=0">
+                                        @if($genlservice->picture != null)
+                                            <?php
+                                            $pics = explode(';', $genlservice->picture);
+                                            $baseurl = explode('@', $pics[0])[0];
+                                            $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                            $imagepath = explode('@', $pics[0])[1];
+                                            ?>
+                                            <img class="card-img-top"
+                                                     src=" {{$baseurl}}{{$imagepath}}"/>
+                                        @else
+                                            <img class="card-img-top"
+                                                 src="{{asset('images/f2.jpg')}}"/>
+                                        @endif
                                         <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                            <h4 class="card-title">龙博品牌设计</h4>
+                                            <h4 class="card-title">{{mb_substr($genlservice->title,0,10,'utf-8')}}...</h4>
                                             <p class="card-text">
-                                                <small class="text-muted">专业设计服务</small>
+                                                <small class="text-muted">{{mb_substr($genlservice->describe,0,10,'utf-8')}}</small>
                                             </p>
                                         </div>
                                         <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
                                         <div class="card-city">
-                                            <small class="text-muted">成都</small>
+                                            <small class="text-muted">{{$genlservice->name}}</small>
                                         </div>
                                     </a>
                                 </div>
-                                <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
-                                    <a href="#">
-                                        <img class="card-img-top"
-                                             src="{{asset('images/f2.jpg')}}"/>
-                                        <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                            <h4 class="card-title">龙博品牌设计</h4>
-                                            <p class="card-text">
-                                                <small class="text-muted">专业设计服务</small>
-                                            </p>
-                                        </div>
-                                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
-                                        <div class="card-city">
-                                            <small class="text-muted">成都</small>
-                                        </div>
-                                    </a>
-                                </div>
+                                @endforeach
                             </div>
+                        </div>
+                        <div class="am-u-lg-9 am-u-md-9 am-u-sm-9">
+                            <nav>
+                                {!! $data['genlservices']->appends(["uid"=>$data['condition']['uid']])->render() !!}
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -245,62 +247,45 @@
                     <div class="am-container ">
                         <div class="shopTitle">
                             <h4 class="floor-title">发布的实习中介服务</h4>
-                            <div class="today-brands">
-                                <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
-                            </div>
                         </div>
                         <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
                         <div class="card-deck-wrapper">
                             <div class="card-deck">
-                                <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
-                                    <a href="#">
-                                        <img class="card-img-top"
-                                             src="{{asset('images/f2.jpg')}}"/>
-                                        <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                            <h4 class="card-title">龙博品牌设计</h4>
-                                            <p class="card-text">
-                                                <small class="text-muted">专业设计服务</small>
-                                            </p>
-                                        </div>
-                                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
-                                        <div class="card-city">
-                                            <small class="text-muted">成都</small>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
-                                    <a href="#">
-                                        <img class="card-img-top"
-                                             src="{{asset('images/f2.jpg')}}"/>
-                                        <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                            <h4 class="card-title">龙博品牌设计</h4>
-                                            <p class="card-text">
-                                                <small class="text-muted">专业设计服务</small>
-                                            </p>
-                                        </div>
-                                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
-                                        <div class="card-city">
-                                            <small class="text-muted">成都</small>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
-                                    <a href="#">
-                                        <img class="card-img-top"
-                                             src="{{asset('images/f2.jpg')}}"/>
-                                        <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                            <h4 class="card-title">龙博品牌设计</h4>
-                                            <p class="card-text">
-                                                <small class="text-muted">专业设计服务</small>
-                                            </p>
-                                        </div>
-                                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
-                                        <div class="card-city">
-                                            <small class="text-muted">成都</small>
-                                        </div>
-                                    </a>
-                                </div>
+                                @foreach($data['finlservices'] as $finlservice)
+                                    <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
+                                        <a href="/service/detail?id={{$finlservice->id}}&type=0">
+                                            @if($finlservice->picture != null)
+                                                <?php
+                                                $pics = explode(';', $finlservice->picture);
+                                                $baseurl = explode('@', $pics[0])[0];
+                                                $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                $imagepath = explode('@', $pics[0])[1];
+                                                ?>
+                                                <img class="card-img-top"
+                                                     src=" {{$baseurl}}{{$imagepath}}"/>
+                                            @else
+                                                <img class="card-img-top"
+                                                     src="{{asset('images/f2.jpg')}}"/>
+                                            @endif
+                                            <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
+                                                <h4 class="card-title">{{mb_substr($finlservice->title,0,10,'utf-8')}}...</h4>
+                                                <p class="card-text">
+                                                    <small class="text-muted">{{mb_substr($finlservice->describe,0,10,'utf-8')}}</small>
+                                                </p>
+                                            </div>
+                                            <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
+                                            <div class="card-city">
+                                                <small class="text-muted">{{$finlservice->name}}</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endforeach
                             </div>
+                        </div>
+                        <div class="am-u-lg-9 am-u-md-9 am-u-sm-9">
+                            <nav>
+                                {!! $data['finlservices']->appends(["uid"=>$data['condition']['uid']])->render() !!}
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -309,57 +294,61 @@
                     <div class="am-container">
                         <div class="shopTitle ">
                             <h4 class="floor-title">发布的专业问答服务</h4>
-                            <div class="today-brands">
-                                <button class="am-btn am-btn-danger am-round more2more">查看更多</button>
-                            </div>
+                            {{--<div class="today-brands">--}}
+                                {{--<button class="am-btn am-btn-danger am-round more2more">查看更多</button>--}}
+                            {{--</div>--}}
                         </div>
                         <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
                         <div class="card-deck-wrapper">
                             <div class="card-deck">
-                                <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
-                                    <a href="#">
-                                        <img class="card-img-top"
-                                             src="{{asset('images/f2.jpg')}}"/>
-                                        <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                            <h4 class="card-title">龙博品牌设计</h4>
-                                            <p class="card-text">
-                                                <small class="text-muted">专业设计服务</small>
-                                            </p>
-                                        </div>
-                                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
-                                        <div class="card-city">
-                                            <small class="text-muted">成都</small>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
-                                    <a href="#">
-                                        <img class="card-img-top"
-                                             src="{{asset('images/f2.jpg')}}"/>
-                                        <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
-                                            <h4 class="card-title">龙博品牌设计</h4>
-                                            <p class="card-text">
-                                                <small class="text-muted">专业设计服务</small>
-                                            </p>
-                                        </div>
-                                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
-                                        <div class="card-city">
-                                            <small class="text-muted">成都</small>
-                                        </div>
-                                    </a>
-                                </div>
+                                @foreach($data['qaservices'] as $qaservice)
+                                    <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
+                                        <a href="/service/detail?id={{$qaservice->id}}&type=0">
+                                            @if($qaservice->picture != null)
+                                                <?php
+                                                $pics = explode(';', $qaservice->picture);
+                                                $baseurl = explode('@', $pics[0])[0];
+                                                $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                $imagepath = explode('@', $pics[0])[1];
+                                                ?>
+                                                <img class="card-img-top"
+                                                     src=" {{$baseurl}}{{$imagepath}}"/>
+                                            @else
+                                                <img class="card-img-top"
+                                                     src="{{asset('images/f2.jpg')}}"/>
+                                            @endif
+                                            <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
+                                                <h4 class="card-title">{{mb_substr($qaservice->title,0,10,'utf-8')}}...</h4>
+                                                <p class="card-text">
+                                                    <small class="text-muted">{{mb_substr($qaservice->describe,0,10,'utf-8')}}</small>
+                                                </p>
+                                            </div>
+                                            <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
+                                            <div class="card-city">
+                                                <small class="text-muted">{{$qaservice->name}}</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endforeach
                             </div>
+                        </div>
+                        <div class="am-u-lg-9 am-u-md-9 am-u-sm-9">
+                            <nav>
+                                {!! $data['qaservices']->appends(["uid"=>$data['condition']['uid']])->render() !!}
+                            </nav>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="am-u-lg-3 am-u-md-3 am-u-sm-3">
-                <div class="container1" style="border: 2px solid #eee;padding: 20px;background: #fff;">
+                <div class="container1"
+                     style="margin-right: -5px;border: 2px solid #eee;padding: 20px;background: #fff;">
                     <div class=" fr main-c">
-                        <a class="fws-hd" href="#" target="_blank">
-                            <img src="{{asset('images/touxiang.jpg')}}" width="180" height="180"></a>
-                        <a class="fws-name" href="#" target="_blank" style="padding:20px;font-size: 18px;">
-                            网安所
+                        <a class="fws-hd" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank">
+                            <img src="{{$data['serviceinfo']['elogo']}}" width="180" height="180"></a>
+                        <a class="fws-name" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank" style="padding:20px;font-size: 18px;">
+                            {{$data['serviceinfo']['ename']}}
                         </a>
                         <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
                         <div class="service-content">
@@ -367,34 +356,62 @@
                                 <div class="fl" style="float: left;">所在地：</div>
                                 <div class="locus"
                                      style="background: url({{asset('images/shop_680.png')}}) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
-                                <div style="float:left;overflow:hidden;height:30px;">北京</div>
+                                <div style="float:left;overflow:hidden;height:30px;">{{$data['serviceinfo']['city']}}</div>
                                 <div class="clear"></div>
                             </div>
+                            @if($data['serviceinfo']['current_edu'] !="")
                                 <div class="service_info">
                                     <div class="fl" style="float: left;">就读院校：</div>
-                                    <div style="float:left;overflow:hidden;height:30px;">四川大学
+                                    <div style="float:left;overflow:hidden;height:30px;">{{explode('@',$data['serviceinfo']['current_edu'])[0]}}
                                         |
+                                        @if(explode('@',$data['serviceinfo']['current_edu'])[1] == 0)
                                             博士及已上
+                                        @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
+                                            硕士
+                                        @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 2)
+                                            学士
+                                        @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
+                                            高中及以下
+                                        @endif
                                     </div>
                                     <div class="clear"></div>
                                 </div>
+                            @endif
                             <div class="service_info">
                                 <div class="fl" style="float: left;">毕业院校：</div>
-                                <div style="float:left;overflow:hidden;height:30px;">四川大学
+                                <div style="float:left;overflow:hidden;height:30px;">{{explode('@',$data['serviceinfo']['graduate_edu'])[0]}}
                                     |
+                                    @if(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 0)
                                         博士及已上
+                                    @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 1)
+                                        硕士
+                                    @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 2)
+                                        学士
+                                    @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 1)
+                                        高中及以下
+                                    @endif
                                 </div>
                                 <div class="clear"></div>
                             </div>
                             <div class="service_info">
                                 <div class="fl" style="float: left;margin-bottom: 1rem">
                                         <span class="am-badge am-badge-warning">
+                                        @if($data['serviceinfo']['is_offline'] ==0)
+                                                仅支持线下交易
+                                            @elseif($data['serviceinfo']['is_offline'] ==1)
+                                                仅支持线上交易
+                                            @else
                                                 支持线上或线下交易
+                                            @endif
                                         </span>
                                 </div>
                                 <div style="float:left;overflow:hidden;height:30px;">
                                         <span class="am-badge am-badge-warning">
+                                        @if($data['serviceinfo']['has_video'] ==0)
+                                                不提供视频教程
+                                            @else
                                                 提供视频教程
+                                            @endif
                                         </span>
                                 </div>
                                 <div class="clear"></div>
@@ -411,15 +428,15 @@
                                     <div class="am-modal-hd">和我联系</div>
                                     <a href="#">
                                         <div class="serviceMsg">
-                                            <img src="{{asset('images/head1.gif')}}"
+                                            <img src="{{$data['serviceinfo']['elogo']}}"
                                                  style="width:150px;height:150px;">
-                                            <p>雇主信息：<span>liyuxiao88</span></p>
+                                            <p id="userinfo" data-content="{{$data['serviceinfo']['uid']}}">服务商名称：<span>{{$data['serviceinfo']['ename']}}</span></p>
                                         </div>
                                     </a>
                                     <div class="am-modal-bd">
                                         <label for="doc-ta-1"></label><br>
                                         {{--<p><input type="textarea" class="am-form-field am-radius" placeholder="椭圆表单域" style="height: 300px;"/></p>--}}
-                                        <textarea placeholder="请写上你想说的话" class="am-form-field am-radius"
+                                        <textarea id="leave_mesg" placeholder="请写上你想说的话" class="am-form-field am-radius"
                                                   style="height:150px;"></textarea>
                                     </div>
                                     <div class="am-modal-footer">
@@ -435,32 +452,6 @@
                         {{--<div class="clear"></div>--}}
                     </div>
                 </div>
-                {{--<div class="container2" style="border: 2px solid #eee;padding: 20px;background: #fff;margin-left: 20px;margin-top: 20px;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">--}}
-                {{--<div class="other_fw_r" style="padding-top: 5px;padding-bottom: 40px;">--}}
-                {{--<div class="twof-t" style="line-height: 30px;">--}}
-                {{--<span class="csfw"--}}
-                {{--style="padding-left: 0;float: left;font-size: 16px;padding-bottom: 10px;">本店其他热门服务</span>--}}
-                {{--<div class="clear"></div>--}}
-                {{--</div>--}}
-
-                {{--<div class="anli-b">--}}
-                {{--<div style="float:left;"><a href="fid-55380.html" target="_blank"><img--}}
-                {{--src="http://p1.shopimg.680.com/2017-7/6/32017070614584559264_10442660.jpg"--}}
-                {{--width="80" style="width: 80px;height: 80px;"></a></div>--}}
-                {{--<div class="xxys"--}}
-                {{--style="float: left;line-height: 25px;padding-left: 10px;font-weight: bold;padding-top: 0;width: 132px;">--}}
-                {{--<a href="fid-55380.html" target="_blank"--}}
-                {{--style="display: block;font-weight: 100;height: auto;padding-bottom: 5px;overflow: visible;color: #666;font-size: 14px;line-height: 20px;height: 25px;overflow: hidden;line-height: 25px;overflow: hidden;width: 130px;text-overflow: ellipsis;padding-left:5px;white-space: nowrap;">田园风格装修/复式楼/别墅/商品房</a><font--}}
-                {{--style="font-weight: 100;color: #DF231B;font-size: 14px;">￥30</font>--}}
-                {{--<div class="fw_r_i_cj">成交4次</div>--}}
-                {{--</div>--}}
-
-                {{--<div class="clear"></div>--}}
-                {{--</div>--}}
-
-                {{--</div>--}}
-                {{--</div>--}}
-
             </div>
         </div>
     </div>
@@ -476,18 +467,39 @@
     <script src="{{asset("dist/amazeui.min.js")}}"></script>
     <script src="{{asset("js/amazeui.dialog.min.js")}}"></script>
     <script type="text/javascript">
-        function buy() {
-            $('#my-alert').modal({
-                onConfirm: function () {
-                    alert("您已完成购买！");
-                }
-            });
-        }
-
         function leaveMsg() {
             $('#my-content').modal({
                 onConfirm: function () {
-                    alert("成功留言！");
+                    var leave_mesg = $('#leave_mesg');
+                    var to_id = $('#userinfo').attr('data-content');
+                    if(leave_mesg.val().length >=250){
+                        swal("","字数不能超过250字","error");
+                        return;
+                    }
+                    var formData = new FormData();
+                    formData.append("content", leave_mesg.val());
+                    formData.append("to_id", to_id);
+                    $.ajax({
+                        url: "/message/sendMessage",
+                        type: "post",
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            //console.log(data);
+                            var result = JSON.parse(data);
+                            if (result.status == 200) {
+                                swal("","留言成功","success");
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            }else{
+                                swal('',result.msg,'error');
+                            }
+                        }
+                    });
                 }
             });
         }

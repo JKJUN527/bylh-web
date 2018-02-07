@@ -420,6 +420,16 @@ class DemandsController extends Controller {
         return view('demands/myneeds',['data'=>$data]);
     }
 
+    public function getdateTempList(Request $request){
+        $data = array();
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+        $data['type'] = AuthController::getType();
+
+
+        return view('demands.needappointment',['data'=>$data]);
+    }
+
 
 
 }
