@@ -82,6 +82,10 @@ Route::any('service/detail',['uses' => 'ServiceController@detail']);
 Route::post('service/reviewser',['uses' => 'OrderController@reviewService']);
 //获取服务用户所有发布的服务列表
 Route::get('service/getservicesList',['uses' => 'serviceController@getservicesList']);
+//获取服务商详情页面
+Route::get('service/serviceproviderInfo', function () {
+    return view('service.serviceproviderInfo');
+});
 //获取用户发布所有需求、服务列表
 Route::get('service/getAllservices',['uses' => 'serviceController@getAllservices']);
 //专业问答--问答

@@ -15,6 +15,16 @@
             height: 150px;
         }
 
+        .card-title {
+            margin-left: 10px;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+        .card-text {
+            padding: 5px;
+            margin-left: 10px;
+        }
         .card img {
             width: 80px;
             height: 80px;

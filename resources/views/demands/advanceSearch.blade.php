@@ -21,6 +21,17 @@
             width: 120px;
             overflow: hidden;
         }
+
+        .card-title {
+            margin-left: 10px;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+        .card-text {
+            padding: 5px;
+            margin-left: 10px;
+        }
         .listIndex dd {
             height: 35px !important;
         }
