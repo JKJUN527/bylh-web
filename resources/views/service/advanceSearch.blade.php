@@ -1,19 +1,30 @@
-@extends('demo.cardDemo',['title'=>3,'subtitle'=>$data["condition"]["type"]])
+@extends('demo.admin',['title'=>3,'subtitle'=>$data["condition"]["type"]])
 @section('title','服务大厅')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/navstyle.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+    {{--<link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>--}}
     <style>
         .card{
-            padding:10px;
+            width: 30%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px;
+            height: 150px;
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
         }
         .card-deck{
             padding:10px;
         }
         .card-block{
             padding: 5px;
+            width: 120px;
+            overflow: hidden;
         }
         .listIndex dd {
             height: 35px !important;
@@ -327,7 +338,7 @@
                             <div class="card-deck-wrapper">
                                 <div class="card-deck">
                                 @foreach($data["result"]["services"] as $s)
-                                        <div class="card">
+                                        <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
                                             <a href="/service/detail?id={{$s->id}}&type=0" class="">
                                                 @if($s->picture != null)
                                                     <?php
@@ -336,11 +347,13 @@
                                                     $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
                                                     $imagepath = explode('@', $pics[0])[1];
                                                     ?>
-                                                    <img class="card-img-top" src="{{$baseurl}}{{$imagepath}}"/>
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{$baseurl}}{{$imagepath}}"/>
                                                 @else
-                                                    <img class="card-img-top" src="{{asset("images/f1.jpg")}}"/>
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{asset("images/f1.jpg")}}"/>
                                                 @endif
-                                            <div class="card-block">
+                                                <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
                                                 <h4 class="card-title">{{$s->title}}</h4>
                                                 <p class="card-text"><small class="text-muted">{{$s->price}}|{{$s->city}}</small></p>
                                             </div>
@@ -365,30 +378,40 @@
                         </div>
                     </div>
                     <div class="am-g am-g-fixed">
-                        @foreach($data["result"]["services"] as $s)
-                            <div class="am-u-lg-3 am-u-md-4" style="padding:10px;">
-                                <a href="/service/detail?id={{$s->id}}&type=1">
-                                    @if($s->picture != null)
-                                        <?php
-                                        $pics = explode(';', $s->picture);
-                                        $baseurl = explode('@', $pics[0])[0];
-                                        $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
-                                        $imagepath = explode('@', $pics[0])[1];
-                                        ?>
-                                        <img src="{{$baseurl}}{{$imagepath}}"/>
-                                    @else
-                                        <img src="{{asset("images/f1.jpg")}}"/>
-                                    @endif
-                                </a>
-                                <div class="left_bottom"
-                                     style="background-color: gray;text-align: center;padding: 3px;color:#fff;">
-                                    <a href="/service/detail?id={{$s->id}}&type=1" style="color: #fff">
-                                        {{$s->title}}
-                                    </a>
-                                    <p>{{$s->price}}|{{$s->city}}</p>
+                        <div class="am-u-lg-12 am-u-md-12" style="padding: 10px;float: left;">
+                            <div class="card-deck-wrapper">
+                                <div class="card-deck">
+                                    @foreach($data["result"]["services"] as $s)
+                                        <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
+                                            <a href="/service/detail?id={{$s->id}}&type=1">
+                                                @if($s->picture != null)
+                                                    <?php
+                                                    $pics = explode(';', $s->picture);
+                                                    $baseurl = explode('@', $pics[0])[0];
+                                                    $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                    $imagepath = explode('@', $pics[0])[1];
+                                                    ?>
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{$baseurl}}{{$imagepath}}"/>
+                                                @else
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{asset("images/f1.jpg")}}"/>
+                                                @endif
+                                            </a>
+                                            <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
+                                                <a href="/service/detail?id={{$s->id}}&type=1" style="color: #fff">
+                                                    <h4 class="card-title">
+                                                        {{$s->title}}</h4>
+                                                </a>
+                                                <p class="card-text">
+                                                    <small class="text-muted">{{$s->price}}|{{$s->city}}</small>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
             @endif
@@ -407,7 +430,7 @@
                             <div class="card-deck-wrapper">
                                 <div class="card-deck">
                                 @foreach($data["result"]["services"] as $s)
-                                        <div class="card">
+                                        <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
                                             <a href="/service/detail?id={{$s->id}}&type=2" class="">
                                                 @if($s->picture != null)
                                                     <?php
@@ -416,11 +439,13 @@
                                                     $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
                                                     $imagepath = explode('@', $pics[0])[1];
                                                     ?>
-                                                    <img class="card-img-top" src="{{$baseurl}}{{$imagepath}}"/>
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{$baseurl}}{{$imagepath}}"/>
                                                 @else
-                                                    <img class="card-img-top" src="{{asset("images/f1.jpg")}}"/>
+                                                    <img class="card-img-top am-u-lg-1 am-u-md-1 am-u-sm-1"
+                                                         src="{{asset("images/f1.jpg")}}"/>
                                                 @endif
-                                                    <div class="card-block">
+                                                <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
                                                         <h4 class="card-title">{{$s->title}}</h4>
                                                         <p class="card-text"><small class="text-muted">{{$s->price}}|{{$s->city}}</small></p>
                                                     </div>

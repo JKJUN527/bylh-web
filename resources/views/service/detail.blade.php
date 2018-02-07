@@ -35,20 +35,12 @@
             height: 30px;
             line-height: 30px;
         }
-        .gzyx_1 {
-            background: #F7CCA2;
-        }
-        .gzyx_2{
-            background: #97DC8E;
-        }
-        .gzyx_3{
-            background: #C7B5F3;
-        }
-        .gzyx_4{
-            background: #88DEE8;
-        }
         .am-g-fixed{
             min-width: 1100px;
+        }
+
+        .service-content {
+            text-align: center;
         }
         .service_title{
             padding-left: 2rem;
@@ -82,12 +74,6 @@
             float: left;
             padding-top: 31px;
         }
-        .service_tab{
-            font-weight: bold;
-            font-size: 18px;
-            padding-right: 1rem !important;
-            padding-left: 1rem !important;
-        }
         .am-comments-list .am-comment {
             margin: 0;
         }
@@ -95,9 +81,10 @@
             color: #666;
             width: 230px;
             line-height: 30px;
-            padding-left: 20px;
+            /*padding-left: 20px;*/
             font-size: 14px;
             padding-top: 0;
+            text-align: center;
         }
         .lx-btn{
             line-height: 30px;
@@ -105,6 +92,10 @@
             padding-bottom: 20px;
             text-align: center;
             margin-top: 1rem;
+        }
+
+        .fr {
+            text-align: center;
         }
     </style>
 @endsection
@@ -368,8 +359,7 @@
 
                 </div>
                 <div class="am-u-lg-3 am-u-md-3 am-u-sm-3">
-                    <div class="container1"
-                         style="border: 2px solid #eee;padding: 20px;background: #fff;margin-left: 20px;">
+                    <div class="container1" style="border: 2px solid #eee;padding: 20px;background: #fff;">
                         <div class=" fr main-c">
                             <a class="fws-hd" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank">
                                 <img src="{{$data['serviceinfo']['elogo']}}" width="180" height="180"></a>
@@ -377,71 +367,100 @@
                                 {{$data['serviceinfo']['ename']}}
                             </a>
                             <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
-                            <div class="service_info">
-                                <div class="fl" style="float: left;">所在地：</div>
-                                <div class="locus" style="background: url({{asset('images/shop_680.png')}}) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
-                                <div style="float:left;overflow:hidden;height:30px;">{{$data['serviceinfo']['city']}}</div>
-                                <div class="clear"></div>
-                            </div>
-                            @if($data['serviceinfo']['current_edu'] !="")
-                            <div class="service_info">
-                                <div class="fl" style="float: left;">就读院校：</div>
-                                <div style="float:left;overflow:hidden;height:30px;">{{explode('@',$data['serviceinfo']['current_edu'])[0]}} |
-                                    @if(explode('@',$data['serviceinfo']['current_edu'])[1] == 0)
-                                        博士及已上
-                                    @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
-                                        硕士
-                                    @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 2)
-                                        学士
-                                    @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
-                                        高中及以下
-                                    @endif
+                            <div class="service-content">
+                                <div class="service_info">
+                                    <div class="fl" style="float: left;">所在地：</div>
+                                    <div class="locus"
+                                         style="background: url({{asset('images/shop_680.png')}}) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
+                                    <div style="float:left;overflow:hidden;height:30px;">{{$data['serviceinfo']['city']}}</div>
+                                    <div class="clear"></div>
                                 </div>
-                                <div class="clear"></div>
-                            </div>
-                            @endif
-                            <div class="service_info">
-                                <div class="fl" style="float: left;">毕业院校：</div>
-                                <div style="float:left;overflow:hidden;height:30px;">{{explode('@',$data['serviceinfo']['graduate_edu'])[0]}} |
-                                    @if(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 0)
-                                        博士及已上
-                                    @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 1)
-                                        硕士
-                                    @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 2)
-                                        学士
-                                    @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 1)
-                                        高中及以下
-                                    @endif
+                                @if($data['serviceinfo']['current_edu'] !="")
+                                    <div class="service_info">
+                                        <div class="fl" style="float: left;">就读院校：</div>
+                                        <div style="float:left;overflow:hidden;height:30px;">{{explode('@',$data['serviceinfo']['current_edu'])[0]}}
+                                            |
+                                            @if(explode('@',$data['serviceinfo']['current_edu'])[1] == 0)
+                                                博士及已上
+                                            @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
+                                                硕士
+                                            @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 2)
+                                                学士
+                                            @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
+                                                高中及以下
+                                            @endif
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                @endif
+                                <div class="service_info">
+                                    <div class="fl" style="float: left;">毕业院校：</div>
+                                    <div style="float:left;overflow:hidden;height:30px;">{{explode('@',$data['serviceinfo']['graduate_edu'])[0]}}
+                                        |
+                                        @if(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 0)
+                                            博士及已上
+                                        @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 1)
+                                            硕士
+                                        @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 2)
+                                            学士
+                                        @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 1)
+                                            高中及以下
+                                        @endif
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="service_info">
-                                <div class="fl" style="float: left;margin-bottom: 1rem">
-                                    <span class="am-badge am-badge-warning">
-                                    @if($data['serviceinfo']['is_offline'] ==0)
-                                        仅支持线下交易
-                                    @elseif($data['serviceinfo']['is_offline'] ==1)
-                                        仅支持线上交易
-                                    @else
-                                        支持线上或线下交易
-                                    @endif
-                                    </span>
+                                <div class="service_info">
+                                    <div class="fl" style="float: left;margin-bottom: 1rem">
+                                        <span class="am-badge am-badge-warning">
+                                        @if($data['serviceinfo']['is_offline'] ==0)
+                                                仅支持线下交易
+                                            @elseif($data['serviceinfo']['is_offline'] ==1)
+                                                仅支持线上交易
+                                            @else
+                                                支持线上或线下交易
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <div style="float:left;overflow:hidden;height:30px;">
+                                        <span class="am-badge am-badge-warning">
+                                        @if($data['serviceinfo']['has_video'] ==0)
+                                                不提供视频教程
+                                            @else
+                                                提供视频教程
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
-                                <div style="float:left;overflow:hidden;height:30px;">
-                                    <span class="am-badge am-badge-warning">
-                                    @if($data['serviceinfo']['has_video'] ==0)
-                                        不提供视频教程
-                                    @else
-                                        提供视频教程
-                                    @endif
-                                    </span>
+                                <div class="lx-btn">
+                                    <button type="button" class="am-btn am-btn-danger am-btn-lg" onclick="leaveMsg()"
+                                            style="width: 80%;">和我联系
+                                    </button>
+                                    <div class="clear"></div>
                                 </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="lx-btn">
-                                <button type="button" class="am-btn am-btn-danger am-btn-lg" style="width: 80%;">和我联系
-                                </button>
-                                <div class="clear"></div>
+                                <div class="am-modal am-modal-alert" tabindex="-1" id="my-content"
+                                     style="margin-top: -200px;">
+                                    <div class="am-modal-dialog">
+                                        <div class="am-modal-hd">和我联系</div>
+                                        <a href="#">
+                                            <div class="serviceMsg">
+                                                <img src="{{asset('images/head1.gif')}}"
+                                                     style="width:150px;height:150px;">
+                                                <p>雇主信息：<span>liyuxiao88</span></p>
+                                            </div>
+                                        </a>
+                                        <div class="am-modal-bd">
+                                            <label for="doc-ta-1"></label><br>
+                                            {{--<p><input type="textarea" class="am-form-field am-radius" placeholder="椭圆表单域" style="height: 300px;"/></p>--}}
+                                            <textarea placeholder="请写上你想说的话" class="am-form-field am-radius"
+                                                      style="height:150px;"></textarea>
+                                        </div>
+                                        <div class="am-modal-footer">
+                                            <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                                            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             {{--<div class="clear"></div>--}}
                             {{--<div class="shop_zpjmsg">好评率：<span>100%</span>&nbsp;&nbsp;|&nbsp;&nbsp;总评：<span>5</span>分--}}
@@ -504,6 +523,14 @@
             $('#my-alert').modal({
                 onConfirm: function () {
                     alert("您已完成购买！");
+                }
+            });
+        }
+
+        function leaveMsg() {
+            $('#my-content').modal({
+                onConfirm: function () {
+                    alert("成功留言！");
                 }
             });
         }
