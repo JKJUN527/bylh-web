@@ -453,6 +453,8 @@
                                                                     /次
                                                                 @elseif($hotest1->price_type ==3)
                                                                     /套
+                                                                @elseif($hotest1->price_type ==4)
+                                                                    /其他
                                                                 @endif
                                                             @endif
                                                         </small>
@@ -513,6 +515,8 @@
                                                                     /次
                                                                 @elseif($hotest2->price_type ==3)
                                                                     /套
+                                                                @elseif($hotest2->price_type ==4)
+                                                                    /其他
                                                                 @endif
                                                             @endif
                                                         </small>
@@ -610,6 +614,8 @@
                                                                     /次
                                                                 @elseif($hotest3->price_type ==3)
                                                                     /套
+                                                                @elseif($hotest3->price_type ==4)
+                                                                    /其他
                                                                 @endif
                                                             @endif
                                                         </small>

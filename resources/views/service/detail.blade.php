@@ -151,6 +151,8 @@
                                             /次
                                         @elseif($data["detail"]->price_type == 3)
                                             /套
+                                        @elseif($data["detail"]->price_type == 4)
+                                            /其他
                                         @endif
                                     </span>
                                 @endif

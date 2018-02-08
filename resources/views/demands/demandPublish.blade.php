@@ -612,10 +612,18 @@
             if(title.val() ==="" ||title.val() ===null){
                 swal("","请设置需求标题","error");
                 return;
-            }else
+            }
+            if(title.val().length > 25){
+                swal("","需求标题长度不能大于25个字符","error");
+                return;
+            } else
                 formdata.append('title',title.val());
             if(description ===""){
                 swal("","请认真填写需求描述","error");
+                return;
+            }
+            if(description.length > 1000){
+                swal("","需求描述长度不能大于1000个字符","error");
                 return;
             }else
                 formdata.append('describe',description);

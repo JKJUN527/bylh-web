@@ -531,32 +531,6 @@ class ServiceController extends Controller {
         //$data['position'] = Position::select('pid','eid','title','tag','pdescribe','salary','region','work_nature','occupation',)
         $orderBy = "view_count";
         $desc = "desc";
-        if ($request->has('orderBy')) {//0:热度排序1:时间排序2:价钱
-            $data["orderBy"] = $request->input('orderBy');
-
-            switch ($request->input('orderBy')) {
-                case 0:
-                    $orderBy = "view_count";
-                    break;
-                case 1:
-                    $orderBy = "created_at";
-                    break;
-                case 2:
-                    $orderBy = "price";
-                    break;
-            }
-        }
-        //desc =1 倒序  2 正序
-        if ($request->has('desc')) {
-            if ($request->input('desc') == 1) {
-                $data["desc"] = 1;
-                $desc = "desc";
-            } else if ($request->input('desc') == 2) {
-                $data["desc"] = 2;
-                $desc = "asc";
-            }
-        }
-
         if ($request->has('class1')) $data['class1'] = $request->input('class1');
         if ($request->has('class2')) $data['class2'] = $request->input('class2');
         if ($request->has('class3')) $data['class3'] = $request->input('class3');
@@ -577,6 +551,31 @@ class ServiceController extends Controller {
                 break;
             default:
                 $table = "bylh_genlservices";
+        }
+        if ($request->has('orderBy')) {//0:热度排序1:时间排序2:价钱
+            $data["orderBy"] = $request->input('orderBy');
+
+            switch ($request->input('orderBy')) {
+                case 0:
+                    $orderBy = "view_count";
+                    break;
+                case 1:
+                    $orderBy = $table.".created_at";
+                    break;
+                case 2:
+                    $orderBy = "price";
+                    break;
+            }
+        }
+        //desc =1 倒序  2 正序
+        if ($request->has('desc')) {
+            if ($request->input('desc') == 1) {
+                $data["desc"] = 1;
+                $desc = "desc";
+            } else if ($request->input('desc') == 2) {
+                $data["desc"] = 2;
+                $desc = "asc";
+            }
         }
 
         $data['services'] = DB::table($table)

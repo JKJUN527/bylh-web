@@ -258,6 +258,7 @@
                                         <option value="1">/天</option>
                                         <option value="2" selected>/次</option>
                                         <option value="3">/套</option>
+                                        <option value="4">/其他</option>
                                     </select>
                                 </div>
                             </div>
@@ -623,12 +624,20 @@
             if(title.val() ==="" ||title.val() ===null){
                 swal("","请设置服务标题","error");
                 return;
-            }else
+            }
+            if(title.val().length > 25){
+                swal("","服务标题长度不能大于25个字符","error");
+                return;
+            } else
                 formdata.append('title',title.val());
             if(description ===""){
                 swal("","请认真填写服务描述","error");
                 return;
-            }else
+            }
+            if(description.length > 1000){
+                swal("","服务描述长度不能大于1000个字符","error");
+                return;
+            } else
                 formdata.append('describe',description);
             //上传图片
             formdata.append("pictures", pictureIndex.val());

@@ -431,6 +431,8 @@
                                                                 /次
                                                             @elseif($s->price_type ==3)
                                                                 /套
+                                                            @elseif($s->price_type ==4)
+                                                                /其他
                                                             @endif
                                                         @endif
                                                     </small><br>
