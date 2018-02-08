@@ -625,8 +625,8 @@
                 swal("","请设置服务标题","error");
                 return;
             }
-            if(title.val().length > 25){
-                swal("","服务标题长度不能大于25个字符","error");
+            if(title.val().length > 50){
+                swal("","服务标题长度不能大于50个字符","error");
                 return;
             } else
                 formdata.append('title',title.val());

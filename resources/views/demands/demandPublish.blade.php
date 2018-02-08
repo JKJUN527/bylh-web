@@ -613,8 +613,8 @@
                 swal("","请设置需求标题","error");
                 return;
             }
-            if(title.val().length > 25){
-                swal("","需求标题长度不能大于25个字符","error");
+            if(title.val().length > 50){
+                swal("","需求标题长度不能大于50个字符","error");
                 return;
             } else
                 formdata.append('title',title.val());

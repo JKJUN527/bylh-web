@@ -52,6 +52,18 @@
                             <input type="email" id="email" name="email" placeholder="请输入负责人联系邮箱">
                         </div>
                     </div>
+                    <div class="am-form-group">
+                        <label for="user-mail" class="am-form-label">您目前从事专业：</label>
+                        <div class="am-form-content">
+                            <input type="text" id="profession" name="profession" placeholder="请设置您目前从事的专业，将显示在你的基本信息不可修改。">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-mail" class="am-form-label">您提供服务的单位：</label>
+                        <div class="am-form-content">
+                            <input type="email" id="email" name="email" placeholder="请输入负责人联系邮箱">
+                        </div>
+                    </div>
                 </div>
                 <div class="authenticationPic">
                     <p class="title">上传毕业证/职称证明/专业资格证等</p>
