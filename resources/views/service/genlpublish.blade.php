@@ -335,7 +335,7 @@
                     </div>
                     <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
                     <label class="am-checkbox am-default" style="font-size: 16px;margin-left:20px;">
-                        <input type="checkbox"  id="protocol" value="" data-am-ucheck><h2 data-am-modal="{target: '#my-popup'}">同意《不亦乐乎》协议</h2>
+                        <input type="checkbox"  id="protocol" value="" data-am-ucheck><h2><a href="/bylh/protocols" target="_blank">同意《不亦乐乎》协议</a></h2>
                     </label>
                     <button id="back_step1" class="am-btn am-btn-danger am-round am-btn-lg" style="margin:0 20px 0 20px;width: 15%;">上一步</button>
                     <button id="submit_info" class="am-btn am-btn-success am-round am-btn-lg" style="margin:0 20px 0 20px;width: 15%;float: right;">已确认，下一步</button>
@@ -345,7 +345,6 @@
         </div>
     </div>
     @endif
-    @include('demo.protocol')
 @endsection
 @section('custom-script')
     <script type="text/javascript">

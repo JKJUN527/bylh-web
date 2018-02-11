@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\News;
+use App\Notices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -132,5 +133,14 @@ class NewsController extends Controller {
         }
 
         return $data;
+    }
+    public function noticeindex(){
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+
+        $data['notices'] =Notices::orderBy('created_at','desc')
+            ->paginate(10);
+
+        return view('news/noties',['data'=>$data]);
     }
 }

@@ -296,7 +296,7 @@
                     <div class="marqueenOne">
                     <span class="marqueen-title"
                           style="text-align: center;padding-top: 1rem;height:54px;background-image: url({{asset('images/float_box2.png')}});background-repeat: no-repeat;">
-                        <i style="font-size: 1.5rem;color: #fff;">本站公告</i></span>
+                        <i style="font-size: 1.5rem;color: #fff;" onclick="window.location.href='/news/notice';">本站公告</i></span>
                         <div class="demo">
                             <ul>
                                 @foreach($data['notes'] as $note)

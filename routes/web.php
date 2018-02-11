@@ -154,13 +154,16 @@ Route::get('news/detail',['uses' => 'NewsController@detail']);
 Route::get('news/',['uses' => 'NewsController@SearchNews']);
 Route::get('news/index',['uses' => 'NewsController@SearchNews']);
 Route::get('news/content', ['uses' => 'NewsController@requestNewsContent']);
-
+Route::get('news/notice',['uses' => 'NewsController@noticeindex']);
 
 //获取订单列表
 Route::get('order/orderlist',['uses' => 'OrderController@orderlist']);
 
 //关于我们
 Route::get('about',['uses' => 'HomeController@aboutindex']);
+//不亦乐乎协议
+Route::get('/bylh/protocols',['uses' => 'HomeController@protocolindex']);
+
 
 //测试方法
 Route::get('sensitive', ['uses' => 'SensitiveController@test']);

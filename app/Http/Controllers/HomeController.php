@@ -224,4 +224,11 @@ class HomeController extends Controller {
 
         return view('about.about',['data'=>$data]);
     }
+
+    public function protocolindex(){
+        $data['uid'] = AuthController::getUid();
+        $data['username'] = InfoController::getUsername();
+
+        return view('demo.protocols',['data'=>$data]);
+    }
 }
