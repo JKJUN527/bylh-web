@@ -318,15 +318,8 @@ class AccountController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
-        if ($data['uid'] == 0) {//用户未登陆
-            $data['status'] = 400;
-            $data['msg'] = "请先登陆再进行操作";
-            return $data;
-        }
-        if ($data['type'] != 2) {
-            $data['status'] = 400;
-            $data['msg'] = "用户非法，请登录企业号";
-            return $data;
+        if ($data['uid'] == 0 ||$data['type'] != 2) {//用户未登陆
+            return view('account/login',['data'=>$data]);
         }
         $data['serviceinfo'] = Serviceinfo::where('uid', $data['uid'])->first();
         $data['province'] = Region::where('parent_id',0)->get();
@@ -395,6 +388,7 @@ class AccountController extends Controller {
         }
         $serviceinfo->ename = $request->input('ename');
         $serviceinfo->city = $request->input('city');
+        $serviceinfo->has_student = $request->input('hasstudent');
         $serviceinfo->current_edu = $request->input('current');
         $serviceinfo->graduate_edu = $request->input('graduation');
         $serviceinfo->is_offline = $request->input('offline');

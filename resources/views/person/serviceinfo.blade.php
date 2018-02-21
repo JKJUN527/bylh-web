@@ -14,7 +14,7 @@
         min-width: 5rem;
     }
     .label_two {
-        width: 40% !important;
+        width: 26% !important;
         display: inline !important;
         height: 2.4rem;
     }
@@ -78,6 +78,15 @@
                                 <label for="doc-vld-age-2-1" class="label_title">服务城市：</label>
                                 <input class="service_info" type="text"   id="service_city" placeholder="你所在的城市（eg:成都）" value="{{$data['serviceinfo']->city}}" required />
                             </div>
+                            <div class="am-form-group" style="width: 50%;display:inline">
+                                <label for="doc-vld-tel-2-1" class="label_title">是否在校生:</label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="hasstudent" value="1" data-am-ucheck @if($data['serviceinfo']->has_student == 1) checked @endif> 在读
+                                </label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="hasstudent" value="0" data-am-ucheck @if($data['serviceinfo']->has_student == 0) checked @endif> 毕业
+                                </label>
+                            </div>
                             @if($data['serviceinfo']->graduate_edu === "" || $data['serviceinfo']->graduate_edu ===null)
                                 <?php
                                     $degree1 =0;
@@ -87,9 +96,10 @@
                                 $degree1 = explode("@",$data['serviceinfo']->graduate_edu)[1];
                                 ?>
                             @endif
-                            <div class="am-form-group">
+                            <div class="am-form-group grdu" @if($data['serviceinfo']->has_student == 1) style="display: none" @endif>
                                 <label for="doc-vld-email-2-1" class="label_title">毕业院校：</label>
                                 <input class="label_two" type="text" id="service_grdu_school" placeholder="输入毕业院校及取得学位" value="{{explode("@",$data['serviceinfo']->graduate_edu)[0]}}" required/>
+                                <input class="label_two" type="text" id="service_grdu_major" placeholder="输入主修专业" value="{{explode("@",$data['serviceinfo']->graduate_edu)[2]}}" required/>
                                 <select class="label_two" id="service_grdu_degree" required>
                                     <option value="0" @if($degree1 ==0 ) selected @endif>博士及以上</option>
                                     <option value="1" @if($degree1 ==1 ) selected @endif>硕士</option>
@@ -106,9 +116,10 @@
                                 $degree2 = explode("@",$data['serviceinfo']->current_edu)[1];
                                 ?>
                             @endif
-                            <div class="am-form-group">
+                            <div class="am-form-group current" @if($data['serviceinfo']->has_student == 0) style="display: none" @endif>
                                 <label for="doc-vld-email-2-1" class="label_title">就读院校：</label>
-                                <input class="label_two" type="text" id="service_current_school" placeholder="(选填)正在攻读院校、攻读学位" value="{{explode("@",$data['serviceinfo']->current_edu)[0]}}" />
+                                <input class="label_two" type="text" id="service_current_school" placeholder="正在攻读院校、攻读学位" value="{{explode("@",$data['serviceinfo']->current_edu)[0]}}" />
+                                <input class="label_two" type="text" id="service_current_major" placeholder="正在攻读专业" value="{{explode("@",$data['serviceinfo']->current_edu)[2]}}" />
                                 <select class="label_two" id="service_current_degree">
                                     <option value="0" @if($degree2 ==0 ) selected @endif>博士及以上</option>
                                     <option value="1" @if($degree2 ==1 ) selected @endif>硕士</option>
@@ -243,6 +254,21 @@
             })
 
         });
+        //判断是否在读生
+        $('input:radio[name="hasstudent"]').change( function () {
+            var has_student = $('input:radio[name="hasstudent"]:checked').val();
+            var grdu = $('.grdu');
+            var current = $('.current');
+
+            if(has_student == 1){
+                grdu.css('display','none');
+                current.css('display','block');
+            }
+            if(has_student == 0){
+                grdu.css('display','block');
+                current.css('display','none');
+            }
+        });
         function loadPreview(element) {
             var file = element.files[0];
             var anyWindow = window.URL || window.webkitURL;
@@ -316,10 +342,13 @@
             var elogo = $('#user_picture');
             var paycode = $('#paycode_picture');
             var city = $('#service_city');
+            var has_student = $('input:radio[name="hasstudent"]:checked').val();
             var grdu_school = $('#service_grdu_school');
+            var grdu_major = $('#service_grdu_major');
             var grdu_degree = $('#service_grdu_degree');
             var current_degree = $('#service_current_degree');
             var current_school = $('#service_current_school');
+            var current_major = $('#service_current_major');
             var offline = $('input:radio[name="offline"]:checked').val();
             var hasvideo = $('input:radio[name="hasvideo"]:checked').val();
             var payway = $('#pay_way');
@@ -336,10 +365,6 @@
                 swal('','请填写你所在城市名称（eg:成都）','error');
                 return;
             }
-            if(grdu_school.val()==='' ){
-                swal('','请务必设置毕业学校','error');
-                return;
-            }
             if (paycode.prop("files")[0] === undefined && $('#paypic-preview').attr('src') ==="images/paycode.png") {
                 console.log("file is empty");
                 swal('','必须上传收款二维码','error');
@@ -347,14 +372,28 @@
             } else {
                 formData.append('paycode', paycode.prop("files")[0]);
             }
+            formData.append('hasstudent', has_student);
+            if(has_student == 1){//在校
+                if(current_school.val()==='' || current_major.val()==='' ){
+                    swal('','请务必设置当前就读学校及主修专业','error');
+                    return;
+                } else {
+                    formData.append('current', current_school.val()+"@"+current_degree.val()+"@"+current_major.val());
+                    formData.append('graduation', "@@@");
+                }
+            }
+            if(has_student == 0){//毕业
+                if(grdu_school.val()==='' ){
+                    swal('','请务必设置毕业学校','error');
+                    return;
+                } else {
+                    formData.append('graduation', grdu_school.val()+"@"+grdu_degree.val()+"@"+grdu_major.val());
+                    formData.append('current', "@@@");
+                }
+            }
 
             formData.append('ename', ename.val());
             formData.append('city', city.val());
-            formData.append('graduation', grdu_school.val()+"@"+grdu_degree.val());
-            if(current_school.val() !=""){
-                formData.append('current', current_school.val()+"@"+current_degree.val());
-            }else
-                formData.append('current', "");
             formData.append('offline', offline);
             formData.append('hasvideo', hasvideo);
             formData.append('payway', payway.val());

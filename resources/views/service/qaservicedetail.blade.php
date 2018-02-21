@@ -198,7 +198,12 @@
                     </div>
                     <div class="clear"></div>
                     <div class="main-bc-btn">
-                        <a class="btn-a buyfuwubtn" href="#"><button class="am-btn am-btn-danger am-btn-lg js-alert" type="button" style="width: 50%;" onclick="buy()">立即购买</button></a>
+                        <a class="btn-a buyfuwubtn">
+                            <button class="am-btn am-btn-danger am-btn-lg js-alert" type="button" style="width: 50%;" onclick="buy()">
+                                <i class="am-icon-shopping-cart"></i>
+                                立即购买
+                            </button>
+                        </a>
                         <div class="clear"></div>
                     </div>
                     <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert" style="margin-top: -150px;">
