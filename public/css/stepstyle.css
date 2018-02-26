@@ -58,7 +58,7 @@ vertical-align: top;margin-top: 5px;margin-left: -24px;color: #b5b5b5;font-size:
 .authenticationInfo .am-form-group {padding-left:30px;height: 60px;line-height: 60px;}
 .authenticationInfo .am-form-group .am-form-label{text-align: left;}
 .authenticationInfo .am-form-content{border: none;}
-.authenticationInfo .am-form-group input {height:36px;line-height:36px;border: 1px solid #eee !important;width: 200px;outline: none;padding:0px 5px ;}
+.authenticationInfo .am-form-group input {height:36px;line-height:36px;border: 1px solid #eee !important;width: 400px;outline: none;padding:0px 5px ;}
 /*示例*/
 .cardlist{padding:10px 0px 20px;}
 .cardlist li{float:none;width:100% ;overflow: hidden;}

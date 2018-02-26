@@ -14,6 +14,12 @@
             background-color: #fff;
             border: 1px solid lightgray;
         }
+        .authenticationInfo{
+            /*text-align: center !important;*/
+        }
+        .am-form-label{
+            min-width: 140px !important;
+        }
 
     </style>
 @endsection
@@ -53,15 +59,15 @@
                         </div>
                     </div>
                     <div class="am-form-group">
-                        <label for="user-mail" class="am-form-label">您目前从事专业：</label>
+                        <label for="user-profession" class="am-form-label">您目前从事专业：</label>
                         <div class="am-form-content">
-                            <input type="text" id="profession" name="profession" placeholder="请设置您目前从事的专业，将显示在你的基本信息不可修改。">
+                            <input type="text" id="profession" name="profession" placeholder="请设置您目前从事的专业，将显示在你的基本信息且不可修改。">
                         </div>
                     </div>
                     <div class="am-form-group">
-                        <label for="user-mail" class="am-form-label">您提供服务的单位：</label>
+                        <label for="user-workplace" class="am-form-label">您提供服务的单位：</label>
                         <div class="am-form-content">
-                            <input type="email" id="email" name="email" placeholder="请输入负责人联系邮箱">
+                            <input type="text" id="workplace" name="workplace" placeholder="请输入你目前提供服务的单位，将显示在你的基本信息且不可修改。">
                         </div>
                     </div>
                 </div>
@@ -71,6 +77,20 @@
 
                     <input type="file" name="id-card-front" class="hide" onchange='showIdCardPreview(this, "front")'>
                     <input type="file" name="id-card-back" class="hide" onchange='showIdCardPreview(this, "back")'>
+                    <div class="authenticationInfo">
+                        <div class="am-form-group">
+                            <label for="user-certificate-name" class="am-form-label">专业证书名称：</label>
+                            <div class="am-form-content">
+                                <input type="text" id="certificate_name" name="certificate_name" placeholder="请输入你提供的专业认证证书名称。">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-identity" class="am-form-label">专业身份：</label>
+                            <div class="am-form-content">
+                                <input type="text" id="identity" name="identity" placeholder="eg:医生、教授、工程师、注册会计师、厨师、技师等">
+                            </div>
+                        </div>
+                    </div>
 
                     <ul class="cardlist">
                         <li>
@@ -151,6 +171,10 @@
             var realName = $("input[name='real_name']").val();
             var tel = $("input[name='tel']").val();
             var email = $("input[name='email']").val();
+            var workplace = $("input[name='workplace']").val();
+            var profession = $("input[name='profession']").val();
+            var certificate_name = $("input[name='certificate_name']").val();
+            var identity = $("input[name='identity']").val();
 
             var idCardFront = $("input[name='id-card-front']");
             var idCardBack = $("input[name='id-card-back']");
@@ -182,11 +206,43 @@
                 swal("", "邮箱格式不正确", "error");
                 return;
             }
+            if(profession === ''){
+                swal("","从事专业不能为空", "error");
+                return;
+            }else if(profession.length >100){
+                swal("","专业名称不能长于100字", "error");
+                return;
+            }
+            if(workplace === ''){
+                swal("","服务单位不能为空", "error");
+                return;
+            }else if(workplace.length >100){
+                swal("","服务单位不能长于100字", "error");
+                return;
+            }
+            if(certificate_name === ''){
+                swal("","证书名称不能为空", "error");
+                return;
+            }else if(certificate_name.length >100){
+                swal("","证书名称不能长于100字", "error");
+                return;
+            }
+            if(identity === ''){
+                swal("","专业身份不能为空", "error");
+                return;
+            }else if(identity.length >100){
+                swal("","专业身份不能长于100字", "error");
+                return;
+            }
 
             var formData = new FormData();
             formData.append("mediator_name", realName);
             formData.append("tel", tel);
             formData.append("email", email);
+            formData.append("profession", profession);
+            formData.append("workplace", workplace);
+            formData.append("certificate_name", certificate_name);
+            formData.append("identity", identity);
 
             if (!isUploadIdCardFront) {
                 swal({

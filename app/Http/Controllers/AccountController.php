@@ -570,7 +570,11 @@ class AccountController extends Controller {
                     if ($userinfo->save()) {
                         //更新serviceinfo -ename字段
                         $serviceinfo = Serviceinfo::where('uid',$userinfo->uid)
-                            ->update(['ename'=>$request->input('mediator_name')]);
+                            ->update([
+                                'ename'=>$request->input('mediator_name'),
+                                'field'=>$request->input('field'),
+                                'self_statement'=>$request->input('self_statement'),
+                            ]);
                         $data['status'] = 200;
                         $data['msg'] = "上传成功";
                         return $data;
@@ -637,7 +641,13 @@ class AccountController extends Controller {
                     if ($userinfo->save()) {
                         //更新serviceinfo -ename字段
                         $serviceinfo = Serviceinfo::where('uid',$userinfo->uid)
-                            ->update(['ename'=>$request->input('mediator_name')]);
+                            ->update([
+                                'ename'=>$request->input('mediator_name'),
+                                'current_profession'=>$request->input('profession'),
+                                'workplace'=>$request->input('workplace'),
+                                'certificate_name'=>$request->input('certificate_name'),
+                                'identity'=>$request->input('identity'),
+                            ]);
                         $data['status'] = 200;
                         $data['msg'] = "上传成功";
                         return $data;

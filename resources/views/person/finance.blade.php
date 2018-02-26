@@ -14,6 +14,13 @@
             background-color: #fff;
             border: 1px solid lightgray;
         }
+        .am-form-label{
+            min-width: 140px !important;
+        }
+        .am-form-content textarea{
+            width: 400px;
+            line-height:1.5;
+        }
 
     </style>
 @endsection
@@ -33,7 +40,6 @@
             @if($data["is_vertify"] == -1)
                 <div class="authenticationInfo">
                     <p class="title">填写机构信息</p>
-
                     <div class="am-form-group">
                         <label for="user-name" class="am-form-label">实习中介机构名称：</label>
                         <div class="am-form-content">
@@ -50,6 +56,18 @@
                         <label for="user-mail" class="am-form-label">负责人联系邮箱：</label>
                         <div class="am-form-content">
                             <input type="email" id="email" name="email" placeholder="请输入负责人联系邮箱">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-field" class="am-form-label">中介领域：</label>
+                        <div class="am-form-content">
+                            <input type="text" id="field" name="field" placeholder="请输入中介领域（工美设计、医院护士、公司职位等）">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-self-statement" class="am-form-label">机构自述：</label>
+                        <div class="am-form-content">
+                            <textarea  rows="3" name="self_statement" placeholder="描述你的机构职能，简介情况等" id="self_statement"></textarea>
                         </div>
                     </div>
                 </div>
@@ -139,6 +157,10 @@
             var realName = $("input[name='real_name']").val();
             var tel = $("input[name='tel']").val();
             var email = $("input[name='email']").val();
+            var field = $("input[name='field']").val();
+            var self_statement_raw = $("textarea[name='self_statement']");
+            var self_statement = self_statement_raw.val().replace(/\r\n/g, '</br>');
+            self_statement = self_statement.replace(/\n/g, '</br>');
 
             var idCardFront = $("input[name='id-card-front']");
             var idCardBack = $("input[name='id-card-back']");
@@ -170,11 +192,21 @@
                 swal("", "邮箱格式不正确", "error");
                 return;
             }
+            if(field === ''){
+                swal("","中介领域不能为空", "error");
+                return;
+            }else if(field.length > 100){
+                swal("","中介领域长度不能超过100字", "error");
+                return;
+            }
+
 
             var formData = new FormData();
             formData.append("mediator_name", realName);
             formData.append("tel", tel);
             formData.append("email", email);
+            formData.append("field", field);
+            formData.append("self_statement", self_statement);
 
             if (!isUploadIdCardFront) {
                 swal({
