@@ -97,6 +97,14 @@
         .fr {
             text-align: center;
         }
+        .service_content{
+            float:left;
+            overflow:hidden;
+            height:30px;
+            width: 50%;
+            font-size: smaller;
+            text-align: left;
+        }
     </style>
 @endsection
 @section('content')
@@ -214,10 +222,16 @@
 
                         <div class="am-tabs-bd">
                             <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-                                <p style="font-size:15px;line-height: 24px;">
-                                    <span style="color: #b84554;">温馨提示：购买服务，不亦乐乎不收取任何费用，请勿相信服务商任何理由的加价交易行为。</span><br>
+                                <span style="color: #b84554;">温馨提示：购买服务，不亦乐乎不收取任何费用，请勿相信服务商任何理由的加价交易行为。</span><br>
+                                <span style="font-size: 1.3rem">服务详情：</span>
+                                <p style="font-size:15px;line-height: 24px;margin-left: 2rem;">
                                     {!! $data["detail"]->describe !!}
                                 </p>
+                                <span style="font-size: 1.3rem">服务者自述：</span>
+                                <p style="font-size:15px;line-height: 24px;margin-left: 2rem;">
+                                    {!! $data['serviceinfo']['brief'] !!}
+                                </p>
+
                             </div>
                             <div class="am-tab-panel am-fade" id="tab2">
                                 <div class="buyer_pj" style="display: block;">
@@ -384,44 +398,78 @@
                                     <div class="fl" style="float: left;">所在地：</div>
                                     <div class="locus"
                                          style="background: url({{asset('images/shop_680.png')}}) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
-                                    <div style="float:left;overflow:hidden;height:30px;">{{$data['serviceinfo']['city']}}</div>
+                                    <div class="service_content">{{$data['serviceinfo']['city']}}</div>
                                     <div class="clear"></div>
                                 </div>
-                                @if($data['serviceinfo']['current_edu'] !="")
-                                    <div class="service_info">
-                                        <div class="fl" style="float: left;">就读院校：</div>
-                                        <div style="float:left;overflow:hidden;height:30px;">{{explode('@',$data['serviceinfo']['current_edu'])[0]}}
-                                            |
-                                            @if(explode('@',$data['serviceinfo']['current_edu'])[1] == 0)
-                                                博士及已上
-                                            @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
-                                                硕士
-                                            @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 2)
-                                                学士
-                                            @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
-                                                高中及以下
-                                            @endif
+                                @if($data["detail"]->type == 0)
+                                    @if($data['serviceinfo']['has_student'] == 0)
+                                        <div class="service_info">
+                                            <div class="fl" style="float: left;">毕业院校：</div>
+                                            <div class="service_content">{{explode('@',$data['serviceinfo']['graduate_edu'])[0]}}|
+                                                {{explode('@',$data['serviceinfo']['graduate_edu'])[2]}}
+                                                |
+                                                @if(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 0)
+                                                    博士及已上
+                                                @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 1)
+                                                    硕士
+                                                @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 2)
+                                                    学士
+                                                @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 3)
+                                                    高中及以下
+                                                @endif
+                                            </div>
+                                            <div class="clear"></div>
                                         </div>
-                                        <div class="clear"></div>
-                                    </div>
+                                    @else
+                                        <div class="service_info">
+                                            <div class="fl" style="float: left;">就读院校：</div>
+                                            <div class="service_content">{{explode('@',$data['serviceinfo']['current_edu'])[0]}}|
+                                                {{explode('@',$data['serviceinfo']['current_edu'])[2]}}
+                                                |
+                                                @if(explode('@',$data['serviceinfo']['current_edu'])[1] == 0)
+                                                    博士及已上
+                                                @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
+                                                    硕士
+                                                @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 2)
+                                                    学士
+                                                @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 3)
+                                                    高中及以下
+                                                @endif
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    @endif
+                                @elseif($data["detail"]->type == 1){{--实习中介--}}
+                                <div class="service_info">
+                                    <div class="fl" style="float: left;">中介领域：</div>
+                                    <div class="service_content">{{$data['serviceinfo']['field']}}</div>
+                                    <div class="fl" style="float: left;">机构自述：</div>
+                                    <div style="float:left;overflow:hidden;text-align: initial;font-size: smaller;">{!! $data['serviceinfo']['self_statement'] !!}</div>
+                                    <div class="clear"></div>
+                                </div>
+                                @elseif($data["detail"]->type == 2){{--专业问答--}}
+                                <div class="service_info">
+                                    <div class="fl" style="float: left;"><strong>从事专业：</strong></div>
+                                    <div class="service_content">{{$data['serviceinfo']['current_profession']}}</div>
+                                    <div class="fl" style="float: left;"><strong>服务单位：</strong></div>
+                                    <div class="service_content">{{$data['serviceinfo']['workplace']}}</div>
+                                    <div class="fl" style="float: left;"><strong>专业身份：</strong></div>
+                                    <div class="service_content">{{$data['serviceinfo']['identity']}}</div>
+                                    <div class="fl" style="float: left;"><strong>专业证书：</strong></div>
+                                    <div class="service_content">{{$data['serviceinfo']['certificate_name']}}</div>
+                                    <div class="clear"></div>
+                                </div>
                                 @endif
                                 <div class="service_info">
-                                    <div class="fl" style="float: left;">毕业院校：</div>
-                                    <div style="float:left;overflow:hidden;height:30px;">{{explode('@',$data['serviceinfo']['graduate_edu'])[0]}}
-                                        |
-                                        @if(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 0)
-                                            博士及已上
-                                        @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 1)
-                                            硕士
-                                        @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 2)
-                                            学士
-                                        @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 1)
-                                            高中及以下
-                                        @endif
+                                    <div style="float:left;overflow:hidden;height:30px;">
+                                        <span class="am-badge am-badge-warning">
+                                        @if($data['serviceinfo']['has_video'] ==0)
+                                                不提供视频教程
+                                            @else
+                                                提供视频教程
+                                            @endif
+                                        </span>
                                     </div>
-                                    <div class="clear"></div>
-                                </div>
-                                <div class="service_info">
                                     <div class="fl" style="float: left;margin-bottom: 1rem">
                                         <span class="am-badge am-badge-warning">
                                         @if($data['serviceinfo']['is_offline'] ==0)
@@ -430,15 +478,6 @@
                                                 仅支持线上交易
                                             @else
                                                 支持线上或线下交易
-                                            @endif
-                                        </span>
-                                    </div>
-                                    <div style="float:left;overflow:hidden;height:30px;">
-                                        <span class="am-badge am-badge-warning">
-                                        @if($data['serviceinfo']['has_video'] ==0)
-                                                不提供视频教程
-                                            @else
-                                                提供视频教程
                                             @endif
                                         </span>
                                     </div>

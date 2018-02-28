@@ -65,6 +65,7 @@ class VerificationController extends Controller {
 //            $data['enprinfo'] = Enprinfo::find($eid);
 //            $data['industry'] = Industry::all();
             $data['userinfo'] = Userinfo::where('uid',$uid)->first();
+            $data['serviceinfo'] = Serviceinfo::where('uid',$uid)->first();
         }
         return $data;
     }

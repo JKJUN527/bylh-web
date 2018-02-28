@@ -60,7 +60,7 @@
                     <p class="am-form-help">企业logo</p>
 
                     <div class="info-m">
-                        <div onclick="focususername();"><b>企业名称：<i>{{$data['serviceinfo']->ename}}</i></b></div>
+                        <div onclick="focususername();"><b>服务商昵称：<i>{{$data['serviceinfo']->ename}}</i></b></div>
                         <div onclick="focususernote();"><b>服务者自述：</b><br><i>{!! $data['serviceinfo']->brief !!}</i></div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                     <form class="am-form" id="doc-vld-msg">
                         <fieldset>
                             <div class="am-form-group">
-                                <label for="doc-vld-name-2-1" class="label_title">企业名称：</label>
+                                <label for="doc-vld-name-2-1" class="label_title">服务商昵称：</label>
                                 <input  class="service_info" name="username" type="text" id="service_name" minlength="3" placeholder="给你的服务起一个响亮的名字吧！"
                                         value="{{$data['serviceinfo']->ename}}" required/>
                             </div>

@@ -157,6 +157,7 @@
                 type: "get",
                 success: function (data) {
                     var userinfo = data['userinfo'];
+                    var serviceinfo = data['serviceinfo'];
 
                     var sex = "男";
                     if(userinfo['sex']==1){
@@ -185,11 +186,19 @@
                         "<td>联系邮箱</td>" +
                         "<td>" + userinfo['mail'] + "</td>" +
                         "</tr>";
-
                     html += "<tr>" +
                         "<td>所在城市</td>" +
                         "<td>" + userinfo['city'] + "</td>" +
                         "</tr>";
+                    html += "<tr>" +
+                            "<td>中介领域</td>" +
+                            "<td>" + serviceinfo['field'] + "</td>" +
+                            "</tr>";
+                    html += "<tr>" +
+                            "<td>机构自述</td>" +
+                            "<td>" + serviceinfo['self_statement'] + "</td>" +
+                            "</tr>";
+
                     html += "<tr>" +
                         "<td colspan='2'>营业执照图片</td></tr>" +
                         "<tr><td colspan='2'><img src=" + photo[0] + " width='100%'/></td>" +
