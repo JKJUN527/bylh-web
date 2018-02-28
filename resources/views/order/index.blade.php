@@ -112,6 +112,11 @@
                                         </div>
                                     </div>
                                 @endforeach
+                                <div class="pager_container" style="margin-left: 50px;">
+                                    <nav>
+                                        {!! $data["orderlist"]->render() !!}
+                                    </nav>
+                                </div>
                             </div>
 
                         </div>

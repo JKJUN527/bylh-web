@@ -503,14 +503,13 @@ class OrderController extends Controller {
         if ($uid == 0) {//用户未登陆
             return view('account.login', ['data' => $data]);
         }
-
         $data['orderlist'] = Orders::where(function ($query) use($uid){
             $query->where('s_uid',$uid)
                 ->orWhere(function ($query) use ($uid) {
                     $query->where('d_uid',$uid);
                 });
         })
-        ->paginate(20);
+        ->paginate(10);
         foreach ($data['orderlist'] as $order){
             if($order->service_id =='' ||$order->service_id ==null){
                 //
