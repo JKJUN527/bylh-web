@@ -786,7 +786,7 @@ class ServiceController extends Controller {
                 ->where('bylh_servicereviews.type', 0)
                 ->where('state', 0)
                 ->orderby('created_at', 'desc')
-                ->paginate(15);//默认一页显示15条评价
+                ->paginate(15,['*'],"viewpage");//默认一页显示15条评价
             //查看该服务成交次数
             $data['ordernum'] = Orders::where('service_id',$sid)
                 ->where('type',$request->input('type'))
@@ -805,7 +805,7 @@ class ServiceController extends Controller {
                     $query->where('state',2)
                         ->orWhere('state',3);
                 })
-                ->paginate(15);//默认一页显示15条
+                ->paginate(15,['*'],"orderpage");//默认一页显示15条
             //服务商服务相关信息
             $data['serviceinfo'] = Serviceinfo::where('uid', $data['detail']->uid)->first();
         }

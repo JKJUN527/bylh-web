@@ -215,13 +215,13 @@
             <div class="am-u-lg-9 am-u-md-9 am-u-sm-9" style="border: 2px solid #eee;padding: 20px;background: #fff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
                 <div class="am-tabs" data-am-tabs style="margin:10px;">
                     <ul class="am-tabs-nav am-nav am-nav-tabs" style="margin:10px;">
-                        <li class="am-active"><a href="#tab1" style="font-weight: bold;font-size: 18px;margin-right: 50px;">服务详情</a></li>
-                        <li><a href="#tab2" style="font-weight: bold; font-size: 18px;margin-right: 50px;">雇主评论</a></li>
-                        <li><a href="#tab3" style="font-weight: bold;font-size: 18px;margin-right: 50px;">成交记录</a></li>
+                        <li @if($data['tab_detail']== 0) class="am-active" @endif ><a href="#tab1" style="font-weight: bold;font-size: 18px;margin-right: 50px;">服务详情</a></li>
+                        <li @if($data['tab_detail']== 1) class="am-active" @endif><a href="#tab2" style="font-weight: bold; font-size: 18px;margin-right: 50px;">雇主评论</a></li>
+                        <li @if($data['tab_detail']== 2) class="am-active" @endif><a href="#tab3" style="font-weight: bold;font-size: 18px;margin-right: 50px;">成交记录</a></li>
                     </ul>
 
                         <div class="am-tabs-bd">
-                            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                            <div class="am-tab-panel am-fade @if($data['tab_detail']== 0) am-active am-in @endif" id="tab1">
                                 <span style="color: #b84554;">温馨提示：购买服务，不亦乐乎不收取任何费用，请勿相信服务商任何理由的加价交易行为。</span><br>
                                 <span style="font-size: 1.3rem">服务详情：</span>
                                 <p style="font-size:15px;line-height: 24px;margin-left: 2rem;">
@@ -233,7 +233,7 @@
                                 </p>
 
                             </div>
-                            <div class="am-tab-panel am-fade" id="tab2">
+                            <div class="am-tab-panel am-fade @if($data['tab_detail']== 1) am-active am-in @endif" id="tab2">
                                 <div class="buyer_pj" style="display: block;">
 
                                     <div class="pl-cont">
@@ -332,6 +332,13 @@
                                                     <div class="clear"></div>
                                                 </div>
                                             @endforeach
+                                                <nav>
+                                                    {!! $data["review"]->appends([
+                                                    'tab_detail'=>1,
+                                                    'id'=>$data['detail']->id,
+                                                    'type'=>$data['detail']->type
+                                                    ])->render() !!}
+                                                </nav>
                                             <div class="clear"></div>
                                         </div>
                                         <div style="height:30px"></div>
@@ -339,7 +346,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="am-tab-panel am-fade" id="tab3">
+                            <div class="am-tab-panel am-fade @if($data['tab_detail']== 2) am-active am-in @endif" id="tab3">
                                 <div class="trade_datalist" style="display: block;">
                                     <div class="gettradeorder_datalist" style="padding: 20px 15px">
 
@@ -375,6 +382,13 @@
                                             @endforeach
                                             </tbody>
                                         </table>
+                                        <nav>
+                                            {!! $data['orderinfo']->appends([
+                                            'tab_detail'=>2,
+                                            'id'=>$data['detail']->id,
+                                            'type'=>$data['detail']->type
+                                            ])->render() !!}
+                                        </nav>
                                     </div>
                                     <div class="look"></div>
                                 </div>

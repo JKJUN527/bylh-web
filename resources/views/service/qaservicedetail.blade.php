@@ -487,6 +487,13 @@
                                             @endforeach
                                             </tbody>
                                         </table>
+                                        <nav>
+                                            {!! $data['orderinfo']->appends([
+                                            'tab_detail'=>2,
+                                            'id'=>$data['detail']->id,
+                                            'type'=>$data['detail']->type
+                                            ])->render() !!}
+                                        </nav>
                                     </div>
                                     <div class="look"></div>
                                 </div>
