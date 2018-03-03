@@ -254,7 +254,7 @@
                                 <input type="text" id="service_price" class="am-form-field" placeholder="单次服务价格" style="float: left;">
                                 <div style="display: grid;" id="price_type">
                                     <select data-am-selected="{btnWidth: '130%',btnStyle: 'warning'}" name="price_type">
-                                        <option value="0">/8小时</option>
+                                        <option value="0">/小时</option>
                                         <option value="1">/天</option>
                                         <option value="2" selected>/次</option>
                                         <option value="3">/套</option>

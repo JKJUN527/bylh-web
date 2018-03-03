@@ -446,9 +446,9 @@
                                                             @else
                                                                 ￥{{$hotest1->price}}
                                                                 @if($hotest1->price_type ==0)
-                                                                    /8h
+                                                                    /小时
                                                                 @elseif($hotest1->price_type ==1)
-                                                                    /day
+                                                                    /天
                                                                 @elseif($hotest1->price_type ==2)
                                                                     /次
                                                                 @elseif($hotest1->price_type ==3)
@@ -508,9 +508,9 @@
                                                             @else
                                                                 ￥{{$hotest2->price}}
                                                                 @if($hotest2->price_type ==0)
-                                                                    /8h
+                                                                    /小时
                                                                 @elseif($hotest2->price_type ==1)
-                                                                    /day
+                                                                    /天
                                                                 @elseif($hotest2->price_type ==2)
                                                                     /次
                                                                 @elseif($hotest2->price_type ==3)
@@ -607,9 +607,9 @@
                                                             @else
                                                                 ￥{{$hotest3->price}}
                                                                 @if($hotest3->price_type ==0)
-                                                                    /8h
+                                                                    /小时
                                                                 @elseif($hotest3->price_type ==1)
-                                                                    /day
+                                                                    /天
                                                                 @elseif($hotest3->price_type ==2)
                                                                     /次
                                                                 @elseif($hotest3->price_type ==3)

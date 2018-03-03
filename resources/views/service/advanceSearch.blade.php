@@ -362,13 +362,15 @@
                                                         @else
                                                             ￥{{$s->price}}
                                                             @if($s->price_type ==0)
-                                                                /8h
+                                                                /小时
                                                             @elseif($s->price_type ==1)
-                                                                /day
+                                                                /天
                                                             @elseif($s->price_type ==2)
                                                                 /次
                                                             @elseif($s->price_type ==3)
                                                                 /套
+                                                            @elseif($s->price_type ==4)
+                                                                /其他
                                                             @endif
                                                         @endif
                                                     </small><br>
@@ -424,9 +426,9 @@
                                                         @else
                                                             ￥{{$s->price}}
                                                             @if($s->price_type ==0)
-                                                                /8h
+                                                                /小时
                                                             @elseif($s->price_type ==1)
-                                                                /day
+                                                                /天
                                                             @elseif($s->price_type ==2)
                                                                 /次
                                                             @elseif($s->price_type ==3)
@@ -487,13 +489,15 @@
                                                                 @else
                                                                     ￥{{$s->price}}
                                                                     @if($s->price_type ==0)
-                                                                        /8h
+                                                                        /小时
                                                                     @elseif($s->price_type ==1)
-                                                                        /day
+                                                                        /天
                                                                     @elseif($s->price_type ==2)
                                                                         /次
                                                                     @elseif($s->price_type ==3)
                                                                         /套
+                                                                    @elseif($s->price_type ==4)
+                                                                        /其他
                                                                     @endif
                                                                 @endif
                                                             </small><br>
