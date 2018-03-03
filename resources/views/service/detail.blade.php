@@ -152,7 +152,7 @@
                                     ￥{{$data["detail"]->price}}
                                     <span style="color:#666;font-size:14px;font-weight:100">
                                         @if($data["detail"]->price_type == 0)
-                                            /8小时
+                                            /小时
                                         @elseif($data["detail"]->price_type == 1)
                                             /天
                                         @elseif($data["detail"]->price_type == 2)

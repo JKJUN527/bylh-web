@@ -523,16 +523,14 @@
                 <div class="rank_content"
                      style="margin: 0 60px;border-bottom: 2px solid #df3536;border-left: 2px solid #df3536;border-right: 2px solid #df3536;">
                     <ul>
-                        @foreach([1,2,3] as $i)
+                        @foreach($data['Service_list'] as $service)
                             <li style="text-align: center;">
                                 <div class="box1"></div>
                                 <div class="outer-con" style="padding: 10px;position: inherit;">
-                                    <a href="# "><img src="{{asset("images/f2.jpg")}}" style="width: 50%;"/>
+                                    <a href="/service/getAllservices?uid={{$service->uid}}">
+                                        <img src="{{$service->elogo or asset("images/f2.jpg")}}" style="width: 50%;"/>
                                         <div class="title ">
-                                            专业{{$i}}
-                                        </div>
-                                        <div class="sub-title ">
-                                            好评率 100%
+                                            {{$service->ename}}
                                         </div>
                                         <div class="right-panel">
                                             <button type="button" class="am-btn am-btn-danger">查看详情</button>

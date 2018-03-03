@@ -28,6 +28,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use MongoDB\Driver\Query;
 
 class ServiceController extends Controller {
 
@@ -221,7 +222,7 @@ class ServiceController extends Controller {
                         ->update(['tel' => $tel, 'mail' => $email]);
                     $data['status'] = 200;
                     $data['msg'] = "操作成功";
-                    $data['demands'] = $this->recommendDemands($request);
+//                    $data['demands'] = $this->recommendDemands($request);
                     return $data;
                 } else {
                     $data['status'] = 400;
@@ -303,7 +304,7 @@ class ServiceController extends Controller {
                         ->update(['tel' => $tel, 'mail' => $email]);
                     $data['status'] = 200;
                     $data['msg'] = "操作成功";
-                    $data['demands'] = $this->recommendDemands($request);
+//                    $data['demands'] = $this->recommendDemands($request);
                     return $data;
                 } else {
                     $data['status'] = 400;
@@ -660,7 +661,30 @@ class ServiceController extends Controller {
         //返回上次查询条件
         $data['condition'] = $request->all();
 
-        //return $data;
+        //返回对应类型服务商排行
+        if($request->has('type'))
+            $type = $request->input('type');
+        else
+            $type =0;
+        $data['Service_list'] = array();
+        $servicers = DB::table('bylh_orders')
+            ->select(DB::raw('count(*) as order_count, s_uid'))
+            ->where('type', '=', $type)
+            ->where( function ($query) {
+                $query->where('state',2)
+                    ->orwhere('state',3);
+            })
+            ->groupby('s_uid')
+            ->orderBy('order_count','desc')
+            ->take(6)
+            ->get();
+        foreach ($servicers as $servicer){
+            $data['Service_list'][] = Serviceinfo::select('uid','elogo','ename')
+                ->where('uid',$servicer->s_uid)
+                ->first();
+        }
+
+//        return $data;
         return view('service.advanceSearch', ['data' => $data]);
     }
     //传入服务id,及对应的服务类型，返回具体的服务详情

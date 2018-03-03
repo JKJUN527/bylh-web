@@ -117,7 +117,7 @@ class DemandsController extends Controller {
                             ->update(['tel'=>$tel,'mail'=>$email]);
                         $data['status'] = 200;
                         $data['msg'] = "操作成功";
-                        $data['services'] = $this->recommendServices($request);
+//                        $data['services'] = $this->recommendServices($request);
                         return $data;
                     } else {
                         $data['status'] = 400;

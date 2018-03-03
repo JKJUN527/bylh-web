@@ -302,33 +302,99 @@
                         <div class="s-bar">
                             <a href="suggest.html"><i class="s-icon"></i>意见反馈</a>
                         </div>
+
                     </div>
 
                     <!--推荐服务商-->
                     <div class="twoTab">
                         <div class="twoTabModel Coupon">
-                            <h5 class="squareTitle"><a href="#"><span class="splitBorder"></span>推荐服务商<i class="am-icon-angle-right"></i></a></h5>
+                            <h5 class="squareTitle">
+                                <a href="#"><span class="splitBorder"></span>
+                                    @if($data['type']==1)
+                                        猜你感兴趣的服务
+                                    @elseif($data['type']==2)
+                                        猜你感兴趣的需求
+                                    @endif
+                                    <i class="am-icon-angle-right"></i>
+                                </a>
+                            </h5>
                             <div class="Box">
                                 <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
 				  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
-                                    @foreach($data['adservers'] as $adserver)
-                                    <li>
-                                        <div class="am-gallery-item">
-                                            <a href="/service/getAllservices?uid={{$adserver->uid}}" class="">
-                                                <img src="
-                                                @if($adserver->elogo == "" || $adserver->elogo == null)
-                                                        {{asset('images/avatar.png')}}
-                                                @else
-                                                        {{$adserver->elogo}}
-                                                @endif
-                                                        "  alt="{{$adserver->ename}}"/>
-                                                <h3 class="am-gallery-title" style="font-size: 1rem;text-align: center;">{{$adserver->ename}}</h3>
-                                                <h3 class="am-gallery-title" style="font-size: 0.8rem;text-align: center;">{{$adserver->city}}</h3>
-                                                {{--<div class="am-gallery-desc" style="font-size: 1rem; margin-left: 2.5rem;">{{$adserver->city}}</div>--}}
-                                            </a>
-                                        </div>
-                                    </li>
-                                    @endforeach
+                                    @if($data['type']==1)
+                                        @foreach($data['recommendServices'] as $service)
+                                        <li>
+                                            <div class="am-gallery-item">
+                                                <a href="/service/detail?id={{$service->id}}&type={{$service->type}}" class="">
+                                                    <img src="
+                                                    @if($service->picture != null)
+                                                        <?php
+                                                        $pics = explode(';', $service->picture);
+                                                        $baseurl = explode('@', $pics[0])[0];
+                                                        $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                        $imagepath = explode('@', $pics[0])[1];
+                                                        ?>
+                                                        {{$baseurl}}{{$imagepath}}
+                                                    @else
+                                                        {{asset('images/f3.png')}}
+                                                    @endif
+                                                            "  alt="{{$service->title}}"/>
+                                                    <h3 class="am-gallery-title" style="font-size: 1rem;text-align: center;">{{mb_substr($service->title,0,23,"utf-8")}}</h3>
+                                                    <h3 class="am-gallery-title" style="font-size: 0.8rem;text-align: center;">
+                                                        @if($service->price == -1)
+                                                            价格面议
+                                                        @else
+                                                            ￥{{$service->price}}
+                                                            @if($service->price_type == 0)
+                                                                /小时
+                                                            @elseif($service->price_type == 1)
+                                                                /天
+                                                            @elseif($service->price_type == 2)
+                                                                /次
+                                                            @elseif($service->price_type == 3)
+                                                                /套
+                                                            @elseif($service->price_type == 4)
+                                                                /其他
+                                                            @endif
+                                                        @endif
+                                                    </h3>
+                                                    {{--<div class="am-gallery-desc" style="font-size: 1rem; margin-left: 2.5rem;">{{$adserver->city}}</div>--}}
+                                                </a>
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    @elseif($data['type']==2)
+                                        @foreach($data['recommendDemands'] as $demand)
+                                            <li>
+                                                <div class="am-gallery-item">
+                                                    <a href="/demands/detail?id={{$demand->id}}" class="">
+                                                        <img src="
+                                                        @if($demand->picture != null)
+                                                            <?php
+                                                            $pics = explode(';', $demand->picture);
+                                                            $baseurl = explode('@', $pics[0])[0];
+                                                            $baseurl = substr($baseurl, 0, strlen($baseurl) - 1);
+                                                            $imagepath = explode('@', $pics[0])[1];
+                                                            ?>
+                                                            {{$baseurl}}{{$imagepath}}
+                                                        @else
+                                                            {{asset('images/f3.png')}}
+                                                        @endif
+                                                                "  alt="{{$demand->title}}" style="width:100px; height: 100px"/>
+                                                        <h3 class="am-gallery-title" style="font-size: 1rem;text-align: center;">{{mb_substr($demand->title,0,23,"utf-8")}}</h3>
+                                                        <h3 class="am-gallery-title" style="font-size: 0.8rem;text-align: center;">
+                                                            @if($demand->price ==-1)
+                                                                价格面议
+                                                            @else
+                                                                ￥{{$demand->price}}
+                                                            @endif
+                                                        </h3>
+                                                        {{--<div class="am-gallery-desc" style="font-size: 1rem; margin-left: 2.5rem;">{{$adserver->city}}</div>--}}
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div>

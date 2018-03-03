@@ -85,8 +85,8 @@
 <div class="shopNav">
     <div class="slideall" style="height: auto;">
 
-        <div class="long-title" style="margin-top: 135px;margin-left: 120px;"><span class="all-goods"
-                                                                                    data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">全部分类</span>
+        <div class="long-title" style="margin-top: 135px;margin-left: 120px;">
+            <span class="all-goods">全部分类</span>
         </div>
 
         <div class="nav-cont" style="margin-top:135px;max-width: 1250px;margin-left: 120px;background: #ff9933bd;">

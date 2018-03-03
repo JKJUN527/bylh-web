@@ -49,6 +49,18 @@ class AccountController extends Controller {
             case 1://需求用户
                 //三个最新需求
                 $data['demandsList'] = $this->getDemands($data['uid']);
+                //推荐最价格最接近的服务--根据最新发布的需求进行推荐
+                $data['recommendServices'] = array();
+                if(count($data['demandsList']) >0){
+                    $data['recommendServices'] = $this->recommendServices($data['demandsList'][0]);
+                }else{
+                    //需求用户没有发布任何需求，则推荐最新设置的加急服务
+                    $data['recommendServices'] = Genlservices::where('is_urgency',1)
+                        ->where('state',0)
+                        ->orderBy('updated_at','desc')
+                        ->take(6)
+                        ->get();
+                }
                 break;
             case 2://服务用户
                 $info = new InfoController();
@@ -58,6 +70,22 @@ class AccountController extends Controller {
                 $data['servicesList'][] = $this->getGenlservices($data['uid']);
                 $data['servicesList'][] = $this->getFinlservices($data['uid']);
                 $data['servicesList'][] = $this->getQaservices($data['uid']);
+
+                //推荐最新发布的需求--根据服务用户类型进行相应需求推荐
+                $data['recommendDemands'] = array();
+                $user_type = User::where('uid',$data['serviceInfo'][0]->uid)->first();
+                $type = 0;//一般服务
+                if($user_type->finance_verify == 1){
+                    $type = 1;
+                }elseif ($user_type->majors_verify == 1){
+                    $type = 2;
+                }
+                $data['recommendDemands'] = Demands::where('state',0)
+                    ->select('id','title','city','picture','price')
+                    ->where('type',$type)
+                    ->orderBy('updated_at','desc')
+                    ->take(6)
+                    ->get();
                 break;
         }
         $info = new InfoController();
@@ -74,9 +102,9 @@ class AccountController extends Controller {
             ->take(9)
             ->get();
         //推荐服务商
-        $data['adservers'] = Serviceinfo::where('is_urgency', 1)->orderBy('created_at', 'desc')
-            ->take(6)
-            ->get();
+//        $data['adservers'] = Serviceinfo::where('is_urgency', 1)->orderBy('created_at', 'desc')
+//            ->take(6)
+//            ->get();
 //        return $data;
         return view('person.home', ['data' => $data]);
     }
@@ -192,7 +220,56 @@ class AccountController extends Controller {
         else
             return $num;
     }
+    //推荐服务--根据三个class分类
+    public function recommendServices($demandinfo){
+        $data = array();
+        $class1_id = $demandinfo->class1_id;
+        $class2_id = $demandinfo->class2_id;
+        $title = $demandinfo->title;
+        $city = $demandinfo->city;
+        $price = $demandinfo->price;
+        $type = $demandinfo->type;
 
+        switch ($type){
+            case 0:
+                $data = Genlservices::select('id','type','title','city','price','price_type','picture','class1_id')
+                    ->where('state',0)
+                    ->where(function($query) use($class1_id,$city,$title){
+                        $query->orWhere('city','=',$city)
+                            ->orWhere('is_urgency',1)
+                            ->orWhere('class1_id', $class1_id)
+                            ->orWhere('describe', 'like', '%' . $title . '%');
+                    })
+                    ->get();
+                break;
+            case 1:
+                $data = Finlservices::select('id','type','title','city','picture','price','price_type','class1_id')
+                    ->where('state',0)
+                    ->where(function($query) use($class1_id,$city,$title,$price){
+                        $query->orWhere('city','=',$city)
+                            ->orWhere('is_urgency',1)
+                            ->orWhere('class1_id', $class1_id)
+//                            ->orWhere('price',)
+                            ->orWhere('describe', 'like', '%' . $title . '%');
+                    })
+                    ->get();
+                break;
+            case 2:
+                $data = Qaservices::select('id','type','title','city','picture','price','price_type','class1_id')
+                    ->where('state',0)
+                    ->where(function($query) use($class1_id,$city,$title){
+                        $query->orWhere('city','=',$city)
+                            ->orWhere('is_urgency',1)
+                            ->orWhere('class1_id', $class1_id)
+                            ->orWhere('describe', 'like', '%' . $title . '%');
+                    })
+                    ->get();
+                break;
+        }
+
+        return $data;
+    }
+//-------------------------------------------------------------
     //查询用户名是否存在
     public function HasUsername(Request $request){
         $data = array();
