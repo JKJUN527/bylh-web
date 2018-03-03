@@ -81,15 +81,15 @@ Route::any('service/detail',['uses' => 'ServiceController@detail']);
 //评论服务
 Route::post('service/reviewser',['uses' => 'OrderController@reviewService']);
 //获取服务用户所有发布的服务列表
-Route::get('service/getservicesList',['uses' => 'serviceController@getservicesList']);
+Route::get('service/getservicesList',['uses' => 'ServiceController@getservicesList']);
 //获取服务商详情页面
 Route::get('service/serviceproviderInfo', function () {
     return view('service.serviceproviderInfo');
 });
 //获取用户发布所有需求、服务列表
-Route::get('service/getAllservices',['uses' => 'serviceController@getAllservices']);
+Route::get('service/getAllservices',['uses' => 'ServiceController@getAllservices']);
 //专业问答--问答
-Route::post('service/recordQa',['uses' => 'serviceController@recordQa']);
+Route::post('service/recordQa',['uses' => 'ServiceController@recordQa']);
 
 //订单模块
 
