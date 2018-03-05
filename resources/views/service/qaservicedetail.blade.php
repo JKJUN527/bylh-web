@@ -5,6 +5,9 @@
     {{--<link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>--}}
     {{--<link href="{{asset('dist/amazeui.min.css')}}" rel="stylesheet" type="text/css"/>--}}
     <style type="text/css">
+        .long-title{
+            display:none;
+        }
         .comcategory li {
             font-size: 14px;
             padding: 3px;

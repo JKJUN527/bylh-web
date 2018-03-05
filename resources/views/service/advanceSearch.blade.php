@@ -6,6 +6,9 @@
     <link href="{{asset('css/navstyle.css')}}" rel="stylesheet" type="text/css"/>
     {{--<link href="{{asset('bootstrap-4.0.0-dist/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>--}}
     <style>
+        .long-title{
+            display:none;
+        }
         .card{
             width: 32%;
             padding: 5px;

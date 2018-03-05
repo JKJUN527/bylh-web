@@ -14,10 +14,13 @@
      .nav_active{
          background-color: #03A9F4;
      }
-     .nav_img{
+
+     .nav_img_release {
+         float: right;
          width: 7rem;
-         margin-top: -8rem;
-         margin-left: 50rem;
+         margin-top: -6rem;
+         margin-right: -5rem;
+         /*margin-left: 50rem;*/
      }
     </style>
     @section("custom-style")
@@ -70,10 +73,10 @@
                 <input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off">
                 <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="button">
             </form>
-            <img  class="nav_img" src="{{asset('images/bylh01.jpg')}}"/>
         </div>
+        <img class="nav_img_release" src="{{asset('images/bylh01.jpg')}}"/>
         {{--<div class="logoBig" style="margin-top: -15px;margin-left: -50px;">--}}
-            {{--<li><img src="{{asset('images/bylh01.jpg')}}"/></li>--}}
+        {{--<li><img src="{{asset('images/bylh01.jpg')}}"/></li>--}}
         {{--</div>--}}
     </div>
 

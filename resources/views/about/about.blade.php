@@ -94,6 +94,11 @@
     </style>
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
+    <style>
+        .long-title{
+            display:none;
+        }
+    </style>
 @endsection
 @section('content')
     <hr class="am-article-divider"/>

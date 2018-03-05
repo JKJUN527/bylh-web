@@ -28,7 +28,7 @@
         .card img {
             width: 110px;
             height: 110px;
-            top:11%
+            top: 11%
         }
 
         .card-deck {
@@ -40,7 +40,7 @@
             width: 120px;
             overflow: hidden;
             text-align: left;
-            top:20%;
+            top: 20%;
         }
 
         .floor-title {
@@ -79,9 +79,13 @@
             margin-left: 10px;
         }
 
-        /*.category-info{*/
-        /*border-left:4px solid #d2364c;*/
-        /*}*/
+        .category-info {
+            border-left: 2px solid #d2364c;
+            border-right: 2px solid #d2364c;
+            background: #fff;
+            border-top: 1px solid #d2364c;
+            border-bottom: 1px solid #d2364c;
+        }
         .title-first a {
             text-align: center;
             padding: 60px;
@@ -100,7 +104,6 @@
             padding: 3px;
             font-weight: bold;
         }
-
         .demo li {
             float: none;
             width: 100%;
@@ -129,6 +132,7 @@
             right: 0;
             border: 2px solid #e64d2e;
         }
+
 
         .marqueenOne {
             margin-top: -10px;
@@ -173,7 +177,8 @@
             margin-top: 5rem;
             font-size: large;
         }
-        .card-title{
+
+        .card-title {
             font-size: 1.2rem;
             font-weight: bold;
         }
@@ -181,7 +186,7 @@
 @endsection
 @section('content')
     <div class="am-g am-g-fixed">
-        <div class="am-u-lg-2">
+        <div class="am-u-lg-2" style="top:40px;">
             <div id="nav" class="navfull" style="position: static;">
                 <div class="area clearfix">
                     <div class="category-content" id="guide_2">
@@ -192,7 +197,7 @@
                                     <li>
                                         <div class="category-info">
                                             <h3 class="category-name b-category-name">
-                                                <a class="ml-22"
+                                                <a class="ml-22" style="color:#000;"
                                                    href="/service/advanceSearch?type={{$serviceclass1->type}}&class1={{$serviceclass1->id}}"
                                                    title="{{$serviceclass1->name}} ">{{$serviceclass1->name}}</a>
                                             </h3>
@@ -243,7 +248,8 @@
                 <ul class="">
                     <li class="">
                         <a href="#">
-                            <img src="{{asset('images/3.jpg')}}" style="width: 850px;margin-left:-200px;height: 377px;"/>
+                            <img src="{{asset('images/3.jpg')}}"
+                                 style="width: 850px;margin-left:-200px;height: 417px;"/>
                         </a>
                     </li>
                 </ul>
@@ -296,7 +302,8 @@
                     <div class="marqueenOne">
                     <span class="marqueen-title"
                           style="text-align: center;padding-top: 1rem;height:54px;background-image: url({{asset('images/float_box2.png')}});background-repeat: no-repeat;">
-                        <i style="font-size: 1.5rem;color: #fff;" onclick="window.location.href='/news/notice';">本站公告</i></span>
+                        <i style="font-size: 1.5rem;color: #fff;"
+                           onclick="window.location.href='/news/notice';">本站公告</i></span>
                         <div class="demo">
                             <ul>
                                 @foreach($data['notes'] as $note)
@@ -318,7 +325,9 @@
                         <div class="shopTitle" style="margin-left: -20px;">
                             <h4 class="floor-title">需求大厅</h4>
                             <div class="today-brands " style="right:0px;">
-                                <button class="am-btn am-btn-danger am-round more2more" onclick="window.location.href='/demands/advanceSearch'">查看更多</button>
+                                <button class="am-btn am-btn-danger am-round more2more"
+                                        onclick="window.location.href='/demands/advanceSearch'">查看更多
+                                </button>
                             </div>
 
                         </div>
@@ -412,7 +421,9 @@
                         <div class="shopTitle " style="width:110%;">
                             <h4 class="floor-title">一般服务</h4>
                             <div class="today-brands " style="right:0px ;top:13px;">
-                                <button class="am-btn am-btn-danger am-round more2more" onclick="window.location.href='/service/advanceSearch?type=0'">查看更多</button>
+                                <button class="am-btn am-btn-danger am-round more2more"
+                                        onclick="window.location.href='/service/advanceSearch?type=0'">查看更多
+                                </button>
                             </div>
 
                         </div>
@@ -440,7 +451,8 @@
                                                 <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
                                                     <h4 class="card-title">{{mb_substr($hotest1->title,0,10,'utf-8')}}</h4>
                                                     <hr>
-                                                    <p class="card-text"><small class="text-muted" style="color: #885621">
+                                                    <p class="card-text">
+                                                        <small class="text-muted" style="color: #885621">
                                                             @if($hotest1->price ==-1)
                                                                 价格面议
                                                             @else
@@ -474,7 +486,9 @@
                         <div class="shopTitle" style="width:110%;">
                             <h4 class="floor-title">实习中介</h4>
                             <div class="today-brands " style="right:0px ;top:13px;">
-                                <button class="am-btn am-btn-danger am-round more2more" onclick="window.location.href='/service/advanceSearch?type=1'">查看更多</button>
+                                <button class="am-btn am-btn-danger am-round more2more"
+                                        onclick="window.location.href='/service/advanceSearch?type=1'">查看更多
+                                </button>
                             </div>
 
                         </div>
@@ -502,7 +516,8 @@
                                                 <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
                                                     <h4 class="card-title">{{mb_substr($hotest2->title,0,10,'utf-8')}}</h4>
                                                     <hr>
-                                                    <p class="card-text"><small class="text-muted" style="color: #885621">
+                                                    <p class="card-text">
+                                                        <small class="text-muted" style="color: #885621">
                                                             @if($hotest2->price ==-1)
                                                                 价格面议
                                                             @else
@@ -547,7 +562,7 @@
                                     <div class="box1"></div>
                                     <div class="outer-con" style="padding: 10px;position: inherit;">
                                         <a href="/service/getAllservices?uid={{$serviceuser->uid}}">
-                                        <img
+                                            <img
                                                     src="{{$serviceuser->elogo}}" style="width: 50%;"/>
                                             <div class="title ">
                                                 {{$serviceuser->ename}}
@@ -574,7 +589,9 @@
                         <div class="shopTitle ">
                             <h4 class="floor-title">专业问答</h4>
                             <div class="today-brands " style="right:0px ;top:13px">
-                                <button class="am-btn am-btn-danger am-round more2more" onclick="window.location.href='/service/advanceSearch?type=2'">查看更多</button>
+                                <button class="am-btn am-btn-danger am-round more2more"
+                                        onclick="window.location.href='/service/advanceSearch?type=2'">查看更多
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -583,7 +600,7 @@
                             <div class="card-deck-wrapper">
                                 <div class="card-deck">
                                 @foreach($data['hotest3'] as $hotest3)
-                                        <div class="card am-u-lg-2 am-u-md-2 am-u-sm-2">
+                                        <div class="card am-u-lg-2 am-u-md-2 am-u-sm-2 am-u-end">
                                             <a href="/service/detail?id={{$hotest3->id}}&type=2">
                                                 @if($hotest3->picture != null)
                                                     <?php
@@ -601,7 +618,8 @@
                                                 <div class="card-block am-u-lg-2 am-u-md-2 am-u-sm-2">
                                                     <h4 class="card-title">{{mb_substr($hotest3->title,0,10,'utf-8')}}</h4>
                                                     <hr>
-                                                    <p class="card-text"><small class="text-muted" style="color: #885621">
+                                                    <p class="card-text">
+                                                        <small class="text-muted" style="color: #885621">
                                                             @if($hotest3->price ==-1)
                                                                 价格面议
                                                             @else
