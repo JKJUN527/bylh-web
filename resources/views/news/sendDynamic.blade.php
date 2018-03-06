@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/webuploader.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/upload.css')}}"/>
     <link href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
     <style>
         #uploader .filelist li {
             background: url({{asset('images/bg.png')}}) no-repeat;
@@ -33,11 +34,11 @@
         }
 
         .text-box .comment {
-            margin-top: 20px;
-            margin-left: 300px;
+            margin: 20px;
+            /*margin-left: 300px;*/
             border: 1px solid #eee;
             display: block;
-            width: 908px;
+            width: 95%;
             padding: 5px;
             resize: none;
             color: #ccc;
@@ -80,28 +81,26 @@
         .text-box-on .word {
             display: inline;
         }
+        .text-box .am-btn{
+            margin-left: 20px;
+        }
     </style>
 </head>
 <body>
-<div class="inputWhat">
-    <div class="text-box">
-        <textarea class="comment" autocomplete="off">评论…</textarea>
-        <button class="am-btn am-btn-danger" style="margin-left:300px;">发布</button>
-    </div>
-</div>
 <div class="width_auto">
-    <div id="container">
+    <div id="container" data-content="{{$data['forum_id']}}">
+        <div class="text-box">
+            <textarea class="comment" autocomplete="off" name="comment">写点什么吧！</textarea>
+            <button class="am-btn am-btn-danger" id="submit_comment">发布</button>
+        </div>
         <!--头部，相册选择和格式选择-->
         <div id="uploader">
-
             <div class="item_container">
                 <div id="" class="queueList">
                     <div id="dndArea" class="placeholder">
                         <div id="filePicker"></div>
                     </div>
                 </div>
-
-
             </div>
             <div class="statusBar" style="display:none;">
                 <div class="progress">
@@ -122,5 +121,42 @@
 <script src="{{asset('js/webuploader.js')}}"></script>
 <script src="{{asset('js/jquery.sortable.js')}}"></script>
 <script src="{{asset('js/upload.js')}}"></script>
+<script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+<script>
+    $('#submit_comment').click(function () {
+        var forum_id = $('#container').attr('data-content');
+        var description_raw = $("textarea[name='comment']");
+        var description = description_raw.val().replace(/\r\n/g, '</br>');
+        description = description.replace(/\n/g, '</br>');
+        var formdata = new FormData();
+        formdata.append('forum_id',forum_id);
+        formdata.append('content',description);
+
+        $.ajax({
+            url: "/news/sendDynamic",
+            type: "post",
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formdata,
+            success: function (data) {
+                var result = JSON.parse(data);
+                if (result.status === 200) {
+                    swal("",result.msg,"success");
+                    setTimeout(function () {
+                        self.location = '/news';
+                    }, 1200);
+                }else{
+                    swal("",result.msg,"error");
+                    return;
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                swal(xhr.status + "：" + thrownError);
+            }
+        })
+    });
+</script>
 </body>
 </html>

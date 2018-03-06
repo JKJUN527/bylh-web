@@ -103,6 +103,11 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public/adpic'),
         ],
+        /*网站朋友圈图片*/
+        'forum' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/forum'),
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_KEY'),

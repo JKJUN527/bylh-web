@@ -401,9 +401,8 @@
         }
         $('select[name=project]').change(function () {
             var btn3 = $('#select_class3');
-        //            alert($(this).val());
-            btn3.html();
-            btn3.attr('data-content',$(this).val());
+            btn3.html($('select[name=project] option:selected').html());
+            btn3.attr('data-content',$('select[name=project]').val());
         });
         function goto_next() {
             var tel = $('#phone');

@@ -31,8 +31,8 @@
             ratio = window.devicePixelRatio || 1,
 
             // 缩略图大小
-            thumbnailWidth = 110 * ratio,
-            thumbnailHeight = 110 * ratio,
+            thumbnailWidth = 100 * ratio,
+            thumbnailHeight = 100 * ratio,
 
             // 可能有pedding, ready, uploading, confirm, done.
             state = 'pedding',
@@ -138,20 +138,26 @@
         }
 
         // 实例化
+        //noinspection JSDuplicatedDeclaration
         uploader = WebUploader.create({
             pick: {
                 id: '#filePicker',
                 label: '点击选择文件'
             },
             formData: {
-                uid: 123
+                forumid: $("#container").attr('data-content')
             },
             dnd: '#dndArea',
             paste: '#uploader',
             swf: 'resource/Uploader.swf',
+            accept:{
+                title: '只允许图片文件',
+                extensions: 'jpg,jpeg,bmp,png',
+                mimeTypes: 'img/*'
+            },
             chunked: true,
             chunkSize: 512 * 1024,
-            server: '../server/fileupload.php',
+            server: '/news/uploadimg',
             method: 'POST',
             // runtimeOrder: 'flash',
 
@@ -163,9 +169,9 @@
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
-            fileNumLimit: 300,
-            fileSizeLimit: 2000 * 1024 * 1024,    // 200 M
-            fileSingleSizeLimit: 500 * 1024 * 1024    // 50 M
+            fileNumLimit: 4,
+            fileSizeLimit: 20 * 1024 * 1024,    // 20 M
+            fileSingleSizeLimit: 5 * 1024 * 1024    // 5 M
         });
 
         // 拖拽时不接受 js, txt 文件。

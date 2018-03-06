@@ -1,5 +1,5 @@
 @extends('demo.admin',['title'=>6])
-@section('title','新闻动态')
+@section('title','网站动态')
 @section('custom-style')
     <style type="text/css">
         .comcategory li{
@@ -134,6 +134,7 @@
         }
 
         .close {
+            cursor:pointer;
             display: none;
             top: 0px;
             right: 0px;
@@ -200,6 +201,7 @@
         }
 
         .info .praise {
+            cursor:pointer;
             color: #369;
             float: right;
             height: 20px;
@@ -214,7 +216,7 @@
 
         .praises-total {
             margin: 0 0 10px 0;
-            height: 20px;
+            /*height: 20px;*/
             background: url("{{asset('images/praise.png')}}") no-repeat 5px 5px rgb(247, 247, 247);
             padding: 5px 0 5px 25px;
             line-height: 19px;
@@ -260,6 +262,7 @@
         }
 
         .comment-box .comment-content .comment-operate {
+            cursor:pointer;
             display: none;
             color: #369;
             height: 20px;
@@ -344,153 +347,76 @@
                     发布动态
                 </button>
             </div>
-            <div class="am-modal am-modal-alert" tabindex="-1" id="my-content"
-                 style="margin-top: -200px;">
-                <div class="am-modal-dialog">
-                    <div class="am-modal-hd">和我联系</div>
-                    <a href="#">
-                        <div class="serviceMsg">
-                            <img src="{{asset('images/head1.gif')}}"
-                                 style="width:150px;height:150px;">
-                            <p>雇主信息：<span>liyuxiao88</span></p>
-                        </div>
-                    </a>
-                    <div class="am-modal-bd">
-                        <label for="doc-ta-1"></label><br>
-                        {{--<p><input type="textarea" class="am-form-field am-radius" placeholder="椭圆表单域" style="height: 300px;"/></p>--}}
-                        <textarea placeholder="请写上你想说的话" class="am-form-field am-radius"
-                                  style="height:150px;"></textarea>
-                    </div>
-                    <div class="am-modal-footer">
-                        <span class="am-modal-btn" data-am-modal-confirm>提交</span>
-                        <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-                    </div>
-                </div>
-            </div>
             <hr data-am-widget="divider" class="am-divider am-divider-danger" style="border-top: 2px solid #d2364c;" />
             <div class="am-g am-g-fixed allNews">
                 <div id="list">
+                    @foreach($data['dynamic'] as $dynamic)
                     <div class="box clearfix">
-                        <a class="close" href="javascript:;">×</a>
-                        <img class="head" src="{{asset('images/f1.jpg')}}" alt=""/>
+                        @if($dynamic->uid == $data['uid'])
+                            <a class="close delete_dynamic" data-content="{{$dynamic->id}}">×</a>
+                        @endif
+                        <img class="head" src="{{$dynamic->photo or asset('images/mansmall.jpg')}}"/>
                         <div class="content">
                             <div class="main">
                                 <p class="txt">
-                                    <span class="user">Andy：</span>轻轻的我走了，正如我轻轻的来；我轻轻的招手，作别西天的云彩。
+                                    <span class="user">{{$dynamic->username}}：</span>
+                                    {!! $dynamic->content !!}
                                 </p>
                                 <div class="am-g am-g-fixed">
-                                    <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="margin-left:20px;">
-                                        <img class="pic am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end"
-                                             src="{{asset('images/f1.jpg')}}" style="padding:5px;" alt=""/>
-                                        <img class="pic am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end"
-                                             src="{{asset('images/f1.jpg')}}" style="padding:5px;" alt=""/>
-                                        <img class="pic am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end"
-                                             src="{{asset('images/f1.jpg')}}" style="padding:5px;" alt=""/>
-                                        <img class="pic am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end"
-                                             src="{{asset('images/f1.jpg')}}" style="padding:5px;" alt=""/>
-                                    </div>
+                                    <?php
+                                        $pictures = explode("@",$dynamic->picture);
+                                        array_shift($pictures);
+                                        $i = 0;
+                                    ?>
+                                    @if(count($pictures) >0)
+                                        <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="margin-left:20px;">
+                                            @foreach($pictures as $picture)
+                                                <img class="pic am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end"
+                                                 src="{{$picture or asset('images/f9.png')}}" style="padding:5px;width: 157px;height: 157px;"/>
+                                                <?php $i++;?>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="info clearfix">
-                                <span class="time">发布时间：2018-02-28 23:01</span>
-                                <a class="praise" href="javascript:;">赞</a>
+                                <span class="time">发布时间：{{$dynamic->created_at}}</span>
+                                <a class="praise" data-content="{{$dynamic->id}}">赞</a>
                             </div>
-                            <div class="praises-total" total="4" style="display: block;">4个人觉得很赞</div>
+                            <div class="praises-total" style="display: block;"><span>{{$dynamic->start_count}}</span>个人觉得很赞</div>
                             <div class="comment-list">
-                                <div class="comment-box clearfix" user="self">
-                                    <img class="myhead" src="{{asset('images/f1.jpg')}}" alt=""/>
-                                    <div class="comment-content">
-                                        <p class="comment-text"><span class="user">我：</span>写的太好了。</p>
-                                        <p class="comment-time">
-                                            2014-02-19 14:36
-                                            <a href="javascript:;" class="comment-praise" total="1" my="0"
-                                               style="display: inline-block">1 赞</a>
-                                            <a href="javascript:;" class="comment-operate">删除</a>
-                                        </p>
+                                @foreach($data['views'][$dynamic->id] as $view)
+                                    <div class="comment-box clearfix">
+                                        <img class="myhead" src="{{$view->photo or asset('images/mansmall.jpg')}}"/>
+                                        <div class="comment-content">
+                                            <p class="comment-text">
+                                                <span class="user">{{$view->username}}：</span>{{$view->content}}
+                                            </p>
+                                            <p class="comment-time">
+                                                {{$view->created_at}}
+                                                @if($view->uid == $data['uid'])
+                                                    <a class="comment-operate delete_view" data-content="{{$view->id}}">删除</a>
+                                                @endif
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="text-box">
                                 <textarea class="comment" autocomplete="off">评论…</textarea>
-                                <button class="btn ">回 复</button>
+                                <button class="btn add_view" data-content="{{$dynamic->id}}">回 复</button>
                                 <span class="word"><span class="length">0</span>/140</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="box clearfix">
-                        <a class="close" href="javascript:;">×</a>
-                        <img class="head" src="{{asset('images/f1.jpg')}}" alt=""/>
-                        <div class="content">
-                            <div class="main">
-                                <p class="txt">
-                                    <span class="user">人在旅途：</span>三亚的海滩很漂亮。
-                                </p>
-                                <div class="am-g am-g-fixed">
-                                    <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="margin-left:20px;">
-                                        <img class="pic am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end"
-                                             src="{{asset('images/f1.jpg')}}" style="padding:5px;" alt=""/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="info clearfix">
-                                <span class="time">02-14 23:01</span>
-                                <a class="praise" href="javascript:;">赞</a>
-                            </div>
-                            <div class="praises-total" total="0" style="display: none;"></div>
-                            <div class="comment-list">
-                                <div class="comment-box clearfix" user="other">
-                                    <img class="myhead" src="{{asset('images/f1.jpg')}}" alt=""/>
-                                    <div class="comment-content">
-                                        <p class="comment-text"><span class="user">老鹰：</span>我也想去三亚。</p>
-                                        <p class="comment-time">
-                                            2014-02-19 14:36
-                                            <a href="javascript:;" class="comment-praise" total="0" my="0">赞</a>
-                                            <a href="javascript:;" class="comment-operate">回复</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-box">
-                                <textarea class="comment" autocomplete="off">评论…</textarea>
-                                <button class="btn ">回 复</button>
-                                <span class="word"><span class="length">0</span>/140</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="box clearfix">
-                        <a class="close" href="javascript:;">×</a>
-                        <img class="head" src="{{asset('images/f1.jpg')}}" alt=""/>
-                        <div class="content">
-                            <div class="main">
-                                <p class="txt">
-                                    <span class="user">小Y：</span>英国艺术家 Jane Perkins
-                                    能利用很多不起眼的东西进行创作，甚至是垃圾。首饰、纽扣、玩具等等都可以作为他创作的工具并创作出惟妙惟肖的画作，丝毫不逊色于色彩丰富的颜料。
-                                </p>
-                            </div>
-                            <div class="info clearfix">
-                                <span class="time">02-11 13:17</span>
-                                <a class="praise" href="javascript:;">赞</a>
-                            </div>
-                            <div class="praises-total" total="0" style="display: none;"></div>
-                            <div class="comment-list">
-
-                            </div>
-                            <div class="text-box">
-                                <textarea class="comment" autocomplete="off">评论…</textarea>
-                                <button class="btn ">回 复</button>
-                                <span class="word"><span class="length">0</span>/140</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <!--分页-->
             {{--<div class="pager_container" style="margin-left: 50px;">--}}
-            {{--<nav>--}}
-            {{--{!! $data['newest']->appends(['newtype' => $data['newtype']])->render() !!}--}}
-            {{--</nav>--}}
+            <nav>
+            {!! $data['dynamic']->render() !!}
+            </nav>
             {{--</div>--}}
         </div>
     </div>
@@ -564,13 +490,129 @@
         });
 
         function leaveMsg() {
-            // $('#my-content').modal({
-            //     onConfirm: function () {
-            //         alert("发布成功！");
-            //     }
-            // });
-            window.open("{{asset('news/sendDynamic')}}");
+            window.location.href="/news/sendDynamic";
         }
+        //点赞、取消点赞
+        $('.praise').click(function () {
+            var praise = $(this);
+            var num = $(this).parent().next().children('span');
+
+            var formdata = new FormData();
+            formdata.append('forum_id',$(this).attr('data-content'));
+            $.ajax({
+                url: "/news/praise",
+                type: "post",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if (result.status != 400) {
+                        if(result.status === 200){
+                            praise.text("取消赞");
+                        }else{
+                            praise.text("赞");
+                        }
+                        num.text(result.praise);
+                    }else{
+                        swal("",result.msg,"error");
+                        return;
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    swal(xhr.status + "：" + thrownError);
+                }
+            })
+        });
+        //评论功能
+        $(".add_view").click(function () {
+//            alert($(this).attr('data-content'));
+            if($(this).hasClass('btn-off'))
+                return;
+            var content = $(this).prev().val();
+
+            var formdata = new FormData();
+            formdata.append('forum_id',$(this).attr('data-content'));
+            formdata.append('content',content);
+            $.ajax({
+                url: "/news/addviews",
+                type: "post",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if (result.status === 200) {
+                        self.location = '/news';
+                    }else{
+                        swal("",result.msg,"error");
+                        return;
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    swal(xhr.status + "：" + thrownError);
+                }
+            })
+        });
+        //删除评论
+        $(".delete_view").click(function () {
+            var view_id = $(this).attr('data-content');
+            var formdata = new FormData();
+            formdata.append('view_id',view_id);
+            $.ajax({
+                url: "/news/deleteview",
+                type: "post",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if (result.status === 200) {
+                        self.location = '/news';
+                    }else{
+                        swal("",result.msg,"error");
+                        return;
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    swal(xhr.status + "：" + thrownError);
+                }
+            })
+        });
+        //删除动态
+        $(".delete_dynamic").click(function () {
+            var forum_id = $(this).attr('data-content');
+            var formdata = new FormData();
+            formdata.append('forum_id',forum_id);
+            $.ajax({
+                url: "/news/deleteForum",
+                type: "post",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if (result.status === 200) {
+                        self.location = '/news';
+                    }else{
+                        swal("",result.msg,"error");
+                        return;
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    swal(xhr.status + "：" + thrownError);
+                }
+            })
+        });
+
     </script>
     <script type="text/javascript" src="{{asset('js/demo.js')}}"></script>
 @endsection

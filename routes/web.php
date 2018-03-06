@@ -156,6 +156,17 @@ Route::get('news/index',['uses' => 'NewsController@SearchNews']);
 Route::get('news/content', ['uses' => 'NewsController@requestNewsContent']);
 Route::get('news/notice',['uses' => 'NewsController@noticeindex']);
 
+Route::get('news/sendDynamic',['uses' => 'NewsController@sendDynamicview']);
+Route::post('news/sendDynamic',['uses' => 'NewsController@sendDynamic']);//发布动态
+Route::post('news/addviews',['uses' => 'NewsController@addviews']);//评论动态
+Route::post('news/praise',['uses' => 'NewsController@praise']);//动态点赞
+Route::post('news/deleteview',['uses' => 'NewsController@deleteview']);//删除评论
+Route::post('news/deleteForum',['uses' => 'NewsController@deleteForum']);//删除动态
+//Route::get('news/sendDynamic',function(){
+//    return view('news/sendDynamic');
+//});
+Route::post('news/uploadimg',['uses' => 'NewsController@uploadimage']);
+
 //获取订单列表
 Route::get('order/orderlist',['uses' => 'OrderController@orderlist']);
 
