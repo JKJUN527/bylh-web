@@ -172,7 +172,7 @@ table {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    top: 5px;
+    /*top: 5px;*/
     text-indent: 5px;
     text-align: left;
 }
