@@ -12,6 +12,7 @@ use App\Finlservices;
 use App\Genlservices;
 use App\Http\Controllers\Controller;
 use App\Position;
+use App\Qarecord;
 use App\Qaservices;
 use App\Servicereviews;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class ServicesController extends Controller {
         $data = DashboardController::getLoginInfo();
         $data['genlservices'] = DB::table('bylh_genlservices')
             ->join('bylh_serviceclass1', 'bylh_serviceclass1.id', '=', 'bylh_genlservices.class1_id')
-            ->select('bylh_genlservices.id','city','name','describe','state','is_urgency')
+            ->select('bylh_genlservices.id','city','name','describe','state','bylh_genlservices.created_at','is_urgency')
             ->where('bylh_genlservices.type',0)
             ->orderBy('bylh_genlservices.updated_at', 'desc')
             ->paginate(10);
@@ -45,7 +46,7 @@ class ServicesController extends Controller {
         $data = DashboardController::getLoginInfo();
         $data['finlservices'] = DB::table('bylh_finlservices')
             ->join('bylh_serviceclass1', 'bylh_serviceclass1.id', '=', 'bylh_finlservices.class1_id')
-            ->select('bylh_finlservices.id','city','name','describe','state','is_urgency')
+            ->select('bylh_finlservices.id','city','name','describe','state','bylh_finlservices.created_at','is_urgency')
             ->where('bylh_finlservices.type',1)
             ->orderBy('bylh_finlservices.updated_at', 'desc')
             ->paginate(10);
@@ -61,7 +62,7 @@ class ServicesController extends Controller {
         $data = DashboardController::getLoginInfo();
         $data['qaservices'] = DB::table('bylh_qaservices')
             ->join('bylh_serviceclass1', 'bylh_serviceclass1.id', '=', 'bylh_qaservices.class1_id')
-            ->select('bylh_qaservices.id','city','name','describe','state','is_urgency')
+            ->select('bylh_qaservices.id','city','name','describe','state','bylh_qaservices.created_at','is_urgency')
             ->where('bylh_qaservices.type',2)
             ->orderBy('bylh_qaservices.updated_at', 'desc')
             ->paginate(10);
@@ -215,7 +216,7 @@ class ServicesController extends Controller {
         $data = DashboardController::getLoginInfo();
         $data['serviceviews'] = Servicereviews::where('state',0)
             ->orderBy('created_at','desc')
-            ->paginate(2);
+            ->paginate(10);
         return view('admin.serviceview',['data'=>$data]);
     }
     //返回服务评论信息详情
@@ -241,6 +242,63 @@ class ServicesController extends Controller {
         if ($request->has('rid')) {
             $rid = $request->input('rid');
             Servicereviews::where('rid', '=', $rid)
+                ->delete();
+            $data['status'] = 200;
+        } else {
+            $data['status'] = 400;
+            $data['msg'] = "删除失败";
+        }
+        return $data;
+    }
+
+    //返回所有服务评论信息，按时间排序
+    public function qarecoder(){
+        $data = array();
+        $uid = AdminAuthController::getUid();
+        if ($uid == 0)
+            return view('admin.login');
+        $data = DashboardController::getLoginInfo();
+        $data['qarecoder'] = Qarecord::orderBy('updated_at','desc')
+            ->paginate(10);
+        return view('admin.qarecoder',['data'=>$data]);
+    }
+    //删除违规答案
+    public function delanswer(Request $request){
+        $data = array();
+        $uid = AdminAuthController::getUid();
+        if ($uid == 0) {
+            $data['status'] = 400;
+            $data['msg'] = "未登陆";
+            return $data;
+        }
+
+        if ($request->has('id')) {
+            $id = $request->input('id');
+            Qarecord::where('id', '=', $id)
+                ->update([
+                    'answer'=>'',
+                    'status'=>0
+                ]);
+            $data['status'] = 200;
+        } else {
+            $data['status'] = 400;
+            $data['msg'] = "删除失败";
+        }
+        return $data;
+    }
+    //删除违规答案
+    public function delall(Request $request){
+        $data = array();
+        $uid = AdminAuthController::getUid();
+        if ($uid == 0) {
+            $data['status'] = 400;
+            $data['msg'] = "未登陆";
+            return $data;
+        }
+
+        if ($request->has('id')) {
+            $id = $request->input('id');
+            Qarecord::where('id', '=', $id)
                 ->delete();
             $data['status'] = 200;
         } else {

@@ -248,4 +248,8 @@ Route::get('admin/serviceview', ['uses' => 'Admin\ServicesController@serviceview
 Route::get('admin/serviceviews/detail', ['uses' => 'Admin\ServicesController@serviceviewsdetail']);
 Route::get('admin/serviceviews/del', ['uses' => 'Admin\ServicesController@serviceviewsdel']);
 
+Route::get('admin/qarecoder', ['uses' => 'Admin\ServicesController@qarecoder']);
+Route::get('admin/qarecoder/delanswer', ['uses' => 'Admin\ServicesController@delanswer']);
+Route::get('admin/qarecoder/delall', ['uses' => 'Admin\ServicesController@delall']);
+
 

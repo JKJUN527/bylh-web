@@ -50,6 +50,7 @@
                             <th>服务城市</th>
                             <th>服务行业</th>
                             <th>服务描述</th>
+                            <th>发布时间</th>
                             <th>状态</th>
                             <th>操作</th>
                         </tr>
@@ -62,7 +63,7 @@
                                 <td>{{$genlservices->city}}</td>
                                 <td>{{$genlservices->name}}</td>
                                 <td>{{mb_substr($genlservices->describe, 0, 20)}}</td>
-
+                                <td>{{$genlservices->created_at}}</td>
                                 <td>
                                     @if($genlservices->state == 0)
                                         <span class="label label-success">正常</span>

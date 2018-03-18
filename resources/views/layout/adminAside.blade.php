@@ -184,8 +184,18 @@
                         class="active"
                         @endif>
                     <a href="/admin/serviceview">
-                        <i class="material-icons">verified_user</i>
+                        <i class="material-icons">dvr</i>
                         <span>服务评价管理</span>
+                    </a>
+
+                </li>
+                <li
+                        @if($title === 'qarecoder')
+                        class="active"
+                        @endif>
+                    <a href="/admin/qarecoder">
+                        <i class="material-icons">dvr</i>
+                        <span>专业问答管理</span>
                     </a>
 
                 </li>

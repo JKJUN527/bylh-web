@@ -212,7 +212,7 @@
     <script src="{{asset('js/radialindicator.min.js')}}"></script>
     <script type="text/javascript">
         window.onload = function(){
-            setTimeout("location.reload()",2000);//两秒自动刷新
+            setTimeout("location.reload()",10000);//10秒自动刷新
         }
 
         $("#set-phone-form").submit(function (event) {

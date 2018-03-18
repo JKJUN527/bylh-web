@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('title', '服务评论')
+@section('title', '专业问答管理')
 
 @section('custom-style')
     <style>
@@ -21,7 +21,7 @@
 @endsection
 
 @section('sidebar')
-    @include('layout.adminAside', ['title' => 'serviceview', 'subtitle'=>'', 'username' => $data['username']])
+    @include('layout.adminAside', ['title' => 'qarecoder', 'subtitle'=>'', 'username' => $data['username']])
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        评论详情列表
+                        专业问答详情列表
                     </h2>
                     {{--<div class="mdl-card__menu">--}}
 
@@ -51,35 +51,46 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>评论内容</th>
-                            <th>评论时间</th>
-                            <th>操作</th>
+                            <th>提问内容</th>
+                            <th>回答内容</th>
+                            <th>提问时间</th>
+                            <th>回答时间</th>
+                            <th>删除答案</th>
+                            <th>删除全部</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse($data['serviceviews'] as $serviceview)
+                        @forelse($data['qarecoder'] as $qarecoder)
                             <tr>
-                                <td onclick="window.open('/service/detail?id={{$serviceview->sid}}&type={{$serviceview->type}}');">
-                                    {{$serviceview->rid}}
+                                <td onclick="window.open('/service/detail?id={{$qarecoder->service_id}}&type=2');">
+                                    {{$qarecoder->id}}
                                 </td>
-                                <td>{{substr($serviceview->comments, 0, 120)}}...</td>
-                                <td>{{$serviceview->created_at}}</td>
+                                {{--<td>{{mb_substr($qarecoder->question,0,20,'utf-8')}}...</td>--}}
+                                {{--<td>{{mb_substr($qarecoder->answer, 0, 20,'utf-8')}}...</td>--}}
+                                <td>{{$qarecoder->question}}</td>
+                                <td>{{$qarecoder->answer}}</td>
+                                <td>{{$qarecoder->created_at}}</td>
+                                <td>{{$qarecoder->updated_at}}</td>
                                 <td>
-                                    <i class="material-icons detail" data-content="{{$serviceview->rid}}"
-                                       data-toggle='modal' data-target='#detailNewsModal'>visibility</i>
-                                    <i class="material-icons delete" data-content="{{$serviceview->rid}}"
+                                    {{--<i class="material-icons detail" data-content="{{$qarecoder->id}}"--}}
+                                       {{--data-toggle='modal' data-target='#detailNewsModal'>visibility</i>--}}
+                                    <i class="material-icons delete1" data-content="{{$qarecoder->id}}"
+                                       style="margin-left: 16px;">delete</i>
+                                </td>
+                                <td>
+                                    <i class="material-icons delete2" data-content="{{$qarecoder->id}}"
                                        style="margin-left: 16px;">delete</i>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3">暂无服务评论</td>
+                                <td colspan="3">暂无专业问答记录</td>
                             </tr>
                         @endforelse
                         </tbody>
                     </table>
                     <nav class="page">
-                        {!! $data['serviceviews']->render() !!}
+                        {!! $data['qarecoder']->render() !!}
                     </nav>
                 </div>
             </div>
@@ -131,12 +142,12 @@
         });
 
 
-        $(".delete").click(function () {
+        $(".delete1").click(function () {
             var element = $(this);
 
             swal({
                 title: "确认",
-                text: "确认该评论吗?",
+                text: "确认删除该项答案吗?",
                 type: "warning",
                 confirmButtonText: "删除",
                 cancelButtonText: "取消",
@@ -144,7 +155,32 @@
                 closeOnConfirm: true
             }, function () {
                 $.ajax({
-                    url: "/admin/serviceviews/del?rid=" + element.attr('data-content'),
+                    url: "/admin/qarecoder/delanswer?id=" + element.attr('data-content'),
+                    type: "get",
+                    success: function (data) {
+                        checkResult(data['status'], "删除成功", data['msg'], null);
+
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1200);
+                    }
+                });
+            });
+        })
+        $(".delete2").click(function () {
+            var element = $(this);
+
+            swal({
+                title: "确认",
+                text: "确认该项问答吗?",
+                type: "warning",
+                confirmButtonText: "删除",
+                cancelButtonText: "取消",
+                showCancelButton: true,
+                closeOnConfirm: true
+            }, function () {
+                $.ajax({
+                    url: "/admin/qarecoder/delall?id=" + element.attr('data-content'),
                     type: "get",
                     success: function (data) {
                         checkResult(data['status'], "删除成功", data['msg'], null);
