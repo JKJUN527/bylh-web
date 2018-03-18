@@ -69,6 +69,10 @@
             padding: 3px;
             line-height: 1.5;
         }
+        .category-content .category-list li{
+            border-top: 0px;
+            border-bottom: 0px;
+        }
 
         .comcategory li a:hover {
             color: #b84554;
@@ -80,11 +84,11 @@
         }
 
         .category-info {
-            border-left: 2px solid #d2364c;
-            border-right: 2px solid #d2364c;
+            border-left: 2px solid #ea6005;
+            border-right: 2px solid #ea6005;
             background: #fff;
-            border-top: 1px solid #d2364c;
-            border-bottom: 1px solid #d2364c;
+            /*border-top: 1px solid #d2364c;*/
+            /*border-bottom: 1px solid #d2364c;*/
         }
         .title-first a {
             text-align: center;
@@ -177,6 +181,9 @@
             margin-top: 5rem;
             font-size: large;
         }
+        .bgcolor{
+            background: #ea6005;
+        }
 
         .card-title {
             font-size: 1.2rem;
@@ -248,7 +255,7 @@
                 <ul class="">
                     <li class="">
                         <a href="#">
-                            <img src="{{asset('images/3.jpg')}}"
+                            <img src="{{asset('images/3.png')}}"
                                  style="width: 850px;margin-left:-200px;height: 417px;"/>
                         </a>
                     </li>
@@ -259,7 +266,7 @@
         <div class="am-u-lg-3" style="margin-left: -180px;">
             <div class="marqueenTwo" style="background:transparent;border:0px;">
                 <div class="demo" style="margin-left: 10rem;">
-                    <button type="button" class="am-btn am-btn-warning am-round demo_btn" onclick="window.location.href='/demands/demandPublishIndex'">发布需求</button>
+                    <button type="button" class="am-btn am-btn-warning am-round demo_btn bgcolor" onclick="window.location.href='/demands/demandPublishIndex'">发布需求</button>
                     <button type="button" class="am-btn am-btn-primary am-round demo_btn" onclick="window.location.href='/service/genlpublish'">发布服务</button>
                 </div>
             </div>

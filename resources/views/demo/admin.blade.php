@@ -15,13 +15,23 @@
          background-color: #03A9F4;
      }
 
+     /*.nav_img_release {*/
+         /*float: right;*/
+         /*width: 7rem;*/
+         /*margin-top: -6rem;*/
+         /*margin-right: -5rem;*/
+         /*!*margin-left: 50rem;*!*/
+     /*}*/
      .nav_img_release {
-         float: right;
-         width: 7rem;
-         margin-top: -6rem;
-         margin-right: -5rem;
-         /*margin-left: 50rem;*/
+         float: left;
+         width: 12rem;
+         margin-top: -5rem;
+         /*margin-right: -5rem;*/
+         margin-left: 11rem;
      }
+        .line{
+            border-bottom: 2px solid #ea6005 !important;
+        }
     </style>
     @section("custom-style")
     @show
@@ -74,7 +84,7 @@
                 <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="button">
             </form>
         </div>
-        <img class="nav_img_release" src="{{asset('images/bylh01.jpg')}}"/>
+        <img class="nav_img_release" src="{{asset('images/logo1.png ')}}"/>
         {{--<div class="logoBig" style="margin-top: -15px;margin-left: -50px;">--}}
         {{--<li><img src="{{asset('images/bylh01.jpg')}}"/></li>--}}
         {{--</div>--}}
@@ -87,9 +97,10 @@
 <div class="shopNav">
     <div class="slideall" style="height: auto;">
 
-        <div class="long-title"><span class="all-goods">全部分类</span></div>
+        <div class="long-title"><span class="all-goods">服务范围</span></div>
 
-        <div class="nav-cont" style="background: #ff9933bd;">
+        <div class="nav-cont" style="
+        /*background: #ff9933bd;*/">
             <ul>
                 <li class="index @if($title==1) nav_active @endif"><a href="{{asset('index')}}">首页</a></li>
                 <li class="qc @if($title==2) nav_active @endif"><a href="{{asset('demands/advanceSearch')}}">需求大厅</a></li>

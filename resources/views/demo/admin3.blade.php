@@ -86,10 +86,11 @@
     <div class="slideall" style="height: auto;">
 
         <div class="long-title" style="margin-top: 135px;margin-left: 120px;">
-            <span class="all-goods">全部分类</span>
+            <span class="all-goods">服务范围</span>
         </div>
 
-        <div class="nav-cont" style="margin-top:135px;max-width: 1250px;margin-left: 120px;background: #ff9933bd;">
+        <div class="nav-cont" style="margin-top:135px;max-width: 1250px;margin-left: 120px;
+        /*background: #ff9933bd;*/">
             <ul>
                 <li class="index @if($title==1) nav_active @endif"><a href="{{asset('index')}}">首页</a></li>
                 <li class="qc @if($title==2) nav_active @endif"><a href="{{asset('demands/advanceSearch')}}">需求大厅</a>

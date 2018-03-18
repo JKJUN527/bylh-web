@@ -84,8 +84,9 @@
     </article>
 </header>
 <div class="nav-table">
-    <div class="long-title"><span class="all-goods">全部分类</span></div>
-    <div class="nav-cont" style="background: #ff9933bd;">
+    <div class="long-title"><span class="all-goods">服务范围</span></div>
+    <div class="nav-cont" style="
+    /*background: #ff9933bd;*/">
         <ul>
             <li class="index"><a href="{{asset('index')}}">首页</a></li>
             <li class="qc"><a href="{{asset('demands/advanceSearch')}}">需求大厅</a></li>

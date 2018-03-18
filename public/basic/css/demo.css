@@ -119,7 +119,7 @@ input.add,input.min{width:15px}
     height: 32px;
     border: none;
     float: right;
-    background: #F03726 none repeat scroll 0% 0%;
+    background: #ea6005 none repeat scroll 0% 0%;
     color: #F5F5F2;
     font-size: 14px;
     cursor: pointer;
@@ -312,7 +312,7 @@ input.add,input.min{width:15px}
 
     .search-bar {
         height: 90px;
-        padding: 20px 70px 0 230px;
+        padding: 20px 70px 0 350px;
         margin: auto;
     }
 
@@ -364,7 +364,7 @@ input.add,input.min{width:15px}
     }
 
     .long-title {
-        background: #d2364c;
+        background: #ea6005;
         color: #fff;
         height: 45px;
         line-height: 45px;
@@ -379,7 +379,8 @@ input.add,input.min{width:15px}
 
     .nav-cont {
         position: absolute;
-        padding-left: 150px;
+        /*padding-left: 150px;*/
+        padding-left: 0px;
         display: block;
         width: 100%;
         top: 0px
@@ -485,7 +486,8 @@ input.add,input.min{width:15px}
     }
 
     .nav-cont {
-        padding-left: 180px;
+        /*padding-left: 180px;*/
+        padding-left: 0px;
     }
 
 }
