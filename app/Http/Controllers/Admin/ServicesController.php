@@ -13,6 +13,7 @@ use App\Genlservices;
 use App\Http\Controllers\Controller;
 use App\Position;
 use App\Qaservices;
+use App\Servicereviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -201,6 +202,50 @@ class ServicesController extends Controller {
                 $data['msg'] = "上架失败";
             }
             return $data;
+        }
+        return $data;
+    }
+
+    //返回所有服务评论信息，按时间排序
+    public function serviceviews(){
+        $data = array();
+        $uid = AdminAuthController::getUid();
+        if ($uid == 0)
+            return view('admin.login');
+        $data = DashboardController::getLoginInfo();
+        $data['serviceviews'] = Servicereviews::where('state',0)
+            ->orderBy('created_at','desc')
+            ->paginate(2);
+        return view('admin.serviceview',['data'=>$data]);
+    }
+    //返回服务评论信息详情
+    public function serviceviewsdetail(Request $request){
+        $data = array();
+        if($request->has('rid')){
+            $rid = $request->input('rid');
+
+            $data['view_detail'] = Servicereviews::find($rid);
+        }
+        return $data;
+    }
+    //删除违规评论
+    public function serviceviewsdel(Request $request){
+        $data = array();
+        $uid = AdminAuthController::getUid();
+        if ($uid == 0) {
+            $data['status'] = 400;
+            $data['msg'] = "未登陆";
+            return $data;
+        }
+
+        if ($request->has('rid')) {
+            $rid = $request->input('rid');
+            Servicereviews::where('rid', '=', $rid)
+                ->delete();
+            $data['status'] = 200;
+        } else {
+            $data['status'] = 400;
+            $data['msg'] = "删除失败";
         }
         return $data;
     }

@@ -47,6 +47,9 @@
             color: #000;
             text-decoration: none;
         }
+        .page li {
+            display: inline;
+        }
     </style>
     @section('custom-style')
     @show

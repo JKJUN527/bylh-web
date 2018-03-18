@@ -179,6 +179,16 @@
                         </li>
                     </ul>
                 </li>
+                <li
+                        @if($title === 'serviceview')
+                        class="active"
+                        @endif>
+                    <a href="/admin/serviceview">
+                        <i class="material-icons">verified_user</i>
+                        <span>服务评价管理</span>
+                    </a>
+
+                </li>
 
                 <li
                         @if($title === 'ad')

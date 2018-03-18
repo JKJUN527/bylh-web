@@ -243,5 +243,9 @@ Route::any('admin/majorservices', ['uses' => 'Admin\ServicesController@qaservice
 Route::any('admin/services/offposition', ['uses' => 'Admin\ServicesController@OffPosition']);
 Route::any('admin/services/onposition', ['uses' => 'Admin\ServicesController@onPosition']);
 Route::any('admin/services/urgency', ['uses' => 'Admin\ServicesController@isUrgency']);
+//2018-03-18
+Route::get('admin/serviceview', ['uses' => 'Admin\ServicesController@serviceviews']);
+Route::get('admin/serviceviews/detail', ['uses' => 'Admin\ServicesController@serviceviewsdetail']);
+Route::get('admin/serviceviews/del', ['uses' => 'Admin\ServicesController@serviceviewsdel']);
 
 
