@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Adverts;
+use App\Complaint;
 use App\Datetemp;
 use App\Demands;
 use App\Finlservices;
@@ -230,5 +231,32 @@ class HomeController extends Controller {
         $data['username'] = InfoController::getUsername();
 
         return view('demo.protocols',['data'=>$data]);
+    }
+
+    //处理投诉信息
+    public function complaint(Request $request){
+        $data = array();
+        $data['status'] = 400;
+        $data['msg'] = "未知错误";
+        $uid = AuthController::getUid();
+        if($uid == 0){
+            $data['msg'] = "请先登录！";
+        }else{
+            if($request->has('type') && $request->has('url') && $request->has('detail') && $request->has('real_place')){
+                $complaint = new Complaint();
+                $complaint->type = $request->input('type');
+                $complaint->content = $request->input('detail');
+                $complaint->url = $request->input('url');
+                $complaint->real_place = $request->input('real_place');
+                $complaint->source_uid = $uid;
+                if($complaint->save()){
+                    $data['status'] = 200;
+                    $data['msg'] = "投诉成功,感谢您的反馈，我们将尽快处理！";
+                }else{
+                    $data['msg'] = "投诉失败";
+                }
+            }
+        }
+        return $data;
     }
 }

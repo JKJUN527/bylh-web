@@ -75,7 +75,12 @@ dt + dd {margin-top: 0;}
 .inline-block{display:inline-block;}
 .inline{display:inline;}
 .bold{font-weight:700;}
-.am-modal {width: 100%;left:0 ;margin-left:0 ;top:0;background: #fefefe;}
+.am-modal {
+	width: 30%;
+	/*left:0 ;*/
+	/*margin-left:0 ;*/
+	/*top:0;*/
+	background: #fefefe;}
 .navfull{display: none;}
 #meauBack{position: absolute;right:10px;top:0px;font-size:14px ;height:36px;line-height:36px;color:#fff;width:auto;}
 

@@ -151,6 +151,26 @@
             background: #c8d2e2;
             text-decoration: none;
         }
+        .box:hover .complaint_dynamic {
+            display: block;
+        }
+        .complaint_dynamic{
+            cursor:pointer;
+            display: none;
+            top: 0px;
+            right: 32px;
+            width: 48px;
+            height: 28px;
+            border: 1px solid #eee;
+            position: absolute;
+            background: #f2f4f7;
+            line-height: 27px;
+            text-align: center;
+        }
+        .complaint_dynamic:hover {
+            background: #c8d2e2;
+            text-decoration: none;
+        }
 
         .head {
             margin-left: 2px;
@@ -325,6 +345,22 @@
         .text-box-on .word {
             display: inline;
         }
+        .am-dimmer.am-active {
+            opacity: 0 !important;
+        }
+        .am-model{
+            width:30% !important;
+            left: auto !important;
+            /*margin-left:*/
+            top:auto !important;
+        }
+        .complaint h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .complaint form{
+            margin-top: 1rem;
+        }
     </style>
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
@@ -352,6 +388,7 @@
                 <div id="list">
                     @foreach($data['dynamic'] as $dynamic)
                     <div class="box clearfix">
+                        <a class="complaint_dynamic" data-content="{{$dynamic->id}}" onclick="openComplaint()">投诉</a>
                         @if($dynamic->uid == $data['uid'])
                             <a class="close delete_dynamic" data-content="{{$dynamic->id}}">×</a>
                         @endif
@@ -410,6 +447,50 @@
                         </div>
                     </div>
                     @endforeach
+                        <div class="am-modal am-modal-alert" tabindex="-1" id="my-content"
+                             style="margin-top: -200px;">
+                            <div class="am-modal-dialog">
+                                <div class="am-form-group complaint">
+                                    <h3>请选择投诉类别</h3>
+                                    <input type="radio" name="complaint" value="-1" style="display: none" checked>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="0" data-am-ucheck>垃圾营销
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="1" data-am-ucheck>不实信息
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="2" data-am-ucheck>有害信息
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="3" data-am-ucheck>违法信息
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="4" data-am-ucheck>污秽色情
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="5" data-am-ucheck>人事攻击
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="6" data-am-ucheck>内容抄袭
+                                    </label>
+
+                                    <form action="" class="am-form">
+                                        <fieldset>
+                                            <h3>投诉详情描述</h3>
+                                            <div class="am-form-group">
+                                                <textarea minlength="10" id="complaint_detail"></textarea>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                    {{--<button class="am-btn am-btn-secondary" type="submit" id="upload">提交</button>--}}
+                                </div>
+                                <div class="am-modal-footer">
+                                    <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                                    <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
             <!--分页-->
@@ -612,6 +693,52 @@
                 }
             })
         });
+        function openComplaint() {
+            $('#my-content').modal({
+                onConfirm: function () {
+                    var type = $('input:radio[name="complaint"]:checked').val();
+                    var detail = $('#complaint_detail').val();
+                    var url = window.location.href;
+                    var real_place = "@网站动态：";
+
+                    if(type == -1){
+                        swal('','请选择投诉类别','error');
+                        return;
+                    }
+                    if(detail.length <=5){
+                        swal('','投诉详情至少输入5个字','error');
+                        return;
+                    }
+
+                    var formData = new FormData();
+                    formData.append("type", type);
+                    formData.append("detail", detail);
+                    formData.append("url", url);
+                    formData.append("real_place", real_place);
+                    $.ajax({
+                        url: "/complaint",
+                        type: "post",
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            //console.log(data);
+                            var result = JSON.parse(data);
+                            if (result.status == 200) {
+                                swal("", result.msg, "success");
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            } else {
+                                swal('', result.msg, 'error');
+                            }
+                        }
+                    });
+                }
+            });
+        }
 
     </script>
     <script type="text/javascript" src="{{asset('js/demo.js')}}"></script>

@@ -199,6 +199,16 @@
                     </a>
 
                 </li>
+                <li
+                        @if($title === 'complaint')
+                        class="active"
+                        @endif>
+                    <a href="/admin/complaint">
+                        <i class="material-icons">dvr</i>
+                        <span>投诉建议</span>
+                    </a>
+
+                </li>
 
                 <li
                         @if($title === 'ad')

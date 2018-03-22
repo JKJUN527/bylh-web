@@ -89,7 +89,7 @@
             <span class="all-goods">服务范围</span>
         </div>
 
-        <div class="nav-cont" style="margin-top:135px;max-width: 1250px;margin-left: 120px;
+        <div class="nav-cont" style="margin-top:135px;max-width: 1250px;margin-left: 172px;
         /*background: #ff9933bd;*/">
             <ul>
                 <li class="index @if($title==1) nav_active @endif"><a href="{{asset('index')}}">首页</a></li>

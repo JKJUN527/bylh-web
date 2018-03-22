@@ -108,6 +108,13 @@
             font-size: smaller;
             text-align: left;
         }
+        .complaint h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .complaint form{
+            margin-top: 1rem;
+        }
     </style>
 @endsection
 @section('content')
@@ -221,6 +228,7 @@
                         <li @if($data['tab_detail']== 0) class="am-active" @endif ><a href="#tab1" style="font-weight: bold;font-size: 18px;margin-right: 50px;">服务详情</a></li>
                         <li @if($data['tab_detail']== 1) class="am-active" @endif><a href="#tab2" style="font-weight: bold; font-size: 18px;margin-right: 50px;">雇主评论</a></li>
                         <li @if($data['tab_detail']== 2) class="am-active" @endif><a href="#tab3" style="font-weight: bold;font-size: 18px;margin-right: 50px;">成交记录</a></li>
+                        <li @if($data['tab_detail']== 3) class="am-active" @endif><a href="#tab4" style="font-weight: bold;font-size: 18px;margin-right: 50px;">投诉建议</a></li>
                     </ul>
 
                         <div class="am-tabs-bd">
@@ -396,6 +404,46 @@
                                     <div class="look"></div>
                                 </div>
                             </div>
+
+                            <div class="am-tab-panel am-fade @if($data['tab_detail']== 3) am-active am-in @endif" id="tab4">
+                                <div class="am-form-group complaint">
+                                    <h3>请选择投诉类别</h3>
+                                    <input type="radio" name="complaint" value="-1" style="display: none" checked>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="0" data-am-ucheck>垃圾营销
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="1" data-am-ucheck>不实信息
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="2" data-am-ucheck>有害信息
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="3" data-am-ucheck>违法信息
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="4" data-am-ucheck>污秽色情
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="5" data-am-ucheck>人事攻击
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="complaint" value="6" data-am-ucheck>内容抄袭
+                                    </label>
+
+                                    <form action="" class="am-form">
+                                        <fieldset>
+                                            <h3>投诉详情描述</h3>
+                                            <div class="am-form-group">
+                                                <textarea minlength="10" id="complaint_detail"></textarea>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                    <button class="am-btn am-btn-secondary" type="submit" id="upload">提交</button>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 
@@ -630,5 +678,47 @@
                 }
             });
         }
+        $('#upload').click(function (event) {
+            var type = $('input:radio[name="complaint"]:checked').val();
+            var detail = $('#complaint_detail').val();
+            var url = window.location.href;
+            var real_place = "@服务标题：" + $.trim($('.main-ba').text());
+
+            if(type == -1){
+                swal('','请选择投诉类别','error');
+                return;
+            }
+            if(detail.length <=10){
+                swal('','投诉详情至少输入十个字','error');
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append("type", type);
+            formData.append("detail", detail);
+            formData.append("url", url);
+            formData.append("real_place", real_place);
+            $.ajax({
+                url: "/complaint",
+                type: "post",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    //console.log(data);
+                    var result = JSON.parse(data);
+                    if (result.status == 200) {
+                        swal("", result.msg, "success");
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        swal('', result.msg, 'error');
+                    }
+                }
+            });
+        });
     </script>
 @endsection

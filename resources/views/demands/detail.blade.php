@@ -4,6 +4,9 @@
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css">
     {{--<link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css"/>--}}
     <style type="text/css">
+        .long-title{
+            display: none;
+        }
         .comcategory li {
             font-size: 14px;
             padding: 3px;
@@ -67,16 +70,83 @@
             font-size: 12px;
             width: 80%;
         }
+        .complaint{
+            margin-right: 32%;
+            float: right;
+        }
+        #demand_title p{
+            display: inline;
+            font-size: 1.5rem;
+        }
+        .container1{
+            border: 2px solid #eee;
+            padding: 20px;
+            background: #fff;
+        }
+        .complaint-detail{
+            display: none;
+        }
+        .complaint-detail h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .complaint-detail form{
+            margin-top: 1rem;
+        }
+        .am-radio-inline{
+            margin-left: 0px !important;
+        }
     </style>
 @endsection
 @section('content')
     <!--发布需求-->
     <div class="am-g am-g-fixed" style="padding-top: 85px;">
         <div class="am-u-lg-8 am-u-md-8 am-u-sm-8">
-            <div class="container1" style="border: 2px solid #eee;padding: 20px;background: #fff;">
-                <div id="demand_title" class="title" data-content="{{$data["detail"]->id}}"
-                     style="height: 37px;font-family: 'Microsoft YaHei';color: #666666;font-size: 18px;font-weight: 700;line-height: 37px;width:  850px;overflow: hidden;">{{$data["detail"]->title}}
+            <div class="container1 complaint-detail">
+                <div class="am-form-group">
+                    <h3>请选择投诉类别</h3>
+                    <input type="radio" name="complaint" value="-1" style="display: none" checked>
+                    <label class="am-radio-inline">
+                        <input type="radio" name="complaint" value="0" data-am-ucheck>垃圾营销
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio" name="complaint" value="1" data-am-ucheck>不实信息
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio" name="complaint" value="2" data-am-ucheck>有害信息
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio" name="complaint" value="3" data-am-ucheck>违法信息
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio" name="complaint" value="4" data-am-ucheck>污秽色情
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio" name="complaint" value="5" data-am-ucheck>人事攻击
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio" name="complaint" value="6" data-am-ucheck>内容抄袭
+                    </label>
+
+                    <form action="" class="am-form">
+                        <fieldset>
+                            <h3>投诉详情描述</h3>
+                            <div class="am-form-group">
+                                <textarea minlength="10" id="complaint_detail"></textarea>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <button class="am-btn am-btn-secondary" type="submit" id="upload">提交</button>
+                    <button class="am-btn am-btn-default cancel-complaint">取消</button>
                 </div>
+            </div>
+            <div class="container1">
+                <div id="demand_title" class="title" data-content="{{$data["detail"]->id}}"
+                     style="height: 37px;font-family: 'Microsoft YaHei';color: #666666;font-size: 18px;font-weight: 700;line-height: 37px;width:  850px;overflow: hidden;">
+                    <p>{{$data["detail"]->title}}</p>
+                    <button type="button" class="am-btn am-btn-default complaint">投诉建议</button>
+                </div>
+
                 <hr/>
                 <div class="item-mode">
                     {{--<div class="item-lesstime">--}}
@@ -100,51 +170,6 @@
                         </div>
                     </div>
                 </div>
-                {{--<div class="item_process"--}}
-                {{--style="margin-top:20px;background: #F2F2F2;padding: 25px 20px 30px 20px;border: solid 1px #E9E9E9;overflow: hidden;">--}}
-                {{--<div class="jinduline">--}}
-                {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
-                {{--<div class="jindu_y_line jindu_out"--}}
-                {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
-                {{--<div class="jindu_y_q_blue_s"--}}
-                {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
-                {{--</div>--}}
-                {{--<div class="jindu_y_text">发布需求<br><span class="jd_date"></span></div>--}}
-                {{--</div>--}}
-
-                {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
-                {{--<div class="jindu_y_line jindu_out"--}}
-                {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
-                {{--<div class="jindu_y_q_blue_s"--}}
-                {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
-                {{--</div>--}}
-                {{--<div class="jindu_y_text">进行中<br><span class="jd_date"></span></div>--}}
-                {{--</div>--}}
-
-                {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
-                {{--<div class="jindu_y_line jindu_out"--}}
-                {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
-                {{--<div class="jindu_y_q_blue_s"--}}
-                {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
-                {{--</div>--}}
-                {{--<div class="jindu_y_text ">验收付款--}}
-                {{--<br><span class="jd_date">  </span>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-
-                {{--<div class="fl jindu_item am-u-lg-3 am-u-md-3 am-u-sm-3" style="float: left;">--}}
-                {{--<div class="jindu_y_line jindu_out"--}}
-                {{--style="background: url({{asset('images/process_red.jpg')}}) left 15px repeat-x;">--}}
-                {{--<div class="jindu_y_q_blue_s"--}}
-                {{--style="background: url({{asset('images/process_cr_red.jpg')}}) center center no-repeat;text-align: center;font-size: 22px;color: #fff;height: 34px;margin: 0 auto;"></div>--}}
-                {{--</div>--}}
-                {{--<div class="jindu_y_text">评价<br><span class="jd_date"></span></div>--}}
-                {{--</div>--}}
-
-                {{--<div class="clear"></div>--}}
-                {{--</div>--}}
-                {{--<div class="clear"></div>--}}
-                {{--</div>--}}
                 <div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
                     <ul class="am-slides">
                         @if($data["detail"]->picture != null)
@@ -481,5 +506,53 @@
                 }
             });
         }
+        //点击投诉后,显示投诉内容框
+        $('.complaint').click(function () {
+            $('.complaint-detail').fadeToggle();
+        });
+        $('.cancel-complaint').click(function () {
+            $('.complaint-detail').fadeToggle();
+        });
+        $('#upload').click(function (event) {
+            var type = $('input:radio[name="complaint"]:checked').val();
+            var detail = $('#complaint_detail').val();
+            var url = window.location.href;
+            var real_place = "@需求标题：" + $.trim($('#demand_title').find('p').text());
+            if(type == -1){
+                swal('','请选择投诉类别','error');
+                return;
+            }
+            if(detail.length <=5){
+                swal('','投诉详情至少输入5个字','error');
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append("type", type);
+            formData.append("detail", detail);
+            formData.append("url", url);
+            formData.append("real_place", real_place);
+            $.ajax({
+                url: "/complaint",
+                type: "post",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    //console.log(data);
+                    var result = JSON.parse(data);
+                    if (result.status == 200) {
+                        swal("", result.msg, "success");
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        swal('', result.msg, 'error');
+                    }
+                }
+            });
+        });
     </script>
 @endsection

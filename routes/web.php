@@ -175,6 +175,9 @@ Route::get('about',['uses' => 'HomeController@aboutindex']);
 //不亦乐乎协议
 Route::get('/bylh/protocols',['uses' => 'HomeController@protocolindex']);
 
+//投诉方法
+Route::post('/complaint',['uses' => 'HomeController@complaint']);
+
 
 //测试方法
 Route::get('sensitive', ['uses' => 'SensitiveController@test']);
@@ -252,4 +255,9 @@ Route::get('admin/qarecoder', ['uses' => 'Admin\ServicesController@qarecoder']);
 Route::get('admin/qarecoder/delanswer', ['uses' => 'Admin\ServicesController@delanswer']);
 Route::get('admin/qarecoder/delall', ['uses' => 'Admin\ServicesController@delall']);
 
+//2018-03-22
+
+Route::get('admin/complaint', ['uses' => 'Admin\ComplaintController@index']);
+Route::get('admin/complaint/detail', ['uses' => 'Admin\ComplaintController@detail']);
+Route::get('admin/complaint/del', ['uses' => 'Admin\ComplaintController@delete']);
 
