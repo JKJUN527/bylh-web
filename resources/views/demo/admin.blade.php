@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
     <style>
      .nav_active{
-         background-color: #03A9F4;
+         background-color: #ea6005;
      }
 
      /*.nav_img_release {*/
