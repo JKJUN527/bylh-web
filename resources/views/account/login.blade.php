@@ -100,7 +100,7 @@
                 //console.log(data);
                 var result = JSON.parse(data);
                 if (result.status == 200) {
-                    swal("登录成功","","success");
+//                    swal("登录成功","","success");
                     setTimeout(function () {
                         self.location = "/account/index";
                     }, 1000);

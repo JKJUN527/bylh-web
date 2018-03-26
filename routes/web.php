@@ -260,4 +260,7 @@ Route::get('admin/qarecoder/delall', ['uses' => 'Admin\ServicesController@delall
 Route::get('admin/complaint', ['uses' => 'Admin\ComplaintController@index']);
 Route::get('admin/complaint/detail', ['uses' => 'Admin\ComplaintController@detail']);
 Route::get('admin/complaint/del', ['uses' => 'Admin\ComplaintController@delete']);
+//2018-03-26
+Route::get('admin/sendmsg', ['uses' => 'Admin\SendmsgController@index']);
+Route::post('admin/sendmsg', ['uses' => 'Admin\SendmsgController@sendmsg']);
 

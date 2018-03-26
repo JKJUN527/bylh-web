@@ -90,10 +90,10 @@
         <ul>
             <li class="index"><a href="{{asset('index')}}">首页</a></li>
             <li class="qc"><a href="{{asset('demands/advanceSearch')}}">需求大厅</a></li>
-            <li class="qc"><a href="{{asset('service/advanceSearch?type=0')}}">大学生服务</a></li>
-            <li class="qc"><a href="{{asset('service/advanceSearch?type=1')}}">实习课堂</a></li>
+            <li class="qc"><a href="{{asset('service/advanceSearch?type=0')}}">专业服务</a></li>
+            <li class="qc"><a href="{{asset('service/advanceSearch?type=1')}}">实习中介</a></li>
             <li class="qc last"><a href="{{asset('service/advanceSearch?type=2')}}">专业问答</a></li>
-            <li class="qc last"><a href="{{asset('news/index')}}">网站动态</a></li>
+            <li class="qc last"><a href="{{asset('news/index')}}">知友沙龙</a></li>
         </ul>
         {{--<div class="nav-extra">--}}
             {{--<a href="{{asset('/message')}}" style="color:#f03726;font-weight:bold;"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的消息--}}

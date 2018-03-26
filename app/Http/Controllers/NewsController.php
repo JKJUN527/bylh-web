@@ -168,13 +168,14 @@ class NewsController extends Controller {
     }
     public function sendDynamicview(){
         $data['uid'] = AuthController::getUid();
+        $data['type'] = AuthController::getType();
         if($data['uid'] == 0){
             return redirect('/account/login');
         }
         //每天最多发三条动态
         $count = Forum::where('uid',$data['uid'])
             ->where('status','0')
-            ->where('created_at','>=',strtotime("-1day"))
+            ->where('created_at','>=',date('Y-m-d h:s:i',strtotime("yesterday")))
             ->count();
         if($count >=3){
             return redirect()->back();
@@ -182,7 +183,7 @@ class NewsController extends Controller {
         //查看当天是否有未发布成功的状态，如果有，则返回该状态的id
         $is_exist = Forum::where('uid',$data['uid'])
             ->where('status','1')
-            ->where('created_at','>=',strtotime("-1day"))
+            ->where('created_at','>=',date('Y-m-d h:s:i',strtotime("yesterday")))
             ->orderBy('created_at','desc')
             ->first();
         if($is_exist){
@@ -247,17 +248,24 @@ class NewsController extends Controller {
             $data['msg'] = "每天最多发三条动态";
             return $data;
         }
-        if($request->has('content') && $request->has('forum_id')){
+        if($request->has('content') && $request->has('forum_id')) {
             $content = $request->input('content');
             $forum_id = $request->input('forum_id');
+            $is_sensitive = SensitiveController::checkSensitive($content);
+            if ($is_sensitive['flag'] == 1) {
+                $data['status'] = 400;
+                $data['msg'] = "发布内容含有敏感词:" . $is_sensitive['word'];
+                return $data;
+            } else {//通过敏感词检测
 
-            //上传文字
-            $forum = Forum::find($forum_id);
-            $forum->content = $content;
-            $forum->status = 0;
-            if($forum->save()){
-                $data['status'] = 200;
-                $data['msg'] = "发布成功";
+                //上传文字
+                $forum = Forum::find($forum_id);
+                $forum->content = $content;
+                $forum->status = 0;
+                if ($forum->save()) {
+                    $data['status'] = 200;
+                    $data['msg'] = "发布成功";
+                }
             }
         }
         return $data;
@@ -349,6 +357,7 @@ class NewsController extends Controller {
     public function deleteview(Request $request){
         $data = array();
         $uid= AuthController::getUid();
+        $type = AuthController::getType();
         $data['status'] = 400;
         if($uid == 0){
             $data['msg'] = "登录后才能进行评论";
@@ -357,7 +366,7 @@ class NewsController extends Controller {
         if($request->has('view_id')){
             $view_id = $request->input('view_id');
             $forum_view = Forumviews::find($view_id);
-            if($forum_view->uid != $uid ){
+            if($forum_view->uid != $uid && $type !=0){
                 $data['msg'] = "您无权进行此操作";
                 return $data;
             }
@@ -377,6 +386,7 @@ class NewsController extends Controller {
     public function deleteForum(Request $request){
         $data = array();
         $uid= AuthController::getUid();
+        $type = AuthController::getType();
         $data['status'] = 400;
         if($uid == 0){
             $data['msg'] = "登录后才能进行评论";
@@ -385,7 +395,7 @@ class NewsController extends Controller {
         if($request->has('forum_id')){
             $forum_id = $request->input('forum_id');
             $forum = Forum::find($forum_id);
-            if($forum->uid != $uid ){
+            if($forum->uid != $uid && $type != 0){
                 $data['msg'] = "您无权进行此操作";
                 return $data;
             }

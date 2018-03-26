@@ -389,7 +389,7 @@
                     @foreach($data['dynamic'] as $dynamic)
                     <div class="box clearfix">
                         <a class="complaint_dynamic" data-content="{{$dynamic->id}}" onclick="openComplaint()">投诉</a>
-                        @if($dynamic->uid == $data['uid'])
+                        @if($dynamic->uid == $data['uid'] || $data['type'] == 0)
                             <a class="close delete_dynamic" data-content="{{$dynamic->id}}">×</a>
                         @endif
                         <img class="head" src="{{$dynamic->photo or asset('images/mansmall.jpg')}}"/>
@@ -431,7 +431,7 @@
                                             </p>
                                             <p class="comment-time">
                                                 {{$view->created_at}}
-                                                @if($view->uid == $data['uid'])
+                                                @if($view->uid == $data['uid'] || $data['type'] == 0)
                                                     <a class="comment-operate delete_view" data-content="{{$view->id}}">删除</a>
                                                 @endif
                                             </p>

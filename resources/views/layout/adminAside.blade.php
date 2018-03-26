@@ -200,6 +200,16 @@
 
                 </li>
                 <li
+                        @if($title === 'sendmsg')
+                        class="active"
+                        @endif>
+                    <a href="/admin/sendmsg">
+                        <i class="material-icons">dvr</i>
+                        <span>发送站内信</span>
+                    </a>
+
+                </li>
+                <li
                         @if($title === 'complaint')
                         class="active"
                         @endif>

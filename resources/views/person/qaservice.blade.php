@@ -25,6 +25,75 @@
 @endsection
 
 @section('content')
+    <div class="main-wrap">
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">实名认证</strong> /
+                <small>Real&nbsp;authentication</small>
+            </div>
+        </div>
+        <hr/>
+        <div class="authentication">
+            @if($data["is_vertify"] == -1)
+                <p class="tip">请填写您身份证上的真实信息，以用于报关审核</p>
+                <div class="authenticationInfo">
+                    <p class="title">填写个人信息</p>
+
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-form-label">真实姓名</label>
+                        <div class="am-form-content">
+                            <input type="text" id="real-name" name="real_name" placeholder="请输入您的真实姓名">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-IDcard" class="am-form-label">身份证号</label>
+                        <div class="am-form-content">
+                            <input type="tel" id="id-card" name="id_card" placeholder="请输入您的身份证信息">
+                        </div>
+                    </div>
+                </div>
+                <div class="authenticationPic">
+                    <p class="title">上传身份证照片</p>
+                    <p class="tip">请按要求上传身份证</p>
+
+                    <input type="file" name="id-card-first" class="hide" onchange='showIdCardPreview(this, "front")'>
+                    <input type="file" name="id-card-secend" class="hide" onchange='showIdCardPreview(this, "back")'>
+
+                    <ul class="cardlist">
+                        <li>
+                            <div class="cardPic" id="id-card-front_holder">
+                                <img src="{{asset("images/cardbg.jpg")}}">
+                                <div class="cardText" id="upload-idcard-front-btn"><i class="am-icon-plus"></i>
+                                    <p>正面照片</p>
+                                </div>
+                                <p class="titleText">手持身份证正面</p>
+                            </div>
+                            <div class="cardExample">
+                                <img id="first-preview" src="{{asset("images/cardexample1.jpg")}}">
+                                <p class="titleText">示例</p>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="cardPic" id="id-card-back_holder">
+                                <img src="{{asset("images/cardbg.jpg")}}">
+                                <div class="cardText" id="upload-idcard-back-btn"><i class="am-icon-plus"></i>
+                                    <p>背面照片</p>
+                                </div>
+                                <p class="titleText">身份证背面</p>
+                            </div>
+                            <div class="cardExample">
+                                <img id="secend-preview" src="{{asset("images/cardexample2.jpg")}}">
+                                <p class="titleText">示例</p>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            @else
+                <span class="am-badge am-badge-warning am-round">您已提交实名认证，请等待审核</span>
+            @endif
+        </div>
+    </div>
 
     <div class="main-wrap">
         <div class="am-cf am-padding">
@@ -43,7 +112,7 @@
                     <div class="am-form-group">
                         <label for="user-name" class="am-form-label">专业问答名称：</label>
                         <div class="am-form-content">
-                            <input type="text" id="real-name" name="real_name" placeholder="请设置您的问答名称">
+                            <input type="text" id="major-name" name="major_name" placeholder="请设置您的问答名称">
                         </div>
                     </div>
                     <div class="am-form-group">
@@ -75,8 +144,8 @@
                     <p class="title">上传毕业证/职称证明/专业资格证等</p>
                     <p class="tip">请按要求上传相关证书</p>
 
-                    <input type="file" name="id-card-front" class="hide" onchange='showIdCardPreview(this, "front")'>
-                    <input type="file" name="id-card-back" class="hide" onchange='showIdCardPreview(this, "back")'>
+                    <input type="file" name="id-card-front" class="hide" onchange='showMajorPreview(this, "front")'>
+                    <input type="file" name="id-card-back" class="hide" onchange='showMajorPreview(this, "back")'>
                     <div class="authenticationInfo">
                         <div class="am-form-group">
                             <label for="user-certificate-name" class="am-form-label">专业证书名称：</label>
@@ -141,6 +210,79 @@
         var isUploadIdCardFront = false;
         var isUploadIdCardBack = false;
 
+        var isUploadIdCardFirst = false;
+        var isUploadIdCardSecend = false;
+
+        $("#upload-idcard-front-btn").click(function (event) {
+            event.preventDefault();
+            swal({
+                title: "要求",
+                type: "info",
+                text: "身份证正面照片，要求身份证上字体清晰可辨",
+                confirmButtonText: "知道了",
+                closeOnConfirm: true
+            }, function () {
+                $("input[name='id-card-first']").click();
+            });
+        });
+
+        $("#upload-idcard-back-btn").click(function (event) {
+            event.preventDefault();
+            swal({
+                title: "要求",
+                type: "info",
+                text: "身份证反面照片，要求身份证上字体清晰可辨",
+                confirmButtonText: "知道了",
+                closeOnConfirm: true
+            }, function () {
+                $("input[name='id-card-secend']").click();
+            });
+        });
+        function showIdCardPreview(element, frontOrBack) {
+            var file = element.files[0];
+            var anyWindow = window.URL || window.webkitURL;
+            var objectUrl = anyWindow.createObjectURL(file);
+            window.URL.revokeObjectURL(file);
+
+            var idCardFrontPath = null;
+            if (frontOrBack === "front") {
+                idCardFrontPath = $("input[name='id-card-first']").val();
+            } else {
+                idCardFrontPath = $("input[name='id-card-secend']").val();
+            }
+
+            if (!/.(jpg|jpeg|png|JPG|JPEG|PNG)$/.test(idCardFrontPath)) {
+                isCorrect = false;
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "图片格式错误，支持：.jpg .jpeg .png类型。请选择正确格式的图片后再试！",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+            } else if (file.size > 5 * 1024 * 1024) {
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "图片文件最大支持：5MB",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+            } else {
+                if (frontOrBack === "front") {
+                    $("#first-preview").attr("src", objectUrl);
+                    isUploadIdCardFirst = true;
+                } else if (frontOrBack === "back") {
+                    $("#secend-preview").attr("src", objectUrl);
+                    isUploadIdCardSecend = true;
+                }
+            }
+        }
+
+
+        //专业证书上传
         $("#upload-front-btn").click(function (event) {
             event.preventDefault();
             swal({
@@ -168,7 +310,7 @@
         });
 
         $("#submit-form").click(function () {
-            var realName = $("input[name='real_name']").val();
+            var majorName = $("input[name='major_name']").val();
             var tel = $("input[name='tel']").val();
             var email = $("input[name='email']").val();
             var workplace = $("input[name='workplace']").val();
@@ -179,9 +321,51 @@
             var idCardFront = $("input[name='id-card-front']");
             var idCardBack = $("input[name='id-card-back']");
 
+            var realName = $("input[name='real_name']").val();
+            var idCardNum = $("input[name='id_card']").val();
+            var idCardFirst = $("input[name='id-card-first']");
+            var idCardSecend = $("input[name='id-card-secend']");
+
+            majorName = $.trim(majorName);
             realName = $.trim(realName);
+            idCardNum = $.trim(idCardNum);
 
             if (realName === "") {
+                swal({
+                    title: "",
+                    text: "请输入您的真实姓名",
+                    type: "error",
+                    confirmButtonText: "确定",
+                    showCancelButton: false,
+                    closeOnConfirm: false
+                });
+                return;
+            }
+
+            if (idCardNum === "") {
+                swal({
+                    title: "",
+                    text: "请输入您的身份证信息",
+                    type: "error",
+                    confirmButtonText: "确定",
+                    showCancelButton: false,
+                    closeOnConfirm: false
+                });
+                return;
+            }
+            if(!/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(idCardNum)){
+                swal({
+                    title: "",
+                    text: "请输入正确的身份证号码",
+                    type: "error",
+                    confirmButtonText: "确定",
+                    showCancelButton: false,
+                    closeOnConfirm: false
+                });
+                return;
+            }
+
+            if (majorName === "") {
                 swal({
                     title: "",
                     text: "请设置您的专业问答名称",
@@ -234,15 +418,43 @@
                 swal("","专业身份不能长于100字", "error");
                 return;
             }
+            if (!isUploadIdCardFirst) {
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "请上传身份证正面照片",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+                return;
+            }
+
+            if (!isUploadIdCardSecend) {
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "请上传身份证反面照片",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+                return;
+            }
 
             var formData = new FormData();
-            formData.append("mediator_name", realName);
+            formData.append("mediator_name", majorName);
             formData.append("tel", tel);
             formData.append("email", email);
             formData.append("profession", profession);
             formData.append("workplace", workplace);
             formData.append("certificate_name", certificate_name);
             formData.append("identity", identity);
+
+            formData.append("real_name", realName);
+            formData.append("id_card", idCardNum);
+            formData.append("idcard1_photo", idCardFirst.prop("files")[0]);
+            formData.append("idcard2_photo", idCardSecend.prop("files")[0]);
 
             if (!isUploadIdCardFront) {
                 swal({
@@ -294,7 +506,7 @@
             })
         });
 
-        function showIdCardPreview(element, frontOrBack) {
+        function showMajorPreview(element, frontOrBack) {
             var file = element.files[0];
             var anyWindow = window.URL || window.webkitURL;
             var objectUrl = anyWindow.createObjectURL(file);

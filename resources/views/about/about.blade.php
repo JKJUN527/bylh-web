@@ -1,4 +1,4 @@
-@extends('demo.admin',['title'=>7])
+@extends('demo.admin',['title'=>7,'subtitle'=>$data['page']])
 @section('title','关于我们')
 @section('custom-style')
     <style type="text/css">
@@ -154,12 +154,13 @@
             <div class="am-offcanvas" id="sidebar">
                 <div class="am-offcanvas-bar">
                     <ul class="am-nav">
-                        <li><a href="#">不亦乐乎简介</a></li>
-                        <li class="am-nav-header">目录</li>
+                        {{--<li><a href="#">不亦乐乎简介</a></li>--}}
+                        <li class="am-nav-header">不亦乐乎简介</li>
                         <li class="am-active"><a href="#">公司简介</a></li>
                         <li><a href="#">公司发展</a></li>
                         <li><a href="#">业务简介</a></li>
                         <li><a href="#">联系方式</a></li>
+                        <li><a href="#">常见问题</a></li>
                     </ul>
                 </div>
             </div>

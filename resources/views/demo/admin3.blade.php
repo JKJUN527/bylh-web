@@ -100,7 +100,7 @@
                 @if($subtitle==0)
                         nav_active
 @endif
-                @endif"><a href="{{asset('service/advanceSearch?type=0')}}">大学生服务</a></li>
+                @endif"><a href="{{asset('service/advanceSearch?type=0')}}">专业服务</a></li>
                 <li class="qc
                 @if($title==3)
                 @if($subtitle==1)
@@ -113,9 +113,9 @@
                         nav_active
                     @endif
                 @endif"><a href="{{asset('service/advanceSearch?type=2')}}">专业问答</a></li>
-                <li class="qc @if($title==6) nav_active @endif"><a href="{{asset('news/index')}}">网站动态</a></li>
+                <li class="qc @if($title==6) nav_active @endif"><a href="{{asset('news/index')}}">知友沙龙</a></li>
                 <li class="qc @if($title==7) nav_active @endif"><a href="{{asset('about')}}">关于我们</a></li>
-                <li class="qc @if($title==8) nav_active @endif"><a href="{{asset('news/index')}}">常见问题</a></li>
+                <li class="qc @if($title==8) nav_active @endif"><a href="/about?page=qainfo">常见问题</a></li>
             </ul>
         </div>
     @section('content')

@@ -219,9 +219,14 @@ class HomeController extends Controller {
             "data" => $data,
         ]);
     }
-    public function aboutindex(){
+    public function aboutindex(Request $request){
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
+
+        if($request->has('page') && $request->input('page') == 'qainfo')
+            $data['page'] = 2;
+        else
+            $data['page'] = 1;
 
         return view('about.about',['data'=>$data]);
     }

@@ -35,14 +35,14 @@ class VerificationController extends Controller {
                 return view('admin/realname', ['data' => $data]);
                 break;
             case 'finance':
-                $data['finance'] = Userinfo::where('realname_statue', 1)
+                $data['finance'] = Userinfo::where('finance_statue', '!=',-1)
                     ->where('finance_photo', '!=', '')
                     ->orderBy('updated_at', 'desc')
                     ->paginate(10);//每页显示10条
                 return view('admin/finance', ['data' => $data]);
                 break;
             case 'major':
-                $data['major'] = Userinfo::where('realname_statue', 1)
+                $data['major'] = Userinfo::where('majors_statue','!=',-1)
                     ->where('majors_photo', '!=', '')
                     ->orderBy('updated_at', 'desc')
                     ->paginate(10);//每页显示10条
@@ -132,9 +132,11 @@ class VerificationController extends Controller {
                     break;
                 case '1': //审核通过
                     $isPass->$is_verify = 1;//审核通过
+                    $isPass->realname_statue = 1;//审核通过
                     $isPass->save();
                     //更改user表状态
                     $user->$user_verify = 1;
+                    $user->realname_verify = 1;
                     //如果通过了实名认证，则用户成为一般服务用户。
                     //新建一般服务用户信息表
                     if($is_verify =="realname_statue"){

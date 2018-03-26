@@ -531,6 +531,13 @@ class AccountController extends Controller {
         $data['type'] = AuthController::getType();
 
         $infoid = Userinfo::where('uid', $data['uid'])->first();
+        //查看是否新建服务用户信息表，如没有则新建
+        $is_exist = Serviceinfo::where('uid',$data['uid'])->count();
+        if($is_exist <=0){
+            $serviceinfo = new Serviceinfo();
+            $serviceinfo->uid = $data['uid'];
+            $serviceinfo->save();
+        }
         switch ($option) {
             case 0:
                 if ($infoid['realname_statue'] == 0 || $infoid['realname_statue'] == 1) {
@@ -595,11 +602,11 @@ class AccountController extends Controller {
                 break;
             case 1://实习中介认证
                 $other = false;
-                if ($infoid['realname_statue'] != 1) {
-                    $data['status'] = 400;
-                    $data['msg'] = "必须先通过实名认证";
-                    return $data;
-                }
+//                if ($infoid['realname_statue'] != 1) {
+//                    $data['status'] = 400;
+//                    $data['msg'] = "必须先通过实名认证";
+//                    return $data;
+//                }
                 if ($infoid['finance_statue'] == 0 || $infoid['finance_statue'] == 1) {
                     $data['status'] = 400;
                     $data['msg'] = "已提交审核，无需重复提交";
@@ -666,15 +673,49 @@ class AccountController extends Controller {
                 break;
             case 2://专业认证
                 $other = false;
-                if ($infoid['realname_statue'] != 1) {
-                    $data['status'] = 400;
-                    $data['msg'] = "必须先通过实名认证";
-                    return $data;
-                }
+//                if ($infoid['realname_statue'] != 1) {
+//                    $data['status'] = 400;
+//                    $data['msg'] = "必须先通过实名认证";
+//                    return $data;
+//                }
                 if ($infoid['majors_statue'] == 0 || $infoid['majors_statue'] == 1) {
                     $data['status'] = 400;
                     $data['msg'] = "已提交审核，无需重复提交";
                     return $data;
+                }
+                $userinfo = Userinfo::find($infoid['id']);
+                //判断是否有身份证照片
+                if ($request->has('real_name') && $request->has('id_card') && $request->hasFile('idcard1_photo')) {
+
+                    if ($request->isMethod('POST')) {
+                        $idcard1_photo = $request->file('idcard1_photo');//取得上传文件信息
+                        $idcard2_photo = $request->file('idcard2_photo');//取得上传文件信息
+
+                        if ($idcard1_photo->isValid() && $idcard2_photo->isValid()) {//判断文件是否上传成功
+                            //原文件名
+//                          //$originalName1 = $idcard1_photo->getClientOriginalName();
+                            //扩展名
+                            $ext1 = $idcard1_photo->getClientOriginalExtension();
+                            $ext2 = $idcard2_photo->getClientOriginalExtension();
+                            //mimetype
+                            //$type1 = $idcard1_photo->getClientMimeType();
+                            //临时觉得路径
+                            $realPath1 = $idcard1_photo->getRealPath();
+                            $realPath2 = $idcard2_photo->getRealPath();
+
+                            $filename1 = date('Y-m-d-H-i-s') . '-' . uniqid() . 'idcard1_photo' . '.' . $ext1;
+                            $filename2 = date('Y-m-d-H-i-s') . '-' . uniqid() . 'idcard2_photo' . '.' . $ext2;
+
+                            $bool1 = Storage::disk('authentication')->put($filename1, file_get_contents($realPath1));
+                            $bool2 = Storage::disk('authentication')->put($filename2, file_get_contents($realPath2));
+
+                            if ($bool1 and $bool2) {
+                                //文件名保存到数据库中
+                                $userinfo->idcard_photo = asset('storage/authentication/' . $filename1) . "+@+" .
+                                    asset('storage/authentication/' . $filename2);
+                            }
+                        }
+                    }
                 }
                 //判断是否有其他证件照片
                 if($request->hasFile('other_photo')) {
@@ -692,7 +733,6 @@ class AccountController extends Controller {
                     }
                 }
                 if ($request->hasFile('license_photo')) {
-                    $userinfo = Userinfo::find($infoid['id']);
                     $majors_photo = $request->file('license_photo');//取得上传文件信息
                     if ($majors_photo->isValid()) {//判断文件是否上传成功
                         //扩展名
@@ -713,6 +753,9 @@ class AccountController extends Controller {
                     }
                     $userinfo->tel = $request->input('tel');
                     $userinfo->mail = $request->input('email');
+                    $userinfo->real_name = $request->input('real_name');
+                    $userinfo->id_card = $request->input('id_card');
+                    $userinfo->realname_statue = 0;
                     $userinfo->majors_statue = 0;
 
                     if ($userinfo->save()) {
