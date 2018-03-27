@@ -14,6 +14,17 @@
     <link href="{{asset('css/dlstyle.css')}}" rel="stylesheet" type="text/css">
     <script src="{{asset('js/jquery.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
+    <style>
+        .login-banner-bg{
+            margin-top: 20px;
+        }
+        .login-banner-bg img {
+            height: 315px;
+        }
+        .login-box{
+            height: auto !important;
+        }
+    </style>
 </head>
 
 <body>

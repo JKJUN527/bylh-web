@@ -30,7 +30,7 @@ class ServicesController extends Controller {
             ->join('bylh_serviceclass1', 'bylh_serviceclass1.id', '=', 'bylh_genlservices.class1_id')
             ->select('bylh_genlservices.id','city','name','describe','state','bylh_genlservices.created_at','is_urgency')
             ->where('bylh_genlservices.type',0)
-            ->orderBy('bylh_genlservices.updated_at', 'desc')
+            ->orderBy('bylh_genlservices.created_at', 'desc')
             ->paginate(10);
 //        $data['genlservice'] = Genlservices::where('type',0)
 //            ->paginate(10);
@@ -48,7 +48,7 @@ class ServicesController extends Controller {
             ->join('bylh_serviceclass1', 'bylh_serviceclass1.id', '=', 'bylh_finlservices.class1_id')
             ->select('bylh_finlservices.id','city','name','describe','state','bylh_finlservices.created_at','is_urgency')
             ->where('bylh_finlservices.type',1)
-            ->orderBy('bylh_finlservices.updated_at', 'desc')
+            ->orderBy('bylh_finlservices.created_at', 'desc')
             ->paginate(10);
 
         return view('admin.finlservices', ['data' => $data]);
@@ -64,7 +64,7 @@ class ServicesController extends Controller {
             ->join('bylh_serviceclass1', 'bylh_serviceclass1.id', '=', 'bylh_qaservices.class1_id')
             ->select('bylh_qaservices.id','city','name','describe','state','bylh_qaservices.created_at','is_urgency')
             ->where('bylh_qaservices.type',2)
-            ->orderBy('bylh_qaservices.updated_at', 'desc')
+            ->orderBy('bylh_qaservices.created_at', 'desc')
             ->paginate(10);
 
         return view('admin.majorservices', ['data' => $data]);

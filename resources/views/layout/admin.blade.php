@@ -47,7 +47,10 @@
             color: #000;
             text-decoration: none;
         }
-        .page li {
+        .am-pagination li {
+            display: inline;
+        }
+        .page li{
             display: inline;
         }
     </style>

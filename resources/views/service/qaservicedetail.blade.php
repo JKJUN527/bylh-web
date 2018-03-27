@@ -646,12 +646,15 @@
         </div>
     </div>
     <!--广告-->
-    <div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-        <img src="{{asset('images/ad4.jpg')}}">
-    </div>
-    <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-        <img src="{{asset('images/ad5.jpg')}}">
-    </div>
+    {{--<div class="advertisement" style="padding: 10px 0 10px 0;">--}}
+        {{--<img src="{{asset('images/ad2.jpg')}}" style="width: 100%;">--}}
+    {{--</div>--}}
+    {{--<div class="advertisement" style="padding: 10px;width: 50%;float: left;">--}}
+        {{--<img src="{{asset('images/ad4.jpg')}}">--}}
+    {{--</div>--}}
+    {{--<div class="advertisement" style="padding: 10px;width: 50%;float: right;">--}}
+        {{--<img src="{{asset('images/ad5.jpg')}}">--}}
+    {{--</div>--}}
 @endsection
 @section('custom-script')
     <script src="{{asset("dist/amazeui.min.js")}}"></script>

@@ -549,12 +549,15 @@
 
 </div>
 <!--广告-->
-<div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-    <img src="{{asset('images/ad4.jpg')}}" alt="">
+<div class="advertisement" style="padding: 10px 0 10px 0;">
+    <img src="{{asset('images/ad2.jpg')}}" style="width: 100%;">
 </div>
-<div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-    <img src="{{asset('images/ad5.jpg')}}" alt="">
-</div>
+{{--<div class="advertisement" style="padding: 10px;width: 50%;float: left;">--}}
+    {{--<img src="{{asset('images/ad4.jpg')}}" alt="">--}}
+{{--</div>--}}
+{{--<div class="advertisement" style="padding: 10px;width: 50%;float: right;">--}}
+    {{--<img src="{{asset('images/ad5.jpg')}}" alt="">--}}
+{{--</div>--}}
 @endsection
 @section('custom-script')
     <script>
