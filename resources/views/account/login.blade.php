@@ -21,7 +21,7 @@
         .login-banner-bg img {
             height: 315px;
         }
-        .login-box{
+        .login-box {
             height: auto !important;
         }
     </style>
