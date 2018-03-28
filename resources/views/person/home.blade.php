@@ -36,7 +36,7 @@
                                 <a class="m-pic" href="/account/baseedit" style="width: 120px;height: 120px;">
                                     <img src="
                                          @if($data['personInfo']->photo ==null ||$data['personInfo']->photo =="")
-                                            {{asset('images/touxiang.jpg')}}
+                                            {{asset('images/dog.png')}}
                                          @else
                                             {{$data['personInfo']->photo}}
                                          @endif

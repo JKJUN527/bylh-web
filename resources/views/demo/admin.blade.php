@@ -125,7 +125,7 @@
                 @endif"><a href="{{asset('service/advanceSearch?type=2')}}">专业问答</a></li>
                 <li class="qc @if($title==6) nav_active @endif"><a href="{{asset('news/index')}}">知友沙龙</a></li>
                 <li class="qc @if($title==7 && $subtitle ==1) nav_active @endif"><a href="{{asset('about')}}">关于我们</a></li>
-                <li class="qc @if($title==7 && $subtitle ==2) nav_active @endif"><a href="/about?page=qainfo">常见问题</a></li>
+                <li class="qc @if($title==7 && $subtitle ==2) nav_active @endif"><a href="/about?page=qainfo">用户指引</a></li>
             </ul>
         </div>
 @section('content')

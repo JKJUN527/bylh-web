@@ -21,6 +21,12 @@
             color: #000;
             font-style: italic;
         }
+        .long-title{
+            display: none !important;
+        }
+        .nav-cont{
+            padding-left: 0px;
+        }
     </style>
 
     @section("custom-style")
