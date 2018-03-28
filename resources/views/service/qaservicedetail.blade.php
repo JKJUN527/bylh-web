@@ -570,6 +570,43 @@
                                     <div style="float:left;overflow:hidden;height:30px;">{{$data['serviceinfo']['city']}}</div>
                                     <div class="clear"></div>
                                 </div>
+                                @if($data['serviceinfo']['has_student'] == 0)
+                                    <div class="service_info">
+                                        <div class="fl" style="float: left;">毕业院校：</div>
+                                        <div class="service_content">{{explode('@',$data['serviceinfo']['graduate_edu'])[0]}}|
+                                            {{explode('@',$data['serviceinfo']['graduate_edu'])[2]}}
+                                            |
+                                            @if(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 0)
+                                                博士及已上
+                                            @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 1)
+                                                硕士
+                                            @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 2)
+                                                学士
+                                            @elseif(explode('@',$data['serviceinfo']['graduate_edu'])[1] == 3)
+                                                高中及以下
+                                            @endif
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                @else
+                                    <div class="service_info">
+                                        <div class="fl" style="float: left;">就读院校：</div>
+                                        <div class="service_content">{{explode('@',$data['serviceinfo']['current_edu'])[0]}}|
+                                            {{explode('@',$data['serviceinfo']['current_edu'])[2]}}
+                                            |
+                                            @if(explode('@',$data['serviceinfo']['current_edu'])[1] == 0)
+                                                博士及已上
+                                            @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 1)
+                                                硕士
+                                            @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 2)
+                                                学士
+                                            @elseif(explode('@',$data['serviceinfo']['current_edu'])[1] == 3)
+                                                高中及以下
+                                            @endif
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                @endif
                                 <div class="service_info">
                                     <div class="fl" style="float: left;"><strong>从事专业：</strong></div>
                                     <div class="service_content">{{$data['serviceinfo']['current_profession']}}</div>

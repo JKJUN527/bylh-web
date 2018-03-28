@@ -11,8 +11,9 @@
     <link href="{{asset('css/orstyle.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
     <style>
-     .nav_active{
-         background-color: #ea6005;
+     .nav_active a{
+         /*background-color: #ea6005;*/
+         color: #F37B1D !important;
      }
 
      /*.nav_img_release {*/

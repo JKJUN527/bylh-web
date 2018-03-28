@@ -196,6 +196,7 @@
         <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="border: 2px solid #eee;padding: 20px;background: #fff;">
             <div class="am-u-lg-9 am-u-md-9 am-u-sm-9">
                 <!--大学生服务-->
+                @if($data['genlservices'][0])
                 <div class="shopMain" id="shopmain">
                     <div class="am-container ">
                         <div class="shopTitle">
@@ -242,6 +243,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @if($data['finlservices'][0])
                 <!--实习中介-->
                 <div class="shopMain" id="shopmain">
                     <div class="am-container ">
@@ -289,6 +292,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @if($data['qaservices'][0])
                 <!--专业问答-->
                 <div class="shopMain" id="shopmain">
                     <div class="am-container">
@@ -339,6 +344,7 @@
                         </div>
                     </div>
                 </div>
+                    @endif
 
             </div>
             <div class="am-u-lg-3 am-u-md-3 am-u-sm-3">

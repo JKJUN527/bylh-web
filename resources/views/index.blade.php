@@ -134,7 +134,7 @@
         .showNews {
             width: 300px;
             right: 0;
-            border: 2px solid #e64d2e;
+            border: 2px solid #F37B1D;
         }
 
 
@@ -308,7 +308,7 @@
                 <div class="index-category-left showNews">
                     <div class="marqueenOne">
                     <span class="marqueen-title"
-                          style="text-align: center;padding-top: 1rem;height:54px;background-image: url({{asset('images/float_box2.png')}});background-repeat: no-repeat;">
+                          style="text-align: center;padding-top: 1rem;height:54px;background-color: #F37B1D">
                         <i style="font-size: 1.5rem;color: #fff;"
                            onclick="window.location.href='/news/notice';">本站公告</i></span>
                         <div class="demo">
@@ -557,12 +557,12 @@
             <div class="am-u-lg-4 am-u-md-4" style="padding-top: 20px;">
                 <div class="request_rank">
                     <div class="rank_title"
-                         style="background:url({{asset('images/tit_bg.jpg')}})no-repeat center;height: 114px;">
-                        <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 20px;">
+                         style="margin: 0 60px; background-color: #F37B1D">
+                        <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 10px;padding-bottom: 10px;">
                             服务商排行榜</p>
                     </div>
                     <div class="rank_content"
-                         style="margin: 0 60px;border-bottom: 2px solid #df3536;border-left: 2px solid #df3536;border-right: 2px solid #df3536;">
+                         style="margin: 0 60px;border-bottom: 2px solid #F37B1D;border-left: 2px solid #F37B1D;border-right: 2px solid #F37B1D;">
                         <ul>
                             @foreach($data['serviceuser'] as $serviceuser)
                                 <li style="text-align: center;">

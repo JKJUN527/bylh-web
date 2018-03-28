@@ -139,7 +139,7 @@ class VerificationController extends Controller {
                     $user->realname_verify = 1;
                     //如果通过了实名认证，则用户成为一般服务用户。
                     //新建一般服务用户信息表
-                    if($is_verify =="realname_statue"){
+//                    if($is_verify =="realname_statue" ||$is_verify =="realname_statue"){
                         $user->type = 2;//升级用户为服务用户
                         $user->save();
                         $is_exist = Serviceinfo::where('uid',$isPass->uid)->get();
@@ -149,7 +149,7 @@ class VerificationController extends Controller {
                             $serviceinfo->city = $isPass->city;
                             $serviceinfo->save();
                         }
-                    }
+//                    }
                     //设置用户登录信息表
                     $set_user = User::find($isPass->uid);
                     $set_user->$user_verify = 1;

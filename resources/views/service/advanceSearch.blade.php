@@ -523,12 +523,12 @@
         </div>
         <div class="am-u-lg-4 am-u-md-4">
             <div class="request_rank">
-                <div class="rank_title" style="background:url('../images/tit_bg.jpg')no-repeat center;height: 114px;">
-                    <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 20px;">
+                <div class="rank_title" style="margin: 0 60px; background-color: #F37B1D">
+                    <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 10px;padding-bottom: 10px;">
                         服务商排行榜</p>
                 </div>
                 <div class="rank_content"
-                     style="margin: 0 60px;border-bottom: 2px solid #df3536;border-left: 2px solid #df3536;border-right: 2px solid #df3536;">
+                     style="margin: 0 60px;border-bottom: 2px solid #F37B1D;border-left: 2px solid #F37B1D;border-right: 2px solid #F37B1D;">
                     <ul>
                         @foreach($data['Service_list'] as $service)
                             <li style="text-align: center;">

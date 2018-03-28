@@ -453,7 +453,7 @@
                          style="margin-right: -5px;border: 2px solid #eee;padding: 20px;background: #fff;">
                         <div class=" fr main-c">
                             <a class="fws-hd" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank">
-                                <img src="{{$data['serviceinfo']['elogo']}}" width="180" height="180"></a>
+                                <img src="{{$data['serviceinfo']['elogo'] or asset('images/dog.png')}}" width="180" height="180"></a>
                             <a class="fws-name" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank" style="padding:20px;font-size: 18px;">
                                 {{$data['serviceinfo']['ename']}}
                             </a>
@@ -504,6 +504,17 @@
                                             <div class="clear"></div>
                                         </div>
                                     @endif
+                                        <div class="service_info">
+                                            <div class="fl" style="float: left;"><strong>从事专业：</strong></div>
+                                            <div class="service_content">{{$data['serviceinfo']['current_profession']}}</div>
+                                            <div class="fl" style="float: left;"><strong>服务单位：</strong></div>
+                                            <div class="service_content">{{$data['serviceinfo']['workplace']}}</div>
+                                            <div class="fl" style="float: left;"><strong>专业身份：</strong></div>
+                                            <div class="service_content">{{$data['serviceinfo']['identity']}}</div>
+                                            <div class="fl" style="float: left;"><strong>专业证书：</strong></div>
+                                            <div class="service_content">{{$data['serviceinfo']['certificate_name']}}</div>
+                                            <div class="clear"></div>
+                                        </div>
                                 @elseif($data["detail"]->type == 1){{--实习中介--}}
                                 <div class="service_info">
                                     <div class="fl" style="float: left;">中介领域：</div>
