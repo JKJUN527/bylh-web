@@ -182,10 +182,10 @@ height: 14px;background: url(../images/cardbg.png);}
 /*底部*/
 .footer{display:none; text-align: center;border-top: 2px solid #F8F8F8 margin-top:20px; padding-top: 5px;}
 .main-wrap {background-color:#fff;}
-@media only screen and (min-width:640px) 
-{	
-	
-	
+@media only screen and (min-width:640px)
+{
+
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -195,15 +195,15 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 font-size:14px ;
-}	
-	
-	
-	
+}
+
+
+
 /*头*/
 header { display:block;}
 header article{max-width: 1200px;margin:0px auto;}
@@ -214,16 +214,16 @@ header article{max-width: 1200px;margin:0px auto;}
 .message-r .topMessage {float: left;padding: 0px 6px;height: 35px;line-height: 35px;}
 /*浮动框*/
 .nav.white{width:100%;margin:0px auto;}
-.nav.white .logoBig{ display:block;float:left;height:56px;width:115px; margin:0px auto; margin-left:5%} 
+.nav.white .logoBig{ display:block;float:left;height:56px;width:115px; margin:0px auto; margin-left:5%}
 .nav.white .logoBig img{width:100%;}
 .my-cart { width: 46px;height: 46px;}
 
 #ai-topsearch {height: 46px;}
-.search-bar input {width: 80%;height:46px;}	
+.search-bar input {width: 80%;height:46px;}
 .classified,.navCir{display:none;}
 .nav.white{ position:relative;top:0px;z-index:0;}
 
- 
+
 /*搜索框*/
 .search-bar {height: 51px;margin: 0px 50px 0 120px; padding-left:5%;}
 .search-bar form{border:2px solid #F03726; max-width:670px;}
@@ -282,13 +282,13 @@ li.person p i{position: absolute;left:0px;font-size: 15px;color:#fd6d37 ;width: 
 .suggestmain .am-btn.anniu{width:150px;margin:25px 0px 20px;}
 
 }
-@media only screen and (min-width:900px) 
+@media only screen and (min-width:900px)
 {
 /*银行卡*/
-.card-box-list li{float:left;width:33.33%}	
+.card-box-list li{float:left;width:33.33%}
 }
-   
-@media only screen and (min-width: 1025px) 
+
+@media only screen and (min-width: 1025px)
 
    {
 	   .nav.white{padding-left:0px; max-width:1000px; margin:0px auto;}

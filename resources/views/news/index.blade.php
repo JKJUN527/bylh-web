@@ -408,7 +408,7 @@
                                     @if(count($pictures) >0)
                                         <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="margin-left:20px;">
                                             @foreach($pictures as $picture)
-                                                <img class="pic am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end"
+                                                <img class="pic am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end" name="previewImg"
                                                  src="{{$picture or asset('images/f9.png')}}" style="padding:5px;width: 157px;height: 157px;"/>
                                                 <?php $i++;?>
                                             @endforeach
@@ -490,6 +490,11 @@
                                     <span class="am-modal-btn" data-am-modal-cancel>取消</span>
                                 </div>
                             </div>
+                        </div>
+                    {{--查看图片大图--}}
+                        <div class="am-modal am-modal-alert" tabindex="-1" id="preview-img"
+                             style="margin-top: -200px;">
+                            <img src="">
                         </div>
                 </div>
             </div>
@@ -742,6 +747,15 @@
                 }
             });
         }
+        $('img[name=previewImg]').click(function () {
+            var src = $(this).attr('src');
+            $('#preview-img img').attr('src',src);
+            $('#preview-img').modal({
+                onConfirm: function () {
+
+                }
+            });
+        });
 
     </script>
     <script type="text/javascript" src="{{asset('js/demo.js')}}"></script>
