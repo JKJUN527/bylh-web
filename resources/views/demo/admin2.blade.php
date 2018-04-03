@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+    {{--<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">--}}
     <title>@yield('title')</title>
     <link href="{{asset('AmazeUI-2.4.2/assets/css/admin.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css">
@@ -16,6 +16,10 @@
     <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.js')}}"></script>
 
     <style>
+        .am-container {
+            width: 980px !important;
+            max-width: none;
+        }
         .require-data{
             background: yellow;
             color: #000;
