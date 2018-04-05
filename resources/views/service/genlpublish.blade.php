@@ -214,7 +214,7 @@
                             <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">服务类型</label>
                             <div class="am-u-sm-8" style="float: left;margin-left: 30px;">
                                 <label class="am-checkbox-inline">
-                                    <input type="radio" disabled name="service_type" value="0" data-am-ucheck @if($data['type'] === '0') checked @endif> 一般服务
+                                    <input type="radio" disabled name="service_type" value="0" data-am-ucheck @if($data['type'] === '0') checked @endif> 专业服务
                                 </label>
                                 <label class="am-checkbox-inline">
                                     <input type="radio" disabled name="service_type" value="1" data-am-ucheck @if($data['type'] === '1') checked @endif> 实习中介
@@ -401,8 +401,16 @@
         }
         $('select[name=project]').change(function () {
             var btn3 = $('#select_class3');
-            btn3.html($('select[name=project] option:selected').html());
-            btn3.attr('data-content',$('select[name=project]').val());
+            var btn2 = $('#select_class2');
+
+            var class2_id = btn2.attr('data-content');
+            // alert(btn3.html());
+//            alert($(this).val());
+            //获取class2id 对应的select
+            var project = $("#project_"+class2_id).find("select option:selected");
+            // alert(project.html());
+            btn3.html(project.html());
+            btn3.attr('data-content',project.val());
         });
         function goto_next() {
             var tel = $('#phone');
@@ -440,7 +448,7 @@
             var baseinfo_type = $('#baseinfo_type');
             var baseinfo_class = $('#baseinfo_class');
             var base_type;
-            if(type === '0') base_type = "一般服务";
+            if(type === '0') base_type = "专业服务";
             if(type === '1') base_type = "实习中介";
             if(type === '2') base_type = "专业问答";
             baseinfo_tel.find("span").html(tel.val());

@@ -189,17 +189,23 @@
             font-size: 1.2rem;
             font-weight: bold;
         }
+
+        .pictureshow img{
+            max-height: 377px;
+            /*width: 850px;margin-left:-200px;height: 417px;*/
+        }
 </style>
 @endsection
 @section('content')
     <div class="am-g am-g-fixed">
-        <div class="am-u-lg-2" style="top:40px;">
+        <div class="am-u-lg-2" style="">
             <div id="nav" class="navfull" style="position: static;">
                 <div class="area clearfix">
                     <div class="category-content" id="guide_2">
 
                         <div class="category" style="box-shadow:none ;margin-top: 2px;">
                             <ul class="category-list navTwo" id="js_climit_li">
+                                <li class="long-title">服务范围</li>
                                 @foreach($data['serviceclass1'] as $serviceclass1)
                                     <li>
                                         <div class="category-info">
@@ -250,22 +256,29 @@
                 </div>
             </div>
         </div>
-        <div class="am-u-lg-7 am-u-sm-4 am-u-md-4" style="margin-left: 180px;">
+        <div class="am-u-lg-8" style="
+        /*margin-left: 180px;*/
+">
             <div class="pictureshow">
                 <ul class="">
                     <li class="">
                         <a href="#">
-                            <img src="{{asset('images/3.png')}}"
-                                 style="width: 850px;margin-left:-200px;height: 417px;"/>
+                            <img src="{{asset('images/3.png')}}"/>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="am-u-lg-3" style="margin-left: -180px;">
-            <div class="marqueenTwo" style="background:transparent;border:0px;">
-                <div class="demo" style="margin-left: 10rem;">
+        <div class="am-u-lg-2" style="
+        /*margin-left: -180px;*/
+">
+            <div class="marqueenTwo" style="
+            /*background:transparent;border:0px;*/
+">
+                <div class="demo" style="
+                /*margin-left: 10rem;*/
+">
                     <button type="button" class="am-btn am-btn-warning am-round demo_btn bgcolor" onclick="window.location.href='/demands/demandPublishIndex'">发布需求</button>
                     <button type="button" class="am-btn am-btn-primary am-round demo_btn" onclick="window.location.href='/service/genlpublish'">发布服务</button>
                 </div>
@@ -273,29 +286,29 @@
         </div>
     </div>
     <!--侧边导航 -->
-    <!--小导航 -->
-    <div class="am-g am-g-fixed smallnav">
-        <div class="am-u-sm-3">
-            <a href="sort.html"><img src="{{asset('images/navsmall.jpg')}}"/>
-                <div class="title">发布需求</div>
-            </a>
-        </div>
-        <div class="am-u-sm-3">
-            <a href="#"><img src="{{asset('images/servicesmall.jpg')}}"/>
-                <div class="title">发布服务</div>
-            </a>
-        </div>
-        <div class="am-u-sm-3">
-            <a href="#"><img src="{{asset('images/mansmall.jpg')}}"/>
-                <div class="title">个人中心</div>
-            </a>
-        </div>
-        <div class="am-u-sm-3">
-            <a href="#"><img src="{{asset('images/aboutus.jpg')}}"/>
-                <div class="title">关于我们</div>
-            </a>
-        </div>
-    </div>
+    {{--<!--小导航 -->--}}
+    {{--<div class="am-g am-g-fixed smallnav">--}}
+        {{--<div class="am-u-sm-3">--}}
+            {{--<a href="sort.html"><img src="{{asset('images/navsmall.jpg')}}"/>--}}
+                {{--<div class="title">发布需求</div>--}}
+            {{--</a>--}}
+        {{--</div>--}}
+        {{--<div class="am-u-sm-3">--}}
+            {{--<a href="#"><img src="{{asset('images/servicesmall.jpg')}}"/>--}}
+                {{--<div class="title">发布服务</div>--}}
+            {{--</a>--}}
+        {{--</div>--}}
+        {{--<div class="am-u-sm-3">--}}
+            {{--<a href="#"><img src="{{asset('images/mansmall.jpg')}}"/>--}}
+                {{--<div class="title">个人中心</div>--}}
+            {{--</a>--}}
+        {{--</div>--}}
+        {{--<div class="am-u-sm-3">--}}
+            {{--<a href="#"><img src="{{asset('images/aboutus.jpg')}}"/>--}}
+                {{--<div class="title">关于我们</div>--}}
+            {{--</a>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <div class="shopMainbg">
         <!--广告1-->
         <div class="advertisement" style="padding: 10px 0 10px 0;">

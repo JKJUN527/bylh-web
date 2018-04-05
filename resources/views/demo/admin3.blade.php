@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    {{--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">--}}
     <title>@yield('title')</title>
     <link href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('AmazeUI-2.4.2/assets/css/admin.css')}}" rel="stylesheet" type="text/css" />
@@ -11,6 +11,10 @@
     <link href="{{asset('css/orstyle.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
     <style>
+        /*.am-container {*/
+            /*width: 980px !important;*/
+            /*max-width: none;*/
+        /*}*/
         .nav_active a{
             color: #F37B1D !important;
         }
@@ -118,7 +122,7 @@
                 @endif"><a href="{{asset('service/advanceSearch?type=2')}}">专业问答</a></li>
                 <li class="qc @if($title==6) nav_active @endif"><a href="{{asset('news/index')}}">知友沙龙</a></li>
                 <li class="qc @if($title==7) nav_active @endif"><a href="{{asset('about')}}">关于我们</a></li>
-                <li class="qc @if($title==8) nav_active @endif"><a href="/about?page=qainfo">用户指引</a></li>
+                <li class="qc @if($title==8) nav_active @endif"><a href="/question">用户指引</a></li>
             </ul>
         </div>
     @section('content')
@@ -144,12 +148,12 @@
     @show
 </div>
 <!--引导 -->
-<div class="navCir">
-    <li class="active"><a href="{{asset('index')}}"><i class="am-icon-home "></i>首页</a></li>
-    <li><a href="{{asset('service/advanceSearch')}}"><i class="am-icon-list"></i>服务大厅</a></li>
-    <li><a href="{{asset('demands/advanceSearch')}}"><i class="am-icon-shopping-basket"></i>需求大厅</a></li>
-    <li><a href="{{asset('account/index')}}"><i class="am-icon-user"></i>个人中心</a></li>
-</div>
+{{--<div class="navCir">--}}
+    {{--<li class="active"><a href="{{asset('index')}}"><i class="am-icon-home "></i>首页</a></li>--}}
+    {{--<li><a href="{{asset('service/advanceSearch')}}"><i class="am-icon-list"></i>服务大厅</a></li>--}}
+    {{--<li><a href="{{asset('demands/advanceSearch')}}"><i class="am-icon-shopping-basket"></i>需求大厅</a></li>--}}
+    {{--<li><a href="{{asset('account/index')}}"><i class="am-icon-user"></i>个人中心</a></li>--}}
+{{--</div>--}}
 
 <script src="{{asset('js/jquery-1.4.3.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('AmazeUI-2.4.2/assets/js/jquery.min.js')}}" type="text/javascript"></script>

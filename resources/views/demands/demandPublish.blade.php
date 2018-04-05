@@ -4,6 +4,9 @@
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/hmstyle.css')}}" rel="stylesheet" type="text/css" />
     <style type="text/css">
+        .long-title{
+            display: none;
+        }
         .comcategory li{
             font-size:14px;
             padding: 3px;
@@ -389,9 +392,16 @@
         }
         $('select[name=project]').change(function () {
             var btn3 = $('#select_class3');
+            var btn2 = $('#select_class2');
+
+            var class2_id = btn2.attr('data-content');
+            // alert(btn3.html());
 //            alert($(this).val());
-            btn3.html($('select[name=project] option:selected').html());
-            btn3.attr('data-content',$('select[name=project]').val());
+            //获取class2id 对应的select
+            var project = $("#project_"+class2_id).find("select option:selected");
+            // alert(project.html());
+            btn3.html(project.html());
+            btn3.attr('data-content',project.val());
         });
         function goto_next() {
             var tel = $('#phone');
