@@ -191,6 +191,7 @@
         }
 
         .pictureshow img{
+            max-height: 377px;
             /*width: 850px;margin-left:-200px;height: 417px;*/
         }
 </style>
