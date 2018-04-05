@@ -16,10 +16,10 @@
     <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.js')}}"></script>
 
     <style>
-        .am-container {
-            width: 980px !important;
-            max-width: none;
-        }
+        /*.am-container {*/
+            /*width: 980px !important;*/
+            /*max-width: none;*/
+        /*}*/
         .require-data{
             background: yellow;
             color: #000;

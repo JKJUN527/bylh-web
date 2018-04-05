@@ -1,5 +1,5 @@
-@extends('demo.admin',['title'=>7])
-@section('title','关于我们')
+@extends('demo.admin',['title'=>8])
+@section('title','用户指引')
 @section('custom-style')
     <style type="text/css">
         @media only screen and (min-width: 641px) {
@@ -155,11 +155,8 @@
                 <div class="am-offcanvas-bar">
                     <ul class="am-nav">
                         {{--<li><a href="#">不亦乐乎简介</a></li>--}}
-                        <li class="am-nav-header">不亦乐乎简介</li>
-                        <li class="am-active"><a href="#">公司简介</a></li>
-                        <li><a href="#">公司发展</a></li>
-                        <li><a href="#">业务简介</a></li>
-                        <li><a href="#">联系方式</a></li>
+                        <li class="am-nav-header">用户指引</li>
+                        <li class="am-active"><a href="#">新手指导</a></li>
                         <li><a href="#">常见问题</a></li>
                     </ul>
                 </div>

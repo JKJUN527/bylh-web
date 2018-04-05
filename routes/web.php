@@ -172,6 +172,7 @@ Route::get('order/orderlist',['uses' => 'OrderController@orderlist']);
 
 //关于我们
 Route::get('about',['uses' => 'HomeController@aboutindex']);
+Route::get('question',['uses' => 'HomeController@questionindex']);
 //不亦乐乎协议
 Route::get('/bylh/protocols',['uses' => 'HomeController@protocolindex']);
 
