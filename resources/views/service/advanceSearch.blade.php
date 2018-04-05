@@ -332,7 +332,7 @@
                         <div class="shopTitle ">
                             <h4 class="floor-title">
                                 <span class="am-badge am-badge-warning am-round">1</span>&nbsp;&nbsp;
-                                一般服务
+                                专业服务
                             </h4>
                         </div>
                     </div>

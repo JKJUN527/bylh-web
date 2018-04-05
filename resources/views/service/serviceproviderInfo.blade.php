@@ -195,12 +195,12 @@
     <div class="am-g am-g-fixed">
         <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="border: 2px solid #eee;padding: 20px;background: #fff;">
             <div class="am-u-lg-9 am-u-md-9 am-u-sm-9">
-                <!--大学生服务-->
+                <!--服务-->
                 @if($data['genlservices'][0])
                 <div class="shopMain" id="shopmain">
                     <div class="am-container ">
                         <div class="shopTitle">
-                            <h4 class="floor-title">发布的一般服务</h4>
+                            <h4 class="floor-title">发布专业服务</h4>
                         </div>
                         <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
                         <div class="card-deck-wrapper">

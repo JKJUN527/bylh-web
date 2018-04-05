@@ -376,7 +376,7 @@
     <div class="am-u-lg-8 am-u-md-8 am-u-sm-8">
         <div class="am-container" style="border-bottom: 2px solid #eee;padding: 20px;background: #fff;margin-top: 20px;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
             <div class="newsHead">
-                最新动态
+                欢迎用户在此留言，对知识服务说三道四，评头论足
             </div>
             <div class="sendDynamic">
                 <button class="am-btn am-btn-warning" onclick="leaveMsg()" style="float: right;margin-top: -20px;">

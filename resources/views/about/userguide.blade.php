@@ -2,7 +2,7 @@
 @section('title','关于我们')
 @section('custom-style')
     <style type="text/css">
-        @media only screen and (min-width: 241px) {
+        @media only screen and (min-width: 641px) {
             .am-offcanvas {
                 display: block;
                 position: static;
@@ -22,14 +22,8 @@
             }
 
         }
-        .abouth1 {
-            font-size: 18px;
-            padding: 3px;
-            font-weight: normal;
-            line-height: 36px;
-        }
 
-        @media only screen and (max-width: 340px) {
+        @media only screen and (max-width: 640px) {
             .am-offcanvas-bar .am-nav>li>a {
                 color:#ccc;
                 border-radius: 0;
@@ -109,44 +103,65 @@
 @section('content')
     <hr class="am-article-divider"/>
     <div class="am-g am-g-fixed">
-        <div class="am-u-md-9 am-u-md-push-2">
+        <div class="am-u-md-9 am-u-md-push-3">
             <div class="am-g">
                 <div class="am-u-sm-11 am-u-sm-centered">
                     <div class="am-cf am-article">
                         <div class="am-align-left">
-                            <img src="images/3-2.png" alt="" width="120">
+                            <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="" width="240">
                         </div>
                         <div>
-                           
-<h1 class="abouth1">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;语曰：有朋自远方来，不亦乐乎！以才能和知识会友，以成知友，其乐融融！<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;《不亦乐乎》（bylehu.com和bylehu.cn）定位于提供专业服务的知识技能共享平台，用户可以在【专业服务】【实习中介】【专业问答】开展知识技能的交易，也可以在【知友沙龙】就知识服务进行意见交流。<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们的愿景是：让每个人的知识都变现。<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专业人士和知识人群的一个普遍问题，是你拥有专业技能和专业知识，却不知道谁需要这些技能和知识。广大社会公众对于专业技能和专业知识的大量需求，又往往不知道谁能够满足。<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在，我们提供这个在线平台，将专业技能和专业知识的供求双方汇聚在一起，让你们能够顺利提供或者享受专业服务。分散存在于专业人士的各种专业技能以及知识人群富含专业知识的大量零星时间，都可以投射到这个平台上，与社会上大量的零散需求进行在线匹配以形成相应的专业服务，实现这些技能和知识的价值。
-
-大学生最困惑的问题，是你就业或者创业之前没有从业经历。现在，我们提供这个平台作为你的网上自助实习基地，在这里踏出你创业就业的第一步，你可以依据所学专业自由寻找对象进行专业服务开启你的从业生涯，还可以一展所学让知识变现。
-
-知友，与人分享你的才华、技能和智慧，不亦乐乎！<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们的使命是促进知识价值的实现，对于信息上传、信息发布和信息推送实行免费，平台撮合供求双方自愿成交，谁服务谁收益。<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们的营运主体是成都不亦乐乎网络科技有限公司。<br></h1>
+                            那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。我们就在骑楼下躲雨，看绿色的邮筒孤独地站在街的对面。我白色风衣的大口袋里有一封要寄给南部的母亲的信。樱子说她可以撑伞过去帮我寄信。我默默点头。
                         </div>
                     </div>
                     <hr/>
-                    
+                    <ul class="am-comments-list">
+                        <li class="am-comment">
+                            <a href="#link-to-user-home">
+                                <img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/96/h/96/q/80" alt="" class="am-comment-avatar" width="48" height="48">
+                            </a>
+                            <div class="am-comment-main">
+                                <header class="am-comment-hd">
+                                    <div class="am-comment-meta">
+                                        <a href="#link-to-user" class="am-comment-author">某人</a> 评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-12 15:30</time>
+                                    </div>
+                                </header>
+                                <div class="am-comment-bd">
+                                    <p>《永远的蝴蝶》一文，还吸收散文特长，多采用第一人称，淡化情节，体现一种思想寄托和艺术追求。</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="am-comment">
+                            <a href="#link-to-user-home">
+                                <img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/96/h/96/q/80" alt="" class="am-comment-avatar" width="48" height="48">
+                            </a>
+                            <div class="am-comment-main">
+                                <header class="am-comment-hd">
+                                    <div class="am-comment-meta">
+                                        <a href="#link-to-user" class="am-comment-author">路人甲</a> 评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-13 0:03</time>
+                                    </div>
+                                </header>
+                                <div class="am-comment-bd">
+                                    <p>感觉仿佛是自身的遭遇一样，催人泪下</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="am-u-md-3 am-u-md-pull-9 my-sidebar">
             <div class="am-offcanvas" id="sidebar">
                 <div class="am-offcanvas-bar">
-                    
+                    <ul class="am-nav">
+                        {{--<li><a href="#">不亦乐乎简介</a></li>--}}
+                        <li class="am-nav-header">不亦乐乎简介</li>
+                        <li class="am-active"><a href="#">公司简介</a></li>
+                        <li><a href="#">公司发展</a></li>
+                        <li><a href="#">业务简介</a></li>
+                        <li><a href="#">联系方式</a></li>
+                        <li><a href="#">常见问题</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -345,7 +345,7 @@
                             <div class="index-category-left">
                                 <a href="/demands/advanceSearch?type=0">
                                     <h1 class="comh1">
-                                        一般需求
+                                        专业需求
                                         <em style="color: #b84554;">
                                             <b>MORE</b>
                                             <i class="am-icon-angle-double-right"></i>
@@ -420,13 +420,13 @@
         </div>
 
 
-        <!--大学生服务-->
+        <!--专业服务-->
         <div class="am-g am-g-fixed">
             <div class="am-u-lg-8 am-u-md-8">
                 <div class="shopMain" id="shopmain">
                     <div class="am-container ">
                         <div class="shopTitle " style="width:110%;">
-                            <h4 class="floor-title">一般服务</h4>
+                            <h4 class="floor-title">专业服务</h4>
                             <div class="today-brands " style="right:0px ;top:13px;">
                                 <button class="am-btn am-btn-danger am-round more2more"
                                         onclick="window.location.href='/service/advanceSearch?type=0'">查看更多
@@ -559,7 +559,7 @@
                     <div class="rank_title"
                          style="margin: 0 60px; background-color: #F37B1D">
                         <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 10px;padding-bottom: 10px;">
-                            服务商排行榜</p>
+                            交易排行榜</p>
                     </div>
                     <div class="rank_content"
                          style="margin: 0 60px;border-bottom: 2px solid #F37B1D;border-left: 2px solid #F37B1D;border-right: 2px solid #F37B1D;">
