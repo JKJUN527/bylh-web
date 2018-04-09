@@ -25,11 +25,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller {
-    public function index() {
+    public function index(Request $request) {
         $data = array();
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
+
+        if($request->has('keyword')){
+           return $this->indexSearch($request);
+        }
 
         $data['serviceclass1']= Serviceclass1::all();//服务范围分类
         $data['serviceclass2']= Serviceclass2::all();//服务专业细分
@@ -186,6 +190,7 @@ class HomeController extends Controller {
                     ->take(20)
                     ->get();
                 $data['serviceuser'] = HomeController::searchServiceUser();
+
                 $data['demands'] = Demands::where('state',0)
                     ->where(function ($query) use ($keywords) {
                         $query->orwhere('title', 'like', '%' . $keywords . '%')
