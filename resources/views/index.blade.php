@@ -1,5 +1,5 @@
 @extends('demo.admin',['title'=>1])
-@section('title', '不亦乐乎|首页')
+@section('title', '不亦乐乎|知识技能共享平台,全系列专业服务')
 @section('custom-style')
     <link href="{{asset('basic/css/demo.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/stepstyle.css')}}" rel="stylesheet" type="text/css">

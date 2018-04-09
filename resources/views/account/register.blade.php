@@ -59,7 +59,7 @@
                         </form>
                         <div class="login-links">
                             <label for="reader-me">
-                                <input id="reader-me-phone" type="checkbox"><a href="/bylh/protocols" target="_blank"> 点击表示您同意不亦乐乎《服务协议》</a>
+                                <input id="reader-me-phone" type="checkbox"><a href="/bylh/protocols" target="_blank"> 点击阅读不亦乐乎服务协议</a>
                             </label>
                         </div>
                         <div class="am-cf">
@@ -88,7 +88,7 @@
 
                         <div class="login-links">
                             <label for="reader-me">
-                                <input id="reader-me-mail" type="checkbox"> 点击表示您同意不亦乐乎《服务协议》
+                                <input id="reader-me-mail" type="checkbox"> 点击阅读不亦乐乎服务协议
                             </label>
                         </div>
                         <div class="am-cf">

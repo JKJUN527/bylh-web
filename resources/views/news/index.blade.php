@@ -1,5 +1,5 @@
 @extends('demo.admin',['title'=>6])
-@section('title','网站动态')
+@section('title','知友沙龙')
 @section('custom-style')
     <style type="text/css">
         .comcategory li{
