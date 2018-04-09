@@ -47,7 +47,7 @@ class ServiceController extends Controller {
             //返回一般服务页面所需数据
             $data['serviceclass1'] = Serviceclass1::where('type', 0)->orderBy('updated_at', 'asc')->get();
             $data['serviceclass2'] = Serviceclass2::where('type', 0)->orderBy('updated_at', 'asc')->get();
-            $data['serviceclass3'] = Serviceclass3::where('type', 0)->orderBy('updated_at','asc')->get();
+            $data['serviceclass3'] = Serviceclass3::orderBy('updated_at','asc')->get();
             $data['province'] = Region::where('parent_id', 0)->get();
             $data['city'] = Region::where('parent_id', '!=', 0)->get();
             //确认联系方式
@@ -87,7 +87,7 @@ class ServiceController extends Controller {
         } else {
             $data['serviceclass1'] = Serviceclass1::where('type', 1)->orderBy('updated_at', 'asc')->get();
             $data['serviceclass2'] = Serviceclass2::where('type', 1)->orderBy('updated_at', 'asc')->get();
-            $data['serviceclass3'] = Serviceclass3::where('type', 1)->orderBy('updated_at','asc')->get();
+            $data['serviceclass3'] = Serviceclass3::orderBy('updated_at','asc')->get();
             $data['province'] = Region::where('parent_id', 0)->get();
             $data['city'] = Region::where('parent_id', '!=', 0)->get();
             //确认联系方式
@@ -127,7 +127,7 @@ class ServiceController extends Controller {
             //返回一般服务页面所需数据
             $data['serviceclass1'] = Serviceclass1::where('type', 2)->orderBy('updated_at', 'asc')->get();
             $data['serviceclass2'] = Serviceclass2::where('type', 2)->orderBy('updated_at', 'asc')->get();
-            $data['serviceclass3'] = Serviceclass3::where('type', 2)->orderBy('updated_at','asc')->get();
+            $data['serviceclass3'] = Serviceclass3::orderBy('updated_at','asc')->get();
             $data['province'] = Region::where('parent_id', 0)->get();
             $data['city'] = Region::where('parent_id', '!=', 0)->get();
             //确认联系方式

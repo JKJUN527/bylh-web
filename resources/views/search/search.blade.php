@@ -100,7 +100,7 @@
                     <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                         <table class="xm_list" cellpadding="0" cellspacing="0">
                             <tbody>
-                            @foreach($data['demands'] as $demand)
+                            @forelse($data['demands'] as $demand)
                             <tr class="line_h   adserveritembg">
                                 <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 25px;">
                                     <div class="aa task_item_i" style="padding: 20px 5px;">
@@ -148,7 +148,9 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                                <p>未搜索到相关需求</p>
+                            @endforelse
                             <!--分页实现-->
 
                             <tr>
@@ -176,10 +178,12 @@
                     <div class="am-tab-panel am-fade" id="tab2">
                         <div class="findrequest">
                             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
+                                <?php $services_count = 0;?>
                                 @foreach($data['genlservices'] as $genlservice)
+                                    <?php $services_count++;?>
                                 <li>
                                     <div class="am-gallery-item">
-                                        <a href="" class="">
+                                        <a href="/service/detail?id={{$genlservice->id}}&type=0" class="">
                                             <img  class="service_img" src="{{$genlservice->picture or asset('images/f8.jpg')}}" />
                                             <h3 class="am-gallery-title">{{$genlservice->title}}</h3>
                                             <div class="am-gallery-desc service_content">{{mb_substr($genlservice->describe,0,20,'utf-8')}}</div>
@@ -188,9 +192,10 @@
                                 </li>
                                 @endforeach
                                 @foreach($data['finlservices'] as $finlservices)
+                                        <?php $services_count++;?>
                                  <li>
                                     <div class="am-gallery-item">
-                                        <a href="" class="">
+                                        <a href="/service/detail?id={{$finlservices->id}}&type=1" class="">
                                              <img class="service_img" src="{{$finlservices->picture or asset('images/f8.jpg')}}" />
                                              <h3 class="am-gallery-title">{{$finlservices->title}}</h3>
                                              <div class="am-gallery-desc service_content">{{mb_substr($finlservices->describe,0,20,'utf-8')}}</div>
@@ -199,9 +204,10 @@
                                  </li>
                                  @endforeach
                                  @foreach($data['qaservices'] as $qaservices)
+                                        <?php $services_count++;?>
                                         <li>
                                             <div class="am-gallery-item">
-                                                <a href="" class="">
+                                                <a href="/service/detail?id={{$qaservices->id}}&type=2" class="">
                                                     <img class="service_img" src="{{$qaservices->picture or asset('images/f8.jpg')}}" />
                                                     <h3 class="am-gallery-title">{{$qaservices->title}}</h3>
                                                     <div class="am-gallery-desc service_content">{{mb_substr($qaservices->describe,0,20,'utf-8')}}</div>
@@ -209,55 +215,10 @@
                                             </div>
                                         </li>
                                  @endforeach
-
+                                @if($services_count == 0)
+                                    未搜索到相关服务
+                                @endif
                             </ul>
-                            {{--<!--分页-->--}}
-                            {{--<div class="pager_container">--}}
-
-                                {{--<ul data-am-widget="pagination"--}}
-                                    {{--class="am-pagination am-pagination-default">--}}
-
-                                    {{--<li class="am-pagination-first ">--}}
-                                        {{--<a href="#" class="">第一页</a>--}}
-                                    {{--</li>--}}
-
-                                    {{--<li class="am-pagination-prev ">--}}
-                                        {{--<a href="#" class="">上一页</a>--}}
-                                    {{--</li>--}}
-
-
-                                    {{--<li class="">--}}
-                                        {{--<a href="#" class="">1</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="am-active">--}}
-                                        {{--<a href="#" class="am-active">2</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="">--}}
-                                        {{--<a href="#" class="">3</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="">--}}
-                                        {{--<a href="#" class="">4</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="">--}}
-                                        {{--<a href="#" class="">5</a>--}}
-                                    {{--</li>--}}
-
-
-                                    {{--<li class="am-pagination-next ">--}}
-                                        {{--<a href="#" class="">下一页</a>--}}
-                                    {{--</li>--}}
-
-                                    {{--<li class="am-pagination-last ">--}}
-                                        {{--<a href="#" class="">最末页</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-
-                            {{--</div>--}}
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -328,10 +289,7 @@
 
 </div>
 <!--广告-->
-<div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-    <img src="{{$data['ad'][0]->picture or asset('images/ad4.jpg')}}" alt="{{$data['ad'][0]->title}}">
-</div>
-<div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-    <img src="{{$data['ad'][1]->picture or asset('images/ad5.jpg')}}" alt="{{$data['ad'][1]->title}}">
+<div class="advertisement" style="padding: 10px 0 10px 0;">
+    <img src="{{asset('images/ad2.jpg')}}" style="width: 100%;">
 </div>
 @endsection
