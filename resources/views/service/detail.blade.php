@@ -202,9 +202,9 @@
                                     <a href="#"><img src="{{$data['serviceinfo']['pay_code']}}"
                                                      style="width:300px;height:300px;"></a>
                                     @if($data['serviceinfo']['pay_way'] == 0)
-                                        <div class="alibaba" type="1" style="font-size: 18px;background: #fff;font-weight: bold;padding: 20px;">请使用微信扫码支付</div>
+                                        <div class="alibaba" type="1" style="font-size: 18px;background: #fff;font-weight: bold;padding: 20px;">请使用支付宝扫码支付</div>
                                     @elseif($data['serviceinfo']['pay_way'] == 1)
-                                        <div class="alibaba" type="2" style="font-size: 18px;background: #fff;font-weight: bold;padding: 20px;">请使用支付宝扫码支付</div>
+                                        <div class="alibaba" type="2" style="font-size: 18px;background: #fff;font-weight: bold;padding: 20px;">请使用微信扫码支付</div>
                                     @endif
                                 </div>
                                 <div class="am-modal-footer">
