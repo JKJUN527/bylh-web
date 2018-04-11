@@ -27,14 +27,14 @@
         }
 
         .card-title {
-            margin-left: 10px;
+            /*margin-left: 10px;*/
             padding: 5px;
-            font-weight: bold;
+            /*font-weight: bold;*/
         }
 
         .card-text {
             padding: 5px;
-            margin-left: 10px;
+            /*margin-left: 10px;*/
         }
         .listIndex dd {
             height: 35px !important;
@@ -56,7 +56,7 @@
             margin-right: 4px;
         }
         .card-title b{
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
     </style>
 @endsection
@@ -295,7 +295,7 @@
             </dl>
 
             <dl class="listIndex" attr="terminal_brand_s">
-                <dt>分类1：</dt>
+                <dt>需求类型：</dt>
                 <dd class="span-holder type-holder">
                     <a href="javascript:void(0)" @if(!isset($data["condition"]["type"])) class="selected" @endif
                     data-content="-1">全部</a>
@@ -347,10 +347,10 @@
                                     ?>
                                     {{$baseurl}}{{$imagepath}}
                                     @else
-                                    {{asset("images/f3.jpg")}}
-                                    @endif" alt="img" style="width: 120px;height:120px;"/>
+                                    {{asset("images/f9.png")}}
+                                    @endif" alt="需求图片" style="width: 120px;height:120px;"/>
                                     <div class="card-block am-u-lg-3 am-u-md-3 am-u-sm-3">
-                                        <h4 class="card-title"><b>{{$demand->title}}</b></h4>
+                                        <h4 class="card-title"><b>{{mb_substr($demand->title,0,12,'utf-8')}}</b></h4>
                                         <hr>
                                         <p class="card-text"><small class="text-muted">{{str_replace(array("</br>","</br","</b"),"",mb_substr($demand->describe, 0, 20, 'utf-8'))}}</small></p>
                                     </div>

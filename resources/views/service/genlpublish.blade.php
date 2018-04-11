@@ -470,9 +470,12 @@
             var pictureIndex = $("input[id='pic_info']");
             num = pictureIndex.val().split("@");
 //            alert(num.length);
+            if(!appendFileInput){
+                swal('',"任有图片待上传","error");
+                return;
+            }
             if (appendFileInput && num.length <= 3) {
                 previewHolder.append("<input type='file' name='pic" + index + "' style='display: none' onchange='showPreview(this, index)'/>");
-                appendFileInput = false;
                 $("input[name='pic" + index + "']").click();
             }else{
                 swal('',"最多上传三张图片","error");
@@ -482,7 +485,7 @@
         });
         function showPreview(element, i) {
             var isCorrect = true;
-
+            appendFileInput = false;
             var file = element.files[0];
             var anyWindow = window.URL || window.webkitURL;
             var objectUrl = anyWindow.createObjectURL(file);
