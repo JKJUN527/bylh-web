@@ -191,8 +191,19 @@
         }
 
         .pictureshow img{
-            max-height: 377px;
+            padding-top: 0.5rem;
+            max-height: 411px;
             /*width: 850px;margin-left:-200px;height: 417px;*/
+        }
+        .service-long-title{
+            background: #F37B1D;
+            color: #fff;
+            width: 182px;
+            text-align: center;
+            font-size: 16px;
+            border-left: 2px solid #ea6005;
+            border-right: 2px solid #ea6005;
+            padding-top: 0.5rem;
         }
 </style>
 @endsection
@@ -205,7 +216,7 @@
 
                         <div class="category" style="box-shadow:none ;margin-top: 2px;">
                             <ul class="category-list navTwo" id="js_climit_li">
-                                <li class="long-title">服务范围</li>
+                                <li class="service-long-title">服务范围</li>
                                 @foreach($data['serviceclass1'] as $serviceclass1)
                                     <li>
                                         <div class="category-info">
@@ -214,7 +225,8 @@
                                                    href="/service/advanceSearch?type={{$serviceclass1->type}}&class1={{$serviceclass1->id}}"
                                                    title="{{$serviceclass1->name}} ">{{$serviceclass1->name}}</a>
                                             </h3>
-                                            <em>&gt;</em></div>
+                                            <em>&gt;</em>
+                                        </div>
                                         <div class="menu-item menu-in top">
                                             <div class="area-in">
                                                 <div class="area-bg">
