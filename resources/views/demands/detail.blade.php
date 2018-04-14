@@ -291,7 +291,7 @@
                 <div class="company_right am-u-lg-4 am-u-md-4 am-u-sm-4">
                     <a class="company_name"
                        style="font-family: SimSun; color: #333333; font-weight: 700;font-size: 16px;height: 30px;line-height: 30px;display: block;overflow: hidden;">
-                        {{$data["userinfo"]->real_name}}</a>
+                        {{$data['username']}}</a>
                     <div>
                         {{$data["userinfo"]->city}}<br>
                         个人签名：<span style="color:#ff6600">{{$data["userinfo"]->note}}</span>

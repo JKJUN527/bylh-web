@@ -15,7 +15,17 @@
     <script src="{{asset('AmazeUI-2.4.2/assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.min.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
-
+    <style>
+        .login-banner-bg{
+            margin-top: 20px;
+        }
+        .login-banner-bg img {
+            height: 315px;
+        }
+        .login-box {
+            height: auto !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -346,12 +356,12 @@
                     if (result.status === 200) {
                         swal({
                             title: "注册成功",
-                            text: "点击确定立即登录",
+                            text: "点击确定立即返回首页",
                             type: "info",
                             confirmButtonText: "确定",
                             closeOnConfirm: false
                         }, function () {
-                            self.location = "/account/login";
+                            self.location = "/";
                         });
                     } else if (result.status === 400) {
                         swal(result.msg);

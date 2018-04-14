@@ -295,15 +295,15 @@
                         {{--</ul>--}}
                     {{--</div>--}}
 
-                    <div class="user-suggestion">
-                        <div class="s-bar">
-                            <i class="s-icon"></i>会员中心
-                        </div>
-                        <div class="s-bar">
-                            <a href="suggest.html"><i class="s-icon"></i>意见反馈</a>
-                        </div>
+                    {{--<div class="user-suggestion">--}}
+                        {{--<div class="s-bar">--}}
+                            {{--<i class="s-icon"></i>会员中心--}}
+                        {{--</div>--}}
+                        {{--<div class="s-bar">--}}
+                            {{--<a href="suggest.html"><i class="s-icon"></i>意见反馈</a>--}}
+                        {{--</div>--}}
 
-                    </div>
+                    {{--</div>--}}
 
                     <!--推荐服务商-->
                     <div class="twoTab">
@@ -319,13 +319,13 @@
                                 </a>
                             </h5>
                             <div class="Box">
-                                <ul data-am-widget="gallery" class="am-gallery am-avg-sm-6
-				  							am-avg-md-6 am-avg-lg-6 am-gallery-default" data-am-gallery="{ pureview: true }" >
+                                <ul  class="am-gallery am-avg-sm-6
+				  							am-avg-md-6 am-avg-lg-6 am-gallery-default"  >
                                     @if($data['type']==1)
                                         @foreach($data['recommendServices'] as $service)
                                         <li>
                                             <div class="am-gallery-item">
-                                                <a href="/service/detail?id={{$service->id}}&type={{$service->type}}" class="">
+                                                <a href="/service/detail?id={{$service->id}}&type={{$service->type}}" target="_blank" class="">
                                                     <img src="
                                                     @if($service->picture != null)
                                                         <?php
@@ -367,7 +367,7 @@
                                         @foreach($data['recommendDemands'] as $demand)
                                             <li>
                                                 <div class="am-gallery-item">
-                                                    <a href="/demands/detail?id={{$demand->id}}" class="">
+                                                    <a href="/demands/detail?id={{$demand->id}}" target="_blank" class="">
                                                         <img src="
                                                         @if($demand->picture != null)
                                                             <?php

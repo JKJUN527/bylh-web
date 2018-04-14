@@ -382,7 +382,7 @@
                                     @foreach($data['demands'] as $demands)
                                         @if($demands->type == 0)
                                         <li>
-                                            <a to="/demands/detail?uid={{$demands->uid}}"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a>
+                                            <a href="/demands/detail?id={{$demands->id}}" target="_blank"><span>{{$demands->title}}</span><i>{{mb_substr($demands->created_at,0,10,'utf-8')}}</i></a>
                                         </li>
                                         @endif
                                     @endforeach
@@ -404,7 +404,7 @@
                                     @foreach($data['demands'] as $demands)
                                         @if($demands->type == 1)
                                             <li>
-                                                <a to="/demands/detail?uid={{$demands->uid}}"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a>
+                                                <a href="/demands/detail?id={{$demands->id}}" target="_blank"><span>{{$demands->title}}</span><i>{{mb_substr($demands->created_at,0,10,'utf-8')}}</i></a>
                                             </li>
                                         @endif
                                     @endforeach
@@ -426,7 +426,7 @@
                                     @foreach($data['demands'] as $demands)
                                         @if($demands->type == 2)
                                             <li>
-                                                <a to="/demands/detail?uid={{$demands->uid}}"><span>{{$demands->title}}</span><i>{{$demands->created_at}}</i></a>
+                                                <a href="/demands/detail?id={{$demands->id}}" target="_blank"><span>{{$demands->title}}</span><i>{{mb_substr($demands->created_at,0,10,'utf-8')}}</i></a>
                                             </li>
                                         @endif
                                     @endforeach

@@ -11,6 +11,7 @@ use App\Serviceinfo;
 use App\User;
 use App\Userinfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -56,7 +57,10 @@ class RegisterController extends Controller
                     //注册成功用户需一并建立userinfo表
                     $userinfo = new Userinfo();
                     $userinfo->uid = $user->uid;
+                    $userinfo->tel = $user->tel;
                     $userinfo->save();
+
+                    $this->afterRegister($user->tel,$input['password'],0);
                     $data['status'] = 200;
                     $data['msg'] = "注册成功！";
                     return $data;
@@ -110,6 +114,7 @@ class RegisterController extends Controller
                 if ($user->save()) {
                     $perinfo = new Userinfo();
                     $perinfo->uid = $user->uid;
+                    $perinfo->mail = $user->mail;
                     $perinfo->save();
 
                     //发送验证邮件
@@ -119,6 +124,7 @@ class RegisterController extends Controller
                         $data['msg'] ="验证邮件发送失败！";
                         return $data;
                     }
+//                    $this->afterRegister($user->mail,$input['password'],1);
                     $data['status'] = 200;
                     $data['msg'] ="注册成功";
                     return $data;
@@ -130,5 +136,38 @@ class RegisterController extends Controller
             }
 
         }
+    }
+    //注册成功后自动登录
+    public function afterRegister($account,$passwd,$type){
+        if($type == 0){
+            if (Auth::attempt(array('tel' => $account, 'password' => $passwd))) {
+                $uid = Auth::user()->uid;
+                session()->put('frontUid',$uid);
+                $type = User::where('uid', '=', $uid)
+                    ->select('type')
+                    ->get();
+                $type = $type[0]['type'];
+                session()->put('type', $type);
+                $data['status'] = 200;
+                $data['msg'] = "登陆成功！";
+                return $data;
+            }
+        }elseif ($type == 1){
+            if (Auth::attempt(array('mail' => $account, 'password' => $passwd))) {
+
+                $uid = Auth::user()->uid;
+                session()->put('frontUid',$uid);
+                $type = User::where('uid', '=', $uid)
+                    ->where('email_verify','=',1)
+                    ->select(['type'])
+                    ->get();
+                $type = $type[0]['type'];
+                session()->put('type', $type);
+                $data['status'] = 200;
+                $data['msg'] = "登陆成功！";
+                return $data;
+            }
+        }
+       return 0;
     }
 }

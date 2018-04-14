@@ -66,7 +66,7 @@
                             </div>
                             <div class="am-form-group">
                                 <label for="doc-vld-age-2-1" class="label_title">生日：</label>
-                                <input type="text" class="user_info" id="doc-vld-age-2-1" placeholder="选择你的生日" value="{{substr($data['userinfo']->birthday,0,10)}}" data-am-datepicker readonly required />
+                                <input type="text" class="user_info" id="doc-vld-age-2-1" placeholder="选择你的生日(选填)" value="{{substr($data['userinfo']->birthday,0,10)}}" data-am-datepicker readonly />
                                 {{--<input class="user_info" type="date"   id="doc-vld-age-2-1" placeholder="" value="{{$data['userinfo']->birthday}}" required />--}}
                             </div>
                             <div class="am-form-group">
@@ -80,7 +80,7 @@
 
                             <div class="am-form-group">
                                 <label for="doc-vld-ta-2-1" class="label_title">签名：</label>
-                                <input class="user_info" id="user-note" placeholder="输入个人签名" type="text" minlength="4"  data-validation-message="请输入长度大于4个字符" value="{{$data['userinfo']->note}}" required/>
+                                <input class="user_info" id="user-note" placeholder="输入个人签名(选填)" type="text" value="{{$data['userinfo']->note}}"/>
                             </div>
                             <div class="am-form-group">
                                 <label for="doc-vld-name-2-1" class="label_title">所在城市：</label>
@@ -178,10 +178,10 @@
                 swal('','用户名长度需大于3个字符','error');
                 return;
             }
-            if(birthday.val() === ""){
-                swal('','请选择生日','error');
-                return;
-            }
+            // if(birthday.val() === ""){
+            //     swal('','请选择生日','error');
+            //     return;
+            // }
             if(sex.val()===''){
                 swal('','请选择性别','error');
                 return;
@@ -194,10 +194,10 @@
                 swal('','电话格式非法','error');
                 return;
             }
-            if(note.val() === '' || note.val().length <4){
-                swal('','个人签名长度不能小于4个字符','error');
-                return;
-            }
+            // if(note.val() === '' || note.val().length <4){
+            //     swal('','个人签名长度不能小于4个字符','error');
+            //     return;
+            // }
            var formData = new FormData();
            formData.append('username', username.val());
            formData.append('birthday', birthday.val());
