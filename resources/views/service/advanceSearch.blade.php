@@ -30,7 +30,7 @@
             width: 120px;
             overflow: hidden;
             text-align: left;
-            top:20%;
+            /*top:20%;*/
         }
 
         .card-title {
@@ -63,11 +63,11 @@
         }
 
         .sort-item {
-            padding: 4px;
-            margin-right: 4px;
+            padding: 2px;
+            margin-right:2px;
         }
         .card-title{
-            font-size: 1.2rem;
+            /*font-size: 1.2rem;*/
             font-weight: bold;
         }
     </style>

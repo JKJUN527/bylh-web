@@ -76,9 +76,8 @@ class ServiceController extends Controller {
         $data['uid'] = AuthController::getUid();
         $data['username'] = InfoController::getUsername();
         $data['type'] = AuthController::getType();
-        $data['uid'] = 1;
-        $data['type'] = 1;
-        if ($data['uid'] == 0 || $data['type'] != 1) {//先登录|登录用户非服务用户
+
+        if ($data['uid'] == 0 || $data['type'] != 2) {//先登录|登录用户非服务用户
             return view('account.login', ['data' => $data]);
         }
         $is_vertify = User::where('uid', $data['uid'])->first();

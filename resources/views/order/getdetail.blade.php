@@ -123,7 +123,7 @@
                                             </div>
                                             <div class="item-info">
                                                 <div class="item-basic-info">
-                                                    <a href="/service/detail?type={{$data["order"]->type}}&id={{$data["order"]->id}}">
+                                                    <a href="/service/detail?type={{$data["order"]->type}}&id={{$data["order"]->service_id}}">
                                                         <p>{{$data["order"]->title}}</p>
                                                     </a>
                                                 </div>
