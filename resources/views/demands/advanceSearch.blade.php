@@ -28,13 +28,14 @@
 
         .card-title {
             /*margin-left: 10px;*/
-            padding: 5px;
-            /*font-weight: bold;*/
+            /*padding: 5px;*/
+            font-weight: bold;
         }
 
         .card-text {
-            padding: 5px;
+            /*padding: 5px;*/
             /*margin-left: 10px;*/
+            line-height:140%
         }
         .listIndex dd {
             height: 35px !important;
@@ -56,7 +57,7 @@
             margin-right: 4px;
         }
         .card-title b{
-            font-size: 1.2rem;
+            /*font-size: 1.2rem;*/
         }
     </style>
 @endsection
@@ -350,7 +351,7 @@
                                     {{asset("images/f9.png")}}
                                     @endif" alt="需求图片" style="width: 120px;height:120px;"/>
                                     <div class="card-block am-u-lg-3 am-u-md-3 am-u-sm-3">
-                                        <h4 class="card-title"><b>{{mb_substr($demand->title,0,12,'utf-8')}}</b></h4>
+                                        <h4 class="card-title"><b>{{mb_substr($demand->title,0,10,'utf-8')}}</b></h4>
                                         <hr>
                                         <p class="card-text"><small class="text-muted">{{str_replace(array("</br>","</br","</b"),"",mb_substr($demand->describe, 0, 20, 'utf-8'))}}</small></p>
                                     </div>

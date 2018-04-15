@@ -9,6 +9,9 @@
                 <ul>
                     <li><a href="{{asset('account/baseedit')}}">个人信息</a></li>
                     <li><a href="{{asset('account/safety')}}">安全设置</a></li>
+                    <li><a href="{{asset('account/safety')}}">专业认证</a></li>
+                    <li><a href="{{asset('account/safety')}}">中介认证</a></li>
+                </ul>
                 </ul>
             </li>
         @else
@@ -23,7 +26,6 @@
                     <li><a href="{{asset('account/safety')}}">安全设置</a></li>
                     <li><a href="{{asset('account/safety')}}">专业认证</a></li>
                     <li><a href="{{asset('account/safety')}}">中介认证</a></li>
-
                 </ul>
             </li>
         @endif
