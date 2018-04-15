@@ -136,6 +136,12 @@
 <script type="text/javascript" src="{{asset("js/jquery-1.7.2.min.js")}}"></script>
 <script src="{{asset("AmazeUI-2.4.2/assets/js/amazeui.js")}}"></script>
 <script>
+    $('#searchInput').bind('keydown',function(event){
+        event.preventDefault();
+        if(event.keyCode == "13") {
+            search();
+        }
+    });
     $("#ai-topsearch").click( function () {
         search();
     });

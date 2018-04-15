@@ -160,6 +160,12 @@
 <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
 <script type="text/javascript">
+    $('#searchInput').bind('keydown',function(event){
+        event.preventDefault();
+        if(event.keyCode == "13") {
+            search();
+        }
+    });
     $("#ai-topsearch").click( function () {
         search();
     });
