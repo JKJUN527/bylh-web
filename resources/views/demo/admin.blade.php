@@ -96,7 +96,7 @@
         <div class="search-bar pr">
             <a name="index_none_header_sysc" href="#"></a>
             <form>
-                <input id="searchInput" name="keyword" type="text" placeholder="搜索" autocomplete="off" onkeydown="if(event.keyCode==13) goSearch();">
+                <input id="searchInput" name="keyword" type="text" placeholder="搜索" autocomplete="off" onkeydown="if(event.keyCode==13) return false;">
                 <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="button">
             </form>
         </div>
@@ -181,7 +181,14 @@
 <script src="{{asset('AmazeUI-2.4.2/assets/js/amazeui.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
 <script type="text/javascript">
+    $('#searchInput').bind('keydown',function(event){
+        event.preventDefault();
+        if(event.keyCode == "13") {
+            search();
+        }
+    });
     $("#ai-topsearch").click(function (event) {
+        event.preventDefault();
         search();
     });
 
