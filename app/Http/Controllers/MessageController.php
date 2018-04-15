@@ -35,6 +35,8 @@ class MessageController extends Controller {
         $data['listMessages'] = array();
 
         $temp = array();//保存temp['from'];
+        //将自己加入站内信查询信息
+        $temp[] = $uid;
 
         $temp1 = Message::whereRaw('to_id =? and is_delete =?', [$uid, 0])//别人发给我的消息
         ->orderBy('created_at', 'desc')

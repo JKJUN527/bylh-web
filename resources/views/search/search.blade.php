@@ -136,7 +136,7 @@
                                 <td class="xm-leix" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 50px;">
                                     <div class="hh">
                                         <span style="color:#2782b7">{{$data['count'][$demand->id]}}</span> 参与预约
-                                        <span style="color:#2782b7">{{$data["serviceclass1"][$demand->id]}}</span><br>
+                                        <span style="color:#2782b7">{{$data["serviceclass1"][$demand->class1_id]}}</span><br>
                                         <div class="locus" style="background: url({{asset('images/shop_680.png')}}) -40px 4px no-repeat;width: 20px;height: 30px;float: left;"></div>
                                         <span style="color:#2782b7">{{$demand->city}}</span>
 
