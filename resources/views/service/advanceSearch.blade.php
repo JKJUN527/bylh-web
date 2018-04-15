@@ -124,6 +124,7 @@
                 <input type="text" id="name" name="name" class="form-control"
                        value="@if(isset($data['condition']['keyword'])){{$data['condition']['keyword']}}@endif"
                        placeholder="输入服务类别／描述进行搜索"
+                       onkeydown="if(event.keyCode==13) return false;"
                        style="width: 250px;padding: 6px;border: 2px solid #b84554;">
                 <a href="#" onclick="goSearch()"><i class="am-icon-search am-icon-fw" style="margin-top: -26px;
     margin-left: 260px;font-size: 20px;"></i></a>
@@ -656,6 +657,12 @@
             clickedElement.siblings().removeClass("selected");
 
             goSearch();
+        });
+        $('#name').bind('keydown',function(event){
+            event.preventDefault();
+            if(event.keyCode == "13") {
+                goSearch();
+            }
         });
 
         function goSearch() {

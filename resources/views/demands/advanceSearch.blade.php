@@ -465,6 +465,12 @@
 
             goSearch();
         });
+        $('#name').bind('keydown',function(event){
+            event.preventDefault();
+            if(event.keyCode == "13") {
+                goSearch();
+            }
+        });
 
         function goSearch() {
             var class1 = $(".class1-holder").find("a.selected").attr("data-content");

@@ -359,6 +359,7 @@ class DemandsController extends Controller {
                 $uid = $data['detail']->uid;
                 //查找对应用户的基本信息
                 $data['userinfo'] = Userinfo::where('uid',$uid)->first();
+                $data['user'] = User::where('uid',$uid)->select('username')->first();
                 //用户其他需求信息
                 $data['otherDemands'] = Demands::where('uid',$uid)
                     ->where('state',0)
