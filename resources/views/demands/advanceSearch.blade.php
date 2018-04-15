@@ -304,7 +304,7 @@
                        @if(isset($data['condition']['type']) && $data['condition']['type'] == 0)
                        class="selected"
                        @endif
-                       data-content="0">大学生服务需求
+                       data-content="0">专业服务需求
                     </a>
                     <a href="javascript:void(0)"
                        @if(isset($data['condition']['type']) && $data['condition']['type'] == 1)
