@@ -108,10 +108,10 @@
                 <div class="am-u-sm-11 am-u-sm-centered">
                     <div class="am-cf am-article">
                         <div class="am-align-left">
-                            <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="" width="240">
+                            <img src="images/guide.png" alt="" width="240">
                         </div>
                         <div>
-                            那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。我们就在骑楼下躲雨，看绿色的邮筒孤独地站在街的对面。我白色风衣的大口袋里有一封要寄给南部的母亲的信。樱子说她可以撑伞过去帮我寄信。我默默点头。
+                            有关不亦乐乎的使用规则:
                         </div>
                     </div>
                     <hr/>
@@ -123,11 +123,11 @@
                             <div class="am-comment-main">
                                 <header class="am-comment-hd">
                                     <div class="am-comment-meta">
-                                        <a href="#link-to-user" class="am-comment-author">某人</a> 评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-12 15:30</time>
+                                        <a href="#link-to-user" class="am-comment-author">问题一</a>  <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-12 15:30</time>
                                     </div>
                                 </header>
                                 <div class="am-comment-bd">
-                                    <p>《永远的蝴蝶》一文，还吸收散文特长，多采用第一人称，淡化情节，体现一种思想寄托和艺术追求。</p>
+                                    <p>用户需要那些注册信息？</p>
                                 </div>
                             </div>
                         </li>
@@ -138,11 +138,11 @@
                             <div class="am-comment-main">
                                 <header class="am-comment-hd">
                                     <div class="am-comment-meta">
-                                        <a href="#link-to-user" class="am-comment-author">路人甲</a> 评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-13 0:03</time>
+                                        <a href="#link-to-user" class="am-comment-author">问题二</a> <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-13 0:03</time>
                                     </div>
                                 </header>
                                 <div class="am-comment-bd">
-                                    <p>感觉仿佛是自身的遭遇一样，催人泪下</p>
+                                    <p>服务用户与普通用户的差别？</p>
                                 </div>
                             </div>
                         </li>

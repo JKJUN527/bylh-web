@@ -42,7 +42,7 @@
 
                     <div class="info-m">
                         <div onclick="focususername();"><b>用户名：<i>{{$data['username']}}</i></b></div>
-                        <div onclick="focususernote();"><b>个人签名：<i>{{$data['userinfo']->note}}</i></b></div>
+                        <div onclick="focususernote();"><b>昵称：<i>{{$data['userinfo']->note}}</i></b></div>
                     </div>
                 </div>
 
@@ -79,8 +79,8 @@
                             </div>
 
                             <div class="am-form-group">
-                                <label for="doc-vld-ta-2-1" class="label_title">签名：</label>
-                                <input class="user_info" id="user-note" placeholder="输入个人签名(选填)" type="text" value="{{$data['userinfo']->note}}"/>
+                                <label for="doc-vld-ta-2-1" class="label_title">昵称：</label>
+                                <input class="user_info" id="user-note" placeholder="输入昵称(选填)" type="text" value="{{$data['userinfo']->note}}"/>
                             </div>
                             <div class="am-form-group">
                                 <label for="doc-vld-name-2-1" class="label_title">所在城市：</label>

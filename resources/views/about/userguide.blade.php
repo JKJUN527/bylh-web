@@ -108,7 +108,7 @@
                 <div class="am-u-sm-11 am-u-sm-centered">
                     <div class="am-cf am-article">
                         <div class="am-align-left">
-                            <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="" width="240">
+                            <img src="images/guide.png" alt="" width="240">
                         </div>
                         <div>
                             那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。我们就在骑楼下躲雨，看绿色的邮筒孤独地站在街的对面。我白色风衣的大口袋里有一封要寄给南部的母亲的信。樱子说她可以撑伞过去帮我寄信。我默默点头。

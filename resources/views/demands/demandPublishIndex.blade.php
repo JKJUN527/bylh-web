@@ -192,18 +192,7 @@
                 <div class="fabu_showtitle" style="height: 25px;line-height: 25px;font-size: 24px;color: #333;margin-bottom: 20px;margin-left: 10px;padding-top: 10px;">请选择你的需求类型</div>
                 <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 20px;">
                     <div class="am-form-group am-form-danger am-form-icon am-form-feedback" style="padding-bottom:20px;">
-                        <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">需求类型</label>
-                        <div class="am-u-sm-8" style="float: left;margin-left: 30px;">
-                            <label class="am-checkbox-inline">
-                                <input type="checkbox"  value="" data-am-ucheck> 一般服务需求
-                            </label>
-                            <label class="am-checkbox-inline">
-                                <input type="checkbox"  value="" data-am-ucheck> 金融需求
-                            </label>
-                            <label class="am-checkbox-inline">
-                                <input type="checkbox"  value="" data-am-ucheck> 专业问答需求
-                            </label>
-                        </div>
+                        
                     </div>
                     <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
                     <button class="am-btn am-btn-danger am-round am-btn-lg" style="margin:20px;width: 15%;">下一步</button>

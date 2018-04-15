@@ -226,7 +226,7 @@
                             <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">需求类型</label>
                             <div class="am-u-sm-8" style="float: left;margin-left: 30px;">
                                 <label class="am-checkbox-inline">
-                                    <input type="radio"  name="service_type" value="0" data-am-ucheck checked > 一般服务
+                                    <input type="radio"  name="service_type" value="0" data-am-ucheck checked > 专业服务
                                 </label>
                                 <label class="am-checkbox-inline">
                                     <input type="radio"  name="service_type" value="1" data-am-ucheck @if($data['type'] === '1') checked @endif> 实习中介
