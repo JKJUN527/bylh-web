@@ -12,7 +12,6 @@
                     <li><a href="{{asset('account/safety')}}">专业认证</a></li>
                     <li><a href="{{asset('account/safety')}}">中介认证</a></li>
                 </ul>
-                </ul>
             </li>
         @else
             <li class="person active">

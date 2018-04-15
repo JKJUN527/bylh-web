@@ -410,7 +410,7 @@ input.add,input.min{width:15px}
         padding: 0 25px;
         text-decoration: none;
         font-weight: 700;
-        display: inline-block;
+        /*display: inline-block;*/
         vertical-align: middle;
     }
 
