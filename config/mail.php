@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => '631642753@qq.com',
+        'address' => '3491483347@qq.com',
         'name' => '不亦乐乎官网',
     ],
 
