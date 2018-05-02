@@ -158,7 +158,7 @@
                                 </div>
                             </div>
                             <div class="am-form-group" style="padding-top: 10rem;">
-                                <label for="doc-vld-email-2-1" class="label_title">选择付款方式:</label>
+                                <label for="doc-vld-email-2-1" class="label_title">选择收款方式:</label>
                                 <select class="service_info" id="pay_way" required>
                                     <option value="0" @if($data['serviceinfo']->pay_way ==0 ) selected @endif>支付宝扫码</option>
                                     <option value="1" @if($data['serviceinfo']->pay_way ==1 ) selected @endif>微信扫码</option>

@@ -273,7 +273,7 @@
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
 						0px;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">服务特色</label>
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">服务项目</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
                                 <input type="service_title" id="doc-ipt-3-a" class="am-form-field" placeholder="好的标题更能吸引眼球哟">
                             </div>
@@ -311,9 +311,9 @@
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
 						0px;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">描述服务详情</label>
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">服务详情</label>
                             <div class="am-u-sm-6" style="float: left;margin-left: 30px;">
-                                <textarea class="" rows="8" name="description" id="doc-ta-1" style="width: 100%;"></textarea>
+                                <textarea class="" rows="8" name="description" id="doc-ta-1" style="width: 100%;" placeholder="提示：服务方式、地点、时间，主要内容描述（如教材、器材、课程、工具等），注意事项（需要对方准备事项、禁忌等）" ></textarea>
                             </div>
                         </div>
                     </div>

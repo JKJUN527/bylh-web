@@ -17,8 +17,8 @@
 
                 <ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
                     <li class="am-active"><a href="#tab1">所有订单</a></li>
-                    <li><a href="#tab2">大学生服务</a></li>
-                    <li><a href="#tab3">实习课堂</a></li>
+                    <li><a href="#tab2">专业服务</a></li>
+                    <li><a href="#tab3">实习中介</a></li>
                     <li><a href="#tab4">专业问答</a></li>
                 </ul>
 
