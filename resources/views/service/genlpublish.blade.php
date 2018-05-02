@@ -283,8 +283,8 @@
                     <div class="fb_container" style="padding: 0px 3px;margin-left: 10px;margin-bottom: 2
 						0px;">
 
-                        <form class="am-form-group am-form-danger am-form-icon am-padding-sm">
-                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;padding-left: 20px;margin-right: 1.2rem">你所在城市</label>
+                        {{--<form class="am-form-group am-form-danger am-form-icon am-padding-sm">--}}
+                            <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;padding-left: 20px;margin-right: 2.2rem">你所在城市</label>
                             <select data-am-selected="{btnWidth: '20%', btnSize: 'sm', btnStyle: 'secondary', searchBox: 1}" id="select_city">
                                 @foreach($data['province'] as $province)
                                 <optgroup label="{{$province->name}}">
@@ -296,7 +296,7 @@
                                 </optgroup>
                                 @endforeach
                             </select>
-                        </form>
+                        {{--</form>--}}
                     </div>
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 2
 						0px;margin-top:20px;">
@@ -707,6 +707,11 @@
 
         });
 
-
+        $(".am-selected-search input").bind('keypress',function(event){
+            if(event.keyCode == 13)
+            {
+                return 0;
+            }
+        });
     </script>
 @endsection

@@ -91,7 +91,7 @@
         }
         .lx-btn{
             line-height: 30px;
-            height: 40px;
+            /*height: 40px;*/
             padding-bottom: 20px;
             text-align: center;
             margin-top: 1rem;
@@ -103,7 +103,7 @@
         .service_content{
             float:left;
             overflow:hidden;
-            height:30px;
+            /*height:30px;*/
             width: 50%;
             font-size: smaller;
             text-align: left;
@@ -453,7 +453,7 @@
                          style="margin-right: -5px;border: 2px solid #eee;padding: 20px;background: #fff;">
                         <div class=" fr main-c">
                             <a class="fws-hd" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank">
-                            <img src="{{$data['serviceinfo']['elogo'] or asset('images/dog.png')}}" width="180" height="180">   
+                            <img src="{{$data['serviceinfo']['elogo'] or $data['userinfo']['photo']}}" width="180" height="180">
                             </a>
                             <a class="fws-name" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank" style="padding:20px;font-size: 18px;">
                                 {{$data['serviceinfo']['ename']}}
@@ -559,6 +559,13 @@
                                         </span>
                                     </div>
                                     <div class="clear"></div>
+                                </div>
+                                <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+                                <div class="service-content">
+                                    <div class="service_info">
+                                        <div class="fl" style="float: left;">服务者自述：</div>
+                                        <div class="service_content">{!! $data['serviceinfo']['brief'] !!}</div>
+                                   </div>
                                 </div>
                                 <div class="lx-btn">
                                     <button type="button" class="am-btn am-btn-danger am-btn-lg" onclick="leaveMsg()"

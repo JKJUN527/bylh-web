@@ -21,6 +21,12 @@
             width: 400px;
             line-height:1.5;
         }
+        .am-badge a{
+            padding: 0.25em 0.625em;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+        }
 
     </style>
 @endsection
@@ -35,9 +41,8 @@
         </div>
         <hr/>
         <div class="authentication">
-            <p class="tip">请填写你的中介机构的认证凭据，以用于平台审核</p>
-
             @if($data["is_vertify"] == -1)
+            <p class="tip">请填写你的中介机构的认证凭据，以用于平台审核</p>
                 <div class="authenticationInfo">
                     <p class="title">填写机构信息</p>
                     <div class="am-form-group">
@@ -113,7 +118,7 @@
                     <div id="submit-form" class="am-btn am-btn-danger">提交</div>
                 </div>
             @else
-                <p>您已提交实习中介认证，请等待审核</p>
+                <span class="am-badge am-badge-warning am-round"><a href="/account/safety">您已提交实习中介认证，请等待审核,点击查看审核结果</a></span>
             @endif
         </div>
     </div>

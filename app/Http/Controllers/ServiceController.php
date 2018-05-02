@@ -51,7 +51,7 @@ class ServiceController extends Controller {
             $data['province'] = Region::where('parent_id', 0)->get();
             $data['city'] = Region::where('parent_id', '!=', 0)->get();
             //确认联系方式
-            $data['userinfo'] = User::where('uid', $data['uid'])
+            $data['userinfo'] = Userinfo::where('uid', $data['uid'])
                 ->select('tel', 'mail')
                 ->first();
             //验证服务用户是否填写了服务基本信息，如未填写，则不能发布一般服务
@@ -90,8 +90,8 @@ class ServiceController extends Controller {
             $data['province'] = Region::where('parent_id', 0)->get();
             $data['city'] = Region::where('parent_id', '!=', 0)->get();
             //确认联系方式
-            $data['userinfo'] = User::where('uid', $data['uid'])
-                ->select('tel', 'mail')
+            $data['userinfo'] = Userinfo::where('uid', $data['uid'])
+                ->select('tel','mail')
                 ->first();
             //验证服务用户是否填写了服务基本信息，如未填写，则不能发布一般服务
             $serviceinfo = Serviceinfo::where('uid', $data['uid'])
@@ -130,7 +130,7 @@ class ServiceController extends Controller {
             $data['province'] = Region::where('parent_id', 0)->get();
             $data['city'] = Region::where('parent_id', '!=', 0)->get();
             //确认联系方式
-            $data['userinfo'] = User::where('uid', $data['uid'])
+            $data['userinfo'] = Userinfo::where('uid', $data['uid'])
                 ->select('tel', 'mail')
                 ->first();
             //验证服务用户是否填写了服务基本信息，如未填写，则不能发布一般服务
@@ -805,6 +805,8 @@ class ServiceController extends Controller {
                 ->paginate(15,['*'],"orderpage");//默认一页显示15条
             //服务商服务相关信息
             $data['serviceinfo'] = Serviceinfo::where('uid', $data['detail']->uid)->first();
+            //查询用户信息
+            $data['userinfo'] = Userinfo::where('uid', $data['detail']->uid)->select('photo')->first();
         }
 //        return $data;
         if($request->input('type') == 2){

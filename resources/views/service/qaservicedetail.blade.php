@@ -96,7 +96,7 @@
         }
         .lx-btn{
             line-height: 30px;
-            height: 40px;
+            /*height: 40px;*/
             padding-bottom: 20px;
             text-align: center;
             margin-top: 1rem;
@@ -148,7 +148,7 @@
         .service_content{
             float:left;
             overflow:hidden;
-            height:30px;
+            /*height:30px;*/
             width: 50%;
             text-align: left;
         }
@@ -291,10 +291,10 @@
                                 <p style="font-size:15px;line-height: 24px;">
                                     {!! $data["detail"]->describe !!}
                                 </p>
-                                <span style="font-size: 1.3rem">服务者自述：</span>
-                                <p style="font-size:15px;line-height: 24px;margin-left: 2rem;">
-                                    {!! $data['serviceinfo']['brief'] !!}
-                                </p>
+                                {{--<span style="font-size: 1.3rem">服务者自述：</span>--}}
+                                {{--<p style="font-size:15px;line-height: 24px;margin-left: 2rem;">--}}
+                                    {{--{!! $data['serviceinfo']['brief'] !!}--}}
+                                {{--</p>--}}
                                 <div class="guessrequest">
                                     <div class="title"
                                          style="font-family: 'Microsoft YaHei';color: #333;font-size: 24px;font-weight: 400;line-height: 24px;">
@@ -558,7 +558,7 @@
                          style="border: 2px solid #eee;padding: 20px;background: #fff;">
                         <div class=" fr main-c">
                             <a class="fws-hd" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank">
-                                <img src="{{$data['serviceinfo']['elogo']}}" width="180" height="180"></a>
+                                <img src="{{$data['serviceinfo']['elogo'] or $data['userinfo']['photo']}}" width="180" height="180"></a>
                             <a class="fws-name" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank" style="padding:20px;font-size: 18px;">
                                 {{$data['serviceinfo']['ename']}}
                             </a>
@@ -640,6 +640,13 @@
                                     </span>
                                     </div>
                                     <div class="clear"></div>
+                                </div>
+                                <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+                                <div class="service-content">
+                                    <div class="service_info">
+                                        <div class="fl" style="float: left;">服务者自述：</div>
+                                        <div class="service_content">{!! $data['serviceinfo']['brief'] !!}</div>
+                                    </div>
                                 </div>
                                 <div class="lx-btn">
                                     <button type="button" class="am-btn am-btn-danger am-btn-lg" style="width: 80%;"
