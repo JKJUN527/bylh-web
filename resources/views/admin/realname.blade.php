@@ -6,6 +6,12 @@
         i.material-icons {
             cursor: pointer;
         }
+        #deny_reason{
+            width: 100%;
+            border-bottom: 2px solid whitesmoke;
+            height: 3rem;
+            border-top: 2px solid whitesmoke;
+        }
     </style>
 @endsection
 
@@ -87,6 +93,26 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success waves-effect" onclick="pass()">审核通过</button>
+                    <button type="button" class="btn btn-danger waves-effect" data-toggle='modal' data-target='#denyModal'>审核拒绝</button>
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="denyModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">请输入审核拒绝原因</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped" id="deny-detail-table">
+                        <tbody>
+                            <input type="text" placeholder="请输入拒绝原因" id="deny_reason" />
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
                     <button type="button" class="btn btn-danger waves-effect" onclick="deny()">审核拒绝</button>
                     <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">关闭</button>
                 </div>
@@ -117,6 +143,7 @@
 
         function deny() {
             var uid = $("#user_id").html();
+            var reason = $("#deny_reason").val();
 
             swal({
                 title: "确认",
@@ -128,7 +155,19 @@
                 closeOnConfirm: true,
                 showLoaderOnConfirm: true
             }, function () {
-                doPostVerify(uid, 0);
+                $.ajax({
+                    url: "/admin/examine_verify?uid=" + uid + "&status=" + 0+"&type=realname"+"&reason="+reason,
+                    type: "get",
+                    success: function (data) {
+                        $("#detailApplyModal").modal('hide');
+                        $("#denyModal").modal('hide');
+
+                        checkResult(data['status'], "操作成功", data['msg'], null);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1200);
+                    }
+                })
             });
         }
 
