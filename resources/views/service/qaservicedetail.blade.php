@@ -660,7 +660,7 @@
                                         <div class="am-modal-hd">和我联系</div>
                                         <a href="#">
                                             <div class="serviceMsg">
-                                                <img src="{{$data['serviceinfo']['elogo']}}"
+                                                <img src="{{$data['serviceinfo']['elogo'] or $data['userinfo']['photo']}}"
                                                      style="width:150px;height:150px;">
                                                 <p id="userinfo" data-content="{{$data['serviceinfo']['uid']}}">服务商名称：<span>{{$data['serviceinfo']['ename']}}</span></p>
                                             </div>

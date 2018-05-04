@@ -238,10 +238,10 @@
                                 <p style="font-size:15px;line-height: 24px;margin-left: 2rem;">
                                     {!! $data["detail"]->describe !!}
                                 </p>
-                                <span style="font-size: 1.3rem">服务者自述：</span>
-                                <p style="font-size:15px;line-height: 24px;margin-left: 2rem;">
-                                    {!! $data['serviceinfo']['brief'] !!}
-                                </p>
+                                {{--<span style="font-size: 1.3rem">服务者自述：</span>--}}
+                                {{--<p style="font-size:15px;line-height: 24px;margin-left: 2rem;">--}}
+                                    {{--{!! $data['serviceinfo']['brief'] !!}--}}
+                                {{--</p>--}}
 
                             </div>
                             <div class="am-tab-panel am-fade @if($data['tab_detail']== 1) am-active am-in @endif" id="tab2">
@@ -579,7 +579,7 @@
                                         <div class="am-modal-hd">和我联系</div>
                                         <a href="#">
                                             <div class="serviceMsg">
-                                                <img src="{{$data['serviceinfo']['elogo']}}"
+                                                <img src="{{$data['serviceinfo']['elogo'] or $data['userinfo']['photo']}}"
                                                      style="width:150px;height:150px;">
                                                 <p id="userinfo" data-content="{{$data['serviceinfo']['uid']}}">服务商名称：<span>{{$data['serviceinfo']['ename']}}</span></p>
                                             </div>
