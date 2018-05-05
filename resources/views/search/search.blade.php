@@ -104,7 +104,7 @@
                             <tr class="line_h   adserveritembg">
                                 <td class="xm_money loadcyvkobj" data="450988" datacynum="19" datazab="0" datacc="1" datacd="/logo" style="border-bottom: 1px dashed #e1dfdf;vertical-align: top;padding-top: 25px;">
                                     <div class="aa task_item_i" style="padding: 20px 5px;">
-                                        <a href="/" target="_blank" title="{{$demand->title}}"><font class="money" style="font-size: 18px;color: #ff6600;">
+                                        <a href="/demands/detail?id={{$demand->id}}" target="_blank" title="{{$demand->title}}"><font class="money" style="font-size: 18px;color: #ff6600;">
                                              @if($demand->price <0)
                                                  暂无报价
                                              @else
@@ -144,7 +144,7 @@
                                     </div></td>
                                 <td class="cc toubiao" style="float: right;vertical-align: top;margin-top: 60px;padding-left: 10px;">
                                     <div class="hhb">
-                                        <button id="date-demand" class="am-btn am-btn-warning am-btn-lg" type="button" data-content="{{$demand->id}}">立即预约</button>
+                                        <button id="date-demand" class="am-btn am-btn-warning am-btn-lg" type="button" data-content="{{$demand->id}}">查看详情</button>
                                     </div>
                                 </td>
                             </tr>
@@ -292,4 +292,12 @@
 <div class="advertisement" style="padding: 10px 0 10px 0;">
     <img src="{{asset('images/ad2.jpg')}}" style="width: 100%;">
 </div>
+@endsection
+@section('custom-script')
+    <script>
+        $("#date-demand").click(function () {
+            var id = $(this).attr('data-content');
+            window.location.href = "/demands/detail?id="+id;
+        });
+    </script>
 @endsection

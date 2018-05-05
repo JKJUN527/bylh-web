@@ -27,6 +27,8 @@
             color: #fff;
         }
 
+
+
     </style>
 @endsection
 
@@ -148,7 +150,98 @@
                         </li>
                     </ul>
                 </div>
-                    
+
+                <div class="authenticationInfo">
+                    <p class="title">填写服务基本信息</p>
+
+                            <div class="am-form-group">
+                                {{--<label for="doc-vld-name-2-1" class="label_title">服务商昵称：</label>--}}
+                                <label for="user-name" class="am-form-label">服务商昵称:</label>
+                                <div class="am-form-content">
+                                    <input  class="service_info" name="username" type="text" id="service_name" minlength="3" placeholder="给你的服务起一个响亮的名字吧！" required/>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="doc-vld-age-2-1" class="am-form-label">服务城市：</label>
+                                <div class="am-form-content">
+                                    <input class="service_info" type="text"   id="service_city" placeholder="你所在的城市（eg:成都）" value="" required />
+                                </div>
+                            </div>
+                            <div class="am-form-group" style="width: 50%;display:inline">
+                                <label for="doc-vld-tel-2-1" class="label_title">是否在校生:</label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="hasstudent" value="1" data-am-ucheck checked> 在读
+                                </label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="hasstudent" value="0" data-am-ucheck> 毕业
+                                </label>
+                            </div>
+
+                            <div class="am-form-group grdu" style="display: none">
+                                <label for="doc-vld-email-2-1" class="label_title">毕业院校：</label>
+                                <input class="label_two" type="text" id="service_grdu_school" placeholder="输入毕业院校及取得学位" value="" required/>
+                                <input class="label_two" type="text" id="service_grdu_major" placeholder="输入主修专业" value="" required/>
+                                <select class="label_two" id="service_grdu_degree" required>
+                                    <option value="0">博士及以上</option>
+                                    <option value="1" selected>硕士</option>
+                                    <option value="2">学士</option>
+                                    <option value="3">高中及以下</option>
+                                </select>
+                            </div>
+
+                            <div class="am-form-group current" style="display: block">
+                                <label for="doc-vld-email-2-1" class="label_title">就读院校：</label>
+                                <input class="label_two" type="text" id="service_current_school" placeholder="正在攻读院校、攻读学位"  />
+                                <input class="label_two" type="text" id="service_current_major" placeholder="正在攻读专业" />
+                                <select class="label_two" id="service_current_degree">
+                                    <option value="0">博士及以上</option>
+                                    <option value="1" selected>硕士</option>
+                                    <option value="2">学士</option>
+                                    <option value="3">高中及以下</option>
+                                </select>
+                            </div>
+                            <div class="am-form-group" style="width: 50%;display: inline">
+                                <label for="doc-vld-tel-2-1" class="label_title">是否支持线下服务:</label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="offline" value="0" data-am-ucheck  checked> 仅线下
+                                </label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="offline" value="1" data-am-ucheck> 仅线上
+                                </label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="offline" value="2" data-am-ucheck> 线上线下均支持
+                                </label>
+                            </div>
+                            <div class="am-form-group" style="width: 50%;display:inline">
+                                <label for="doc-vld-tel-2-1" class="label_title">是否有视频教程:</label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="hasvideo" value="1" data-am-ucheck> 有
+                                </label>
+                                <label class="am-radio am-secondary" style="width: 50%">
+                                    <input type="radio" name="hasvideo" value="0" data-am-ucheck checked> 没有
+                            </div>
+
+                            <div class="am-form-group">
+                                {{--<input class="service_info" id="user-note" placeholder="描述你的服务经历、个人能力等" type="text" minlength="4"  data-validation-message="请输入长度大于4个字符" value="{{$data['serviceinfo']->brief}}" required/>--}}
+                                <div class="am-u-sm-12">
+                                    <label for="doc-vld-ta-2-1" class="label_title">服务者自述：</label>
+                                    <textarea class="" rows="8" name="description" placeholder="描述你的服务经历、个人能力等" id="service-note"></textarea>
+                                </div>
+                            </div>
+                            <div class="am-form-group" style="padding-top: 10rem;">
+                                <label for="doc-vld-email-2-1" class="label_title">选择收款方式:</label>
+                                <select class="service_info" id="pay_way" required>
+                                    <option value="0" selected>支付宝扫码</option>
+                                    <option value="1">微信扫码</option>
+                                </select>
+                            </div>
+                            <div class="pay_code">
+                                <input type="file" id="paycode_picture" class="paypic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" onchange="loadPreviewPaycode(this)">
+                                <img class="am-radius am-img-thumbnail "  id="paypic-preview" src="{{asset('images/paycode.png')}}
+                                        " alt="" style="width: 150px;height: 150px"/>
+                            </div>
+
+                </div>
                 
                 <div class="info-btn">
                     <div id="submit-form" class="am-btn am-btn-danger">提交</div>
