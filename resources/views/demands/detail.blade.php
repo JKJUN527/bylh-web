@@ -328,7 +328,7 @@
                     <a href="#" >
                         <div class="serviceMsg">
                             <img src="{{$data["userinfo"]->photo or asset('images/head1.gif')}}" style="width:150px;height:150px;">
-                            <p id="userinfo" data-content="{{$data["userinfo"]->uid}}">雇主姓名：<span>{{$data["userinfo"]->real_name}}</span></p>
+                            <p id="userinfo" data-content="{{$data["userinfo"]->uid}}">雇主姓名：<span>{{$data["user"]->username}}</span></p>
                         </div>
                     </a>
                     <div class="am-modal-bd">

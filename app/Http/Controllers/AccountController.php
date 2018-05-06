@@ -670,6 +670,8 @@ class AccountController extends Controller {
                         //return redirect('account/enterpriseVerify?eid='.$eid)->with('error', '上传证件失败');
                     }
                 }
+                //保存服务基本信息
+
                 break;
             case 2://专业认证
                 $other = false;
@@ -751,7 +753,7 @@ class AccountController extends Controller {
                             }
                         }
                     }
-                    $userinfo->tel = $request->input('tel');
+//                    $userinfo->tel = $request->input('tel');
                     $userinfo->mail = $request->input('email');
                     $userinfo->real_name = $request->input('real_name');
                     $userinfo->id_card = $request->input('id_card');
@@ -759,15 +761,55 @@ class AccountController extends Controller {
                     $userinfo->majors_statue = 0;
 
                     if ($userinfo->save()) {
-                        //更新serviceinfo -ename字段
-                        $serviceinfo = Serviceinfo::where('uid',$userinfo->uid)
-                            ->update([
-                                'ename'=>$request->input('mediator_name'),
-                                'current_profession'=>$request->input('profession'),
-                                'workplace'=>$request->input('workplace'),
-                                'certificate_name'=>$request->input('certificate_name'),
-                                'identity'=>$request->input('identity'),
-                            ]);
+                        $serviceinfo = Serviceinfo::where('uid',$userinfo->uid)->first();
+                        //更新serviceinfo字段
+                        //保存服务基本信息
+                        //接收收款二维码数据
+                        if ($request->hasFile('paycode')) {
+                            $pay = $request->file('paycode');
+                            if ($pay->isValid()) {//判断文件是否上传成功
+                                $ext = $pay->getClientOriginalExtension();
+                                //临时觉得路径
+                                $realPath = $pay->getRealPath();
+
+                                $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . 'paycode' . '.' . $ext;
+
+                                $bool = Storage::disk('paycode')->put($filename, file_get_contents($realPath));
+                                if ($bool) {
+                                    $serviceinfo->pay_code = asset('storage/paycode/' . $filename);
+                                }
+                            }
+                        }
+                        $serviceinfo->ename = $request->input('ename');
+                        $serviceinfo->city = $request->input('city');
+                        $serviceinfo->has_student = $request->input('hasstudent');
+                        $serviceinfo->current_edu = $request->input('current');
+                        $serviceinfo->graduate_edu = $request->input('graduation');
+                        $serviceinfo->is_offline = $request->input('offline');
+                        $serviceinfo->has_video = $request->input('hasvideo');
+                        $serviceinfo->pay_way = $request->input('payway');
+                        $serviceinfo->brief = $request->input('description');
+                        $serviceinfo->current_profession=$request->input('profession');
+//                        $serviceinfo->workplace=$request->input('workplace');
+//                        $serviceinfo->certificate_name=$request->input('certificate_name');
+//                        $serviceinfo->identity=$request->input('identity');
+                        $serviceinfo->save();
+
+//                        $serviceinfo = Serviceinfo::where('uid',$userinfo->uid)
+//                            ->update([
+//                                'ename'=>$request->input('ename'),
+//                                'city'=>$request->input('city'),
+//                                'has_student'=>$request->input('hasstudent'),
+//                                'current_edu'=>$request->input('current'),
+//                                'graduate_edu'=>$request->input('graduation'),
+//                                'is_offline'=>$request->input('offline'),
+//                                'has_video'=>$request->input('has_video'),
+//                                'pay_way'=>$request->input('pay_way'),
+//                                'current_profession'=>$request->input('profession'),
+//                                'workplace'=>$request->input('workplace'),
+//                                'certificate_name'=>$request->input('certificate_name'),
+//                                'identity'=>$request->input('identity'),
+//                            ]);
                         $data['status'] = 200;
                         $data['msg'] = "上传成功";
                         return $data;
