@@ -121,9 +121,9 @@
             </div>
             <div class="footer-bd ">
                 <p style="text-align: center;">
-                    ©2017-2018 bylh.com 成备xxxxxxxx号<br>
-                    不亦乐乎（成都）有限公司<br>
-                    客服：xxxx-xxx-xxx
+                    Copyright © 2017-2018 bylehu 版权所有 蜀ICP备17027037<br>
+                    客服电话：028-85593827<br>
+                    联系邮箱：不亦乐乎＠bylehu.com 
 
                 </p>
             </div>

@@ -139,8 +139,8 @@
                             @endif
                         @endforeach
                     @else
-                        <li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
-                        <li><img src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
+                        <li><img src="{{ asset('images/default2.jpg')}}" width="400" height="293" ></li>
+                        
                     @endif
                 </ul>
             </div>
