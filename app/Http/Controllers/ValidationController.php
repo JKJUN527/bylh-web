@@ -160,7 +160,7 @@ class ValidationController extends Controller
                     $data["status"] = 200;
                     $data["user"] = $user;
 
-                    return $data;
+//                    return $data;
                     return view("account.emailVerify", ["data" => $data]);
 //                    echo "<script> alert('邮箱验证成功！')</script>>";
 //                    return redirect('index');
