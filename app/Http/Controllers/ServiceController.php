@@ -907,6 +907,9 @@ class ServiceController extends Controller {
                     $data['userinfo'] = Userinfo::where('uid', $uid)->first();
                 elseif ($is_exist->type == 2)
                     $data['serviceinfo'] = Serviceinfo::where('uid',$uid)->first();
+
+                //查询用户信息
+                $data['userinfo'] = Userinfo::where('uid', $uid)->select('photo')->first();
 //                return $data;
                 return view('service/serviceproviderInfo', ['data' => $data]);
             } else {

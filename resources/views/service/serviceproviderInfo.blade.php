@@ -352,7 +352,7 @@
                      style="margin-right: -5px;border: 2px solid #eee;padding: 20px;background: #fff;">
                     <div class=" fr main-c">
                         <a class="fws-hd" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank">
-                            <img src="{{$data['serviceinfo']['elogo']}}" width="180" height="180"></a>
+                            <img src="{{$data['serviceinfo']['elogo'] or $data['userinfo']['photo']}}" width="180" height="180"></a>
                         <a class="fws-name" href="/service/getAllservices?uid={{$data['serviceinfo']['uid']}}" target="_blank" style="padding:20px;font-size: 18px;">
                             {{$data['serviceinfo']['ename']}}
                         </a>
