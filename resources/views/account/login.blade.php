@@ -68,6 +68,22 @@
         </div>
     </div>
 </div>
+
+    <div class="footer ">
+        <div class="footer-hd ">
+        </div>
+        <div class="footer-bd ">
+            <br>
+            <p style="text-align: center;">
+
+                Copyright © 2017-2018  bylehu 版权所有  蜀ICP备17027037<br>
+                客服电话：028-85593827<br>
+                联系邮箱：不亦乐乎＠bylehu.com
+
+            </p>
+        </div>
+    </div>
+
 <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
 <script>
     $("#password").keyup(function (event) {

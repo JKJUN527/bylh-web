@@ -462,11 +462,8 @@
         </div>
     </div>
     <!--广告-->
-    <div class="advertisement" style="padding: 10px;width: 50%;float: left;">
-        <img src="{{asset('images/ad4.jpg')}}">
-    </div>
-    <div class="advertisement" style="padding: 10px;width: 50%;float: right;">
-        <img src="{{asset('images/ad5.jpg')}}">
+    <div class="advertisement" style="padding: 10px;width: 100%;float: left;">
+        <img src="{{asset('images/ad2.jpg')}}">
     </div>
 @endsection
 @section('custom-script')
