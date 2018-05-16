@@ -28,7 +28,7 @@
         </div>
         <hr/>
         <div class="authentication">
-            @if($data["is_vertify"] == -1)
+            @if($data["is_vertify"] != 0)
                 <p class="tip">请填写您身份证上的真实信息，以用于报关审核</p>
                 <div class="authenticationInfo">
                     <p class="title">填写个人信息</p>
