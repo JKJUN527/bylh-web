@@ -105,6 +105,8 @@
                                         <div class="fore2"><small>认证通过后可进行专业服务、专业问答发布，同时可进一步提高账户安全性。</small></div>
                                     @elseif($data['userinfo']->majors_statue == 0)
                                         <div class="fore2"><small>您已提交审核，请耐心等待审核结果。</small></div>
+                                    @elseif($data['userinfo']->majors_statue == 2)
+                                        <div class="fore2"><small>审核失败，请点击重新提交资料。</small></div>
                                     @else
                                         <div class="fore2"><small>恭喜您已通过身份认证</small></div>
                                     @endif
@@ -123,6 +125,10 @@
                                     @elseif($data['userinfo']->majors_statue == 0)
                                         <a href="#">
                                             <div class="am-btn am-btn-secondary" style="opacity:0.5;">审核中</div>
+                                        </a>
+                                    @elseif($data['userinfo']->majors_statue == 2)
+                                        <a href="/account/authentication/2">
+                                            <div class="am-btn am-btn-secondary" style="opacity:0.5;">失败</div>
                                         </a>
                                     @else
                                         <a href="#">
@@ -143,6 +149,8 @@
                                         <div class="fore2"><small>认证通过后可发布中介信息，同时可进一步提高账户安全性。</small></div>
                                     @elseif($data['userinfo']->finance_statue== 0)
                                         <div class="fore2"><small>您已提交审核，请耐心等待审核结果。</small></div>
+                                    @elseif($data['userinfo']->finance_statue== 2)
+                                        <div class="fore2"><small>审核失败，请点击重新提交资料。</small></div>
                                     @else
                                         <div class="fore2"><small>恭喜您已通过机构认证</small></div>
                                     @endif
@@ -161,6 +169,10 @@
                                     @elseif($data['userinfo']->finance_statue == 0)
                                         <a href="#">
                                             <div class="am-btn am-btn-secondary" style="opacity:0.5;">审核中</div>
+                                        </a>
+                                    @elseif($data['userinfo']->finance_statue == 2)
+                                        <a href="/account/authentication/1">
+                                            <div class="am-btn am-btn-secondary" style="opacity:0.5;">失败</div>
                                         </a>
                                     @else
                                         <a href="#">

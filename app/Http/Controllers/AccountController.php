@@ -504,16 +504,17 @@ class AccountController extends Controller {
                 case 0://实名认证
                     //查看用户审核情况(普通用户未验证)
                     //返回用户实名认证情况
-                    $situation = Userinfo::where('uid', $data['uid'])->select('realname_statue')->first();
-                    $data['is_vertify'] = $situation['realname_statue'];
+//                    $situation = Userinfo::where('uid', $data['uid'])->select('realname_statue')->first();
+                    $situation = User::where('uid', $data['uid'])->select('realname_verify')->first();
+                    $data['is_vertify'] = $situation['realname_verify'];
                     return view("person.idcard", ['data' => $data]);
                 case 1://实习中介认证
-                    $situation = Userinfo::where('uid', $data['uid'])->select('finance_statue')->first();
-                    $data['is_vertify'] = $situation['finance_statue'];
+                    $situation = User::where('uid', $data['uid'])->select('finance_verify')->first();
+                    $data['is_vertify'] = $situation['finance_verify'];
                     return view("person.finance", ['data' => $data]);
                 case 2:
-                    $situation = Userinfo::where('uid', $data['uid'])->select('majors_statue')->first();
-                    $data['is_vertify'] = $situation['majors_statue'];
+                    $situation = User::where('uid', $data['uid'])->select('majors_verify')->first();
+                    $data['is_vertify'] = $situation['majors_verify'];
                     return view("person.qaservice", ['data' => $data]);
                 default:
                     return "error";

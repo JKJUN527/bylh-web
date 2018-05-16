@@ -41,8 +41,8 @@ class ServiceController extends Controller {
             return view('account.login', ['data' => $data]);
         }
         $is_vertify = User::where('uid', $data['uid'])->first();
-        if (!$is_vertify->realname_verify) {//未通过实名认证、跳转到实名认证页面
-            return redirect()->back();
+        if ($is_vertify->realname_verify !=1 || $is_vertify->majors_verify !=1) {//未通过实名认证、跳转到实名认证页面
+            return redirect('account/authentication/2');
         } else {
             //返回一般服务页面所需数据
             $data['serviceclass1'] = Serviceclass1::where('type', 0)->orderBy('updated_at', 'asc')->get();
@@ -81,7 +81,7 @@ class ServiceController extends Controller {
             return view('account.login', ['data' => $data]);
         }
         $is_vertify = User::where('uid', $data['uid'])->first();
-        if (!$is_vertify->finance_verify) {//未通过实名认证、跳转到实名认证页面
+        if ($is_vertify->finance_verify !=1) {//未通过实名认证、跳转到实名认证页面
             return redirect('account/authentication/1');
         } else {
             $data['serviceclass1'] = Serviceclass1::where('type', 1)->orderBy('updated_at', 'asc')->get();
