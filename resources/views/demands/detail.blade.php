@@ -203,7 +203,7 @@
                             {!!$data["detail"]->describe !!}
                             <h3 style="font-size: 15px;font-weight: bold;">需求类型：
                                 @if($data["detail"]->type == 0)
-                                    一般服务需求
+                                    专业服务需求
                                 @elseif($data["detail"]->type == 1)
                                     金融需求
                                 @elseif($data["detail"]->type == 2)

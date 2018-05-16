@@ -1,5 +1,5 @@
 @extends('demo.admin2')
-@section("title", "实习中介认证")
+@section("title", "机构认证")
 
 @section("custom-style")
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
@@ -35,18 +35,18 @@
 
     <div class="main-wrap">
         <div class="am-cf am-padding">
-            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">实习中介认证</strong> /
-                <small>Finance&nbsp;authentication</small>
+            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">机构认证</strong> /
+                <small>Organization&nbsp;authentication</small>
             </div>
         </div>
         <hr/>
         <div class="authentication">
             @if($data["is_vertify"] == -1)
-            <p class="tip">请填写你的中介机构的认证凭据，以用于平台审核</p>
+            <p class="tip">请填写您的机构的认证凭据，以用于平台审核</p>
                 <div class="authenticationInfo">
                     <p class="title">填写机构信息</p>
                     <div class="am-form-group">
-                        <label for="user-name" class="am-form-label">实习中介机构名称：</label>
+                        <label for="user-name" class="am-form-label">机构名称：</label>
                         <div class="am-form-content">
                             <input type="text" id="real-name" name="real_name" placeholder="请输入您的机构名称">
                         </div>
@@ -64,9 +64,9 @@
                         </div>
                     </div>
                     <div class="am-form-group">
-                        <label for="user-field" class="am-form-label">中介领域：</label>
+                        <label for="user-field" class="am-form-label">服务领域：</label>
                         <div class="am-form-content">
-                            <input type="text" id="field" name="field" placeholder="请输入中介领域（工美设计、医院护士、公司职位等）">
+                            <input type="text" id="field" name="field" placeholder="请输入服务领域（体育、艺术、技术、医疗等）">
                         </div>
                     </div>
                     <div class="am-form-group">
@@ -102,7 +102,7 @@
                             <div class="cardPic" id="id-card-back_holder">
                                 <img src="{{asset("images/cardbg.jpg")}}">
                                 <div class="cardText" id="upload-back-btn"><i class="am-icon-plus"></i>
-                                    <p>其他相关证件</p>
+                                    <p>其他许可/资质</p>
                                 </div>
                                 <p class="titleText">其他证件</p>
                             </div>
@@ -118,7 +118,7 @@
                     <div id="submit-form" class="am-btn am-btn-danger">提交</div>
                 </div>
             @else
-                <span class="am-badge am-badge-warning am-round"><a href="/account/safety">您已提交实习中介认证，请等待审核,点击查看审核结果</a></span>
+                <span class="am-badge am-badge-warning am-round"><a href="/account/safety">您已提交机构认证材料，请等待审核,点击查看审核结果</a></span>
             @endif
         </div>
     </div>
@@ -150,7 +150,7 @@
             swal({
                 title: "要求",
                 type: "info",
-                text: "其他相关证件照片，可证明实习中介身份的照片",
+                text: "其他相关证件照片，可证明机构身份的照片",
                 confirmButtonText: "知道了",
                 closeOnConfirm: true
             }, function () {
@@ -175,7 +175,7 @@
             if (realName === "") {
                 swal({
                     title: "",
-                    text: "请输入您的实习中介机构名称",
+                    text: "请输入您的机构名称",
                     type: "error",
                     confirmButtonText: "确定",
                     showCancelButton: false,
@@ -198,10 +198,10 @@
                 return;
             }
             if(field === ''){
-                swal("","中介领域不能为空", "error");
+                swal("","服务领域不能为空", "error");
                 return;
             }else if(field.length > 100){
-                swal("","中介领域长度不能超过100字", "error");
+                swal("","服务领域长度不能超过100字", "error");
                 return;
             }
 

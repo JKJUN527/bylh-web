@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     {{--<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">--}}
     <title>@yield('title')</title>
+    <link rel="icon" href="{{asset('images/bylehu2.ico')}}" type="image/x-icon" />
     <link href="{{asset('AmazeUI-2.4.2/assets/css/admin.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/personal.css')}}" rel="stylesheet" type="text/css">

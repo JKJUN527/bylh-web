@@ -510,7 +510,7 @@
     <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
         <div class="am-container" style="border: 2px solid #eee;padding: 20px;background: #fff;margin-left: 20px;margin-top: 20px;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
             <div class="hotNews">
-                热门资讯
+                讨论热点话题
             </div>
             <hr data-am-widget="divider"  class="am-divider am-divider-danger" style="border-top: 2px solid #d2364c;" />
             <div class="am-g am-g-fixed allhotNews">

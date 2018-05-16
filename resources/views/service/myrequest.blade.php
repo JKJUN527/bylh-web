@@ -8,9 +8,9 @@
                     <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我发布的服务</strong> / <small>My&nbsp;services</small></div>
                 </div>
                 <ul class="am-nav am-nav-pills">
-                    <li class="@if($data['type_tab'] ==1) am-active @endif" name="type_tab" data-content="tab1"><a href="#">大学生服务</a></li>
-                    <li class="@if($data['type_tab'] ==2) am-active @endif" name="type_tab" data-content="tab2"><a href="#">实习中介服务</a></li>
-                    <li class="@if($data['type_tab'] ==3) am-active @endif" name="type_tab" data-content="tab3"><a href="#">专业问答服务</a></li>
+                    <li class="@if($data['type_tab'] ==1) am-active @endif" name="type_tab" data-content="tab1"><a href="#">专业服务</a></li>
+                    <li class="@if($data['type_tab'] ==2) am-active @endif" name="type_tab" data-content="tab2"><a href="#">中介服务</a></li>
+                    <li class="@if($data['type_tab'] ==3) am-active @endif" name="type_tab" data-content="tab3"><a href="#">专业问答</a></li>
                 </ul>
                 <hr/>
             </div>

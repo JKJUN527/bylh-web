@@ -228,7 +228,7 @@
                         <li @if($data['tab_detail']== 0) class="am-active" @endif ><a href="#tab1" style="font-weight: bold;font-size: 18px;margin-right: 50px;">服务详情</a></li>
                         <li @if($data['tab_detail']== 1) class="am-active" @endif><a href="#tab2" style="font-weight: bold; font-size: 18px;margin-right: 50px;">雇主评论</a></li>
                         <li @if($data['tab_detail']== 2) class="am-active" @endif><a href="#tab3" style="font-weight: bold;font-size: 18px;margin-right: 50px;">成交记录</a></li>
-                        <li @if($data['tab_detail']== 3) class="am-active" @endif><a href="#tab4" style="font-weight: bold;font-size: 18px;margin-right: 50px;">投诉建议</a></li>
+                        <li @if($data['tab_detail']== 3) class="am-active" @endif><a href="#tab4" style="font-weight: bold;font-size: 18px;margin-right: 50px;">举报</a></li>
                     </ul>
 
                         <div class="am-tabs-bd">

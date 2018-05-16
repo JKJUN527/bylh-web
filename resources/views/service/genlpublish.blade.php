@@ -208,7 +208,7 @@
                     </div>
                 </div>
                 <div class="fabu1" style="background:#eee;margin-bottom:10px;">
-                    <div class="fabu_showtitle title_tip">请选择你的需求类型</div>
+                    <div class="fabu_showtitle title_tip"></div>
                     <div class="fb_container" style="padding: 16px 3px;margin-left: 10px;padding-bottom: 30px;margin-bottom: 20px;">
                         <div class="am-form-group am-form-danger am-form-icon am-form-feedback" style="padding-bottom:20px;">
                             <label for="doc-ipt-3-a" class="am-u-sm-2 am-form-label" style="font-size: 16px;">服务类型</label>

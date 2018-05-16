@@ -1,5 +1,5 @@
 @extends('demo.admin2')
-@section("title", "专业问答认证")
+@section("title", "身份认证")
 
 @section("custom-style")
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
@@ -58,7 +58,7 @@
 @section('content')
     <div class="main-wrap">
         <div class="am-cf am-padding">
-            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">专业认证</strong> /
+            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">身份认证</strong> /
                 <small>Real&nbsp;authentication</small>
             </div>
         </div>
@@ -109,7 +109,7 @@
                                 <div class="cardText" id="upload-idcard-front-btn"><i class="am-icon-plus"></i>
                                     <p>正面照片</p>
                                 </div>
-                                <p class="titleText">手持身份证正面</p>
+                                <p class="titleText">身份证正面</p>
                             </div>
                             <div class="cardExample">
                                 <img id="first-preview" src="{{asset("images/cardexample1.jpg")}}">
@@ -136,7 +136,7 @@
                     </div>
                     
                     <div class="authenticationPic">
-                    <p class="title">请上传 学生证、毕业证、资格证或者其它技能证书</p>
+                    <p class="title">请上传 学生证、毕业证、职称证、资格证或者其它技能证书</p>
                     <p class="tip">请按要求上传相关证书</p>
 
                     <input type="file" name="id-card-front" class="hide" onchange='showMajorPreview(this, "front")'>

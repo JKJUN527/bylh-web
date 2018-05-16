@@ -137,6 +137,11 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们的营运主体是成都不亦乐乎网络科技有限公司。<br></h1>
                         </div>
+                        <div class="am-align-center">
+                            <br><br>
+                            <img src="images/contact.png" alt="" width="80">
+                        </div>
+
                     </div>
                     <hr/>
                     
