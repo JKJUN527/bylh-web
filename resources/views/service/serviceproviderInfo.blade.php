@@ -256,7 +256,7 @@
                             <div class="card-deck">
                                 @foreach($data['finlservices'] as $finlservice)
                                     <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
-                                        <a href="/service/detail?id={{$finlservice->id}}&type=0">
+                                        <a href="/service/detail?id={{$finlservice->id}}&type=1">
                                             @if($finlservice->picture != null)
                                                 <?php
                                                 $pics = explode(';', $finlservice->picture);
@@ -308,7 +308,7 @@
                             <div class="card-deck">
                                 @foreach($data['qaservices'] as $qaservice)
                                     <div class="card am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-end">
-                                        <a href="/service/detail?id={{$qaservice->id}}&type=0">
+                                        <a href="/service/detail?id={{$qaservice->id}}&type=2">
                                             @if($qaservice->picture != null)
                                                 <?php
                                                 $pics = explode(';', $qaservice->picture);
