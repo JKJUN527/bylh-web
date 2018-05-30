@@ -205,6 +205,9 @@
             border-right: 2px solid #ea6005;
             padding-top: 0.5rem;
         }
+        .floodSix{
+            margin-left: 10px !important;
+        }
 </style>
 @endsection
 @section('content')
@@ -329,34 +332,12 @@
         <!--需求大厅-->
         <!--公告详情页显示-->
         <div class="am-g am-g-fixed">
-            <div class="am-u-lg-4 am-u-md-4 am-u-sm-4 leftpanel" style="padding-bottom: 10px;">
-                <div class="index-category-left showNews">
-                    <div class="marqueenOne">
-                    <span class="marqueen-title"
-                          style="text-align: center;padding-top: 1rem;height:54px;background-color: #F37B1D">
-                        <i style="font-size: 1.5rem;color: #fff;"
-                           onclick="window.location.href='/news/notice';">本站公告</i></span>
-                        <div class="demo">
-                            <ul>
-                                @foreach($data['notes'] as $note)
-                                    <li><a class="am-btn"
-                                           data-am-popover="{theme: 'primary', content: '{{$note->content}}'}">
-                                            <span style="font-size: 16px;color: #b84554;padding-right: 3px;"><i
-                                                        class="am-icon-volume-up am-icon-fw"></i></span>{{mb_substr($note->content,0,20,'utf-8')}}
-                                        </a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="am-u-lg-8  am-u-md-8 am-u-sm-12">
+            <div class="am-u-lg-8 am-u-md-8">
                 <div class="shopMain" id="shopmain">
                     <div class="am-container ">
-                        <div class="shopTitle" style="margin-left: -20px;">
+                        <div class="shopTitle" style="width:110%;">
                             <h4 class="floor-title">需求大厅</h4>
-                            <div class="today-brands " style="right:0px;">
+                            <div class="today-brands " style="right:0px ;top:13px;">
                                 <button class="am-btn am-btn-danger am-round more2more"
                                         onclick="window.location.href='/demands/advanceSearch'">查看更多
                                 </button>
@@ -434,6 +415,28 @@
                             </div>
                         </div>
                         <div class="clear "></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-lg-4 am-u-md-4" style="padding-top: 20px;">
+                <div class="request_rank">
+                    <div class="rank_title"
+                         style="margin: 0 60px; background-color: #F37B1D">
+                        <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 10px;padding-bottom: 10px;">
+                            本站公告</p>
+                    </div>
+                    <div class="rank_content"
+                         style="margin: 0 60px;border-bottom: 2px solid #F37B1D;border-left: 2px solid #F37B1D;border-right: 2px solid #F37B1D;">
+                        <ul>
+                            @foreach($data['notes'] as $note)
+                                <li><a class="am-btn"
+                                       data-am-popover="{theme: 'primary', content: '{{$note->content}}'}">
+                                            <span style="font-size: 16px;color: #b84554;padding-right: 3px;"><i
+                                                        class="am-icon-volume-up am-icon-fw"></i></span>{{mb_substr($note->content,0,20,'utf-8')}}
+                                    </a></li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
