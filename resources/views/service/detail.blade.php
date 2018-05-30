@@ -605,6 +605,17 @@
                     </div>
                 </div>
             </div>
+
+        <div class="am-u-lg-9 am-u-md-9 am-u-sm-9" style="border: 2px solid #eee;padding: 20px;background: #fff;box-shadow:0px 3px 0px 0px rgba(4,0,0,0.1);">
+                                <span style="font-size: 1.3rem">服务者信息：</span>
+                                <p style="font-size:15px;line-height: 24px;margin-left: 2rem;">
+                                    {!! $data['serviceinfo']['brief'] !!}
+                                </p>
+                </div>
+
+
+
+
         </div>
     </div>
     <!--广告-->

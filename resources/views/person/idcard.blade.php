@@ -1,5 +1,5 @@
 @extends('demo.admin2')
-@section("title", "身份认证")
+@section("title", "个人认证")
 
 @section("custom-style")
     <link rel="stylesheet" type="text/css" href="{{asset("plugins/sweetalert/sweetalert.css")}}"/>
@@ -22,7 +22,7 @@
 
     <div class="main-wrap">
         <div class="am-cf am-padding">
-            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">实名认证</strong> /
+            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人认证</strong> /
                 <small>Real&nbsp;authentication</small>
             </div>
         </div>
