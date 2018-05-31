@@ -580,48 +580,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--服务商推荐-->
-            <div class="am-u-lg-4 am-u-md-4" style="padding-top: 20px;">
-                <div class="request_rank">
-                    <div class="rank_title"
-                         style="margin: 0 60px; background-color: #F37B1D">
-                        <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 10px;padding-bottom: 10px;">
-                            交易排行榜</p>
-                    </div>
-                    <div class="rank_content"
-                         style="margin: 0 60px;border-bottom: 2px solid #F37B1D;border-left: 2px solid #F37B1D;border-right: 2px solid #F37B1D;">
-                        <ul>
-                            @foreach($data['serviceuser'] as $serviceuser)
-                                <li style="text-align: center;">
-                                    <div class="box1"></div>
-                                    <div class="outer-con" style="padding: 10px;position: inherit;">
-                                        <a href="/service/getAllservices?uid={{$serviceuser->uid}}">
-                                            <img
-                                                    src="{{$serviceuser->elogo}}" style="width: 50%;"/>
-                                            <div class="title ">
-                                                {{$serviceuser->ename}}
-                                            </div>
-                                            <div class="right-panel">
-                                                <button type="button" class="am-btn am-btn-danger">查看详情</button>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!--专业问答-->
-        <div class="am-g am-g-fixed">
-            <div class="am-u-lg-12 am-u-md-12" style="float: left;">
+                <!--专业问答-->
                 <div class="shopMain" id="shopmain">
                     <div class="am-container">
-                        <div class="shopTitle ">
+                        <div class="shopTitle" style="width:110%;">
                             <h4 class="floor-title">专业问答</h4>
                             <div class="today-brands " style="right:0px ;top:13px">
                                 <button class="am-btn am-btn-danger am-round more2more"
@@ -634,7 +596,7 @@
                         <div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="padding: 10px;float: left;">
                             <div class="card-deck-wrapper">
                                 <div class="card-deck">
-                                @foreach($data['hotest3'] as $hotest3)
+                                    @foreach($data['hotest3'] as $hotest3)
                                         <div class="card am-u-lg-2 am-u-md-2 am-u-sm-2 am-u-end">
                                             <a href="/service/detail?id={{$hotest3->id}}&type=2">
                                                 @if($hotest3->picture != null)
@@ -676,7 +638,7 @@
                                                 </div>
                                             </a>
                                         </div>
-                                @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                             {{--<ul data-am-widget="gallery" class="am-gallery am-avg-sm-6--}}
@@ -696,6 +658,39 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <!--服务商推荐-->
+            <div class="am-u-lg-4 am-u-md-4" style="padding-top: 20px;">
+                <div class="request_rank">
+                    <div class="rank_title"
+                         style="margin: 0 60px; background-color: #F37B1D">
+                        <p style="font-size: 16px;font-weight: bold;text-align: center;color: #fff;padding-top: 10px;padding-bottom: 10px;">
+                            交易排行榜</p>
+                    </div>
+                    <div class="rank_content"
+                         style="margin: 0 60px;border-bottom: 2px solid #F37B1D;border-left: 2px solid #F37B1D;border-right: 2px solid #F37B1D;">
+                        <ul>
+                            @foreach($data['serviceuser'] as $serviceuser)
+                                <li style="text-align: center;">
+                                    <div class="box1"></div>
+                                    <div class="outer-con" style="padding: 10px;position: inherit;">
+                                        <a href="/service/getAllservices?uid={{$serviceuser->uid}}">
+                                            <img
+                                                    src="{{$serviceuser->elogo}}" style="width: 50%;"/>
+                                            <div class="title ">
+                                                {{$serviceuser->ename}}
+                                            </div>
+                                            <div class="right-panel">
+                                                <button type="button" class="am-btn am-btn-danger">查看详情</button>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
         <!--广告-->
