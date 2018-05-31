@@ -582,20 +582,22 @@
             if(isUploadIdCardSecend){
                 formData.append("idcard2_photo", idCardSecend.prop("files")[0]);
             }
-            if (!isUploadIdCardFront) {
-                swal({
-                    title: "错误",
-                    type: "error",
-                    text: "请至少上传一个证书",
-                    cancelButtonText: "关闭",
-                    showCancelButton: true,
-                    showConfirmButton: false
-                });
-                return;
-            } else {
+//            if (!isUploadIdCardFront) {
+//                swal({
+//                    title: "错误",
+//                    type: "error",
+//                    text: "请至少上传一个证书",
+//                    cancelButtonText: "关闭",
+//                    showCancelButton: true,
+//                    showConfirmButton: false
+//                });
+//                return;
+//            } else {
+//                formData.append("license_photo", idCardFront.prop("files")[0]);
+//            }
+            if(isUploadIdCardFront){
                 formData.append("license_photo", idCardFront.prop("files")[0]);
             }
-
             if (isUploadIdCardBack) {
                 formData.append("other_photo", idCardBack.prop("files")[0]);
             }
