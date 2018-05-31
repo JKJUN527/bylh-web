@@ -505,16 +505,19 @@ class AccountController extends Controller {
                     //查看用户审核情况(普通用户未验证)
                     //返回用户实名认证情况
 //                    $situation = Userinfo::where('uid', $data['uid'])->select('realname_statue')->first();
-                    $situation = User::where('uid', $data['uid'])->select('realname_verify')->first();
-                    $data['is_vertify'] = $situation['realname_verify'];
+//                    $situation = User::where('uid', $data['uid'])->select('realname_verify')->first();
+                    $situation = Userinfo::where('uid', $data['uid'])->select('realname_statue')->first();
+                    $data['is_vertify'] = $situation['realname_statue'];
                     return view("person.idcard", ['data' => $data]);
                 case 1://实习中介认证
-                    $situation = User::where('uid', $data['uid'])->select('finance_verify')->first();
-                    $data['is_vertify'] = $situation['finance_verify'];
+//                    $situation = User::where('uid', $data['uid'])->select('finance_verify')->first();
+                    $situation = Userinfo::where('uid', $data['uid'])->select('finance_statue')->first();
+                    $data['is_vertify'] = $situation['finance_statue'];
                     return view("person.finance", ['data' => $data]);
                 case 2:
-                    $situation = User::where('uid', $data['uid'])->select('majors_verify')->first();
-                    $data['is_vertify'] = $situation['majors_verify'];
+//                    $situation = User::where('uid', $data['uid'])->select('majors_verify')->first();
+                    $situation = Userinfo::where('uid', $data['uid'])->select('majors_statue')->first();
+                    $data['is_vertify'] = $situation['majors_statue'];
                     return view("person.qaservice", ['data' => $data]);
                 default:
                     return "error";
@@ -688,7 +691,8 @@ class AccountController extends Controller {
                 }
                 $userinfo = Userinfo::find($infoid['id']);
                 //判断是否有身份证照片
-                if ($request->has('real_name') && $request->has('id_card') && $request->hasFile('idcard1_photo')) {
+//                if ($request->has('real_name') && $request->has('id_card') && $request->hasFile('idcard1_photo')) {
+                if ($request->hasFile('idcard1_photo') &&$request->has('idcard2_photo')) {
 
                     if ($request->isMethod('POST')) {
                         $idcard1_photo = $request->file('idcard1_photo');//取得上传文件信息

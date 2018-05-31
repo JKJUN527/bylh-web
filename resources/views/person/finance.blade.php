@@ -41,7 +41,7 @@
         </div>
         <hr/>
         <div class="authentication">
-            @if($data["is_vertify"] != 1)
+            @if($data["is_vertify"] == -1 ||$data["is_vertify"] == 2)
             <p class="tip">请填写您的机构的认证凭据，以用于平台审核</p>
                 <div class="authenticationInfo">
                     <p class="title">填写机构信息</p>
