@@ -29,7 +29,7 @@
         <hr/>
         <div class="authentication">
             @if($data["is_vertify"] != 0)
-                <p class="tip">请填写您身份证上的真实信息，以用于报关审核</p>
+                <p class="tip">若自愿意实名认证，可上传您身份证上的真实信息，提高信用度</p>
                 <div class="authenticationInfo">
                     <p class="title">填写个人信息</p>
 
@@ -48,7 +48,6 @@
                 </div>
                 <div class="authenticationPic">
                     <p class="title">上传身份证照片</p>
-                    <p class="tip">请按要求上传身份证</p>
 
                     <input type="file" name="id-card-front" class="hide" onchange='showIdCardPreview(this, "front")'>
                     <input type="file" name="id-card-back" class="hide" onchange='showIdCardPreview(this, "back")'>

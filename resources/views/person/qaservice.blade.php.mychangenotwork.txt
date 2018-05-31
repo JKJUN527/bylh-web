@@ -58,122 +58,13 @@
 @section('content')
     <div class="main-wrap">
         <div class="am-cf am-padding">
-            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">身份认证</strong> /
+            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人认证</strong> /
                 <small>Real&nbsp;authentication</small>
             </div>
         </div>
         <hr/>
         <div class="authentication">
             @if($data["is_vertify"] != 1)
-                <p class="tip">自愿提供身份证信息，若愿意增加信用度，可上传您身份证上的真实信息(选填)</p>
-                <div class="authenticationInfo">
-                    <p class="title">填写个人信息</p>
-
-                    <div class="am-form-group">
-                        <label for="user-name" class="am-form-label">真实姓名</label>
-                        <div class="am-form-content">
-                            <input type="text" id="real-name" name="real_name" placeholder="请输入您的真实姓名">
-                        </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="user-IDcard" class="am-form-label">身份证号</label>
-                        <div class="am-form-content">
-                            <input type="text" id="id-card" name="id_card" placeholder="请输入您的身份证信息">
-                        </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="user-profession" class="am-form-label">从事专业：</label>
-                        <div class="am-form-content">
-                            <input type="text" id="profession" name="profession" placeholder="请设置您从事的专业">
-                        </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="user-mail" class="am-form-label">联系邮箱：</label>
-                        <div class="am-form-content">
-                            <input type="email" id="email" name="email" placeholder="请输入联系邮箱">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="authenticationPic">
-                    <p class="title">请上传证件照片</p>
-                    <p class="tip">请按要求上传身份证</p>
-
-                    <input type="file" name="id-card-first" class="hide" onchange='showIdCardPreview(this, "front")'>
-                    <input type="file" name="id-card-secend" class="hide" onchange='showIdCardPreview(this, "back")'>
-
-                    <ul class="cardlist">
-                        <li>
-                            <div class="cardPic" id="id-card-front_holder">
-                                <img src="{{asset("images/cardbg.jpg")}}">
-                                <div class="cardText" id="upload-idcard-front-btn"><i class="am-icon-plus"></i>
-                                    <p>正面照片</p>
-                                </div>
-                                <p class="titleText">身份证正面</p>
-                            </div>
-                            <div class="cardExample">
-                                <img id="first-preview" src="{{asset("images/cardexample1.jpg")}}">
-                                <p class="titleText">示例</p>
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="cardPic" id="id-card-back_holder">
-                                <img src="{{asset("images/cardbg.jpg")}}">
-                                <div class="cardText" id="upload-idcard-back-btn"><i class="am-icon-plus"></i>
-                                    <p>背面照片</p>
-                                </div>
-                                <p class="titleText">身份证背面</p>
-                            </div>
-                            <div class="cardExample">
-                                <img id="secend-preview" src="{{asset("images/cardexample2.jpg")}}">
-                                <p class="titleText">示例</p>
-                            </div>
-
-                        </li>
-                        
-                    </ul>
-                    </div>
-                    
-                    <div class="authenticationPic">
-                    <p class="title">自愿上传 学生证、毕业证、职称证、资格证或者其它技能证书（选填）</p>
-                    <p class="tip">请按要求上传相关证书</p>
-
-                    <input type="file" name="id-card-front" class="hide" onchange='showMajorPreview(this, "front")'>
-                    <input type="file" name="id-card-back" class="hide" onchange='showMajorPreview(this, "back")'>
-
-                    <ul class="cardlist">
-                        <li>
-                            <div class="cardPic" id="id-card-front_holder">
-                                <img src="{{asset("images/cardbg.jpg")}}">
-                                <div class="cardText" id="upload-front-btn"><i class="am-icon-plus"></i>
-                                    <p>证书1</p>
-                                </div>
-                                <p class="titleText">证书材料1</p>
-                            </div>
-                            <div class="cardExample">
-                                <img id="front-preview" src="{{asset("images/cardbg.jpg")}}">
-                                <p class="titleText">示例</p>
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="cardPic" id="id-card-back_holder">
-                                <img src="{{asset("images/cardbg.jpg")}}">
-                                <div class="cardText" id="upload-back-btn"><i class="am-icon-plus"></i>
-                                    <p>证书2</p>
-                                </div>
-                                <p class="titleText">证书材料2</p>
-                            </div>
-                            <div class="cardExample">
-                                <img id="back-preview" src="{{asset("images/cardbg.jpg")}}">
-                                <p class="titleText">示例</p>
-                            </div>
-
-                        </li>
-                    </ul>
-                </div>
-
                 <div class="authenticationInfo">
                     <p class="title">填写服务基本信息(必填)</p>
 
@@ -190,6 +81,21 @@
                                     <input class="service_info" type="text"   id="service_city" placeholder="你所在的城市（eg:成都）" value="" required />
                                 </div>
                             </div>
+
+	                    <div class="am-form-group">
+        	                    <label for="user-profession" class="am-form-label">从事专业：</label>
+                	            <div class="am-form-content">
+                        	        <input type="text" id="profession" name="profession" placeholder="请设置您从事的专业">
+   	                            </div>
+        	            </div>
+                	    <div class="am-form-group">
+                                    <label for="user-mail" class="am-form-label">联系邮箱：</label>
+                	  	    <div class="am-form-content">
+                        	    	<input type="email" id="email" name="email" placeholder="请输入联系邮箱">
+        	            	    </div>
+	                    </div>
+
+                           
                             <div class="am-form-group">
                                 <label for="doc-vld-tel-2-1" class="am-form-label">是否在校生:</label>
                                 <div class="am-form-content">
@@ -281,11 +187,112 @@
 
                 </div>
                 
+                <br><br>
+            
+                <p class="tip"></p>
+                <div class="authenticationInfo">
+                    <p class="title">填写个人信息(自愿提供身份证信息，若愿意增加信用度，可上传您身份证上的真实信息) (选填)</p>
+
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-form-label">真实姓名</label>
+                        <div class="am-form-content">
+                            <input type="text" id="real-name" name="real_name" placeholder="请输入您的真实姓名">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-IDcard" class="am-form-label">身份证号</label>
+                        <div class="am-form-content">
+                            <input type="text" id="id-card" name="id_card" placeholder="请输入您的身份证信息">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="authenticationPic">
+                    <p class="title">请上传证件照片（选填）</p>
+                    <p class="tip">请按要求上传身份证</p>
+
+                    <input type="file" name="id-card-first" class="hide" onchange='showIdCardPreview(this, "front")'>
+                    <input type="file" name="id-card-secend" class="hide" onchange='showIdCardPreview(this, "back")'>
+
+                    <ul class="cardlist">
+                        <li>
+                            <div class="cardPic" id="id-card-front_holder">
+                                <img src="{{asset("images/cardbg.jpg")}}">
+                                <div class="cardText" id="upload-idcard-front-btn"><i class="am-icon-plus"></i>
+                                    <p>正面照片</p>
+                                </div>
+                                <p class="titleText">身份证正面</p>
+                            </div>
+                            <div class="cardExample">
+                                <img id="first-preview" src="{{asset("images/cardexample1.jpg")}}">
+                                <p class="titleText">示例</p>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="cardPic" id="id-card-back_holder">
+                                <img src="{{asset("images/cardbg.jpg")}}">
+                                <div class="cardText" id="upload-idcard-back-btn"><i class="am-icon-plus"></i>
+                                    <p>背面照片</p>
+                                </div>
+                                <p class="titleText">身份证背面</p>
+                            </div>
+                            <div class="cardExample">
+                                <img id="secend-preview" src="{{asset("images/cardexample2.jpg")}}">
+                                <p class="titleText">示例</p>
+                            </div>
+
+                        </li>
+                        
+                    </ul>
+                    </div>
+                    <div class="authenticationPic">
+                    <p class="title">上传 学生证、毕业证、职称证、资格证或者其它技能证书（选填）</p>
+                    <p class="tip">请按要求上传相关证书</p>
+
+                    <input type="file" name="id-card-front" class="hide" onchange='showMajorPreview(this, "front")'>
+                    <input type="file" name="id-card-back" class="hide" onchange='showMajorPreview(this, "back")'>
+
+                    <ul class="cardlist">
+                        <li>
+                            <div class="cardPic" id="id-card-front_holder">
+                                <img src="{{asset("images/cardbg.jpg")}}">
+                                <div class="cardText" id="upload-front-btn"><i class="am-icon-plus"></i>
+                                    <p>证书1</p>
+                                </div>
+                                <p class="titleText">证书材料1</p>
+                            </div>
+                            <div class="cardExample">
+                                <img id="front-preview" src="{{asset("images/cardbg.jpg")}}">
+                                <p class="titleText">示例</p>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="cardPic" id="id-card-back_holder">
+                                <img src="{{asset("images/cardbg.jpg")}}">
+                                <div class="cardText" id="upload-back-btn"><i class="am-icon-plus"></i>
+                                    <p>证书2</p>
+                                </div>
+                                <p class="titleText">证书材料2</p>
+                            </div>
+                            <div class="cardExample">
+                                <img id="back-preview" src="{{asset("images/cardbg.jpg")}}">
+                                <p class="titleText">示例</p>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+
                 <div class="info-btn">
                     <div id="submit-form" class="am-btn am-btn-danger">提交</div>
                 </div>
+            
+            
+                
             @else
-                <span class="am-badge am-badge-warning am-round"><a href="/account/safety">您已提交专业身份认证，请等待审核,点击查看审核结果</a></span>
+                <span class="am-badge am-badge-warning am-round"><a href="/account/safety">您已提交专业身份认证，点击查看审核结果</a></span>
             @endif
         </div>
     </div>
@@ -420,7 +427,7 @@
             realName = $.trim(realName);
             idCardNum = $.trim(idCardNum);
 
-            if (realName === "") {
+            if (0) {
                 swal({
                     title: "",
                     text: "请输入您的真实姓名",
@@ -432,7 +439,7 @@
                 return;
             }
 
-            if (idCardNum === "") {
+            if (0) {
                 swal({
                     title: "",
                     text: "请输入您的身份证信息",
@@ -443,7 +450,7 @@
                 });
                 return;
             }
-            if(!/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(idCardNum)){
+            if(0){
                 swal({
                     title: "",
                     text: "请输入正确的身份证号码",
@@ -471,7 +478,7 @@
                 return;
             }
 
-            if (!isUploadIdCardFirst) {
+            if (0) {
                 swal({
                     title: "错误",
                     type: "error",
@@ -483,7 +490,7 @@
                 return;
             }
 
-            if (!isUploadIdCardSecend) {
+            if (0) {
                 swal({
                     title: "错误",
                     type: "error",
@@ -516,7 +523,7 @@
             var formData = new FormData();
 
             if(ename.val() === "" ||ename.val().length<3){
-                swal('','企业名称长度需大于3个字符','error');
+                swal('','名称长度需大于3个字符','error');
                 return;
             }
             if(city.val() === ""){
@@ -580,7 +587,7 @@
             formData.append("idcard1_photo", idCardFirst.prop("files")[0]);
             formData.append("idcard2_photo", idCardSecend.prop("files")[0]);
 
-            if (!isUploadIdCardFront) {
+            if (0) {
                 swal({
                     title: "错误",
                     type: "error",

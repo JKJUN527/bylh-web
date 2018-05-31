@@ -34,19 +34,20 @@
                 <li><a href="{{asset('order')}}">订单管理</a></li>
             </ul>
         </li>
-
-        @if($type == 2)
-            <li class="person">
+	
+	<li class="person">
                 <p><i class="am-icon-dollar"></i>我的服务</p>
                 <ul>
                     <li><a href="{{asset('service/genlpublish')}}">专业服务</a></li>
-                    <li><a href="{{asset('service/finlpublish')}}">实习中介</a></li>
                     <li><a href="{{asset('service/qapublish')}}">专业问答</a></li>
+                    @if($type == 2)
+                    <li><a href="{{asset('service/finlpublish')}}">实习中介</a></li>
+                    @endif
                     <li><a href="{{asset('service/getservicesList')}}">服务列表</a></li>
                 </ul>
-            </li>
-        @endif
-	
+        </li>
+
+
         <li class="person">
             <p><i class="am-icon-tags"></i>我的需求</p>
             <ul>

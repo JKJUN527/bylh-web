@@ -125,6 +125,7 @@
 @endsection
 @section('content')
     <!--发布服务-->
+    <!--
     @if($data['verification'] == 0)
         <div style="min-height: 450px">
             <div class="am-alert am-alert-warning warning">
@@ -132,6 +133,7 @@
             </div>
         </div>
     @else
+    -->
     <div class="am-g am-g-fixed" style="padding-top: 45px;">
         <div class="am-u-lg-4 am-u-md-4 am-u-sm-4">
             <div class="fabu_guide_y guide_line"></div>
@@ -347,7 +349,7 @@
             </div>
         </div>
     </div>
-    @endif
+    <!--@endif-->
 @endsection
 @section('custom-script')
     <script type="text/javascript">
