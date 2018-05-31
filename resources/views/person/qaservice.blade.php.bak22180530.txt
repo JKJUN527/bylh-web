@@ -64,7 +64,7 @@
         </div>
         <hr/>
         <div class="authentication">
-            @if($data["is_vertify"] == -1 || $data["is_vertify"] == 2)
+            @if($data["is_vertify"] != 1)
                 <p class="tip">自愿提供身份证信息，若愿意增加信用度，可上传您身份证上的真实信息(选填)</p>
                 <div class="authenticationInfo">
                     <p class="title">填写个人信息</p>
@@ -72,13 +72,13 @@
                     <div class="am-form-group">
                         <label for="user-name" class="am-form-label">真实姓名</label>
                         <div class="am-form-content">
-                            <input type="text" id="real-name" name="real_name" placeholder="请输入您的真实姓名(选填)">
+                            <input type="text" id="real-name" name="real_name" placeholder="请输入您的真实姓名">
                         </div>
                     </div>
                     <div class="am-form-group">
                         <label for="user-IDcard" class="am-form-label">身份证号</label>
                         <div class="am-form-content">
-                            <input type="text" id="id-card" name="id_card" placeholder="请输入您的身份证信息(选填)">
+                            <input type="text" id="id-card" name="id_card" placeholder="请输入您的身份证信息">
                         </div>
                     </div>
                     <div class="am-form-group">
@@ -96,7 +96,7 @@
                 </div>
                 
                 <div class="authenticationPic">
-                    <p class="title">请上传证件照片(选填)</p>
+                    <p class="title">请上传证件照片</p>
                     <p class="tip">请按要求上传身份证</p>
 
                     <input type="file" name="id-card-first" class="hide" onchange='showIdCardPreview(this, "front")'>
@@ -420,40 +420,41 @@
             realName = $.trim(realName);
             idCardNum = $.trim(idCardNum);
 
-//            if (realName === "") {
-//                swal({
-//                    title: "",
-//                    text: "请输入您的真实姓名",
-//                    type: "error",
-//                    confirmButtonText: "确定",
-//                    showCancelButton: false,
-//                    closeOnConfirm: false
-//                });
-//                return;
-//            }
+            if (realName === "") {
+                swal({
+                    title: "",
+                    text: "请输入您的真实姓名",
+                    type: "error",
+                    confirmButtonText: "确定",
+                    showCancelButton: false,
+                    closeOnConfirm: false
+                });
+                return;
+            }
 
-//            if (idCardNum === "") {
-//                swal({
-//                    title: "",
-//                    text: "请输入您的身份证信息",
-//                    type: "error",
-//                    confirmButtonText: "确定",
-//                    showCancelButton: false,
-//                    closeOnConfirm: false
-//                });
-//                return;
-//            }
-//            if(!/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(idCardNum)){
-//                swal({
-//                    title: "",
-//                    text: "请输入正确的身份证号码",
-//                    type: "error",
-//                    confirmButtonText: "确定",
-//                    showCancelButton: false,
-//                    closeOnConfirm: false
-//                });
-//                return;
-//            }
+            if (idCardNum === "") {
+                swal({
+                    title: "",
+                    text: "请输入您的身份证信息",
+                    type: "error",
+                    confirmButtonText: "确定",
+                    showCancelButton: false,
+                    closeOnConfirm: false
+                });
+                return;
+            }
+            if(!/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(idCardNum)){
+                swal({
+                    title: "",
+                    text: "请输入正确的身份证号码",
+                    type: "error",
+                    confirmButtonText: "确定",
+                    showCancelButton: false,
+                    closeOnConfirm: false
+                });
+                return;
+            }
+
 
             if(email === ''){
                 swal("","邮箱不能为空", "error");
@@ -470,29 +471,29 @@
                 return;
             }
 
-//            if (!isUploadIdCardFirst) {
-//                swal({
-//                    title: "错误",
-//                    type: "error",
-//                    text: "请上传身份证正面照片",
-//                    cancelButtonText: "关闭",
-//                    showCancelButton: true,
-//                    showConfirmButton: false
-//                });
-//                return;
-//            }
-//
-//            if (!isUploadIdCardSecend) {
-//                swal({
-//                    title: "错误",
-//                    type: "error",
-//                    text: "请上传身份证反面照片",
-//                    cancelButtonText: "关闭",
-//                    showCancelButton: true,
-//                    showConfirmButton: false
-//                });
-//                return;
-//            }
+            if (!isUploadIdCardFirst) {
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "请上传身份证正面照片",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+                return;
+            }
+
+            if (!isUploadIdCardSecend) {
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "请上传身份证反面照片",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+                return;
+            }
 
             //服务基本信息获取
             var ename = $('#service_name');
@@ -576,31 +577,27 @@
 
             formData.append("real_name", realName);
             formData.append("id_card", idCardNum);
-            if(isUploadIdCardFirst){
-                formData.append("idcard1_photo", idCardFirst.prop("files")[0]);
-            }
-            if(isUploadIdCardSecend){
-                formData.append("idcard2_photo", idCardSecend.prop("files")[0]);
-            }
-//            if (!isUploadIdCardFront) {
-//                swal({
-//                    title: "错误",
-//                    type: "error",
-//                    text: "请至少上传一个证书",
-//                    cancelButtonText: "关闭",
-//                    showCancelButton: true,
-//                    showConfirmButton: false
-//                });
-//                return;
-//            } else {
-//                formData.append("license_photo", idCardFront.prop("files")[0]);
-//            }
-            if(isUploadIdCardFront){
+            formData.append("idcard1_photo", idCardFirst.prop("files")[0]);
+            formData.append("idcard2_photo", idCardSecend.prop("files")[0]);
+
+            if (!isUploadIdCardFront) {
+                swal({
+                    title: "错误",
+                    type: "error",
+                    text: "请至少上传一个证书",
+                    cancelButtonText: "关闭",
+                    showCancelButton: true,
+                    showConfirmButton: false
+                });
+                return;
+            } else {
                 formData.append("license_photo", idCardFront.prop("files")[0]);
             }
+
             if (isUploadIdCardBack) {
                 formData.append("other_photo", idCardBack.prop("files")[0]);
             }
+
 
             $.ajax({
                 url: "/account/authentication/2",
